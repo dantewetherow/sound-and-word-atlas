@@ -1,0 +1,721 @@
+{
+ "intro": "The route has thirty-two steps in eight bands. Each mark enters with the first word that needs it, and the verb kernel runs through every band. The orientation map shows the same route with each word's letters in colour.",
+ "bands": [
+  {
+   "name": "Sounds and syllables",
+   "steps": [
+    1,
+    2,
+    3,
+    4
+   ]
+  },
+  {
+   "name": "Units",
+   "steps": [
+    5,
+    6,
+    7,
+    8
+   ]
+  },
+  {
+   "name": "Jobs across letters",
+   "steps": [
+    9,
+    10,
+    11,
+    12
+   ]
+  },
+  {
+   "name": "Morphemes",
+   "steps": [
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "name": "Single vowels",
+   "steps": [
+    16,
+    17,
+    18,
+    19
+   ]
+  },
+  {
+   "name": "Vowel teams",
+   "steps": [
+    20,
+    21,
+    22,
+    23
+   ]
+  },
+  {
+   "name": "More units",
+   "steps": [
+    24,
+    25,
+    26
+   ]
+  },
+  {
+   "name": "Families",
+   "steps": [
+    27,
+    28,
+    29,
+    30,
+    31,
+    32
+   ]
+  }
+ ],
+ "steps": [
+  {
+   "n": 1,
+   "title": "Open or closed",
+   "band": "Sounds and syllables",
+   "words_md": "*I* / *it, in, is, if*",
+   "marks": "sound circle, syllable swoop, long, short",
+   "kernel_md": "*is*",
+   "carney": "Short vowels can't end an open syllable and long vowels can, p. 134; short i, p. 135; long i, p. 151",
+   "words": [
+    "I",
+    "it",
+    "in",
+    "is",
+    "if"
+   ],
+   "contrast_md": ""
+  },
+  {
+   "n": 2,
+   "title": "Closed two-letter words",
+   "band": "Sounds and syllables",
+   "words_md": "*at, an, am, as, on, up, us*",
+   "marks": "none",
+   "kernel_md": "*am*",
+   "carney": "The short word rule: lexical words usually have at least three letters, and function words can have two, pp. 131–133; short a, p. 143; short u, p. 147; short o, p. 149; *s* for /z/, p. 238",
+   "words": [
+    "at",
+    "an",
+    "am",
+    "as",
+    "on",
+    "up",
+    "us"
+   ],
+   "contrast_md": ""
+  },
+  {
+   "n": 3,
+   "title": "Open words say their name",
+   "band": "Sounds and syllables",
+   "words_md": "*he, me, we, be, my, by, so, no, go*; contrast *go/do, so/to*",
+   "marks": "none",
+   "kernel_md": "*be, go, do*",
+   "carney": "Long vowels can end an open syllable, p. 134; *be* beside *bee*, p. 133; long e, p. 155; long i, p. 151; long o, p. 171",
+   "words": [
+    "he",
+    "me",
+    "we",
+    "be",
+    "my",
+    "by",
+    "so",
+    "no",
+    "go"
+   ],
+   "contrast_md": "*go/do, so/to*"
+  },
+  {
+   "n": 4,
+   "title": "One consonant closes it",
+   "band": "Sounds and syllables",
+   "words_md": "*be/bed, me/met, we/wet, go/got, no/not, hi/him/hit*",
+   "marks": "none",
+   "kernel_md": "*got*",
+   "carney": "Short vowels, p. 134; each short vowel, pp. 135–150",
+   "words": [
+    "be",
+    "bed",
+    "me",
+    "met",
+    "we",
+    "wet",
+    "go",
+    "got",
+    "no",
+    "not",
+    "hi",
+    "him",
+    "hit"
+   ],
+   "contrast_md": ""
+  },
+  {
+   "n": 5,
+   "title": "Two letters, one sound",
+   "band": "Units",
+   "words_md": "*the, she, this, that, with, much, such, which*",
+   "marks": "green bond bar",
+   "kernel_md": "none",
+   "carney": "*h* as a helper (auxiliary) letter in *ch*, *sh* and *ph*, p. 39; *ch*, p. 226; *th*, p. 232; *sh*, p. 240; *wh*, p. 253",
+   "words": [
+    "the",
+    "she",
+    "this",
+    "that",
+    "with",
+    "much",
+    "such",
+    "which"
+   ],
+   "contrast_md": ""
+  },
+  {
+   "n": 6,
+   "title": "Closed words in the kernel",
+   "band": "Units",
+   "words_md": "*has, had, did, can, will, shall, must, get, went, spell*",
+   "marks": "black bond bar on doubled endings (*will*, *spell*); the box comes with endings at step 14",
+   "kernel_md": "*has, had, did, can, will, shall, must, get, went*",
+   "carney": "At the end of a word, doubling is largely limited to *ff*, *ss*, *ll*, *ck*, *tch* and *dge* (rule #D5), p. 123; *add*, *egg* and the short word rule, pp. 123, 131",
+   "words": [
+    "has",
+    "had",
+    "did",
+    "can",
+    "will",
+    "shall",
+    "must",
+    "get",
+    "went",
+    "spell"
+   ],
+   "contrast_md": ""
+  },
+  {
+   "n": 7,
+   "title": "One analog, three words",
+   "band": "Units",
+   "words_md": "*would* → *could, should*",
+   "marks": "red bond bar",
+   "kernel_md": "*would, could, should*",
+   "carney": "*ou* for the vowel of *book* in *could*, *should* and *would*, p. 146; their empty *l*, p. 249; rule O.22, p. 346",
+   "words": [
+    "would",
+    "could",
+    "should"
+   ],
+   "contrast_md": ""
+  },
+  {
+   "n": 8,
+   "title": "The *e* that keeps *v* off the end",
+   "band": "Units",
+   "words_md": "*have, has, had*; *give/gave*; *live/live*",
+   "marks": "cone of silence; vowel vault in *gave*",
+   "kernel_md": "*have*",
+   "carney": "The *e* after *v* in *have* and *love*, p. 13; *ve* as the doubled *v*, p. 121; no final *v* (*nerve*, *serve*), p. 189; a final *v* only in short forms and slang (*gov*, *rev*), p. 231",
+   "words": [
+    "have",
+    "has",
+    "had",
+    "give",
+    "gave",
+    "live"
+   ],
+   "contrast_md": ""
+  },
+  {
+   "n": 9,
+   "title": "The vault",
+   "band": "Jobs across letters",
+   "words_md": "*make, like, time, home, name*",
+   "marks": "the vault on every vowel–consonant–*e* word",
+   "kernel_md": "none",
+   "carney": "The *e* marks a long vowel, p. 129; *matting* beside *mating*, p. 114",
+   "words": [
+    "make",
+    "like",
+    "time",
+    "home",
+    "name"
+   ],
+   "contrast_md": ""
+  },
+  {
+   "n": 10,
+   "title": "The nice-nudge",
+   "band": "Jobs across letters",
+   "words_md": "*nice, face, place, age, page, huge*",
+   "marks": "nice-nudge",
+   "kernel_md": "none",
+   "carney": "*c* says /s/ before *e* (rule C.8), p. 303; *g* says /j/ before *e*, *i* and *y* (rules G.9 and G.12), pp. 326–327",
+   "words": [
+    "nice",
+    "face",
+    "place",
+    "age",
+    "page",
+    "huge"
+   ],
+   "contrast_md": ""
+  },
+  {
+   "n": 11,
+   "title": "Vowel teams",
+   "band": "Jobs across letters",
+   "words_md": "*may, day, see, been, might, night*",
+   "marks": "none",
+   "kernel_md": "*may, might, been*",
+   "carney": "Long a, p. 164; long e, p. 155; *igh*, p. 154",
+   "words": [
+    "may",
+    "day",
+    "see",
+    "been",
+    "might",
+    "night"
+   ],
+   "contrast_md": ""
+  },
+  {
+   "n": 12,
+   "title": "The r-controlled unit",
+   "band": "Jobs across letters",
+   "words_md": "*or, for, her, are, were, car, bird, turn*",
+   "marks": "r-controlled unit",
+   "kernel_md": "*are, were*",
+   "carney": "*ar*, p. 177; *or*, p. 181; *er*, *ir* and *ur*, p. 186",
+   "words": [
+    "or",
+    "for",
+    "her",
+    "are",
+    "were",
+    "car",
+    "bird",
+    "turn"
+   ],
+   "contrast_md": ""
+  },
+  {
+   "n": 13,
+   "title": "A suffix joins at the seam",
+   "band": "Morphemes",
+   "words_md": "*gets, sees, going, doing, being**, played*",
+   "marks": "morpheme seam",
+   "kernel_md": "*being, doing, going, gets*",
+   "carney": "*-ed* and *-s* keep one spelling, pp. 18–19 (table 5); *ng*, p. 248",
+   "words": [
+    "gets",
+    "sees",
+    "going",
+    "doing",
+    "being",
+    "played"
+   ],
+   "contrast_md": ""
+  },
+  {
+   "n": 14,
+   "title": "The box blocks the vault",
+   "band": "Morphemes",
+   "words_md": "*spell/spelling, get/getting, **help/helped, **sun/sunny, happy*",
+   "marks": "block box and blocked vault, where two consonants stop a reach, doubled or already there (*spelling*, *getting**, helped*)",
+   "kernel_md": "*getting*",
+   "carney": "Doubling marks a short vowel, p. 114; *ck*, *tch* and *dge* as the doubled spellings (rule #D3), p. 121; *tch* as the doubled *ch*, p. 226",
+   "words": [
+    "spell",
+    "spelling",
+    "get",
+    "getting",
+    "help",
+    "helped",
+    "sun",
+    "sunny",
+    "happy"
+   ],
+   "contrast_md": ""
+  },
+  {
+   "n": 15,
+   "title": "The *e* drops, its jobs move",
+   "band": "Morphemes",
+   "words_md": "*make/making, have/having, race/racing, ice/icy*",
+   "marks": "none: the vault and nudge move to the suffix vowel",
+   "kernel_md": "*having*",
+   "carney": "The *e* drops before an ending that begins with a vowel, p. 130, and stays where it still nudges *c* or *g* (*noticeable*), p. 131",
+   "words": [
+    "make",
+    "making",
+    "have",
+    "having",
+    "race",
+    "racing",
+    "ice",
+    "icy"
+   ],
+   "contrast_md": ""
+  },
+  {
+   "n": 16,
+   "title": "Open and closed in longer words",
+   "band": "Single vowels",
+   "words_md": "*silent, tiger, paper, music, open, over*; contrast *silent/silly, open/seven*",
+   "marks": "none: the vault reaches across the syllable, and a weak vowel stays bare",
+   "kernel_md": "none",
+   "carney": "In a vowel-consonant-vowel run the first vowel is often short, and hard to predict without stress, p. 275; open syllables, p. 134",
+   "words": [
+    "silent",
+    "tiger",
+    "paper",
+    "music",
+    "open",
+    "over"
+   ],
+   "contrast_md": "*silent/silly, open/seven*"
+  },
+  {
+   "n": 17,
+   "title": "Consonant + le",
+   "band": "Single vowels",
+   "words_md": "*table, bugle, title, little, apple, middle*",
+   "marks": "none: a red bond bar and one red circle under *le*",
+   "kernel_md": "none",
+   "carney": "*le* is a vowel and a consonant with the letters switched, p. 129; a short vowel before *le* doubles (*bubble*, *bottle*; rule #D9), p. 124; *le* beside *al*, *el*, *il* and *ol*, p. 433",
+   "words": [
+    "table",
+    "bugle",
+    "title",
+    "little",
+    "apple",
+    "middle"
+   ],
+   "contrast_md": ""
+  },
+  {
+   "n": 18,
+   "title": "Long before two consonants",
+   "band": "Single vowels",
+   "words_md": "*old, cold, both, most, only, find, kind, child, wild*; contrast *most/cost, mind/mint*",
+   "marks": "none: the long mark with no vault",
+   "kernel_md": "none",
+   "carney": "Long vowels before *nd*, *ld* and *lt* (*find*, *cold*, *bolt*), p. 129; *old*, *olt* and *oll* words, p. 175; *find*, *kind*, *child* and *wild* (rules I.11 and I.12), pp. 332–333",
+   "words": [
+    "old",
+    "cold",
+    "both",
+    "most",
+    "only",
+    "find",
+    "kind",
+    "child",
+    "wild"
+   ],
+   "contrast_md": "*most/cost, mind/mint*"
+  },
+  {
+   "n": 19,
+   "title": "A vowel that borrows a sound",
+   "band": "Single vowels",
+   "words_md": "*come, some, done, from, was, what, do, to, who, does*; contrast *home/come, bone/done/gone*",
+   "marks": "none: the borrowing vowel stays bare",
+   "kernel_md": "*was, does, done, gone*",
+   "carney": "*o* for *u* beside *m* and *n*, where pen strokes ran together (*come*), p. 69; *a* after *w* (*want*, *wash*, *what*, *was*), p. 150; *do*, *to* and *who*, p. 198",
+   "words": [
+    "come",
+    "some",
+    "done",
+    "from",
+    "was",
+    "what",
+    "do",
+    "to",
+    "who",
+    "does"
+   ],
+   "contrast_md": "*home/come, bone/done/gone*"
+  },
+  {
+   "n": 20,
+   "title": "Teams for the long vowels",
+   "band": "Vowel teams",
+   "words_md": "*rain, paid, eat, read, please, boat, show, grow, own, pie, they, eight*",
+   "marks": "none",
+   "kernel_md": "none",
+   "carney": "Long a, p. 164; long e, p. 155; long o, p. 171; long i, p. 151",
+   "words": [
+    "rain",
+    "paid",
+    "eat",
+    "read",
+    "please",
+    "boat",
+    "show",
+    "grow",
+    "own",
+    "pie",
+    "they",
+    "eight"
+   ],
+   "contrast_md": ""
+  },
+  {
+   "n": 21,
+   "title": "The long u sound",
+   "band": "Vowel teams",
+   "words_md": "*too, moon, food, new, grew, blue, true, you, soup*; contrast *do/due/dew*",
+   "marks": "none",
+   "kernel_md": "none",
+   "carney": "Long u, p. 196; long u with a *y* sound before it (*cute*), p. 200",
+   "words": [
+    "too",
+    "moon",
+    "food",
+    "new",
+    "grew",
+    "blue",
+    "true",
+    "you",
+    "soup"
+   ],
+   "contrast_md": "*do/due/dew*"
+  },
+  {
+   "n": 22,
+   "title": "A team's second sound",
+   "band": "Vowel teams",
+   "words_md": "*look, good, book, head, bread, put, pull, said, again, many*; contrast *moon/book, eat/head*",
+   "marks": "open: whether a team with two sounds takes a mark",
+   "kernel_md": "*been*, said /bɪn/",
+   "carney": "The vowel of *book*, p. 144; *full*, *pull* and *put*, p. 145; short e spelled *ea*, p. 141",
+   "words": [
+    "look",
+    "good",
+    "book",
+    "head",
+    "bread",
+    "put",
+    "pull",
+    "said",
+    "again",
+    "many"
+   ],
+   "contrast_md": "*moon/book, eat/head*"
+  },
+  {
+   "n": 23,
+   "title": "The aw sound",
+   "band": "Vowel teams",
+   "words_md": "*saw, draw, law, because, want, wash, water, all, small, walk*",
+   "marks": "none",
+   "kernel_md": "*was*, beside *want* and *wash*",
+   "carney": "*aw*, *au* and *a* before *l*, pp. 181–182; *all*, *ball* and *call*, p. 184; *a* after *w*, p. 150",
+   "words": [
+    "saw",
+    "draw",
+    "law",
+    "because",
+    "want",
+    "wash",
+    "water",
+    "all",
+    "small",
+    "walk"
+   ],
+   "contrast_md": ""
+  },
+  {
+   "n": 24,
+   "title": "The ouch and oil sounds",
+   "band": "More units",
+   "words_md": "*out, round, found, how, now, down, coin, point, boy, toy*; contrast *now/snow*",
+   "marks": "none: *ow* joins the teams with two sounds",
+   "kernel_md": "none",
+   "carney": "*ou* and *ow*, p. 169; *oi* and *oy*, p. 202",
+   "words": [
+    "out",
+    "round",
+    "found",
+    "how",
+    "now",
+    "down",
+    "coin",
+    "point",
+    "boy",
+    "toy"
+   ],
+   "contrast_md": "*now/snow*"
+  },
+  {
+   "n": 25,
+   "title": "Silent letters join their unit",
+   "band": "More units",
+   "words_md": "*know, knee, knife, write, wrong, lamb, climb, two*; contrast *knot/not, wrap/rap*",
+   "marks": "black bond bar for a consonant unit",
+   "kernel_md": "none",
+   "carney": "*kn* and *mb* as units, p. 41; inert and empty letters, pp. 41–42; the *w* of *wring*, p. 44",
+   "words": [
+    "know",
+    "knee",
+    "knife",
+    "write",
+    "wrong",
+    "lamb",
+    "climb",
+    "two"
+   ],
+   "contrast_md": "*knot/not, wrap/rap*"
+  },
+  {
+   "n": 26,
+   "title": "More r-controlled units",
+   "band": "More units",
+   "words_md": "*hair, hear, our, your, their, more, before, care, there, where*; contrast *were/there, are/care*",
+   "marks": "none: the red bar runs under three letters in *hair* and *our*",
+   "kernel_md": "*are, were*, beside *care* and *there*",
+   "carney": "*or*, p. 181; *ear*, p. 190; *air*, and the *ere* of *there* and *where*, pp. 192–194; *ure*, p. 194",
+   "words": [
+    "hair",
+    "hear",
+    "our",
+    "your",
+    "their",
+    "more",
+    "before",
+    "care",
+    "there",
+    "where"
+   ],
+   "contrast_md": "*were/there, are/care*"
+  },
+  {
+   "n": 27,
+   "title": "Two words join",
+   "band": "Families",
+   "words_md": "*I'm, it's, isn't, don't, can't, won't, we're*",
+   "marks": "red apostrophe for the letters left out",
+   "kernel_md": "*I'm, isn't, don't, can't, won't*",
+   "carney": "The apostrophe, p. 50",
+   "words": [
+    "I'm",
+    "it's",
+    "isn't",
+    "don't",
+    "can't",
+    "won't",
+    "we're"
+   ],
+   "contrast_md": ""
+  },
+  {
+   "n": 28,
+   "title": "The th and wh family",
+   "band": "Families",
+   "words_md": "*this, that, these, those, then, there*; contrast *then/when, there/where, that/what*",
+   "marks": "proposed: pointer pill",
+   "kernel_md": "none",
+   "carney": "The voiced *th* of *the*, *this*, *these*, *that*, *those*, *then* and *there*, p. 232; the *h* of *whine*, p. 44; *wh*, p. 253",
+   "words": [
+    "this",
+    "that",
+    "these",
+    "those",
+    "then",
+    "there"
+   ],
+   "contrast_md": "*then/when, there/where, that/what*"
+  },
+  {
+   "n": 29,
+   "title": "-y, -ly and y turns to i",
+   "band": "Families",
+   "words_md": "*sadly, slowly, happily, happier, tried, carries*; contrast *try/tried, play/played*",
+   "marks": "none: the seam",
+   "kernel_md": "none",
+   "carney": "*-y* and *-ies* (*berry*, *berries*), p. 70; *carry*, *carried*, *carries*, p. 135; *i* before some endings (*happiness*), p. 136",
+   "words": [
+    "sadly",
+    "slowly",
+    "happily",
+    "happier",
+    "tried",
+    "carries"
+   ],
+   "contrast_md": "*try/tried, play/played*"
+  },
+  {
+   "n": 30,
+   "title": "un- and re-",
+   "band": "Families",
+   "words_md": "*undo, untie, unhappy, unlock, redo, replay, refill, reread*",
+   "marks": "none: the seam, before the root",
+   "kernel_md": "*undo, redo*",
+   "carney": "No section of its own. A morpheme keeps its spelling, p. 18; *re-enact* beside *react*, p. 48",
+   "words": [
+    "undo",
+    "untie",
+    "unhappy",
+    "unlock",
+    "redo",
+    "replay",
+    "refill",
+    "reread"
+   ],
+   "contrast_md": ""
+  },
+  {
+   "n": 31,
+   "title": "A Latin family: act and create",
+   "band": "Families",
+   "words_md": "*act, action, actor, active, react, create, creation, creator*",
+   "marks": "none",
+   "kernel_md": "none",
+   "carney": "Words from Latin, pp. 96–101; *-tion*, p. 420; *-er* and *-or*, p. 426",
+   "words": [
+    "act",
+    "action",
+    "actor",
+    "active",
+    "react",
+    "create",
+    "creation",
+    "creator"
+   ],
+   "contrast_md": ""
+  },
+  {
+   "n": 32,
+   "title": "A Greek family: photo, phone, graph",
+   "band": "Families",
+   "words_md": "*photo, phone, graph, telephone, photograph, alphabet*",
+   "marks": "none: the black bond bar under *ph*",
+   "kernel_md": "none",
+   "carney": "*ph* in words from Greek, p. 228; words from Greek, pp. 96–101",
+   "words": [
+    "photo",
+    "phone",
+    "graph",
+    "telephone",
+    "photograph",
+    "alphabet"
+   ],
+   "contrast_md": ""
+  }
+ ],
+ "carney_intro": "Edward Carney's *A Survey of English Spelling* (Routledge, 1994) describes every unit on the route, and the atlas leans on it from the first step to the last. The pages are Carney's printed pages; a sound named on its own is the start of his section on that sound. How a phonics program lines up with the route is in a crosswalk, a separate PDF for each program. The first is for UFLI Foundations.",
+ "open": [
+  "Teams with two sounds (steps 22 and 24). The Orton-Gillingham manual puts a bar or a cup over *oo* (p. 17), and the vicinity pattern page says a team takes no long mark, short mark or vault. The marking calls of 7 October mark both sounds alike for now.",
+  "Step 19 could move up to follow step 13. Its words are met in marked text from rung 1, and every unit it uses is in place by step 13, where the seam lets *does* be built as *do* + *es*.",
+  "The black bond bar enters the map's key at step 25, but *qu* (step 4), *wh* (step 5) and *ng* (step 13) already take it on the cards and in the appendix. The key could name it at step 5.",
+  "The pointer pill at step 28 is a proposed mark, not a decided one."
+ ],
+ "note_16_32": "Steps 16 to 32 were added as a draft on 15 October 2026, and the orientation map shows them in the same form. The new bands repeat the first four at a larger scale: single vowels, then teams, then the remaining units, then words built from parts.\nWith the same script and assumptions as the ELP table, 144 of the 148 ELP words are readable by step 26. *Of, laugh, pretty* and *people* stay one-offs. In adult text (wordfreq, top 6,000 words), the share of running words readable on the route rises from about 46% at step 15 to about 70% at step 26."
+}

@@ -1,0 +1,402 @@
+{
+ "all": {
+  "code": "b.a k.ll",
+  "from": "flsz_family.py"
+ },
+ "as": {
+  "code": "s.a c.s",
+  "from": "flsz_family.py"
+ },
+ "back": {
+  "code": "c.b s.a k.ck",
+  "from": "flsz_family.py"
+ },
+ "backing": {
+  "code": "c.b s.a x.ck + | s.i k.ng ; bv 3>2",
+  "from": "flsz_family.py"
+ },
+ "badge": {
+  "code": "c.b s.a x.dg e0 ; bv 3>2 ; nudge 3>2",
+  "from": "legend_rules.py"
+ },
+ "bath": {
+  "code": "c.b s.a g.th",
+  "from": "flsz_family.py"
+ },
+ "bathe": {
+  "code": "c.b l.a g.th e>",
+  "from": "flsz_family.py"
+ },
+ "bed": {
+  "code": "c.b s.e c.d",
+  "from": "legend_rules.py"
+ },
+ "bedding": {
+  "code": "c.b s.e x.dd + | s.i k.ng ; bv 3>2",
+  "from": "legend_rules.py"
+ },
+ "bee": {
+  "code": "c.b t.ee",
+  "from": "flsz_family.py"
+ },
+ "bother": {
+  "code": "c.b s.o x.th | r.er ; bv 3>2",
+  "from": "flsz_family.py"
+ },
+ "buzz": {
+  "code": "c.b s.u k.zz",
+  "from": "flsz_family.py"
+ },
+ "buzzing": {
+  "code": "c.b s.u x.zz + | s.i k.ng ; bv 3>2",
+  "from": "flsz_family.py"
+ },
+ "bye": {
+  "code": "c.b l.y e0",
+  "from": "flsz_family.py"
+ },
+ "call": {
+  "code": "c.c b.a k.ll",
+  "from": "legend_rules.py"
+ },
+ "cash": {
+  "code": "c.c s.a g.sh",
+  "from": "flsz_family.py"
+ },
+ "cashing": {
+  "code": "c.c s.a x.sh + | s.i k.ng ; bv 3>2",
+  "from": "flsz_family.py"
+ },
+ "cat": {
+  "code": "c.c s.a c.t",
+  "from": "th_family.py"
+ },
+ "catch": {
+  "code": "c.c s.a g.tch",
+  "from": "flsz_family.py"
+ },
+ "catching": {
+  "code": "c.c s.a x.tch + | s.i k.ng ; bv 3>2",
+  "from": "flsz_family.py"
+ },
+ "cats": {
+  "code": "c.c s.a c.t + c.s",
+  "from": "th_family.py"
+ },
+ "chess": {
+  "code": "g.ch s.e k.ss",
+  "from": "flsz_family.py"
+ },
+ "cliff": {
+  "code": "c.cl s.i k.ff",
+  "from": "flsz_family.py"
+ },
+ "diving": {
+  "code": "c.d l.i | c.v + s.i k.ng ; vault 3>1",
+  "from": "flsz_family.py"
+ },
+ "dog": {
+  "code": "c.d s.o c.g",
+  "from": "th_family.py"
+ },
+ "dogs": {
+  "code": "c.d s.o c.g + c.s",
+  "from": "th_family.py"
+ },
+ "doll": {
+  "code": "c.d s.o k.ll",
+  "from": "flsz_family.py"
+ },
+ "even": {
+  "code": "l.e | c.v b.e c.n ; vault 2>0",
+  "from": "flsz_family.py"
+ },
+ "file": {
+  "code": "c.f l.i c.l e>",
+  "from": "flsz_family.py"
+ },
+ "filing": {
+  "code": "c.f l.i | c.l + s.i k.ng ; vault 3>1",
+  "from": "flsz_family.py"
+ },
+ "fill": {
+  "code": "c.f s.i k.ll",
+  "from": "flsz_family.py"
+ },
+ "filling": {
+  "code": "c.f s.i x.ll + | s.i k.ng ; bv 3>2",
+  "from": "flsz_family.py"
+ },
+ "flosing": {
+  "code": "c.fl l.o | c.s + s.i k.ng ; vault 3>1",
+  "from": "flsz_family.py"
+ },
+ "flossing": {
+  "code": "c.fl s.o x.ss + | s.i k.ng ; bv 3>2",
+  "from": "flsz_family.py"
+ },
+ "gather": {
+  "code": "c.g s.a x.th | r.er ; bv 3>2",
+  "from": "flsz_family.py"
+ },
+ "getting": {
+  "code": "c.g s.e x.tt + | s.i k.ng ; bv 3>2",
+  "from": "flsz_family.py"
+ },
+ "giving": {
+  "code": "c.g s.i c.v + | s.i k.ng",
+  "from": "flsz_family.py"
+ },
+ "hall": {
+  "code": "c.h b.a k.ll",
+  "from": "flsz_family.py"
+ },
+ "head": {
+  "code": "c.h t.ea c.d",
+  "from": "legend_rules.py"
+ },
+ "heading": {
+  "code": "c.h t.ea c.d + | s.i k.ng",
+  "from": "legend_rules.py"
+ },
+ "his": {
+  "code": "c.h s.i c.s",
+  "from": "flsz_family.py"
+ },
+ "hop": {
+  "code": "c.h s.o c.p",
+  "from": "legend_rules.py"
+ },
+ "hope": {
+  "code": "c.h l.o c.p e>",
+  "from": "legend_rules.py"
+ },
+ "hoping": {
+  "code": "c.h l.o | c.p + s.i k.ng ; vault 3>1",
+  "from": "legend_rules.py"
+ },
+ "hopping": {
+  "code": "c.h s.o x.pp + | s.i k.ng ; bv 3>2",
+  "from": "legend_rules.py"
+ },
+ "if": {
+  "code": "s.i c.f",
+  "from": "flsz_family.py"
+ },
+ "in": {
+  "code": "s.i c.n",
+  "from": "flsz_family.py"
+ },
+ "inn": {
+  "code": "s.i k.nn",
+  "from": "flsz_family.py"
+ },
+ "jazy": {
+  "code": "c.j l.a | c.z + b.y ; vault 3>1",
+  "from": "flsz_family.py"
+ },
+ "jazzy": {
+  "code": "c.j s.a x.zz + | b.y ; bv 3>2",
+  "from": "flsz_family.py"
+ },
+ "kising": {
+  "code": "c.k l.i | c.s + s.i k.ng ; vault 3>1",
+  "from": "flsz_family.py"
+ },
+ "kiss": {
+  "code": "c.k s.i k.ss",
+  "from": "legend_rules.py"
+ },
+ "kissing": {
+  "code": "c.k s.i x.ss + | s.i k.ng ; bv 3>2",
+  "from": "legend_rules.py"
+ },
+ "knife": {
+  "code": "k.kn l.i c.f e>",
+  "from": "flsz_family.py"
+ },
+ "knives": {
+  "code": "k.kn l.i c.v e> + c.s",
+  "from": "flsz_family.py"
+ },
+ "knoll": {
+  "code": "k.kn l.o k.ll",
+  "from": "flsz_family.py"
+ },
+ "leaf": {
+  "code": "c.l t.ea c.f",
+  "from": "flsz_family.py"
+ },
+ "leaves": {
+  "code": "c.l t.ea c.v e0 + c.s",
+  "from": "flsz_family.py"
+ },
+ "lemon": {
+  "code": "c.l s.e c.m | b.o c.n",
+  "from": "legend_rules.py"
+ },
+ "life": {
+  "code": "c.l l.i c.f e>",
+  "from": "flsz_family.py"
+ },
+ "lives": {
+  "code": "c.l l.i c.v e> + c.s",
+  "from": "flsz_family.py"
+ },
+ "mash": {
+  "code": "c.m s.a g.sh",
+  "from": "flsz_family.py"
+ },
+ "mashing": {
+  "code": "c.m s.a x.sh + | s.i k.ng ; bv 3>2",
+  "from": "flsz_family.py"
+ },
+ "math": {
+  "code": "c.m s.a g.th",
+  "from": "flsz_family.py"
+ },
+ "moth": {
+  "code": "c.m s.o g.th",
+  "from": "flsz_family.py"
+ },
+ "page": {
+  "code": "c.p l.a c.g e> ; nudge 3>2",
+  "from": "legend_rules.py"
+ },
+ "pol": {
+  "code": "c.p s.o c.l",
+  "from": "flsz_family.py"
+ },
+ "pole": {
+  "code": "c.p l.o c.l e>",
+  "from": "flsz_family.py"
+ },
+ "poll": {
+  "code": "c.p l.o k.ll",
+  "from": "flsz_family.py"
+ },
+ "pony": {
+  "code": "c.p l.o | c.n b.y ; vault 3>1",
+  "from": "legend_rules.py"
+ },
+ "rol": {
+  "code": "c.r s.o c.l",
+  "from": "flsz_family.py"
+ },
+ "role": {
+  "code": "c.r l.o c.l e>",
+  "from": "flsz_family.py"
+ },
+ "roll": {
+  "code": "c.r l.o k.ll",
+  "from": "legend_rules.py"
+ },
+ "scroll": {
+  "code": "c.scr l.o k.ll",
+  "from": "flsz_family.py"
+ },
+ "sea": {
+  "code": "c.s t.ea",
+  "from": "flsz_family.py"
+ },
+ "skull": {
+  "code": "c.sk s.u k.ll",
+  "from": "flsz_family.py"
+ },
+ "sniffing": {
+  "code": "c.sn s.i x.ff + | s.i k.ng ; bv 3>2",
+  "from": "flsz_family.py"
+ },
+ "snifing": {
+  "code": "c.sn l.i | c.f + s.i k.ng ; vault 3>1",
+  "from": "flsz_family.py"
+ },
+ "spell": {
+  "code": "c.sp s.e k.ll",
+  "from": "flsz_family.py"
+ },
+ "spelling": {
+  "code": "c.sp s.e x.ll + | s.i k.ng ; bv 3>2",
+  "from": "flsz_family.py"
+ },
+ "still": {
+  "code": "c.st s.i k.ll",
+  "from": "flsz_family.py"
+ },
+ "stroll": {
+  "code": "c.str l.o k.ll",
+  "from": "flsz_family.py"
+ },
+ "such": {
+  "code": "c.s s.u g.ch",
+  "from": "flsz_family.py"
+ },
+ "than": {
+  "code": "g.th s.a c.n",
+  "from": "th_family.py"
+ },
+ "them": {
+  "code": "g.th s.e c.m",
+  "from": "th_family.py"
+ },
+ "thick": {
+  "code": "g.th s.i k.ck",
+  "from": "th_family.py"
+ },
+ "thin": {
+  "code": "g.th s.i c.n",
+  "from": "th_family.py"
+ },
+ "three": {
+  "code": "g.th c.r t.ee",
+  "from": "th_family.py"
+ },
+ "till": {
+  "code": "c.t s.i k.ll",
+  "from": "flsz_family.py"
+ },
+ "tol": {
+  "code": "c.t s.o c.l",
+  "from": "flsz_family.py"
+ },
+ "tole": {
+  "code": "c.t l.o c.l e>",
+  "from": "flsz_family.py"
+ },
+ "toll": {
+  "code": "c.t l.o k.ll",
+  "from": "flsz_family.py"
+ },
+ "troll": {
+  "code": "c.tr l.o k.ll",
+  "from": "flsz_family.py"
+ },
+ "us": {
+  "code": "s.u c.s",
+  "from": "flsz_family.py"
+ },
+ "wee": {
+  "code": "c.w t.ee",
+  "from": "flsz_family.py"
+ },
+ "well": {
+  "code": "c.w s.e k.ll",
+  "from": "flsz_family.py"
+ },
+ "wife": {
+  "code": "c.w l.i c.f e>",
+  "from": "flsz_family.py"
+ },
+ "wives": {
+  "code": "c.w l.i c.v e> + c.s",
+  "from": "flsz_family.py"
+ },
+ "wolf": {
+  "code": "c.w b.o c.lf",
+  "from": "flsz_family.py"
+ },
+ "wolves": {
+  "code": "c.w b.o c.lv e0 + c.s",
+  "from": "flsz_family.py"
+ }
+}

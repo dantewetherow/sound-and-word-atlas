@@ -1,0 +1,145 @@
+/* Layout: the route drawn as eight bands of step tiles; each step page is a plate of marked words beside its notes.
+   Colours are the session decks' own, so the marks read the same here as on the slides. */
+:root {
+  --paper: #f4efe6;
+  --card: #fbf8f2;
+  --ink: #2b2b2b;
+  --soft: #6b6256;
+  --line: #e2d8c8;
+  --modal: #3f6488;
+  --verb: #b5402f;
+  --subject: #3a7d44;
+  --display: "Fraunces", Georgia, "Times New Roman", serif;
+  --body: "Lexend", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #1d1b18; --card: #25221e; --ink: #ece5d8; --soft: #a89e8f; --line: #3a352e;
+    --modal: #95b6db; --verb: #e2836e; --subject: #7dbb87; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #1d1b18; --card: #25221e; --ink: #ece5d8; --soft: #a89e8f; --line: #3a352e;
+  --modal: #95b6db; --verb: #e2836e; --subject: #7dbb87; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.6;
+}
+a { color: var(--modal); text-underline-offset: 3px; }
+a:focus-visible, .tile:focus-visible { outline: 2px solid var(--modal); outline-offset: 3px; border-radius: 6px; }
+em, i { font-family: var(--display); font-style: italic; font-weight: 400; }
+h1, h2, h3 { font-family: var(--display); font-weight: 500; text-wrap: balance; margin: 0; line-height: 1.15; }
+h1 { font-size: clamp(2.1rem, 5.2vw, 3.4rem); letter-spacing: -0.01em; }
+h2 { font-size: clamp(1.5rem, 3vw, 1.9rem); }
+h3 { font-size: 1.15rem; }
+p { margin: 0; }
+
+.wrap {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.eyebrow { font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--soft); font-weight: 400; }
+.eyebrow a { color: inherit; }
+.badge {
+  display: inline-block; margin-left: 6px; padding: 1px 9px; border: 1px solid var(--line); border-radius: 999px;
+  font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--soft); vertical-align: 1px;
+}
+
+/* header and footer */
+header.site { border-bottom: 1px solid var(--line); }
+header.site .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 28px; padding-block: 16px; }
+.brand { font-family: var(--display); font-size: 1.3rem; font-weight: 500; color: var(--ink); text-decoration: none; line-height: 1.2; }
+.brand small { display: block; font-family: var(--body); font-size: 0.7rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--soft); }
+nav.site { display: flex; flex-wrap: wrap; gap: 6px 22px; font-size: 0.95rem; }
+nav.site a { text-decoration: none; font-weight: 400; }
+nav.site a:hover { text-decoration: underline; }
+footer.site { border-top: 1px solid var(--line); margin-top: 48px; }
+footer.site .wrap { padding-block: 22px 32px; color: var(--soft); font-size: 0.85rem; max-width: 1120px; }
+
+/* home */
+.hero .wrap { padding-block: 48px 36px; display: grid; gap: 14px; }
+.lead { font-size: 1.15rem; max-width: 62ch; }
+.route .wrap, .marks .wrap, .about .wrap { padding-block: 28px; display: grid; gap: 10px; }
+.sub { color: var(--soft); max-width: 66ch; }
+.band { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 20px 28px; padding-block: 24px; border-top: 1px solid var(--line); }
+.band:first-of-type { margin-top: 10px; }
+.band-label { display: grid; align-content: start; gap: 4px; }
+.band-label p { color: var(--soft); font-size: 0.88rem; }
+.band-label .badge { justify-self: start; margin-left: 0; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+.tile {
+  display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-rows: auto 1fr; column-gap: 12px; row-gap: 6px;
+  padding: 14px 16px 16px; background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+  color: var(--ink); text-decoration: none; transition: border-color 0.15s ease;
+}
+.tile:hover { border-color: var(--modal); }
+.tile .num { grid-row: 1 / span 2; font-family: var(--display); font-size: 1.7rem; line-height: 1; color: var(--modal); font-variant-numeric: tabular-nums; min-width: 1.4em; }
+.tile .t { font-weight: 400; line-height: 1.3; }
+.tile .w { font-size: 0.92rem; line-height: 1.5; color: var(--ink); }
+.cw { white-space: nowrap; margin-right: 0.45em; letter-spacing: 0.01em; }
+.cw .v { color: var(--verb); }
+.cw .g { color: var(--subject); }
+
+.key { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px; margin-top: 8px; }
+.mark { margin: 0; padding: 14px 16px; background: var(--card); border: 1px solid var(--line); border-radius: 10px; display: grid; gap: 8px; align-content: start; }
+.mark .mw { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 4px 18px; min-height: 84px; }
+.mark .mw svg { height: 80px; width: auto; max-width: 100%; }
+.mark figcaption { font-size: 0.9rem; line-height: 1.5; }
+.mark figcaption b { display: block; font-weight: 500; font-size: 0.98rem; }
+
+.about .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px 32px; margin-top: 8px; }
+.about .cols > div { display: grid; gap: 6px; align-content: start; }
+.about h3 { font-size: 1.05rem; }
+
+/* step pages */
+.step-head { padding-block: 36px 8px; display: grid; gap: 10px; }
+.plate { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 28px; padding-block: 20px; align-items: start; }
+.words {
+  display: flex; flex-wrap: wrap; align-items: flex-end; gap: 22px 30px;
+  padding: 26px 24px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; min-width: 0;
+}
+.group { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 6px 14px; min-width: 0; max-width: 100%; }
+.group.pair { padding: 6px 10px 2px; border: 1px dashed var(--line); border-radius: 10px; }
+.word { margin: 0; display: grid; justify-items: center; gap: 2px; min-width: 0; max-width: 100%; }
+.word svg { display: block; max-width: 100%; height: auto; }
+.word figcaption { font-size: 0.78rem; color: var(--soft); text-align: center; }
+.word .plain { font-family: "Lexend", var(--body); font-weight: 400; line-height: 1; color: var(--ink); padding-block: 26px 30px; }
+.notes { display: grid; gap: 18px; min-width: 0; }
+.note { display: grid; gap: 4px; padding-bottom: 16px; border-bottom: 1px solid var(--line); }
+.note:last-child { border-bottom: 0; }
+.note h2 { font-family: var(--body); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--soft); }
+.note p { font-size: 0.98rem; }
+.note.open h2 { color: var(--verb); }
+.unmarked-note { color: var(--soft); font-size: 0.9rem; max-width: 70ch; }
+.pn { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; border-top: 1px solid var(--line); margin-top: 28px; padding-top: 20px; }
+.pn a { display: grid; gap: 2px; text-decoration: none; color: var(--ink); padding: 10px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); }
+.pn a:hover { border-color: var(--modal); }
+.pn a span { font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--modal); }
+.pn .next { text-align: right; }
+
+@media (max-width: 860px) {
+  .plate { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 720px) {
+  .band { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .band-label { grid-template-columns: auto auto 1fr; align-items: baseline; gap: 10px; }
+  .words { padding: 18px 14px; gap: 16px 18px; }
+}
+@media (max-width: 480px) {
+  .word svg { height: 100px !important; width: auto !important; }
+  .word .plain { font-size: 42px !important; padding-block: 18px 22px; }
+  .pn { grid-template-columns: 1fr; }
+  .pn .next { text-align: left; }
+  body { font-size: 16px; }
+}
+@media (prefers-reduced-motion: reduce) { .tile { transition: none; } }
