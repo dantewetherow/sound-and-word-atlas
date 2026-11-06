@@ -254,19 +254,50 @@ if ELP_FILE.exists() and all((OUT / "cards" / f).exists() for f, *_ in CARD_SETS
                      f'<p><a href="cards/{f}" download>Download the PDF</a> ({kb} KB)</p></div>')
     sample = (f'<div class="words"><figure class="word"><span class="plain" style="font-size:58px">make</span><figcaption>front</figcaption></figure>'
               f'<figure class="word">{svg_of("make", 58)}<figcaption>back</figcaption></figure></div>')
+
+    # The grade 3 word sum cards (build_word_sum_cards.py), shown when their PDF is there too.
+    WS_FILE = "word-sum-cards-grade-3.pdf"
+    ws_html = ""
+    if (OUT / "cards" / WS_FILE).exists():
+        import word_sum_codes as WS
+        groups = []
+        for short, title, rows in WS.SECTIONS:
+            groups.append((title, len(rows)))
+            if short == "Prefixes": groups.append(("Pairs that aren't word sums", len(WS.PAIRS)))
+        sheet, ranges = 1, []
+        for title, n in groups:
+            k = -(-n // 10)
+            ranges.append(f'<li>{"Sheets" if k > 1 else "Sheet"} {sheet}{f"&ndash;{sheet + k - 1}" if k > 1 else ""}: {html.escape(title[0].lower() + title[1:])} ({n} cards)</li>')
+            sheet += k
+        n_cards = sum(n for _, n in groups)
+        kb = round((OUT / "cards" / WS_FILE).stat().st_size / 1024)
+        ws_sample = (f'<div class="words"><figure class="word"><span class="plain" style="font-size:58px">making</span><figcaption>front</figcaption></figure>'
+                     f'<figure class="word"><span style="font-size:15px;color:var(--soft)">make + ing &rarr; making</span>{svg_of("making", 58)}<figcaption>back</figcaption></figure></div>')
+        ws_html = f"""
+<section class="about" id="word-sums" aria-labelledby="ws-h"><div class="wrap">
+<h2 id="ws-h">Grade 3 word sums</h2>
+<p class="sub">An extension for students who have finished the ELP lists: {n_cards} cards built on the list words. The front has the whole word. The back has its word sum, such as make + ing &rarr; making, and the word coded with a seam at each join. Each group starts on a new sheet, so you can print just the rule you're teaching.</p>
+<p><a href="cards/{WS_FILE}" download>Download the PDF</a> ({kb} KB, {sheet - 1} sheets, 10 to a page)</p>
+<ul class="sub">{''.join(ranges)}</ul>
+{ws_sample}
+</div></section>"""
     cards_body = f"""{header(0)}
 <main>
 <section class="hero"><div class="wrap">
 <p class="eyebrow">Downloads</p>
 <h1>Word cards</h1>
-<p class="lead">High-frequency word cards from the SD23 Early Literacy Profile lists. Each card has the plain word on the front and the same word coded on the back.</p>
+<p class="lead">Printable cards with the plain word on the front and the coded word on the back: high-frequency words from the SD23 Early Literacy Profile lists, and word sums for students who have finished them.</p>
 </div></section>
-<section class="about" aria-label="The three sets"><div class="wrap"><div class="cols">{''.join(tiles)}</div></div></section>
-<section class="about" aria-label="A card, front and back"><div class="wrap">{sample}</div></section>
+<section class="about" id="elp" aria-labelledby="elp-h"><div class="wrap">
+<h2 id="elp-h">ELP high-frequency words</h2>
+<div class="cols">{''.join(tiles)}</div>
+{sample}
+</div></section>{ws_html}
 <section class="about" aria-label="Notes"><div class="wrap"><div class="cols">
-<div><h3>Printing</h3><p>Print in colour and double-sided, flipping on the long edge, so each coded word lands behind its plain one. Print one sheet first and hold it up to a window to check that the backs line up, then cut on the grey lines. Spaces left over on the last sheet are blank cards to write on.</p></div>
-<div><h3>The coding</h3><p>The coded sides show the markings as they stand in the manual now. Some of these words still have marking calls open, and the cards will be rebuilt when those are ruled.</p></div>
+<div><h3>Printing</h3><p>Print in colour and double-sided, flipping on the long edge, so each back lands behind its front. Print one sheet first and hold it up to a window to check that the backs line up, then cut on the grey lines. Spaces left over on a sheet are blank cards to write on.</p></div>
+<div><h3>The coding</h3><p>The coded sides show the markings as they stand in the manual now. Some words still have marking calls open, including most of the word sum markings, which are new, and the cards will be rebuilt when those are ruled.</p></div>
 <div><h3>Where the words come from</h3><p>The Early Literacy Profile (ELP) Assessment &amp; Instructional Guide, Central Okanagan Public Schools (2025), pp. 16&ndash;17. The guide doesn't name a source for its lists; it says they were aligned with a phonics scope and sequence, keeping one word for each pattern. These cards aren't an SD23 publication. The district's own <a href="https://assessment.sd23.bc.ca/elp">ELP page</a> is the place for the assessment itself.</p></div>
+<div><h3>Word sums</h3><p>Word sums and word matrices come from Melvyn Ramsden's Real Spelling, and Peter Bowers brought them into classrooms as structured word inquiry. The base words come from the ELP lists and E. W. Dolch's grade 3 list (Dolch, 1936).</p></div>
 </div></div></section>
 </main>
 {footer(0)}"""
