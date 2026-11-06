@@ -1,0 +1,19 @@
+{
+  "source": "Early Literacy Profile (ELP) Assessment & Instructional Guide, Central Okanagan Public Schools, 2025, pp. 16-17: High Frequency Word Lists",
+  "lists": {
+    "1":  {"grade": "K", "label": "Kindergarten", "words": ["a","and","I","is","it","the","to","you","he","she","was","of"]},
+    "2":  {"grade": "1", "label": "CV", "words": ["go","me","my","we","be","no","by"]},
+    "3":  {"grade": "1", "label": "Irregular/HFW words", "words": ["come","some","one","put","said","two","see","look","why","try"]},
+    "4":  {"grade": "1", "label": "Digraphs", "words": ["that","this","with","then","when","much","wish","pick","which"]},
+    "5":  {"grade": "1", "label": "Irregular/HFW words", "words": ["where","small","are","have","into","there","they","want","what","like","little","play"]},
+    "6":  {"grade": "1", "label": "Long Vowel Silent 'e'", "words": ["take","five","gave","made","these","those","use","white","write","here","make","ate","came","ride"]},
+    "7":  {"grade": "1", "label": "Irregular/HFW words", "words": ["who","again","any","could","would","from","give","once","walk","were","good","her"]},
+    "8":  {"grade": "1", "label": "R-Controlled", "words": ["over","before","first","hurt","for","under","start"]},
+    "9":  {"grade": "1", "label": "Irregular/HFW words", "words": ["because","been","both","buy","old","does","goes","many","pull","their"]},
+    "10": {"grade": "1", "label": "Vowel Teams", "words": ["please","each","eat","say","green","read","right","too","keep","away","blue"]},
+    "11": {"grade": "2", "label": "Diphthongs", "words": ["how","round","found","draw","down","brown","new","now","our","out","saw","grow","own","show","know"]},
+    "12": {"grade": "2", "label": "Irregular/HFW words", "words": ["around","very","wash","work","your","done","eight","find","kind","laugh","only","pretty","together","warm"]},
+    "13": {"grade": "2", "label": "Multisyllabic", "words": ["every","going","open","always","better","carry","funny","yellow","today","myself","never","seven","other","water","people"]}
+  },
+  "starred_not_irregular": ["see","look","like","little","play","good","her"]
+}

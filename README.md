@@ -23,8 +23,9 @@ The route and its notes come from the *Legomorphic notation* manual. To change w
 
 1. Read the manual's route section (from "The route" to "The operator system") with the Claude Docs connector, save the result, and convert it with `build/x2t.py`. Keep the part before "## The operator system" as `build/data/route_section.md`.
 2. `python3 build/parse_route.py build/data/route_section.md build/data/route.json`
-3. `python3 build/build_site.py build/data/route.json docs --standalone`
-4. Commit and push. Pages republishes the site within a few minutes.
+3. To rebuild the word cards, run `npm install @fontsource-variable/lexend` somewhere outside the repository, then `python3 build/build_elp_cards.py <that folder>/node_modules docs/cards <a scratch folder>`. The words come from `build/data/elp_hfw.json`, taken from the SD23 ELP guide (pp. 16–17).
+4. `python3 build/build_site.py build/data/route.json docs --standalone`. It writes the Word cards page when the card PDFs are in `docs/cards`.
+5. Commit and push. Pages republishes the site within a few minutes.
 
 To refresh the deck codes from a copy of the atlas folder, run `python3 build/known_codes.py --refresh /path/to/atlas`.
 
