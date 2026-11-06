@@ -75,7 +75,7 @@ W = {
  "right": "c.r t.igh c.t", "too": "c.t t.oo", "keep": "c.k t.ee c.p", "away": "b.a | c.w t.ay", "blue": "c.bl t.ue",
  # ---- list 11, diphthongs
  "how": "c.h t.ow", "round": "c.r t.ou c.nd", "found": "c.f t.ou c.nd", "draw": "c.dr t.aw", "down": "c.d t.ow c.n", "brown": "c.br t.ow c.n",
- "new": "c.n t.ew", "now": "c.n t.ow", "our": "r.our", "out": "t.ou c.t", "saw": "c.s t.aw", "grow": "c.gr t.ow", "own": "t.ow c.n",
+ "new": "c.n t.ew", "now": "c.n t.ow", "our": "t.ou c.r", "out": "t.ou c.t", "saw": "c.s t.aw", "grow": "c.gr t.ow", "own": "t.ow c.n",
  "show": "g.sh t.ow", "know": "k.kn t.ow",
  # ---- list 12
  "around": "b.a | c.r t.ou c.nd", "very": "c.v s.e c.r | b.y", "wash": "c.w b.a g.sh", "work": "c.w r.or c.k", "your": "c.y r.our",
