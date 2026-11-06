@@ -19,7 +19,7 @@ codes, _ = all_codes()
 for w, c in SC.SITE_CODES.items(): codes.setdefault(w, c)
 LW.W.clear(); LW.W.update(codes)
 STEPS = route["steps"]; N = len(STEPS)
-BUILT = "5 November 2026"
+BUILT = "6 November 2026"
 FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
          '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600'
          '&family=Lexend:wght@300;400;500&display=swap">')
@@ -41,21 +41,27 @@ def groups_of(words_md):
             if g: out.append(g)
     return out
 
+def with_code(word, code):
+    """Put a word's code in place for one drawing, and afterwards leave LW.W as it was (no stray empty code behind)."""
+    had, old = word in LW.W, LW.W.get(word)
+    LW.W[word] = code
+    return lambda: LW.W.__setitem__(word, old) if had else LW.W.pop(word, None)
+
 def svg_of(word, F, code=None, label=None):
-    if code: old = LW.W.get(word); LW.W[word] = code
+    undo = with_code(word, code) if code else None
     try:
         svg, _, _ = LW.svg_strip([word], F=F, cls=False, label=label or f"{word}, marked")
     finally:
-        if code: LW.W[word] = old
+        if undo: undo()
     return svg
 
 def coloured(word, code=None):
     """A word with its letters in their colours, as the orientation map shows them."""
     if word in SC.UNMARKED or (word not in LW.W and not code): return f'<span class="cw">{html.escape(word)}</span>'
-    if code: old = LW.W.get(word); LW.W[word] = code
+    undo = with_code(word, code) if code else None
     try: letters = LW.parse(word)["letters"]
     finally:
-        if code: LW.W[word] = old
+        if undo: undo()
     cls = {"vowel": "v", "team": "g", "consonant": ""}
     return '<span class="cw">' + "".join(f'<span class="{cls[l["type"]]}">{html.escape(l["ch"])}</span>' if cls[l["type"]] else html.escape(l["ch"]) for l in letters) + "</span>"
 
@@ -95,7 +101,7 @@ def header(depth):
     up = "../" * depth
     return (f'<header class="site"><div class="wrap"><a class="brand" href="{up}index.html"><small>Legomorphic notation</small>Sound and Word Atlas</a>'
             f'<nav class="site" aria-label="Site"><a href="{up}index.html#route">The route</a><a href="{up}index.html#marks">Reading the marks</a>'
-            f'<a href="{up}cards.html">Word cards</a><a href="{up}index.html#about">About</a></nav></div></header>')
+            f'<a href="{up}cards.html">Word cards</a><a href="{up}word-lists.html">Word lists</a><a href="{up}index.html#about">About</a></nav></div></header>')
 
 def footer(depth):
     return ('<footer class="site"><div class="wrap"><p>Built on ' + BUILT + ' from the <i>Legomorphic notation</i> manual. '
@@ -225,7 +231,7 @@ home_body = f"""{header(0)}
 <section class="about" id="about" aria-labelledby="about-h"><div class="wrap">
 <h2 id="about-h">About this version</h2>
 <div class="cols">
-<div><h3>What's here</h3><p>The route: {N} steps in {len(route["bands"])} bands, {n_words} different words, {n_marked} of them marked. Printable cards for the ELP high-frequency words are on the <a href="cards.html">Word cards</a> page. The legend in full, the word families and the teaching routines come next.</p></div>
+<div><h3>What's here</h3><p>The route: {N} steps in {len(route["bands"])} bands, {n_words} different words, {n_marked} of them marked. Printable cards for the ELP high-frequency words and all of Dolch&rsquo;s sight words are on the <a href="cards.html">Word cards</a> page, and <a href="word-lists.html">Word lists</a> shows where the ELP words come from. The legend in full, the word families and the teaching routines come next.</p></div>
 <div><h3>Where it comes from</h3><p>The route and its notes come from the <i>Legomorphic notation</i> manual, and the site is rebuilt from it, so corrections go into the manual first. The marks are drawn with the same tools as the session decks.</p></div>
 <div><h3>Still settling</h3><p>Steps 16 to 32 were added as a draft on 15 October 2026. A few words show in plain letters until their marking is decided.</p></div>
 </div>
@@ -281,22 +287,41 @@ if ELP_FILE.exists() and all((OUT / "cards" / f).exists() for f, *_ in CARD_SETS
 <ul class="sub">{''.join(ranges)}</ul>
 {ws_sample}
 </div></section>"""
+    # The Dolch sight word cards (build_dolch_cards.py), shown when all five PDFs are there.
+    DOLCH = json.loads((HERE / "data" / "dolch.json").read_text(encoding="utf-8"))
+    elp_words = {w for v in ELP["lists"].values() for w in v["words"]}
+    dolch_sets = [(f'dolch-word-cards-{l["key"]}.pdf', l) for l in DOLCH["levels"]]
+    dolch_html = ""
+    if all((OUT / "cards" / f).exists() for f, _ in dolch_sets):
+        dtiles = []
+        for f, l in dolch_sets:
+            n, on = len(l["words"]), sum(w in elp_words for w in l["words"])
+            kb = round((OUT / "cards" / f).stat().st_size / 1024)
+            dtiles.append(f'<div><h3>{html.escape(l["name"])}</h3><p>{n} cards on {-(-n // 10)} sheets, {on} of them on the ELP lists.</p>'
+                          f'<p><a href="cards/{f}" download>Download the PDF</a> ({kb} KB)</p></div>')
+        n_d = sum(len(l["words"]) for l in DOLCH["levels"])
+        dolch_html = f"""
+<section class="about" id="dolch" aria-labelledby="dolch-h"><div class="wrap">
+<h2 id="dolch-h">Dolch sight words</h2>
+<p class="sub">All {n_d} of E. W. Dolch&rsquo;s sight words (1936), one set for each of his levels, 10 to a page. Each card&rsquo;s tag names its level and the ELP list that teaches the word, if one does, so you can set aside the cards a class has already met. <a href="word-lists.html">Where the ELP words come from</a> shows how the two lists line up.</p>
+<div class="cols">{''.join(dtiles)}</div>
+</div></section>"""
     cards_body = f"""{header(0)}
 <main>
 <section class="hero"><div class="wrap">
 <p class="eyebrow">Downloads</p>
 <h1>Word cards</h1>
-<p class="lead">Printable cards with the plain word on the front and the coded word on the back: high-frequency words from the SD23 Early Literacy Profile lists, and word sums for students who have finished them.</p>
+<p class="lead">Printable cards with the plain word on the front and the coded word on the back: high-frequency words from the SD23 Early Literacy Profile lists, all of Dolch&rsquo;s sight words, and word sums for students who have finished the ELP lists.</p>
 </div></section>
 <section class="about" id="elp" aria-labelledby="elp-h"><div class="wrap">
 <h2 id="elp-h">ELP high-frequency words</h2>
 <div class="cols">{''.join(tiles)}</div>
 {sample}
-</div></section>{ws_html}
+</div></section>{dolch_html}{ws_html}
 <section class="about" aria-label="Notes"><div class="wrap"><div class="cols">
 <div><h3>Printing</h3><p>Print in colour and double-sided, flipping on the long edge, so each back lands behind its front. Print one sheet first and hold it up to a window to check that the backs line up, then cut on the grey lines. Spaces left over on a sheet are blank cards to write on.</p></div>
-<div><h3>The coding</h3><p>The coded sides show the markings as they stand in the manual now. Some words still have marking calls open, including most of the word sum markings, which are new, and the cards will be rebuilt when those are ruled.</p></div>
-<div><h3>Where the words come from</h3><p>The Early Literacy Profile (ELP) Assessment &amp; Instructional Guide, Central Okanagan Public Schools (2025), pp. 16&ndash;17. The guide doesn't name a source for its lists; it says they were aligned with a phonics scope and sequence, keeping one word for each pattern. These cards aren't an SD23 publication. The district's own <a href="https://assessment.sd23.bc.ca/elp">ELP page</a> is the place for the assessment itself.</p></div>
+<div><h3>The coding</h3><p>The coded sides show the markings as they stand in the manual now. Some words still have marking calls open, including most of the word sum markings and a few of the Dolch words, which are new, and the cards will be rebuilt when those are ruled.</p></div>
+<div><h3>Where the words come from</h3><p>The Early Literacy Profile (ELP) Assessment &amp; Instructional Guide, Central Okanagan Public Schools (2025), pp. 16&ndash;17. The guide doesn't name a source for its lists; it says they were aligned with a phonics scope and sequence, keeping one word for each pattern. All but three of its 148 words are E. W. Dolch&rsquo;s (1936), as <a href="word-lists.html">Word lists</a> shows. These cards aren't an SD23 publication. The district's own <a href="https://assessment.sd23.bc.ca/elp">ELP page</a> is the place for the assessment itself.</p></div>
 <div><h3>Word sums</h3><p>Word sums and word matrices come from Melvyn Ramsden's Real Spelling, and Peter Bowers brought them into classrooms as structured word inquiry. The base words come from the ELP lists and E. W. Dolch's grade 3 list (Dolch, 1936).</p></div>
 </div></div></section>
 </main>
@@ -304,6 +329,11 @@ if ELP_FILE.exists() and all((OUT / "cards" / f).exists() for f, *_ in CARD_SETS
     (OUT / "cards.html").write_text(page("Word cards · Sound and Word Atlas", cards_body, 0,
                                          "Printable high-frequency word cards from the SD23 ELP lists, plain on the front and coded on the back."), encoding="utf-8")
     print("wrote cards.html |", ", ".join(t for _, t, *_ in CARD_SETS))
+
+from dolch_codes import DOLCH_CODES
+import word_lists
+for w, c in DOLCH_CODES.items(): LW.W.setdefault(w, c)
+word_lists.write(OUT, page, header, footer, coloured, LW)
 
 if (HERE / "site.css").exists():
     shutil.copy(HERE / "site.css", OUT / "site.css")

@@ -13,6 +13,8 @@ The site is at https://dantewetherow.github.io/sound-and-word-atlas/.
   - `x2t.py` converts a read of the manual from the Claude Docs connector into markdown.
   - `legomorphic_words.py` draws the marked words.
   - `known_codes.py` and `deck_codes.json` hold the codes the session decks already use, and `site_codes.py` holds the codes written for route words that had none.
+  - `build_elp_cards.py`, `build_dolch_cards.py` and `build_word_sum_cards.py` make the printable cards. `dolch_codes.py` holds the codes written for the 43 Dolch words that had none.
+  - `word_lists.py` writes the Word lists page, which shows where the ELP words come from in Dolch's lists. Its words come from `data/elp_hfw.json` and `data/dolch.json`, and every count on it is worked out from them.
   - `site.css` is the stylesheet.
 
 ## The manual stays the source
@@ -23,8 +25,8 @@ The route and its notes come from the *Legomorphic notation* manual. To change w
 
 1. Read the manual's route section (from "The route" to "The operator system") with the Claude Docs connector, save the result, and convert it with `build/x2t.py`. Keep the part before "## The operator system" as `build/data/route_section.md`.
 2. `python3 build/parse_route.py build/data/route_section.md build/data/route.json`
-3. To rebuild the word cards, run `npm install @fontsource-variable/lexend` somewhere outside the repository, then `python3 build/build_elp_cards.py <that folder>/node_modules docs/cards <a scratch folder>`. The words come from `build/data/elp_hfw.json`, taken from the SD23 ELP guide (pp. 16–17). The grade 3 word sum cards build the same way with `build/build_word_sum_cards.py`; their word sums come from the manual's Word analysis draft tab and their markings from `build/word_sum_codes.py`, whose `CALLS` wait for a ruling in the manual's Marking calls tab.
-4. `python3 build/build_site.py build/data/route.json docs --standalone`. It writes the Word cards page when the card PDFs are in `docs/cards`.
+3. To rebuild the word cards, run `npm install @fontsource-variable/lexend` somewhere outside the repository, then `python3 build/build_elp_cards.py <that folder>/node_modules docs/cards <a scratch folder>`. The words come from `build/data/elp_hfw.json`, taken from the SD23 ELP guide (pp. 16–17). The grade 3 word sum cards build the same way with `build/build_word_sum_cards.py`; their word sums come from the manual's Word analysis draft tab and their markings from `build/word_sum_codes.py`, whose `CALLS` wait for a ruling in the manual's Marking calls tab. The Dolch cards build the same way with `build/build_dolch_cards.py`. Their words come from `build/data/dolch.json`, which holds E. W. Dolch's 220 words (1936) at the levels ReadWriteThink prints, with his *going* where its list has *giving*, and his 95 nouns. The codes the decks don't have come from `build/dolch_codes.py`, whose `CALLS` wait under "From the Dolch cards" in the Marking calls tab.
+4. `python3 build/build_site.py build/data/route.json docs --standalone`. It writes the Word cards page when the card PDFs are in `docs/cards`, and the Word lists page.
 5. Commit and push. Pages republishes the site within a few minutes.
 
 To refresh the deck codes from a copy of the atlas folder, run `python3 build/known_codes.py --refresh /path/to/atlas`.

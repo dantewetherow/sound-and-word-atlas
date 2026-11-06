@@ -27,6 +27,8 @@ THE CODE, unit by unit, left to right
     le      the final -le unit (both letters red, red bond bar, one red circle)
     e0      a silent e in a cone of silence, with no vault
     e>      a silent e in a cone, with a vault back to the long vowel before it
+    ap      the red apostrophe of a contraction, standing in for the vowel it drops, with no circle (don’t, as the
+            marking card draws I’m)
     |       a syllable break (each syllable gets its own swoop)
     +       a morpheme seam
 After a semicolon, by unit number (counting from 0, skipping | and +; a group such as c.nt is one unit):
@@ -155,6 +157,7 @@ def parse(word):
         if tok == "+": marks.append({"type": "seam", "after": col - 1}); continue
         if tok == "le": kind, s = "le", "le"
         elif tok in ("e0", "e>"): kind, s = tok, "e"
+        elif tok == "ap": kind, s = "ap", "’"
         else:
             kind, _, s = tok.partition(".")
             assert kind in ("c", "k", "g", "x", "s", "l", "b", "w", "t", "r") and s, (word, tok)
@@ -192,6 +195,8 @@ def parse(word):
             assert "r" in s and len(s) >= 2, (word, tok)
             for ch in s: letters.append({"ch": ch, "type": "consonant" if ch == "r" else "vowel"})
             marks += [{"type": "blendbar", "from": cols[0], "to": cols[-1], "color": "vowel"}, {"type": "dot", "cols": cols, "color": "vowel"}]
+        elif kind == "ap":                                   # red, like the vowel it stands in for; it has no sound, so no circle
+            letters.append({"ch": "’", "type": "vowel"})
         elif kind == "e0":
             letters.append({"ch": "e", "type": "vowel"}); marks.append({"type": "cone", "col": col})
         elif kind == "e>":
@@ -243,7 +248,8 @@ INK, RED, GREEN, BLUE, QUIET = "var(--ink)", "var(--verb)", "var(--subject)", "v
 INKX = {"a": (.285, .246), "b": (.252, .279), "c": (.236, .248), "d": (.286, .261), "e": (.262, .270), "f": (.165, .194), "g": (.293, .254),
         "h": (.235, .234), "i": (.076, .080), "j": (.164, .086), "k": (.221, .279), "l": (.063, .062), "m": (.398, .399), "n": (.235, .234),
         "o": (.276, .271), "p": (.253, .278), "q": (.284, .248), "r": (.139, .205), "s": (.208, .198), "t": (.176, .183), "u": (.240, .244),
-        "v": (.271, .276), "w": (.384, .381), "x": (.281, .282), "y": (.290, .288), "z": (.195, .211), "I": (.176, .167)}
+        "v": (.271, .276), "w": (.384, .381), "x": (.281, .282), "y": (.290, .288), "z": (.195, .211), "I": (.176, .167),
+        "’": (.060, .060)}
 BAR = 0.33          # the bond bar sits this far under the baseline, clear of the tails of g and y
 FILL = {"consonant": INK, "vowel": RED, "team": GREEN}
 
@@ -262,6 +268,10 @@ def svg_word(word, F=80.0, x0=0.0, cls=True):
     n = len(p["letters"])
     room = [0.0] * n                                         # extra room after a letter
     for s in seams: room[s] += G
+    for i, L in enumerate(p["letters"]):                     # an apostrophe takes half a slot, as in type, so its neighbours close in
+        if L["ch"] == "’":
+            if i: room[i - 1] -= 0.25 * S
+            if i < n - 1: room[i] -= 0.25 * S
     box_ends = {m["to"] for m in p["marks"] if m["type"] == "block"}
     for m in p["marks"]:                                     # a cone must clear the letter before it (the m of come), and a box (the dg of nudge)
         c = m["col"] if m["type"] == "cone" else (m["to"] if m["type"] == "vault" and m.get("cone", True) else None)
@@ -359,7 +369,7 @@ def svg_strip(words, F=80.0, gap=None, label=None, cls=True, extra_class="", css
 def describe(word):
     """A plain-words account of a word's marks, for checking and for the manual."""
     p = parse(word); bits = []
-    names = {"c": "", "k": "unit", "g": "green unit", "x": "boxed", "s": "short", "l": "long", "b": "bare", "w": "two sounds, two circles", "t": "vowel unit", "r": "r-unit", "le": "le unit", "e0": "cone", "e>": "cone and vault"}
+    names = {"c": "", "k": "unit", "g": "green unit", "x": "boxed", "s": "short", "l": "long", "b": "bare", "w": "two sounds, two circles", "t": "vowel unit", "r": "r-unit", "le": "le unit", "e0": "cone", "e>": "cone and vault", "ap": "red apostrophe"}
     for u in p["units"]:
         bits.append(u["text"] + (f" ({names[u['kind']]})" if names[u["kind"]] else ""))
     extra = [m["type"] for m in p["marks"] if m["type"] in ("blockedvault", "nudge", "seam")] + ["vault (no cone)" for m in p["marks"] if m["type"] == "vault" and m.get("cone") is False] \

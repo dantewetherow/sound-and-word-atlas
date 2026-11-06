@@ -143,3 +143,64 @@ footer.site .wrap { padding-block: 22px 32px; color: var(--soft); font-size: 0.8
   body { font-size: 16px; }
 }
 @media (prefers-reduced-motion: reduce) { .tile { transition: none; } }
+
+/* word lists: the ELP and Dolch charts. Their colours are their own, kept apart from the marks' red, green and blue:
+   ochre for the ELP grades and slate for Dolch's levels, each in steps of one hue so the order shows. */
+:root {
+  --elp-k: #e8d4a0; --elp-1: #d9b866; --elp-2: #c2952f;
+  --dl-1: #d3dfed; --dl-2: #b8cbe2; --dl-3: #9cb6d6; --dl-4: #81a1ca; --dl-5: #688dbd;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --elp-k: #3d3424; --elp-1: #5e4c27; --elp-2: #806427;
+    --dl-1: #222c37; --dl-2: #29394b; --dl-3: #31475f; --dl-4: #3a5675; --dl-5: #44668b;
+  }
+}
+:root[data-theme="dark"] {
+  --elp-k: #3d3424; --elp-1: #5e4c27; --elp-2: #806427;
+  --dl-1: #222c37; --dl-2: #29394b; --dl-3: #31475f; --dl-4: #3a5675; --dl-5: #44668b;
+}
+.wl .flow { display: grid; gap: 14px; margin-top: 10px; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 18px; list-style: none; margin: 0; padding: 0; font-size: 0.88rem; color: var(--soft); }
+.legend li { display: flex; align-items: center; gap: 7px; }
+.sw { display: inline-block; width: 14px; height: 14px; border-radius: 3px; }
+.wl .rows { display: grid; gap: 8px; }
+.wl .row { display: grid; grid-template-columns: 12rem minmax(0, 1fr); align-items: center; gap: 12px; }
+.wl .rl { font-size: 0.92rem; line-height: 1.25; text-align: right; }
+.wl .rl b { margin-left: 8px; font-weight: 400; color: var(--soft); font-variant-numeric: tabular-nums; }
+.grade-h { margin: 6px 0 -2px; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--soft); }
+.track { min-width: 0; }
+.bar { display: flex; gap: 2px; height: 34px; min-width: 0; }
+.seg {
+  flex: 1 1 0; min-width: 0; overflow: hidden; padding: 0; border: 0; border-radius: 4px; cursor: pointer;
+  font: inherit; font-size: 0.85rem; font-weight: 500; color: var(--ink); font-variant-numeric: tabular-nums;
+}
+.seg:hover { filter: brightness(0.95); }
+.seg[aria-pressed="true"] { outline: 2px solid var(--ink); outline-offset: 2px; position: relative; z-index: 1; }
+.seg:focus-visible { outline: 2px solid var(--modal); outline-offset: 2px; position: relative; z-index: 1; }
+.s-K { background: var(--elp-k); } .s-1 { background: var(--elp-1); } .s-2 { background: var(--elp-2); }
+.d-pre-primer { background: var(--dl-1); } .d-primer { background: var(--dl-2); } .d-first { background: var(--dl-3); }
+.d-second { background: var(--dl-4); } .d-third { background: var(--dl-5); }
+.s-none, .d-none { background: transparent; border: 1.5px dashed var(--soft); color: var(--soft); }
+.detail { display: grid; gap: 10px; align-content: start; min-height: 6rem; padding: 16px 18px; background: var(--card); border: 1px solid var(--line); border-radius: 10px; }
+.detail h3 { font-size: 1.12rem; }
+.detail h3 span { margin-left: 8px; font-family: var(--body); font-size: 0.85rem; font-weight: 400; color: var(--soft); }
+.detail dl { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 6px 18px; margin: 0; }
+.detail dt { font-size: 0.88rem; color: var(--soft); padding-top: 2px; }
+.detail dd { margin: 0; }
+.detail .cw { font-size: 1.05rem; }
+.detail .more { font-size: 0.9rem; color: var(--soft); }
+.tablewrap { overflow-x: auto; background: var(--card); border: 1px solid var(--line); border-radius: 10px; }
+table.wl-table { width: 100%; min-width: 900px; border-collapse: collapse; font-size: 0.9rem; line-height: 1.45; }
+table.wl-table th, table.wl-table td { padding: 8px 10px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+table.wl-table thead th { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.03em; color: var(--soft); }
+table.wl-table tbody th { font-weight: 400; white-space: nowrap; }
+table.wl-table tr:last-child th, table.wl-table tr:last-child td { border-bottom: 0; }
+table.wl-table tr.off th { font-weight: 500; }
+.sources { display: grid; gap: 6px; max-width: 78ch; margin: 0; padding-left: 1.2em; }
+@media (max-width: 640px) {
+  .wl .row { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  .wl .rl { text-align: left; }
+  .detail dl { grid-template-columns: minmax(0, 1fr); gap: 2px 0; }
+  .detail dd { margin-bottom: 8px; }
+}
