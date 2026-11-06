@@ -1,6 +1,6 @@
 """Markings for the grade 3 word sum cards, written on 5 November 2026.
 
-The word sums come from the manual's Word analysis draft tab, in its order. Each derived word is marked with the
+The word sums come from the manual's Word analysis draft tab, in its order. Whiteness was pulled on 5 November 2026. Each derived word is marked with the
 same code as legomorphic_words.py (see its docstring), following the conventions the deck and site words already
 use: a seam (+) at each join, a syllable break (|) after the seam when the ending adds a syllable, the vault moving
 to the ending's vowel when the e drops (as making), and a box with a blocked vault when the consonant doubles (as
@@ -44,7 +44,7 @@ SECTIONS = [
         ("draw + ing → drawing", "drawing", "c.dr t.aw + | s.i k.ng"),
         ("hold + ing → holding", "holding", "c.h l.o c.ld + | s.i k.ng"),
         ("open + ing → opening", "opening", "l.o | c.p b.e c.n + | s.i k.ng ; vault 2>0"),
-        ("small + er → smaller", "smaller", "c.sm b.a k.ll + | r.er"),
+        ("small + er → smaller", "smaller", "c.sm b.a x.ll + | r.er ; bv 3>2"),
         ("old + est → oldest", "oldest", "l.o c.ld + | b.e c.st"),
         ("new + er → newer", "newer", "c.n t.ew + | r.er"),
         ("warm + er → warmer", "warmer", "c.w r.ar c.m + | r.er"),
@@ -60,7 +60,7 @@ SECTIONS = [
         ("new + ly → newly", "newly", "c.n t.ew + | c.l b.y"),
         ("light + ly → lightly", "lightly", "c.l t.igh c.t + | c.l b.y"),
         ("open + ly → openly", "openly", "l.o | c.p b.e c.n + | c.l b.y ; vault 2>0"),
-        ("full + ly → fully", "fully", "c.f b.u k.ll + | b.y"),
+        ("full + ly → fully", "fully", "c.f b.u x.ll + | b.y ; bv 3>2"),
         ("play + ful → playful", "playful", "c.pl t.ay + | c.f b.u c.l"),
         ("hurt + ful → hurtful", "hurtful", "c.h r.ur c.t + | c.f b.u c.l"),
         ("kind + ness → kindness", "kindness", "c.k l.i c.nd + | c.n b.e k.ss"),
@@ -92,7 +92,6 @@ SECTIONS = [
         ("use + ful → useful", "useful", "l.u c.s e> + | c.f b.u c.l"),
         ("use + less → useless", "useless", "l.u c.s e> + | c.l b.e k.ss"),
         ("like + ly → likely", "likely", "c.l l.i c.k e> + | c.l b.y"),
-        ("white + ness → whiteness", "whiteness", "k.wh l.i c.t e> + | c.n b.e k.ss"),
     ]),
     ("y turns to i", "y turns to i, and when it stays", [
         ("carry + ed → carried", "carried", "c.c b.a x.rr | b.i + e0 c.d ; bv 3>2"),
@@ -155,7 +154,8 @@ CALLS = [
     ("longer", "n and g as two consonants, not the ng unit", "The g is sounded in longer, as it isn't in long or singer."),
     ("picking", "a box over ck and a blocked vault from the i of -ing",
      "Carney treats ck as the doubled k (p. 121), so it blocks the reach the way tt does in getting."),
-    ("fully", "the seam after ll, with only the y of -ly", "Which l drops can't be seen, so full keeps its ll unit."),
+    ("fully", "a box over ll with a blocked vault from the y, and the seam after ll",
+     "Which l drops can't be seen, so full keeps its ll. The box follows smaller and spelling, where a doubled ending blocks the reach of the vowel after it."),
     ("-ful, -less, -ness, -est, -able", "weak vowels bare, ss as a doubled ending, and ble as consonant + le",
      "-ful has one l, and the a of -able is bare, as a weak vowel is elsewhere."),
 ]

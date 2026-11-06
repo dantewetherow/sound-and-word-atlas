@@ -18,6 +18,10 @@ from playwright.async_api import async_playwright
 
 FONTS, OUT, WORK = (pathlib.Path(a) for a in sys.argv[1:4])
 codes, _ = all_codes(); LW.W.clear(); LW.W.update(codes)
+# Markings these cards use in place of the route's, ruled on 5 November 2026: on the K-2 cards our splits into
+# the ou of out and an r, where the route (step 26) runs one r-controlled bar under all three letters.
+CARD_CODES = {"our": "t.ou c.r"}
+LW.W.update(CARD_CODES)
 esc = html.escape
 ELP = json.loads((HERE / "data" / "elp_hfw.json").read_text(encoding="utf-8"))
 
