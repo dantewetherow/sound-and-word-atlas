@@ -6,7 +6,7 @@ Etymology Dictionary's entries for *leg- and morphology, opened on 6 November 20
 legend gives them. The copyright holder, the licence and the contact address are the author's choices of 6 November 2026.
 The site is static, so contact is a mail link: the address is put together in the page, which keeps it out of the HTML
 that address harvesters read."""
-import pathlib, shutil
+import pathlib
 HERE = pathlib.Path(__file__).resolve().parent
 
 HOLDER = "Dante Wetherow, B.Ed., M.Ed."
@@ -24,7 +24,6 @@ EXAMPLES = [("could", "A red bond bar under <i>oul</i>, the letters that spell i
 
 
 def write(OUT, page, header, footer, svg_of):
-    shutil.copyfile(HERE / "logo.svg", OUT / "logo.svg")
     examples = "".join(f'<figure class="ex">{svg_of(w, 56)}<figcaption>{cap}</figcaption></figure>' for w, cap in EXAMPLES)
     about = f"""{header(0)}
 <main>
@@ -34,7 +33,6 @@ def write(OUT, page, header, footer, svg_of):
 <h1>Legomorphic Notation</h1>
 <p class="lead">A set of marks and colours drawn on ordinary spelling, so that what a reader usually has to work out alone is there for everyone to see: how many sounds a word has, which letters spell each sound, where its meaningful parts join, and which letters change the sounds of others.</p>
 </div>
-<figure class="logo"><img src="logo.svg" width="150" height="150" alt="The logo: the letters d, b, q and p"><figcaption><i>d, b, q</i> and <i>p</i>: a single shape, flipped and turned</figcaption></figure>
 </div></section>
 
 <section class="about" aria-labelledby="word-h"><div class="wrap prose">

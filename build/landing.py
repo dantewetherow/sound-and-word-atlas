@@ -15,8 +15,7 @@ LEGO_STEPS = [   # (layers it brings in, caption)
     ("4", "Bars where letters spell a single sound: <i>or</i> and <i>ph</i>."),
     ("5", "Then the letters."),
     ("6", "A cup over a short vowel, a bar over a long one."),
-    ("8", "A vault: a vowel after a single consonant reaches back and makes the <i>o</i> long."),
-    ("9", "Seams where the parts join: <i>lego + morph + ic</i>."),
+    ("9", "Seams where the parts join: <i>lego + morph + ic</i>. The <i>o</i> ends its part, so it says its name, as in <i>go</i>."),
 ]
 STEP = 1.6          # seconds between steps
 START = 0.4
