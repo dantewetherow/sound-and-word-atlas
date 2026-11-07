@@ -38,6 +38,14 @@ DECKS = [{
         ("sentence-cards", "Sentence cards",
          "A demonstration set of 48 tent cards about reading and writing. Stand up an actor, an operator and an action, "
          "then move the operator to the front to turn the statement into a question."),
+        ("verb-system-cards", "Verb-system cards",
+         "Added after the session: 53 tent cards for the words that orbit the verb (every form of <i>be</i>, <i>have</i> and "
+         "<i>do</i>, the modals, <i>not</i> and the <i>n&rsquo;t</i> contractions, the semi-modals, the endings and <i>to</i>). "
+         "A blue band means the word can move to the front to make a question, and a red one means it stays. "
+         "The first page explains the colours and gives flips to try."),
+        ("modal-cards", "Modal cards, first version",
+         "The first version of the operator cards, from 8 October: the nine modals as fold-over tent cards, plus three blank cards."),
+        ("modal-cards-instructions", "Using the modal cards", "The instruction sheet that went with them."),
     ],
 }]
 

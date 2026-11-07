@@ -96,6 +96,9 @@ W = {
 
 # Words that are marked for the key to the marks only. They are in none of the lines and none of the lists.
 KEY_ONLY = {"nice": "c.n l.i c.c e> ; nudge 3>2"}
+# Pieces drawn on their own with no syllable swoop, because they are a syllable in some words and not in others
+# (the ed of played and wanted, the n't of can't and isn't). A tool that draws one adds it here.
+NO_SWOOP = set()
 
 def code_of(word):
     return W[word] if word in W else KEY_ONLY[word]
@@ -223,7 +226,8 @@ def parse(word):
         elif op == "box":
             f, t = rng(arg); marks.append({"type": "block", "from": f, "to": t})
         else: raise ValueError((word, a))
-    for a, b in sylls: marks.append({"type": "swoop", "from": a, "to": b})
+    if word not in NO_SWOOP:                              # endings that are a syllable in some words and not in others get none
+        for a, b in sylls: marks.append({"type": "swoop", "from": a, "to": b})
     for u in units:                                       # a green digraph inside a block box keeps its green letters, bar and circle
         if u["kind"] == "x" and u["text"] in GREEN_IN_BOX:
             a, b = GREEN_IN_BOX[u["text"]]; c0 = u["cols"][0]

@@ -165,7 +165,7 @@ def write(OUT, page, header, footer, coloured, LW):
     trs.append('<tr class="off"><th scope="row">Not on the ELP lists</th>' +
                "".join(f'<td>{", ".join(esc(w) for w in l["words"] if w not in list_of)}</td>' for l in levels) + "<td></td></tr>")
 
-    cw = {w: coloured(w) for w in set(elp_words) | set(level_of)}
+    cw = {w: coloured(w) for w in sorted(set(elp_words) | set(level_of))}   # sorted, so a rebuild writes the same page
     data = {"levels": [{"key": l["key"], "name": l["name"], "words": l["words"]} for l in levels],
             "lists": lists, "cw": cw, "short": off_short, "nouns": nouns,
             "cards": {l["key"]: f'cards/dolch-word-cards-{l["key"]}.pdf' for l in levels}}

@@ -17,6 +17,7 @@ The site is at https://dantewetherow.github.io/sound-and-word-atlas/.
   - `word_lists.py` writes the Word lists page, which shows where the ELP words come from in Dolch's lists. Its words come from `data/elp_hfw.json` and `data/dolch.json`, and every count on it is worked out from them.
   - `sessions.py` writes the Presentations page and copies the decks in `sessions/` to the site. The decks there are the web copies: the title slide's byline is left off, and a link in the slide controls leads back to the page. Run as a script, `python3 build/sessions.py <node_modules> docs` makes each deck's offline copy (with `make_offline_deck.py`, which needs `@fontsource-variable/fraunces`, `@fontsource-variable/lexend` and `@fontsource/gentium-plus`) and its preview pictures.
   - `build_handouts.py` makes the Session 1 handouts: `python3 build/build_handouts.py <node_modules> docs/sessions/handouts <a scratch folder>`. It is the atlas tool with one change, a footer that names the session instead of the presenter.
+  - `build_verb_cards.py` makes the verb-system cards from `build_handouts.py`'s pieces, with the codes the notation didn't have and the calls they rest on: `python3 build/build_verb_cards.py <node_modules> docs/sessions/handouts <a scratch folder>`. The modal cards (8 October) have no builder; they are the PDFs as made, with the presenter's name taken out of the instruction sheet's footer.
   - `site.css` is the stylesheet.
 
 ## The manual stays the source

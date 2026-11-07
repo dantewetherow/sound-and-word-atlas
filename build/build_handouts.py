@@ -494,4 +494,5 @@ async def main():
             print("wrote", OUT / f"{name}.pdf", "| fonts loaded:", fonts)
         await br.close()
 
-asyncio.run(main())
+if __name__ == "__main__":      # build_verb_cards.py imports these pieces without building
+    asyncio.run(main())
