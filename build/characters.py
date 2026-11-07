@@ -1,7 +1,8 @@
 """The notation's characters: words with their letters lifted out, so their marks stand on their own as faces.
 
-Note, the mascot, is note. The Dialogue Team is She, Could and Go, the actor, operator and action of a claim; when
-Could flips to the front, the claim becomes a question. Chosen on 7 November 2026.
+Note, the mascot, is note; he sits beside the site's name in the header. The Dialogue Team is She, Could and Go, the
+actor, operator and action of a claim; when Could flips to the front, the claim becomes a question. Chosen on
+7 November 2026.
 
 A lifted word keeps every mark svg_word draws, in its order. With the letters gone, the marks drawn above them (long
 and short marks, the cone, the vault) come down by DROP letter sizes to close the gap, and the marks drawn under them
@@ -46,10 +47,23 @@ def _points(el):
     return [(x + dx, y + dy) for x, y in pts for dx, dy in ((-sw, -sw), (sw, sw))]
 
 
-def lifted(LW, word, F=58.0, label=None, pad=0.08, scale=1.0, em=None):
+def _weigh(el, weight):
+    """Heavier marks for a small drawing: thicker strokes (and the cone's dots with them), bigger sound circles. The
+    shapes and places stay the same."""
+    num = lambda m: f'{m[1]}="{float(m[2]) * weight:.2f}"'
+    el = re.sub(f'(stroke-width)="({NUM})"', num, el)
+    el = re.sub(r'stroke-dasharray="([^"]+)"', lambda m: 'stroke-dasharray="' + " ".join(
+        f"{float(v) * weight:.2f}" for v in re.findall(NUM, m[1])) + '"', el)
+    if re.search(r'class="nz(1|2)"', el):                  # sound circles, not the cone
+        el = re.sub(f' (r)="({NUM})"', lambda m: f' r="{float(m[2]) * weight:.2f}"', el)
+    return el
+
+
+def lifted(LW, word, F=58.0, label=None, pad=0.08, scale=1.0, em=None, px_height=None, weight=1.0):
     """The word's marks with its letters lifted out and the gap closed, cropped to the marks. Colours come from the
     site's variables, so it follows the page between bright and night. With em, the width is set in ems, so a group of
-    drawings can be scaled together by its font size."""
+    drawings can be scaled together by its font size. With px_height, the drawing is sized to that height. Weight
+    thickens the marks for small sizes, like the header's."""
     g, _, _ = LW.svg_word(word, F, 0.0, cls=True)
     B = 1.44 * F                                           # svg_word's baseline
     g = re.sub(r'<rect class="wt"[^>]*/>', "", g)
@@ -63,12 +77,16 @@ def lifted(LW, word, F=58.0, label=None, pad=0.08, scale=1.0, em=None):
             dy = DROP * F
         else:
             dy = 0.0
+        if weight != 1.0:
+            el = _weigh(el, weight)
         el = re.sub(r' class="nz\d"', "", el)
         pts += [(x, y + dy) for x, y in _points(el)]
         out.append(f'<g transform="translate(0 {dy:.1f})">{el}</g>' if dy else el)
     x0, y0 = min(p[0] for p in pts) - pad * F, min(p[1] for p in pts) - pad * F
     w, h = max(p[0] for p in pts) + pad * F - x0, max(p[1] for p in pts) + pad * F - y0
     aria = f' role="img" aria-label="{label}"' if label else ' aria-hidden="true"'
+    if px_height:
+        scale = px_height / h
     size = f' style="width:{w * em:.2f}em;height:auto"' if em else ""
     return (f'<svg class="lifted" viewBox="{x0:.1f} {y0:.1f} {w:.1f} {h:.1f}" width="{w * scale:.0f}" height="{h * scale:.0f}"{size}{aria}>'
             + "".join(out) + "</svg>")

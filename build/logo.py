@@ -7,8 +7,9 @@ The wordmark, from Dante's sketches of 6 November 2026, which replace the d b q 
                             and written to build/wordmark.svg, which about_pages.py draws into the page
   split   λέγ┊ō┊morph┊ic    the word as the notation reads it in English: leg, o, morph and ic, with seams
 
-The logo: go, chosen on 7 November 2026 for the site's header and the browser tab, written to build/logo.svg with PNG
-copies for browsers that can't use an SVG icon (favicon-32.png, apple-touch-icon.png). The candidates were a word's own
+The logo: go, chosen on 7 November 2026 for the browser tab, written to build/logo.svg with PNG copies for browsers
+that can't use an SVG icon (favicon-32.png, apple-touch-icon.png). Note, the mascot, sits beside the name in the header
+(characters.py). The candidates were a word's own
 marks with its letters lifted out, so every mark is true (6 November 2026):
 
   go          two circles and a swoop, a bar over the red one: a vowel that ends its syllable says its name
