@@ -1,14 +1,14 @@
 """Action cards and actor cards: tent cards for the content words a sentence is built from, made on 6 November 2026 to
 stand with the sentence cards and the verb-system cards.
 
-Action cards, on a pale red wash: the words E. W. Dolch's 1936 article lists as verbs (data/dolch.json, "verbs"), less
-the 22 that are already verb-system cards (the forms of be, have and do, the modals, and don't), so those keep their
-blue or red bands. 70 cards.
-Actor cards, on a pale green wash, for actors and the acted-on: the personal pronouns I, me, you, he, him, she, her, we,
-us, they, them and it, then Dolch's 95 nouns. 107 cards.
+Action cards: the words E. W. Dolch's 1936 article lists as verbs (data/dolch.json, "verbs"), less the 22 that are
+already verb-system cards (the forms of be, have and do, the modals, and don't). 70 cards.
+Actor cards, for actors and the acted-on: the personal pronouns I, me, you, he, him, she, her, we, us, they, them and
+it, then Dolch's 95 nouns. 107 cards.
 
-The washes follow the sentence colours: actions red, actors and the acted-on green. The wash is a panel inset from the
-card's edges, so it prints whole on printers that can't print to the edge of the page.
+The cards carry no colour for the sentence roles. They first had a pale wash (red for actions, green for actors), and
+the verb-system cards a band; both came off on 6 November 2026 because they cluttered the cards. The list pages name
+the roles in words, and their flips outline the card that moves, as the Session 1 sentence cards do.
 
 The cards are drawn with build_handouts.py's pieces (fonts, card geometry, marking), so the sets match. NOUN_CODES has
 the 72 nouns the notation didn't mark yet, each following the word named in its comment. CALLS lists the choices they
@@ -173,34 +173,14 @@ def card_face(w):
     return H.mark(w, F)
 
 
-WASH = {"an": ("#f5e6e4", "#dea9a1"), "ac": ("#e5eee7", "#a6c4ab")}      # action and actor: the verb red and subject green, pale
 ROLE_CSS = """
-.wash{position:absolute;left:.2in;right:.2in;top:2.225in;bottom:.2in;border-radius:.1in;border:.9pt solid;}
-""" + "".join(f".wash.{k}{{background:{bg};border-color:{edge};}} .tile.{k}{{background:{bg};border-color:{edge};}}\n"
-              for k, (bg, edge) in WASH.items()) + """
-.scard .face.w{padding:.1in 0 .2in;box-sizing:border-box;}
 .pair.hy{column-gap:0;}
-.key span{white-space:nowrap;}
-.key i.w{display:inline-block;width:.42in;height:.2in;border-radius:2pt;border:.9pt solid;}
 .wrapw .w{line-height:1.45;}
 """
 CSS = (H.SOUNDS_CSS + H.CARDS_CSS.replace("@page{size:8.5in 11in;margin:0;}", "").replace(".page{width:8.5in;height:11in;display:block;}", "")
        + H.SENT_CSS + V.VERB_CSS + ROLE_CSS)
 
-ACTION_SET, ACTOR_SET = set(ACTIONS), set(PRONOUNS) | set(NOUNS)
-
-
-def tiles(line):
-    out = []
-    for tok in line.split():
-        parts = []
-        for t in tok.split("+"):
-            word = t.replace("_", " ")
-            cls = (" op" if word in V.MOVES else " st" if word in V.STAYS else " an" if word in ACTION_SET
-                   else " ac" if word in ACTOR_SET else "")
-            parts.append(f'<span class="tile{cls}">{esc(word)}</span>')
-        out.append(parts[0] if len(parts) == 1 else f'<span class="jn">{"".join(parts)}</span>')
-    return "".join(out)
+tiles = V.tiles                             # the flips outline only the card that moves
 
 
 FLIPS = [("the dog can jump .", "can the dog jump ?"),
@@ -210,31 +190,25 @@ FLIPS = [("the dog can jump .", "can the dog jump ?"),
          ("she saw him .", "did she see him ?")]
 
 
-def key_html():
-    sw = lambda k: f'<i class="w" style="background:{WASH[k][0]};border-color:{WASH[k][1]}"></i>'
-    return (f'<div class="key"><span>{sw("ac")}actors and the acted-on</span><span>{sw("an")}actions</span>'
-            '<span><i class="b" style="background:var(--modal)"></i>operators</span></div>')
-
-
 def list_page(kind):
     flips = "".join(f'<div class="fp"><div class="fl">{tiles(a)}</div><div class="arrow">→</div><div class="fl">{tiles(b)}</div></div>' for a, b in FLIPS)
     row = lambda name, ws: (f'<div class="srow wrapw"><span class="g">{name}<span>{len(ws)}</span></span>'
                             f'<span class="w">{" ".join(esc(w).replace(" ", "&nbsp;") for w in ws)}</span></div>')
     if kind == "an":
         title, rows, pages = "Action cards", row("Actions", ACTIONS), f"2 to {1 + -(-len(ACTIONS) // 6)}"
-        lead = ("Tent cards on a pale red wash for the actions: the words E. W. Dolch’s 1936 sight vocabulary lists as verbs, "
+        lead = ("Tent cards for the actions: the words E. W. Dolch’s 1936 sight vocabulary lists as verbs, "
                 "less the forms of <i>be</i>, <i>have</i> and <i>do</i>, the modals and <i>don’t</i>, which are verb-system cards. "
                 "They are the size of the sentence cards, so they stand with its actors and operators.")
         notes = ("<p>Ten cards are past forms: <i>ate, came, found, gave, got, made, ran, said, saw</i> and <i>went</i>. In a question, "
                  "<i>did</i> carries the past and the action goes back to its plain form: <i>they ate the cake, did they eat the cake?</i></p>"
                  "<p><i>Goes</i> and <i>going</i> are <i>go</i> with an ending. For the others, lay an ending from the verb-system cards "
                  "beside the card: <i>help + -s, jump + ing</i>.</p>"
-                 "<p>A word that moves to the front is never on a red wash. <i>Have</i> and <i>do</i> can be actions too "
-                 "(<i>do you have a dog?</i>), but their cards are in the verb-system set.</p>")
+                 "<p><i>Have</i> and <i>do</i> can be actions too (<i>do you have a dog?</i>), but their cards are in the "
+                 "verb-system set, with the other words that can move to the front.</p>")
     else:
         title, rows, pages = ("Actor cards", row("Pronouns", PRONOUNS) + row("Nouns", NOUNS),
                               f"2 to {1 + -(-(len(PRONOUNS) + len(NOUNS)) // 6)}")
-        lead = ("Tent cards on a pale green wash for the actors and the acted-on: twelve personal pronouns from E. W. Dolch’s "
+        lead = ("Tent cards for the actors and the acted-on: twelve personal pronouns from E. W. Dolch’s "
                 "1936 sight vocabulary, and his separate list of 95 nouns. The same card can be either: "
                 "<i>the dog saw the cat, the cat saw the dog</i>.")
         notes = ("<p>The pronouns come in pairs, one for the actor and one for the acted-on: <i>I</i> and <i>me</i>, <i>he</i> and "
@@ -245,14 +219,14 @@ def list_page(kind):
                  "in the manual.</p>"
                  "<p><i>The</i> and <i>a</i> are on the sentence cards, and the operators on the verb-system cards.</p>")
     notes += (f"<p>Print pages {pages} in colour on card stock, single-sided, at actual size. Cut on the solid lines, fold on "
-              "the dotted ones, and stand each card up. The wash stops short of the edges, so most printers print it whole.</p>")
+              "the dotted ones, and stand each card up.</p>")
     return f"""<section class="page">
   <h1>{title}</h1>
   <p class="lead">{lead}</p>
   <div class="sl"><h2>In the set</h2>{rows}</div>
   <div class="duo">
-    <div class="fs"><h2>Green, red and blue</h2>{key_html()}
-      <div class="rule"><p>The wash gives a card’s job in the sentence, and the operators keep the verb-system cards’ blue band. Stand up an actor, an operator and an action, then move the operator to the front.</p></div>
+    <div class="fs"><h2>Flips to try</h2>
+      <div class="rule"><p>Stand up an actor, an operator and an action, then move the operator to the front. The outlined card is the one that moves.</p></div>
       <div class="flips1">{flips}</div></div>
     <div class="notes"><h2>Notes</h2>{notes}</div>
   </div>
@@ -268,22 +242,14 @@ def card_pages(words, kind):
         for k, w in enumerate(slots[p0:p0 + 6]):
             x, y = (k % 3) * 3.6667, (k // 3) * 4.25
             if w is None:
-                cards += f'<div class="scard" style="left:{x:.4f}in;top:{y}in"><div class="wash {kind}"></div></div>'; continue
-            cards += (f'<div class="scard" style="left:{x:.4f}in;top:{y}in"><div class="wash {kind}"></div>'
-                      f'<div class="face w">{card_face(w)}</div></div>')
+                cards += f'<div class="scard" style="left:{x:.4f}in;top:{y}in"></div>'; continue
+            cards += f'<div class="scard" style="left:{x:.4f}in;top:{y}in"><div class="face">{card_face(w)}</div></div>'
         guides = ('<div class="cut v" style="left:3.6667in;height:8.5in"></div><div class="cut v" style="left:7.3333in;height:8.5in"></div>'
                   '<div class="cut h" style="width:11in;top:4.25in"></div>'
                   '<div class="fold" style="top:2.125in;width:11in"></div><div class="fold" style="top:6.375in;width:11in"></div>')
         pages.append(f'<section class="page cards">{cards}{guides}</section>')
     return "".join(pages)
 
-
-# Each word must sit inside its wash, clear of the panel's edge.
-WASH_CHECK_JS = """() => [...document.querySelectorAll('.scard')].flatMap(c => { const w = c.querySelector('.wash'), f = c.querySelector('.face');
-  if (!w || !f) return []; const W = w.getBoundingClientRect();
-  return [...f.children].map(v => { const b = v.getBoundingClientRect();
-    const pad = [b.left - W.left, W.right - b.right, b.top - W.top, W.bottom - b.bottom].map(x => Math.round(x));
-    return Math.min(...pad) < 4 ? (v.getAttribute('aria-label') || v.textContent) + ' ' + pad.join(',') : null; }).filter(Boolean); })"""
 
 SETS = [("action-cards", "Action cards", "an", ACTIONS), ("actor-cards", "Actor cards", "ac", PRONOUNS + NOUNS)]
 
@@ -306,8 +272,6 @@ async def main():
                 bad = r["overflowY"] > 1 or r["overflowX"] > 1 or r["outside"] or r["crowded"]
                 if bad or r["page"] == 1: print(f"  {name} p{r['page']}: free above footer {r['free']} in" + (f" | PROBLEM {r}" if bad else ""))
                 assert not bad, r
-            tight = await page.evaluate(WASH_CHECK_JS)
-            assert not tight, tight
             await page.pdf(path=str(H.OUT / f"{name}.pdf"), width="11in", height="8.5in", print_background=True,
                            margin={"top": "0", "right": "0", "bottom": "0", "left": "0"})
             print("wrote", H.OUT / f"{name}.pdf")

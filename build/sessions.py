@@ -41,13 +41,12 @@ DECKS = [{
         ("verb-system-cards", "Verb-system cards",
          "Added after the session: 53 tent cards for the words that orbit the verb (every form of <i>be</i>, <i>have</i> and "
          "<i>do</i>, the modals, <i>not</i> and the <i>n&rsquo;t</i> contractions, the semi-modals, the endings and <i>to</i>). "
-         "A blue band means the word can move to the front to make a question, and a red one means it stays. "
-         "The first page explains the colours and gives flips to try."),
+         "The first page says which words can move to the front to make a question and gives flips to try."),
         ("action-cards", "Action cards",
-         "70 tent cards on a pale red wash for the actions: the verbs in Dolch&rsquo;s 1936 sight vocabulary, less the ones "
+         "70 tent cards for the actions: the verbs in Dolch&rsquo;s 1936 sight vocabulary, less the ones "
          "that are verb-system cards. The first page lists them and gives flips to try."),
         ("actor-cards", "Actor cards",
-         "107 tent cards on a pale green wash for actors and the acted-on: twelve personal pronouns and Dolch&rsquo;s 95 nouns. "
+         "107 tent cards for actors and the acted-on: twelve personal pronouns and Dolch&rsquo;s 95 nouns. "
          "The first page lists them and gives flips to try."),
         ("modal-cards", "Modal cards, first version",
          "The first version of the operator cards, from 8 October: the nine modals as fold-over tent cards, plus three blank cards."),

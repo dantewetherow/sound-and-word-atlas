@@ -90,6 +90,9 @@ def write(OUT, page, header, footer, svg_of):
 <h2 id="sp-h">Spelling and words</h2>
 <ul class="credits">
 <li><b>Edward Carney</b>, <i>A Survey of English Spelling</i> (Routledge, 1994). The backbone of the route, cited by page on every step.</li>
+<li><b>Richard Venezky</b>, &ldquo;English Orthography: Its Graphical Structure and Its Relation to Sound,&rdquo; <i>Reading Research Quarterly</i> 2 (1967), and <i>The Structure of English Orthography</i> (Mouton, 1970). Spelling as a system, including the letters that mark how other letters are read, such as a silent <i>e</i>: the job the vault, the nudge and the cone show. His later book is <i>The American Way of Spelling</i> (Guilford, 1999).</li>
+<li><b>Noam Chomsky and Morris Halle</b>, <i>The Sound Pattern of English</i> (Harper &amp; Row, 1968). Their argument that English spelling keeps a word&rsquo;s parts the same when their sounds change, as in <i>sign</i> and <i>signature</i>, is the premise word sums rest on.</li>
+<li><b>Carol Chomsky</b>, &ldquo;Reading, Writing, and Phonology,&rdquo; <i>Harvard Educational Review</i> 40, no. 2 (1970): 287&ndash;309 (<a href="https://doi.org/10.17763/haer.40.2.y7u0242x76w05624">doi</a>). She carried that morphophonemic view of spelling into teaching children to read and write.</li>
 <li><b>Melvyn Ramsden</b>, whose <a href="http://www.realspelling.com/">Real Spelling</a> gave us word sums and word matrices, the basis of the grade 3 word sum cards. His book is <i>Rescuing Spelling</i> (Southgate Publishers).</li>
 <li><b>Pete Bowers</b>, who brought word sums and matrices into classrooms as structured word inquiry. His book is <i>Teaching How the Written Word Works</i>. With John R. Kirby and S. H&eacute;l&egrave;ne Deacon he wrote &ldquo;The Effects of Morphological Instruction on Literacy Skills: A Systematic Review of the Literature,&rdquo; <i>Review of Educational Research</i> 80, no. 2 (2010) (<a href="https://doi.org/10.3102/0034654309359353">doi</a>), and with Jeffrey Bowers, &ldquo;Beyond Phonics: The Case for Teaching Children the Logic of the English Spelling System,&rdquo; <i>Educational Psychologist</i> 52, no. 2 (2017): 124&ndash;141 (<a href="https://doi.org/10.1080/00461520.2017.1288571">doi</a>).</li>
 <li><b>Sue Scibetta Hegland</b>, <i><a href="https://shop.thereadingleague.org/products/beneath-the-surface-of-words-what-english-spelling-reveals-and-why-it-matters">Beneath the Surface of Words: What English Spelling Reveals and Why It Matters</a></i> (Learning About Spelling).</li>
@@ -100,10 +103,19 @@ def write(OUT, page, header, footer, svg_of):
 </div></section>
 
 <section class="about" aria-labelledby="sl-h"><div class="wrap prose">
-<h2 id="sl-h">Sounds and learning</h2>
+<h2 id="sl-h">Reading and learning</h2>
 <ul class="credits">
 <li><b>Daniil Elkonin</b>. Sound circles go back to his boxes, where a child pushes a counter into a box for each sound.</li>
+<li><b>Linnea Ehri</b>, &ldquo;Orthographic Mapping in the Acquisition of Sight Word Reading, Spelling Memory, and Vocabulary Learning,&rdquo; <i>Scientific Studies of Reading</i> 18, no. 1 (2014): 5&ndash;21 (<a href="https://doi.org/10.1080/10888438.2013.819356">doi</a>). Her account of how readers bond a word&rsquo;s spelling to its sounds and meaning is why it helps to mark which letters spell which sound.</li>
+<li><b>Norbert Wiener</b>, <i>Cybernetics: Or Control and Communication in the Animal and the Machine</i> (1948), for the idea of feedback the first session is built on.</li>
 <li>The studies behind marking by hand are cited on <i>Using the operator cards</i>, in the <a href="presentations.html">Session 1 handouts</a>.</li>
+</ul>
+</div></section>
+
+<section class="about" aria-labelledby="se-h"><div class="wrap prose">
+<h2 id="se-h">Sentences</h2>
+<ul class="credits">
+<li><b>Randolph Quirk, Sidney Greenbaum, Geoffrey Leech and Jan Svartvik</b>, <i>A Comprehensive Grammar of the English Language</i> (Longman, 1985), for <i>operator</i>: their name for the first auxiliary, the word that carries the negative and moves to the front to make a question.</li>
 </ul>
 </div></section>
 

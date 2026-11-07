@@ -2,10 +2,12 @@
 
 Every form of be, have and do, the nine modals, not and the n't contractions, the semi-modals, the endings -s, ed, ing
 and en, and the to of to go: 53 cards and a blank. They are the sentence cards' size, six to a landscape page, so they
-stand with the sentence cards' actors and actions. A band along the bottom of each card gives its colour: blue if the
-word can move to the front to make a question, red if it stays. The -s and ed are blue because do carries them to the
-front (she reads, does she read?), as the Session 1 deck colours the s of likes. The first page lists the set,
-explains the colours and gives flips to try.
+stand with the sentence cards' actors and actions. The first page lists the set, says which words can move to the
+front to make a question, and gives flips to try, with the card that moves outlined.
+
+The cards carry no colour band. One came off on 6 November 2026 because it cluttered the cards. In a sentence the
+colours still follow the ruling of that day: blue if the word can move to the front, red if it stays, with -s and ed
+blue because do carries them to the front (she reads, does she read?), as the Session 1 deck colours the s of likes.
 
 The cards are drawn with build_handouts.py's pieces (fonts, card geometry, marking), so the sets match. The codes the
 notation didn't have are below. CALLS lists the choices they rest on; they wait in the manual's Marking calls tab under
@@ -60,7 +62,7 @@ CALLS = [
     ("ed, n’t (cards on their own)", "no syllable swoop",
      "Each is a syllable in some words and not in others (wanted, played; isn’t, can’t). The -s card has none either."),
     ("ed", "the e in a cone", "Silent, as in played and hopped. In wanted it is said weakly: mark it again on the blank face."),
-    ("not, to, the semi-modals", "a red band",
+    ("not, to, the semi-modals", "red in the sentence colours, not blue",
      "They never move to the front. Formal English can still say Ought we to go?, so ought could be argued blue."),
 ]
 
@@ -102,15 +104,7 @@ def card_face(w):
 
 
 VERB_CSS = """
-.band{position:absolute;left:.3in;right:.3in;bottom:.22in;height:.09in;border-radius:.045in;}   /* clear of the page edge, so it prints */
-.scard .face{padding-bottom:.14in;box-sizing:border-box;}                                         /* the word sits up, clear of the band */
-.band.mv{background:var(--modal);} .band.st{background:var(--verb);}
 .pair{display:flex;column-gap:""" + f"{GAP}in" + """;align-items:flex-end;}
-.srow .w .mv{color:var(--modal);font-weight:500;} .srow .w .st{color:var(--verb);font-weight:500;}
-.tile.st{border:1.6pt solid var(--verb);color:var(--verb);font-weight:500;}
-.key{display:flex;column-gap:.3in;align-items:center;margin:.05in 0 .02in;font-size:9.6pt;}
-.key span{display:inline-flex;align-items:center;column-gap:.07in;}
-.key i.b{display:inline-block;width:.42in;height:.09in;border-radius:1pt;}
 .rule p{font-size:9.6pt;line-height:1.4;margin:0 0 .05in;}
 .rule i{font-family:var(--serif);font-style:italic;}
 .duo{display:grid;grid-template-columns:5.85in 1fr;column-gap:.35in;}
@@ -143,7 +137,7 @@ def tiles(line):
         parts = []
         for t in tok.split("+"):
             word = t.replace("_", " ")
-            cls = " op" if word in MOVES else (" st" if word in STAYS else "")
+            cls = " op" if word in MOVES else ""
             parts.append(f'<span class="tile{cls}">{esc(word)}</span>')
         out.append(parts[0] if len(parts) == 1 else f'<span class="jn">{"".join(parts)}</span>')
     return "".join(out)
@@ -158,16 +152,15 @@ def list_page():
     def row(names):
         return '<div class="srow">' + "".join(
             f'<span class="g">{n}<span>{len(fam[n])}</span></span><span class="w">'
-            + " ".join(f'<span class="{"mv" if m else "st"}">{esc(w)}</span>' for w, m in fam[n]) + "</span>" for n in names) + "</div>"
+            + " ".join(esc(w) for w, _ in fam[n]) + "</span>" for n in names) + "</div>"
     flips = "".join(f'<div class="fp"><div class="fl">{tiles(a)}</div><div class="arrow">→</div><div class="fl">{tiles(b)}</div></div>' for a, b in FLIPS)
     return f"""<section class="page">
   <h1>Verb-system cards</h1>
   <p class="lead">Tent cards for the words that orbit the verb: every form of <i>be</i>, <i>have</i> and <i>do</i>, the nine modals, <i>not</i> and the <i>n’t</i> contractions, the semi-modals, the endings, and the <i>to</i> of <i>to go</i>. They are the size of the sentence cards, so they stand with its actors and actions.</p>
   <div class="sl"><h2>In the set</h2>{"".join(row(r) for r in ROWS)}</div>
   <div class="duo">
-    <div class="fs"><h2>Blue moves, red stays</h2>
-      <div class="key"><span><i class="b" style="background:var(--modal)"></i>can move to the front to make a question</span><span><i class="b" style="background:var(--verb)"></i>stays where it is</span></div>
-      <div class="rule"><p>The band along the bottom of a card gives its colour. The <i>-s</i> and <i>ed</i> are blue because <i>do</i> carries them to the front: <i>she reads, does she read?</i> The <i>-s</i> of a plural, as in <i>books</i>, stays.</p></div>
+    <div class="fs"><h2>Flips to try</h2>
+      <div class="rule"><p>These move to the front to make a question: <i>am, is, are, was, were, have, has, had, do, does, did</i>, the modals and the <i>n’t</i> contractions. <i>Be, been, being, having, done, doing, not, to</i>, the semi-modals and the endings <i>ing</i> and <i>en</i> stay where they are. The <i>-s</i> and <i>ed</i> go with <i>do</i>: <i>she reads, does she read?</i> The <i>-s</i> of a plural, as in <i>books</i>, stays. The outlined card is the one that moves.</p></div>
       <div class="flips1">{flips}</div></div>
     <div class="notes"><h2>Notes</h2>
       <p><i>N’t</i> goes where its operator goes: <i>Couldn’t she read?</i> <i>Not</i> stays after the actor: <i>Could she not read?</i> The red apostrophe stands in for the <i>o</i> of <i>not</i>. <i>Can’t</i> keeps one <i>n</i>, and <i>won’t</i> and <i>don’t</i> change the vowel. <i>Shan’t</i> and <i>mightn’t</i> are left out as rare.</p>
@@ -191,8 +184,7 @@ def card_pages():
                 cards += f'<div class="scard" style="left:{x:.4f}in;top:{y}in"></div>'; continue
             w, m = c
             edge = " left" if w in LEFT else ""
-            cards += (f'<div class="scard" style="left:{x:.4f}in;top:{y}in"><div class="face{edge}">{card_face(w)}</div>'
-                      f'<div class="band {"mv" if m else "st"}"></div></div>')
+            cards += f'<div class="scard" style="left:{x:.4f}in;top:{y}in"><div class="face{edge}">{card_face(w)}</div></div>'
         guides = ('<div class="cut v" style="left:3.6667in;height:8.5in"></div><div class="cut v" style="left:7.3333in;height:8.5in"></div>'
                   '<div class="cut h" style="width:11in;top:4.25in"></div>'
                   '<div class="fold" style="top:2.125in;width:11in"></div><div class="fold" style="top:6.375in;width:11in"></div>')
