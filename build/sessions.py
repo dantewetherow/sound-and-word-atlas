@@ -26,7 +26,24 @@ DECKS = [{
               "with our methods and synthesize our understandings. The first session starts with how many sounds a voice can "
               "make and how we write them down, works through sound circles and one letter, one beat, and ends with a "
               "learning loop to run with one student this week."),
+    # The handouts given out with it, built by build_handouts.py into docs/sessions/handouts/: (file, title, what it is)
+    "handouts": [
+        ("sounds-and-marks-key", "The 44 sounds and marking a word",
+         "Two sides: the 44 sounds of English, each with a key word marked, and how to mark a word by hand."),
+        ("operator-cards", "Operator cards",
+         "Fold-over tent cards for the nine modals (can, could, will, would, shall, should, may, might and must), "
+         "marked on one face and blank on the other, plus three blank cards."),
+        ("operator-cards-instructions", "Using the operator cards",
+         "Making the cards, running a loop, and marking a word by hand."),
+        ("sentence-cards", "Sentence cards",
+         "A demonstration set of 48 tent cards about reading and writing. Stand up an actor, an operator and an action, "
+         "then move the operator to the front to turn the statement into a question."),
+    ],
 }]
+
+
+def kb(n):
+    return f"{n / 1e6:.1f} MB" if n >= 1e6 else f"{round(n / 1024)} KB"
 
 
 def slide_labels(deck_html):
@@ -45,10 +62,19 @@ def write(OUT, page, header, footer):
             f'<img src="sessions/{f}-{n}.jpg" alt="Slide {n}: {html.escape(labels[n - 1])}" width="960" height="540" loading="lazy">'
             for n in d["previews"] if (OUT / "sessions" / f"{f}-{n}.jpg").exists())
         offline = OUT / "sessions" / f"{f}-offline.html"
-        size = offline.stat().st_size if offline.exists() else 0
-        size = f"{size / 1e6:.1f} MB" if size >= 1e6 else f"{round(size / 1024)} KB"
         get = (f'<span><a href="sessions/{f}-offline.html" download="{html.escape(d["title"])}.html">Download it to present offline</a> '
-               f'({size})</span>') if offline.exists() else ""
+               f'({kb(offline.stat().st_size)})</span>') if offline.exists() else ""
+        from pypdf import PdfReader
+        items = []
+        for name, title, what in d.get("handouts", []):
+            pdf = OUT / "sessions" / "handouts" / f"{name}.pdf"
+            if not pdf.exists(): continue
+            n = len(PdfReader(str(pdf)).pages)
+            items.append(f'<li><a href="sessions/handouts/{name}.pdf">{html.escape(title)}</a>'
+                         f'<span class="meta">PDF, {n} page{"s" if n != 1 else ""}, {kb(pdf.stat().st_size)}</span>'
+                         f'<span class="what">{what}</span></li>')
+        hands = (f'<h3 class="hand-h">Handouts</h3><ul class="handouts">{"".join(items)}</ul>'
+                 '<p class="sub">Print them in colour. The card pages are made for card stock, and the instructions show how to fold them.</p>') if items else ""
         blocks.append(f"""<article class="deck" id="{f}">
 <a class="deck-shots" href="sessions/{f}.html" aria-label="Open {html.escape(d['title'])}">{shots}</a>
 <div class="deck-text">
@@ -58,6 +84,7 @@ def write(OUT, page, header, footer):
 <p class="deck-links"><a class="btn" href="sessions/{f}.html">Open the presentation</a>{get}</p>
 <p class="sub">To move on, click or tap the right side of a slide, or press the right arrow or the space bar. The left third of a slide, or the left arrow, goes back. Many slides build a step at a time, and the &#10530; button, which shows when you move the mouse, fills the screen.</p>
 </div>
+<div class="deck-hands">{hands}</div>
 </article>""")
     body = f"""{header(0)}
 <main>

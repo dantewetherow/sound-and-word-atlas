@@ -216,3 +216,13 @@ table.wl-table tr.off th { font-weight: 500; }
 .btn { display: inline-block; padding: 10px 20px; border-radius: 999px; background: var(--ink); color: var(--paper); font-weight: 500; text-decoration: none; }
 .btn:hover { opacity: 0.88; }
 @media (max-width: 760px) { .deck { grid-template-columns: minmax(0, 1fr); gap: 20px; } }
+
+.hand-h { margin: 0 0 10px; font-size: 1.15rem; }
+.handouts { display: grid; gap: 12px; margin: 0 0 10px; padding: 0; list-style: none; }
+.handouts li { display: grid; gap: 2px; }
+.handouts a { font-weight: 500; }
+.handouts .meta { font-size: 0.85rem; color: var(--soft); }
+.handouts .what { font-size: 0.95rem; }
+.deck { grid-template-areas: "shots text" "hands text"; grid-template-rows: auto 1fr; }
+.deck-shots { grid-area: shots; } .deck-text { grid-area: text; } .deck-hands { grid-area: hands; }
+@media (max-width: 760px) { .deck { grid-template-areas: "shots" "text" "hands"; grid-template-rows: auto; } }
