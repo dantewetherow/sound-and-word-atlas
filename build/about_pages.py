@@ -67,6 +67,7 @@ def write(OUT, page, header, footer, svg_of):
 <p>English has both families. From the Greek come <i>lexicon</i>, <i>dialogue</i> and <i>logic</i>; from the Latin, <i>legible</i>, <i>lecture</i>, <i>collect</i> and <i>select</i>. Linguists trace them all to a Proto-Indo-European root, written *leg-, to collect or gather.</p>
 <p><i>Morphē</i> (μορφή) is Greek for form or shape. It gives us <i>morpheme</i>, and <i>morphology</i>, the study of word forms, which joins the same two roots the other way round.</p>
 <p>So the notation is named for the shapes words take when we gather them: the sounds we pick out and say, the letters we pick out and read, and the parts they build together.</p>
+<p>The dictionary entry for <i>legomorphic</i>, with <i>legomorph</i> and <i>legomorphics</i>, is on the <a href="definitions.html">Definitions</a> page.</p>
 <p class="sub">Etymologies from the Online Etymology Dictionary: <a href="https://www.etymonline.com/word/*leg-">*leg-</a> and <a href="https://www.etymonline.com/word/morphology">morphology</a>.</p>
 </div></section>
 
@@ -139,6 +140,7 @@ def write(OUT, page, header, footer, svg_of):
 <h2 id="se-h">Sentences</h2>
 <ul class="credits">
 <li><b>Randolph Quirk, Sidney Greenbaum, Geoffrey Leech and Jan Svartvik</b>, <i>A Comprehensive Grammar of the English Language</i> (Longman, 1985), for <i>operator</i>: their name for the first auxiliary, the word that carries the negative and moves to the front to make a question.</li>
+<li><b>Zellig Harris</b>, &ldquo;Co-Occurrence and Transformation in Linguistic Structure,&rdquo; <i>Language</i> 33, no. 3 (1957): 283&ndash;340, and <b>Noam Chomsky</b>, <i>Syntactic Structures</i> (Mouton, 1957), for <i>kernel</i>: their name for a language&rsquo;s simplest sentences. The notation keeps the word for what&rsquo;s built first, and grows the rest from it.</li>
 </ul>
 </div></section>
 

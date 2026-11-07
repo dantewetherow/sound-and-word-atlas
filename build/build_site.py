@@ -125,7 +125,7 @@ def header(depth):
     up = "../" * depth
     return (f'<header class="site"><div class="wrap"><a class="brand" href="{up}index.html"><small>Legomorphic Notation</small>Sound and Word Atlas</a>'
             f'<div class="tools"><nav class="site" aria-label="Site"><a href="{up}index.html#route">The route</a><a href="{up}index.html#marks">Reading the marks</a>'
-            f'<a href="{up}cards.html">Word cards</a><a href="{up}word-lists.html">Word lists</a><a href="{up}presentations.html">Presentations</a><a href="{up}about.html">About</a></nav>'
+            f'<a href="{up}definitions.html">Definitions</a><a href="{up}cards.html">Word cards</a><a href="{up}word-lists.html">Word lists</a><a href="{up}presentations.html">Presentations</a><a href="{up}about.html">About</a></nav>'
             f'{THEME_SWITCH}</div></div></header>')
 
 def footer(depth):
@@ -367,6 +367,9 @@ sessions.write(OUT, page, header, footer)
 
 import about_pages
 about_pages.write(OUT, page, header, footer, svg_of)
+
+import definitions
+definitions.write(OUT, page, header, footer, svg_of, KEY, LW)
 
 if (HERE / "site.css").exists():
     shutil.copy(HERE / "site.css", OUT / "site.css")
