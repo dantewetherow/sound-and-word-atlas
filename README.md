@@ -1,6 +1,6 @@
 # Sound and Word Atlas
 
-A route through English spelling for teachers: 32 steps in eight bands, with every word drawn in legomorphic notation. Each step has its own page with its words marked, the marks it brings in, its kernel words and contrasts, and the pages in Edward Carney's *A Survey of English Spelling* (Routledge, 1994) that back it.
+A route through English spelling for teachers: 32 steps in eight bands, with every word drawn in Legomorphic Notation. Each step has its own page with its words marked, the marks it brings in, its kernel words and contrasts, and the pages in Edward Carney's *A Survey of English Spelling* (Routledge, 1994) that back it.
 
 The site is at https://dantewetherow.github.io/sound-and-word-atlas/.
 
@@ -26,7 +26,7 @@ The site is at https://dantewetherow.github.io/sound-and-word-atlas/.
 
 ## The manual stays the source
 
-The route and its notes come from the *Legomorphic notation* manual. To change what the site says, change the manual, then rebuild. Choices about how a word is marked wait for a ruling in the manual's Marking calls tab, under "From the atlas site", and `site_codes.py` changes to match once they're ruled.
+The route and its notes come from the *Legomorphic Notation* manual. To change what the site says, change the manual, then rebuild. Choices about how a word is marked wait for a ruling in the manual's Marking calls tab, under "From the atlas site", and `site_codes.py` changes to match once they're ruled.
 
 ## Rebuilding
 

@@ -31,7 +31,7 @@ def write(OUT, page, header, footer, svg_of):
 <section class="hero"><div class="wrap about-hero">
 <div>
 <p class="eyebrow">About</p>
-<h1>Legomorphic notation</h1>
+<h1>Legomorphic Notation</h1>
 <p class="lead">A set of marks and colours drawn on ordinary spelling, so that what a reader usually has to work out alone is there for everyone to see: how many sounds a word has, which letters spell each sound, where its meaningful parts join, and which letters change the sounds of others.</p>
 </div>
 <figure class="logo"><img src="logo.svg" width="150" height="150" alt="The logo: the letters d, b, q and p"><figcaption><i>d, b, q</i> and <i>p</i>: a single shape, flipped and turned</figcaption></figure>
@@ -70,20 +70,20 @@ def write(OUT, page, header, footer, svg_of):
 
 <section class="about" aria-labelledby="who-h"><div class="wrap prose">
 <h2 id="who-h">Who made it</h2>
-<p>Legomorphic notation and this site are the work of {HOLDER} The writers it builds on are on the <a href="credits.html">Credits</a> page.</p>
+<p>Legomorphic Notation and this site are the work of {HOLDER} The writers it builds on are on the <a href="credits.html">Credits</a> page.</p>
 {CONTACT}
 </div></section>
 </main>
 {footer(0)}"""
-    (OUT / "about.html").write_text(page("About legomorphic notation · Sound and Word Atlas", about, 0,
-                                         "What legomorphic notation is, where the word comes from, and how it's used."), encoding="utf-8")
+    (OUT / "about.html").write_text(page("About Legomorphic Notation · Sound and Word Atlas", about, 0,
+                                         "What Legomorphic Notation is, where the word comes from, and how it's used."), encoding="utf-8")
 
     credits = f"""{header(0)}
 <main>
 <section class="hero"><div class="wrap">
 <p class="eyebrow">Credits</p>
 <h1>Credits and copyright</h1>
-<p class="lead">Legomorphic notation stands on other people&rsquo;s work. These are the writers it draws on, and the terms for using what&rsquo;s here.</p>
+<p class="lead">Legomorphic Notation stands on other people&rsquo;s work. These are the writers it draws on, and the terms for using what&rsquo;s here.</p>
 </div></section>
 
 <section class="about" aria-labelledby="sp-h"><div class="wrap prose">
@@ -133,6 +133,6 @@ def write(OUT, page, header, footer, svg_of):
 </main>
 {footer(0)}"""
     (OUT / "credits.html").write_text(page("Credits and copyright · Sound and Word Atlas", credits, 0,
-                                           "The writers legomorphic notation draws on, the site's copyright and licence, and how to get in touch."),
+                                           "The writers Legomorphic Notation draws on, the site's copyright and licence, and how to get in touch."),
                                       encoding="utf-8")
     print("wrote about.html, credits.html")

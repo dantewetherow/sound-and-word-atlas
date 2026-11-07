@@ -105,7 +105,7 @@ def write(OUT, page, header, footer):
 <section class="hero"><div class="wrap">
 <p class="eyebrow">Presentations</p>
 <h1>Sessions for teachers</h1>
-<p class="lead">Slide decks from a staff series on legomorphic notation. They build a click at a time, the way the marks are taught, so they work for presenting to colleagues and for going through on your own.</p>
+<p class="lead">Slide decks from a staff series on Legomorphic Notation. They build a click at a time, the way the marks are taught, so they work for presenting to colleagues and for going through on your own.</p>
 </div></section>
 <section class="about" aria-label="Decks"><div class="wrap"><div class="decks">
 {"".join(blocks)}
@@ -113,7 +113,7 @@ def write(OUT, page, header, footer):
 </main>
 {footer(0)}"""
     (OUT / "presentations.html").write_text(
-        page("Presentations · Sound and Word Atlas", body, 0, "Slide decks from a staff series on legomorphic notation, to present or go through on your own."),
+        page("Presentations · Sound and Word Atlas", body, 0, "Slide decks from a staff series on Legomorphic Notation, to present or go through on your own."),
         encoding="utf-8")
     print(f"wrote presentations.html | {len(DECKS)} deck(s)")
 

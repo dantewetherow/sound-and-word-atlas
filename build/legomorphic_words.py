@@ -1,4 +1,4 @@
-"""Legomorphic notation for every word in the ask-and-answer lines.
+"""Legomorphic Notation for every word in the ask-and-answer lines.
 
 Each word is written once in a short code (W below), following the marking cards
 (marking_cards.json) and the rules in the manual. The code expands to the same

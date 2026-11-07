@@ -99,13 +99,13 @@ def page(title, body, depth, desc):
 
 def header(depth):
     up = "../" * depth
-    return (f'<header class="site"><div class="wrap"><a class="brand" href="{up}index.html"><small>Legomorphic notation</small>Sound and Word Atlas</a>'
+    return (f'<header class="site"><div class="wrap"><a class="brand" href="{up}index.html"><small>Legomorphic Notation</small>Sound and Word Atlas</a>'
             f'<nav class="site" aria-label="Site"><a href="{up}index.html#route">The route</a><a href="{up}index.html#marks">Reading the marks</a>'
             f'<a href="{up}cards.html">Word cards</a><a href="{up}word-lists.html">Word lists</a><a href="{up}presentations.html">Presentations</a><a href="{up}about.html">About</a></nav></div></header>')
 
 def footer(depth):
     up = "../" * depth
-    return ('<footer class="site"><div class="wrap"><p>Built on ' + BUILT + ' from the <i>Legomorphic notation</i> manual. '
+    return ('<footer class="site"><div class="wrap"><p>Built on ' + BUILT + ' from the <i>Legomorphic Notation</i> manual. '
             'Steps 16 to 32 are a draft. Page references are to Edward Carney, <i>A Survey of English Spelling</i> (Routledge, 1994).</p>'
             '<p>&copy; 2026 Dante Wetherow, B.Ed., M.Ed. Shared under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>. '
             f'<a href="{up}credits.html">Credits and contact</a></p></div></footer>')
@@ -235,7 +235,7 @@ home_body = f"""{header(0)}
 <h2 id="about-h">About this version</h2>
 <div class="cols">
 <div><h3>What's here</h3><p>The route: {N} steps in {len(route["bands"])} bands, {n_words} different words, {n_marked} of them marked. Printable cards for the ELP high-frequency words and all of Dolch&rsquo;s sight words are on the <a href="cards.html">Word cards</a> page, and <a href="word-lists.html">Word lists</a> shows where the ELP words come from. The first session of the staff series is under <a href="presentations.html">Presentations</a>. The legend in full, the word families and the teaching routines come next.</p></div>
-<div><h3>Where it comes from</h3><p>The route and its notes come from the <i>Legomorphic notation</i> manual, and the site is rebuilt from it, so corrections go into the manual first. The marks are drawn with the same tools as the session decks. <a href="about.html">About</a> explains the notation and its name, and <a href="credits.html">Credits</a> names the writers it draws on.</p></div>
+<div><h3>Where it comes from</h3><p>The route and its notes come from the <i>Legomorphic Notation</i> manual, and the site is rebuilt from it, so corrections go into the manual first. The marks are drawn with the same tools as the session decks. <a href="about.html">About</a> explains the notation and its name, and <a href="credits.html">Credits</a> names the writers it draws on.</p></div>
 <div><h3>Still settling</h3><p>Steps 16 to 32 were added as a draft on 15 October 2026. A few words show in plain letters until their marking is decided.</p></div>
 </div>
 </div></section>
@@ -243,7 +243,7 @@ home_body = f"""{header(0)}
 {footer(0)}"""
 if STANDALONE:
     home = page("Sound and Word Atlas", home_body, 0,
-                "A route through English spelling for teachers: 32 steps, with every word marked in legomorphic notation.")
+                "A route through English spelling for teachers: 32 steps, with every word marked in Legomorphic Notation.")
 else:
     home = home_head + home_body
 (OUT / "index.html").write_text(home, encoding="utf-8")
