@@ -204,3 +204,15 @@ table.wl-table tr.off th { font-weight: 500; }
   .detail dl { grid-template-columns: minmax(0, 1fr); gap: 2px 0; }
   .detail dd { margin-bottom: 8px; }
 }
+
+/* presentations */
+.decks { display: grid; gap: 44px; }
+.deck { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 34px; align-items: start; }
+.deck-shots { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.deck-shots img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; background: var(--card); border: 1px solid var(--line); border-radius: 8px; }
+.deck-shots:hover img { border-color: var(--soft); }
+.deck-text h2 { margin: 4px 0 12px; }
+.deck-links { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin: 18px 0 12px; }
+.btn { display: inline-block; padding: 10px 20px; border-radius: 999px; background: var(--ink); color: var(--paper); font-weight: 500; text-decoration: none; }
+.btn:hover { opacity: 0.88; }
+@media (max-width: 760px) { .deck { grid-template-columns: minmax(0, 1fr); gap: 20px; } }

@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sounds, Symbols and Sentences</title>
+<meta name="description" content="Session 1 of a staff series on legomorphic notation: the sounds a voice makes, the symbols we write them with, and a learning loop to run with one student.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&family=Lexend:wght@300;400;500;600&family=Gentium+Plus&display=swap" rel="stylesheet">
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --paper:#f4efe6; --panel:#fbf8f1; --line:#e0d8c7;
+  --ink:#2b2b2b; --soft:#6b6256;
+  --subject:#3a7d44; --verb:#b5402f; --object:#2b2b2b; --modal:#3f6488; --silent:#a89e8f;
+  --serif:"Fraunces",Georgia,"Times New Roman",serif;
+  --sans:"Lexend",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#1d1b18; --panel:#26231f; --line:#3b362f;
+    --ink:#ece5d8; --soft:#a89e8f;
+    --subject:#7dbb87; --verb:#e2836e; --object:#ece5d8; --modal:#95b6db; --silent:#7d7466;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#1d1b18; --panel:#26231f; --line:#3b362f;
+  --ink:#ece5d8; --soft:#a89e8f;
+  --subject:#7dbb87; --verb:#e2836e; --object:#ece5d8; --modal:#95b6db; --silent:#7d7466;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px);}
+body{height:100%;margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);overflow:hidden;-webkit-font-smoothing:antialiased;}
+#viewport{position:relative;width:100%;height:100%;overflow:hidden;}
+#stage{position:absolute;top:0;left:0;width:1600px;height:900px;transform-origin:0 0;background:var(--paper);}
+
+/* ---------- slides ---------- */
+.slide{position:absolute;inset:0;padding:104px 132px 120px;display:flex;flex-direction:column;visibility:hidden;}
+.slide.on{visibility:visible;}
+.slide.mid{justify-content:center;}
+.num{position:absolute;left:132px;bottom:40px;font-size:20px;color:var(--soft);font-variant-numeric:tabular-nums;}
+.progress{position:absolute;left:0;bottom:0;height:4px;background:var(--soft);opacity:.28;transition:width .35s ease;}
+
+/* ---------- type ---------- */
+.display{font-family:var(--serif);font-weight:600;font-size:132px;line-height:.98;letter-spacing:-.018em;margin:0;}
+.lede{font-size:36px;color:var(--soft);margin:22px 0 0;font-weight:400;}
+.head{font-family:var(--serif);font-weight:500;font-size:66px;line-height:1.1;letter-spacing:-.012em;margin:0 0 30px;max-width:1240px;text-wrap:balance;}
+.body{font-size:30px;line-height:1.52;font-weight:400;margin:0 0 20px;max-width:1080px;}
+.body i,.source i,.q i{font-family:var(--serif);font-style:italic;font-weight:400;}
+.source{font-size:22px;line-height:1.5;color:var(--soft);margin:auto 0 0;max-width:1140px;}
+.q{font-family:var(--serif);font-style:italic;font-size:44px;line-height:1.25;margin:44px 0 0;max-width:1180px;}
+.q.np{font-size:50px;line-height:1.3;margin-top:10px;max-width:1240px;padding-left:30px;border-left:4px solid var(--modal);}
+.q.end{font-size:38px;margin-top:40px;padding-top:30px;border-top:1.5px solid var(--line);max-width:1080px;}
+.opx{color:var(--modal);}
+.byline{font-size:24px;color:var(--soft);margin:auto 0 0;}
+
+/* ---------- title slide ---------- */
+.title-top{display:flex;justify-content:space-between;align-items:flex-start;gap:48px;}
+.subtitle{font-family:var(--serif);font-style:italic;font-weight:400;font-size:48px;line-height:1.15;margin:18px 0 0;}
+.title-top .lede{margin-top:16px;}
+
+/* ---------- operator balance ---------- */
+.clause-host{margin:40px 0 0;}
+.clause-host.center{display:flex;justify-content:center;}
+.stave{--cw:100px;display:inline-grid;align-items:end;column-gap:calc(var(--cw)*.28);}
+.w{font-family:var(--serif);font-weight:500;font-size:var(--cw);line-height:1;text-align:center;align-self:end;padding:0 .04em;white-space:nowrap;}
+.w.subj{color:var(--subject);} .w.verb{color:var(--verb);} .w.obj{color:var(--object);}
+.w.op{color:var(--modal);font-style:italic;font-weight:400;min-width:calc(var(--cw)*1.4);transition:opacity .32s ease;}
+.w .ghost{visibility:hidden;}
+.bal{position:relative;height:calc(var(--cw)*.46);}
+.beam{position:absolute;top:calc(var(--cw)*.12);left:7%;right:7%;height:max(3px,calc(var(--cw)*.06));background:var(--modal);border-radius:4px;transform-origin:center center;transition:transform .75s cubic-bezier(.45,.05,.25,1);}
+.beam::before,.beam::after{content:"";position:absolute;top:50%;width:calc(var(--cw)*.22);height:calc(var(--cw)*.22);border-radius:50%;background:var(--modal);transform:translateY(-50%);}
+.beam::before{left:calc(var(--cw)*-.11);} .beam::after{right:calc(var(--cw)*-.11);}
+.beam.tip-post{transform:rotate(5.5deg);} .beam.tip-pre{transform:rotate(-5.5deg);}
+.fulcrum{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:0;height:0;
+  border-left:calc(var(--cw)*.14) solid transparent;border-right:calc(var(--cw)*.14) solid transparent;border-bottom:calc(var(--cw)*.22) solid var(--modal);}
+.brk{height:calc(var(--cw)*.18);align-self:start;margin-top:calc(var(--cw)*.05);border:max(3px,calc(var(--cw)*.045)) solid;border-top:none;}
+.brk.g{border-color:var(--subject);} .brk.r{border-color:var(--verb);} .brk.k{border-color:var(--object);}
+.lab{font-family:var(--sans);font-weight:500;font-size:max(18px,calc(var(--cw)*.26));text-align:center;letter-spacing:.02em;margin-top:calc(var(--cw)*.08);}
+.lab.g{color:var(--subject);} .lab.r{color:var(--verb);} .lab.k{color:var(--object);}
+/* interactive states */
+.stave.tell .a,.stave.ask .t{display:none;}
+.stave.tell .w.op.pre,.stave.ask .w.op.post{opacity:0;}
+.stave.tell .w.op.post,.stave.ask .w.op.pre{transition-delay:.28s;}
+.stave.tell .beam{transform:rotate(5.5deg);} .stave.ask .beam{transform:rotate(-5.5deg);}
+
+.toggle{align-self:center;margin-top:44px;font-family:var(--sans);font-size:24px;font-weight:500;color:var(--ink);background:var(--panel);
+  border:1.5px solid var(--line);border-radius:999px;padding:12px 30px;cursor:pointer;}
+.toggle:hover{border-color:var(--soft);}
+button:focus-visible,.stave[role="button"]:focus-visible{outline:3px solid var(--modal);outline-offset:4px;}
+.stave[role="button"]{cursor:pointer;border-radius:8px;}
+
+/* ---------- specific slides ---------- */
+.equation{font-family:var(--serif);font-size:62px;line-height:1.3;margin:0 0 40px;}
+.equation .x{color:var(--soft);font-weight:400;padding:0 .3em;}
+.strands{display:grid;grid-template-columns:1fr 1fr;column-gap:88px;margin:10px 0 0;max-width:1300px;}
+.strands h3{font-family:var(--serif);font-weight:500;font-size:40px;margin:0 0 12px;}
+.strands p{font-size:27px;line-height:1.5;font-weight:400;margin:0;color:var(--ink);}
+.strands > div{border-top:1.5px solid var(--line);padding-top:22px;}
+
+.path{position:relative;margin:70px 0 64px;height:120px;max-width:1336px;}
+.path .rail{position:absolute;left:14px;right:14px;top:14px;height:2px;background:var(--ink);opacity:.8;}
+.path ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,1fr);position:relative;}
+.path li{display:flex;flex-direction:column;align-items:flex-start;}
+.path li:last-child{align-items:flex-end;}
+.path .dot{width:30px;height:30px;border-radius:50%;background:var(--paper);border:2.5px solid var(--ink);}
+.path li:last-child .dot{background:var(--ink);}
+.path .stop{font-family:var(--serif);font-size:36px;margin-top:20px;}
+.path .ends{display:flex;justify-content:space-between;margin-top:30px;font-size:22px;color:var(--soft);}
+
+.giant{font-family:var(--serif);font-style:italic;font-weight:400;font-size:230px;line-height:.9;margin:0 0 30px;letter-spacing:-.02em;}
+.giant .mo{position:relative;display:inline-block;}
+.giant .mo::before{content:"";position:absolute;left:50%;top:0.12em;width:0.56em;height:0.06em;background:currentColor;border-radius:3px;transform:translateX(-50%);}
+.gloss{display:grid;grid-template-columns:auto 1fr;column-gap:32px;row-gap:10px;font-size:30px;line-height:1.4;margin:0 0 44px;}
+.gloss dt{color:var(--soft);font-weight:400;}
+.gloss dd{margin:0;font-weight:400;}
+
+.marked{display:flex;justify-content:center;margin:18px 0 26px;}
+.marked svg{width:830px;height:auto;overflow:visible;}
+
+.pairs{display:grid;grid-template-columns:auto auto;column-gap:140px;row-gap:34px;justify-content:center;margin:26px 0 30px;}
+.pairs .stave{--cw:66px;}
+.stack{display:flex;flex-direction:column;align-items:center;gap:12px;margin:4px 0 10px;}
+.stack .stave{--cw:70px;}
+
+.try{list-style:none;margin:24px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;column-gap:80px;row-gap:34px;max-width:1336px;}
+.try li{font-family:var(--serif);font-size:42px;line-height:1.25;}
+.try .ans{display:block;margin-top:6px;opacity:0;transition:opacity .6s ease;}
+.try .ans small{display:block;font-family:var(--sans);font-size:22px;color:var(--soft);font-weight:400;margin-top:4px;}
+.try.shown .ans{opacity:1;}
+.try .op{color:var(--modal);font-style:italic;}
+
+.w.op.blank{border:2.5px dashed var(--modal);border-radius:10px;opacity:.6;min-width:calc(var(--cw)*1.3);height:calc(var(--cw)*.6);align-self:end;margin-bottom:.05em;}
+
+.opfam{display:grid;grid-template-columns:168px 1fr;row-gap:15px;column-gap:28px;margin:26px 0 0;max-width:1320px;align-items:start;}
+.opfam dt{font-family:var(--sans);font-size:21px;color:var(--soft);font-weight:500;padding-top:8px;}
+.opfam dd{margin:0;display:flex;flex-wrap:wrap;gap:10px 13px;}
+.opfam .tag{font-family:var(--serif);font-style:italic;font-size:25px;color:var(--modal);border:1.5px solid var(--line);border-radius:9px;padding:4px 14px;background:var(--panel);}
+
+
+.modes{display:grid;grid-template-columns:repeat(4,1fr);column-gap:34px;margin:28px 0 0;max-width:1336px;}
+.modes h4{font-family:var(--serif);font-weight:500;font-size:27px;margin:0 0 6px;}
+.modes p{font-size:19px;line-height:1.42;color:var(--soft);margin:0;font-weight:400;}
+
+.cont{position:relative;margin:34px 0 8px;max-width:1336px;}
+.cont .line{height:2px;background:var(--ink);opacity:.35;}
+.cont .ends{display:flex;justify-content:space-between;font-size:22px;color:var(--soft);margin-top:10px;}
+.map{list-style:none;margin:30px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;grid-auto-flow:column;grid-template-rows:repeat(4,auto);column-gap:90px;row-gap:24px;max-width:1336px;}
+.map li{display:grid;grid-template-columns:56px 1fr;align-items:baseline;}
+.map .n{font-family:var(--serif);font-size:38px;color:var(--soft);}
+.map .mt{font-size:28px;font-weight:500;}
+.map .ms{display:block;font-size:21px;font-weight:400;color:var(--soft);margin-top:3px;line-height:1.4;}
+.map li.now .n{color:var(--ink);}
+
+/* ---------- word build: no to knotting ---------- */
+.build-wrap{display:grid;grid-template-columns:1fr 322px;column-gap:44px;align-items:start;margin-top:22px;}
+.knotsvg{display:block;width:920px;height:370px;overflow:visible;}
+.knotsvg [data-s]{transition:opacity .8s ease;}
+.knotsvg [data-x]{transition:transform .95s cubic-bezier(.45,.05,.25,1),opacity .8s ease;}
+.knotsvg .off{opacity:0;}
+.knotsvg.instant,.knotsvg.instant *{transition:none !important;}
+.build-cap{font-size:25px;line-height:1.45;margin:10px 0 0;min-height:108px;max-width:940px;}
+.build-cap i{font-family:var(--serif);font-style:italic;}
+.pills{display:flex;gap:12px;margin-top:14px;}
+.pill{font-family:var(--serif);font-style:italic;font-size:25px;padding:6px 20px;border-radius:999px;border:1.5px solid var(--line);background:var(--panel);color:var(--soft);cursor:pointer;}
+.pill:hover{border-color:var(--soft);}
+.pill.on{color:var(--ink);border-color:var(--ink);}
+.key{border-left:1.5px solid var(--line);padding-left:30px;border-radius:0;}
+.key-t{font-size:20px;font-weight:500;color:var(--soft);margin:4px 0 14px;}
+.key ul{list-style:none;margin:0;padding:0;display:grid;row-gap:9px;}
+.key li{display:grid;grid-template-columns:62px 1fr;column-gap:14px;align-items:center;}
+.key svg{width:62px;height:40px;overflow:visible;}
+.key span{font-size:16px;color:var(--soft);line-height:1.3;}
+.key b{display:block;font-weight:500;font-size:19px;color:var(--ink);line-height:1.2;}
+
+/* ---------- by / buy / bye ---------- */
+.bbb{display:block;width:940px;height:auto;overflow:visible;}
+.bbb-p{font-size:25px;line-height:1.45;margin:8px 0 0;max-width:960px;}
+.bbb-note{font-size:20px;line-height:1.45;color:var(--soft);margin:10px 0 0;max-width:960px;}
+.pq{margin:26px 0 0;padding:0;}
+.pq p{font-family:var(--serif);font-style:italic;font-size:23px;line-height:1.38;margin:0 0 10px;}
+.pq cite{font-style:normal;font-size:16px;line-height:1.4;color:var(--soft);display:block;}
+.pq cite i{font-style:italic;}
+
+/* ---------- modal spellings ---------- */
+.modals-svg{display:block;width:1336px;height:auto;margin-top:26px;overflow:visible;}
+.qs{display:grid;grid-template-columns:auto auto;justify-content:start;column-gap:90px;row-gap:8px;margin-top:22px;
+  font-family:var(--serif);font-size:32px;line-height:1.3;}
+.qs i{color:var(--modal);}
+
+/* ---------- might / may / must ---------- */
+.mmm-svg{display:block;width:1336px;height:auto;margin-top:20px;overflow:visible;}
+.mmm-wrap{display:grid;grid-template-columns:1fr 570px;column-gap:48px;align-items:start;margin-top:12px;}
+.igh-svg{display:block;width:570px;height:auto;margin-top:8px;overflow:visible;}
+.qs.one{grid-template-columns:auto;margin-top:0;font-size:38px;row-gap:4px;}
+.bbb-p i,.bbb-note i{font-family:var(--serif);font-style:italic;}
+
+/* ---------- sight words / Ehri ---------- */
+.sw-words{display:flex;flex-wrap:wrap;gap:22px 64px;margin:22px 0 0;font-family:var(--sans);font-size:58px;font-weight:400;line-height:1.2;}
+.sw-grid{display:grid;grid-template-columns:1fr 500px;column-gap:64px;align-items:start;margin-top:20px;}
+.om-term{font-family:var(--serif);font-weight:500;font-size:40px;margin:0 0 8px;}
+.om-q{font-family:var(--serif);font-style:italic;font-size:27px;line-height:1.36;margin:0;max-width:760px;}
+.phases{list-style:none;margin:0;padding:0;display:grid;row-gap:7px;counter-reset:ph;}
+.phases li{display:grid;grid-template-columns:40px 1fr;align-items:baseline;counter-increment:ph;}
+.phases li::before{content:counter(ph);font-family:var(--serif);font-size:30px;color:var(--soft);grid-row:span 2;}
+.phases b{font-weight:500;font-size:22px;line-height:1.2;}
+.phases span{grid-column:2;font-size:18px;color:var(--soft);line-height:1.35;}
+
+/* ---------- four modes ---------- */
+.modes2{display:grid;grid-template-columns:110px 1fr 1fr;column-gap:52px;margin-top:22px;max-width:1336px;}
+.m2-col{font-size:19px;color:var(--soft);padding-bottom:8px;}
+.m2-row{font-size:20px;color:var(--soft);border-top:1.5px solid var(--line);padding-top:18px;}
+.m2-cell{border-top:1.5px solid var(--line);padding:10px 0 12px;}
+.m2-cell h4{font-family:var(--serif);font-weight:500;font-size:38px;margin:0 0 6px;}
+.m2-cell p{display:grid;grid-template-columns:62px 1fr;align-items:baseline;font-size:20px;line-height:1.45;margin:0 0 2px;}
+.m2-cell i{font-family:var(--serif);font-style:italic;}
+.m2-cell .lbl{font-size:16px;color:var(--soft);}
+
+/* ---------- rope ---------- */
+.rope-svg{display:block;width:1336px;height:auto;margin-top:16px;overflow:visible;}
+
+/* ---------- IPA decoding ---------- */
+.ipa-head{display:flex;justify-content:space-between;align-items:center;gap:40px;}
+.stanzas{display:grid;grid-template-columns:1fr 1fr;column-gap:64px;margin-top:26px;}
+.ipa-lines{list-style:none;margin:0;padding:0;display:grid;row-gap:8px;align-content:start;}
+.ipa-lines li{font-family:"Gentium Plus","Charis SIL","Doulos SIL","Noto Serif","DejaVu Serif",serif;font-size:55px;line-height:1.08;}
+.ipa-lines li > span:first-child{white-space:nowrap;}
+.ipa-lines .eng{display:block;font-family:var(--serif);font-style:italic;font-size:27px;line-height:1.3;color:var(--soft);opacity:0;transition:opacity .6s ease;}
+.ipa-take{font-size:22px;line-height:1.45;margin:22px 0 0;max-width:1300px;opacity:0;transition:opacity .6s ease;}
+.ipa-take i{font-family:var(--serif);font-style:italic;}
+#ipa.shown .eng,#ipa.shown .ipa-take{opacity:1;}
+.ipa-keybar{margin-top:auto;display:flex;flex-wrap:wrap;align-items:baseline;column-gap:34px;row-gap:6px;border-top:1.5px solid var(--line);padding-top:14px;}
+.kb-t{font-size:18px;color:var(--soft);}
+.kb{display:inline-flex;align-items:baseline;gap:9px;}
+.kb .sym{font-family:"Gentium Plus","Charis SIL","Doulos SIL","Noto Serif","DejaVu Serif",serif;font-size:32px;line-height:1;color:var(--ink);}
+.kb > span:last-child{font-size:19px;color:var(--soft);}
+.kb b{color:var(--ink);font-weight:600;}
+
+/* ---------- stepped slides ---------- */
+.stepped [data-s],.stepped [data-dim]{transition:opacity .85s ease;}
+.stepped .dim{opacity:.16;}
+.stepped .off{opacity:0;pointer-events:none;}
+.stepped.instant,.stepped.instant *{transition:none !important;}
+.layers{position:relative;}
+.layers > *{position:absolute;left:0;top:0;right:0;}
+.snd-wrap{display:grid;grid-template-columns:760px 1fr;column-gap:56px;align-items:start;margin-top:18px;}
+.snd-svg{display:block;width:760px;height:540px;overflow:visible;}
+.snd-right{display:flex;flex-direction:column;height:540px;}
+.snd-caps{flex:1;}
+.snd-cap{font-size:27px;line-height:1.42;margin:0;}
+.snd-src{font-size:17px;color:var(--soft);margin:14px 0 0;}
+.stepdots{display:flex;gap:10px;}
+.stepdots i{width:10px;height:10px;border-radius:50%;background:var(--line);transition:background .3s ease;}
+.stepdots i.on{background:var(--ink);}
+
+/* ---------- sound-coding layers: one per click ---------- */
+.slide.snap .ly1,.slide.snap .ly2,.slide.snap .ly3,.slide.snap .ly4,.slide.snap .ly5,.slide.snap .ly6,.slide.snap .ly7,.slide.snap .ly8,.slide.snap .ly9,.slide.snap .ly10{transition:none !important;}
+.ly1,.ly2,.ly3,.ly4,.ly5,.ly6,.ly7,.ly8,.ly9,.ly10{transition:opacity .8s ease;}
+.lh{opacity:0 !important;}
+
+/* ---------- open and closed / graphemes / learning loops ---------- */
+.oc-svg{display:block;width:1040px;height:auto;margin:10px 0 0 40px;overflow:visible;}
+.gr-svg{display:block;width:1336px;height:auto;margin-top:6px;overflow:visible;}
+.bbb-p b{font-weight:600;}
+.ll-head{display:flex;justify-content:space-between;align-items:center;}
+.ll-svg{display:block;width:1336px;height:auto;margin-top:8px;overflow:visible;}
+.ll-caps{height:74px;margin-top:4px;}
+.ll-cap{font-size:25px;line-height:1.45;margin:0;max-width:1300px;}
+.ll-swaps{display:grid;grid-template-columns:repeat(3,1fr);column-gap:40px;row-gap:14px;margin-top:10px;}
+.ll-swaps > div{display:flex;flex-direction:column;}
+.sw-l{font-size:17px;color:var(--soft);}
+.sw-c{font-family:var(--serif);font-style:italic;font-size:25px;line-height:1.3;}
+
+/* ---------- lego icon ---------- */
+.lego-icon{position:absolute;top:112px;right:132px;height:290px;width:auto;}
+
+/* ---------- words written in IPA-range letters ---------- */
+.ipa-word{font-family:"Gentium Plus","Charis SIL","Doulos SIL","Noto Serif","DejaVu Serif",serif;}
+
+/* ---------- activity ---------- */
+.act-steps{margin:30px 0 0;padding:0 0 0 1.3em;font-size:30px;line-height:1.5;max-width:1260px;}
+.act-steps li{margin:0 0 12px;padding-left:8px;}
+.act-steps li::marker{font-family:var(--serif);color:var(--soft);}
+.act-steps b{font-weight:500;}
+.act-steps i{font-family:var(--serif);font-style:italic;}
+.op-w{color:var(--modal);}
+
+/* ---------- sound circles: b, a, then banana ---------- */
+.sc-svg{display:block;width:1120px;height:auto;margin:6px 0 0 60px;overflow:visible;}
+.sc-caps{height:110px;margin-top:4px;}
+.sc-cap{font-size:28px;line-height:1.45;margin:0;max-width:1200px;}
+.sc-cap i{font-family:var(--serif);font-style:italic;}
+.stepped .wave-draw{stroke-dasharray:1000;stroke-dashoffset:0;transition:stroke-dashoffset 7s linear,opacity .3s ease;}
+.stepped .wave-draw.off{stroke-dashoffset:1000;}
+.stepped.instant .wave-draw{transition:none !important;}
+
+/* ---------- the first line of the verse, coded click by click ---------- */
+.cl-svg{display:block;width:1336px;height:auto;margin-top:92px;overflow:visible;}
+.stepped .cl-svg [data-s]{transition:opacity .5s ease;}
+.stepped .cl-svg .cl-draw{stroke-dasharray:1000;stroke-dashoffset:0;transition:stroke-dashoffset .6s ease-in-out,opacity .15s ease;}
+.stepped .cl-svg .cl-draw.off{stroke-dashoffset:1000;}
+.cl-caps{margin-top:52px;}
+.cl-caps .sc-cap{text-wrap:pretty;}
+
+/* ---------- one loop, card by card: sentence cards on the operator balance ---------- */
+.cl2{position:relative;width:1336px;height:310px;margin-top:70px;}
+.cl2 .slot{position:absolute;top:44px;height:124px;}
+.cl2 .slot.stack::before,.cl2 .slot.stack::after{content:"";position:absolute;z-index:0;left:0;right:0;top:0;height:124px;border:1.5px solid var(--line);border-radius:14px;background:var(--panel);}
+.cl2 .slot.stack::before{transform:translate(10px,10px);} .cl2 .slot.stack::after{transform:translate(5px,5px);}
+.cl2 .card{position:absolute;z-index:2;left:0;right:0;top:0;height:124px;box-sizing:border-box;display:flex;align-items:center;justify-content:center;
+  background:var(--panel);border:1.5px solid var(--line);border-radius:14px;box-shadow:0 2px 0 var(--line);
+  font-family:var(--serif);font-weight:500;font-size:72px;line-height:1;white-space:nowrap;}
+.cl2 .op .card{color:var(--modal);font-style:italic;font-weight:400;}
+.cl2 .act .card{color:var(--subject);} .cl2 .verb .card{color:var(--verb);} .cl2 .obj .card{color:var(--object);} .cl2 .pun .card{color:var(--ink);}
+.cl2 .ing{display:inline-block;margin-left:.03em;padding:.08em .1em .14em;border:1.5px solid var(--line);border-radius:10px;background:var(--panel);box-shadow:-3px 3px 0 var(--line);}
+.stepped .cl2 .card[data-tx]{transition:transform .6s cubic-bezier(.3,.1,.3,1),opacity .45s ease;}
+.stepped .cl2 .card:not(.off){transition-delay:.22s;}
+.cl2 .beam{position:absolute;top:194px;height:6px;border-radius:4px;background:var(--modal);transform-origin:center center;transition:transform .75s cubic-bezier(.45,.05,.25,1);}
+.cl2 .beam::before,.cl2 .beam::after{content:"";position:absolute;top:50%;width:20px;height:20px;border-radius:50%;background:var(--modal);transform:translateY(-50%);}
+.cl2 .beam::before{left:-10px;} .cl2 .beam::after{right:-10px;}
+.cl2 .beam.tip-post{transform:rotate(5.5deg);} .cl2 .beam.tip-pre{transform:rotate(-5.5deg);}
+.cl2 .fulcrum{position:absolute;top:202px;width:0;height:0;transform:translateX(-50%);border-left:16px solid transparent;border-right:16px solid transparent;border-bottom:28px solid var(--modal);}
+.cl2 .brk2{position:absolute;top:248px;height:18px;border:4px solid;border-top:none;}
+.cl2 .brk2.g{border-color:var(--subject);} .cl2 .brk2.r{border-color:var(--verb);} .cl2 .brk2.k{border-color:var(--object);}
+.cl2 .lab2{position:absolute;top:276px;text-align:center;font-family:var(--sans);font-weight:500;font-size:22px;letter-spacing:.02em;}
+.cl2 .lab2.g{color:var(--subject);} .cl2 .lab2.r{color:var(--verb);} .cl2 .lab2.k{color:var(--object);}
+.cl2 .clash{position:absolute;top:2px;width:42px;height:42px;}
+.cl2-caps{margin-top:30px;}
+.cl2-caps .sc-cap{text-wrap:pretty;}
+
+/* ---------- one letter, one beat: the alphabet, and the song that squeezes L, M, N, O, P ---------- */
+.ab-svg{display:block;width:1336px;height:auto;margin-top:36px;overflow:visible;}
+.stepped .ab-svg circle[data-s],.stepped .ab-svg line[data-s]{transition:opacity .25s ease;}
+.ab-pen{stroke-dasharray:1000;stroke-dashoffset:1000;}
+.stepped .ab-pen.top:not(.off){animation:abTop 9.88s linear forwards;}
+.stepped .ab-pen.song:not(.off){animation:abSong 9.12s linear forwards;}
+@keyframes abTop{0.000%{stroke-dashoffset:1000.0} 3.846%{stroke-dashoffset:953.8} 7.692%{stroke-dashoffset:917.3} 11.538%{stroke-dashoffset:880.8} 15.385%{stroke-dashoffset:834.5} 19.231%{stroke-dashoffset:788.3} 23.077%{stroke-dashoffset:751.8} 26.923%{stroke-dashoffset:715.3} 30.769%{stroke-dashoffset:669.1} 34.615%{stroke-dashoffset:622.8} 38.462%{stroke-dashoffset:586.4} 42.308%{stroke-dashoffset:549.9} 46.154%{stroke-dashoffset:513.4} 50.000%{stroke-dashoffset:476.9} 53.846%{stroke-dashoffset:430.6} 57.692%{stroke-dashoffset:384.4} 61.538%{stroke-dashoffset:347.9} 65.385%{stroke-dashoffset:311.4} 69.231%{stroke-dashoffset:274.9} 73.077%{stroke-dashoffset:238.4} 76.923%{stroke-dashoffset:192.2} 80.769%{stroke-dashoffset:146.0} 84.615%{stroke-dashoffset:116.8} 88.462%{stroke-dashoffset:102.2} 92.308%{stroke-dashoffset:73.0} 96.154%{stroke-dashoffset:36.5} 100.000%{stroke-dashoffset:0.0}}
+@keyframes abSong{0.000%{stroke-dashoffset:1000.0} 4.167%{stroke-dashoffset:953.4} 8.333%{stroke-dashoffset:916.7} 12.500%{stroke-dashoffset:880.0} 16.667%{stroke-dashoffset:833.4} 20.833%{stroke-dashoffset:786.8} 25.000%{stroke-dashoffset:750.1} 29.167%{stroke-dashoffset:713.4} 33.333%{stroke-dashoffset:666.8} 37.500%{stroke-dashoffset:620.2} 41.667%{stroke-dashoffset:583.5} 45.833%{stroke-dashoffset:528.4} 50.000%{stroke-dashoffset:449.3} 54.167%{stroke-dashoffset:387.1} 58.333%{stroke-dashoffset:350.3} 62.500%{stroke-dashoffset:313.6} 66.667%{stroke-dashoffset:276.8} 70.833%{stroke-dashoffset:240.1} 75.000%{stroke-dashoffset:193.5} 79.167%{stroke-dashoffset:147.0} 83.333%{stroke-dashoffset:117.6} 87.500%{stroke-dashoffset:102.9} 91.667%{stroke-dashoffset:73.5} 95.833%{stroke-dashoffset:36.7} 100.000%{stroke-dashoffset:0.0}}
+.ab-caps{margin-top:22px;}
+.ab-caps .sc-cap{text-wrap:pretty;}
+
+/* ---------- IPA verse ---------- */
+.verse{display:grid;grid-template-columns:auto 1fr;column-gap:56px;row-gap:6px;margin-top:26px;align-items:baseline;}
+.verse .vr{display:contents;}
+.verse .vr.gap .ipa-l,.verse .vr.gap .eng{margin-top:18px;}
+.verse .ipa-l{font-family:"Gentium Plus","Charis SIL","Doulos SIL","Noto Serif","DejaVu Serif",serif;font-size:50px;line-height:1.1;white-space:nowrap;}
+.verse .eng{font-family:var(--serif);font-style:italic;font-size:27px;color:var(--soft);opacity:0;transition:opacity .6s ease;}
+#ipa2.shown .eng,#ipa2.shown .ipa-take{opacity:1;}
+#ipa2 .ipa-take{margin-top:20px;}
+.kb-tight{column-gap:24px;}
+.kb-tight .kb .sym{font-size:28px;}
+.kb-tight .kb > span:last-child{font-size:17px;}
+
+/* ---------- the 44 sounds in IPA ---------- */
+.i44-block{margin-top:16px;}
+.i44-t{font-family:var(--serif);font-style:italic;font-size:26px;margin:0 0 8px;padding-bottom:4px;border-bottom:1.5px solid var(--line);}
+.i44-t.v{color:var(--verb);}
+.i44-grid{display:grid;row-gap:13px;}
+.i44-grid.c8{grid-template-columns:repeat(8,1fr);}
+.i44-grid.c10{grid-template-columns:repeat(10,1fr);}
+.i44{display:flex;flex-direction:column;}
+.i44 .sym{font-family:"Gentium Plus","Charis SIL","Doulos SIL","Noto Serif","DejaVu Serif",serif;font-size:42px;line-height:1.1;color:var(--ink);}
+.i44 .sym.v{color:var(--verb);}
+.i44 .ex{font-size:24px;color:#a39a8d;letter-spacing:.01em;}
+.i44 .ex b{font-weight:600;}
+.i44 .gk{color:var(--ink);} .i44 .gg{color:var(--subject);} .i44 .gv{color:var(--verb);}
+.i44 .team{border-bottom:2.5px solid currentColor;}
+.i44 .rk{color:var(--ink);}
+.snd-heads h2{font-size:50px;}
+
+/* ---------- back-of-the-mind questions ---------- */
+.bq{margin-top:34px;display:grid;row-gap:26px;max-width:1240px;}
+.bq p{font-family:var(--serif);font-style:italic;font-size:40px;line-height:1.3;margin:0;padding-left:26px;border-left:3px solid var(--line);}
+
+/* ---------- learning loops as a ring ---------- */
+.ring-wrap{display:grid;grid-template-columns:680px 1fr;column-gap:56px;align-items:start;margin-top:14px;}
+.ring-svg{display:block;width:680px;height:544px;overflow:visible;}
+.ring-caps{height:112px;}
+.ring-swaps{display:grid;row-gap:10px;margin-top:8px;}
+.ring-swaps > div{display:flex;flex-direction:column;}
+.stepped [data-tx]{transition:transform 1.6s cubic-bezier(.45,.05,.25,1),opacity .85s ease;}
+
+/* ---------- title balance: set without animating on arrival ---------- */
+.stave.snapst,.stave.snapst *{transition:none !important;}
+
+/* ---------- IPA decoding: the six systems, question beside statement ---------- */
+#ipa .pairs{list-style:none;margin:26px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;column-gap:64px;row-gap:6px;}
+#ipa .pairs li{display:grid;grid-template-columns:340px 1fr;column-gap:20px;align-items:baseline;}
+#ipa .ipa-l{font-family:"Gentium Plus","Charis SIL","Doulos SIL","Noto Serif","DejaVu Serif",serif;font-size:44px;line-height:1.1;white-space:nowrap;}
+#ipa .eng{font-family:var(--serif);font-style:italic;font-size:24px;line-height:1.3;color:var(--soft);opacity:0;transition:opacity .6s ease;}
+#ipa .pair-long{margin-top:16px;}
+#ipa .pair-long .eng{display:block;margin-top:2px;}
+#ipa .ipa-take{margin-top:12px;font-size:21px;}
+
+/* ---------- controls ---------- */
+#controls{position:absolute;right:16px;bottom:14px;display:flex;gap:8px;opacity:0;transition:opacity .3s ease;z-index:5;}
+body.awake #controls,#controls:focus-within{opacity:1;}
+#controls button{width:46px;height:46px;border-radius:50%;border:1.5px solid var(--line);background:var(--panel);color:var(--ink);font:500 22px/1 var(--sans);cursor:pointer;display:grid;place-items:center;}
+#controls button:hover{border-color:var(--soft);}
+#controls a{width:46px;height:46px;border-radius:50%;border:1.5px solid var(--line);background:var(--panel);color:var(--ink);font:500 22px/1 var(--sans);display:grid;place-items:center;text-decoration:none;}
+#controls a:hover{border-color:var(--soft);}
+
+@media (prefers-reduced-motion: reduce){
+  .ly1,.ly2,.ly3,.ly4,.ly5,.ly6,.ly7,.ly8,.ly9,.ly10{transition:none !important;}
+  .stepped [data-tx],.stepped [data-s],.stepped [data-dim],.beam,.w.op,.try .ans,.ipa-lines .eng,.ipa-take,.progress,.knotsvg [data-s],.knotsvg [data-x]{transition:none !important;}
+  .stepped .wave-draw{transition:stroke-dashoffset 7s linear !important;}
+}
+</style>
+</head>
+<body>
+<div id="viewport">
+<div id="stage" aria-roledescription="slide deck">
+
+  <!-- 1 -->
+  <section class="slide" aria-label="Title" data-build="title">
+    <div class="title-top">
+      <div>
+        <h1 class="display">Sounds, Symbols<br>and Sentences</h1>
+      </div>
+    </div>
+    <div class="clause-host" data-clause="title" style="margin-top:auto"></div>
+  </section>
+
+  <section class="slide mid" aria-label="Not a program">
+    <h2 class="head">This is not a program.</h2>
+    <p class="q np">It is an exploration of ways to provide access, and an invitation to experiment with our methods and synthesize our understandings.</p>
+  </section>
+
+  <section class="slide" aria-label="Questions to keep in mind">
+    <h2 class="head">Questions to keep in the back of your mind.</h2>
+    <div class="bq">
+      <p>Where does today’s work meet the phonics lessons you already teach?</p>
+      <p>What might it change about how we teach high-frequency words?</p>
+      <p>Where does phonemic awareness show up in what we mark, say and hear?</p>
+      <p>How can this apply to differentiation and ELL learners at all levels?</p>
+      <p>How can we add elements of decoding to every lesson, especially when introducing curricular vocabulary?</p>
+    </div>
+    <p class="bbb-note" style="margin-top:34px">No need to answer them yet.</p>
+  </section>
+
+  <!-- 6b -->
+  <section class="slide" aria-label="How this differs from a grammar lesson">
+    <h2 class="head">How this differs from a grammar lesson.</h2>
+    <div class="strands">
+      <div>
+        <h3>Teaching grammar</h3>
+        <p>Rules and terms come first, usually through worksheets, before students have had anything to notice.</p>
+      </div>
+      <div>
+        <h3>Making structure explicit</h3>
+        <p>We start from sentences students already say and understand. Slowed down, their structure becomes visible, and students can try small changes and talk about what each change does.</p>
+      </div>
+    </div>
+    <p class="q">Terms come after students have noticed the pattern.</p>
+  </section>
+  <!-- 10z -->
+  <section class="slide stepped" data-build="steps" data-max="4" aria-label="Forty-four sounds">
+    <div class="layers snd-heads" style="height:118px">
+      <h2 class="head" style="margin:0" data-s="012">How many sounds can a voice make?</h2>
+      <h2 class="head" style="margin:0" data-s="34">We use 40–44 sounds every day without thinking about it.</h2>
+    </div>
+    <div class="snd-wrap">
+      <svg class="snd-svg" viewBox="0 0 760 540" role="img" aria-label="Five pictures, shown a step at a time: a field of about 3,000 dots, one for each speech sound catalogued across the world’s languages; the 44 English sounds picked out of it; five inventories side by side, consonants in black and vowels in red: English 24 and 20, nsyilxcən about 40 and 4, Ukrainian 32 and 6, Arabic 28 and 6, Tagalog 16 and 5; the 44 sounds, with parents, teachers, educational assistants and speech-language pathologists around them; and a loop between learner and support, ringed by thinking, speaking, listening, seeing, reading and writing."><path data-s="01" data-dim="1" d="M729.9 119.3h0M150.3 329.2h0M202.6 130.1h0M523.8 162.4h0M741.2 273.7h0M469.2 127.5h0M619.7 315h0M425.3 328.9h0M720.5 53.7h0M105 6.3h0M720.3 502.5h0M146.8 73.1h0M234.5 104.9h0M169.2 392.2h0M733.2 490.5h0M368.7 394.5h0M346.9 50.5h0M224.5 248.1h0M399.6 273.7h0M249.1 139.3h0M337.3 75.6h0M26.6 339h0M501.9 161h0M542.4 316.7h0M608.6 128.3h0M487.4 174.2h0M633.1 193h0M27.7 95.9h0M137.4 393.5h0M456.5 16.8h0M278.3 424.3h0M357.6 404.4h0M467.1 281.4h0M421.5 127h0M666.5 438.3h0M17.2 493.4h0M227.2 215.7h0M270.2 371.1h0M169.7 273.2h0M336.7 105.9h0M554.6 282h0M545.4 271.1h0M379.6 85.2h0M72.2 512.7h0M676.2 395.2h0M743.4 283.8h0M355.5 196.7h0M377.7 438.4h0M204 32.1h0M730.2 461h0M369 438.2h0M259.9 105h0M555.2 215.4h0M333.7 185.7h0M642.1 480h0M259.5 196.8h0M510.3 416.4h0M137.1 280.8h0M81.6 427.3h0M5.1 63.7h0M402.1 31.8h0M554.8 119.3h0M543.7 184h0M301.2 172.6h0M455.3 75.6h0M567 294.9h0M291.3 85.5h0M17.5 282.2h0M544.6 230.2h0M225.4 86.5h0M633.2 436.6h0M444.7 328h0M348.6 62.8h0M381.5 140.6h0M655.1 160.6h0M39.4 160.3h0M403.4 371.3h0M700.1 357.9h0M664.2 250h0M710.8 107h0M555.6 18.4h0M490.4 238.4h0M16.7 131h0M25.9 481.7h0M600.2 272.4h0M358.5 391.8h0M689.6 250.1h0M411.5 93.9h0M534 492.4h0M39 53.6h0M355.9 349.7h0M521 412.9h0M171.8 205.5h0M81.2 416.7h0M70.7 292.3h0M314.5 107.9h0M291.2 382.8h0M718.6 95.2h0M752.4 27.8h0M194.3 458.9h0M324 95.1h0M667.6 294.5h0M532.3 449.5h0M664.7 383.3h0M378.5 424.4h0M465.5 414.9h0M751.9 73h0M707.6 424.9h0M103.9 315.6h0M345.8 405.2h0M720 84.1h0M337 361.4h0M238.1 489.9h0M358.4 62.1h0M336.2 207.3h0M51.3 52h0M280.6 402.5h0M80.4 271.1h0M436.4 84.8h0M259.5 270.9h0M157.3 185.8h0M676.4 162h0M302.7 438.5h0M205.7 514.5h0M623.3 62.5h0M630.8 270.2h0M126.7 30.4h0M389.7 259.5h0M589.9 94.7h0M278.3 372.3h0M567.5 218.3h0M479 426.6h0M467.5 96.8h0M589 62h0M685.7 204.1h0M50.8 93.8h0M4 149.6h0M743.4 293.4h0M302 457.2h0M392.5 127.2h0M500.5 141.3h0M279.9 325.4h0M513.3 471.2h0M501.3 64.8h0M39.4 404.5h0M586.8 85.7h0M445 193.5h0M510.7 27.9h0M545 195.5h0M135.6 86.4h0M600.8 151.7h0M302.4 348.3h0M149.7 458.1h0M425.6 502h0M522.5 96.4h0M181.4 183.4h0M446.8 460.6h0M15.7 241h0M4 317.1h0M612.1 490.6h0M370.5 449h0M236.3 53.5h0M147.5 295h0M677.1 64.8h0M115.6 172.9h0M392.4 18.7h0M720.5 369.2h0M203.2 20.9h0M512.2 206.3h0M213.8 317h0M135.8 480.5h0M630.8 226.1h0M267.8 215.6h0M158 317.5h0M256.8 317.2h0M325.7 105.3h0M567 150.3h0M755.4 64.7h0M490 338.9h0M709.7 326.7h0M434.1 74.1h0M247.8 237.1h0M357.2 97.8h0M172.6 371.3h0M542.8 126.8h0M378 54.2h0M480 304.4h0M653.4 372.8h0M138.1 10.1h0M444.1 106.9h0M344.6 436.9h0M337.1 51.2h0M480.7 194h0M533.8 218.1h0M51.3 295.6h0M755.5 9.1h0M238.3 141.2h0M216.2 20.4h0M367.1 402h0M16.9 62.2h0M665.6 86.9h0M258.8 292.6h0M69.4 205.9h0M311.5 227.7h0M267.9 424.5h0M367.8 74.4h0M148.3 42.5h0M633 141.2h0M498.8 216h0M721 306.7h0M731.6 17.3h0M356.4 381.6h0M37.4 358.9h0M543.6 152h0M29.6 502.8h0M147.8 140h0M289.5 64.8h0M160.8 502.3h0M501.4 42.1h0M722.4 449.2h0M402.9 438.9h0M489.7 138.5h0M446.4 382.1h0M576.3 394h0M40 470.8h0M146.7 204.4h0M15.8 105h0M205.3 339.2h0M402.6 259.2h0M7.1 105h0M379.7 460.6h0M708.3 305.1h0M7.3 305.3h0M69.8 18.5h0M159.4 9.8h0M137.5 261.9h0M138.4 469.5h0M620 447.6h0M170.5 292.4h0M631.6 29.5h0M3.9 248.2h0M126.7 294.7h0M158.3 172.6h0M487.5 404.8h0M586.3 40.1h0M656.6 482.7h0M380 283.1h0M487.9 282.7h0M181.5 317.5h0M742.5 358.2h0M589.8 139.1h0M731.5 337.7h0M685.4 115.8h0M698 20.9h0M60.1 139.8h0M115.7 86.1h0M566.9 195.9h0M216.1 250.1h0M91.7 50.1h0M732 350.2h0M402.1 360.3h0M181.7 207.2h0M324.4 284.1h0M29.6 54.1h0M39.7 427.1h0M391.3 171.6h0M335.1 490.3h0M161.2 296.1h0M611.8 459.7h0M456.7 284.4h0M557 381.4h0M755.5 404.2h0M447.2 18.3h0M14.5 447.7h0M733.4 502.5h0M399.8 183.8h0M302.9 490.1h0M300.7 193.5h0M380.5 65h0M369.8 117.5h0M721.3 469.5h0M260 514.2h0M290.3 461.1h0M435.3 61h0M674.4 448.4h0M488.6 295.4h0M124.8 204.4h0M433.8 54h0M443.7 415.4h0M643.2 162.4h0M237.3 173.9h0M95.1 482.1h0M566.9 116.9h0M289.7 192.9h0M37.2 237.8h0M17.9 30.2h0M336.6 424.8h0M61.7 416.9h0M104.6 493.2h0M730.5 380.9h0M61.2 129.8h0M488.3 456.8h0M104.6 457.8h0M467.7 515.3h0M433.1 238.3h0M399.6 61.7h0M721.3 117.4h0M610.2 84.6h0M325.1 8.2h0M447.6 305.2h0M754.9 131h0M499.2 261.5h0M610.7 402.4h0M710.5 382.1h0M234.9 75.8h0M38.5 108.2h0M732.4 238.2h0M346.9 490.3h0M489.5 468.2h0M587.1 306.9h0M489.7 53.6h0M608.3 207.1h0M159.8 206.9h0M38.7 437.4h0M687.5 381.2h0M436.4 174.9h0M103.3 215.5h0M49.6 326.9h0M510.5 195.8h0M94.1 296.1h0M388.3 73.2h0M246.9 250.1h0M730.2 185.8h0M148.7 249.2h0M399.3 292.8h0M224.4 18h0M117.6 515.7h0M707.3 347.1h0M137.3 336.2h0M434.8 116.8h0M555.1 31.1h0M180.2 347.7h0M490.9 120h0M334.2 20.5h0M729.6 30.9h0M26.3 272.3h0M533 17.5h0M149.7 271.2h0M358.3 238.8h0M48.2 173.1h0M158.5 238.4h0M601.6 347.1h0M665.5 468.6h0M510.1 426.2h0M433.6 127.2h0M666.9 338.7h0M58.4 383.1h0M183.4 501.3h0M59.2 194.1h0M456.7 27.8h0M170.2 503.2h0M115.2 250.2h0M424.9 416.2h0M534.8 348.5h0M521.2 435.2h0M696.4 336.2h0M193.3 9.4h0M104.1 327.7h0M731 151.4h0M40.5 503.5h0M182.5 281.7h0M180.7 174.8h0M445.9 204h0M753 249.4h0M443.4 273.8h0M454.5 160.2h0M467.7 259.7h0M434.1 207.5h0M6.3 18.8h0M161.6 116.5h0M245.5 216h0M744.1 97.6h0M634.2 150.8h0M643.3 358.5h0M391.4 328.2h0M18.5 195.2h0M631.1 427.1h0M378.2 216.6h0M579.3 226.3h0M498.5 360.3h0M303.9 478.8h0M655.7 360.6h0M392.6 414.7h0M368.8 337.9h0M304.6 228.1h0M432.6 392.4h0M93 415.1h0M300.8 405.1h0M742.1 394.3h0M685.6 62.9h0M27.3 281.6h0M665 347.8h0M741 129.8h0M247.1 383.9h0M586.8 236.8h0M171.2 448.5h0M60.4 105.1h0M59.4 349.1h0M620.3 151.9h0M488.9 480h0M137.4 50.2h0M579.4 75.4h0M170.8 337.9h0M644.6 394.6h0M95.3 490.8h0M577.3 416.8h0M456 469h0M49.2 139.8h0M282 30.9h0M325.8 61.2h0M499.7 514.3h0M15.2 459.5h0M489.7 328.9h0M279.1 196.6h0M742.5 39.3h0M577 161.9h0M125.1 74.1h0M356.1 151.6h0M710.8 292.2h0M159.8 359.7h0M160.4 380.1h0M588.4 251.8h0M381.5 449.6h0M334.6 314.8h0M400.1 8.6h0M688.2 295.2h0M707.9 415.1h0M161.2 76.1h0M290.9 293.1h0M699 426.5h0M622.2 402.5h0M180.3 306h0M84 482.9h0M689.2 394h0M47.6 226.8h0M578.1 205.7h0M697.1 479.5h0M5.1 8.2h0M444 479.1h0M82.5 370.3h0M678.4 140.3h0M271.6 491.1h0M202.3 359.8h0M269.9 97.9h0M136.5 141.1h0M169.6 84.3h0M532.2 283.1h0M597.8 490.1h0M72.9 306.8h0M720.7 217.9h0M62.1 469.7h0M414.4 512.1h0M15.1 217.4h0M191.2 325.1h0M513.6 95.7h0M61.6 393.9h0M72 450h0M279 161.3h0M280.2 237.2h0M458.3 229.1h0M28.8 172.9h0M159.2 413h0M269.8 501.6h0M564.6 61.6h0M289.6 238.4h0M445.8 503.8h0M161.5 228.3h0M227.5 30.8h0M38.4 491.4h0M355.4 338.7h0M26.3 5.9h0M223.7 437.2h0M193.1 504h0M421.6 216.5h0M381.1 95.3h0M16.8 185.7h0M752.2 327.4h0M139.5 515.2h0M260.6 139.5h0M523.3 251.8h0M491.6 94.9h0M95.6 152.5h0M403 284.1h0M226.7 481.7h0M346.7 106.9h0M389.3 468.1h0M378.4 329.1h0M700 349.3h0M521.6 358.1h0M138.7 347.4h0M467.5 316.2h0M113.7 481.4h0M403.6 197.1h0M586.6 75.3h0M488.6 82.8h0M347.2 303.6h0M468.4 502.3h0M490.1 492.2h0M314.6 53h0M71.3 481.8h0M257.4 383.5h0M216.7 63.4h0M730.6 127.4h0M358.8 217.7h0M630.6 108.7h0M301.3 204.9h0M489 185.4h0M213.5 291.8h0M138.3 163h0M293 481.6h0M707.6 358.3h0M698.2 40.7h0M557.3 504.3h0M535.3 261.8h0M663.9 10h0M663.4 182.3h0M91.6 119.7h0M446.5 350.6h0M191.8 141.5h0M270.7 28.9h0M512.3 108.9h0M103.1 182.7h0M18.4 41h0M652.4 383.7h0M711.4 117.6h0M168.9 515.6h0M689.3 304.5h0M204.8 391.6h0M69.6 228.9h0M6 196.4h0M148.8 130.6h0M3.7 393.7h0M172.6 405.5h0M566.1 469.3h0M410.8 381.2h0M444.9 151.6h0M293 6h0M435.7 416h0M557.2 316.9h0M479.7 206.9h0M224.3 427.1h0M267.5 184.8h0M311.4 76h0M502.6 128.8h0M337.2 226.8h0M334.7 295.6h0M300.3 247.9h0M271 283.7h0M644.6 305.7h0M413.2 493h0M190.7 369h0M337.3 249h0M113.4 293.3h0M633.7 96.9h0M103.1 295.4h0M345.1 86.3h0M468.8 196.5h0M545.4 415.1h0M92.6 347.5h0M469 9.5h0M114.7 30.6h0M686.1 29.8h0M72.6 53.4h0M246.5 152.4h0M546.6 240.2h0M81.1 284.8h0M414.4 426h0M544.6 94h0M259.2 17.6h0M125.1 249.3h0M356.5 459.1h0M126.2 501.8h0M688 182.4h0M545.3 63.3h0M205.5 438h0M676.4 207.2h0M170 53.8h0M425.6 42.4h0M315.1 513.1h0M347.4 316.4h0M83.1 447.9h0M652.9 303.9h0M391.1 96.6h0M642.5 426.1h0M227.1 504.6h0M378.9 273.4h0M653.5 128.4h0M82.4 259.5h0M150.4 239.5h0M741.4 226.7h0M740.8 302.9h0M487.5 437.1h0M457.2 369.9h0M223.7 160.4h0M370.4 478.9h0M612.6 61.2h0M642.4 283.3h0M520.9 348.7h0M126.7 460.9h0M502.7 240.6h0M468.5 405.7h0M392.1 436.9h0M597.8 228.3h0M93.2 29.7h0M281.5 303.6h0M556.1 405.3h0M512.2 248.5h0M84.3 84.2h0M51.1 107.4h0M589.2 193.9h0M479.5 96.8h0M212.7 512.7h0M62.6 327.4h0M731.4 229.4h0M312.7 87.2h0M69.9 383.3h0M511.2 351.2h0M556.8 271.8h0M535.3 403.1h0M567.1 436h0M521.9 238.5h0M180.8 471.4h0M160.3 471h0M741.7 248.7h0M29.6 458.3h0M490.6 228.8h0M367.5 39.8h0M718.9 325.2h0M455.8 216.2h0M71.4 416.9h0M347.7 391.4h0M597.5 448.2h0M675.2 317.2h0M201.9 481.2h0M718.8 251.5h0M147.4 281.9h0M685.8 128.9h0M532.6 7.6h0M194.3 392h0M290.8 119.7h0M743.1 329.2h0M83.7 469.5h0M566.8 317.8h0M663.7 406h0M224.3 382.6h0M488.2 306h0M411.7 460.4h0M82.1 141.5h0M158.3 149.4h0M73.6 460.9h0M732.1 72.4h0M25.5 359.7h0M721.8 184.6h0M148.5 436.9h0M93 446.4h0M500.6 172.4h0M289.6 171.1h0M588 206.8h0M314.3 416.4h0M103.6 372.8h0M333.5 262.2h0M575.7 260.4h0M722.6 28.4h0M578.7 437.6h0M557 127.3h0M216.4 413.9h0M755.1 259.7h0M180.4 95.1h0M457.1 449.2h0M545.7 248.6h0M150.5 393.7h0M94.6 85.6h0M94.8 108.2h0M92.8 383.2h0M754.4 98h0M81.9 216h0M18.3 74.8h0M390.1 30.6h0M466.6 326h0M334.7 413.3h0M388.9 162.9h0M271 228.9h0M102.7 404.2h0M699.4 392.4h0M446 250.7h0M700.5 372.4h0M502.5 427.2h0M95 184.1h0M455.7 478.8h0M642.3 86.5h0M268.2 196.7h0M181.1 437.7h0M433.7 19.9h0M214.7 127.7h0M290.9 140.7h0M191.3 318.1h0M149.5 380.2h0M740.9 404.7h0M201.8 415.5h0M542.7 348.1h0M237.3 349.8h0M117.3 273.6h0M700.3 447.1h0M172.3 237.3h0M432.6 94.7h0M578.3 305.2h0M247.5 229.9h0M751.7 515.6h0M389.6 86.2h0M466.8 138.3h0M38.8 129.4h0M139.1 171.5h0M424.1 405.5h0M358.6 281.4h0M105.4 63h0M577.5 250.6h0M137.2 314.1h0M236 404.8h0M271.3 393.8h0M170.9 415.5h0M234.5 438.3h0M435.8 351.1h0M234.5 316.7h0M117.1 117.9h0M667 130.4h0M39.3 283.9h0M412.1 227.9h0M180.8 478.9h0M688.4 493.3h0M477.4 28.6h0M38.6 248.4h0M194.5 416.7h0M345.3 291.9h0M227.4 515h0M227.2 94.1h0M135.3 426.3h0M235.3 195.3h0M469.2 62h0M50.2 250.8h0M432.6 490.9h0M303.1 84.1h0M568.6 250h0M84.1 436.4h0M366.8 284.3h0M128.5 325h0M611.6 304.5h0M611.4 181.8h0M367.8 52.8h0M663.7 326.6h0M15.3 19.8h0M368.6 250.3h0M557.5 74.8h0M424.1 50.1h0M432.7 369.6h0M722.6 439.2h0M159.4 481h0M553.6 6.9h0M80.7 204.1h0M293.4 225.9h0M620.2 369.7h0M445.6 49.8h0M281 361.4h0M27.3 161.5h0M237.6 261h0M487.9 383.3h0M740.8 316.1h0M322.9 73.4h0M203.9 84.9h0M445.4 316h0M543.5 480.4h0M500.3 313.9h0M259.1 460.1h0M425.4 142h0M81.7 249.7h0M480.3 505h0M289.6 428.1h0M69.8 239.5h0M236.1 217h0M413.3 417h0M601.5 294.1h0M534.7 73.6h0M236.2 251h0M676.1 413.6h0M148.2 359.7h0M556.6 185.7h0M753.5 394.1h0M256.9 249.7h0M14.7 229.8h0M312.4 337.7h0M377.9 130h0M347.9 117.5h0M7.2 402.4h0M148.1 104.8h0M754.7 482.1h0M685.7 95h0M665.7 318.2h0M741.5 49.9h0M531.7 337.5h0M545.8 296.1h0M597.5 62.6h0M609.3 382.3h0M698.5 63.1h0M545.2 513.9h0M346.3 283.5h0M511.5 305.6h0M732.7 207h0M697.5 195.2h0M171.3 318.1h0M688.6 514.5h0M267.7 75.3h0M291.4 370.1h0M446.8 238.9h0M124.6 317.5h0M128 237h0M412 501.5h0M37.7 98h0M455.5 339.7h0M579.4 108.1h0M47.5 39.3h0M337.4 173.8h0M731.1 472.1h0M556.4 448.1h0M425.7 336.9h0M710.5 174.4h0M413.6 62.1h0M688.3 461h0M103.4 468.9h0M732.8 262.8h0M80.7 238.7h0M170.7 425.1h0M566.5 501.8h0M696.9 281.1h0M598.6 248.6h0M344.9 340.1h0M259.6 172.8h0M609.3 284.3h0M313.7 491.9h0M590.3 502.3h0M82.1 72.3h0M359 371h0M127.4 139.8h0M159.3 347.5h0M710.3 251.9h0M521.2 106.4h0M37.3 261.8h0M666 303.6h0M634.3 41.5h0M390.2 482.2h0M92.4 218.8h0M457.5 348h0M534 503.6h0M675.9 226.9h0M697.1 86.1h0M401.5 204.7h0M27.2 195.4h0M652.6 73.7h0M281.3 350.3h0M7.4 230.2h0M601.1 193.3h0M115.9 427.2h0M40.2 416.4h0M93.9 238.7h0M391 39.1h0M116.8 227.2h0M82.4 162.3h0M698 182.9h0M601.3 106.8h0M84.5 108.5h0M150.1 62.9h0M102.9 106.8h0M522.8 195.6h0M137.1 503.1h0M93.3 248.6h0M80.5 513.7h0M126.6 439.2h0M245.6 491.4h0M114.3 326h0M597.8 336.9h0M644 94.7h0M378.1 119.8h0M653.3 109.1h0M577 31.2h0M18.5 174.9h0M202.3 239.2h0M512 459.7h0M435 218.7h0M531.6 183.2h0M478.3 415.5h0M412.7 50.2h0M755.2 304.8h0M631.9 214.8h0M586.4 403.9h0M27.9 325.7h0M356.7 85.1h0M215.7 172.6h0M532 326h0M3.7 348.8h0M598.9 119.5h0M377.5 195.1h0M157.4 328.9h0M105.9 349.5h0M50.7 381h0M644.7 263.2h0M126.3 402.5h0M366.6 161.4h0M510.2 72.3h0M234.7 393.9h0M557.1 61.5h0M137.4 94.1h0M423.4 347.3h0M3.9 381.1h0M512.8 259.7h0M5.4 481.3h0M421.6 282.3h0M502.4 17.5h0M524.3 515.8h0M609.6 392.3h0M161 250.6h0M6.9 141h0M292.8 19.8h0M102.5 305.6h0M335.6 471.6h0M92.7 17.4h0M36.8 326h0M4.7 270.5h0M730.3 393.9h0M292.7 207.1h0M355.8 108.8h0M16.1 151.7h0M655.6 149.5h0M544.7 9.9h0M203.1 469.7h0M27.6 72h0M531.6 205.8h0M369.2 172.4h0M137.8 249.3h0M313.3 171.4h0M37.3 42.7h0M249 459.7h0M609.4 272.5h0M172.1 184.6h0M93.3 325h0M611.8 238.3h0M719.6 379.8h0M201.7 74.3h0M71.7 317.6h0M377.6 404.4h0M399.9 379.9h0M620.7 30.1h0M513.6 360.4h0M356 73.3h0M588 226.2h0M654.7 425h0M4.6 373.2h0M544.6 85.4h0M367.7 139.2h0M191.1 479h0M719.7 151.1h0M642.4 461.2h0M644.7 491.9h0M6.6 358.9h0M334.7 118.9h0M533.2 29.7h0M634.7 293.3h0M215.1 307.2h0M257 53.3h0M402.6 349.1h0M612.7 250.1h0M446.3 404.5h0M608.9 140.7h0M181 53.4h0M37.4 303.1h0M656.2 85h0M685.7 446.1h0M238.2 372.9h0M665.9 61.8h0M301.8 64.6h0M688.7 228.9h0M392 350.2h0M631.2 118.4h0M546.1 107.1h0M413.7 85.7h0M707.4 458.1h0M203.1 96.6h0M590 149.2h0M148.1 446.1h0M279.7 131h0M620.8 338.1h0M480.7 493.9h0M114.4 184.2h0M510 371.6h0M578.7 445.9h0M314.7 41.7h0M400.5 228.5h0M333.5 281.9h0M566.9 270.6h0M576.8 281.2h0M300.9 273.7h0M433.6 513.4h0M424.5 149h0M201.7 41.8h0M202.9 142.1h0M179.6 493.4h0M707.8 127.2h0M292.2 328.9h0M366.7 31.8h0M379.2 6h0M687.9 8.1h0M381.3 251.1h0M370.2 260.7h0M469.6 172.9h0M535 172.8h0M70.9 83.6h0M72.4 338.9h0M390.1 500.9h0M259.7 325.6h0M688.8 325h0M389 383.4h0M247.1 20.3h0M564.4 369.7h0M754 470.3h0M40 87.1h0M72.1 141.2h0M535.5 392.1h0M435.2 446.4h0M235.7 29h0M390.2 218.7h0M73.1 248.1h0M399.6 316.1h0M368.6 314.8h0M631.9 305.1h0M83.7 127.8h0M609.7 501.5h0M48.5 336.9h0M311.4 9.1h0M83.1 460h0M457.1 97.1h0M707.5 393.6h0M214.5 83.5h0M25.8 381.7h0M60.6 281.7h0M334.1 480.5h0M380.8 414.7h0M73.3 98.2h0M160 369.5h0M348.2 416.4h0M619.4 394.4h0M653.3 228.8h0M81.6 95.9h0M325.6 504.1h0M357.6 450.2h0M313 18.8h0M146.5 402.3h0M6.8 164h0M700.1 128.1h0M348.3 72.6h0M180.7 40.3h0M139.4 228.6h0M293.1 29.9h0M532.9 515.8h0M301.2 327.2h0M698 380.5h0M94.1 171.9h0M687 468.5h0M260.4 238.1h0M588.7 284.9h0M180 425.6h0M685.9 108.2h0M183.6 237.2h0M48.6 73.4h0M522.2 457.8h0M201.6 251.6h0M169.1 6.9h0M532.4 106.1h0M366.4 370.6h0M160.3 393.8h0M105 138h0M270.3 160.2h0M135.7 63.3h0M544.9 404.9h0M577.9 384h0M25.7 30h0M128.7 284.3h0M369.6 226h0M601.2 514.4h0M17.2 315.3h0M512.7 395.1h0M531.8 305.2h0M740.9 469.3h0M633.3 86.6h0M653 349.9h0M524.5 328.6h0M524.6 229h0M632.5 373.1h0M39.4 27.9h0M135.4 448h0M271.6 317.9h0M29 436.4h0M181.8 447h0M4.8 424.6h0M699.5 160.1h0M687.1 281.1h0M412.4 207.7h0M478.7 457.9h0M654.6 514.3h0M379.4 105.3h0M435.5 295.4h0M622.1 73.1h0M597.8 316.1h0M51.6 415.5h0M687.6 504.6h0M576.8 52.7h0M80.8 381.4h0M444.2 436.3h0M367.8 381h0M499.8 326.8h0M62.3 161.6h0M500.2 436.4h0M644.9 513.4h0M753.3 489.8h0M399.8 149.4h0M477.9 336.8h0M268.7 326.3h0M304.3 30.3h0M642.2 130.7h0M38.6 373h0M347.5 185.8h0M643 139h0M467 30.6h0M126.2 392.2h0M478.1 391.3h0M620.7 262.3h0M14.9 272.4h0M521.7 382.1h0M323.8 140.6h0M335.2 460.7h0M61.4 272.2h0M124.5 413.2h0M312 461.1h0M389.1 205.9h0M753.3 118h0M71.4 284.9h0M337.6 383.2h0M502.4 501.2h0M311.6 140h0M642.3 469.1h0M753.1 426.4h0M72.2 150.9h0M710.6 482.5h0M279.2 105.3h0M721.5 41.8h0M82.8 391.5h0M644.8 403.1h0M204.4 172h0M116.2 383h0M711.7 63.4h0M169.4 152.8h0M205.1 262.3h0M730 250.7h0M697.5 204.6h0M641.9 416.2h0M524.4 402.5h0M446.9 40.6h0M524.1 338.9h0M138.3 73.4h0M720.4 296.1h0M135.6 126.9h0M697.3 436.8h0M568.1 49.9h0M502.1 82.8h0M17.6 52.9h0M223.5 338h0M457.8 513.8h0M312.2 372h0M80.5 502.3h0M323.9 128.6h0M303.6 307.2h0M599.2 73.7h0M38.8 149.7h0M170.2 105.6h0M434.9 262.4h0M655.1 17.3h0M93.1 458.5h0M590.3 184.9h0M708.1 492.7h0M70.9 217.8h0M348.3 248.8h0M49 480.9h0M588.8 20.5h0M16 84.4h0M477.9 436.6h0M623.6 381h0M575.5 182.8h0M411.3 294h0M40.2 460.1h0M92 130.1h0M237 413.6h0M270.7 457h0M368.7 239.7h0M667.5 39.1h0M521 271.2h0M28.7 317.8h0M425.4 513h0M555.7 469.5h0M655 392.8h0M577.1 503h0M238 8.6h0M597.9 94.7h0M457.5 207.5h0M544.1 427.7h0M742.9 414.8h0M366.5 273.1h0M731 139.2h0M543.7 362.1h0M290.2 468.3h0M268 141.8h0M630.4 16.8h0M589.2 9.8h0M743.1 159.8h0M478.6 226.3h0M732.3 314h0M721.5 127.3h0M469.1 338.8h0M124.6 258.8h0M509.9 228.1h0M36.8 5.8h0M17.7 337.5h0M333.6 274.1h0M447.1 183.5h0M411.5 238.7h0M314.5 194.3h0M655.9 40.6h0M193.6 427h0M205.2 501.5h0M491.7 370.6h0M179.5 63.5h0M157.7 405.1h0M753.7 173.5h0M117.4 457.7h0M556.9 262.3h0M435 458.5h0M392.5 228.8h0M225.5 272.2h0M586.7 482.8h0M556.5 42.8h0M633.7 383.7h0M60.2 427.8h0M61.7 460.9h0M720.3 61.2h0M18 380.5h0M202.6 327.3h0M212.6 153h0M434.4 501.9h0M347.7 162h0M731.6 96.5h0M28.5 16.8h0M169.5 383.4h0M542.7 29.1h0M729.6 171.2h0M226.2 7.2h0M335.1 393.2h0M598.6 53h0M666.3 32h0M633 62.4h0M576.6 272.7h0M410.4 185.4h0M26.3 295.6h0M367.7 293.4h0M656.1 29.1h0M445.5 492.2h0M577.7 425.6h0M182.1 141.3h0M678.1 272.6h0M656.6 250h0M722.5 425h0M391 6.3h0M70 501.5h0M359.4 138.7h0M664.5 138h0M566.6 130.2h0M51.5 261.6h0M729.4 406.1h0M391.9 404.6h0M688.1 435.9h0M260.6 30.3h0M611.5 40.7h0M708.8 86.9h0M678 459.3h0M202 184.4h0M751.5 196.3h0M444.5 139.5h0M688.3 153h0M501.2 402.4h0M676 173.7h0M280.3 459.6h0M676.8 83.5h0M521.2 372.9h0M718.5 316.8h0M71.7 348.7h0M622 251h0M278.7 73.1h0M149.6 350.8h0M104 239.5h0M609.8 17.8h0M633.4 493.7h0M631 239.1h0M477.5 10h0M575.6 7.7h0M224.8 237.3h0M598.1 204.3h0M204.7 305.8h0M678.2 40.8h0M314.7 347.2h0M28.7 151h0M258.1 394h0M677.6 151.2h0M315.7 160h0M588.1 262.9h0M247.9 97h0M281 415h0M445.1 31.3h0M215.4 9h0M478.5 62.1h0M390.1 61.1h0M25.3 259.6h0M282.2 18.9h0M443.5 337h0M246.7 261.6h0M599 304.5h0M444.5 8.8h0M663.9 370.2h0M135.3 362h0M59.5 228.8h0M225.2 139.4h0M7.3 237.8h0M212.6 491.4h0M655.9 502.1h0M687.9 216.6h0M434.7 140.5h0M414.5 327.9h0M600.4 29.4h0M534.8 42.1h0M399.3 20.3h0M137.7 185.3h0M369.9 192.9h0M743 64.1h0M292.1 437.4h0M312.5 185.7h0M236.7 227.4h0M688.7 370.5h0M323.8 512.8h0M611.3 296h0M411.6 17.6h0M303.5 284.5h0M325.7 85.1h0M204.6 348.8h0M685.4 424.3h0M336 238.5h0M598.8 130.8h0M271.7 406.1h0M238.1 357.9h0M642.1 270.3h0M103.9 206.3h0M641.7 325.1h0M443.4 372.1h0M567.5 393.7h0M742.6 107h0M455.3 315.6h0M92.3 164.1h0M204.7 383h0M623.1 54h0M49.4 207.9h0M246.3 73h0M711.7 281.9h0M127.5 93.9h0M642.4 182.8h0M643.7 50.4h0M223.7 393h0M609.1 314.1h0M499.2 461.2h0M696.5 249.1h0M256.6 130.7h0M731.1 512.6h0M113.8 393.4h0M675.9 326.8h0M458 84.4h0M708.9 229.9h0M392.6 117.5h0M458.4 405.5h0M403.2 338.1h0M729.8 306.6h0M553.9 335.9h0M315.2 358h0M601.4 393.2h0M117.2 338.2h0M511.4 502.2h0M106.7 152.6h0M631.6 129.8h0M191.4 84h0M347.2 127.3h0M312.4 274.1h0M161.6 306.1h0M721.8 229.5h0M260.2 207.9h0M126.8 172.9h0M314 318.2h0M356.7 129.2h0M139.6 492.8h0M642 106.6h0M696.8 31.9h0M711.5 94.4h0M611.7 7h0M336.3 512.1h0M742.7 152.2h0M458.5 293.5h0M414 8.5h0M533.4 427.8h0M81.2 40.4h0M501.9 269.8h0M719.3 393.5h0M741 171h0M83.1 350.5h0M555.5 515.3h0M576 360.8h0M128.5 6.3h0M422.4 98h0M535.1 371.7h0M709.5 259.6h0M225.2 41.4h0M247.6 271.7h0M181.8 20.6h0M138.5 205.9h0M212.7 139.6h0M191.3 241.1h0M733.4 8.8h0M246.7 424.4h0M216.2 327.9h0M554.1 106.8h0M421.5 470.2h0M568.5 8.7h0M489 217.8h0M489 149.2h0M621.2 469.8h0M204.3 61.5h0M634.3 348.7h0M58.7 183.7h0M644 218.1h0M663.5 192.9h0M169 62.2h0M480.7 315.6h0M577.9 195.4h0M171.7 282h0M347.2 327.1h0M136.4 461.1h0M71 7.6h0M203.8 370.7h0M378 370.7h0M322.5 116.9h0M719.6 206.8h0M501.9 339.2h0M643.8 6.1h0M589.6 471.1h0M127.5 131.1h0M521 41.5h0M106.3 339.5h0M237 326h0M575.4 20.2h0M71.3 425.9h0M443.7 218.7h0M491.4 358.6h0M609.3 482.9h0M38.8 117.6h0M259.7 217.4h0M675.3 437.1h0M125.6 185.6h0M480.3 160.3h0M410.5 215.6h0M302.1 470.4h0M135.6 328.2h0M91.6 427.7h0M368.7 129.8h0M423.8 483h0M38.2 193.6h0M300.4 416.5h0M546.6 204.6h0M456.9 117.9h0M741.3 83.5h0M622.7 193.3h0M644 446.4h0M654.1 116.7h0M421.4 28.5h0M81.2 357.9h0M290.9 360.5h0M675.9 50.7h0M323.7 250.1h0M521.1 29.7h0M432.6 439h0M150.6 261.1h0M575.7 85.4h0M216.1 338.5h0M348.2 357.9h0M103.4 173.9h0M247.9 8.2h0M18.5 482.7h0M410.5 316.2h0M223.9 449.6h0M203.1 109.1h0M115.9 60.8h0M480.2 240.8h0M38.5 483.1h0M325.4 381.8h0M303.5 139h0M215.2 41.7h0M127.2 450h0M423 262.6h0M744.2 204.2h0M127.1 469.7h0M466.4 152.5h0M609.5 357.9h0M113.6 359.3h0M403 109h0M578.7 130h0M39.6 227.9h0M168.5 493.9h0M399.8 160.2h0M223.7 489.8h0M257 340.1h0M304.5 218.1h0M675.4 370.8h0M300.9 426.4h0M509.4 325h0M543.8 324.8h0M689.1 84.5h0M534.7 292h0M303.4 503.7h0M356.5 260.7h0M48.9 425.3h0M25.8 119.8h0M722.5 74.4h0M653.1 449.9h0M170.6 470.3h0M402.8 251.1h0M621.3 328.7h0M522.1 218.9h0M72 173.4h0M235 18h0M699 272.8h0M455.3 138.2h0M325 358.1h0M622.3 162.8h0M709.5 9.8h0M390.1 460.6h0M425.4 426.3h0M388.9 104.9h0M249.5 292.3h0M26.2 203.9h0M223.4 283.3h0M699.8 140.1h0M367.3 97h0M160.8 513.4h0M70 438.6h0M224 348.3h0M718.6 9.8h0M531.4 152.2h0M292.3 394.8h0M38.2 139.2h0M480.6 447.1h0M301.2 39.1h0M69.6 182.2h0M183 106.7h0M480.6 174.3h0M224.3 127h0M498.5 206h0M389.1 305.3h0M146.5 7.5h0M139.1 371.4h0M721.2 138.8h0M709.1 272.5h0M697.6 229.7h0M699.6 76.1h0M435.8 402.6h0M752.2 39.4h0M468.6 74.2h0M400.5 403.8h0M181.2 391.5h0M664.1 461h0M511.6 152.2h0M621.5 130.7h0M589.4 350.8h0M237.8 43.1h0M126.7 152.2h0M27.5 392.1h0M687.2 19.8h0M50.8 446.7h0M499.9 391.8h0M346 174.9h0M500.8 295h0M16.1 434.9h0M623.2 19.1h0M513.4 128.7h0M248 63.9h0M410.6 392.5h0M48.5 504.6h0M532 318.1h0M553.7 141.8h0M94.4 271.2h0M106.4 39.2h0M433.3 358.4h0M698.7 512.3h0M247 415.4h0M257.9 60.8h0M180.3 215.7h0M282.5 142.2h0M709.2 435h0M358.8 328.4h0M270.1 412.9h0M334.4 139.9h0M610.7 52.1h0M323.2 417.2h0M655.7 456.9h0M159.9 129.2h0M490 446.6h0M81.7 175h0M333.8 435.1h0M103.7 438.5h0M741.1 435.1h0M161.3 460.9h0M115.8 262.7h0M26.4 139.6h0M524.5 17.1h0M444.5 394.1h0M194.3 29.8h0M246.3 348.3h0M478.3 75.2h0M268.1 18.8h0M182 129.7h0M138.1 404.3h0M257.3 84h0M498.4 74.4h0M422.4 491.5h0M491.4 348.2h0M653.1 97.8h0M754.2 161.7h0M205.2 294.2h0M510 139.2h0M413.1 170.9h0M326.2 461h0M236.7 481.9h0M652.4 216.5h0M346 217.1h0M478.7 184h0M722.6 262.3h0M456.3 435.7h0M245.7 329.1h0M711 206.9h0M522.7 153.1h0M729.4 215.9h0M587 108.6h0M95.1 42.4h0M610.8 175.2h0M47.5 314.5h0M565.8 303.6h0M291.3 105.5h0M238.4 239.7h0M50 131.1h0M543.9 174.4h0M137.1 41.8h0M193.3 492.1h0M545.2 458.3h0M212.5 261.5h0M468.8 292.6h0M489.8 394.2h0M667.1 361.8h0M655.2 63h0M698.3 470.6h0M510.9 270.5h0M17.6 372.5h0M234.7 186h0M191.8 283.4h0M105.5 164h0M249.3 403.1h0M249.7 193.9h0M400.6 86.1h0M542.5 502.2h0M214.8 481.6h0M356.8 9.5h0M447 76.2h0M555.6 194.1h0M544.5 283.5h0M92.1 505.2h0M289.7 151.3h0M598.4 359.8h0M344.5 205.2h0M421.4 304.4h0M4.2 260.2h0M532.5 162.5h0M557.2 249.1h0M491 417.2h0M50.7 64.5h0M434.2 151h0M234.4 448.1h0M599 328.1h0M634.7 403.5h0M226.2 149.3h0M237.9 470.4h0M170.2 457h0M16.1 326.5h0M380.8 318h0M117.7 493.6h0M169 163.9h0M399.9 238.8h0M303.6 238.5h0M487.4 204.7h0M510.4 382.6h0M600.1 86.5h0M711.5 449.5h0M698.2 171.6h0M499.6 119.9h0M752.8 383.5h0M500.5 384.1h0M468 118h0M325.2 292.3h0M303.7 185.7h0M465.7 392h0M491.1 162.9h0M168.4 17.1h0M114.8 304.6h0M36.7 171.7h0M707.6 162.9h0M71.6 272.5h0M586.8 339h0M467.7 350.9h0M160.1 61.2h0M127.8 108.4h0M399.8 42.5h0M267.8 380.7h0M28.4 349.7h0M731.6 193.3h0M15 294.4h0M433.5 5.8h0M414.1 305.4h0M127.4 272.8h0M28 306.1h0M138.8 416.9h0M413.7 259.1h0M752.6 503.2h0M192.8 349.8h0M664.1 271.1h0M334.4 215.9h0M698.5 119.6h0M688.8 336.6h0M148.5 304.4h0M368.4 329.2h0M676.8 349.4h0M522.1 129.4h0M48.2 151.1h0M479 137.8h0M148.1 339.5h0M61.6 75.2h0M687.3 315.3h0M213.7 438.6h0M4.5 28.8h0M257.6 148.8h0M106 283.8h0M115.2 413.5h0M337 504.8h0M312.2 240.6h0M260.4 229h0M623 141.4h0M103 447.3h0M532.5 195.9h0M48.2 17.4h0M291.5 94.9h0M311.5 481.3h0M622.7 273h0M355.6 28h0M367.6 470.3h0M621.4 183.2h0M5.1 437h0M235.9 206h0M598.4 481.2h0M499 283.7h0M324.6 226.3h0M557.2 293.1h0M576.9 217.7h0M247.3 185.9h0M510.5 162.4h0M667.6 480h0M564.5 338.7h0M512.5 283.5h0M403.5 471.9h0M181.7 151.6h0M443.6 230h0M312.1 150h0M324.5 52.6h0M634.5 251.7h0M432.8 317.2h0M113.5 40.6h0M512.8 238.4h0M389.8 240.4h0M731 50.6h0M192.6 174.7h0M214.5 28.9h0M730.1 86.2h0M652.9 414.8h0M730.6 64.7h0M665.3 218.3h0M323.3 194.4h0M732.9 361.7h0M633.3 393.8h0M608.9 217.9h0M135.4 271.9h0M410.9 359h0M246.7 106.6h0M48.2 469.7h0M311.9 31.8h0M454.6 270.4h0M709.8 316.2h0M116.5 128.2h0M270.9 515.4h0M149.4 163.3h0M258.7 402.7h0M215.9 273.4h0M4.6 413.9h0M168.6 128h0M346.1 238.2h0M214.1 105.5h0M28.3 61.5h0M203.2 6h0M193.6 450h0M114.9 194.6h0M567.7 160h0M744.3 490h0M509.4 482.5h0M696.8 108.3h0M732.4 479.2h0M685.7 349.5h0M642.9 42.9h0M643.2 196h0M225.4 205.5h0M457.2 458.1h0M523.5 142h0M523 295.9h0M39.2 62.6h0M324.7 174.9h0M182.3 227.4h0M588.6 174.7h0M246.4 129.6h0M59.3 207.8h0M543.8 340.2h0M645.5 64.3h0M377.5 74.4h0M686.8 405h0M28.6 446.8h0M412 192.9h0M535.1 62.5h0M281 491.5h0M114.7 160.5h0M677.4 381.3h0M62.4 337.4h0M116.2 404h0M502.5 227h0M567.2 175h0M323 149.3h0M6.3 128.3h0M487.6 40.1h0M499.6 414.6h0M697.5 314.6h0M72.7 119.8h0M269.7 482h0M576.5 515.4h0M356.9 315.8h0M753.5 51.8h0M103.7 28h0M169 262.9h0M411.4 42.9h0M5.5 326.3h0M171.7 303.8h0M601.5 160.4h0M599.6 237h0M432.9 39.3h0M410.7 282h0M642.3 238h0M246.9 171.3h0M237.8 284.1h0M102.5 84h0M193.7 226.5h0M413.5 105.9h0M322.4 39h0M678 194.6h0M138.9 218.9h0M281.2 394.2h0M500.6 350.9h0M4.9 120h0M190.4 468.7h0M522 393h0M609.1 106.7h0M731.2 438.1h0M674.9 104.8h0M631.6 503.7h0M303.6 447.1h0M128.6 83.7h0M125.7 19.4h0M533.4 360.1h0M535 417.1h0M742.4 262.2h0M169 41.4h0M115.5 204.1h0M478.8 362.2h0M545.3 118.1h0M666 284.8h0M643.8 28.8h0M346.7 380.9h0M80.3 316.7h0M434.6 271h0M421.7 117.4h0M337.7 7.4h0M556.3 160.4h0M380.6 492.9h0M313.9 404.9h0M413.8 482.8h0M25.4 42.1h0M72.5 493.2h0M666 492.9h0M289.4 51.6h0M289.7 304.5h0M227.1 174.7h0M150.3 424.2h0M400.9 325h0M216 98.1h0M257.3 7.8h0M16.1 360.2h0M733.6 282.8h0M170.5 195.6h0M447.4 63.8h0M126.2 358.2h0M302.1 261.9h0M686 272.1h0M366.4 216h0M182.8 75.4h0M69.4 28.9h0M491.3 515h0M279.7 50.1h0M379 360.6h0M467.9 18.1h0M634.1 184.2h0M686.4 238.2h0M258.5 472.1h0M237.9 501.9h0M158 446.6h0M410.6 141.9h0M81.3 292.5h0M117.4 72.6h0M311.3 131.1h0M291.8 315.9h0M304.2 19h0M753.4 336.2h0M138.9 435.3h0M50.9 350.6h0M468.4 107.7h0M4.8 185.5h0M424.3 250.7h0M302.4 117.7h0M93.4 360.2h0M158.4 107.9h0M564.6 516h0M346.4 504.3h0M114 95.5h0M423.5 394.7h0M203.2 449.4h0M534.1 458.4h0M193.5 216.2h0M80.6 228h0M194.5 184h0M116.7 470.8h0M359.2 270.2h0M698.6 416.5h0M741.6 479h0M379.5 236.9h0M91.4 514.3h0M644 207.3h0M576.4 491.9h0M564.8 96.3h0M622.3 347.3h0M634.5 262.2h0M203.1 425.3h0M258 97.3h0M753.8 181.8h0M236.8 151.7h0M61.5 250.1h0M424 73.8h0M509.9 402.4h0M455 61h0M203.8 316.6h0M652.8 261.1h0M634.4 326.1h0M686.8 416.2h0M378.8 27.9h0M458 394.3h0M609.8 424.5h0M114.6 502h0M456.3 303.5h0M579.1 370.5h0M522.9 73h0M51.4 285.1h0M687.8 76.2h0M709.2 468.6h0M523.5 64.5h0M138.5 305.6h0M281 183.2h0M589.3 28.6h0M403.7 480.5h0M39.6 295.9h0M435.3 284.2h0M676.3 303.3h0M753 459.4h0M378.1 152.5h0M127.9 54.2h0M150.3 83.2h0M160.8 140.6h0M566.2 83.4h0M69.6 127.7h0M543.4 20.7h0M477.5 52.7h0M454.9 239.8h0M742.1 215.7h0M708.6 217.2h0M61.9 317.8h0M280.9 516.1h0M566.6 458.6h0M323 448.4h0M443.4 173.2h0M455 174.6h0M698 216.4h0M587.1 426.1h0M47.6 512.7h0M686.4 482.6h0M82.8 119.9h0M345 272.2h0M104.6 228.9h0M655.8 317.2h0M191.8 196.3h0M645.4 72.6h0M643.7 228h0M49.2 159.8h0M576.1 328.9h0M674.7 31.7h0M476.5 42h0M751.6 369.7h0M7.4 447.8h0M190.9 340h0M577.4 338.5h0M699.1 405.5h0M247 42.1h0M622.8 207.5h0M357.5 226h0M634 336.4h0M49.4 304.7h0M192.9 128.9h0M534.7 240.5h0M247.2 83.6h0M686.1 361.4h0M643.7 501.7h0M730.1 292.3h0M556.7 305.3h0M488.1 130.9h0M543.3 393.9h0M248.1 283.7h0M500.1 492.2h0M402.9 416.7h0M190.7 96.4h0M346.6 29.4h0M590.5 295.9h0M59.2 214.9h0M665.4 52.1h0M457.4 249h0M282.4 65.2h0M612 349.8h0M436.4 305.5h0M721.1 358.5h0M234.6 460.4h0M664.6 504.8h0M215.5 447.1h0M555.5 93.9h0M356 481.8h0M61.1 501.8h0M289.4 74.2h0M543.4 215.7h0M172.3 362h0M94.9 94.8h0M665.1 426.8h0M203.7 489.9h0M280.6 270.1h0M248.4 435h0M137.7 382.6h0M280.6 338.8h0M369 6.1h0M193.1 161.5h0M509.8 62.4h0M326.7 305.2h0M432.5 107.4h0M216.5 116.9h0M49.7 456.8h0M399.7 96.9h0M743.8 7.5h0M568.1 380.4h0M380 172.6h0M226.8 361h0M267.8 437.7h0M697.4 306.7h0M676.9 504.8h0M476.3 116.9h0M115.8 438.1h0M171.7 349.5h0M238.1 94.2h0M708.7 30.1h0M619.3 461.2h0M278.4 504.8h0M557.2 349.9h0M102.8 394.4h0M105.2 424.8h0M234.8 160.2h0M16.1 392.6h0M160.2 32h0M146.3 469.5h0M234.5 338.1h0M399.4 447.7h0M212.5 501.5h0M752.6 105.5h0M192.3 105.6h0M543.7 438.4h0M568.5 17h0M499.8 49.8h0M356 361.8h0M510.3 119.2h0M269.5 292.5h0M677.4 294.9h0M751.6 416.7h0M675.5 118.4h0M290.1 502.9h0M696.9 503.9h0M742.3 239h0M622.1 515.6h0M249.6 51.8h0M751.4 240.4h0M608.8 260.8h0M380.1 503.2h0M357.2 515.1h0M611.6 371.5h0M267.8 271.7h0M282.4 249.4h0M59.9 42.4h0M742.3 120h0M168.5 117.8h0M587.6 413h0M390.1 358.5h0M609.8 414.8h0M399.6 393.5h0M654.1 434.8h0M326.5 369.3h0M609.9 95.9h0M290.4 447.2h0M555.7 204.4h0M180.4 6h0M271.5 85.7h0M631.5 447.7h0M479.2 262.5h0M401.1 53.2h0M16 513.2h0M523.4 83.7h0M531.4 249.6h0M468.1 251.6h0M105.4 52.5h0M234.3 272.3h0M608.6 228.8h0M149.9 16.9h0M665.1 97.2h0M115.6 237.5h0M147.9 215.7h0M60.2 117.3h0M578.9 39h0M444 424.4h0M500.2 149.6h0M753 435.8h0M433.6 184.7h0M601 501.2h0M48.2 392.3h0M212.3 373.1h0M15 425.5h0M246.5 162.7h0M623.2 503.9h0M666.6 152.6h0M47.5 215.3h0M576.1 483h0M302.2 371h0M388.4 371.6h0M622.5 172.3h0M172.6 249.1h0M631.3 470.2h0M345 93.9h0M392 138.9h0M314.7 261.4h0M520.5 51.9h0M477.4 281.3h0M314.1 248.5h0M260.5 448.1h0M643.8 120.1h0M49.1 272.9h0M642 151.1h0M29.6 371.8h0M545.4 303.2h0M718.6 272.4h0M62.3 435.5h0M523.8 283.7h0M622.5 361h0M181.1 261.5h0M676.5 248.3h0M719.2 240.9h0M214.5 460.8h0M621 435.2h0M103.8 250.3h0M267.6 337.6h0M413.5 75.1h0M674.4 262.1h0M720.7 339.1h0M235.3 83.5h0M348.3 262.3h0M619.8 490.5h0M587.2 164h0M357 162.2h0M512.4 218.2h0M226.2 303.7h0M753 283.9h0M84 151.8h0M368.7 151.6h0M388.6 515.4h0M190.3 62.8h0M424.1 19.7h0M117 316.3h0M566.1 361.9h0M323.6 216h0M104.9 359.3h0M564.9 260h0M400.5 171.6h0M357.7 248.5h0M579 150.2h0M347.8 426.2h0M269 150.9h0M674.8 339.3h0M653.5 292.3h0M588.7 359.8h0M94.3 259.4h0M566.8 140.6h0M491 250.2h0M181.4 373h0M642.8 435.4h0M664.2 413.7h0M666.8 20.2h0M3.9 52.1h0M730.9 372.8h0M708 182.1h0M731.3 447.1h0M94.8 62.4h0M192.2 262.4h0M269.2 116h0M522.7 304.2h0M478.1 107.2h0M201.8 151h0M324.4 468.4h0M37.1 515h0M47.8 361.3h0M6.6 489.8h0M413.1 249.9h0M48.1 373h0M290.6 404.7h0M303.4 98h0M587.7 53.8h0M171.5 324.8h0M675.4 6.8h0M204.4 218.2h0M159.8 273h0M501.5 194h0M411.9 160.5h0M325.8 18h0M469.1 427.6h0M478.9 292.2h0M598.3 175.1h0M160.8 17.3h0M700.2 292.8h0M403.4 489.8h0M445.7 358.6h0M268.9 469.8h0M271.4 62h0M597.7 470.1h0M513.7 293.9h0M48.4 185.1h0M744.7 370.6h0M247 512h0M183.4 404h0M433.8 382.6h0M281.5 226.9h0M226.6 64h0M355.9 413.7h0M586.8 383.2h0M169.3 94.6h0M609 338.9h0M91.9 281.7h0M424.8 447.7h0M621.6 9.4h0M620.6 416.6h0M533.6 434.9h0M675.3 480.6h0M214.7 469.6h0M688.7 164.1h0M245.8 371.6h0M610.8 447.5h0M520.8 172.1h0M16.3 503.8h0M148.2 479.3h0M654.8 471.2h0M665.3 117.9h0M597.7 382.5h0M51.1 238.9h0M424.2 182.4h0M72.7 471.2h0M556.6 175h0M16.9 416.6h0M367.6 416.9h0M711.3 140.6h0M544.6 492.1h0M271.4 171.9h0M612 27.9h0M355.5 175h0M103.9 260.1h0M70.3 108.9h0M369.1 425.5h0M193.8 380.5h0M281.9 41.3h0M653.1 282.7h0M28.1 417h0M600.7 139.7h0M359 182.6h0M447.6 129.4h0M564.8 30.6h0M293.2 261.8h0M510.9 84h0M466.6 39.9h0M40.4 314.9h0M62.1 479.2h0M443.3 281.5h0M48.2 27.9h0M281.4 207.3h0M755.7 447.4h0M732.6 161.3h0M169.4 74.9h0M291.7 127.7h0M586.7 392.8h0M675.1 182.3h0M358.3 54.2h0M390.7 149.3h0M280.3 383.9h0M224.3 413.7h0M468.4 381.5h0M688 261.3h0M601.4 283.4h0M456.4 195.4h0M94.1 404.8h0M160.8 53.4h0M652.8 403.8h0M313.9 384h0M579.2 403.1h0M434.8 339.1h0M115.6 140h0M159.1 83.8h0M743.3 514.7h0M260.5 346.9h0M6.9 471h0M257.6 260.7h0M555 237.4h0M722.6 416.8h0M60.2 403.5h0M741.6 350.5h0M62.7 8.9h0M227.3 108h0M676.7 75.1h0M753 272.3h0M324.8 328h0M576.1 295h0M314.1 393.1h0M579.2 314h0M181.3 160h0M226.7 196.5h0M336 349.1h0M710 73.4h0M444.7 513.8h0M468.1 437.3h0M257.6 72.7h0M82.3 337.1h0M216.3 284.3h0M513.1 436.5h0M146.7 417h0M17.9 347.8h0M234.7 515.4h0M216.3 217.7h0M337.7 150.9h0M148.7 117.6h0M567 39.4h0M26.4 107.1h0M677.1 19.3h0M378.1 511.8h0M612.6 515.3h0M567.7 207.3h0M268 350.6h0M532.5 478.9h0M224.4 73.8h0M444.9 291.8h0M468 304.9h0M292.6 285.2h0M377.4 348.8h0M302.4 514.3h0M730 42.6h0M95 368.8h0M490.3 272.8h0M246.9 359.5h0M422.9 173.3h0M49.9 493.7h0M499.3 373.1h0M268.6 239.9h0M236.8 306.4h0M126.8 425.6h0M467.4 203.8h0M435.8 249.7h0M699.3 491.4h0M225.3 226.8h0M236.9 426.1h0M380.3 183.9h0M598.6 370.4h0M578.7 140.2h0M136.2 295.4h0M545.7 368.8h0M192.2 149.4h0M5.4 294.4h0M26.4 491.5h0M587.1 119.7h0M652.8 207.8h0M477.3 371.8h0M566.1 403h0M744 380.1h0M367.3 18.7h0M467 215.4h0M654.7 183.5h0M576.2 350.1h0M722.6 174.2h0M667.1 204.9h0M194 358.5h0M334.2 329h0M260.6 501.9h0M70.6 361.1h0M113.3 108.3h0M344.8 41.9h0M82 193.8h0M512.8 39.8h0M193.5 303.5h0M269.8 261.6h0M69.8 262.6h0M490.1 29.8h0M303.3 315.1h0M280.6 481.4h0M4.8 39h0M304.2 393.6h0M521.1 206.2h0M642.8 339h0M709.6 371.5h0M278.6 116.5h0M257.3 184.8h0M82.1 325.2h0M643.7 314.9h0M400.5 305.4h0M642.9 170.9h0M93.7 228h0M447.2 116.3h0M214.5 349.4h0M368.3 303.5h0M523.9 426h0M248.6 502.9h0M754.4 360.7h0M204.5 118h0M532 470.8h0M697.2 239.6h0M258.9 371.1h0M347.4 468.2h0M476.4 150.8h0M257.9 490.1h0M72.2 60.8h0M47.4 196.8h0M325.9 314.6h0M424.9 358.8h0M334.9 369.3h0M269.8 447h0M356.8 41.7h0M40.1 384h0M422.8 162.5h0M666 394.5h0M260.6 357.9h0M279.5 96.1h0M400.1 512.9h0M432.8 194h0M172.6 173.8h0M333.3 195.3h0M103.6 127.2h0M523.5 481.5h0M392 425.5h0M708.6 53.2h0M303.5 383.2h0M499.7 183.1h0M125.6 340.1h0M709.1 237.5h0M106.3 19.6h0M521.1 116.9h0M268.6 306.6h0M126.3 192.9h0M523.2 261.3h0M182.5 293.6h0M212.4 226.9h0M687.3 52.9h0M620 237.8h0M467.2 273h0M238.4 128.4h0M663.8 262.1h0M599 428h0M424.7 437.8h0M555.5 492.4h0M136.7 19.7h0M421.5 238.6h0M59.2 492.2h0M336.5 162.6h0M751.4 294.1h0M116.3 19.8h0M300.9 159.9h0M566.1 283.6h0M27.2 516.1h0M611.2 161.5h0M60.4 61.2h0M136.2 119.6h0M524.2 181.8h0M124.7 215.1h0M411.4 152.8h0M314.7 62h0M180.1 270.9h0M666.6 226.7h0M95.6 141.1h0M367.6 515.4h0M491.7 501.1h0M565.2 448.9h0M93.3 302.8h0M136 28h0M212.8 185.2h0M455.5 490.7h0M732.6 413.6h0M454.6 326.5h0M677.7 357.8h0M83.7 306.6h0M344.7 513.5h0M447 471.4h0M282.1 261h0M104.1 72.4h0M490.6 259h0M82.5 19.6h0M491.6 74.1h0M116.9 347.3h0M356.1 491.3h0M391.9 184.5h0M203.5 207.3h0M25.8 251.7h0M477.5 248.7h0M149.4 229.5h0M359 117h0M158.3 436h0M425.2 460.4h0M105.8 480.9h0M37.7 19.2h0M192.9 515.4h0M676.5 490.5h0M225.1 403.2h0M479.2 20.1h0M520.5 314.4h0M18.1 6.6h0M301.5 337.4h0M597.7 9.8h0M322.4 494.2h0M84.3 52h0M369.2 492h0M400.3 142h0M259.7 283.8h0M435.8 160h0M59.3 172.3h0M557.5 370.8h0M401.7 73h0M390.8 339.2h0M741.8 426.8h0M4.4 173.1h0M389.6 293.6h0M148.9 193h0M608.5 328.7h0M378.3 292.9h0M457.1 504.7h0M60.7 305.3h0M279.4 284.1h0M510.7 515.8h0M300.7 359.5h0M454.8 107.7h0M290.9 182.2h0M678.3 424.5h0M755.7 227.6h0M6.3 214.8h0M179.6 339.7h0M556.9 149.5h0M336.9 130.5h0M335.2 41.7h0M25.7 425.4h0M322.5 336.4h0M280.3 448.8h0M127.8 372h0M676.8 283h0M180.6 30.4h0M326.5 402.7h0M337.6 97.6h0M543.4 468h0M587.4 317.6h0M620.3 120.1h0M172.6 435h0M301.6 292.6h0M223.5 461h0M588.7 327.1h0M663.9 512.3h0M555.4 413.2h0M565.1 350.3h0M278.5 152.5h0M180.7 511.9h0M59.1 151.1h0M423.3 64.6h0M531.7 229.6h0M270.8 8.8h0M696.6 50.9h0M742.6 185.3h0M270.2 39.8h0M282.6 468.1h0M72.1 391.6h0M93.8 206.8h0M160 425.2h0M556.5 457.6h0M599 214.8h0M289.8 270h0M590.3 128.9h0M708.6 502.7h0M411.6 117h0M422 228.2h0M480.6 327.9h0M336.2 84.2h0M7.5 206.4h0M467.4 227.7h0M389.1 251.1h0M510 492.2h0M590.2 491.8h0M14.5 162.8h0M7.2 76.1h0M5.7 513.4h0M16.8 138h0M346.6 227.5h0M36.4 207.3h0M720.5 512h0M348.5 193.1h0M556 424.1h0M61.2 514.8h0M347.6 482.6h0M314.8 306.5h0M752.2 17.9h0M292.6 42.1h0M94.2 339.2h0M565.1 238.8h0M502.6 32h0M698.1 149.7h0M590.1 370.1h0M260 427.4h0M687.4 42.7h0M202.7 460.7h0M413.3 469.5h0M103 501.7h0M102.8 515h0M425 109.2h0M359.5 293h0M422.6 8.6h0M412.8 270.5h0M391.3 196.3h0M214.8 359.5h0M126.6 307.1h0M114.4 449.9h0M435.3 482.7h0M267.4 128.1h0M392.2 493.5h0M502.1 468.7h0M334.4 405h0M377.8 228.1h0M676.5 239.7h0M480 273h0M194.4 17.5h0M622.2 108.2h0M500.6 9.6h0M532 54.2h0M468 373.1h0M622 215.8h0M224.4 294.4h0M443.8 161h0M557.1 361.7h0M513.1 174.8h0M722.4 21.1h0M413.5 402.7h0M564.9 413.6h0M302.5 75.8h0M325.9 348.6h0M655.4 491.2h0M204.4 284.3h0M337.3 63.4h0M665.4 105.6h0M367.5 61h0M631.4 8.9h0M479.6 126.9h0M94 75.6h0M568.1 184.2h0M455.3 51h0M126.6 490.9h0M380.6 260.4h0M590.2 273.2h0M576.7 64h0M17.9 252h0M380.1 337h0M70.4 402h0M49.9 437.7h0M656.6 324.9h0M556.1 52.5h0M652.8 196.8h0M69.9 196.5h0M512.3 449.9h0M597.5 437.1h0M455.4 359.7h0M224.7 315.8h0M202.9 270.9h0M676.4 127.5h0M621.7 424.7h0M292.3 415.7h0M3.9 460.7h0M159.7 196.7h0M292 339h0M268.1 206.5h0M390.9 270.6h0M545.6 40.6h0M512.8 18.9h0M454.4 39.3h0M18.1 262.5h0M180.6 326.4h0M81.1 30.3h0M150.1 151.7h0M223.9 116.8h0M542.9 164.2h0M192.6 295.3h0M698.8 97.5h0M292.6 215.1h0M597.6 405.4h0M214.7 237.8h0M520.3 500.9h0M674.8 97.9h0M632.4 415.1h0M6.6 281.9h0M391.7 393.5h0M721.6 347.5h0M732.7 108h0M150.4 493.8h0M641.5 249.2h0M126.2 349.1h0M590.2 217h0M358.7 204.3h0M225.7 182h0M565.8 427.4h0M377.4 18h0M302.2 149.3h0M621.8 306h0M467 490.5h0M290.3 161.1h0M567.4 480.9h0M579 174.7h0M29.2 402.2h0M730.3 327.4h0M191.6 53h0M205.7 227h0M545.8 261.1h0M424.1 83.4h0M720.7 163.2h0M478 480.2h0M325.2 424.7h0M369.1 457.2h0M434.3 328.6h0M40.6 340h0M434.2 469.3h0M632.4 283.3h0M488.8 19.7h0M356.1 17h0M326.6 261.7h0M61.9 448.9h0M91.6 9.5h0M546.3 381.7h0M103.7 194h0M345.2 6.3h0M247.1 118h0M498.5 95.1h0M149.7 30.9h0M512.1 52.3h0M466.1 53.1h0M611.8 436.2h0M314 471.6h0M113.8 369.8h0M26.9 472.1h0M644.8 370.8h0M553.5 436.6h0M557 230.2h0M147.4 97.7h0M465.7 184.1h0M600.2 260.8h0M325.5 208.1h0M544.8 53.4h0M268.1 52.4h0M531.4 128h0M379.3 469.3h0M314.1 504.4h0M446.3 261.1h0M653.5 7.6h0M226.6 262.6h0M282 218h0M259.7 161.3h0M58.6 292.1h0M182 415.6h0M58.8 237.6h0M379 160.8h0M389.8 315.8h0M94.3 438.9h0M564.8 326.6h0M37.5 393.5h0M466.7 470.1h0M479.9 471h0M92.1 469.6h0M368.8 182.8h0M323.4 482.7h0M323 237.2h0M754.4 142.1h0M487.8 109h0M181.2 84.6h0M546.1 72.1h0M248.7 315.7h0M48 115.9h0M655.3 137.9h0M502.5 303.8h0M138.1 106.1h0M709.9 19.8h0M159.3 493.2h0M147.3 314.7h0M729.7 426.4h0M94 193.1h0M270.5 106.8h0M345.5 449.7h0M40.4 73.9h0M422 372.7h0M688.1 193.3h0M378 41.8h0M314.6 328h0M60.5 263.2h0M192.8 249.8h0M675.1 468.4h0M259.9 42.5h0M26.6 185.7h0M498.5 248.4h0M468.6 359.3h0M664.1 449.8h0M367.5 205h0M291.7 512.7h0M633 174.8h0M369.6 504.3h0M203.3 404.3h0M16.2 306.3h0M533 382.4h0M280.8 437.5h0M191.5 273.3h0M677.2 216.4h0M14.8 471.6h0M38.1 449h0M215.4 195.8h0M477.2 214.8h0M620.5 230h0M752 317.6h0M733.6 270.6h0M257.2 306h0M312 281.5h0M655.7 52.5h0M247.3 206.6h0M412 336.9h0M403.4 218.6h0M4.7 502.5h0M501.3 107.1h0M322.9 161.6h0M502 450.2h0M227 469.2h0M193.3 437.4h0M388.6 50.9h0M181.9 457h0M645.5 381.9h0M487.9 317h0M214.9 204.7h0M73.4 43h0M128.4 62.7h0M215.1 160.9h0M161.7 94.3h0M564.5 73h0M335.7 29.6h0M203.7 194.1h0M322.8 393.4h0M534.3 118.5h0M322.6 184.2h0M190.4 71.9h0M216.1 392h0M214 53.7h0M741.3 140.8h0M740.4 459.9h0M104.7 94.3h0M315.6 291.9h0M752.6 153.2h0M644.7 348.5h0M238.3 295.6h0M577.2 240.7h0M599.5 413.1h0M599.8 460.9h0M106.6 416.3h0M665 159.9h0M281.5 173.1h0M369.4 347.3h0M38.7 185.7h0M663.4 239h0M104 381.8h0M511.9 8.2h0M84.2 405.1h0M413.6 349.8h0M392.4 283.9h0M37.5 215.6h0M270.9 361.4h0M544 140.9h0M556.6 481.9h0M588.2 513.3h0M577.3 94.8h0M458.5 416.5h0M634.4 161.2h0M344.4 152.7h0M103.1 271.1h0M512.9 313.9h0M403.2 504.7h0M634.6 206.3h0M634.2 361.7h0M279.3 292.1h0M410.4 447.8h0M50.8 405.2h0M181.3 251.3h0M304.7 129.9h0M356.4 501.5h0M346 350.6h0M740.7 71.8h0M402.9 428.2h0M333.6 446.1h0M621.8 40.6h0M720.9 105.6h0M708.3 41.8h0M400.6 128.3h0M280.9 317.5h0M159.5 337.7h0M643.1 295.7h0M522.4 7.1h0M159.7 259.8h0M38.6 272h0M61.3 360.8h0M707.5 195.5h0M27.9 239.4h0M434.5 30.6h0M4.9 85.9h0M720.1 280.9h0M345.4 460.5h0M172.3 229.1h0M675.6 403.4h0M127.4 116.8h0M245.4 28.2h0M335.8 338.8h0M623.1 95h0M665.7 173.7h0M226.9 50.3h0M454.7 261h0M663.9 72.8h0M566.3 108.9h0M520.9 492.6h0M402.3 118.3h0M599.5 21h0M534.1 140.9h0M346 138.7h0M71.2 370.8h0M479.3 384h0M380.9 382.6h0M158.6 160.8h0M740.5 28.4h0M280.2 85.4h0M620.7 84.9h0M479.8 404.8h0M686.8 173h0M653.5 273.8h0M609.1 193.2h0M268.7 249h0M555.7 85.2h0M158.6 42.1h0M469.4 482.8h0M722 459.4h0M183.2 360.8h0M235.1 118.3h0M81.5 492.1h0M710.4 402.1h0M161.2 217.4h0M193.1 116.5h0M446 94.6h0M720.1 404.9h0M608.3 468.7h0M412.7 370.4h0M653.5 171.9h0M479.7 85.2h0M258 414.4h0M93.3 314.2h0M313.1 447.7h0M313.4 436.3h0M576.5 118.4h0M697.5 326h0M149.3 50.1h0M490.6 62.7h0M169.6 31h0M469.2 237.6h0M721 493.9h0M136.5 239.6h0M48 8.1h0M741.2 340h0M181.7 383.1h0M213.2 75.8h0M454.6 130.7h0M565.7 229.9h0M117 50.6h0M70.6 72.5h0M719 195.7h0M139.6 150.4h0M171.6 214.9h0M720.5 479.6h0M345.5 372.8h0M213.4 426.2h0M379.5 480.7h0M314.2 215.3h0M553.8 326.5h0M312.2 116h0M379.7 205.1h0M744.2 450h0M258.3 119.2h0M191.5 38.9h0M258.9 479.8h0M589.6 437.5h0M83.3 7.2h0M300.5 109.2h0M39.6 351.1h0M138.5 193h0M160.1 283.5h0M27.6 226.6h0M634.6 51.3h0M359.1 435h0M60.2 85.6h0M17.7 97.5h0M656.4 337.9h0M491.5 194.9h0M148.4 184.2h0M113.6 217.1h0M125.6 382.5h0M377.6 393.4h0M422 207.6h0M512.2 336.1h0M128 41.8h0M641.4 20h0M411.8 32h0M72.9 328.7h0M116.5 152.1h0M355.5 305.2h0M148.2 174.7h0M226 373.1h0M6.6 336.2h0M213.8 383.6h0M411.2 438.5h0M619.5 292.4h0M346.4 19.6h0M191.8 404.8h0M534.8 86.5h0M61.4 29.6h0M59.5 369.8h0M612.5 153h0M488.5 6.1h0M179.7 194.6h0M610.7 117.3h0M421.5 294.2h0M634.1 75.9h0M292.8 489.9h0M634.4 314.5h0M26.2 215.3h0M59 97.9h0M236.8 62.5h0M740.3 195.6h0M149.3 515.2h0M490.5 427.4h0M84 185.1h0M205.6 162.4h0M290.9 350.6h0M467.3 459.8h0M534.2 93.8h0M323.6 31.9h0M14.8 206.4h0M422.4 196.3h0M654.2 241h0M631.5 457.7h0M630.4 479.5h0M676.1 513.6h0M454.4 425.5h0M128 514.3h0M368.6 360.3h0M621.7 281.2h0M589.9 458.9h0M146.5 370.3h0M245.7 337.5h0M378 305.1h0M370 107.7h0M238.2 381.6h0M62 52.3h0M752.8 206.8h0M149.6 502.3h0M279.8 9.4h0M632.9 515.4h0M742.6 501.4h0M510.7 183.5h0M201.8 51.3h0M697.7 7.2h0M445.7 450.2h0M114.4 284h0M27.1 127.3h0M457.1 6.6h0M403.3 460.5h0M247.4 446.1h0M313.7 205.4h0M14.3 402.5h0M259.6 437.7h0M751.8 218.9h0M48.3 84.5h0M71.5 164.1h0M435 425.4h0M751.9 347.3h0M467.1 448.7h0M567.2 493.8h0M469.4 161.7h0M598.9 43.1h0M301 6.8h0M478.8 350.5h0M479.1 514.2h0M248.4 393.7h0M696.5 261.8h0" fill="none" stroke="var(--soft)" stroke-width="4.6" stroke-linecap="round" opacity="0.55"/><circle data-s="1" cx="499.6" cy="119.9" r="6" fill="var(--ink)"/><circle data-s="1" cx="247.3" cy="206.6" r="6" fill="var(--ink)"/><circle data-s="1" cx="304.5" cy="218.1" r="6" fill="var(--ink)"/><circle data-s="1" cx="400.6" cy="86.1" r="6" fill="var(--ink)"/><circle data-s="1" cx="589" cy="62" r="6" fill="var(--ink)"/><circle data-s="1" cx="655.8" cy="317.2" r="6" fill="var(--ink)"/><circle data-s="1" cx="70" cy="501.5" r="6" fill="var(--ink)"/><circle data-s="1" cx="697.1" cy="479.5" r="6" fill="var(--ink)"/><circle data-s="1" cx="203.7" cy="194.1" r="6" fill="var(--ink)"/><circle data-s="1" cx="510.9" cy="84" r="6" fill="var(--ink)"/><circle data-s="1" cx="489.8" cy="394.2" r="6" fill="var(--ink)"/><circle data-s="1" cx="366.4" cy="370.6" r="6" fill="var(--ink)"/><circle data-s="1" cx="667.6" cy="294.5" r="6" fill="var(--ink)"/><circle data-s="1" cx="181.1" cy="261.5" r="6" fill="var(--ink)"/><circle data-s="1" cx="588.1" cy="262.9" r="6" fill="var(--ink)"/><circle data-s="1" cx="301.2" cy="172.6" r="6" fill="var(--ink)"/><circle data-s="1" cx="731" cy="50.6" r="6" fill="var(--ink)"/><circle data-s="1" cx="388.6" cy="50.9" r="6" fill="var(--ink)"/><circle data-s="1" cx="378.9" cy="273.4" r="6" fill="var(--ink)"/><circle data-s="1" cx="290.9" cy="350.6" r="6" fill="var(--ink)"/><circle data-s="1" cx="290.8" cy="119.7" r="6" fill="var(--ink)"/><circle data-s="1" cx="246.5" cy="152.4" r="6" fill="var(--ink)"/><circle data-s="1" cx="435" cy="458.5" r="6" fill="var(--ink)"/><circle data-s="1" cx="699.6" cy="76.1" r="6" fill="var(--ink)"/><circle data-s="1" cx="234.8" cy="160.2" r="6" fill="var(--verb)"/><circle data-s="1" cx="268.1" cy="206.5" r="6" fill="var(--verb)"/><circle data-s="1" cx="279.9" cy="325.4" r="6" fill="var(--verb)"/><circle data-s="1" cx="94" cy="193.1" r="6" fill="var(--verb)"/><circle data-s="1" cx="432.9" cy="39.3" r="6" fill="var(--verb)"/><circle data-s="1" cx="621.4" cy="183.2" r="6" fill="var(--verb)"/><circle data-s="1" cx="106.6" cy="416.3" r="6" fill="var(--verb)"/><circle data-s="1" cx="93" cy="415.1" r="6" fill="var(--verb)"/><circle data-s="1" cx="490.4" cy="238.4" r="6" fill="var(--verb)"/><circle data-s="1" cx="291.5" cy="94.9" r="6" fill="var(--verb)"/><circle data-s="1" cx="25.4" cy="42.1" r="6" fill="var(--verb)"/><circle data-s="1" cx="500.6" cy="9.6" r="6" fill="var(--verb)"/><circle data-s="1" cx="456.7" cy="284.4" r="6" fill="var(--verb)"/><circle data-s="1" cx="710" cy="73.4" r="6" fill="var(--verb)"/><circle data-s="1" cx="700.1" cy="128.1" r="6" fill="var(--verb)"/><circle data-s="1" cx="500.6" cy="350.9" r="6" fill="var(--verb)"/><circle data-s="1" cx="380.9" cy="382.6" r="6" fill="var(--verb)"/><circle data-s="1" cx="520.3" cy="500.9" r="6" fill="var(--verb)"/><circle data-s="1" cx="103.7" cy="28" r="6" fill="var(--verb)"/><circle data-s="1" cx="281" cy="415" r="6" fill="var(--verb)"/><g data-s="2"><circle cx="30" cy="380" r="6.5" fill="var(--ink)"/><circle cx="49" cy="380" r="6.5" fill="var(--ink)"/><circle cx="68" cy="380" r="6.5" fill="var(--ink)"/><circle cx="87" cy="380" r="6.5" fill="var(--ink)"/><circle cx="106" cy="380" r="6.5" fill="var(--ink)"/><circle cx="125" cy="380" r="6.5" fill="var(--ink)"/><circle cx="30" cy="361" r="6.5" fill="var(--ink)"/><circle cx="49" cy="361" r="6.5" fill="var(--ink)"/><circle cx="68" cy="361" r="6.5" fill="var(--ink)"/><circle cx="87" cy="361" r="6.5" fill="var(--ink)"/><circle cx="106" cy="361" r="6.5" fill="var(--ink)"/><circle cx="125" cy="361" r="6.5" fill="var(--ink)"/><circle cx="30" cy="342" r="6.5" fill="var(--ink)"/><circle cx="49" cy="342" r="6.5" fill="var(--ink)"/><circle cx="68" cy="342" r="6.5" fill="var(--ink)"/><circle cx="87" cy="342" r="6.5" fill="var(--ink)"/><circle cx="106" cy="342" r="6.5" fill="var(--ink)"/><circle cx="125" cy="342" r="6.5" fill="var(--ink)"/><circle cx="30" cy="323" r="6.5" fill="var(--ink)"/><circle cx="49" cy="323" r="6.5" fill="var(--ink)"/><circle cx="68" cy="323" r="6.5" fill="var(--ink)"/><circle cx="87" cy="323" r="6.5" fill="var(--ink)"/><circle cx="106" cy="323" r="6.5" fill="var(--ink)"/><circle cx="125" cy="323" r="6.5" fill="var(--ink)"/><circle cx="30" cy="304" r="6.5" fill="var(--verb)"/><circle cx="49" cy="304" r="6.5" fill="var(--verb)"/><circle cx="68" cy="304" r="6.5" fill="var(--verb)"/><circle cx="87" cy="304" r="6.5" fill="var(--verb)"/><circle cx="106" cy="304" r="6.5" fill="var(--verb)"/><circle cx="125" cy="304" r="6.5" fill="var(--verb)"/><circle cx="30" cy="285" r="6.5" fill="var(--verb)"/><circle cx="49" cy="285" r="6.5" fill="var(--verb)"/><circle cx="68" cy="285" r="6.5" fill="var(--verb)"/><circle cx="87" cy="285" r="6.5" fill="var(--verb)"/><circle cx="106" cy="285" r="6.5" fill="var(--verb)"/><circle cx="125" cy="285" r="6.5" fill="var(--verb)"/><circle cx="30" cy="266" r="6.5" fill="var(--verb)"/><circle cx="49" cy="266" r="6.5" fill="var(--verb)"/><circle cx="68" cy="266" r="6.5" fill="var(--verb)"/><circle cx="87" cy="266" r="6.5" fill="var(--verb)"/><circle cx="106" cy="266" r="6.5" fill="var(--verb)"/><circle cx="125" cy="266" r="6.5" fill="var(--verb)"/><circle cx="30" cy="247" r="6.5" fill="var(--verb)"/><circle cx="49" cy="247" r="6.5" fill="var(--verb)"/><text x="77.5" y="424" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="23" fill="var(--ink)">English</text><text x="77.5" y="449" text-anchor="middle" font-family="Lexend, system-ui, sans-serif" font-size="17"><tspan fill="var(--ink)">24</tspan><tspan fill="var(--soft)"> + </tspan><tspan fill="var(--verb)">20</tspan></text><circle cx="175" cy="380" r="6.5" fill="var(--ink)"/><circle cx="194" cy="380" r="6.5" fill="var(--ink)"/><circle cx="213" cy="380" r="6.5" fill="var(--ink)"/><circle cx="232" cy="380" r="6.5" fill="var(--ink)"/><circle cx="251" cy="380" r="6.5" fill="var(--ink)"/><circle cx="270" cy="380" r="6.5" fill="var(--ink)"/><circle cx="175" cy="361" r="6.5" fill="var(--ink)"/><circle cx="194" cy="361" r="6.5" fill="var(--ink)"/><circle cx="213" cy="361" r="6.5" fill="var(--ink)"/><circle cx="232" cy="361" r="6.5" fill="var(--ink)"/><circle cx="251" cy="361" r="6.5" fill="var(--ink)"/><circle cx="270" cy="361" r="6.5" fill="var(--ink)"/><circle cx="175" cy="342" r="6.5" fill="var(--ink)"/><circle cx="194" cy="342" r="6.5" fill="var(--ink)"/><circle cx="213" cy="342" r="6.5" fill="var(--ink)"/><circle cx="232" cy="342" r="6.5" fill="var(--ink)"/><circle cx="251" cy="342" r="6.5" fill="var(--ink)"/><circle cx="270" cy="342" r="6.5" fill="var(--ink)"/><circle cx="175" cy="323" r="6.5" fill="var(--ink)"/><circle cx="194" cy="323" r="6.5" fill="var(--ink)"/><circle cx="213" cy="323" r="6.5" fill="var(--ink)"/><circle cx="232" cy="323" r="6.5" fill="var(--ink)"/><circle cx="251" cy="323" r="6.5" fill="var(--ink)"/><circle cx="270" cy="323" r="6.5" fill="var(--ink)"/><circle cx="175" cy="304" r="6.5" fill="var(--ink)"/><circle cx="194" cy="304" r="6.5" fill="var(--ink)"/><circle cx="213" cy="304" r="6.5" fill="var(--ink)"/><circle cx="232" cy="304" r="6.5" fill="var(--ink)"/><circle cx="251" cy="304" r="6.5" fill="var(--ink)"/><circle cx="270" cy="304" r="6.5" fill="var(--ink)"/><circle cx="175" cy="285" r="6.5" fill="var(--ink)"/><circle cx="194" cy="285" r="6.5" fill="var(--ink)"/><circle cx="213" cy="285" r="6.5" fill="var(--ink)"/><circle cx="232" cy="285" r="6.5" fill="var(--ink)"/><circle cx="251" cy="285" r="6.5" fill="var(--ink)"/><circle cx="270" cy="285" r="6.5" fill="var(--ink)"/><circle cx="175" cy="266" r="6.5" fill="var(--ink)"/><circle cx="194" cy="266" r="6.5" fill="var(--ink)"/><circle cx="213" cy="266" r="6.5" fill="var(--ink)"/><circle cx="232" cy="266" r="6.5" fill="var(--ink)"/><circle cx="251" cy="266" r="6.5" fill="var(--verb)"/><circle cx="270" cy="266" r="6.5" fill="var(--verb)"/><circle cx="175" cy="247" r="6.5" fill="var(--verb)"/><circle cx="194" cy="247" r="6.5" fill="var(--verb)"/><text x="222.5" y="424" text-anchor="middle" font-family="Gentium Plus, Charis SIL, Doulos SIL, Noto Serif, DejaVu Serif, serif" font-style="italic" font-size="23" fill="var(--ink)">nsyilxcən</text><text x="222.5" y="449" text-anchor="middle" font-family="Lexend, system-ui, sans-serif" font-size="17"><tspan fill="var(--ink)">40</tspan><tspan fill="var(--soft)"> + </tspan><tspan fill="var(--verb)">4</tspan></text><circle cx="320" cy="380" r="6.5" fill="var(--ink)"/><circle cx="339" cy="380" r="6.5" fill="var(--ink)"/><circle cx="358" cy="380" r="6.5" fill="var(--ink)"/><circle cx="377" cy="380" r="6.5" fill="var(--ink)"/><circle cx="396" cy="380" r="6.5" fill="var(--ink)"/><circle cx="415" cy="380" r="6.5" fill="var(--ink)"/><circle cx="320" cy="361" r="6.5" fill="var(--ink)"/><circle cx="339" cy="361" r="6.5" fill="var(--ink)"/><circle cx="358" cy="361" r="6.5" fill="var(--ink)"/><circle cx="377" cy="361" r="6.5" fill="var(--ink)"/><circle cx="396" cy="361" r="6.5" fill="var(--ink)"/><circle cx="415" cy="361" r="6.5" fill="var(--ink)"/><circle cx="320" cy="342" r="6.5" fill="var(--ink)"/><circle cx="339" cy="342" r="6.5" fill="var(--ink)"/><circle cx="358" cy="342" r="6.5" fill="var(--ink)"/><circle cx="377" cy="342" r="6.5" fill="var(--ink)"/><circle cx="396" cy="342" r="6.5" fill="var(--ink)"/><circle cx="415" cy="342" r="6.5" fill="var(--ink)"/><circle cx="320" cy="323" r="6.5" fill="var(--ink)"/><circle cx="339" cy="323" r="6.5" fill="var(--ink)"/><circle cx="358" cy="323" r="6.5" fill="var(--ink)"/><circle cx="377" cy="323" r="6.5" fill="var(--ink)"/><circle cx="396" cy="323" r="6.5" fill="var(--ink)"/><circle cx="415" cy="323" r="6.5" fill="var(--ink)"/><circle cx="320" cy="304" r="6.5" fill="var(--ink)"/><circle cx="339" cy="304" r="6.5" fill="var(--ink)"/><circle cx="358" cy="304" r="6.5" fill="var(--ink)"/><circle cx="377" cy="304" r="6.5" fill="var(--ink)"/><circle cx="396" cy="304" r="6.5" fill="var(--ink)"/><circle cx="415" cy="304" r="6.5" fill="var(--ink)"/><circle cx="320" cy="285" r="6.5" fill="var(--ink)"/><circle cx="339" cy="285" r="6.5" fill="var(--ink)"/><circle cx="358" cy="285" r="6.5" fill="var(--verb)"/><circle cx="377" cy="285" r="6.5" fill="var(--verb)"/><circle cx="396" cy="285" r="6.5" fill="var(--verb)"/><circle cx="415" cy="285" r="6.5" fill="var(--verb)"/><circle cx="320" cy="266" r="6.5" fill="var(--verb)"/><circle cx="339" cy="266" r="6.5" fill="var(--verb)"/><text x="367.5" y="424" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="23" fill="var(--ink)">Ukrainian</text><text x="367.5" y="449" text-anchor="middle" font-family="Lexend, system-ui, sans-serif" font-size="17"><tspan fill="var(--ink)">32</tspan><tspan fill="var(--soft)"> + </tspan><tspan fill="var(--verb)">6</tspan></text><circle cx="465" cy="380" r="6.5" fill="var(--ink)"/><circle cx="484" cy="380" r="6.5" fill="var(--ink)"/><circle cx="503" cy="380" r="6.5" fill="var(--ink)"/><circle cx="522" cy="380" r="6.5" fill="var(--ink)"/><circle cx="541" cy="380" r="6.5" fill="var(--ink)"/><circle cx="560" cy="380" r="6.5" fill="var(--ink)"/><circle cx="465" cy="361" r="6.5" fill="var(--ink)"/><circle cx="484" cy="361" r="6.5" fill="var(--ink)"/><circle cx="503" cy="361" r="6.5" fill="var(--ink)"/><circle cx="522" cy="361" r="6.5" fill="var(--ink)"/><circle cx="541" cy="361" r="6.5" fill="var(--ink)"/><circle cx="560" cy="361" r="6.5" fill="var(--ink)"/><circle cx="465" cy="342" r="6.5" fill="var(--ink)"/><circle cx="484" cy="342" r="6.5" fill="var(--ink)"/><circle cx="503" cy="342" r="6.5" fill="var(--ink)"/><circle cx="522" cy="342" r="6.5" fill="var(--ink)"/><circle cx="541" cy="342" r="6.5" fill="var(--ink)"/><circle cx="560" cy="342" r="6.5" fill="var(--ink)"/><circle cx="465" cy="323" r="6.5" fill="var(--ink)"/><circle cx="484" cy="323" r="6.5" fill="var(--ink)"/><circle cx="503" cy="323" r="6.5" fill="var(--ink)"/><circle cx="522" cy="323" r="6.5" fill="var(--ink)"/><circle cx="541" cy="323" r="6.5" fill="var(--ink)"/><circle cx="560" cy="323" r="6.5" fill="var(--ink)"/><circle cx="465" cy="304" r="6.5" fill="var(--ink)"/><circle cx="484" cy="304" r="6.5" fill="var(--ink)"/><circle cx="503" cy="304" r="6.5" fill="var(--ink)"/><circle cx="522" cy="304" r="6.5" fill="var(--ink)"/><circle cx="541" cy="304" r="6.5" fill="var(--verb)"/><circle cx="560" cy="304" r="6.5" fill="var(--verb)"/><circle cx="465" cy="285" r="6.5" fill="var(--verb)"/><circle cx="484" cy="285" r="6.5" fill="var(--verb)"/><circle cx="503" cy="285" r="6.5" fill="var(--verb)"/><circle cx="522" cy="285" r="6.5" fill="var(--verb)"/><text x="512.5" y="424" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="23" fill="var(--ink)">Arabic</text><text x="512.5" y="449" text-anchor="middle" font-family="Lexend, system-ui, sans-serif" font-size="17"><tspan fill="var(--ink)">28</tspan><tspan fill="var(--soft)"> + </tspan><tspan fill="var(--verb)">6</tspan></text><circle cx="610" cy="380" r="6.5" fill="var(--ink)"/><circle cx="629" cy="380" r="6.5" fill="var(--ink)"/><circle cx="648" cy="380" r="6.5" fill="var(--ink)"/><circle cx="667" cy="380" r="6.5" fill="var(--ink)"/><circle cx="686" cy="380" r="6.5" fill="var(--ink)"/><circle cx="705" cy="380" r="6.5" fill="var(--ink)"/><circle cx="610" cy="361" r="6.5" fill="var(--ink)"/><circle cx="629" cy="361" r="6.5" fill="var(--ink)"/><circle cx="648" cy="361" r="6.5" fill="var(--ink)"/><circle cx="667" cy="361" r="6.5" fill="var(--ink)"/><circle cx="686" cy="361" r="6.5" fill="var(--ink)"/><circle cx="705" cy="361" r="6.5" fill="var(--ink)"/><circle cx="610" cy="342" r="6.5" fill="var(--ink)"/><circle cx="629" cy="342" r="6.5" fill="var(--ink)"/><circle cx="648" cy="342" r="6.5" fill="var(--ink)"/><circle cx="667" cy="342" r="6.5" fill="var(--ink)"/><circle cx="686" cy="342" r="6.5" fill="var(--verb)"/><circle cx="705" cy="342" r="6.5" fill="var(--verb)"/><circle cx="610" cy="323" r="6.5" fill="var(--verb)"/><circle cx="629" cy="323" r="6.5" fill="var(--verb)"/><circle cx="648" cy="323" r="6.5" fill="var(--verb)"/><text x="657.5" y="424" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="23" fill="var(--ink)">Tagalog</text><text x="657.5" y="449" text-anchor="middle" font-family="Lexend, system-ui, sans-serif" font-size="17"><tspan fill="var(--ink)">16</tspan><tspan fill="var(--soft)"> + </tspan><tspan fill="var(--verb)">5</tspan></text></g><g data-s="3"><circle cx="226" cy="150" r="14" fill="var(--ink)"/><circle cx="270" cy="150" r="14" fill="var(--ink)"/><circle cx="314" cy="150" r="14" fill="var(--ink)"/><circle cx="358" cy="150" r="14" fill="var(--ink)"/><circle cx="402" cy="150" r="14" fill="var(--ink)"/><circle cx="446" cy="150" r="14" fill="var(--ink)"/><circle cx="490" cy="150" r="14" fill="var(--ink)"/><circle cx="534" cy="150" r="14" fill="var(--ink)"/><circle cx="226" cy="194" r="14" fill="var(--ink)"/><circle cx="270" cy="194" r="14" fill="var(--ink)"/><circle cx="314" cy="194" r="14" fill="var(--ink)"/><circle cx="358" cy="194" r="14" fill="var(--ink)"/><circle cx="402" cy="194" r="14" fill="var(--ink)"/><circle cx="446" cy="194" r="14" fill="var(--ink)"/><circle cx="490" cy="194" r="14" fill="var(--ink)"/><circle cx="534" cy="194" r="14" fill="var(--ink)"/><circle cx="226" cy="238" r="14" fill="var(--ink)"/><circle cx="270" cy="238" r="14" fill="var(--ink)"/><circle cx="314" cy="238" r="14" fill="var(--ink)"/><circle cx="358" cy="238" r="14" fill="var(--ink)"/><circle cx="402" cy="238" r="14" fill="var(--ink)"/><circle cx="446" cy="238" r="14" fill="var(--ink)"/><circle cx="490" cy="238" r="14" fill="var(--ink)"/><circle cx="534" cy="238" r="14" fill="var(--ink)"/><circle cx="226" cy="282" r="14" fill="var(--verb)"/><circle cx="270" cy="282" r="14" fill="var(--verb)"/><circle cx="314" cy="282" r="14" fill="var(--verb)"/><circle cx="358" cy="282" r="14" fill="var(--verb)"/><circle cx="402" cy="282" r="14" fill="var(--verb)"/><circle cx="446" cy="282" r="14" fill="var(--verb)"/><circle cx="490" cy="282" r="14" fill="var(--verb)"/><circle cx="534" cy="282" r="14" fill="var(--verb)"/><circle cx="226" cy="326" r="14" fill="var(--verb)"/><circle cx="270" cy="326" r="14" fill="var(--verb)"/><circle cx="314" cy="326" r="14" fill="var(--verb)"/><circle cx="358" cy="326" r="14" fill="var(--verb)"/><circle cx="402" cy="326" r="14" fill="var(--verb)"/><circle cx="446" cy="326" r="14" fill="var(--verb)"/><circle cx="490" cy="326" r="14" fill="var(--verb)"/><circle cx="534" cy="326" r="14" fill="var(--verb)"/><circle cx="226" cy="370" r="14" fill="var(--verb)"/><circle cx="270" cy="370" r="14" fill="var(--verb)"/><circle cx="314" cy="370" r="14" fill="var(--verb)"/><circle cx="358" cy="370" r="14" fill="var(--verb)"/><circle cx="266" cy="436" r="8" fill="var(--ink)"/><text x="282" y="442" font-family="Lexend, system-ui, sans-serif" font-size="17" fill="var(--soft)">24 consonants</text><circle cx="430" cy="436" r="8" fill="var(--verb)"/><text x="446" y="442" font-family="Lexend, system-ui, sans-serif" font-size="17" fill="var(--soft)">20 vowels</text><text x="30" y="96" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="26" fill="var(--ink)">parents</text><text x="730" y="96" text-anchor="end" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="26" fill="var(--ink)">teachers</text><text x="30" y="512" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="26" fill="var(--ink)">educational assistants</text><text x="730" y="512" text-anchor="end" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="26" fill="var(--ink)">speech-language pathologists</text></g><g data-s="4"><circle cx="380" cy="272" r="200" fill="none" stroke="var(--line)" stroke-width="2.5"/><circle cx="380" cy="72" r="7" fill="var(--ink)"/><text x="380" y="40" text-anchor="middle" font-family="Lexend, system-ui, sans-serif" font-size="23" fill="var(--ink)">thinking</text><circle cx="553.2" cy="172" r="7" fill="var(--ink)"/><text x="572.3" y="169" text-anchor="start" font-family="Lexend, system-ui, sans-serif" font-size="23" fill="var(--ink)">speaking</text><circle cx="553.2" cy="372" r="7" fill="var(--ink)"/><text x="572.3" y="391" text-anchor="start" font-family="Lexend, system-ui, sans-serif" font-size="23" fill="var(--ink)">listening</text><circle cx="380" cy="472" r="7" fill="var(--ink)"/><text x="380" y="520" text-anchor="middle" font-family="Lexend, system-ui, sans-serif" font-size="23" fill="var(--ink)">seeing</text><circle cx="206.8" cy="372" r="7" fill="var(--ink)"/><text x="187.7" y="391" text-anchor="end" font-family="Lexend, system-ui, sans-serif" font-size="23" fill="var(--ink)">reading</text><circle cx="206.8" cy="172" r="7" fill="var(--ink)"/><text x="187.7" y="169" text-anchor="end" font-family="Lexend, system-ui, sans-serif" font-size="23" fill="var(--ink)">writing</text><defs><marker id="loopHead" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto"><path d="M1.5 1.5 L7 5 L1.5 8.5" fill="none" stroke="var(--modal)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker></defs><text x="302" y="283" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="32" fill="var(--ink)">learner</text><text x="458" y="283" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="32" fill="var(--ink)">support</text><path d="M302 242 Q380 176 454 240" fill="none" stroke="var(--modal)" stroke-width="4" stroke-linecap="round" marker-end="url(#loopHead)"/><path d="M458 304 Q380 370 306 306" fill="none" stroke="var(--modal)" stroke-width="4" stroke-linecap="round" marker-end="url(#loopHead)"/></g></svg>
+      <div class="snd-right">
+        <div class="layers snd-caps">
+          <div data-s="0"><p class="snd-cap">No one can count every sound a voice can make. But linguists have catalogued about 3,000 that the world’s languages use to tell words apart.</p><p class="snd-src">PHOIBLE 2.0: 3,183 sounds across 2,186 languages</p></div>
+          <div data-s="1"><p class="snd-cap">English uses about 44 of them: 24 consonants and 20 vowels. The count shifts with accent; many North American analyses land nearer 40.</p></div>
+          <div data-s="2"><p class="snd-cap">The languages in our building use different sets. Tagalog uses about 21 sounds, Arabic 34, Ukrainian 38, and <span class="ipa-word">nsyilxcən</span>, the syilx language of this valley, about 44, nearly all of them consonants. Look at the red: English carries far more vowels than any of them.</p></div>
+          <div data-s="3"><p class="snd-cap">That includes every parent, teacher, educational assistant and speech-language pathologist a child meets.</p></div>
+          <div data-s="4"><p class="snd-cap">So the entry point is the same for every learner: point to the word, or the part of the word, as you say it and as they say it. Slow down so they can see it, hear it, say it and write it while they think about it. That feedback is what joins the systems.</p></div>
+        </div>
+        <div class="stepdots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide stepped" data-build="steps" data-max="1" aria-label="The 44 sounds in IPA">
+    <div class="ll-head">
+      <h2 class="head" style="margin:0">The 44 sounds in IPA.</h2>
+      <div class="stepdots" aria-hidden="true"><i></i><i></i></div>
+    </div>
+    <div class="i44-block" data-s="01"><p class="i44-t">24 consonants</p><div class="i44-grid c8"><div class="i44"><span class="sym " lang="en-fonipa">p</span><span class="ex"><b class="gk">p</b>ig</span></div><div class="i44"><span class="sym " lang="en-fonipa">b</span><span class="ex"><b class="gk">b</b>at</span></div><div class="i44"><span class="sym " lang="en-fonipa">t</span><span class="ex"><b class="gk">t</b>op</span></div><div class="i44"><span class="sym " lang="en-fonipa">d</span><span class="ex"><b class="gk">d</b>og</span></div><div class="i44"><span class="sym " lang="en-fonipa">k</span><span class="ex"><b class="gk">k</b>it</span></div><div class="i44"><span class="sym " lang="en-fonipa">g</span><span class="ex"><b class="gk">g</b>um</span></div><div class="i44"><span class="sym " lang="en-fonipa">f</span><span class="ex"><b class="gk">f</b>ish</span></div><div class="i44"><span class="sym " lang="en-fonipa">v</span><span class="ex"><b class="gk">v</b>an</span></div><div class="i44"><span class="sym " lang="en-fonipa">θ</span><span class="ex"><b class="gg team">th</b>in</span></div><div class="i44"><span class="sym " lang="en-fonipa">ð</span><span class="ex"><b class="gg team">th</b>is</span></div><div class="i44"><span class="sym " lang="en-fonipa">s</span><span class="ex"><b class="gk">s</b>un</span></div><div class="i44"><span class="sym " lang="en-fonipa">z</span><span class="ex"><b class="gk">z</b>ip</span></div><div class="i44"><span class="sym " lang="en-fonipa">ʃ</span><span class="ex"><b class="gg team">sh</b>ip</span></div><div class="i44"><span class="sym " lang="en-fonipa">ʒ</span><span class="ex">vi<b class="gk team">si</b>on</span></div><div class="i44"><span class="sym " lang="en-fonipa">h</span><span class="ex"><b class="gk">h</b>at</span></div><div class="i44"><span class="sym " lang="en-fonipa">tʃ</span><span class="ex"><b class="gg team">ch</b>in</span></div><div class="i44"><span class="sym " lang="en-fonipa">dʒ</span><span class="ex"><b class="gk">j</b>am</span></div><div class="i44"><span class="sym " lang="en-fonipa">m</span><span class="ex"><b class="gk">m</b>ap</span></div><div class="i44"><span class="sym " lang="en-fonipa">n</span><span class="ex"><b class="gk">n</b>et</span></div><div class="i44"><span class="sym " lang="en-fonipa">ŋ</span><span class="ex">ri<b class="gk team">ng</b></span></div><div class="i44"><span class="sym " lang="en-fonipa">l</span><span class="ex"><b class="gk">l</b>eg</span></div><div class="i44"><span class="sym " lang="en-fonipa">r</span><span class="ex"><b class="gk">r</b>ed</span></div><div class="i44"><span class="sym " lang="en-fonipa">w</span><span class="ex"><b class="gk">w</b>eb</span></div><div class="i44"><span class="sym " lang="en-fonipa">j</span><span class="ex"><b class="gk">y</b>es</span></div></div></div>
+    <div class="i44-block" data-s="1"><p class="i44-t v">20 vowels</p><div class="i44-grid c10"><div class="i44"><span class="sym v" lang="en-fonipa">æ</span><span class="ex">c<b class="gv">a</b>t</span></div><div class="i44"><span class="sym v" lang="en-fonipa">ɛ</span><span class="ex">b<b class="gv">e</b>d</span></div><div class="i44"><span class="sym v" lang="en-fonipa">ɪ</span><span class="ex">s<b class="gv">i</b>t</span></div><div class="i44"><span class="sym v" lang="en-fonipa">ɑ</span><span class="ex">h<b class="gv">o</b>t</span></div><div class="i44"><span class="sym v" lang="en-fonipa">ʌ</span><span class="ex">c<b class="gv">u</b>p</span></div><div class="i44"><span class="sym v" lang="en-fonipa">eɪ</span><span class="ex">d<b class="gv team">ay</b></span></div><div class="i44"><span class="sym v" lang="en-fonipa">i</span><span class="ex">s<b class="gv team">ee</b></span></div><div class="i44"><span class="sym v" lang="en-fonipa">aɪ</span><span class="ex">m<b class="gv">y</b></span></div><div class="i44"><span class="sym v" lang="en-fonipa">oʊ</span><span class="ex">g<b class="gv">o</b></span></div><div class="i44"><span class="sym v" lang="en-fonipa">u</span><span class="ex">m<b class="gv team">oo</b>n</span></div><div class="i44"><span class="sym v" lang="en-fonipa">ʊ</span><span class="ex">b<b class="gv team">oo</b>k</span></div><div class="i44"><span class="sym v" lang="en-fonipa">ɔ</span><span class="ex">s<b class="gv team">aw</b></span></div><div class="i44"><span class="sym v" lang="en-fonipa">ə</span><span class="ex"><b class="gv">a</b>bout</span></div><div class="i44"><span class="sym v" lang="en-fonipa">ɔɪ</span><span class="ex">b<b class="gv team">oy</b></span></div><div class="i44"><span class="sym v" lang="en-fonipa">aʊ</span><span class="ex">c<b class="gv team">ow</b></span></div><div class="i44"><span class="sym v" lang="en-fonipa">ɑr</span><span class="ex">c<b class="gv team">a<span class="rk">r</span></b></span></div><div class="i44"><span class="sym v" lang="en-fonipa">ɔr</span><span class="ex">f<b class="gv team">o<span class="rk">r</span></b></span></div><div class="i44"><span class="sym v" lang="en-fonipa">ɝ</span><span class="ex">h<b class="gv team">e<span class="rk">r</span></b></span></div><div class="i44"><span class="sym v" lang="en-fonipa">ɛr</span><span class="ex">h<b class="gv team">ai<span class="rk">r</span></b></span></div><div class="i44"><span class="sym v" lang="en-fonipa">ɪr</span><span class="ex"><b class="gv team">ea<span class="rk">r</span></b></span></div></div></div>
+    <p class="bbb-note" data-s="1" style="margin-top:14px;max-width:1300px">The count shifts with accent. Many Canadians say <i>hot</i> and <i>saw</i> with the same vowel, and an r-controlled vowel is a vowel plus <i>r</i>, which is why counts run from about 40 to 44. The symbols are from the International Phonetic Alphabet, so /j/ is the <i>y</i> in <i>yes</i>.</p>
+  </section>
+
+  <!-- 7ef -->
+  <section class="slide" aria-label="Through a student’s eyes">
+    <div class="ipa-head">
+      <h2 class="head" style="margin:0">Through a student’s eyes.</h2>
+      <button class="toggle" data-reveal="ipa" data-show="Show the spelling" data-hide="Hide the spelling" aria-pressed="false" style="margin:0;white-space:nowrap">Show the spelling</button>
+    </div>
+    <div id="ipa">
+      <ol class="pairs"><li><span class="ipa-l" lang="en-fonipa">/kʊd ʃi θɪŋk/</span><span class="eng">Could she think?</span></li><li><span class="ipa-l" lang="en-fonipa">/ʃi kʊd θɪŋk/</span><span class="eng">She could think.</span></li><li><span class="ipa-l" lang="en-fonipa">/kʊd ʃi hɪr/</span><span class="eng">Could she hear?</span></li><li><span class="ipa-l" lang="en-fonipa">/ʃi kʊd hɪr/</span><span class="eng">She could hear.</span></li><li><span class="ipa-l" lang="en-fonipa">/kʊd ʃi si/</span><span class="eng">Could she see?</span></li><li><span class="ipa-l" lang="en-fonipa">/ʃi kʊd si/</span><span class="eng">She could see.</span></li><li><span class="ipa-l" lang="en-fonipa">/kʊd ʃi spik/</span><span class="eng">Could she speak?</span></li><li><span class="ipa-l" lang="en-fonipa">/ʃi kʊd spik/</span><span class="eng">She could speak.</span></li><li><span class="ipa-l" lang="en-fonipa">/kʊd ʃi rid/</span><span class="eng">Could she read?</span></li><li><span class="ipa-l" lang="en-fonipa">/ʃi kʊd rid/</span><span class="eng">She could read.</span></li><li><span class="ipa-l" lang="en-fonipa">/kʊd ʃi raɪt/</span><span class="eng">Could she write?</span></li><li><span class="ipa-l" lang="en-fonipa">/ʃi kʊd raɪt/</span><span class="eng">She could write.</span></li></ol>
+      <div class="pair-long"><span class="ipa-l" lang="en-fonipa">/ʃi kʊd θɪŋk ænd hɪr ænd si ænd spik ænd rid ænd raɪt/</span><span class="eng">She could think and hear and see and speak and read and write.</span></div>
+      <p class="ipa-take">Each IPA symbol stands for one sound, a simpler code than English spelling, and you still read it slowly, as a new reader does. And notice /rid/: the IPA says which <i>read</i> this is. English spelling can’t.</p>
+    </div>
+    <div class="ipa-keybar" aria-label="Sound key"><span class="kb-t">Key</span><span class="kb"><span class="sym" lang="en-fonipa">ʃ</span><span><b>sh</b>ip</span></span><span class="kb"><span class="sym" lang="en-fonipa">ʊ</span><span>b<b>oo</b>k</span></span><span class="kb"><span class="sym" lang="en-fonipa">i</span><span>s<b>ee</b></span></span><span class="kb"><span class="sym" lang="en-fonipa">ɪ</span><span><b>i</b>t</span></span><span class="kb"><span class="sym" lang="en-fonipa">θ</span><span><b>th</b>in</span></span><span class="kb"><span class="sym" lang="en-fonipa">ŋ</span><span>ri<b>ng</b></span></span><span class="kb"><span class="sym" lang="en-fonipa">æ</span><span>c<b>a</b>t</span></span><span class="kb"><span class="sym" lang="en-fonipa">aɪ</span><span>m<b>y</b></span></span></div>
+  </section>
+  <section class="slide" aria-label="Now try a verse">
+    <div class="ipa-head">
+      <h2 class="head" style="margin:0">Now try a verse.</h2>
+      <button class="toggle" data-reveal="ipa2" data-show="Show the spelling" data-hide="Hide the spelling" aria-pressed="false" style="margin:0;white-space:nowrap">Show the spelling</button>
+    </div>
+    <div id="ipa2">
+      <div class="verse"><div class="vr"><span class="ipa-l" lang="en-fonipa">/ʃi kʊd rid ɪt ɑn ði aɪs/</span><span class="eng">She could read it on the ice,</span></div><div class="vr"><span class="ipa-l" lang="en-fonipa">/ʃi wʊd rid ɪt wʌns ɔr twaɪs/</span><span class="eng">she would read it once or twice.</span></div><div class="vr gap"><span class="ipa-l" lang="en-fonipa">/ʃi ʃʊd rid ɪt baɪ ðə leɪk/</span><span class="eng">She should read it by the lake,</span></div><div class="vr"><span class="ipa-l" lang="en-fonipa">/ʃi maɪt rid ɪt ɑn ə breɪk/</span><span class="eng">she might read it on a break.</span></div><div class="vr gap"><span class="ipa-l" lang="en-fonipa">/ʃi meɪ rid ɪt ɪn ðə snoʊ/</span><span class="eng">She may read it in the snow.</span></div><div class="vr"><span class="ipa-l" lang="en-fonipa">/mʌst ʃi stɑp | oʊ noʊ noʊ noʊ/</span><span class="eng">Must she stop? Oh no, no, no.</span></div></div>
+      <p class="ipa-take">Notice the last line: no question mark in IPA, only <i>must</i> at the front.</p>
+    </div>
+    <div class="ipa-keybar kb-tight" aria-label="Sound key"><span class="kb-t">Key</span><span class="kb"><span class="sym" lang="en-fonipa">ʃ</span><span><b>sh</b>ip</span></span><span class="kb"><span class="sym" lang="en-fonipa">ʊ</span><span>b<b>oo</b>k</span></span><span class="kb"><span class="sym" lang="en-fonipa">i</span><span>s<b>ee</b></span></span><span class="kb"><span class="sym" lang="en-fonipa">ɪ</span><span><b>i</b>t</span></span><span class="kb"><span class="sym" lang="en-fonipa">ɑ</span><span>h<b>o</b>t</span></span><span class="kb"><span class="sym" lang="en-fonipa">ð</span><span><b>th</b>e</span></span><span class="kb"><span class="sym" lang="en-fonipa">aɪ</span><span>m<b>y</b></span></span><span class="kb"><span class="sym" lang="en-fonipa">ʌ</span><span>c<b>u</b>p</span></span><span class="kb"><span class="sym" lang="en-fonipa">ɔ</span><span>s<b>aw</b></span></span><span class="kb"><span class="sym" lang="en-fonipa">ə</span><span><b>a</b>bout</span></span><span class="kb"><span class="sym" lang="en-fonipa">eɪ</span><span>d<b>ay</b></span></span><span class="kb"><span class="sym" lang="en-fonipa">oʊ</span><span>g<b>o</b></span></span></div>
+  </section>
+
+  <!-- 7b: the first line of the verse, coded -->
+  <section class="slide stepped" data-build="steps" data-max="4" aria-label="From symbols to sounds">
+    <div class="ll-head">
+      <h2 class="head" style="margin:0">From symbols to sounds.</h2>
+      <div class="stepdots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+    </div>
+    <svg class="cl-svg" viewBox="0 0 1336 226" role="img" aria-label="She could read it on the ice, written twice over: the IPA of each word in grey, and under it the spelling in black letters. Click by click the spelling is coded: a sound circle under each of the 16 sounds, though there are 22 letters, and none under the silent e of ice; bond bars under s h, o u l, e a and t h; then colour in both lines at once, vowels in red, with the l of could red as part of its vowel, consonants in black, and s h and t h, and their IPA symbols, in green; and a syllable swoop under each of the seven words."><g font-family="'Gentium Plus','Charis SIL','Doulos SIL','Noto Serif','DejaVu Serif',serif" font-size="58" fill="var(--soft)" text-anchor="middle"><text x="70.3" y="58" lang="en-fonipa"><tspan>ʃ</tspan><tspan>i</tspan></text><text x="300.1" y="58" lang="en-fonipa"><tspan>k</tspan><tspan>ʊ</tspan><tspan>d</tspan></text><text x="551.8" y="58" lang="en-fonipa"><tspan>r</tspan><tspan>i</tspan><tspan>d</tspan></text><text x="737.2" y="58" lang="en-fonipa"><tspan>ɪ</tspan><tspan>t</tspan></text><text x="878.5" y="58" lang="en-fonipa"><tspan>ɑ</tspan><tspan>n</tspan></text><text x="1041.8" y="58" lang="en-fonipa"><tspan>ð</tspan><tspan>i</tspan></text><text x="1227.3" y="58" lang="en-fonipa"><tspan>a</tspan><tspan>ɪ</tspan><tspan>s</tspan></text><text x="70.3" y="58" lang="en-fonipa" data-s="34" style="transition-delay:0.00s"><tspan fill="var(--subject)">ʃ</tspan><tspan fill="var(--verb)">i</tspan></text><text x="300.1" y="58" lang="en-fonipa" data-s="34" style="transition-delay:0.18s"><tspan fill="var(--ink)">k</tspan><tspan fill="var(--verb)">ʊ</tspan><tspan fill="var(--ink)">d</tspan></text><text x="551.8" y="58" lang="en-fonipa" data-s="34" style="transition-delay:0.44s"><tspan fill="var(--ink)">r</tspan><tspan fill="var(--verb)">i</tspan><tspan fill="var(--ink)">d</tspan></text><text x="737.2" y="58" lang="en-fonipa" data-s="34" style="transition-delay:0.66s"><tspan fill="var(--verb)">ɪ</tspan><tspan fill="var(--ink)">t</tspan></text><text x="878.5" y="58" lang="en-fonipa" data-s="34" style="transition-delay:0.80s"><tspan fill="var(--verb)">ɑ</tspan><tspan fill="var(--ink)">n</tspan></text><text x="1041.8" y="58" lang="en-fonipa" data-s="34" style="transition-delay:0.94s"><tspan fill="var(--subject)">ð</tspan><tspan fill="var(--verb)">i</tspan></text><text x="1227.3" y="58" lang="en-fonipa" data-s="34" style="transition-delay:1.11s"><tspan fill="var(--verb)">a</tspan><tspan fill="var(--verb)">ɪ</tspan><tspan fill="var(--ink)">s</tspan></text></g><g transform="translate(0 64)"><g font-family="Lexend, system-ui, sans-serif" font-size="66.0" font-weight="400" text-anchor="middle" fill="var(--ink)"><text x="26.1" y="95.0">S</text><text x="70.3" y="95.0">h</text><text x="114.6" y="95.0">e</text><text x="211.6" y="95.0">c</text><text x="255.8" y="95.0">o</text><text x="300.0" y="95.0">u</text><text x="344.2" y="95.0">l</text><text x="388.5" y="95.0">d</text><text x="485.5" y="95.0">r</text><text x="529.7" y="95.0">e</text><text x="573.9" y="95.0">a</text><text x="618.1" y="95.0">d</text><text x="715.1" y="95.0">i</text><text x="759.4" y="95.0">t</text><text x="856.4" y="95.0">o</text><text x="900.6" y="95.0">n</text><text x="997.6" y="95.0">t</text><text x="1041.8" y="95.0">h</text><text x="1086.1" y="95.0">e</text><text x="1183.1" y="95.0">i</text><text x="1227.3" y="95.0">c</text><text x="1271.5" y="95.0">e</text><text x="1297.9" y="95.0">,</text></g><circle data-s="1234" cx="48.2" cy="132.0" r="4.8" fill="var(--ink)" style="transition-delay:0.04s"/><circle data-s="1234" cx="114.6" cy="132.0" r="4.8" fill="var(--ink)" style="transition-delay:0.17s"/><circle data-s="1234" cx="211.6" cy="132.0" r="4.8" fill="var(--ink)" style="transition-delay:0.36s"/><circle data-s="1234" cx="300.0" cy="132.0" r="4.8" fill="var(--ink)" style="transition-delay:0.53s"/><circle data-s="1234" cx="388.5" cy="132.0" r="4.8" fill="var(--ink)" style="transition-delay:0.70s"/><circle data-s="1234" cx="485.5" cy="132.0" r="4.8" fill="var(--ink)" style="transition-delay:0.89s"/><circle data-s="1234" cx="551.8" cy="132.0" r="4.8" fill="var(--ink)" style="transition-delay:1.01s"/><circle data-s="1234" cx="618.1" cy="132.0" r="4.8" fill="var(--ink)" style="transition-delay:1.14s"/><circle data-s="1234" cx="715.1" cy="132.0" r="4.8" fill="var(--ink)" style="transition-delay:1.33s"/><circle data-s="1234" cx="759.4" cy="132.0" r="4.8" fill="var(--ink)" style="transition-delay:1.41s"/><circle data-s="1234" cx="856.4" cy="132.0" r="4.8" fill="var(--ink)" style="transition-delay:1.60s"/><circle data-s="1234" cx="900.6" cy="132.0" r="4.8" fill="var(--ink)" style="transition-delay:1.69s"/><circle data-s="1234" cx="1019.7" cy="132.0" r="4.8" fill="var(--ink)" style="transition-delay:1.91s"/><circle data-s="1234" cx="1086.1" cy="132.0" r="4.8" fill="var(--ink)" style="transition-delay:2.04s"/><circle data-s="1234" cx="1183.1" cy="132.0" r="4.8" fill="var(--ink)" style="transition-delay:2.23s"/><circle data-s="1234" cx="1227.3" cy="132.0" r="4.8" fill="var(--ink)" style="transition-delay:2.31s"/><path class="cl-draw" data-s="234" d="M9.1 116.8 H87.3" pathLength="1000" fill="none" stroke="var(--ink)" stroke-width="3.3" stroke-linecap="round" style="transition-delay:-0.02s"/><path class="cl-draw" data-s="234" d="M238.8 116.8 H361.2" pathLength="1000" fill="none" stroke="var(--ink)" stroke-width="3.3" stroke-linecap="round" style="transition-delay:0.22s"/><path class="cl-draw" data-s="234" d="M512.7 116.8 H590.9" pathLength="1000" fill="none" stroke="var(--ink)" stroke-width="3.3" stroke-linecap="round" style="transition-delay:0.51s"/><path class="cl-draw" data-s="234" d="M980.7 116.8 H1058.8" pathLength="1000" fill="none" stroke="var(--ink)" stroke-width="3.3" stroke-linecap="round" style="transition-delay:1.00s"/><g data-s="34" style="transition-delay:0.00s" font-family="Lexend, system-ui, sans-serif" font-size="66.0" font-weight="400" text-anchor="middle"><text x="26.1" y="95.0" fill="var(--subject)">S</text><text x="70.3" y="95.0" fill="var(--subject)">h</text><text x="114.6" y="95.0" fill="var(--verb)">e</text></g><path data-s="34" d="M9.1 116.8 H87.3" fill="none" stroke="var(--subject)" stroke-width="3.3" stroke-linecap="round" style="transition-delay:0.00s"/><circle data-s="34" cx="48.2" cy="132.0" r="4.8" fill="var(--subject)" style="transition-delay:0.00s"/><circle data-s="34" cx="114.6" cy="132.0" r="4.8" fill="var(--verb)" style="transition-delay:0.00s"/><g data-s="34" style="transition-delay:0.18s" font-family="Lexend, system-ui, sans-serif" font-size="66.0" font-weight="400" text-anchor="middle"><text x="255.8" y="95.0" fill="var(--verb)">o</text><text x="300.0" y="95.0" fill="var(--verb)">u</text><text x="344.2" y="95.0" fill="var(--verb)">l</text></g><path data-s="34" d="M238.8 116.8 H361.2" fill="none" stroke="var(--verb)" stroke-width="3.3" stroke-linecap="round" style="transition-delay:0.18s"/><circle data-s="34" cx="300.0" cy="132.0" r="4.8" fill="var(--verb)" style="transition-delay:0.18s"/><g data-s="34" style="transition-delay:0.44s" font-family="Lexend, system-ui, sans-serif" font-size="66.0" font-weight="400" text-anchor="middle"><text x="529.7" y="95.0" fill="var(--verb)">e</text><text x="573.9" y="95.0" fill="var(--verb)">a</text></g><path data-s="34" d="M512.7 116.8 H590.9" fill="none" stroke="var(--verb)" stroke-width="3.3" stroke-linecap="round" style="transition-delay:0.44s"/><circle data-s="34" cx="551.8" cy="132.0" r="4.8" fill="var(--verb)" style="transition-delay:0.44s"/><g data-s="34" style="transition-delay:0.66s" font-family="Lexend, system-ui, sans-serif" font-size="66.0" font-weight="400" text-anchor="middle"><text x="715.1" y="95.0" fill="var(--verb)">i</text></g><circle data-s="34" cx="715.1" cy="132.0" r="4.8" fill="var(--verb)" style="transition-delay:0.66s"/><g data-s="34" style="transition-delay:0.80s" font-family="Lexend, system-ui, sans-serif" font-size="66.0" font-weight="400" text-anchor="middle"><text x="856.4" y="95.0" fill="var(--verb)">o</text></g><circle data-s="34" cx="856.4" cy="132.0" r="4.8" fill="var(--verb)" style="transition-delay:0.80s"/><g data-s="34" style="transition-delay:0.94s" font-family="Lexend, system-ui, sans-serif" font-size="66.0" font-weight="400" text-anchor="middle"><text x="997.6" y="95.0" fill="var(--subject)">t</text><text x="1041.8" y="95.0" fill="var(--subject)">h</text><text x="1086.1" y="95.0" fill="var(--verb)">e</text></g><path data-s="34" d="M980.7 116.8 H1058.8" fill="none" stroke="var(--subject)" stroke-width="3.3" stroke-linecap="round" style="transition-delay:0.94s"/><circle data-s="34" cx="1019.7" cy="132.0" r="4.8" fill="var(--subject)" style="transition-delay:0.94s"/><circle data-s="34" cx="1086.1" cy="132.0" r="4.8" fill="var(--verb)" style="transition-delay:0.94s"/><g data-s="34" style="transition-delay:1.11s" font-family="Lexend, system-ui, sans-serif" font-size="66.0" font-weight="400" text-anchor="middle"><text x="1183.1" y="95.0" fill="var(--verb)">i</text><text x="1271.5" y="95.0" fill="var(--verb)">e</text></g><circle data-s="34" cx="1183.1" cy="132.0" r="4.8" fill="var(--verb)" style="transition-delay:1.11s"/><path class="cl-draw cl-swoop" data-s="4" d="M41.2 143.2 Q81.4 156.4 121.6 143.2" pathLength="1000" fill="none" stroke="var(--modal)" stroke-width="3.0" stroke-linecap="round" style="transition-delay:0.02s"/><path class="cl-draw cl-swoop" data-s="4" d="M204.5 143.2 Q300.0 156.4 395.5 143.2" pathLength="1000" fill="none" stroke="var(--modal)" stroke-width="3.0" stroke-linecap="round" style="transition-delay:0.26s"/><path class="cl-draw cl-swoop" data-s="4" d="M478.4 143.2 Q551.8 156.4 625.2 143.2" pathLength="1000" fill="none" stroke="var(--modal)" stroke-width="3.0" stroke-linecap="round" style="transition-delay:0.65s"/><path class="cl-draw cl-swoop" data-s="4" d="M708.1 143.2 Q737.3 156.4 766.4 143.2" pathLength="1000" fill="none" stroke="var(--modal)" stroke-width="3.0" stroke-linecap="round" style="transition-delay:0.99s"/><path class="cl-draw cl-swoop" data-s="4" d="M849.3 143.2 Q878.5 156.4 907.7 143.2" pathLength="1000" fill="none" stroke="var(--modal)" stroke-width="3.0" stroke-linecap="round" style="transition-delay:1.19s"/><path class="cl-draw cl-swoop" data-s="4" d="M1012.7 143.2 Q1052.9 156.4 1093.1 143.2" pathLength="1000" fill="none" stroke="var(--modal)" stroke-width="3.0" stroke-linecap="round" style="transition-delay:1.43s"/><path class="cl-draw cl-swoop" data-s="4" d="M1176.0 143.2 Q1205.2 156.4 1234.4 143.2" pathLength="1000" fill="none" stroke="var(--modal)" stroke-width="3.0" stroke-linecap="round" style="transition-delay:1.66s"/></g></svg>
+    <div class="layers sc-caps cl-caps"><p class="sc-cap" data-s="0">A new reader meets this line much as you met the IPA: a row of 22 plain symbols.</p><p class="sc-cap" data-s="1">Say it slowly and give each sound a circle: 16 sounds from 22 letters. The <i>e</i> of <i>ice</i> makes no sound of its own, so it gets no circle.</p><p class="sc-cap" data-s="2">A bond bar joins the letters that spell one sound: the digraphs <i>sh</i>, <i>ea</i> and <i>th</i>, and the trigraph <i>oul</i>.</p><p class="sc-cap" data-s="3">Colour sorts the sounds in both lines: vowels red, consonants black, <i>sh</i> and <i>th</i> green. The <i>l</i> of <i>could</i> belongs to its vowel, so it turns red too.</p><p class="sc-cap" data-s="4">A syllable swoop cradles each beat: seven words, seven beats, and every swoop holds one red circle.</p></div>
+  </section>
+
+  <!-- 6c -->
+  <section class="slide stepped" data-build="steps" data-max="5" aria-label="Sound circles">
+    <div class="ll-head">
+      <h2 class="head" style="margin:0">Sound circles.</h2>
+      <div class="stepdots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    </div>
+    <svg class="sc-svg" viewBox="0 0 1120 420" role="img" aria-label="The letters a and b, then the words a banana. Under each letter a sound circle: high and red for the open vowels, the four a's; low for the closed consonants b, n and n. A wave then draws slowly through the circles, rising and falling: open, closed, open, closed."><path class="wave-draw" data-s="5" d="M110 306.9 L114 303.9 L118 301.1 L122 298.6 L126 296.4 L130 294.5 L134 292.9 L138 291.6 L142 290.7 L146 290.2 L150 290.0 L154 290.1 L158 290.4 L162 290.9 L166 291.6 L170 292.4 L174 293.5 L178 294.7 L182 296.2 L186 297.7 L190 299.5 L194 301.4 L198 303.4 L202 305.6 L206 308.0 L210 310.4 L214 312.9 L218 315.6 L222 318.3 L226 321.1 L230 324.0 L234 326.9 L238 329.8 L242 332.8 L246 335.7 L250 338.7 L254 341.7 L258 344.6 L262 347.5 L266 350.3 L270 353.1 L274 355.8 L278 358.4 L282 360.8 L286 363.2 L290 365.5 L294 367.6 L298 369.6 L302 371.4 L306 373.1 L310 374.6 L314 375.9 L318 377.1 L322 378.0 L326 378.8 L330 379.4 L334 379.8 L338 380.0 L342 380.0 L346 379.6 L350 378.9 L354 377.8 L358 376.4 L362 374.6 L366 372.6 L370 370.2 L374 367.5 L378 364.6 L382 361.5 L386 358.1 L390 354.5 L394 350.8 L398 347.0 L402 343.0 L406 339.0 L410 335.0 L414 331.0 L418 327.0 L422 323.0 L426 319.2 L430 315.5 L434 311.9 L438 308.5 L442 305.4 L446 302.5 L450 299.8 L454 297.4 L458 295.4 L462 293.6 L466 292.2 L470 291.1 L474 290.4 L478 290.0 L482 290.0 L486 290.4 L490 291.1 L494 292.2 L498 293.6 L502 295.4 L506 297.4 L510 299.8 L514 302.5 L518 305.4 L522 308.5 L526 311.9 L530 315.5 L534 319.2 L538 323.0 L542 327.0 L546 331.0 L550 335.0 L554 339.0 L558 343.0 L562 347.0 L566 350.8 L570 354.5 L574 358.1 L578 361.5 L582 364.6 L586 367.5 L590 370.2 L594 372.6 L598 374.6 L602 376.4 L606 377.8 L610 378.9 L614 379.6 L618 380.0 L622 380.0 L626 379.6 L630 378.9 L634 377.8 L638 376.4 L642 374.6 L646 372.6 L650 370.2 L654 367.5 L658 364.6 L662 361.5 L666 358.1 L670 354.5 L674 350.8 L678 347.0 L682 343.0 L686 339.0 L690 335.0 L694 331.0 L698 327.0 L702 323.0 L706 319.2 L710 315.5 L714 311.9 L718 308.5 L722 305.4 L726 302.5 L730 299.8 L734 297.4 L738 295.4 L742 293.6 L746 292.2 L750 291.1 L754 290.4 L758 290.0 L762 290.0 L766 290.4 L770 291.1 L774 292.2 L778 293.6 L782 295.4 L786 297.4 L790 299.8 L794 302.5 L798 305.4 L802 308.5 L806 311.9 L810 315.5 L814 319.2 L818 323.0 L822 327.0 L826 331.0 L830 335.0 L834 339.0 L838 343.0 L842 347.0 L846 350.8 L850 354.5 L854 358.1 L858 361.5 L862 364.6 L866 367.5 L870 370.2 L874 372.6 L878 374.6 L882 376.4 L886 377.8 L890 378.9 L894 379.6 L898 380.0 L902 380.0 L906 379.6 L910 378.9 L914 377.8 L918 376.4 L922 374.6 L926 372.6 L930 370.2 L934 367.5 L938 364.6 L942 361.5 L946 358.1 L950 354.5 L954 350.8 L958 347.0 L962 343.0 L966 339.0 L970 335.0 L974 331.0 L978 327.0 L982 323.0 L986 319.2 L990 315.5 L994 311.9 L998 308.5 L1002 305.4 L1006 302.5 L1010 299.8 L1014 297.4 L1018 295.4 L1022 293.6 L1026 292.2 L1030 291.1 L1034 290.4 L1038 290.0 L1042 290.0 L1046 290.4 L1050 291.1 L1054 292.2 L1058 293.6 L1062 295.4 L1066 297.4 L1070 299.8 L1074 302.5 L1078 305.4" pathLength="1000" fill="none" stroke="var(--modal)" stroke-width="5.5" stroke-linecap="round"/><g data-s="12345" font-family="Lexend, system-ui, sans-serif" font-size="19" fill="var(--soft)"><text x="100" y="296" text-anchor="end">open</text><text x="100" y="386" text-anchor="end">closed</text></g><text data-s="012345" x="150" y="160" text-anchor="middle" font-family="Lexend, system-ui, sans-serif" font-size="130" fill="var(--ink)">a</text><text data-s="2345" x="150" y="160" text-anchor="middle" font-family="Lexend, system-ui, sans-serif" font-size="130" fill="var(--verb)">a</text><circle data-s="1" cx="150" cy="290" r="15" fill="var(--ink)"/><circle data-s="2345" cx="150" cy="290" r="15" fill="var(--verb)"/><text data-s="012345" x="340" y="160" text-anchor="middle" font-family="Lexend, system-ui, sans-serif" font-size="130" fill="var(--ink)">b</text><circle data-s="12345" cx="340" cy="380" r="15" fill="var(--ink)"/><text data-s="345" x="480" y="160" text-anchor="middle" font-family="Lexend, system-ui, sans-serif" font-size="130" fill="var(--verb)" style="transition-delay:0.0s">a</text><circle data-s="345" cx="480" cy="290" r="15" fill="var(--verb)" style="transition-delay:0.0s"/><text data-s="345" x="620" y="160" text-anchor="middle" font-family="Lexend, system-ui, sans-serif" font-size="130" fill="var(--ink)" style="transition-delay:0.7s">n</text><circle data-s="345" cx="620" cy="380" r="15" fill="var(--ink)" style="transition-delay:0.7s"/><text data-s="345" x="760" y="160" text-anchor="middle" font-family="Lexend, system-ui, sans-serif" font-size="130" fill="var(--verb)" style="transition-delay:1.4s">a</text><circle data-s="345" cx="760" cy="290" r="15" fill="var(--verb)" style="transition-delay:1.4s"/><text data-s="345" x="900" y="160" text-anchor="middle" font-family="Lexend, system-ui, sans-serif" font-size="130" fill="var(--ink)" style="transition-delay:2.1s">n</text><circle data-s="345" cx="900" cy="380" r="15" fill="var(--ink)" style="transition-delay:2.1s"/><text data-s="345" x="1040" y="160" text-anchor="middle" font-family="Lexend, system-ui, sans-serif" font-size="130" fill="var(--verb)" style="transition-delay:2.8s">a</text><circle data-s="345" cx="1040" cy="290" r="15" fill="var(--verb)" style="transition-delay:2.8s"/></svg>
+    <div class="layers sc-caps"><p class="sc-cap" data-s="0">Say them slowly: /a/, then /b/.</p><p class="sc-cap" data-s="1">A sound circle marks each sound. /a/ opens the mouth, so its circle sits high. /b/ closes the lips, so its circle sits low.</p><p class="sc-cap" data-s="2">Open sounds are vowels. Their circles, and their letters, are red.</p><p class="sc-cap" data-s="3">Keep going: /a/, /n/, /a/, /n/, /a/. <i>A banana.</i></p><p class="sc-cap" data-s="5">Say it slowly and feel the rhythm: open, closed, open, closed.</p><p class="sc-cap" data-s="4">Sound circles go back to the Soviet psychologist Daniil Elkonin <span class="ipa-word" lang="en-fonipa">/dəniˈil ɛlˈkoʊnɪn/</span>, who had children push a counter into a box for each sound before they learned letters.</p></div>
+  </section>
+
+  <!-- 10b: one letter, one beat -->
+  <section class="slide stepped" data-build="steps" data-max="3" aria-label="One letter, one beat">
+    <div class="ll-head">
+      <h2 class="head" style="margin:0">One letter, one beat.</h2>
+      <div class="stepdots" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    </div>
+    <svg class="ab-svg" viewBox="0 0 1336 392" role="img" aria-label="The alphabet twice, with the vowels in red. In the top row, one letter to a beat: every letter has its own sound circle, high for the vowels and low for the consonants, and a wave runs through them; W has two circles, one under each of its points, because double-u takes two beats. In the lower row, as the song is usually sung: L and M share one circle under a bond bar, N and O share another, and P has its own, so five letters get three beats. When both waves are drawn in time, the lower one jumps two letters ahead at L, M, N, O."><rect data-s="3" x="552" y="56" width="248" height="330" rx="14" fill="var(--line)" fill-opacity=".7"/><text data-s="0123" x="0" y="26" font-family="Lexend, system-ui, sans-serif" font-size="20" font-weight="500" fill="var(--soft)">Every letter on its own beat</text><text data-s="23" x="0" y="230" font-family="Lexend, system-ui, sans-serif" font-size="20" font-weight="500" fill="var(--soft)">As we usually sing it</text><g data-s="0123" font-family="Lexend, system-ui, sans-serif" font-size="48" font-weight="400" text-anchor="middle"><text x="26" y="96" fill="var(--verb)">A</text><text x="76" y="96" fill="var(--ink)">B</text><text x="126" y="96" fill="var(--ink)">C</text><text x="176" y="96" fill="var(--ink)">D</text><text x="226" y="96" fill="var(--verb)">E</text><text x="276" y="96" fill="var(--ink)">F</text><text x="326" y="96" fill="var(--ink)">G</text><text x="376" y="96" fill="var(--ink)">H</text><text x="426" y="96" fill="var(--verb)">I</text><text x="476" y="96" fill="var(--ink)">J</text><text x="526" y="96" fill="var(--ink)">K</text><text x="576" y="96" fill="var(--ink)">L</text><text x="626" y="96" fill="var(--ink)">M</text><text x="676" y="96" fill="var(--ink)">N</text><text x="726" y="96" fill="var(--verb)">O</text><text x="776" y="96" fill="var(--ink)">P</text><text x="826" y="96" fill="var(--ink)">Q</text><text x="876" y="96" fill="var(--ink)">R</text><text x="926" y="96" fill="var(--ink)">S</text><text x="976" y="96" fill="var(--ink)">T</text><text x="1026" y="96" fill="var(--verb)">U</text><text x="1076" y="96" fill="var(--ink)">V</text><text x="1126" y="96" fill="var(--ink)">W</text><text x="1176" y="96" fill="var(--ink)">X</text><text x="1226" y="96" fill="var(--ink)">Y</text><text x="1276" y="96" fill="var(--ink)">Z</text></g><circle data-s="123" cx="26.0" cy="130" r="6" fill="var(--verb)" style="transition-delay:0.00s"/><circle data-s="123" cx="76.0" cy="166" r="6" fill="var(--ink)" style="transition-delay:0.38s"/><circle data-s="123" cx="126.0" cy="166" r="6" fill="var(--ink)" style="transition-delay:0.76s"/><circle data-s="123" cx="176.0" cy="166" r="6" fill="var(--ink)" style="transition-delay:1.14s"/><circle data-s="123" cx="226.0" cy="130" r="6" fill="var(--verb)" style="transition-delay:1.52s"/><circle data-s="123" cx="276.0" cy="166" r="6" fill="var(--ink)" style="transition-delay:1.90s"/><circle data-s="123" cx="326.0" cy="166" r="6" fill="var(--ink)" style="transition-delay:2.28s"/><circle data-s="123" cx="376.0" cy="166" r="6" fill="var(--ink)" style="transition-delay:2.66s"/><circle data-s="123" cx="426.0" cy="130" r="6" fill="var(--verb)" style="transition-delay:3.04s"/><circle data-s="123" cx="476.0" cy="166" r="6" fill="var(--ink)" style="transition-delay:3.42s"/><circle data-s="123" cx="526.0" cy="166" r="6" fill="var(--ink)" style="transition-delay:3.80s"/><circle data-s="123" cx="576.0" cy="166" r="6" fill="var(--ink)" style="transition-delay:4.18s"/><circle data-s="123" cx="626.0" cy="166" r="6" fill="var(--ink)" style="transition-delay:4.56s"/><circle data-s="123" cx="676.0" cy="166" r="6" fill="var(--ink)" style="transition-delay:4.94s"/><circle data-s="123" cx="726.0" cy="130" r="6" fill="var(--verb)" style="transition-delay:5.32s"/><circle data-s="123" cx="776.0" cy="166" r="6" fill="var(--ink)" style="transition-delay:5.70s"/><circle data-s="123" cx="826.0" cy="166" r="6" fill="var(--ink)" style="transition-delay:6.08s"/><circle data-s="123" cx="876.0" cy="166" r="6" fill="var(--ink)" style="transition-delay:6.46s"/><circle data-s="123" cx="926.0" cy="166" r="6" fill="var(--ink)" style="transition-delay:6.84s"/><circle data-s="123" cx="976.0" cy="166" r="6" fill="var(--ink)" style="transition-delay:7.22s"/><circle data-s="123" cx="1026.0" cy="130" r="6" fill="var(--verb)" style="transition-delay:7.60s"/><circle data-s="123" cx="1076.0" cy="166" r="6" fill="var(--ink)" style="transition-delay:7.98s"/><circle data-s="123" cx="1116.0" cy="166" r="6" fill="var(--ink)" style="transition-delay:8.36s"/><circle data-s="123" cx="1136.0" cy="166" r="6" fill="var(--ink)" style="transition-delay:8.74s"/><circle data-s="123" cx="1176.0" cy="166" r="6" fill="var(--ink)" style="transition-delay:9.12s"/><circle data-s="123" cx="1226.0" cy="166" r="6" fill="var(--ink)" style="transition-delay:9.50s"/><circle data-s="123" cx="1276.0" cy="166" r="6" fill="var(--ink)" style="transition-delay:9.88s"/><path class="ab-pen top" data-s="1" d="M26.0 130.0 L29.1 130.3 L32.2 131.4 L35.4 133.0 L38.5 135.3 L41.6 138.0 L44.8 141.1 L47.9 144.5 L51.0 148.0 L54.1 151.5 L57.2 154.9 L60.4 158.0 L63.5 160.7 L66.6 163.0 L69.8 164.6 L72.9 165.7 L76.0 166.0 L79.1 166.0 L82.2 166.0 L85.4 166.0 L88.5 166.0 L91.6 166.0 L94.8 166.0 L97.9 166.0 L101.0 166.0 L104.1 166.0 L107.2 166.0 L110.4 166.0 L113.5 166.0 L116.6 166.0 L119.8 166.0 L122.9 166.0 L126.0 166.0 L129.1 166.0 L132.2 166.0 L135.4 166.0 L138.5 166.0 L141.6 166.0 L144.8 166.0 L147.9 166.0 L151.0 166.0 L154.1 166.0 L157.2 166.0 L160.4 166.0 L163.5 166.0 L166.6 166.0 L169.8 166.0 L172.9 166.0 L176.0 166.0 L179.1 165.7 L182.2 164.6 L185.4 163.0 L188.5 160.7 L191.6 158.0 L194.8 154.9 L197.9 151.5 L201.0 148.0 L204.1 144.5 L207.2 141.1 L210.4 138.0 L213.5 135.3 L216.6 133.0 L219.8 131.4 L222.9 130.3 L226.0 130.0 L229.1 130.3 L232.2 131.4 L235.4 133.0 L238.5 135.3 L241.6 138.0 L244.8 141.1 L247.9 144.5 L251.0 148.0 L254.1 151.5 L257.2 154.9 L260.4 158.0 L263.5 160.7 L266.6 163.0 L269.8 164.6 L272.9 165.7 L276.0 166.0 L279.1 166.0 L282.2 166.0 L285.4 166.0 L288.5 166.0 L291.6 166.0 L294.8 166.0 L297.9 166.0 L301.0 166.0 L304.1 166.0 L307.2 166.0 L310.4 166.0 L313.5 166.0 L316.6 166.0 L319.8 166.0 L322.9 166.0 L326.0 166.0 L329.1 166.0 L332.2 166.0 L335.4 166.0 L338.5 166.0 L341.6 166.0 L344.8 166.0 L347.9 166.0 L351.0 166.0 L354.1 166.0 L357.2 166.0 L360.4 166.0 L363.5 166.0 L366.6 166.0 L369.8 166.0 L372.9 166.0 L376.0 166.0 L379.1 165.7 L382.2 164.6 L385.4 163.0 L388.5 160.7 L391.6 158.0 L394.8 154.9 L397.9 151.5 L401.0 148.0 L404.1 144.5 L407.2 141.1 L410.4 138.0 L413.5 135.3 L416.6 133.0 L419.8 131.4 L422.9 130.3 L426.0 130.0 L429.1 130.3 L432.2 131.4 L435.4 133.0 L438.5 135.3 L441.6 138.0 L444.8 141.1 L447.9 144.5 L451.0 148.0 L454.1 151.5 L457.2 154.9 L460.4 158.0 L463.5 160.7 L466.6 163.0 L469.8 164.6 L472.9 165.7 L476.0 166.0 L479.1 166.0 L482.2 166.0 L485.4 166.0 L488.5 166.0 L491.6 166.0 L494.8 166.0 L497.9 166.0 L501.0 166.0 L504.1 166.0 L507.2 166.0 L510.4 166.0 L513.5 166.0 L516.6 166.0 L519.8 166.0 L522.9 166.0 L526.0 166.0 L529.1 166.0 L532.2 166.0 L535.4 166.0 L538.5 166.0 L541.6 166.0 L544.8 166.0 L547.9 166.0 L551.0 166.0 L554.1 166.0 L557.2 166.0 L560.4 166.0 L563.5 166.0 L566.6 166.0 L569.8 166.0 L572.9 166.0 L576.0 166.0 L579.1 166.0 L582.2 166.0 L585.4 166.0 L588.5 166.0 L591.6 166.0 L594.8 166.0 L597.9 166.0 L601.0 166.0 L604.1 166.0 L607.2 166.0 L610.4 166.0 L613.5 166.0 L616.6 166.0 L619.8 166.0 L622.9 166.0 L626.0 166.0 L629.1 166.0 L632.2 166.0 L635.4 166.0 L638.5 166.0 L641.6 166.0 L644.8 166.0 L647.9 166.0 L651.0 166.0 L654.1 166.0 L657.2 166.0 L660.4 166.0 L663.5 166.0 L666.6 166.0 L669.8 166.0 L672.9 166.0 L676.0 166.0 L679.1 165.7 L682.2 164.6 L685.4 163.0 L688.5 160.7 L691.6 158.0 L694.8 154.9 L697.9 151.5 L701.0 148.0 L704.1 144.5 L707.2 141.1 L710.4 138.0 L713.5 135.3 L716.6 133.0 L719.8 131.4 L722.9 130.3 L726.0 130.0 L729.1 130.3 L732.2 131.4 L735.4 133.0 L738.5 135.3 L741.6 138.0 L744.8 141.1 L747.9 144.5 L751.0 148.0 L754.1 151.5 L757.2 154.9 L760.4 158.0 L763.5 160.7 L766.6 163.0 L769.8 164.6 L772.9 165.7 L776.0 166.0 L779.1 166.0 L782.2 166.0 L785.4 166.0 L788.5 166.0 L791.6 166.0 L794.8 166.0 L797.9 166.0 L801.0 166.0 L804.1 166.0 L807.2 166.0 L810.4 166.0 L813.5 166.0 L816.6 166.0 L819.8 166.0 L822.9 166.0 L826.0 166.0 L829.1 166.0 L832.2 166.0 L835.4 166.0 L838.5 166.0 L841.6 166.0 L844.8 166.0 L847.9 166.0 L851.0 166.0 L854.1 166.0 L857.2 166.0 L860.4 166.0 L863.5 166.0 L866.6 166.0 L869.8 166.0 L872.9 166.0 L876.0 166.0 L879.1 166.0 L882.2 166.0 L885.4 166.0 L888.5 166.0 L891.6 166.0 L894.8 166.0 L897.9 166.0 L901.0 166.0 L904.1 166.0 L907.2 166.0 L910.4 166.0 L913.5 166.0 L916.6 166.0 L919.8 166.0 L922.9 166.0 L926.0 166.0 L929.1 166.0 L932.2 166.0 L935.4 166.0 L938.5 166.0 L941.6 166.0 L944.8 166.0 L947.9 166.0 L951.0 166.0 L954.1 166.0 L957.2 166.0 L960.4 166.0 L963.5 166.0 L966.6 166.0 L969.8 166.0 L972.9 166.0 L976.0 166.0 L979.1 165.7 L982.2 164.6 L985.4 163.0 L988.5 160.7 L991.6 158.0 L994.8 154.9 L997.9 151.5 L1001.0 148.0 L1004.1 144.5 L1007.2 141.1 L1010.4 138.0 L1013.5 135.3 L1016.6 133.0 L1019.8 131.4 L1022.9 130.3 L1026.0 130.0 L1029.1 130.3 L1032.2 131.4 L1035.4 133.0 L1038.5 135.3 L1041.6 138.0 L1044.8 141.1 L1047.9 144.5 L1051.0 148.0 L1054.1 151.5 L1057.2 154.9 L1060.4 158.0 L1063.5 160.7 L1066.6 163.0 L1069.8 164.6 L1072.9 165.7 L1076.0 166.0 L1079.1 166.0 L1082.2 166.0 L1085.2 166.0 L1088.3 166.0 L1091.4 166.0 L1094.5 166.0 L1097.5 166.0 L1100.6 166.0 L1103.7 166.0 L1106.8 166.0 L1109.8 166.0 L1112.9 166.0 L1116.0 166.0 L1119.3 166.0 L1122.7 166.0 L1126.0 166.0 L1129.3 166.0 L1132.7 166.0 L1136.0 166.0 L1139.1 166.0 L1142.2 166.0 L1145.2 166.0 L1148.3 166.0 L1151.4 166.0 L1154.5 166.0 L1157.5 166.0 L1160.6 166.0 L1163.7 166.0 L1166.8 166.0 L1169.8 166.0 L1172.9 166.0 L1176.0 166.0 L1179.1 166.0 L1182.2 166.0 L1185.4 166.0 L1188.5 166.0 L1191.6 166.0 L1194.8 166.0 L1197.9 166.0 L1201.0 166.0 L1204.1 166.0 L1207.2 166.0 L1210.4 166.0 L1213.5 166.0 L1216.6 166.0 L1219.8 166.0 L1222.9 166.0 L1226.0 166.0 L1229.1 166.0 L1232.2 166.0 L1235.4 166.0 L1238.5 166.0 L1241.6 166.0 L1244.8 166.0 L1247.9 166.0 L1251.0 166.0 L1254.1 166.0 L1257.2 166.0 L1260.4 166.0 L1263.5 166.0 L1266.6 166.0 L1269.8 166.0 L1272.9 166.0 L1276.0 166.0" pathLength="1000" fill="none" stroke="var(--modal)" stroke-width="3.5" stroke-linecap="round"/><path class="ab-pen top" data-s="23" d="M26.0 130.0 L29.1 130.3 L32.2 131.4 L35.4 133.0 L38.5 135.3 L41.6 138.0 L44.8 141.1 L47.9 144.5 L51.0 148.0 L54.1 151.5 L57.2 154.9 L60.4 158.0 L63.5 160.7 L66.6 163.0 L69.8 164.6 L72.9 165.7 L76.0 166.0 L79.1 166.0 L82.2 166.0 L85.4 166.0 L88.5 166.0 L91.6 166.0 L94.8 166.0 L97.9 166.0 L101.0 166.0 L104.1 166.0 L107.2 166.0 L110.4 166.0 L113.5 166.0 L116.6 166.0 L119.8 166.0 L122.9 166.0 L126.0 166.0 L129.1 166.0 L132.2 166.0 L135.4 166.0 L138.5 166.0 L141.6 166.0 L144.8 166.0 L147.9 166.0 L151.0 166.0 L154.1 166.0 L157.2 166.0 L160.4 166.0 L163.5 166.0 L166.6 166.0 L169.8 166.0 L172.9 166.0 L176.0 166.0 L179.1 165.7 L182.2 164.6 L185.4 163.0 L188.5 160.7 L191.6 158.0 L194.8 154.9 L197.9 151.5 L201.0 148.0 L204.1 144.5 L207.2 141.1 L210.4 138.0 L213.5 135.3 L216.6 133.0 L219.8 131.4 L222.9 130.3 L226.0 130.0 L229.1 130.3 L232.2 131.4 L235.4 133.0 L238.5 135.3 L241.6 138.0 L244.8 141.1 L247.9 144.5 L251.0 148.0 L254.1 151.5 L257.2 154.9 L260.4 158.0 L263.5 160.7 L266.6 163.0 L269.8 164.6 L272.9 165.7 L276.0 166.0 L279.1 166.0 L282.2 166.0 L285.4 166.0 L288.5 166.0 L291.6 166.0 L294.8 166.0 L297.9 166.0 L301.0 166.0 L304.1 166.0 L307.2 166.0 L310.4 166.0 L313.5 166.0 L316.6 166.0 L319.8 166.0 L322.9 166.0 L326.0 166.0 L329.1 166.0 L332.2 166.0 L335.4 166.0 L338.5 166.0 L341.6 166.0 L344.8 166.0 L347.9 166.0 L351.0 166.0 L354.1 166.0 L357.2 166.0 L360.4 166.0 L363.5 166.0 L366.6 166.0 L369.8 166.0 L372.9 166.0 L376.0 166.0 L379.1 165.7 L382.2 164.6 L385.4 163.0 L388.5 160.7 L391.6 158.0 L394.8 154.9 L397.9 151.5 L401.0 148.0 L404.1 144.5 L407.2 141.1 L410.4 138.0 L413.5 135.3 L416.6 133.0 L419.8 131.4 L422.9 130.3 L426.0 130.0 L429.1 130.3 L432.2 131.4 L435.4 133.0 L438.5 135.3 L441.6 138.0 L444.8 141.1 L447.9 144.5 L451.0 148.0 L454.1 151.5 L457.2 154.9 L460.4 158.0 L463.5 160.7 L466.6 163.0 L469.8 164.6 L472.9 165.7 L476.0 166.0 L479.1 166.0 L482.2 166.0 L485.4 166.0 L488.5 166.0 L491.6 166.0 L494.8 166.0 L497.9 166.0 L501.0 166.0 L504.1 166.0 L507.2 166.0 L510.4 166.0 L513.5 166.0 L516.6 166.0 L519.8 166.0 L522.9 166.0 L526.0 166.0 L529.1 166.0 L532.2 166.0 L535.4 166.0 L538.5 166.0 L541.6 166.0 L544.8 166.0 L547.9 166.0 L551.0 166.0 L554.1 166.0 L557.2 166.0 L560.4 166.0 L563.5 166.0 L566.6 166.0 L569.8 166.0 L572.9 166.0 L576.0 166.0 L579.1 166.0 L582.2 166.0 L585.4 166.0 L588.5 166.0 L591.6 166.0 L594.8 166.0 L597.9 166.0 L601.0 166.0 L604.1 166.0 L607.2 166.0 L610.4 166.0 L613.5 166.0 L616.6 166.0 L619.8 166.0 L622.9 166.0 L626.0 166.0 L629.1 166.0 L632.2 166.0 L635.4 166.0 L638.5 166.0 L641.6 166.0 L644.8 166.0 L647.9 166.0 L651.0 166.0 L654.1 166.0 L657.2 166.0 L660.4 166.0 L663.5 166.0 L666.6 166.0 L669.8 166.0 L672.9 166.0 L676.0 166.0 L679.1 165.7 L682.2 164.6 L685.4 163.0 L688.5 160.7 L691.6 158.0 L694.8 154.9 L697.9 151.5 L701.0 148.0 L704.1 144.5 L707.2 141.1 L710.4 138.0 L713.5 135.3 L716.6 133.0 L719.8 131.4 L722.9 130.3 L726.0 130.0 L729.1 130.3 L732.2 131.4 L735.4 133.0 L738.5 135.3 L741.6 138.0 L744.8 141.1 L747.9 144.5 L751.0 148.0 L754.1 151.5 L757.2 154.9 L760.4 158.0 L763.5 160.7 L766.6 163.0 L769.8 164.6 L772.9 165.7 L776.0 166.0 L779.1 166.0 L782.2 166.0 L785.4 166.0 L788.5 166.0 L791.6 166.0 L794.8 166.0 L797.9 166.0 L801.0 166.0 L804.1 166.0 L807.2 166.0 L810.4 166.0 L813.5 166.0 L816.6 166.0 L819.8 166.0 L822.9 166.0 L826.0 166.0 L829.1 166.0 L832.2 166.0 L835.4 166.0 L838.5 166.0 L841.6 166.0 L844.8 166.0 L847.9 166.0 L851.0 166.0 L854.1 166.0 L857.2 166.0 L860.4 166.0 L863.5 166.0 L866.6 166.0 L869.8 166.0 L872.9 166.0 L876.0 166.0 L879.1 166.0 L882.2 166.0 L885.4 166.0 L888.5 166.0 L891.6 166.0 L894.8 166.0 L897.9 166.0 L901.0 166.0 L904.1 166.0 L907.2 166.0 L910.4 166.0 L913.5 166.0 L916.6 166.0 L919.8 166.0 L922.9 166.0 L926.0 166.0 L929.1 166.0 L932.2 166.0 L935.4 166.0 L938.5 166.0 L941.6 166.0 L944.8 166.0 L947.9 166.0 L951.0 166.0 L954.1 166.0 L957.2 166.0 L960.4 166.0 L963.5 166.0 L966.6 166.0 L969.8 166.0 L972.9 166.0 L976.0 166.0 L979.1 165.7 L982.2 164.6 L985.4 163.0 L988.5 160.7 L991.6 158.0 L994.8 154.9 L997.9 151.5 L1001.0 148.0 L1004.1 144.5 L1007.2 141.1 L1010.4 138.0 L1013.5 135.3 L1016.6 133.0 L1019.8 131.4 L1022.9 130.3 L1026.0 130.0 L1029.1 130.3 L1032.2 131.4 L1035.4 133.0 L1038.5 135.3 L1041.6 138.0 L1044.8 141.1 L1047.9 144.5 L1051.0 148.0 L1054.1 151.5 L1057.2 154.9 L1060.4 158.0 L1063.5 160.7 L1066.6 163.0 L1069.8 164.6 L1072.9 165.7 L1076.0 166.0 L1079.1 166.0 L1082.2 166.0 L1085.2 166.0 L1088.3 166.0 L1091.4 166.0 L1094.5 166.0 L1097.5 166.0 L1100.6 166.0 L1103.7 166.0 L1106.8 166.0 L1109.8 166.0 L1112.9 166.0 L1116.0 166.0 L1119.3 166.0 L1122.7 166.0 L1126.0 166.0 L1129.3 166.0 L1132.7 166.0 L1136.0 166.0 L1139.1 166.0 L1142.2 166.0 L1145.2 166.0 L1148.3 166.0 L1151.4 166.0 L1154.5 166.0 L1157.5 166.0 L1160.6 166.0 L1163.7 166.0 L1166.8 166.0 L1169.8 166.0 L1172.9 166.0 L1176.0 166.0 L1179.1 166.0 L1182.2 166.0 L1185.4 166.0 L1188.5 166.0 L1191.6 166.0 L1194.8 166.0 L1197.9 166.0 L1201.0 166.0 L1204.1 166.0 L1207.2 166.0 L1210.4 166.0 L1213.5 166.0 L1216.6 166.0 L1219.8 166.0 L1222.9 166.0 L1226.0 166.0 L1229.1 166.0 L1232.2 166.0 L1235.4 166.0 L1238.5 166.0 L1241.6 166.0 L1244.8 166.0 L1247.9 166.0 L1251.0 166.0 L1254.1 166.0 L1257.2 166.0 L1260.4 166.0 L1263.5 166.0 L1266.6 166.0 L1269.8 166.0 L1272.9 166.0 L1276.0 166.0" pathLength="1000" fill="none" stroke="var(--modal)" stroke-width="3.5" stroke-linecap="round"/><g data-s="23" font-family="Lexend, system-ui, sans-serif" font-size="48" font-weight="400" text-anchor="middle"><text x="26" y="300" fill="var(--verb)">A</text><text x="76" y="300" fill="var(--ink)">B</text><text x="126" y="300" fill="var(--ink)">C</text><text x="176" y="300" fill="var(--ink)">D</text><text x="226" y="300" fill="var(--verb)">E</text><text x="276" y="300" fill="var(--ink)">F</text><text x="326" y="300" fill="var(--ink)">G</text><text x="376" y="300" fill="var(--ink)">H</text><text x="426" y="300" fill="var(--verb)">I</text><text x="476" y="300" fill="var(--ink)">J</text><text x="526" y="300" fill="var(--ink)">K</text><text x="576" y="300" fill="var(--ink)">L</text><text x="626" y="300" fill="var(--ink)">M</text><text x="676" y="300" fill="var(--ink)">N</text><text x="726" y="300" fill="var(--verb)">O</text><text x="776" y="300" fill="var(--ink)">P</text><text x="826" y="300" fill="var(--ink)">Q</text><text x="876" y="300" fill="var(--ink)">R</text><text x="926" y="300" fill="var(--ink)">S</text><text x="976" y="300" fill="var(--ink)">T</text><text x="1026" y="300" fill="var(--verb)">U</text><text x="1076" y="300" fill="var(--ink)">V</text><text x="1126" y="300" fill="var(--ink)">W</text><text x="1176" y="300" fill="var(--ink)">X</text><text x="1226" y="300" fill="var(--ink)">Y</text><text x="1276" y="300" fill="var(--ink)">Z</text></g><circle data-s="23" cx="26.0" cy="334" r="6" fill="var(--verb)" style="transition-delay:0.00s"/><circle data-s="23" cx="76.0" cy="370" r="6" fill="var(--ink)" style="transition-delay:0.38s"/><circle data-s="23" cx="126.0" cy="370" r="6" fill="var(--ink)" style="transition-delay:0.76s"/><circle data-s="23" cx="176.0" cy="370" r="6" fill="var(--ink)" style="transition-delay:1.14s"/><circle data-s="23" cx="226.0" cy="334" r="6" fill="var(--verb)" style="transition-delay:1.52s"/><circle data-s="23" cx="276.0" cy="370" r="6" fill="var(--ink)" style="transition-delay:1.90s"/><circle data-s="23" cx="326.0" cy="370" r="6" fill="var(--ink)" style="transition-delay:2.28s"/><circle data-s="23" cx="376.0" cy="370" r="6" fill="var(--ink)" style="transition-delay:2.66s"/><circle data-s="23" cx="426.0" cy="334" r="6" fill="var(--verb)" style="transition-delay:3.04s"/><circle data-s="23" cx="476.0" cy="370" r="6" fill="var(--ink)" style="transition-delay:3.42s"/><circle data-s="23" cx="526.0" cy="370" r="6" fill="var(--ink)" style="transition-delay:3.80s"/><line data-s="23" x1="561" y1="316" x2="641" y2="316" stroke="var(--modal)" stroke-width="4" stroke-linecap="round" style="transition-delay:4.18s"/><circle data-s="23" cx="601.0" cy="370" r="6" fill="var(--ink)" style="transition-delay:4.18s"/><line data-s="23" x1="661" y1="316" x2="741" y2="316" stroke="var(--modal)" stroke-width="4" stroke-linecap="round" style="transition-delay:4.56s"/><circle data-s="23" cx="701.0" cy="334" r="6" fill="var(--verb)" style="transition-delay:4.56s"/><circle data-s="23" cx="776.0" cy="370" r="6" fill="var(--ink)" style="transition-delay:4.94s"/><circle data-s="23" cx="826.0" cy="370" r="6" fill="var(--ink)" style="transition-delay:5.32s"/><circle data-s="23" cx="876.0" cy="370" r="6" fill="var(--ink)" style="transition-delay:5.70s"/><circle data-s="23" cx="926.0" cy="370" r="6" fill="var(--ink)" style="transition-delay:6.08s"/><circle data-s="23" cx="976.0" cy="370" r="6" fill="var(--ink)" style="transition-delay:6.46s"/><circle data-s="23" cx="1026.0" cy="334" r="6" fill="var(--verb)" style="transition-delay:6.84s"/><circle data-s="23" cx="1076.0" cy="370" r="6" fill="var(--ink)" style="transition-delay:7.22s"/><circle data-s="23" cx="1116.0" cy="370" r="6" fill="var(--ink)" style="transition-delay:7.60s"/><circle data-s="23" cx="1136.0" cy="370" r="6" fill="var(--ink)" style="transition-delay:7.98s"/><circle data-s="23" cx="1176.0" cy="370" r="6" fill="var(--ink)" style="transition-delay:8.36s"/><circle data-s="23" cx="1226.0" cy="370" r="6" fill="var(--ink)" style="transition-delay:8.74s"/><circle data-s="23" cx="1276.0" cy="370" r="6" fill="var(--ink)" style="transition-delay:9.12s"/><path class="ab-pen song" data-s="23" d="M26.0 334.0 L29.1 334.3 L32.2 335.4 L35.4 337.0 L38.5 339.3 L41.6 342.0 L44.8 345.1 L47.9 348.5 L51.0 352.0 L54.1 355.5 L57.2 358.9 L60.4 362.0 L63.5 364.7 L66.6 367.0 L69.8 368.6 L72.9 369.7 L76.0 370.0 L79.1 370.0 L82.2 370.0 L85.4 370.0 L88.5 370.0 L91.6 370.0 L94.8 370.0 L97.9 370.0 L101.0 370.0 L104.1 370.0 L107.2 370.0 L110.4 370.0 L113.5 370.0 L116.6 370.0 L119.8 370.0 L122.9 370.0 L126.0 370.0 L129.1 370.0 L132.2 370.0 L135.4 370.0 L138.5 370.0 L141.6 370.0 L144.8 370.0 L147.9 370.0 L151.0 370.0 L154.1 370.0 L157.2 370.0 L160.4 370.0 L163.5 370.0 L166.6 370.0 L169.8 370.0 L172.9 370.0 L176.0 370.0 L179.1 369.7 L182.2 368.6 L185.4 367.0 L188.5 364.7 L191.6 362.0 L194.8 358.9 L197.9 355.5 L201.0 352.0 L204.1 348.5 L207.2 345.1 L210.4 342.0 L213.5 339.3 L216.6 337.0 L219.8 335.4 L222.9 334.3 L226.0 334.0 L229.1 334.3 L232.2 335.4 L235.4 337.0 L238.5 339.3 L241.6 342.0 L244.8 345.1 L247.9 348.5 L251.0 352.0 L254.1 355.5 L257.2 358.9 L260.4 362.0 L263.5 364.7 L266.6 367.0 L269.8 368.6 L272.9 369.7 L276.0 370.0 L279.1 370.0 L282.2 370.0 L285.4 370.0 L288.5 370.0 L291.6 370.0 L294.8 370.0 L297.9 370.0 L301.0 370.0 L304.1 370.0 L307.2 370.0 L310.4 370.0 L313.5 370.0 L316.6 370.0 L319.8 370.0 L322.9 370.0 L326.0 370.0 L329.1 370.0 L332.2 370.0 L335.4 370.0 L338.5 370.0 L341.6 370.0 L344.8 370.0 L347.9 370.0 L351.0 370.0 L354.1 370.0 L357.2 370.0 L360.4 370.0 L363.5 370.0 L366.6 370.0 L369.8 370.0 L372.9 370.0 L376.0 370.0 L379.1 369.7 L382.2 368.6 L385.4 367.0 L388.5 364.7 L391.6 362.0 L394.8 358.9 L397.9 355.5 L401.0 352.0 L404.1 348.5 L407.2 345.1 L410.4 342.0 L413.5 339.3 L416.6 337.0 L419.8 335.4 L422.9 334.3 L426.0 334.0 L429.1 334.3 L432.2 335.4 L435.4 337.0 L438.5 339.3 L441.6 342.0 L444.8 345.1 L447.9 348.5 L451.0 352.0 L454.1 355.5 L457.2 358.9 L460.4 362.0 L463.5 364.7 L466.6 367.0 L469.8 368.6 L472.9 369.7 L476.0 370.0 L479.1 370.0 L482.2 370.0 L485.4 370.0 L488.5 370.0 L491.6 370.0 L494.8 370.0 L497.9 370.0 L501.0 370.0 L504.1 370.0 L507.2 370.0 L510.4 370.0 L513.5 370.0 L516.6 370.0 L519.8 370.0 L522.9 370.0 L526.0 370.0 L529.0 370.0 L532.0 370.0 L535.0 370.0 L538.0 370.0 L541.0 370.0 L544.0 370.0 L547.0 370.0 L550.0 370.0 L553.0 370.0 L556.0 370.0 L559.0 370.0 L562.0 370.0 L565.0 370.0 L568.0 370.0 L571.0 370.0 L574.0 370.0 L577.0 370.0 L580.0 370.0 L583.0 370.0 L586.0 370.0 L589.0 370.0 L592.0 370.0 L595.0 370.0 L598.0 370.0 L601.0 370.0 L604.0 369.9 L607.1 369.7 L610.1 369.3 L613.1 368.7 L616.2 368.0 L619.2 367.1 L622.2 366.1 L625.2 365.0 L628.3 363.8 L631.3 362.4 L634.3 361.0 L637.4 359.5 L640.4 357.9 L643.4 356.2 L646.5 354.6 L649.5 352.9 L652.5 351.1 L655.5 349.4 L658.6 347.8 L661.6 346.1 L664.6 344.5 L667.7 343.0 L670.7 341.6 L673.7 340.2 L676.8 339.0 L679.8 337.9 L682.8 336.9 L685.8 336.0 L688.9 335.3 L691.9 334.7 L694.9 334.3 L698.0 334.1 L701.0 334.0 L704.0 334.1 L707.0 334.6 L710.0 335.3 L713.0 336.2 L716.0 337.4 L719.0 338.9 L722.0 340.5 L725.0 342.4 L728.0 344.3 L731.0 346.4 L734.0 348.6 L737.0 350.9 L740.0 353.1 L743.0 355.4 L746.0 357.6 L749.0 359.7 L752.0 361.6 L755.0 363.5 L758.0 365.1 L761.0 366.6 L764.0 367.8 L767.0 368.7 L770.0 369.4 L773.0 369.9 L776.0 370.0 L779.1 370.0 L782.2 370.0 L785.4 370.0 L788.5 370.0 L791.6 370.0 L794.8 370.0 L797.9 370.0 L801.0 370.0 L804.1 370.0 L807.2 370.0 L810.4 370.0 L813.5 370.0 L816.6 370.0 L819.8 370.0 L822.9 370.0 L826.0 370.0 L829.1 370.0 L832.2 370.0 L835.4 370.0 L838.5 370.0 L841.6 370.0 L844.8 370.0 L847.9 370.0 L851.0 370.0 L854.1 370.0 L857.2 370.0 L860.4 370.0 L863.5 370.0 L866.6 370.0 L869.8 370.0 L872.9 370.0 L876.0 370.0 L879.1 370.0 L882.2 370.0 L885.4 370.0 L888.5 370.0 L891.6 370.0 L894.8 370.0 L897.9 370.0 L901.0 370.0 L904.1 370.0 L907.2 370.0 L910.4 370.0 L913.5 370.0 L916.6 370.0 L919.8 370.0 L922.9 370.0 L926.0 370.0 L929.1 370.0 L932.2 370.0 L935.4 370.0 L938.5 370.0 L941.6 370.0 L944.8 370.0 L947.9 370.0 L951.0 370.0 L954.1 370.0 L957.2 370.0 L960.4 370.0 L963.5 370.0 L966.6 370.0 L969.8 370.0 L972.9 370.0 L976.0 370.0 L979.1 369.7 L982.2 368.6 L985.4 367.0 L988.5 364.7 L991.6 362.0 L994.8 358.9 L997.9 355.5 L1001.0 352.0 L1004.1 348.5 L1007.2 345.1 L1010.4 342.0 L1013.5 339.3 L1016.6 337.0 L1019.8 335.4 L1022.9 334.3 L1026.0 334.0 L1029.1 334.3 L1032.2 335.4 L1035.4 337.0 L1038.5 339.3 L1041.6 342.0 L1044.8 345.1 L1047.9 348.5 L1051.0 352.0 L1054.1 355.5 L1057.2 358.9 L1060.4 362.0 L1063.5 364.7 L1066.6 367.0 L1069.8 368.6 L1072.9 369.7 L1076.0 370.0 L1079.1 370.0 L1082.2 370.0 L1085.2 370.0 L1088.3 370.0 L1091.4 370.0 L1094.5 370.0 L1097.5 370.0 L1100.6 370.0 L1103.7 370.0 L1106.8 370.0 L1109.8 370.0 L1112.9 370.0 L1116.0 370.0 L1119.3 370.0 L1122.7 370.0 L1126.0 370.0 L1129.3 370.0 L1132.7 370.0 L1136.0 370.0 L1139.1 370.0 L1142.2 370.0 L1145.2 370.0 L1148.3 370.0 L1151.4 370.0 L1154.5 370.0 L1157.5 370.0 L1160.6 370.0 L1163.7 370.0 L1166.8 370.0 L1169.8 370.0 L1172.9 370.0 L1176.0 370.0 L1179.1 370.0 L1182.2 370.0 L1185.4 370.0 L1188.5 370.0 L1191.6 370.0 L1194.8 370.0 L1197.9 370.0 L1201.0 370.0 L1204.1 370.0 L1207.2 370.0 L1210.4 370.0 L1213.5 370.0 L1216.6 370.0 L1219.8 370.0 L1222.9 370.0 L1226.0 370.0 L1229.1 370.0 L1232.2 370.0 L1235.4 370.0 L1238.5 370.0 L1241.6 370.0 L1244.8 370.0 L1247.9 370.0 L1251.0 370.0 L1254.1 370.0 L1257.2 370.0 L1260.4 370.0 L1263.5 370.0 L1266.6 370.0 L1269.8 370.0 L1272.9 370.0 L1276.0 370.0" pathLength="1000" fill="none" stroke="var(--modal)" stroke-width="3.5" stroke-linecap="round"/></svg>
+    <div class="layers sc-caps ab-caps"><p class="sc-cap" data-s="0">The alphabet, with the vowels in red.</p><p class="sc-cap" data-s="1">One letter to a beat: every letter gets its own circle, and the wave rises at each vowel. W, <i>double-u</i>, has three syllables, so it takes two beats.</p><p class="sc-cap" data-s="2">The usual song squeezes L, M, N, O and P into three beats: L-M and N-O run together like digraphs, and only P stands alone. Watch the lower line jump ahead.</p><p class="sc-cap" data-s="3">We don’t need a new song. Keep the old tune, but hold the beat through L, M, N, O, P, so each letter keeps its own sound. Children who need extra help often have to untangle this part, not because it is hard, but because we squeeze it.</p></div>
+  </section>
+  <!-- 7d -->
+  <section class="slide" aria-label="Should, would, could, shall">
+    <h2 class="head" style="margin-bottom:0">Count the sounds.</h2>
+    <svg class="modals-svg" viewBox="0 0 1336 200" role="img" aria-label="Should, would, could and shall, marked. Each has three sound circles and a syllable swoop. In should and shall, s h is green with a green bond bar. In should, would and could, o u l is red with a red bond bar and one red circle: the l is silent, absorbed into the vowel. In shall, the a has a short mark and the double l has a black bond bar."><g class="ly5" font-family="Lexend, system-ui, sans-serif" font-size="82" font-weight="400" text-anchor="middle"><text x="40" y="115" fill="var(--subject)">s</text><text x="94" y="115" fill="var(--subject)">h</text><text x="148" y="115" fill="var(--verb)">o</text><text x="202" y="115" fill="var(--verb)">u</text><text x="256" y="115" fill="var(--verb)">l</text><text x="310" y="115" fill="var(--ink)">d</text></g><g class="ly4"><line x1="21.7" y1="139.6" x2="114" y2="139.6" stroke="var(--subject)" stroke-width="4.1" stroke-linecap="round"/><line x1="126.4" y1="139.6" x2="262.8" y2="139.6" stroke="var(--verb)" stroke-width="4.1" stroke-linecap="round"/></g><g class="ly1"><circle cx="67" cy="160.9" r="5.9" fill="var(--ink)"/><circle cx="202" cy="160.9" r="5.9" fill="var(--ink)"/><circle cx="310" cy="160.9" r="5.9" fill="var(--ink)"/></g><g class="ly2"><circle cx="67" cy="160.9" r="5.9" fill="var(--subject)"/><circle cx="202" cy="160.9" r="5.9" fill="var(--verb)"/></g><g class="ly3"><path d="M58.8 174.9 Q188.5 191.3 318.2 174.9" fill="none" stroke="var(--modal)" stroke-width="3.8" stroke-linecap="round"/></g><g class="ly10"><g font-family="Lexend, system-ui, sans-serif" font-size="82" font-weight="400" text-anchor="middle"><text x="425" y="115" fill="var(--ink)">w</text><text x="479" y="115" fill="var(--verb)">o</text><text x="533" y="115" fill="var(--verb)">u</text><text x="587" y="115" fill="var(--verb)">l</text><text x="641" y="115" fill="var(--ink)">d</text></g><line x1="457.4" y1="139.6" x2="593.8" y2="139.6" stroke="var(--verb)" stroke-width="4.1" stroke-linecap="round"/><circle cx="425" cy="160.9" r="5.9" fill="var(--ink)"/><circle cx="533" cy="160.9" r="5.9" fill="var(--ink)"/><circle cx="641" cy="160.9" r="5.9" fill="var(--ink)"/><circle cx="533" cy="160.9" r="5.9" fill="var(--verb)"/><path d="M416.8 174.9 Q533 191.3 649.2 174.9" fill="none" stroke="var(--modal)" stroke-width="3.8" stroke-linecap="round"/><g font-family="Lexend, system-ui, sans-serif" font-size="82" font-weight="400" text-anchor="middle"><text x="756" y="115" fill="var(--ink)">c</text><text x="810" y="115" fill="var(--verb)">o</text><text x="864" y="115" fill="var(--verb)">u</text><text x="918" y="115" fill="var(--verb)">l</text><text x="972" y="115" fill="var(--ink)">d</text></g><line x1="788.4" y1="139.6" x2="924.8" y2="139.6" stroke="var(--verb)" stroke-width="4.1" stroke-linecap="round"/><circle cx="756" cy="160.9" r="5.9" fill="var(--ink)"/><circle cx="864" cy="160.9" r="5.9" fill="var(--ink)"/><circle cx="972" cy="160.9" r="5.9" fill="var(--ink)"/><circle cx="864" cy="160.9" r="5.9" fill="var(--verb)"/><path d="M747.8 174.9 Q864 191.3 980.2 174.9" fill="none" stroke="var(--modal)" stroke-width="3.8" stroke-linecap="round"/><g font-family="Lexend, system-ui, sans-serif" font-size="82" font-weight="400" text-anchor="middle"><text x="1087" y="115" fill="var(--subject)">s</text><text x="1141" y="115" fill="var(--subject)">h</text><text x="1195" y="115" fill="var(--verb)">a</text><text x="1249" y="115" fill="var(--ink)">l</text><text x="1303" y="115" fill="var(--ink)">l</text></g><line x1="1068.7" y1="139.6" x2="1161" y2="139.6" stroke="var(--subject)" stroke-width="4.1" stroke-linecap="round"/><line x1="1229" y1="139.6" x2="1323" y2="139.6" stroke="var(--ink)" stroke-width="4.1" stroke-linecap="round"/><path d="M1173.7 35 Q1195 51.4 1216.3 35" fill="none" stroke="var(--verb)" stroke-width="4.1" stroke-linecap="round"/><circle cx="1114" cy="160.9" r="5.9" fill="var(--ink)"/><circle cx="1195" cy="160.9" r="5.9" fill="var(--ink)"/><circle cx="1276" cy="160.9" r="5.9" fill="var(--ink)"/><circle cx="1114" cy="160.9" r="5.9" fill="var(--subject)"/><circle cx="1195" cy="160.9" r="5.9" fill="var(--verb)"/><path d="M1105.8 174.9 Q1195 191.3 1284.2 174.9" fill="none" stroke="var(--modal)" stroke-width="3.8" stroke-linecap="round"/></g></svg>
+    <div class="build-wrap" style="margin-top:22px">
+      <div>
+        <p class="bbb-p">These spellings are harder than CVC, CV or VC words, but they are common and patterned, and they can be learned. Mark the sounds while decoding and spelling. Then over-practise each one as a question and a statement, in short sentences where every other word is already familiar.</p>
+        <div class="qs">
+          <span>We <i>could</i> go.</span><span><i>Could</i> we go?</span>
+          <span>I <i>should</i> stop.</span><span><i>Should</i> I stop?</span>
+          <span>It <i>would</i> fit.</span><span><i>Would</i> it fit?</span>
+        </div>
+      </div>
+      <aside class="key" aria-label="Key">
+        <p class="key-t">Key</p>
+        <ul>
+          <li><svg viewBox="0 0 62 40" aria-hidden="true"><circle cx="15" cy="20" r="6" fill="var(--subject)"/><circle cx="31" cy="20" r="6" fill="var(--verb)"/><circle cx="47" cy="20" r="6" fill="var(--ink)"/></svg><span><b>sound circle</b>marks each sound</span></li>
+          <li><svg viewBox="0 0 62 40" aria-hidden="true"><path d="M8 13 Q31 35 54 13" fill="none" stroke="var(--modal)" stroke-width="3.5" stroke-linecap="round"/></svg><span><b>syllable swoop</b>cradles each syllable</span></li>
+          <li><svg viewBox="0 0 62 40" aria-hidden="true"><path d="M19 13 Q31 31 43 13" fill="none" stroke="var(--verb)" stroke-width="3.5" stroke-linecap="round"/></svg><span><b>short</b>keeps its short sound</span></li>
+          <li><svg viewBox="0 0 62 40" aria-hidden="true"><line x1="6" y1="24" x2="20" y2="24" stroke="var(--subject)" stroke-width="4.5" stroke-linecap="round"/><line x1="25" y1="24" x2="37" y2="24" stroke="var(--ink)" stroke-width="4.5" stroke-linecap="round"/><line x1="42" y1="24" x2="56" y2="24" stroke="var(--verb)" stroke-width="4.5" stroke-linecap="round"/></svg><span><b>bond bar</b>letters bonded into one sound</span></li>
+                  </ul>
+      </aside>
+    </div>
+  </section>
+
+
+  <!-- word build: watch the o -->
+  <section class="slide" aria-label="Watch the o" data-build="knot">
+    <h2 class="head" style="margin-bottom:0">Watch the <i>o</i>.</h2>
+    <div class="build-wrap">
+      <div>
+        <svg id="knotSvg" class="knotsvg" viewBox="0 0 920 370" role="img" aria-labelledby="knotCap"></svg>
+        <p class="build-cap" id="knotCap" aria-live="polite"></p>
+        <div class="pills" role="group" aria-label="Choose a word">
+          <button class="pill" data-step="0" aria-pressed="false">no</button>
+          <button class="pill" data-step="1" aria-pressed="false">not</button>
+          <button class="pill" data-step="2" aria-pressed="false">note</button>
+          <button class="pill" data-step="3" aria-pressed="false">knot</button>
+          <button class="pill" data-step="4" aria-pressed="false">knotted</button>
+          <button class="pill" data-step="5" aria-pressed="false">knotting</button>
+        </div>
+      </div>
+      <aside class="key" aria-label="Key">
+        <p class="key-t">Key</p>
+        <ul>
+          <li><svg viewBox="0 0 62 40" aria-hidden="true"><circle cx="21" cy="20" r="6" fill="var(--verb)"/><circle cx="41" cy="20" r="6" fill="var(--ink)"/></svg><span><b>sound circle</b>marks each sound</span></li>
+          <li><svg viewBox="0 0 62 40" aria-hidden="true"><path d="M8 13 Q31 35 54 13" fill="none" stroke="var(--modal)" stroke-width="3.5" stroke-linecap="round"/></svg><span><b>syllable swoop</b>cradles each syllable</span></li>
+          <li><svg viewBox="0 0 62 40" aria-hidden="true"><path d="M19 13 Q31 31 43 13" fill="none" stroke="var(--verb)" stroke-width="3.5" stroke-linecap="round"/></svg><span><b>short</b>keeps its short sound</span></li>
+          <li><svg viewBox="0 0 62 40" aria-hidden="true"><line x1="17" y1="20" x2="45" y2="20" stroke="var(--verb)" stroke-width="4" stroke-linecap="round"/></svg><span><b>long</b>says its name</span></li>
+          <li><svg viewBox="0 0 62 40" aria-hidden="true"><path d="M50 34 C48 6 24 5 13 17" fill="none" stroke="var(--modal)" stroke-width="3.5" stroke-linecap="round"/><path d="M20 11 L13 17 L21 21" fill="none" stroke="var(--modal)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>vowel vault</b>signals across one consonant</span></li>
+          <li><svg viewBox="0 0 62 40" aria-hidden="true"><circle cx="31" cy="20" r="15" fill="none" stroke="var(--silent)" stroke-width="3" stroke-dasharray="3 4"/><text x="31" y="26" text-anchor="middle" font-family="Lexend, system-ui, sans-serif" font-size="17" fill="var(--verb)">e</text></svg><span><b>cone of silence</b>written, not heard</span></li>
+          <li><svg viewBox="0 0 62 40" aria-hidden="true"><line x1="8" y1="24" x2="27" y2="24" stroke="var(--ink)" stroke-width="4.5" stroke-linecap="round"/><line x1="35" y1="24" x2="54" y2="24" stroke="var(--verb)" stroke-width="4.5" stroke-linecap="round"/></svg><span><b>bond bar</b>letters bonded into one sound</span></li>
+          <li><svg viewBox="0 0 62 40" aria-hidden="true"><rect x="12" y="7" width="38" height="27" rx="6" fill="none" stroke="var(--modal)" stroke-width="3"/></svg><span><b>block box</b>blocks the vault; a red X shows where</span></li>
+          <li><svg viewBox="0 0 62 40" aria-hidden="true"><line x1="31" y1="4" x2="31" y2="36" stroke="var(--modal)" stroke-width="3" stroke-dasharray="4 4"/></svg><span><b>morpheme seam</b>where meanings join</span></li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+  <!-- 13: one loop, card by card -->
+  <section class="slide stepped" data-build="steps" data-max="11" aria-label="One loop, card by card">
+    <div class="ll-head">
+      <h2 class="head" style="margin:0">One loop, card by card.</h2>
+      <div class="stepdots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    </div>
+    <div class="cl2" role="img" aria-label="Sentence cards on the operator balance, one change per click: She could read. Could she read? She would read. Would she read? She would write. He would write. He would writing (marked with a red X: it does not make sense). He is writing. Is he writing? He can read a banana. Can he read a banana? Can he read “a banana”? The operator card sits after the actor in a statement and in front of it in a question, and the beam tips to match."><div class="slot op" style="left:0px;width:215px"><div class="card" data-s="1," data-tx="0,0|0,0|0,-100|0,-100|0,-100|0,-100|0,-100|0,-100|0,-100|0,-100|0,-100|0,-100">Could</div><div class="card" data-s="3," data-tx="0,0|0,0|0,0|0,0|0,0|0,0|0,0|0,-100|0,-100|0,-100|0,-100|0,-100">Would</div><div class="card" data-s="8," data-tx="0,0|0,0|0,0|0,0|0,0|0,0|0,0|0,0|0,0|0,-100|0,-100|0,-100">Is</div><div class="card" data-s="10,11," data-tx="0,0|0,0|0,0|0,0|0,0|0,0|0,0|0,0|0,0|0,0|0,0|0,0">Can</div></div><div class="slot act stack" style="left:231px;width:155px"><div class="card" data-s="0,2,4," data-tx="0,0|0,0|0,0|0,0|0,0|0,-100|0,-100|0,-100|0,-100|0,-100|0,-100|0,-100">She</div><div class="card" data-s="1,3," data-tx="0,0|0,0|0,0|0,0|0,0|0,-100|0,-100|0,-100|0,-100|0,-100|0,-100|0,-100">she</div><div class="card" data-s="5,6,7,9," data-tx="0,0|0,0|0,0|0,0|0,0|0,0|0,0|0,0|0,0|0,0|0,0|0,0">He</div><div class="card" data-s="8,10,11," data-tx="0,0|0,0|0,0|0,0|0,0|0,0|0,0|0,0|0,0|0,0|0,0|0,0">he</div></div><div class="slot op" style="left:402px;width:215px"><div class="card" data-s="0," data-tx="0,0|0,0|0,-100|0,-100|0,-100|0,-100|0,-100|0,-100|0,-100|0,-100|0,-100|0,-100">could</div><div class="card" data-s="2,4,5,6," data-tx="0,0|0,0|0,0|0,0|0,0|0,0|0,0|0,-100|0,-100|0,-100|0,-100|0,-100">would</div><div class="card" data-s="7," data-tx="0,0|0,0|0,0|0,0|0,0|0,0|0,0|0,0|0,0|0,-100|0,-100|0,-100">is</div><div class="card" data-s="9," data-tx="0,0|0,0|0,0|0,0|0,0|0,0|0,0|0,0|0,0|0,0|0,0|0,0">can</div></div><div class="slot verb stack" style="left:633px;width:270px"><div class="card" data-s="0,1,2,3,9,10,11," data-tx="0,0|0,0|0,0|0,0|0,-100|0,-100|0,-100|0,-100|0,-100|0,0|0,0|0,0">read</div><div class="card" data-s="4,5," data-tx="0,0|0,0|0,0|0,0|0,0|0,0|0,0|0,0|0,0|0,-100|0,-100|0,-100">write</div><div class="card" data-s="6,7,8," data-tx="0,0|0,0|0,0|0,0|0,0|0,0|0,0|0,0|0,0|0,-100|0,-100|0,-100">writ<span class="ing">ing</span></div></div><div class="slot pun" style="left:919px;width:64px"><div class="card" data-s="0,2,4,5,6,7,">.</div><div class="card" data-s="1,3,8,">?</div></div><div class="slot obj" style="left:919px;width:337px" data-s="9,10,11,"><div class="card" data-s="11,">“a banana”</div><div class="card" data-s="9,10,">a banana</div></div><div class="slot pun" style="left:1272px;width:64px"><div class="card" data-s="9,">.</div><div class="card" data-s="10,11,">?</div></div><div class="beam tip-post" data-cls="tip-pre|1,3,8,10,11," style="left:43px;width:531px"></div><div class="fulcrum" style="left:308px"></div><div class="brk2 g" style="left:239px;width:139px"></div><div class="lab2 g" style="left:231px;width:155px">actor</div><div class="brk2 r" style="left:641px;width:254px"></div><div class="lab2 r" style="left:633px;width:270px">action</div><div class="brk2 k" style="left:927px;width:321px" data-s="9,10,11,"></div><div class="lab2 k" style="left:919px;width:337px" data-s="9,10,11,">object</div><svg class="clash" data-s="6" viewBox="0 0 40 40" style="left:605px" aria-hidden="true"><path d="M8 8 L32 32 M32 8 L8 32" fill="none" stroke="var(--verb)" stroke-width="5" stroke-linecap="round"/></svg></div>
+    <div class="layers sc-caps cl2-caps"><p class="sc-cap" data-s="0,">Start with a sentence the child already says. Show the cards and say it slowly, and let them watch your mouth; then they say it, read it and write it.</p><p class="sc-cap" data-s="1,">Move the operator to the front and the statement becomes a question. Say both.</p><p class="sc-cap" data-s="2,">Swap one card: <i>could</i> becomes <i>would</i>. Every pass reads <i>she</i>, <i>would</i> and <i>could</i> again, so high-frequency words and odd spellings get practised in context.</p><p class="sc-cap" data-s="3,">Tip it into a question again, and let the child choose the next card to change.</p><p class="sc-cap" data-s="4,">Swap the action. Keep the action cards in a stack, and lift the top one off to reveal the next.</p><p class="sc-cap" data-s="5,">Swap the actor the same way: pull the top card off the actor stack.</p><p class="sc-cap" data-s="6,">Lay <i>ing</i> over the <i>e</i> of <i>write</i>. Does it still make sense? <i>He would writing</i> doesn’t, and the child can hear it.</p><p class="sc-cap" data-s="7,">Swap <i>would</i> for <i>is</i>, and it makes sense again. We aren’t teaching grammar here; grammar jumps in, and the child notices.</p><p class="sc-cap" data-s="8,"><i>Is</i> tips into a question the same way.</p><p class="sc-cap" data-s="9,">Let the child add a word on a blank card. <i>He can read a banana</i> is silly, but it still works as a sentence.</p><p class="sc-cap" data-s="10,">Elkonin also studied children’s play. This is structured play: one card at a time, with words the child chooses, in stacks that grow as their words do.</p><p class="sc-cap" data-s="11,">Now put quotation marks around <i>a banana</i>. It becomes words on a page, the words we sounded out, and <i>Can he read “a banana”?</i> is no longer silly.</p></div>
+  </section>
+  <!-- 13 -->
+  <section class="slide mid" aria-label="This week">
+    <h2 class="head">This week, run a loop with one student.</h2>
+    <p class="body">Cut out the operator cards and the sentence cards, and start with <i>would</i>, <i>could</i> and <i>should</i>. Say each sentence and let the child watch your mouth; then they say it, read it and write it. Change one card at a time, let them choose some of the cards, and notice what it is like for both of you.</p>
+    <p class="q end">Where could this go in helping students build sentences and experiment with adjectives and adverbs?</p>
+  </section>
+
+  <div class="progress" id="progress" aria-hidden="true"></div>
+  <div class="num" id="num" aria-live="polite"></div>
+</div>
+
+<div id="controls">
+  <a id="home" href="../presentations.html" title="All presentations" aria-label="All presentations on the Sound and Word Atlas" onclick="event.stopPropagation()">&#8962;</a>
+  <button id="prev" aria-label="Previous slide">‹</button>
+  <button id="next" aria-label="Next slide">›</button>
+  <button id="full" aria-label="Full screen">⤢</button>
+</div>
+</div>
+
+<script>
+(function(){
+  /* ---------- clause specs ----------
+     k: pre | subj | post | verb | obj
+     w: text, or {t:tell-form, a:ask-form} for the interactive clause
+     op: operator word used as an invisible spacer in the empty pan, so the beam stays centred on the subject */
+  var C = {
+    title:{cw:96, labels:false, interactive:true, slots:[
+      {k:"pre",w:"Could"},{k:"subj",w:{t:"She",a:"she"}},{k:"post",w:"could"},{k:"verb",w:{t:"read.",a:"read?"}}]},
+    balance:{cw:104, labels:true, interactive:true, slots:[
+      {k:"pre",w:"Should"},{k:"subj",w:{t:"She",a:"she"}},{k:"post",w:"should"},{k:"verb",w:{t:"go.",a:"go?"}}]},
+    isTell:{labels:false, op:"is", copular:true, slots:[
+      {k:"pre",w:""},{k:"subj",w:"It"},{k:"post",w:"is"},{k:"obj",w:"a dog."}]},
+    isAsk:{labels:false, op:"Is", copular:true, slots:[
+      {k:"pre",w:"Is"},{k:"subj",w:"it"},{k:"post",w:""},{k:"obj",w:"a dog?"}]},
+    haveTell:{labels:false, op:"have", slots:[
+      {k:"pre",w:""},{k:"subj",w:"They"},{k:"post",w:"have"},{k:"verb",w:"left."}]},
+    haveAsk:{labels:false, op:"Have", slots:[
+      {k:"pre",w:"Have"},{k:"subj",w:"they"},{k:"post",w:""},{k:"verb",w:"left?"}]},
+    likes:{labels:false, op:"Does", slots:[
+      {k:"pre",w:""},{k:"subj",w:"She"},{k:"post",w:""},{k:"verb",w:'like<span class="opx">s</span>'},{k:"obj",w:"dogs."}]},
+    doesLike:{labels:false, op:"Does", slots:[
+      {k:"pre",w:"Does"},{k:"subj",w:"she"},{k:"post",w:""},{k:"verb",w:"like"},{k:"obj",w:"dogs?"}]},
+    openSeat:{cw:96, labels:false, slots:[
+      {k:"pre",w:""},{k:"subj",w:"She"},{k:"post",w:"",blank:true},{k:"verb",w:"go."}]}
+  };
+  var LAB = {subj:"subject", verb:"verb", obj:"object", comp:"complement"};
+
+  function txt(w){
+    if (w && typeof w === "object") return '<span class="t">'+w.t+'</span><span class="a">'+w.a+'</span>';
+    return w;
+  }
+  function render(id){
+    var c = C[id]; if(!c) return "";
+    var cols = c.slots.map(function(s,i){ return Object.assign({col:i+1}, s); });
+    function span(kinds){
+      var a = cols.filter(function(s){ return kinds.indexOf(s.k) > -1; }).map(function(s){ return s.col; });
+      return a.length ? Math.min.apply(null,a)+" / "+(Math.max.apply(null,a)+1) : null;
+    }
+    var pre = cols.filter(function(s){return s.k==="pre";})[0];
+    var post = cols.filter(function(s){return s.k==="post";})[0];
+    var tip = "";
+    if (!c.interactive){ tip = (post && post.w) ? "tip-post" : ((pre && pre.w) ? "tip-pre" : ""); }
+    var h = '<div class="stave'+(c.interactive?' tell':'')+'" style="--cw:'+(c.cw||0)+'px;grid-template-columns:repeat('+cols.length+',auto)"'
+      + (c.interactive ? ' role="button" tabindex="0" aria-label="Switch between statement and question" data-inter="'+id+'"' : '') + '>';
+    if(!c.cw){ h = h.replace('--cw:0px;',''); }
+    cols.forEach(function(s){
+      var cls = "w";
+      if (s.k==="subj") cls += " subj";
+      else if (s.k==="verb") cls += " verb";
+      else if (s.k==="obj") cls += " obj";
+      else cls += " op " + s.k;
+      var inner = txt(s.w);
+      if (s.k==="pre"||s.k==="post"){
+        if (s.blank){ cls += " blank"; inner = ""; }
+        else if (!s.w){ inner = '<span class="ghost">'+(c.op||"is")+'</span>'; }
+      }
+      h += '<div class="'+cls+'" style="grid-row:1;grid-column:'+s.col+'">'+inner+'</div>';
+    });
+    h += '<div class="bal" style="grid-row:2;grid-column:'+span(["pre","subj","post"])+'"><div class="beam '+tip+'"></div></div>';
+    h += '<div class="bal" style="grid-row:2;grid-column:'+span(["subj"])+'"><div class="fulcrum"></div></div>';
+    h += '<div class="brk g" style="grid-row:3;grid-column:'+span(["subj"])+'"></div>';
+    if (span(["verb"])) h += '<div class="brk r" style="grid-row:3;grid-column:'+span(["verb"])+'"></div>';
+    if (span(["obj"]))  h += '<div class="brk k" style="grid-row:3;grid-column:'+span(["obj"])+'"></div>';
+    if (c.labels){
+      h += '<div class="lab g" style="grid-row:4;grid-column:'+span(["subj"])+'">'+LAB.subj+'</div>';
+      if (span(["verb"])) h += '<div class="lab r" style="grid-row:4;grid-column:'+span(["verb"])+'">'+LAB.verb+'</div>';
+      if (span(["obj"]))  h += '<div class="lab k" style="grid-row:4;grid-column:'+span(["obj"])+'">'+(c.copular?LAB.comp:LAB.obj)+'</div>';
+    }
+    return h + '</div>';
+  }
+  document.querySelectorAll("[data-clause]").forEach(function(el){ el.innerHTML = render(el.getAttribute("data-clause")); });
+
+  /* ---------- interactive balance ---------- */
+  function flip(id){
+    var st = document.querySelector('[data-inter="'+id+'"]');
+    var btn = document.querySelector('[data-toggle="'+id+'"]');
+    if(!st) return;
+    var asking = st.classList.contains("tell");
+    st.classList.toggle("tell", !asking);
+    st.classList.toggle("ask", asking);
+    if(btn){ btn.textContent = asking ? "Tell it" : "Ask it"; btn.setAttribute("aria-pressed", asking ? "true" : "false"); }
+  }
+  document.querySelectorAll("[data-toggle]").forEach(function(b){
+    b.addEventListener("click", function(e){ e.stopPropagation(); flip(b.getAttribute("data-toggle")); });
+  });
+  document.querySelectorAll("[data-inter]").forEach(function(st){
+    st.addEventListener("click", function(e){ e.stopPropagation(); flip(st.getAttribute("data-inter")); });
+    st.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); e.stopPropagation(); flip(st.getAttribute("data-inter")); } });
+  });
+  document.querySelectorAll("[data-reveal]").forEach(function(b){
+    b.addEventListener("click", function(e){
+      e.stopPropagation();
+      var list = document.getElementById(b.getAttribute("data-reveal"));
+      var on = list.classList.toggle("shown");
+      b.textContent = on ? (b.getAttribute("data-hide") || "Hide the questions") : (b.getAttribute("data-show") || "Show the questions");
+      b.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+  });
+  function resetReveals(slide){
+    slide.querySelectorAll("[data-reveal]").forEach(function(b){
+      var t = document.getElementById(b.getAttribute("data-reveal"));
+      if (t && t.classList.contains("shown")){
+        t.classList.remove("shown");
+        b.textContent = b.getAttribute("data-show") || "Show the questions";
+        b.setAttribute("aria-pressed", "false");
+      }
+    });
+  }
+  function resetTryReveal(){
+    var list = document.getElementById("try");
+    if (list && list.classList.contains("shown")){
+      list.classList.remove("shown");
+      var b = document.querySelector('[data-reveal="try"]');
+      if (b){ b.textContent = "Show the questions"; b.setAttribute("aria-pressed", "false"); }
+    }
+  }
+
+  /* ---------- word build: no, not, note, knot, knotted, knotting ----------
+     Every mark is placed from the same letter-slot coordinates, so dots, swoops,
+     bars, box, seam and vault always sit on the graphemes they belong to. */
+  var knotBuilder = null;
+  (function(){
+    var svg = document.getElementById("knotSvg");
+    if (!svg) return;
+    var cap = document.getElementById("knotCap");
+    var pills = Array.prototype.slice.call(document.querySelectorAll(".pill[data-step]"));
+    var F = 140, B = 230, S = 98, X0 = 60, G = 48;
+    function X(i){ return X0 + S*i + (i >= 5 ? G : 0); }
+    function M(a,b){ return (X(a)+X(b))/2; }
+    var SEAM = (X(4)+X(5))/2;
+    var yMac = B - 0.91*F, yCupEnd = B - 0.975*F, yCupCtl = B - 0.775*F;
+    var yBar = B + 0.30*F, yDot = B + 0.56*F, ySw = B + 0.73*F;
+    var CAPS = [
+      '<i>No</i> has two letters and two sounds. Nothing closes the syllable, so the <i>o</i> says its name.',
+      'Add a <i>t</i>. The syllable closes, and the <i>o</i> goes short.',
+      'Add an <i>e</i> you can\u2019t hear. It reaches back over one consonant, and the <i>o</i> says its name again.',
+      'Add a <i>k</i> you can\u2019t hear. <i>Not</i> and <i>knot</i> sound exactly alike: <i>kn</i> is one sound, spelled with two letters.',
+      'Add <i>-ed</i>. One <i>t</i> would let the <i>e</i> vault back and lengthen the <i>o</i>, as in <i>noted</i>. A second <i>t</i> blocks the vault: it starts, then ends in a red X over the box, so the <i>o</i> stays short.',
+      'Same move with <i>-ing</i>: the vault ends in the red X again, and the box holds the <i>o</i> short. And <i>ng</i> is one sound, too.'
+    ];
+    var h = [];
+    h.push('<defs><marker id="vaultHead" viewBox="0 0 10 10" refX="6.5" refY="5" markerWidth="5" markerHeight="5" orient="auto">'
+      + '<path d="M1.5 1.5 L7 5 L1.5 8.5" fill="none" stroke="var(--modal)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>');
+    /* block box and seam sit behind the letters */
+    h.push('<rect class="ly7" data-s="45" x="'+(X(3)-42)+'" y="'+(B-0.75*F)+'" width="'+(X(4)-X(3)+84)+'" height="'+(0.87*F)+'" rx="16" fill="none" stroke="var(--modal)" stroke-width="5"/>');
+    h.push('<line class="ly9" data-s="45" x1="'+SEAM+'" y1="'+(B-0.95*F)+'" x2="'+SEAM+'" y2="'+(B+0.46*F)+'" stroke="var(--modal)" stroke-width="4" stroke-dasharray="8 8"/>');
+    /* cone of silence around the silent e of note */
+    h.push('<circle class="ly8" data-s="2" cx="'+X(4)+'" cy="'+(B-0.26*F)+'" r="'+(0.37*F)+'" fill="none" stroke="var(--silent)" stroke-width="5" stroke-dasharray="4 9"/>');
+    /* letters */
+    h.push('<g font-family="Lexend, system-ui, sans-serif" font-size="'+F+'" font-weight="400" text-anchor="middle">');
+    [["k",0,"ink","345"],["n",1,"ink","012345"],["o",2,"verb","012345"],["t",3,"ink","12345"],
+     ["e",4,"verb","2"],["t",4,"ink","45"],["e",5,"verb","4"],["i",5,"verb","5"],
+     ["d",6,"ink","4"],["n",6,"ink","5"],["g",7,"ink","5"]].forEach(function(L){
+      h.push('<text class="ly5" data-s="'+L[3]+'" x="'+X(L[1])+'" y="'+B+'" fill="var(--'+L[2]+')">'+L[0]+'</text>');
+    });
+    h.push('</g>');
+    /* bond bars: kn, ng, and the tt of knotted and knotting, which keeps its bar when the box comes */
+    h.push('<line class="ly4" data-s="345" x1="'+(X(0)-36)+'" y1="'+yBar+'" x2="'+(X(1)+36)+'" y2="'+yBar+'" stroke="var(--ink)" stroke-width="7" stroke-linecap="round"/>');
+    h.push('<line class="ly4" data-s="5" x1="'+(X(6)-36)+'" y1="'+yBar+'" x2="'+(X(7)+36)+'" y2="'+yBar+'" stroke="var(--ink)" stroke-width="7" stroke-linecap="round"/>');
+    h.push('<line class="ly4" data-s="45" x1="'+(X(3)-36)+'" y1="'+yBar+'" x2="'+(X(4)+36)+'" y2="'+yBar+'" stroke="var(--ink)" stroke-width="7" stroke-linecap="round"/>');
+    /* long marks and short marks */
+    function shortMark(x, s){ return '<path class="ly6" data-s="'+s+'" d="M'+(x-36)+' '+yCupEnd+' Q'+x+' '+yCupCtl+' '+(x+36)+' '+yCupEnd+'" fill="none" stroke="var(--verb)" stroke-width="7" stroke-linecap="round"/>'; }
+    h.push('<line class="ly6" data-s="02" x1="'+(X(2)-39)+'" y1="'+yMac+'" x2="'+(X(2)+39)+'" y2="'+yMac+'" stroke="var(--verb)" stroke-width="7" stroke-linecap="round"/>');
+    h.push(shortMark(X(2), "1345"));
+    h.push(shortMark(X(5), "45"));
+    /* vowel vault: the silent e of note reaching back over t to the o */
+    h.push('<path class="ly8" data-s="2" d="M'+(X(4)+8)+' '+(B-0.58*F)+' C'+(X(4)-6)+' '+(B-1.32*F)+' '+(X(2)+62)+' '+(B-1.31*F)+' '+(X(2)+6)+' '+(B-1.14*F)+'" fill="none" stroke="var(--modal)" stroke-width="6" stroke-linecap="round" marker-end="url(#vaultHead)"/>');
+    /* a vault the block box stops: a half-arc from the suffix vowel that ends in a red X over the box */
+    var bxC = M(3,4), yXk = B - 1.06*F;
+    h.push('<path class="ly8" data-s="45" d="M'+(X(5)+4)+' '+(B-1.1*F)+' Q'+((X(5)+bxC)/2+16)+' '+(B-1.62*F)+' '+(bxC+10)+' '+(yXk+1)+'" fill="none" stroke="var(--modal)" stroke-width="6" stroke-linecap="round"/>');
+    h.push('<path class="ly8" data-s="45" d="M'+(bxC-11)+' '+(yXk-11)+' L'+(bxC+11)+' '+(yXk+11)+' M'+(bxC+11)+' '+(yXk-11)+' L'+(bxC-11)+' '+(yXk+11)+'" fill="none" stroke="var(--verb)" stroke-width="7" stroke-linecap="round"/>');
+    /* sound circles: some slide to sit under a team when one arrives */
+    function dot(xs, fill, s){ return fill === "ink" ? dot1(xs, "ink", s, "ly1") : dot1(xs, "ink", s, "ly1") + dot1(xs, fill, s, "ly2"); }
+    function dot1(xs, fill, s, cls){ return '<circle class="'+cls+'" data-s="'+s+'" data-x="'+xs.join(",")+'" data-y="'+yDot+'" cx="0" cy="0" r="10" fill="var(--'+fill+')" style="transform:translate('+xs[0]+'px,'+yDot+'px)"/>'; }
+    h.push(dot([X(1),X(1),X(1),M(0,1),M(0,1),M(0,1)], "ink", "012345"));
+    h.push(dot([X(2),X(2),X(2),X(2),X(2),X(2)], "verb", "012345"));
+    h.push(dot([X(3),X(3),X(3),X(3),M(3,4),M(3,4)], "ink", "12345"));
+    h.push(dot([X(5),X(5),X(5),X(5),X(5),X(5)], "verb", "45"));
+    h.push(dot([X(6),X(6),X(6),X(6),X(6),M(6,7)], "ink", "45"));
+    /* syllable swoops, first dot to last dot of each syllable */
+    function swoop(a, b, s){ var x0 = a-15, x1 = b+15; return '<path class="ly3" data-s="'+s+'" d="M'+x0+' '+ySw+' Q'+((x0+x1)/2)+' '+(ySw+28)+' '+x1+' '+ySw+'" fill="none" stroke="var(--modal)" stroke-width="6.5" stroke-linecap="round"/>'; }
+    h.push(swoop(X(1), X(2), "0"));
+    h.push(swoop(X(1), X(3), "12"));
+    h.push(swoop(M(0,1), X(3), "3"));
+    h.push(swoop(M(0,1), M(3,4), "45"));
+    h.push(swoop(X(5), X(6), "4"));
+    h.push(swoop(X(5), M(6,7), "5"));
+    svg.innerHTML = h.join("");
+
+    function set(n, instant){
+      if (instant) svg.classList.add("instant");
+      svg.querySelectorAll("[data-s]").forEach(function(e){ e.classList.toggle("off", e.getAttribute("data-s").indexOf(String(n)) < 0); });
+      svg.querySelectorAll("[data-x]").forEach(function(e){
+        var xs = e.getAttribute("data-x").split(",");
+        e.style.transform = "translate(" + xs[n] + "px," + e.getAttribute("data-y") + "px)";
+      });
+      cap.innerHTML = CAPS[n];
+      pills.forEach(function(p, i){ var on = i === n; p.classList.toggle("on", on); p.setAttribute("aria-pressed", on ? "true" : "false"); });
+      knotBuilder.step = n;
+      if (instant){ void svg.getBoundingClientRect(); svg.classList.remove("instant"); }
+    }
+    knotBuilder = { step: 0, max: CAPS.length - 1, set: set };
+    pills.forEach(function(p){ p.addEventListener("click", function(e){ e.stopPropagation(); if (window.__revealAllLayers) window.__revealAllLayers(svg.closest(".slide")); set(parseInt(p.getAttribute("data-step"), 10)); }); });
+    set(0, true);
+  })();
+
+  /* ---------- activity timer ---------- */
+  (function(){
+    var btn = document.getElementById("actTimer"); if (!btn) return;
+    var left = 0, iv = null;
+    function fmt(s){ var m = Math.floor(s / 60), r = s % 60; return m + ":" + (r < 10 ? "0" : "") + r; }
+    function stop(){ if (iv){ clearInterval(iv); iv = null; } }
+    btn.addEventListener("click", function(e){
+      e.stopPropagation();
+      if (iv){ stop(); btn.textContent = "Start 10 minutes"; return; }
+      left = 600; btn.textContent = fmt(left);
+      iv = setInterval(function(){ left -= 1; if (left <= 0){ stop(); btn.textContent = "Time"; } else { btn.textContent = fmt(left); } }, 1000);
+    });
+  })();
+
+  /* ---------- deck ---------- */
+  var stage = document.getElementById("stage"), vp = document.getElementById("viewport");
+  var slides = Array.prototype.slice.call(document.querySelectorAll(".slide"));
+  var N = slides.length, cur = 0, KEY = "sounds-to-sentences-s1";
+  var num = document.getElementById("num"), prog = document.getElementById("progress");
+
+  /* a step list is a run of digits ("0123") or, for slides with more than ten states, a comma list ("1,3,10,") */
+  function hasStep(list, n){ return list.indexOf(",") > -1 ? list.split(",").indexOf(String(n)) > -1 : list.indexOf(String(n)) > -1; }
+  slides.forEach(function(sl){
+    if (sl.getAttribute("data-build") !== "steps") return;
+    var dots = Array.prototype.slice.call(sl.querySelectorAll(".stepdots i"));
+    var b = { step: 0, max: parseInt(sl.getAttribute("data-max"), 10) || 0, set: function(n, instant){
+      if (instant) sl.classList.add("instant");
+      sl.querySelectorAll("[data-s]").forEach(function(e){
+        var off = !hasStep(e.getAttribute("data-s"), n);
+        e.classList.toggle("off", off);
+        e.setAttribute("aria-hidden", off ? "true" : "false");
+      });
+      sl.querySelectorAll("[data-dim]").forEach(function(e){ e.classList.toggle("dim", hasStep(e.getAttribute("data-dim"), n)); });
+      sl.querySelectorAll("[data-cls]").forEach(function(e){ var c = e.getAttribute("data-cls").split("|"); e.classList.toggle(c[0], hasStep(c[1], n)); });
+      sl.querySelectorAll("[data-tx]").forEach(function(e){
+        var a = e.getAttribute("data-tx").split("|"); var v = (a[n] !== undefined ? a[n] : a[a.length - 1]).split(",");
+        e.style.transform = "translate(" + v[0] + "px," + v[1] + "px)";
+      });
+      dots.forEach(function(d, i){ d.classList.toggle("on", i === n); });
+      b.step = n;
+      if (instant){ void sl.getBoundingClientRect(); sl.classList.remove("instant"); }
+    }};
+    sl._builder = b;
+    b.set(0, true);
+  });
+
+  function fit(){
+    var w = vp.clientWidth, h = vp.clientHeight;
+    var s = Math.min(w/1600, h/900);
+    stage.style.transform = "translate("+((w-1600*s)/2)+"px,"+((h-900*s)/2)+"px) scale("+s+")";
+  }
+  var titleStave = document.querySelector('[data-inter="title"]');
+  var titleBuilder = titleStave ? {
+    get step(){ return titleStave.classList.contains("ask") ? 0 : 1; },
+    max: 1,
+    set: function(n, instant){
+      var ask = n < 1;
+      if (instant) titleStave.classList.add("snapst");
+      titleStave.classList.toggle("tell", !ask); titleStave.classList.toggle("ask", ask);
+      if (instant){ void titleStave.getBoundingClientRect(); titleStave.classList.remove("snapst"); }
+    }
+  } : null;
+  function builderAt(i){
+    var sl = slides[i]; if (!sl) return null;
+    var t = sl.getAttribute("data-build");
+    if (t === "title") return titleBuilder;
+    if (t === "knot") return knotBuilder;
+    if (t === "steps") return sl._builder || null;
+    return null;
+  }
+  /* sound-coding layers, one per click: circles, red vowels, swoops, bond bars, letters,
+     short and long marks, block boxes, cones and vaults, seams; then the other examples, complete */
+  function layerOrder(sl){
+    var order = [];
+    for (var k = 1; k <= 10; k++){
+      var els = Array.prototype.filter.call(sl.querySelectorAll(".ly" + k), function(e){ return !e.classList.contains("off"); });
+      if (els.length) order.push(k);
+    }
+    return order;
+  }
+  function setLayers(sl, count){
+    (sl._lyOrder || []).forEach(function(k, i){
+      sl.querySelectorAll(".ly" + k).forEach(function(e){ e.classList.toggle("lh", i >= count); });
+    });
+    sl._lyShown = count;
+  }
+  function initLayers(sl, full){
+    if (!sl || !sl.querySelector(".ly1, .ly10")){ if (sl) sl._lyOrder = null; return; }
+    sl.querySelectorAll(".lh").forEach(function(e){ e.classList.remove("lh"); });
+    sl.classList.add("snap");
+    sl._lyOrder = layerOrder(sl);
+    setLayers(sl, full ? sl._lyOrder.length : 0);
+    void sl.getBoundingClientRect();
+    sl.classList.remove("snap");
+  }
+  window.__revealAllLayers = function(sl){ if (sl && sl._lyOrder) setLayers(sl, sl._lyOrder.length); };
+  function next(){
+    var sl = slides[cur];
+    if (sl && sl._lyOrder && sl._lyShown < sl._lyOrder.length){ setLayers(sl, sl._lyShown + 1); return; }
+    var b = builderAt(cur); if (b && b.step < b.max){ b.set(b.step + 1); return; }
+    show(cur + 1);
+  }
+  function prev(){
+    var sl = slides[cur];
+    var b = builderAt(cur); if (b && b.step > 0){ b.set(b.step - 1); return; }
+    if (sl && sl._lyOrder && sl._lyShown > 0){ setLayers(sl, sl._lyShown - 1); return; }
+    show(cur - 1);
+  }
+  var started = false;
+  function show(n){
+    n = Math.max(0, Math.min(N-1, n));
+    var bIn = builderAt(n);
+    var backward = started && n < cur;
+    if (bIn && (n !== cur || !started)) bIn.set(backward ? bIn.max : 0, true);
+    var entering = (n !== cur || !started);
+    started = true;
+    if (n !== cur && slides[cur]) resetReveals(slides[cur]);
+    slides.forEach(function(sl,i){ var on = i===n; sl.classList.toggle("on", on); sl.setAttribute("aria-hidden", on ? "false" : "true"); });
+    cur = n;
+    if (entering) initLayers(slides[n], backward);
+    num.textContent = (n+1) + " / " + N;
+    prog.style.width = (((n+1)/N)*100) + "%";
+    try { history.replaceState(null, "", "#" + (n+1)); } catch(e) {}
+    try { localStorage.setItem(KEY, String(n)); } catch(e) {}
+  }
+  function start(){
+    var h = parseInt((location.hash||"").replace("#",""), 10);
+    if (h >= 1 && h <= N) return h-1;
+    try { var s = parseInt(localStorage.getItem(KEY), 10); if (s >= 0 && s < N) return s; } catch(e) {}
+    return 0;
+  }
+
+  document.getElementById("prev").addEventListener("click", function(e){ e.stopPropagation(); prev(); });
+  document.getElementById("next").addEventListener("click", function(e){ e.stopPropagation(); next(); });
+  document.getElementById("full").addEventListener("click", function(e){ e.stopPropagation(); fullscreen(); });
+  function fullscreen(){
+    try {
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+      else document.exitFullscreen();
+    } catch(e) {}
+  }
+
+  document.addEventListener("keydown", function(e){
+    var t = e.target;
+    if (t && t.closest && t.closest("button,[role=button]") && (e.key===" "||e.key==="Enter")) return;
+    if (["ArrowRight","ArrowDown","PageDown"," "].indexOf(e.key) > -1){ e.preventDefault(); next(); }
+    else if (["ArrowLeft","ArrowUp","PageUp"].indexOf(e.key) > -1){ e.preventDefault(); prev(); }
+    else if (e.key==="Home"){ show(0); }
+    else if (e.key==="End"){ show(N-1); }
+    else if (e.key==="f"||e.key==="F"){ fullscreen(); }
+  });
+
+  stage.addEventListener("click", function(e){
+    if (e.target.closest("button,[role=button]")) return;
+    var r = stage.getBoundingClientRect();
+    if (e.clientX - r.left < r.width/3) prev(); else next();
+  });
+  var tx = null, ty = null;
+  vp.addEventListener("touchstart", function(e){ tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, {passive:true});
+  vp.addEventListener("touchend", function(e){
+    if (tx === null) return;
+    var dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty;
+    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)){ if (dx < 0) next(); else prev(); }
+    tx = null;
+  }, {passive:true});
+
+  var idle;
+  function wake(){ document.body.classList.add("awake"); clearTimeout(idle); idle = setTimeout(function(){ document.body.classList.remove("awake"); }, 2600); }
+  ["mousemove","touchstart","keydown"].forEach(function(ev){ document.addEventListener(ev, wake, {passive:true}); });
+
+  window.addEventListener("hashchange", function(){
+    var h = parseInt((location.hash||"").replace("#",""), 10);
+    if (h >= 1 && h <= N && h-1 !== cur) show(h-1);
+  });
+  window.addEventListener("resize", fit);
+  if (window.ResizeObserver) new ResizeObserver(fit).observe(vp);
+  fit(); show(start()); wake();
+})();
+</script>
+</body>
+</html>

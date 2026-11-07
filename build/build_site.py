@@ -101,7 +101,7 @@ def header(depth):
     up = "../" * depth
     return (f'<header class="site"><div class="wrap"><a class="brand" href="{up}index.html"><small>Legomorphic notation</small>Sound and Word Atlas</a>'
             f'<nav class="site" aria-label="Site"><a href="{up}index.html#route">The route</a><a href="{up}index.html#marks">Reading the marks</a>'
-            f'<a href="{up}cards.html">Word cards</a><a href="{up}word-lists.html">Word lists</a><a href="{up}index.html#about">About</a></nav></div></header>')
+            f'<a href="{up}cards.html">Word cards</a><a href="{up}word-lists.html">Word lists</a><a href="{up}presentations.html">Presentations</a><a href="{up}index.html#about">About</a></nav></div></header>')
 
 def footer(depth):
     return ('<footer class="site"><div class="wrap"><p>Built on ' + BUILT + ' from the <i>Legomorphic notation</i> manual. '
@@ -231,7 +231,7 @@ home_body = f"""{header(0)}
 <section class="about" id="about" aria-labelledby="about-h"><div class="wrap">
 <h2 id="about-h">About this version</h2>
 <div class="cols">
-<div><h3>What's here</h3><p>The route: {N} steps in {len(route["bands"])} bands, {n_words} different words, {n_marked} of them marked. Printable cards for the ELP high-frequency words and all of Dolch&rsquo;s sight words are on the <a href="cards.html">Word cards</a> page, and <a href="word-lists.html">Word lists</a> shows where the ELP words come from. The legend in full, the word families and the teaching routines come next.</p></div>
+<div><h3>What's here</h3><p>The route: {N} steps in {len(route["bands"])} bands, {n_words} different words, {n_marked} of them marked. Printable cards for the ELP high-frequency words and all of Dolch&rsquo;s sight words are on the <a href="cards.html">Word cards</a> page, and <a href="word-lists.html">Word lists</a> shows where the ELP words come from. The first session of the staff series is under <a href="presentations.html">Presentations</a>. The legend in full, the word families and the teaching routines come next.</p></div>
 <div><h3>Where it comes from</h3><p>The route and its notes come from the <i>Legomorphic notation</i> manual, and the site is rebuilt from it, so corrections go into the manual first. The marks are drawn with the same tools as the session decks.</p></div>
 <div><h3>Still settling</h3><p>Steps 16 to 32 were added as a draft on 15 October 2026. A few words show in plain letters until their marking is decided.</p></div>
 </div>
@@ -334,6 +334,9 @@ from dolch_codes import DOLCH_CODES
 import word_lists
 for w, c in DOLCH_CODES.items(): LW.W.setdefault(w, c)
 word_lists.write(OUT, page, header, footer, coloured, LW)
+
+import sessions
+sessions.write(OUT, page, header, footer)
 
 if (HERE / "site.css").exists():
     shutil.copy(HERE / "site.css", OUT / "site.css")

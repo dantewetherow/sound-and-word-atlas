@@ -15,6 +15,7 @@ The site is at https://dantewetherow.github.io/sound-and-word-atlas/.
   - `known_codes.py` and `deck_codes.json` hold the codes the session decks already use, and `site_codes.py` holds the codes written for route words that had none.
   - `build_elp_cards.py`, `build_dolch_cards.py` and `build_word_sum_cards.py` make the printable cards. `dolch_codes.py` holds the codes written for the 43 Dolch words that had none.
   - `word_lists.py` writes the Word lists page, which shows where the ELP words come from in Dolch's lists. Its words come from `data/elp_hfw.json` and `data/dolch.json`, and every count on it is worked out from them.
+  - `sessions.py` writes the Presentations page and copies the decks in `sessions/` to the site. The decks there are the web copies: the title slide's byline is left off, and a link in the slide controls leads back to the page. Run as a script, `python3 build/sessions.py <node_modules> docs` makes each deck's offline copy (with `make_offline_deck.py`, which needs `@fontsource-variable/fraunces`, `@fontsource-variable/lexend` and `@fontsource/gentium-plus`) and its preview pictures.
   - `site.css` is the stylesheet.
 
 ## The manual stays the source
