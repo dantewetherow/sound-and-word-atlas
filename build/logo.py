@@ -4,32 +4,37 @@ The wordmark, from Dante's sketches of 6 November 2026, which replace the d b q 
 
   whole   λέγ┊ω · morphic   the Greek verb whole, its two syllables smiling (λέ, γω), a seam between the stem and
                             the ending -ω, "I". Chosen for the About page, where it stands beside the etymology,
-                            and written to build/wordmark.svg, which the site copies
+                            and written to build/wordmark.svg, which about_pages.py draws into the page
   split   λέγ┊ō┊morph┊ic    the word as the notation reads it in English: leg, o, morph and ic, with seams
 
-The logo candidates, faces made of the notation's own marks with the letters lifted out (6 November 2026):
+The logo candidates: a word's own marks with its letters lifted out, so every mark is true (6 November 2026).
 
-  a   three circles and a swoop: the sounds of leg
-  b   two circles and a swoop with a cup over the red one, on the right: λέ, true for Greek, where epsilon is short,
-      but read as English it shows a short vowel ending its syllable, which no word on the site does
-  c   b with a bar over the black circle: a vowel mark over a consonant, which the notation never makes
-  d   red first: the marks of it, a short vowel closed by a consonant
+  go          two circles and a swoop, a bar over the red one: a vowel that ends its syllable says its name
+  it          red first, with a cup over it: a short vowel closed by a consonant
+  leg         three circles and a swoop, a cup over the red one
+  leg-bare    three circles and a swoop
+  note        three circles and a swoop, a bar over the red one, and the silent e's marks: the empty cone, and the
+              vault reaching back to the bar. Too fine for a browser tab, so it would be the larger mark
+  note-ring   note as first described, with an empty red circle for the e, a mark the notation doesn't have
 
-Marks keep the notation's colours: ink for consonants, red for vowels and their cups and bars, blue for swoops and
-seams. Greek in Gentium Plus, Latin in Lexend, both under the SIL Open Font License. The colours turn light on a
-dark page.
+Two earlier faces were set aside: a cup over a red circle that ends its syllable (true of Greek λέ, where epsilon is
+short, but no English word on the site does it), and a bar over a black circle (a vowel mark over a consonant).
+
+Marks keep the notation's colours: ink for consonants, red for vowels and their cups and bars, blue for swoops, seams
+and vaults, and the soft grey of the cone. Greek in Gentium Plus, Latin in Lexend, both under the SIL Open Font
+License. As files, the colours turn light on a dark screen.
 
 Run:  python3 build/logo.py <node_modules with the @fontsource packages> <out dir for the candidates>
 """
-import pathlib, sys
+import math, pathlib, sys
 from fontTools.ttLib import TTFont
 from fontTools.pens.svgPathPen import SVGPathPen
 from fontTools.pens.boundsPen import BoundsPen
 from fontTools.varLib import instancer
 
 HERE = pathlib.Path(__file__).resolve().parent
-INK, RED, BLUE = "#2b2b2b", "#b5402f", "#3f6488"                 # the site's --ink, --verb and --modal
-INK_DARK, RED_DARK, BLUE_DARK = "#ece5d8", "#e2836e", "#95b6db"
+INK, RED, BLUE, QUIET = "#2b2b2b", "#b5402f", "#3f6488", "#6b6256"        # the site's --ink, --verb, --modal, --soft
+INK_DARK, RED_DARK, BLUE_DARK, QUIET_DARK = "#ece5d8", "#e2836e", "#95b6db", "#a89e8f"
 S = 100.0                                      # the Latin letters' size; everything else is a share of it
 
 
@@ -104,9 +109,9 @@ def tagline(tag, x_mid, y):
     return line.out + out
 
 
-STYLE = (f'<style>.k{{fill:{INK}}}.r{{fill:{RED}}}.k.st,.r.st,.b.st,.b.seam{{fill:none}}.k.st{{stroke:{INK}}}.r.st{{stroke:{RED}}}'
-         f'.b.st,.b.seam{{stroke:{BLUE}}}@media (prefers-color-scheme:dark){{.k{{fill:{INK_DARK}}}.r{{fill:{RED_DARK}}}'
-         f'.k.st{{stroke:{INK_DARK}}}.r.st{{stroke:{RED_DARK}}}.b.st,.b.seam{{stroke:{BLUE_DARK}}}}}</style>')
+STYLE = (f'<style>.k{{fill:{INK}}}.r{{fill:{RED}}}.k.st,.r.st,.b.st,.b.seam,.q.st{{fill:none}}.k.st{{stroke:{INK}}}.r.st{{stroke:{RED}}}'
+         f'.b.st,.b.seam{{stroke:{BLUE}}}.q.st{{stroke:{QUIET}}}@media (prefers-color-scheme:dark){{.k{{fill:{INK_DARK}}}.r{{fill:{RED_DARK}}}'
+         f'.k.st{{stroke:{INK_DARK}}}.r.st{{stroke:{RED_DARK}}}.b.st,.b.seam{{stroke:{BLUE_DARK}}}.q.st{{stroke:{QUIET_DARK}}}}}</style>')
 
 
 def svg(body, x0, y0, x1, y1, label, pad=0.18 * S):
@@ -161,41 +166,72 @@ def split(nm):
 
 # ------------------------------------------------------------------ the logo candidates
 # Measures in F, the letter size, as svg_word draws them: circles a slot of .67F apart, the swoop's ends .17F under the
-# circles' centres with its control .37F under them and .107F past the outer circles, the cup .257F each side of its
-# vowel with its control .2F under its ends, the bar .279F each side. A logo drops the letters, so the cup comes down
-# to sit BROW above its circle, and WEIGHT thickens the circles and strokes so they hold at the size of a browser tab.
-FACES = {   # name: (sounds left to right as (colour, mark above), what it is)
-    "a": ([("k", None), ("r", None), ("k", None)], "three sound circles and a swoop: the sounds of leg"),
-    "b": ([("k", None), ("r", "cup")], "two sound circles and a swoop, a cup over the red one on the right"),
-    "c": ([("k", "bar"), ("r", "cup")], "two sound circles and a swoop, a bar over the black one and a cup over the red one"),
-    "d": ([("r", "cup"), ("k", None)], "two sound circles and a swoop, red first with a cup over it: the marks of it"),
+# circles' centres with its control .37F under them and .107F past the outer circles; the cup .257F each side of its
+# vowel with its control .2F under its ends; the bar .279F each side; the cone a dotted ring; the vault leaving the
+# cone's top and ending .21F over the bar, with its arrowhead. A logo drops the letters, so the marks above come down
+# to sit BROW over the circles, the cone sits in the row of circles where the e would be, and WEIGHT thickens circles
+# and strokes so they hold at small sizes.
+MARKS = {   # name: (circles left to right, (mark above, over which circle), what follows the circles, what it is)
+    "go": (["k", "r"], ("bar", 1), None, "two sound circles and a swoop, a bar over the red one: the marks of go"),
+    "it": (["r", "k"], ("cup", 0), None, "two sound circles and a swoop, red first with a cup over it: the marks of it"),
+    "leg": (["k", "r", "k"], ("cup", 1), None, "three sound circles and a swoop, a cup over the red one: the marks of leg"),
+    "leg-bare": (["k", "r", "k"], None, None, "three sound circles and a swoop"),
+    "note": (["k", "r", "k"], ("bar", 1), "cone", "three sound circles and a swoop, a bar over the red one, and an empty "
+             "cone with a vault reaching back to the bar: the marks of note"),
+    "note-ring": (["k", "r", "k"], ("bar", 1), "ring", "three sound circles and a swoop, a bar over the red one, and an "
+                  "empty red circle"),
 }
-WEIGHT, BROW, SLOT = 1.5, 0.28, 0.67
+WEIGHT, BROW, SLOT, CONE = 1.5, 0.33, 0.67, 0.30
 
 
-def face(name, F=100.0):
-    units, what = FACES[name]
-    n = len(units)
+def mark(name, F=100.0):
+    dots, top, tail, what = MARKS[name]
+    n = len(dots)
     r, sws, swm = 0.072 * WEIGHT * F, 0.046 * WEIGHT * F, 0.05 * WEIGHT * F
     xs = [SLOT * F * (i - (n - 1) / 2) for i in range(n)]
     xl, xr = xs[0] - 0.107 * F, xs[-1] + 0.107 * F
-    body, box = [], [xl - sws / 2, -r, xr + sws / 2, 0.27 * F + sws / 2]
+    body, box = [], [xl - sws, -r, xr + sws, 0.27 * F + sws]
     def grow(x0, y0, x1, y1): box[:] = [min(box[0], x0), min(box[1], y0), max(box[2], x1), max(box[3], y1)]
-    for x, (c, top) in zip(xs, units):
+    for x, c in zip(xs, dots):
         body.append(f'<circle class="{c}" cx="{x:.2f}" cy="0" r="{r:.2f}"/>')
-        if top == "cup":                                   # its lowest point sits BROW above the circle's centre
-            e = -(BROW + 0.1) * F
-            body.append(f'<path class="r st" d="M{x - .257 * F:.2f} {e:.2f} Q{x:.2f} {e + .2 * F:.2f} {x + .257 * F:.2f} {e:.2f}" '
-                        f'stroke-width="{swm:.2f}" stroke-linecap="round"/>')
-            grow(x - .257 * F - swm / 2, e - swm / 2, x + .257 * F + swm / 2, 0)
-        if top == "bar":
-            y = -(BROW + 0.05) * F
-            body.append(f'<line class="r st" x1="{x - .279 * F:.2f}" y1="{y:.2f}" x2="{x + .279 * F:.2f}" y2="{y:.2f}" '
-                        f'stroke-width="{swm:.2f}" stroke-linecap="round"/>')
-            grow(x - .279 * F - swm / 2, y - swm / 2, x + .279 * F + swm / 2, 0)
     body.append(f'<path class="b st" d="M{xl:.2f} {.17 * F:.2f} Q{(xl + xr) / 2:.2f} {.37 * F:.2f} {xr:.2f} {.17 * F:.2f}" '
                 f'stroke-width="{sws:.2f}" stroke-linecap="round"/>')
-    side = max(box[2] - box[0], box[3] - box[1]) * 1.2
+    xt = 0.0
+    if top:
+        kind, at = top
+        xt = xs[at]
+        if kind == "bar":
+            y = -BROW * F
+            body.append(f'<line class="r st" x1="{xt - .279 * F:.2f}" y1="{y:.2f}" x2="{xt + .279 * F:.2f}" y2="{y:.2f}" '
+                        f'stroke-width="{swm:.2f}" stroke-linecap="round"/>')
+            grow(xt - .279 * F - swm, y - swm, xt + .279 * F + swm, y)
+        else:                                              # the cup: its ends a little above the bar's line
+            e = -(BROW + 0.05) * F
+            body.append(f'<path class="r st" d="M{xt - .257 * F:.2f} {e:.2f} Q{xt:.2f} {e + .2 * F:.2f} {xt + .257 * F:.2f} {e:.2f}" '
+                        f'stroke-width="{swm:.2f}" stroke-linecap="round"/>')
+            grow(xt - .257 * F - swm, e - swm, xt + .257 * F + swm, e)
+    xe = xs[-1] + SLOT * F                                 # where the e would stand
+    if tail == "ring":
+        body.append(f'<circle class="r st" cx="{xe:.2f}" cy="0" r="{r - swm / 2:.2f}" stroke-width="{swm * 0.8:.2f}"/>')
+        grow(xe - r, -r, xe + r, r)
+    if tail == "cone":
+        cr, sw = CONE * F, 0.043 * WEIGHT * F
+        body.append(f'<circle class="q st" cx="{xe:.2f}" cy="0" r="{cr:.2f}" stroke-width="{0.038 * WEIGHT * F:.2f}" '
+                    f'stroke-linecap="round" stroke-dasharray="{0.012 * WEIGHT * F:.2f} {0.078 * WEIGHT * F:.2f}"/>')
+        ys, ex, ey = -cr, xt + 0.05 * F, -(BROW + 0.21) * F
+        c1, c2 = (xe - 0.04 * F, ys - 0.77 * F), (xt + 0.46 * F, min(ys - 0.77 * F, ey - 0.28 * F))
+        body.append(f'<path class="b st" d="M{xe:.2f} {ys:.2f} C{c1[0]:.2f} {c1[1]:.2f} {c2[0]:.2f} {c2[1]:.2f} {ex:.2f} {ey:.2f}" '
+                    f'stroke-width="{sw:.2f}" stroke-linecap="round"/>')
+        dx, dy = ex - c2[0], ey - c2[1]
+        d = math.hypot(dx, dy); dx, dy = dx / d, dy / d
+        c, s, size = math.cos(0.5), math.sin(0.5), 0.144 * F
+        a = (ex + size * (-dx * c + dy * s), ey + size * (-dx * s - dy * c))
+        b = (ex + size * (-dx * c - dy * s), ey + size * (dx * s - dy * c))
+        body.append(f'<path class="b st" d="M{a[0]:.2f} {a[1]:.2f} L{ex:.2f} {ey:.2f} L{b[0]:.2f} {b[1]:.2f}" '
+                    f'stroke-width="{sw:.2f}" stroke-linecap="round" stroke-linejoin="round"/>')
+        crest = min(0.125 * ys + 0.375 * c1[1] + 0.375 * c2[1] + 0.125 * ey, a[1], b[1])   # near the arc's top
+        grow(min(a[0], b[0]) - sw, crest - sw, xe + cr + sw, cr + sw)
+    side = max(box[2] - box[0], box[3] - box[1]) * 1.16
     mx, my = (box[0] + box[2]) / 2, (box[1] + box[3]) / 2
     return svg(body, mx - side / 2, my - side / 2, mx + side / 2, my + side / 2,
                f"Legomorphic Notation logo: {what}", pad=0)
@@ -206,5 +242,5 @@ if __name__ == "__main__":
     out.mkdir(parents=True, exist_ok=True)
     (HERE / "wordmark.svg").write_text(whole(nm), encoding="utf-8")
     (out / "wordmark-split.svg").write_text(split(nm), encoding="utf-8")
-    for name in FACES: (out / f"face-{name}.svg").write_text(face(name), encoding="utf-8")
+    for name in MARKS: (out / f"mark-{name}.svg").write_text(mark(name), encoding="utf-8")
     print("wrote", HERE / "wordmark.svg", "and the candidates in", out)

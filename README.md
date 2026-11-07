@@ -8,7 +8,7 @@ The site is at https://dantewetherow.github.io/sound-and-word-atlas/.
 
 - `docs/` is the site itself. GitHub Pages publishes this folder as it is.
 - `build/` has what makes it:
-  - `build_site.py` writes the pages from `data/route.json`.
+  - `build_site.py` writes the pages from `data/route.json`. Every page has a Bright/Night switch: it follows the device until a reader picks, and keeps the pick in that browser.
   - `parse_route.py` turns the manual's route section (`data/route_section.md`) into `data/route.json`.
   - `x2t.py` converts a read of the manual from the Claude Docs connector into markdown.
   - `legomorphic_words.py` draws the marked words.
@@ -20,7 +20,7 @@ The site is at https://dantewetherow.github.io/sound-and-word-atlas/.
   - `build_role_cards.py` makes the action cards (Dolch's verbs that aren't verb-system cards) and the actor cards (twelve pronouns and Dolch's 95 nouns) the same way: `python3 build/build_role_cards.py <node_modules> docs/sessions/handouts <a scratch folder>`. It holds the codes written for the nouns and the calls they rest on, which wait under "From the action and actor cards" in the Marking calls tab.
   - `build_verb_cards.py` makes the verb-system cards from `build_handouts.py`'s pieces, with the codes the notation didn't have and the calls they rest on: `python3 build/build_verb_cards.py <node_modules> docs/sessions/handouts <a scratch folder>`. The modal cards (8 October) have no builder; they are the PDFs as made, with the presenter's name taken out of the instruction sheet's footer.
   - `landing.py` writes the landing section at the top of the home page: *legomorphic* built up mark by mark, the way the decks build a word, and *note* to *notate* to *notation*, with the e dropping at each seam. Without script, or with reduced motion, it shows the finished words. The codes for its words and the calls they rest on are in `site_codes.py`.
-  - `logo.py` draws the wordmark, λέγω · morphic, from the fonts as paths, so the file stands on its own, and writes it to `build/wordmark.svg`. It also draws the other wordmark sketch (λέγ ō morph ic) and the candidates for the logo, faces made of the notation's marks, into an out dir: `python3 build/logo.py <node_modules> <out dir>`. The d b q p logo came off the site on 6 November 2026.
+  - `logo.py` draws the wordmark, λέγω · morphic, from the fonts as paths, so the file stands on its own, and writes it to `build/wordmark.svg`, which the About page draws in with the site's colours. It also draws the other wordmark sketch (λέγ ō morph ic) and the candidates for the logo, words' marks with their letters lifted out (go, it, leg, note), into an out dir: `python3 build/logo.py <node_modules> <out dir>`. The d b q p logo came off the site on 6 November 2026.
   - `about_pages.py` writes the About page, with the wordmark beside the etymology, and the Credits page, with the copyright notice and the contact link.
   - `site.css` is the stylesheet.
 

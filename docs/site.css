@@ -60,7 +60,15 @@ header.site { border-bottom: 1px solid var(--line); }
 header.site .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 28px; padding-block: 16px; }
 .brand { font-family: var(--display); font-size: 1.3rem; font-weight: 500; color: var(--ink); text-decoration: none; line-height: 1.2; }
 .brand small { display: block; font-family: var(--body); font-size: 0.7rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--soft); }
+header.site .tools { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 22px; }
 nav.site { display: flex; flex-wrap: wrap; gap: 6px 22px; font-size: 0.95rem; }
+/* bright and night: follows the device until a reader picks one (build_site.py) */
+.theme { display: inline-flex; gap: 2px; padding: 2px; border: 1px solid var(--line); border-radius: 999px; }
+.theme[hidden] { display: none; }
+.theme button { font: inherit; font-size: 0.8rem; line-height: 1; padding: 6px 12px; border: 0; border-radius: 999px;
+  background: transparent; color: var(--soft); cursor: pointer; }
+.theme button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.theme button:focus-visible { outline: 2px solid var(--modal); outline-offset: 2px; }
 nav.site a { text-decoration: none; font-weight: 400; }
 nav.site a:hover { text-decoration: underline; }
 footer.site { border-top: 1px solid var(--line); margin-top: 48px; }
@@ -230,7 +238,7 @@ table.wl-table tr.off th { font-weight: 500; }
 /* about and credits */
 .about-hero { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px 48px; align-items: center; }
 .wordmark { margin: 10px 0 18px; display: grid; gap: 10px; }
-.wordmark img { display: block; width: min(100%, 460px); height: auto; }
+.wordmark svg { display: block; width: min(100%, 460px); height: auto; }
 .wordmark figcaption { font-size: 0.9rem; color: var(--soft); }
 .prose > :not(.examples) { max-width: 74ch; }
 .prose p { margin: 0 0 12px; }

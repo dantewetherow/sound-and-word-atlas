@@ -7,9 +7,11 @@ legend gives them. The copyright holder, the licence and the contact address are
 The site is static, so contact is a mail link: the address is put together in the page, which keeps it out of the HTML
 that address harvesters read.
 
-The wordmark, λέγω · morphic, stands beside the etymology. logo.py draws it from the fonts into build/wordmark.svg,
-and this copies it to the site, since the fonts it is drawn from are not in the repository."""
-import pathlib, re, shutil
+The wordmark, λέγω · morphic, stands beside the etymology. logo.py draws it from the fonts into build/wordmark.svg (the
+fonts are not in the repository), and this draws it into the page with the site's colours, as every marked word on the
+site is drawn, so it follows the page between bright and night. As an image it took its colours from the device instead,
+and showed black Greek on a black page where the two disagreed."""
+import pathlib, re
 HERE = pathlib.Path(__file__).resolve().parent
 
 HOLDER = "Dante Wetherow, B.Ed., M.Ed."
@@ -26,19 +28,26 @@ EXAMPLES = [("could", "A red bond bar under <i>oul</i>, the letters that spell i
             ("funny", "The box around <i>nn</i> stops the <i>y</i> from reaching back, so the <i>u</i> stays short.")]
 
 
-def wordmark(OUT):
-    src = HERE / "wordmark.svg"
-    shutil.copyfile(src, OUT / "wordmark.svg")
-    w, h = (float(v) for v in re.search(r'viewBox="\S+ \S+ (\S+) (\S+)"', src.read_text(encoding="utf-8")).groups())
-    return (f'<figure class="wordmark"><img src="wordmark.svg" width="460" height="{460 * h / w:.0f}" '
-            f'alt="The wordmark: λέγω · morphic, over the words language, form, meaning">'
+SITE_COLOURS = {'class="k"': 'fill="var(--ink)"', 'class="r"': 'fill="var(--verb)"',
+                'class="k st"': 'fill="none" stroke="var(--ink)"', 'class="r st"': 'fill="none" stroke="var(--verb)"',
+                'class="b st"': 'fill="none" stroke="var(--modal)"', 'class="b seam"': 'fill="none" stroke="var(--modal)"'}
+
+
+def wordmark():
+    s = re.sub(r"<style>.*?</style>\n?", "", (HERE / "wordmark.svg").read_text(encoding="utf-8"), flags=re.S)
+    for cls, paint in sorted(SITE_COLOURS.items(), key=lambda kv: -len(kv[0])):    # the two-class names first
+        s = s.replace(cls, paint)
+    assert "class=" not in s, "wordmark.svg has a class the page doesn't colour"
+    s = s.replace('aria-label="Legomorphic Notation: λέγω, morphic. Language, form, meaning"',
+                  'aria-label="The wordmark: λέγω · morphic, over the words language, form, meaning"')
+    return (f'<figure class="wordmark">{s}'
             f'<figcaption>λέγω marked as the notation marks English: a circle under each sound, red for the vowels, a swoop '
             f'under each syllable (λέ and γω), and a seam where the stem λεγ- meets the ending -ω, &ldquo;I.&rdquo; The seam '
             f'falls inside a syllable, as it does in <i>making</i>.</figcaption></figure>')
 
 
 def write(OUT, page, header, footer, svg_of):
-    mark = wordmark(OUT)
+    mark = wordmark()
     examples ="".join(f'<figure class="ex">{svg_of(w, 56)}<figcaption>{cap}</figcaption></figure>' for w, cap in EXAMPLES)
     about = f"""{header(0)}
 <main>

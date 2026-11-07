@@ -88,20 +88,45 @@ def page(title, body, depth, desc):
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="{html.escape(desc)}">
 <title>{html.escape(title)}</title>
+<script>try {{ const t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; }} catch (e) {{}}</script>
 {FONTS}
 <link rel="stylesheet" href="{up}site.css">
 </head>
 <body>
 {body}
+{THEME_JS}
 </body>
 </html>
 """
 
+# Bright and night. The page follows the device until a reader picks one; the pick is kept in this browser, and picking
+# what the device already shows goes back to following the device. The script in the head sets the pick before the
+# page paints, so it never flashes the other colours. Without script the switch stays hidden and the device decides.
+THEME_JS = """<script>(() => {
+  const root = document.documentElement, dark = matchMedia('(prefers-color-scheme: dark)'), sw = document.querySelector('.theme');
+  if (!sw) return;
+  const now = () => root.dataset.theme || (dark.matches ? 'dark' : 'light');
+  const show = () => sw.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.pick === now())));
+  sw.addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    const pick = b.dataset.pick, device = dark.matches ? 'dark' : 'light';
+    try { if (pick === device) { delete root.dataset.theme; localStorage.removeItem('theme'); }
+          else { root.dataset.theme = pick; localStorage.setItem('theme', pick); } }
+    catch (err) { root.dataset.theme = pick; }
+    show();
+  });
+  if (dark.addEventListener) dark.addEventListener('change', show);
+  sw.hidden = false; show();
+})();</script>"""
+THEME_SWITCH = ('<div class="theme" role="group" aria-label="Page colours" hidden>'
+                '<button type="button" data-pick="light">Bright</button><button type="button" data-pick="dark">Night</button></div>')
+
 def header(depth):
     up = "../" * depth
     return (f'<header class="site"><div class="wrap"><a class="brand" href="{up}index.html"><small>Legomorphic Notation</small>Sound and Word Atlas</a>'
-            f'<nav class="site" aria-label="Site"><a href="{up}index.html#route">The route</a><a href="{up}index.html#marks">Reading the marks</a>'
-            f'<a href="{up}cards.html">Word cards</a><a href="{up}word-lists.html">Word lists</a><a href="{up}presentations.html">Presentations</a><a href="{up}about.html">About</a></nav></div></header>')
+            f'<div class="tools"><nav class="site" aria-label="Site"><a href="{up}index.html#route">The route</a><a href="{up}index.html#marks">Reading the marks</a>'
+            f'<a href="{up}cards.html">Word cards</a><a href="{up}word-lists.html">Word lists</a><a href="{up}presentations.html">Presentations</a><a href="{up}about.html">About</a></nav>'
+            f'{THEME_SWITCH}</div></div></header>')
 
 def footer(depth):
     up = "../" * depth

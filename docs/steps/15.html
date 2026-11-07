@@ -6,11 +6,12 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Step 15: The e drops, its jobs move, on the Sound and Word Atlas route.">
 <title>Step 15: The e drops, its jobs move</title>
+<script>try { const t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; } catch (e) {}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&family=Lexend:wght@300;400;500&display=swap">
 <link rel="stylesheet" href="../site.css">
 </head>
 <body>
-<header class="site"><div class="wrap"><a class="brand" href="../index.html"><small>Legomorphic Notation</small>Sound and Word Atlas</a><nav class="site" aria-label="Site"><a href="../index.html#route">The route</a><a href="../index.html#marks">Reading the marks</a><a href="../cards.html">Word cards</a><a href="../word-lists.html">Word lists</a><a href="../presentations.html">Presentations</a><a href="../about.html">About</a></nav></div></header>
+<header class="site"><div class="wrap"><a class="brand" href="../index.html"><small>Legomorphic Notation</small>Sound and Word Atlas</a><div class="tools"><nav class="site" aria-label="Site"><a href="../index.html#route">The route</a><a href="../index.html#marks">Reading the marks</a><a href="../cards.html">Word cards</a><a href="../word-lists.html">Word lists</a><a href="../presentations.html">Presentations</a><a href="../about.html">About</a></nav><div class="theme" role="group" aria-label="Page colours" hidden><button type="button" data-pick="light">Bright</button><button type="button" data-pick="dark">Night</button></div></div></div></header>
 <main class="wrap">
 <div class="step-head">
 <p class="eyebrow"><a href="../index.html#band-morphemes">Morphemes</a> · Step 15 of 32</p>
@@ -28,5 +29,21 @@
 <nav class="pn" aria-label="Steps"><a class="prev" href="14.html"><span>Step 14</span>The box blocks the vault</a><a class="next" href="16.html"><span>Step 16</span>Open and closed in longer words</a></nav>
 </main>
 <footer class="site"><div class="wrap"><p>Built on 6 November 2026 from the <i>Legomorphic Notation</i> manual. Steps 16 to 32 are a draft. Page references are to Edward Carney, <i>A Survey of English Spelling</i> (Routledge, 1994).</p><p>&copy; 2026 Dante Wetherow, B.Ed., M.Ed. Shared under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>. <a href="../credits.html">Credits and contact</a></p></div></footer>
+<script>(() => {
+  const root = document.documentElement, dark = matchMedia('(prefers-color-scheme: dark)'), sw = document.querySelector('.theme');
+  if (!sw) return;
+  const now = () => root.dataset.theme || (dark.matches ? 'dark' : 'light');
+  const show = () => sw.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.pick === now())));
+  sw.addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    const pick = b.dataset.pick, device = dark.matches ? 'dark' : 'light';
+    try { if (pick === device) { delete root.dataset.theme; localStorage.removeItem('theme'); }
+          else { root.dataset.theme = pick; localStorage.setItem('theme', pick); } }
+    catch (err) { root.dataset.theme = pick; }
+    show();
+  });
+  if (dark.addEventListener) dark.addEventListener('change', show);
+  sw.hidden = false; show();
+})();</script>
 </body>
 </html>
