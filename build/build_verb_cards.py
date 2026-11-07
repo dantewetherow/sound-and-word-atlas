@@ -102,7 +102,8 @@ def card_face(w):
 
 
 VERB_CSS = """
-.band{position:absolute;left:0;right:0;bottom:0;height:.13in;}
+.band{position:absolute;left:.3in;right:.3in;bottom:.22in;height:.09in;border-radius:.045in;}   /* clear of the page edge, so it prints */
+.scard .face{padding-bottom:.14in;box-sizing:border-box;}                                         /* the word sits up, clear of the band */
 .band.mv{background:var(--modal);} .band.st{background:var(--verb);}
 .pair{display:flex;column-gap:""" + f"{GAP}in" + """;align-items:flex-end;}
 .srow .w .mv{color:var(--modal);font-weight:500;} .srow .w .st{color:var(--verb);font-weight:500;}
