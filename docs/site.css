@@ -229,9 +229,9 @@ table.wl-table tr.off th { font-weight: 500; }
 
 /* about and credits */
 .about-hero { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px 48px; align-items: center; }
-.logo { margin: 0; text-align: center; }
-.logo img { display: block; width: 150px; height: 150px; margin: 0 auto 8px; }
-.logo figcaption { font-size: 0.85rem; color: var(--soft); }
+.wordmark { margin: 10px 0 18px; display: grid; gap: 10px; }
+.wordmark img { display: block; width: min(100%, 460px); height: auto; }
+.wordmark figcaption { font-size: 0.9rem; color: var(--soft); }
 .prose > :not(.examples) { max-width: 74ch; }
 .prose p { margin: 0 0 12px; }
 .marks-list, .credits { display: grid; gap: 8px; margin: 4px 0 16px; padding-left: 1.2em; }
@@ -242,8 +242,6 @@ table.wl-table tr.off th { font-weight: 500; }
 footer.site p + p { margin-top: 6px; }
 @media (max-width: 640px) {
   .about-hero { grid-template-columns: minmax(0, 1fr); }
-  .logo { justify-self: start; text-align: left; }
-  .logo img { margin: 0 0 8px; width: 110px; height: 110px; }
   .examples { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 18px; }
 }
 

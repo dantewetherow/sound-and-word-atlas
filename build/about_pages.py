@@ -5,8 +5,11 @@ build_site.py calls write() with its page, header, footer and svg_of functions. 
 Etymology Dictionary's entries for *leg- and morphology, opened on 6 November 2026. The marks are described as the site's
 legend gives them. The copyright holder, the licence and the contact address are the author's choices of 6 November 2026.
 The site is static, so contact is a mail link: the address is put together in the page, which keeps it out of the HTML
-that address harvesters read."""
-import pathlib
+that address harvesters read.
+
+The wordmark, λέγω · morphic, stands beside the etymology. logo.py draws it from the fonts into build/wordmark.svg,
+and this copies it to the site, since the fonts it is drawn from are not in the repository."""
+import pathlib, re, shutil
 HERE = pathlib.Path(__file__).resolve().parent
 
 HOLDER = "Dante Wetherow, B.Ed., M.Ed."
@@ -23,8 +26,20 @@ EXAMPLES = [("could", "A red bond bar under <i>oul</i>, the letters that spell i
             ("funny", "The box around <i>nn</i> stops the <i>y</i> from reaching back, so the <i>u</i> stays short.")]
 
 
+def wordmark(OUT):
+    src = HERE / "wordmark.svg"
+    shutil.copyfile(src, OUT / "wordmark.svg")
+    w, h = (float(v) for v in re.search(r'viewBox="\S+ \S+ (\S+) (\S+)"', src.read_text(encoding="utf-8")).groups())
+    return (f'<figure class="wordmark"><img src="wordmark.svg" width="460" height="{460 * h / w:.0f}" '
+            f'alt="The wordmark: λέγω · morphic, over the words language, form, meaning">'
+            f'<figcaption>λέγω marked as the notation marks English: a circle under each sound, red for the vowels, a swoop '
+            f'under each syllable (λέ and γω), and a seam where the stem λεγ- meets the ending -ω, &ldquo;I.&rdquo; The seam '
+            f'falls inside a syllable, as it does in <i>making</i>.</figcaption></figure>')
+
+
 def write(OUT, page, header, footer, svg_of):
-    examples = "".join(f'<figure class="ex">{svg_of(w, 56)}<figcaption>{cap}</figcaption></figure>' for w, cap in EXAMPLES)
+    mark = wordmark(OUT)
+    examples ="".join(f'<figure class="ex">{svg_of(w, 56)}<figcaption>{cap}</figcaption></figure>' for w, cap in EXAMPLES)
     about = f"""{header(0)}
 <main>
 <section class="hero"><div class="wrap about-hero">
@@ -38,6 +53,7 @@ def write(OUT, page, header, footer, svg_of):
 <section class="about" aria-labelledby="word-h"><div class="wrap prose">
 <h2 id="word-h">The word</h2>
 <p><i>Legomorphic</i> is built from two old words, a word for gathering and a word for shape.</p>
+{mark}
 <p><i>Lego</i> is the same word in Greek and in Latin, and in both it means &ldquo;I gather.&rdquo; Greek <i>legō</i> (λέγω) first meant to pick out, to gather and to count, and from picking out words it came to mean to say and to tell. Latin <i>legō</i> (<i>legere</i>) means to gather and to choose, and also to read. The root gives a speaker&rsquo;s word in Greek and a reader&rsquo;s word in Latin.</p>
 <p>English has both families. From the Greek come <i>lexicon</i>, <i>dialogue</i> and <i>logic</i>; from the Latin, <i>legible</i>, <i>lecture</i>, <i>collect</i> and <i>select</i>. Linguists trace them all to a Proto-Indo-European root, written *leg-, to collect or gather.</p>
 <p><i>Morphē</i> (μορφή) is Greek for form or shape. It gives us <i>morpheme</i>, and <i>morphology</i>, the study of word forms, which joins the same two roots the other way round.</p>
