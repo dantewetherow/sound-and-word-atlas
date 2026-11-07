@@ -30,14 +30,22 @@ EXAMPLES = [("could", "A red bond bar under <i>oul</i>, the letters that spell i
 
 SITE_COLOURS = {'class="k"': 'fill="var(--ink)"', 'class="r"': 'fill="var(--verb)"',
                 'class="k st"': 'fill="none" stroke="var(--ink)"', 'class="r st"': 'fill="none" stroke="var(--verb)"',
-                'class="b st"': 'fill="none" stroke="var(--modal)"', 'class="b seam"': 'fill="none" stroke="var(--modal)"'}
+                'class="b st"': 'fill="none" stroke="var(--modal)"', 'class="b seam"': 'fill="none" stroke="var(--modal)"',
+                'class="q st"': 'fill="none" stroke="var(--soft)"'}
+
+
+def in_site_colours(name):
+    """A file logo.py drew, ready to draw into a page: its own colour rules out, the site's colours in, so it follows
+    the page between bright and night."""
+    s = re.sub(r"<style>.*?</style>\n?", "", (HERE / name).read_text(encoding="utf-8"), flags=re.S)
+    for cls, paint in sorted(SITE_COLOURS.items(), key=lambda kv: -len(kv[0])):    # the two-class names first
+        s = s.replace(cls, paint)
+    assert "class=" not in s, f"{name} has a class the page doesn't colour"
+    return s
 
 
 def wordmark():
-    s = re.sub(r"<style>.*?</style>\n?", "", (HERE / "wordmark.svg").read_text(encoding="utf-8"), flags=re.S)
-    for cls, paint in sorted(SITE_COLOURS.items(), key=lambda kv: -len(kv[0])):    # the two-class names first
-        s = s.replace(cls, paint)
-    assert "class=" not in s, "wordmark.svg has a class the page doesn't colour"
+    s = in_site_colours("wordmark.svg")
     s = s.replace('aria-label="Legomorphic Notation: λέγω, morphic. Language, form, meaning"',
                   'aria-label="The wordmark: λέγω · morphic, over the words language, form, meaning"')
     return (f'<figure class="wordmark">{s}'
@@ -46,8 +54,10 @@ def wordmark():
             f'falls inside a syllable, as it does in <i>making</i>.</figcaption></figure>')
 
 
-def write(OUT, page, header, footer, svg_of):
+def write(OUT, page, header, footer, svg_of, LW):
+    import characters
     mark = wordmark()
+    note = characters.lifted(LW, "note", label="Note, the notation's mascot: note with its letters lifted out", scale=1.2)
     examples ="".join(f'<figure class="ex">{svg_of(w, 56)}<figcaption>{cap}</figcaption></figure>' for w, cap in EXAMPLES)
     about = f"""{header(0)}
 <main>
@@ -57,6 +67,7 @@ def write(OUT, page, header, footer, svg_of):
 <h1>Legomorphic Notation</h1>
 <p class="lead">A set of marks and colours drawn on ordinary spelling, so that what a reader usually has to work out alone is there for everyone to see: how many sounds a word has, which letters spell each sound, where its meaningful parts join, and which letters change the sounds of others.</p>
 </div>
+<figure class="mascot-hero"><a href="definitions.html#def-legomorph">{note}</a><figcaption>Note, the notation&rsquo;s mascot: <i>note</i> with its letters lifted out</figcaption></figure>
 </div></section>
 
 <section class="about" aria-labelledby="word-h"><div class="wrap prose">

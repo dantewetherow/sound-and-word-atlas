@@ -88,6 +88,9 @@ def page(title, body, depth, desc):
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="{html.escape(desc)}">
 <title>{html.escape(title)}</title>
+<link rel="icon" href="{up}favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="{up}favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="{up}apple-touch-icon.png">
 <script>try {{ const t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; }} catch (e) {{}}</script>
 {FONTS}
 <link rel="stylesheet" href="{up}site.css">
@@ -118,12 +121,18 @@ THEME_JS = """<script>(() => {
   if (dark.addEventListener) dark.addEventListener('change', show);
   sw.hidden = false; show();
 })();</script>"""
+# The logo, go with its letters lifted out (logo.py, build/logo.svg), drawn into the header in the site's colours so it
+# follows bright and night. The brand link names the site, so the drawing is hidden from screen readers.
+import about_pages
+LOGO = re.sub(r' role="img" aria-label="[^"]*"', ' aria-hidden="true" focusable="false"',
+              re.sub(r"<title>.*?</title>\n?", "", about_pages.in_site_colours("logo.svg")), count=1)
+
 THEME_SWITCH = ('<div class="theme" role="group" aria-label="Page colours" hidden>'
                 '<button type="button" data-pick="light">Bright</button><button type="button" data-pick="dark">Night</button></div>')
 
 def header(depth):
     up = "../" * depth
-    return (f'<header class="site"><div class="wrap"><a class="brand" href="{up}index.html"><small>Legomorphic Notation</small>Sound and Word Atlas</a>'
+    return (f'<header class="site"><div class="wrap"><a class="brand" href="{up}index.html"><span class="logo">{LOGO}</span><span class="name"><small>Legomorphic Notation</small>Sound and Word Atlas</span></a>'
             f'<div class="tools"><nav class="site" aria-label="Site"><a href="{up}index.html#route">The route</a><a href="{up}index.html#marks">Reading the marks</a>'
             f'<a href="{up}definitions.html">Definitions</a><a href="{up}cards.html">Word cards</a><a href="{up}word-lists.html">Word lists</a><a href="{up}presentations.html">Presentations</a><a href="{up}about.html">About</a></nav>'
             f'{THEME_SWITCH}</div></div></header>')
@@ -365,12 +374,14 @@ word_lists.write(OUT, page, header, footer, coloured, LW)
 import sessions
 sessions.write(OUT, page, header, footer)
 
-import about_pages
-about_pages.write(OUT, page, header, footer, svg_of)
+about_pages.write(OUT, page, header, footer, svg_of, LW)
 
 import definitions
 definitions.write(OUT, page, header, footer, svg_of, KEY, LW)
 
 if (HERE / "site.css").exists():
     shutil.copy(HERE / "site.css", OUT / "site.css")
+shutil.copy(HERE / "logo.svg", OUT / "favicon.svg")          # the tab icon: the logo's own colour rules, light or dark
+for icon in ("favicon-32.png", "apple-touch-icon.png"):      # for browsers that can't use an SVG icon
+    shutil.copy(HERE / icon, OUT / icon)
 print("wrote", OUT, "| words", n_words, "marked", n_marked)

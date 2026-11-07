@@ -59,6 +59,9 @@ p { margin: 0; }
 header.site { border-bottom: 1px solid var(--line); }
 header.site .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 28px; padding-block: 16px; }
 .brand { font-family: var(--display); font-size: 1.3rem; font-weight: 500; color: var(--ink); text-decoration: none; line-height: 1.2; }
+.brand { display: flex; align-items: center; gap: 10px; }
+.brand .logo svg { display: block; width: 54px; height: 54px; margin: -4px 0; }
+.brand .name { display: block; }
 .brand small { display: block; font-family: var(--body); font-size: 0.7rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--soft); }
 header.site .tools { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 22px; }
 nav.site { display: flex; flex-wrap: wrap; gap: 6px 22px; font-size: 0.95rem; }
@@ -266,6 +269,26 @@ table.wl-table tr.off th { font-weight: 500; }
 .mascot .to { color: var(--soft); font-size: 1.4rem; }
 .mascot figcaption { font-size: 0.9rem; color: var(--soft); }
 @media (max-width: 560px) { .marks-defs .mk dd { grid-template-columns: minmax(0, 1fr); } .mdraw { justify-content: flex-start; } }
+/* the characters (characters.py): Note, and the Dialogue Team */
+svg.lifted { display: block; max-width: 100%; height: auto; }
+.mascot-hero { margin: 0; display: grid; justify-items: center; gap: 8px; }
+.mascot-hero a { display: block; }
+.mascot-hero figcaption { max-width: 15em; font-size: 0.85rem; color: var(--soft); text-align: center; }
+.team { margin: 6px 0 18px; display: grid; gap: 6px; }
+.team-line { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 6px 10px; font-size: 16px; }
+.team .member { margin: 0; padding: 6px 8px; display: grid; justify-items: center; gap: 4px; border: 2px solid transparent; border-radius: 12px; }
+.team .member.moving { border-color: var(--modal); }
+.team .member figcaption { display: grid; justify-items: center; font-size: 0.85rem; line-height: 1.25; }
+.team .member figcaption span { font-size: 0.78rem; color: var(--soft); }
+.team .say { margin: 0 0 1.9rem 8px; font-size: 1.15rem; color: var(--soft); white-space: nowrap; }
+.team > figcaption { font-size: 0.9rem; color: var(--soft); }
+@media (max-width: 640px) {
+  .mascot-hero { justify-items: start; }
+  .mascot-hero figcaption { text-align: left; }
+  .team-line { font-size: 11px; gap: 4px 6px; }
+  .team .member { padding: 4px 4px; }
+  .team .say { flex-basis: 100%; margin: 0 0 6px 6px; }
+}
 .wordmark { margin: 10px 0 18px; display: grid; gap: 10px; }
 .wordmark svg { display: block; width: min(100%, 460px); height: auto; }
 .wordmark figcaption { font-size: 0.9rem; color: var(--soft); }

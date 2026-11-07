@@ -3,7 +3,7 @@ for sentences, marks and teaching, each saying whether it was coined for the not
 whom.
 
 The definitions of legomorph and legomorphics are Dante Wetherow's of 7 November 2026. The second sense of legomorph
-is the one his demonstration paper gives the grammar's primes. Sentence terms follow the About page, the verb cards and
+is the one his demonstration paper gives the grammar's primes. Note and the Dialogue Team come from characters.py. Sentence terms follow the About page, the verb cards and
 the teaching notes (head, body and legs). The marks come from the legend (KEY in build_site.py), so the two can't drift
 apart. The LEGO note follows the LEGO Group's own history page, opened on 7 November 2026.
 
@@ -97,15 +97,6 @@ def entries(rows):
     return '<dl class="defs">' + "".join(out) + "</dl>"
 
 
-def lifted(LW, word, F, label):
-    """A word with its letters lifted out and its marks left where they were."""
-    svg, _, _ = LW.svg_strip([word], F=F, cls=True, label=label)
-    svg = re.sub(r'<rect class="wt"[^>]*/>', "", svg)
-    svg = re.sub(r'<g class="nz5".*?</g>', "", svg, flags=re.S)
-    svg = re.sub(r' class="nz\d"', "", svg).replace(' class="nz"', "")
-    return svg
-
-
 def write(OUT, page, header, footer, svg_of, KEY, LW):
     contraction = next((w for w in ("can’t", "don’t", "isn’t", "it’s") if w in LW.W),
                        next((w for w in LW.W if "’" in w), None))
@@ -117,9 +108,11 @@ def write(OUT, page, header, footer, svg_of, KEY, LW):
                      f'<dd><span class="mtext">{text}.</span><span class="mdraw">{drawn}</span></dd></div>')
     marks_html = '<dl class="defs marks-defs">' + "".join(marks) + "</dl>"
 
+    import characters
     unsize = lambda svg: re.sub(r' style="[^"]*"', "", svg, count=1)
     note_marked = unsize(svg_of("note", 64, label="note, marked"))
-    note_lifted = unsize(lifted(LW, "note", 64, "Note, the mascot: note with its letters lifted out"))
+    note_lifted = characters.lifted(LW, "note", label="Note, the mascot: note with its letters lifted out")
+    team = characters.team(LW)
 
     body = f"""{header(0)}
 <main>
@@ -151,7 +144,7 @@ def write(OUT, page, header, footer, svg_of, KEY, LW):
 <li>In the grammar of legomorphics, a prime: one of the first categories a sentence is assembled from, such as the actor, the action and the acted-on (Latin <i>primus</i>, first).</li>
 </ol>
 <figure class="mascot"><div class="pair">{note_marked}<span class="to" aria-hidden="true">&rarr;</span>{note_lifted}</div>
-<figcaption>Note, the notation&rsquo;s mascot: <i>note</i> with its letters lifted out, leaving its legomorphs. The three circles are its phonemes, and the vault from the silent <i>e</i> in its cone to the bar over the <i>o</i> is its transformation.</figcaption></figure>
+<figcaption>Note, the notation&rsquo;s mascot: <i>note</i> with its letters lifted out and the gap they leave closed, so its legomorphs stand on their own. The three circles are its phonemes, and the vault from the silent <i>e</i> in its cone to the bar over the <i>o</i> is its transformation.</figcaption></figure>
 <span class="src">Coined for the notation.</span></dd></div>
 
 <div class="def" id="def-legomorphics"><dt>legomorphics <span class="pos">noun, singular</span> <span class="pron">/ˌlɛɡoʊˈmɔrfɪks/</span></dt>
@@ -165,6 +158,7 @@ def write(OUT, page, header, footer, svg_of, KEY, LW):
 <section class="about" id="sentences" aria-labelledby="sent-h"><div class="wrap prose">
 <h2 id="sent-h">Sentences</h2>
 <p>Every sentence has a head, a body and legs: who or what it&rsquo;s about, what they do, and what they do it to. These are the words for its parts, and for the two things a sentence can do, claim and ask.</p>
+{team}
 {entries(SENTENCES)}
 </div></section>
 

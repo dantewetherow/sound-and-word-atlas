@@ -7,7 +7,9 @@ The wordmark, from Dante's sketches of 6 November 2026, which replace the d b q 
                             and written to build/wordmark.svg, which about_pages.py draws into the page
   split   λέγ┊ō┊morph┊ic    the word as the notation reads it in English: leg, o, morph and ic, with seams
 
-The logo candidates: a word's own marks with its letters lifted out, so every mark is true (6 November 2026).
+The logo: go, chosen on 7 November 2026 for the site's header and the browser tab, written to build/logo.svg with PNG
+copies for browsers that can't use an SVG icon (favicon-32.png, apple-touch-icon.png). The candidates were a word's own
+marks with its letters lifted out, so every mark is true (6 November 2026):
 
   go          two circles and a swoop, a bar over the red one: a vowel that ends its syllable says its name
   it          red first, with a cup over it: a short vowel closed by a consonant
@@ -25,6 +27,7 @@ and vaults, and the soft grey of the cone. Greek in Gentium Plus, Latin in Lexen
 License. As files, the colours turn light on a dark screen.
 
 Run:  python3 build/logo.py <node_modules with the @fontsource packages> <out dir for the candidates>
+      (the PNGs are drawn with Playwright, which this workspace has)
 """
 import math, pathlib, sys
 from fontTools.ttLib import TTFont
@@ -182,6 +185,8 @@ MARKS = {   # name: (circles left to right, (mark above, over which circle), wha
                   "empty red circle"),
 }
 WEIGHT, BROW, SLOT, CONE = 1.5, 0.33, 0.67, 0.30
+CHOSEN = "go"
+PAPER = "#f4efe6"                                          # the site's --paper, behind the PNG icons
 
 
 def mark(name, F=100.0):
@@ -243,4 +248,13 @@ if __name__ == "__main__":
     (HERE / "wordmark.svg").write_text(whole(nm), encoding="utf-8")
     (out / "wordmark-split.svg").write_text(split(nm), encoding="utf-8")
     for name in MARKS: (out / f"mark-{name}.svg").write_text(mark(name), encoding="utf-8")
+    logo = mark(CHOSEN)
+    (HERE / "logo.svg").write_text(logo, encoding="utf-8")
+    from playwright.sync_api import sync_playwright         # the PNG icons: the mark on the paper colour, light marks
+    with sync_playwright() as pw:
+        page = pw.chromium.launch().new_page(color_scheme="light")
+        for name, px, share in (("apple-touch-icon.png", 180, 0.78), ("favicon-32.png", 32, 1.0)):
+            inner = logo.replace("<svg ", f'<svg width="{px * share:.0f}" height="{px * share:.0f}" ', 1)
+            page.set_content(f'<div id="t" style="width:{px}px;height:{px}px;background:{PAPER};display:grid;place-items:center">{inner}</div>')
+            page.locator("#t").screenshot(path=str(HERE / name))
     print("wrote", HERE / "wordmark.svg", "and the candidates in", out)

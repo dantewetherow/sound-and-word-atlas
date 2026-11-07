@@ -1,0 +1,81 @@
+"""The notation's characters: words with their letters lifted out, so their marks stand on their own as faces.
+
+Note, the mascot, is note. The Dialogue Team is She, Could and Go, the actor, operator and action of a claim; when
+Could flips to the front, the claim becomes a question. Chosen on 7 November 2026.
+
+A lifted word keeps every mark svg_word draws, in its order. With the letters gone, the marks drawn above them (long
+and short marks, the cone, the vault) come down by DROP letter sizes to close the gap, and the marks drawn under them
+(bond bars, circles, swoops, nudges) stay where they were. The drawing is then cropped to its marks. Boxes and seams,
+which run through the letters, aren't moved, so a word with either would need more thought before it joins the team."""
+import math, re
+
+DROP = 0.62
+TEAM = [("she", "She", "actor"), ("could", "Could", "operator"), ("go", "Go", "action")]
+NUM = r"-?\d+(?:\.\d+)?"
+
+
+def _points(el):
+    """Points enough to bound one drawn element: circle and line ends, and samples along each path."""
+    sw = float((re.search(r'stroke-width="(' + NUM + ')"', el) or [0, 0])[1]) / 2
+    if el.startswith("<circle"):
+        cx, cy, r = (float(re.search(f'{a}="({NUM})"', el)[1]) for a in ("cx", "cy", "r"))
+        r += sw
+        return [(cx - r, cy - r), (cx + r, cy + r)]
+    if el.startswith("<line"):
+        x1, y1, x2, y2 = (float(re.search(f'{a}="({NUM})"', el)[1]) for a in ("x1", "y1", "x2", "y2"))
+        return [(x1 - sw, y1 - sw), (x2 + sw, y2 + sw), (x1 + sw, y1 + sw), (x2 - sw, y2 - sw)]
+    if el.startswith("<rect"):
+        x, y, w, h = (float(re.search(f' {a}="({NUM})"', el)[1]) for a in ("x", "y", "width", "height"))
+        return [(x - sw, y - sw), (x + w + sw, y + h + sw)]
+    d = re.search(r' d="([^"]+)"', el)[1]
+    pts, cur = [], (0.0, 0.0)
+    for cmd, args in re.findall(r"([MLQC])([^MLQC]*)", d):
+        v = [float(n) for n in re.findall(NUM, args)]
+        ctrl = [cur] + [(v[i], v[i + 1]) for i in range(0, len(v), 2)]
+        if cmd in "ML":
+            pts.append(ctrl[-1])
+        else:                                              # a Bezier curve: sample it, so its bulge counts and its handles don't
+            n = len(ctrl) - 1
+            for k in range(1, 21):
+                t = k / 20
+                pts.append(tuple(sum(math.comb(n, i) * (1 - t) ** (n - i) * t ** i * p[j] for i, p in enumerate(ctrl)) for j in (0, 1)))
+        cur = ctrl[-1]
+    return [(x + dx, y + dy) for x, y in pts for dx, dy in ((-sw, -sw), (sw, sw))]
+
+
+def lifted(LW, word, F=58.0, label=None, pad=0.08, scale=1.0, em=None):
+    """The word's marks with its letters lifted out and the gap closed, cropped to the marks. Colours come from the
+    site's variables, so it follows the page between bright and night. With em, the width is set in ems, so a group of
+    drawings can be scaled together by its font size."""
+    g, _, _ = LW.svg_word(word, F, 0.0, cls=True)
+    B = 1.44 * F                                           # svg_word's baseline
+    g = re.sub(r'<rect class="wt"[^>]*/>', "", g)
+    g = re.sub(r'<g class="nz5".*?</g>', "", g, flags=re.S)
+    out, pts = [], []
+    for el in re.findall(r"<[^>]+/>", g):
+        first = re.search(f'(?:cy|y1)="({NUM})"', el) or re.search(f'd="M{NUM} ({NUM})', el)
+        dy = DROP * F if re.search(r'class="nz(6|8)"', el) and first and float(first[1]) < B else 0.0
+        el = re.sub(r' class="nz\d"', "", el)
+        pts += [(x, y + dy) for x, y in _points(el)]
+        out.append(f'<g transform="translate(0 {dy:.1f})">{el}</g>' if dy else el)
+    x0, y0 = min(p[0] for p in pts) - pad * F, min(p[1] for p in pts) - pad * F
+    w, h = max(p[0] for p in pts) + pad * F - x0, max(p[1] for p in pts) + pad * F - y0
+    aria = f' role="img" aria-label="{label}"' if label else ' aria-hidden="true"'
+    size = f' style="width:{w * em:.2f}em;height:auto"' if em else ""
+    return (f'<svg class="lifted" viewBox="{x0:.1f} {y0:.1f} {w:.1f} {h:.1f}" width="{w * scale:.0f}" height="{h * scale:.0f}"{size}{aria}>'
+            + "".join(out) + "</svg>")
+
+
+def team(LW, scale=0.95):
+    """The Dialogue Team making a claim, then the flip: Could moves to the front, outlined in blue as on the word cards."""
+    def member(word, name, role, moving=False):
+        return (f'<figure class="member{" moving" if moving else ""}">{lifted(LW, word, label=f"{name}, {word} with its letters lifted out", scale=scale, em=scale / 16)}'
+                f'<figcaption><b>{name}</b><span>{role}</span></figcaption></figure>')
+    claim = "".join(member(*m) for m in TEAM)
+    flipped = [TEAM[1], TEAM[0], TEAM[2]]
+    question = "".join(member(*m, moving=(m[0] == "could")) for m in flipped)
+    return (f'<figure class="team" aria-label="The Dialogue Team"><div class="team-line">{claim}<p class="say">She could go.</p></div>'
+            f'<div class="team-line">{question}<p class="say">Could she go?</p></div>'
+            f'<figcaption>The Dialogue Team. She, Could and Go, the actor, operator and action, make a claim. When Could, the '
+            f'operator, flips to the front, the claim becomes a question. Their faces are their words with the letters lifted '
+            f'out, like Note&rsquo;s.</figcaption></figure>')
