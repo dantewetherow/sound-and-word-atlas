@@ -32,10 +32,14 @@ THE CODE, unit by unit, left to right
     |       a syllable break (each syllable gets its own swoop)
     +       a morpheme seam
 After a semicolon, by unit number (counting from 0, skipping | and +; a group such as c.nt is one unit):
-    vault A>B     a vault from the sounded vowel in unit A back to the vowel in unit B
+    vault A>B     a vault from the sounded vowel in unit A back to the vowel in unit B. A may be a consonant unit that
+                  holds a vowel letter, which sends the vault: the i of k.ti in notation, as the create family deck
+                  draws creation (the t and i say sh together, and the i still makes the a long)
     bv A>B        a vault from unit A that the box at unit B stops (bv A>B-C for a box over units B to C)
     nudge A>B     a nice-nudge from the vowel in unit A to the c or g in unit B (B may be a box, as the dg of nudge)
     box A         a block box around the cluster in unit A (box A-B for units A to B)
+    seam N        a morpheme seam after letter N (counting letters from 0), for a seam inside a unit: notat + ion
+                  puts the seam between the t and the i of k.ti
 
 Run:  python3 legomorphic_words.py            checks every word and prints a summary
       python3 legomorphic_words.py --cards    writes legomorphic_words_cards.json (marking-cards form)
@@ -214,8 +218,11 @@ def parse(word):
         src, _, dst = arg.partition(">")
         rng = lambda x: (units[int(x.split("-")[0])]["cols"][0], units[int(x.split("-")[-1])]["cols"][-1])
         if op == "vault":
-            assert units[int(src)]["kind"] in VOWEL_KINDS and units[int(dst)]["kind"] == "l", (word, a)
-            marks.append({"type": "vault", "from": units[int(dst)]["cols"][0], "to": units[int(src)]["cols"][0], "cone": False})
+            u = units[int(src)]
+            send = u["cols"][0] if u["kind"] in VOWEL_KINDS else next(
+                (c for c, ch in zip(u["cols"], u["text"]) if u["kind"] == "k" and ch.lower() in "aeiouy"), None)
+            assert send is not None and units[int(dst)]["kind"] == "l", (word, a)
+            marks.append({"type": "vault", "from": units[int(dst)]["cols"][0], "to": send, "cone": False})
         elif op == "bv":                                  # a vowel, or a silent e in a cone, whose vault a box stops (funny, edge)
             assert units[int(src)]["kind"] in VOWEL_KINDS | {"e0"}, (word, a)
             f, t = rng(dst); marks.append({"type": "blockedvault", "from": units[int(src)]["cols"][0], "blockFrom": f, "blockTo": t})
@@ -225,6 +232,9 @@ def parse(word):
             marks.append({"type": "nudge", "from": units[int(src)]["cols"][0], "to": cg[-1]})
         elif op == "box":
             f, t = rng(arg); marks.append({"type": "block", "from": f, "to": t})
+        elif op == "seam":
+            assert 0 <= int(arg) < col - 1, (word, a)
+            marks.append({"type": "seam", "after": int(arg)})
         else: raise ValueError((word, a))
     if word not in NO_SWOOP:                              # endings that are a syllable in some words and not in others get none
         for a, b in sylls: marks.append({"type": "swoop", "from": a, "to": b})

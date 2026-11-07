@@ -214,15 +214,14 @@ home_head = f"""<title>Sound and Word Atlas</title>
 {FONTS}
 <link rel="stylesheet" href="site.css">
 """
+import landing
+for w in ("legomorphic", "note", "notate", "notation"): assert w in LW.W, w
 home_body = f"""{header(0)}
 <main>
-<section class="hero"><div class="wrap">
-<p class="eyebrow">For teachers · Version 1</p>
-<h1>Sound and Word Atlas</h1>
-<p class="lead">{md(route["intro"].split(" The orientation map")[0])} Open a step to see its words marked, the marks it brings in, and the pages in Carney's survey that back it.</p>
-</div></section>
+{landing.html_block(LW)}
 <section class="route" id="route" aria-labelledby="route-h"><div class="wrap">
 <h2 id="route-h">The route at a glance</h2>
+<p class="lead">{md(route["intro"].split(" The orientation map")[0])} Open a step to see its words marked, the marks it brings in, and the pages in Carney's survey that back it.</p>
 <p class="sub">Each word is shown with its letters in colour: red for vowels, green for <em>sh</em>, <em>th</em> and <em>ch</em>, black for the rest.</p>
 {''.join(bands_html)}
 </div></section>
