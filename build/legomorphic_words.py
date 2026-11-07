@@ -256,7 +256,10 @@ def card_spec(word):
 
 # ------------------------------------------------------------------ drawing, at the deck's scale
 # Every measure is a multiple of the letter size F, taken from the word builds in Session 1
-# (bond bar at +0.30 F under the baseline, circle at +0.56 F, swoop at +0.73 F, long mark at -0.91 F ...).
+# (bond bar at +0.30 F under the baseline, circle at +0.56 F, swoop at +0.85 F, long mark at -0.91 F ...).
+# The swoop came down from +0.73 F to +0.85 F on 7 November 2026, everywhere the notation is drawn, so it reads as a
+# smile under the circles rather than a line hugging them; a word drawing grew from 2.36 F to 2.48 F tall to hold it.
+SWOOP, HEIGHT = 0.85, 2.48
 INK, RED, GREEN, BLUE, QUIET = "var(--ink)", "var(--verb)", "var(--subject)", "var(--modal)", "var(--soft)"   # the cone is drawn in the soft text grey, which shows from the back of a room
 # How far each Lexend letter's ink reaches left and right of its centre, as a share of the letter size (measured from the font).
 INKX = {"a": (.285, .246), "b": (.252, .279), "c": (.236, .248), "d": (.286, .261), "e": (.262, .270), "f": (.165, .194), "g": (.293, .254),
@@ -278,7 +281,7 @@ def svg_word(word, F=80.0, x0=0.0, cls=True):
     With classes on, the word also carries a band (class wt) that stands in for its letters while only its sounds show."""
     p = parse(word)
     S, M, G = slot(word) * F, 0.30 * F, 0.22 * F
-    B, H = 1.44 * F, 2.36 * F
+    B, H = 1.44 * F, HEIGHT * F
     seams = sorted(m["after"] for m in p["marks"] if m["type"] == "seam")
     n = len(p["letters"])
     room = [0.0] * n                                         # extra room after a letter
@@ -364,7 +367,7 @@ def svg_word(word, F=80.0, x0=0.0, cls=True):
             assert inside, (word, "a syllable with no sound")
             xl, xr = min(d["x"] for d in inside) - 0.107 * F, max(d["x"] for d in inside) + 0.107 * F
             if len(inside) == 1: xl, xr = xl - 0.10 * F, xr + 0.10 * F
-            out.append(f'<path{k(3)} d="M{f(xl)} {f(B + 0.73 * F)} Q{f((xl + xr) / 2)} {f(B + 0.93 * F)} {f(xr)} {f(B + 0.73 * F)}" fill="none" stroke="{BLUE}" stroke-width="{f(0.046 * F)}" stroke-linecap="round"/>')
+            out.append(f'<path{k(3)} d="M{f(xl)} {f(B + SWOOP * F)} Q{f((xl + xr) / 2)} {f(B + (SWOOP + 0.2) * F)} {f(xr)} {f(B + SWOOP * F)}" fill="none" stroke="{BLUE}" stroke-width="{f(0.046 * F)}" stroke-linecap="round"/>')
     return "".join(out), width, H
 
 def svg_strip(words, F=80.0, gap=None, label=None, cls=True, extra_class="", css_height=None):
@@ -375,7 +378,7 @@ def svg_strip(words, F=80.0, gap=None, label=None, cls=True, extra_class="", css
         g, wd, H = svg_word(w, F, x, cls)
         parts.append(f'<g data-word="{w}">{g}</g>'); x += wd + gap
     width = x - gap if words else 0
-    H = 2.36 * F
+    H = HEIGHT * F
     label = label or ("Marked: " + ", ".join(words))
     style = f' style="width:{width:.0f}px;max-width:100%;height:auto"' if css_height is None else f' style="height:{css_height}px;width:auto;max-width:100%"'
     klass = ("nz " + extra_class).strip()

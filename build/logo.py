@@ -83,6 +83,7 @@ def bar(x0, x1, y, cls): return (f'<line class="{cls} st" x1="{x0:.2f}" y1="{y:.
 def smile(x0, x1, y, depth=0.2 * S): return (f'<path class="b st" d="M{x0:.2f} {y:.2f} Q{(x0 + x1) / 2:.2f} {y + 2 * depth:.2f} '
                                              f'{x1:.2f} {y:.2f}" stroke-width="{0.055 * S:.2f}" stroke-linecap="round"/>')
 cx = lambda b: (b[0] + b[2]) / 2
+SMILE = 0.26 * S          # the smiles' ends under the sound circles: 0.14 S until the swoop came down on 7 November 2026
 
 
 def build(nm):
@@ -135,12 +136,12 @@ def whole(nm):
     low = max(b[3] for b in (l, e, g, w))
     dy = low + 0.13 * S                                   # the sound circles sit under the lowest letter
     for b, cls in ((l, "k"), (e, "r"), (g, "k"), (w, "r")): marks.append(dot(cx(b), dy, cls))
-    marks.append(smile(cx(l) - 0.13 * S, cx(e) + 0.13 * S, dy + 0.14 * S))
-    marks.append(smile(cx(g) - 0.13 * S, cx(w) + 0.13 * S, dy + 0.14 * S))
+    marks.append(smile(cx(l) - 0.13 * S, cx(e) + 0.13 * S, dy + SMILE))
+    marks.append(smile(cx(g) - 0.13 * S, cx(w) + 0.13 * S, dy + SMILE))
     marks.append(seam(sx, B - 0.92 * S, dy - 0.12 * S))
     width = L.x
-    body = L.out + marks + tagline(tag, width / 2, dy + 0.14 * S + 0.4 * S + 0.65 * S)
-    return svg(body, 0, B - 1.05 * S, width, dy + 1.25 * S, "Legomorphic Notation: λέγω, morphic. Language, form, meaning")
+    body = L.out + marks + tagline(tag, width / 2, dy + SMILE + 0.4 * S + 0.65 * S)
+    return svg(body, 0, B - 1.05 * S, width, dy + 1.37 * S, "Legomorphic Notation: λέγω, morphic. Language, form, meaning")
 
 
 def split(nm):
@@ -161,16 +162,16 @@ def split(nm):
     low = max(b[3] for b in (l, e, g))
     dy = low + 0.13 * S
     for b, cls in ((l, "k"), (e, "r"), (g, "k")): marks.append(dot(cx(b), dy, cls))
-    marks.append(smile(cx(l) - 0.20 * S, cx(g) + 0.20 * S, dy + 0.14 * S))
+    marks.append(smile(cx(l) - 0.20 * S, cx(g) + 0.20 * S, dy + SMILE))
     for x in seams: marks.append(seam(x, B - 0.92 * S, B + 0.10 * S))
     width = L.x
-    body = L.out + marks + tagline(tag, width / 2, dy + 0.14 * S + 0.4 * S + 0.65 * S)
-    return svg(body, 0, B - 1.05 * S, width, dy + 1.25 * S, "Legomorphic Notation: λέγ, ō, morph, ic. Language, form, meaning")
+    body = L.out + marks + tagline(tag, width / 2, dy + SMILE + 0.4 * S + 0.65 * S)
+    return svg(body, 0, B - 1.05 * S, width, dy + 1.37 * S, "Legomorphic Notation: λέγ, ō, morph, ic. Language, form, meaning")
 
 
 # ------------------------------------------------------------------ the logo candidates
-# Measures in F, the letter size, as svg_word draws them: circles a slot of .67F apart, the swoop's ends .17F under the
-# circles' centres with its control .37F under them and .107F past the outer circles; the cup .257F each side of its
+# Measures in F, the letter size, as svg_word draws them: circles a slot of .67F apart, the swoop's ends .29F under the
+# circles' centres with its control .49F under them and .107F past the outer circles (since 7 November 2026); the cup .257F each side of its
 # vowel with its control .2F under its ends; the bar .279F each side; the cone a dotted ring; the vault leaving the
 # cone's top and ending .21F over the bar, with its arrowhead. A logo drops the letters, so the marks above come down
 # to sit BROW over the circles, the cone sits in the row of circles where the e would be, and WEIGHT thickens circles
@@ -196,11 +197,11 @@ def mark(name, F=100.0):
     r, sws, swm = 0.072 * WEIGHT * F, 0.046 * WEIGHT * F, 0.05 * WEIGHT * F
     xs = [SLOT * F * (i - (n - 1) / 2) for i in range(n)]
     xl, xr = xs[0] - 0.107 * F, xs[-1] + 0.107 * F
-    body, box = [], [xl - sws, -r, xr + sws, 0.27 * F + sws]
+    body, box = [], [xl - sws, -r, xr + sws, 0.39 * F + sws]
     def grow(x0, y0, x1, y1): box[:] = [min(box[0], x0), min(box[1], y0), max(box[2], x1), max(box[3], y1)]
     for x, c in zip(xs, dots):
         body.append(f'<circle class="{c}" cx="{x:.2f}" cy="0" r="{r:.2f}"/>')
-    body.append(f'<path class="b st" d="M{xl:.2f} {.17 * F:.2f} Q{(xl + xr) / 2:.2f} {.37 * F:.2f} {xr:.2f} {.17 * F:.2f}" '
+    body.append(f'<path class="b st" d="M{xl:.2f} {.29 * F:.2f} Q{(xl + xr) / 2:.2f} {.49 * F:.2f} {xr:.2f} {.29 * F:.2f}" '
                 f'stroke-width="{sws:.2f}" stroke-linecap="round"/>')
     xt = 0.0
     if top:

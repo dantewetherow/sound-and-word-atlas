@@ -69,7 +69,7 @@ def coded(word, F):
 def fit(*words, gap=0.0):
     """The coded letter size that fits these words side by side under the word sum line."""
     ratio = sum(LW.svg_word(w, 1.0, 0, cls=False)[1] for w in words)
-    return min(CODED_CAP, (AH - SUM_H) / 2.36, (AW - gap) / ratio)
+    return min(CODED_CAP, (AH - SUM_H) / LW.HEIGHT, (AW - gap) / ratio)
 
 def cards():
     """(group label, front text, back html) for every card, with the group each starts."""

@@ -199,8 +199,11 @@ MARKS_CSS = """
 """
 
 def marks_page():
+    # The grid's letters are .333 in (were .35): the drawings grew when the swoop came down on 7 November 2026, so the
+    # letters came down by the same share to keep the grid's height. The contrasts keep .31 in: smaller, their drawings
+    # would narrow each set and wrap its caption onto another line.
     words = lambda w: [w] if isinstance(w, str) else w
-    cells = "".join(f'<div class="cell" style="grid-column:span {span}"><div class="cw">{"".join(mark(x, .35) for x in words(w))}</div><b>{name}</b><span class="d">{text}</span></div>'
+    cells = "".join(f'<div class="cell" style="grid-column:span {span}"><div class="cw">{"".join(mark(x, .333) for x in words(w))}</div><b>{name}</b><span class="d">{text}</span></div>'
                     for w, name, text, span in MARKS)
     sets = "".join('<div class="set"><div class="ws">' + "".join(mark(w, .31) for w in words) + f'</div><p class="cap">{cap}</p></div>' for words, cap in CONTRASTS)
     return f'''<section class="page">
@@ -348,14 +351,14 @@ FLIPS = [("she could read .", "could she read ?"), ("she could not read .", "cou
 
 def letter_svg(ch, f_in):
     """A single letter, black, with its circle and no swoop: a letter alone is not a syllable."""
-    F = 100.0; S, M, B, H = 0.67 * F, 0.30 * F, 1.44 * F, 2.36 * F; w = 2 * M + S; x = M + S / 2
+    F = 100.0; S, M, B, H = 0.67 * F, 0.30 * F, 1.44 * F, LW.HEIGHT * F; w = 2 * M + S; x = M + S / 2
     g = (f'<text x="{x:.1f}" y="{B:.1f}" font-family="Lexend, system-ui, sans-serif" font-size="{F:.1f}" text-anchor="middle" fill="var(--ink)">{ch}</text>'
          f'<circle cx="{x:.1f}" cy="{B + 0.56 * F:.1f}" r="{0.072 * F:.1f}" fill="var(--ink)"/>')
     return f'<svg class="mw" viewBox="0 0 {w:.1f} {H:.1f}" style="width:{w / 100 * f_in:.3f}in;height:{H / 100 * f_in:.3f}in" role="img" aria-label="{ch}">{g}</svg>'
 
 def hyphen_svg(f_in):
     """The hyphen that marks an ending, at the height of the middle of a small letter."""
-    F = 100.0; B, H, w = 1.44 * F, 2.36 * F, 0.46 * F
+    F = 100.0; B, H, w = 1.44 * F, LW.HEIGHT * F, 0.46 * F
     return (f'<svg class="mw" viewBox="0 0 {w:.1f} {H:.1f}" style="width:{w / 100 * f_in:.3f}in;height:{H / 100 * f_in:.3f}in" aria-hidden="true">'
             f'<line x1="{0.12 * F:.1f}" y1="{B - 0.29 * F:.1f}" x2="{0.36 * F:.1f}" y2="{B - 0.29 * F:.1f}" stroke="var(--ink)" stroke-width="{0.07 * F:.1f}" stroke-linecap="round"/></svg>')
 

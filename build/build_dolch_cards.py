@@ -132,7 +132,7 @@ async def main():
             aw, ah = cw - 2 * PAD_X, ch - PAD_TOP - PAD_BOTTOM
             plain_w = await page.evaluate(MEASURE_JS, [w for w, _ in cards])
             F_plain = min(PLAIN_CAP, ah / PLAIN_HEIGHT, aw / max(plain_w.values()))
-            F_coded = min(ah / 2.36, aw / max(LW.svg_word(w, 1.0, 0, cls=False)[1] for w, _ in cards))
+            F_coded = min(ah / LW.HEIGHT, aw / max(LW.svg_word(w, 1.0, 0, cls=False)[1] for w, _ in cards))
             per = cols * rows
             slots = cards + [None] * ((-len(cards)) % per)
             n_sheets = len(slots) // per
