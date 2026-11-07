@@ -5,13 +5,13 @@ whom.
 The definitions of legomorph and legomorphics are Dante Wetherow's of 7 November 2026. The second sense of legomorph
 is the one his demonstration paper gives the grammar's primes. Sentence terms follow the About page, the verb cards and
 the teaching notes (head, body and legs). The marks come from the legend (KEY in build_site.py), so the two can't drift
-apart. The LEGO note follows the LEGO Group's own history of its name, opened on 7 November 2026.
+apart. The LEGO note follows the LEGO Group's own history page, opened on 7 November 2026.
 
 build_site.py calls write() once every word code is in place, so the example words can be drawn."""
 import html, re
 
 PRON = '<span class="pron">/ˌlɛɡoʊˈmɔrfɪk/ <span class="say">leg-oh-MOR-fik</span></span>'
-LEGO_PAGE = "https://www.lego.com/aboutus/news/2026/february/90-year-history-of-the-lego-name"
+LEGO_PAGE = "https://www.lego.com/en-us/aboutus/lego-history"
 ROUTE = '<a href="index.html#route">route</a>'
 
 SENTENCES = [   # (term, part of speech, definition, source or None)
@@ -140,7 +140,7 @@ def write(OUT, page, header, footer, svg_of, KEY, LW):
 <li>Having to do with legomorphics, the joining of a language's systems through speaking, reading and writing. <span class="eg">Legomorphic Notation; legomorphic teaching.</span></li>
 </ol>
 <p class="ety"><b>Origin.</b> From Greek λέγω (<i>légō</i>), &ldquo;I gather, I pick out,&rdquo; and so &ldquo;I count, I tell, I say,&rdquo; and Greek μορφή (<i>morphḗ</i>), &ldquo;form, shape,&rdquo; with <i class="nw">-ic</i>, &ldquo;having to do with,&rdquo; from Greek <i class="nw">-ikós</i>. Latin <i>legō</i>, &ldquo;I gather, I choose, I read,&rdquo; is the same word. <i>Lego</i> keeps the Greek verb whole, ending and all: λέγ-ω, &ldquo;gather-I.&rdquo; Coined by Dante Wetherow for the notation and the study it names.</p>
-<p class="usage"><b>Not from the toy.</b> The word isn&rsquo;t named for the LEGO brick, though the building fits. The LEGO Group took its name from the Danish <i>leg godt</i>, &ldquo;play well,&rdquo; and found the Latin meaning later (<a href="{LEGO_PAGE}">the LEGO Group&rsquo;s history of its name</a>).</p>
+<p class="usage"><b>Not from the toy.</b> The word isn&rsquo;t named for the LEGO brick, though the building fits. The LEGO Group&rsquo;s name is short for the Danish <i>leg godt</i>, &ldquo;play well&rdquo; (<a href="{LEGO_PAGE}">the LEGO Group&rsquo;s history</a>).</p>
 <p class="rel"><b>Related.</b> <a href="#def-legomorph">legomorph</a>, <a href="#def-legomorphics">legomorphics</a>, <a href="#def-legomorphic-notation">Legomorphic Notation</a>. From the same roots: <i>dialogue</i>, <i>lexicon</i>, <i>legible</i>, <i>morpheme</i>. See <a href="about.html#word-h">The word</a> on the About page.</p>
 </article>
 
