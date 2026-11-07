@@ -5,11 +5,14 @@ Could flips to the front, the claim becomes a question. Chosen on 7 November 202
 
 A lifted word keeps every mark svg_word draws, in its order. With the letters gone, the marks drawn above them (long
 and short marks, the cone, the vault) come down by DROP letter sizes to close the gap, and the marks drawn under them
-(bond bars, circles, swoops, nudges) stay where they were. The drawing is then cropped to its marks. Boxes and seams,
-which run through the letters, aren't moved, so a word with either would need more thought before it joins the team."""
+(bond bars, circles, nudges) stay where they were. The swoop comes down by SWOOP_DOWN, so it reads as a mouth under the
+circles rather than a line hugging them (7 November 2026); the logo in logo.py keeps the notation's own spacing. The
+drawing is then cropped to its marks. Boxes and seams, which run through the letters, aren't moved, so a word with
+either would need more thought before it joins the team."""
 import math, re
 
 DROP = 0.62
+SWOOP_DOWN = 0.12
 TEAM = [("she", "She", "actor"), ("could", "Could", "operator"), ("go", "Go", "action")]
 NUM = r"-?\d+(?:\.\d+)?"
 
@@ -54,7 +57,12 @@ def lifted(LW, word, F=58.0, label=None, pad=0.08, scale=1.0, em=None):
     out, pts = [], []
     for el in re.findall(r"<[^>]+/>", g):
         first = re.search(f'(?:cy|y1)="({NUM})"', el) or re.search(f'd="M{NUM} ({NUM})', el)
-        dy = DROP * F if re.search(r'class="nz(6|8)"', el) and first and float(first[1]) < B else 0.0
+        if 'class="nz3"' in el:                            # the swoop
+            dy = SWOOP_DOWN * F
+        elif re.search(r'class="nz(6|8)"', el) and first and float(first[1]) < B:
+            dy = DROP * F
+        else:
+            dy = 0.0
         el = re.sub(r' class="nz\d"', "", el)
         pts += [(x, y + dy) for x, y in _points(el)]
         out.append(f'<g transform="translate(0 {dy:.1f})">{el}</g>' if dy else el)
