@@ -12,7 +12,7 @@ import html, re
 
 PRON = '<span class="pron">/ˌlɛɡoʊˈmɔrfɪk/ <span class="say">leg-oh-MOR-fik</span></span>'
 LEGO_PAGE = "https://www.lego.com/en-us/aboutus/lego-history"
-ROUTE = '<a href="index.html#route">route</a>'
+ROUTE = '<a href="progressions.html">route</a>'
 
 SENTENCES = [   # (term, part of speech, definition, source or None)
     ("kernel", "noun",
@@ -67,7 +67,7 @@ TEACHING = [
      "analog shares its letters with the words it leads to, which a rhyme doesn't have to do.", None),
     ("route", "noun",
      "This site's scope and sequence: 32 steps through English spelling, with Edward Carney's <i>A Survey of English "
-     "Spelling</i> as its backbone. See <a href=\"index.html#route\">the route</a>.", None),
+     "Spelling</i> as its backbone. See <a href=\"progressions.html\">the route</a>.", None),
     ("word sum", "noun",
      "A word written as its morphemes joined by plus signs, with an arrow to the word they make: <i>not(e) + ate &rarr; "
      "notate</i>. A letter in brackets drops at the seam.",
@@ -103,6 +103,15 @@ EXTRA_MARKS = [   # marks the legend doesn't list on its own
 
 
 def slug(t): return "def-" + re.sub(r"[^a-z]+", "-", t.lower()).strip("-")
+
+
+def terms(KEY):
+    """Every entry on the page, as (term, anchor), for the site's search."""
+    words = [("legomorphic", "def-legomorphic"), ("legomorph", "def-legomorph"), ("legomorphics", "def-legomorphics"),
+             ("Legomorphic Notation", "def-legomorphic-notation")]
+    rows = [(t, slug(t)) for t, *_ in SENTENCES + TEACHING + STUDY]
+    marks = [(n.lower(), slug(n)) for n, *_ in list(KEY) + EXTRA_MARKS]
+    return words + rows + marks
 
 
 def entries(rows):
@@ -168,7 +177,7 @@ def write(OUT, page, header, footer, svg_of, KEY, LW):
 <dd>The integration of orthography, morphology, phonology, articulation, semantics and syntax through the legomorphic means: speaking, reading and writing, and the syntax of claims and questions. In plainer words, spelling, word parts, sounds, how the mouth makes them, meaning and word order, learned together through talk, reading and writing. Like <i>phonics</i> and <i>linguistics</i>, it takes a singular verb.<span class="src">Coined for the notation.</span></dd></div>
 
 <div class="def" id="def-legomorphic-notation"><dt>Legomorphic Notation <span class="pos">noun</span></dt>
-<dd>The marks and colours this site draws on ordinary spelling, so that a word&rsquo;s legomorphs can be seen: its sounds, the letters that spell them, its meaningful parts, and the changes letters make to one another. The marks are listed <a href="#marks">below</a> and drawn in <a href="index.html#marks">Reading the marks</a>.<span class="src">Coined for the notation.</span></dd></div>
+<dd>The marks and colours this site draws on ordinary spelling, so that a word&rsquo;s legomorphs can be seen: its sounds, the letters that spell them, its meaningful parts, and the changes letters make to one another. The marks are listed <a href="#marks">below</a> and drawn in <a href="notations.html#marks">Notations</a>.<span class="src">Coined for the notation.</span></dd></div>
 </dl>
 </div></section>
 
@@ -181,7 +190,7 @@ def write(OUT, page, header, footer, svg_of, KEY, LW):
 
 <section class="about" id="marks" aria-labelledby="marks-h"><div class="wrap prose">
 <h2 id="marks-h">Marks</h2>
-<p>The marks Legomorphic Notation draws, each on one word with that mark alone. Their names are the notation&rsquo;s own. <a href="index.html#marks">Reading the marks</a> has them as a legend.</p>
+<p>The marks Legomorphic Notation draws, each on one word with that mark alone. Their names are the notation&rsquo;s own. <a href="notations.html">Notations</a> has them as a legend.</p>
 {marks_html}
 </div></section>
 

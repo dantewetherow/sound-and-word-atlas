@@ -70,7 +70,11 @@ def write(OUT, page, header, footer):
     for d in DECKS:
         f = d["file"]
         src = (HERE / "sessions" / f"{f}.html").read_text(encoding="utf-8")
-        (OUT / "sessions" / f"{f}.html").write_text(src, encoding="utf-8")
+        # the web copy takes its fonts from the site, as every page does (the offline copy has them built in)
+        web = re.sub(r'<link[^>]+fonts\.(?:googleapis|gstatic)\.com[^>]*>\n?', "", src)
+        web = web.replace("</head>", '<link rel="stylesheet" href="../fonts/fonts.css">\n</head>', 1)
+        assert "googleapis" not in web and "gstatic" not in web
+        (OUT / "sessions" / f"{f}.html").write_text(web, encoding="utf-8")
         labels = slide_labels(src)
         shots = "".join(
             f'<img src="sessions/{f}-{n}.jpg" alt="Slide {n}: {html.escape(labels[n - 1])}" width="960" height="540" loading="lazy">'

@@ -57,7 +57,8 @@ p { margin: 0; }
 
 /* header and footer */
 header.site { border-bottom: 1px solid var(--line); }
-header.site .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 28px; padding-block: 16px; }
+header.site .wrap { display: grid; gap: 12px; padding-block: 16px 12px; }
+header.site .masthead { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 28px; }
 .brand { font-family: var(--display); font-size: 1.3rem; font-weight: 500; color: var(--ink); text-decoration: none; line-height: 1.2; }
 .brand { display: flex; align-items: center; gap: 10px; }
 .brand .logo svg { display: block; margin: -9px 0; }
@@ -65,13 +66,59 @@ header.site .wrap { display: flex; flex-wrap: wrap; align-items: center; justify
 .brand small { display: block; font-family: var(--body); font-size: 0.7rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--soft); }
 header.site .tools { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 22px; }
 nav.site { display: flex; flex-wrap: wrap; gap: 6px 22px; font-size: 0.95rem; }
-/* bright and night: follows the device until a reader picks one (build_site.py) */
-.theme { display: inline-flex; gap: 2px; padding: 2px; border: 1px solid var(--line); border-radius: 999px; }
-.theme[hidden] { display: none; }
-.theme button { font: inherit; font-size: 0.8rem; line-height: 1; padding: 6px 12px; border: 0; border-radius: 999px;
+/* bright and night, teacher and student: each follows a default until a reader picks (build_site.py, doors.py) */
+.theme, .view { display: inline-flex; gap: 2px; padding: 2px; border: 1px solid var(--line); border-radius: 999px; }
+.theme[hidden], .view[hidden], .search[hidden], .menu[hidden] { display: none; }
+.theme button, .view button { font: inherit; font-size: 0.8rem; line-height: 1; padding: 6px 12px; border: 0; border-radius: 999px;
   background: transparent; color: var(--soft); cursor: pointer; }
-.theme button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
-.theme button:focus-visible { outline: 2px solid var(--modal); outline-offset: 2px; }
+.theme button[aria-pressed="true"], .view button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.theme button:focus-visible, .view button:focus-visible { outline: 2px solid var(--modal); outline-offset: 2px; }
+
+/* the seven doors (doors.py): in teacher view their names, in student view five short words */
+nav.doors { display: flex; flex-wrap: wrap; gap: 4px 6px; margin-inline: -10px; }
+nav.doors a { padding: 5px 10px; border-radius: 999px; color: var(--ink); text-decoration: none; font-weight: 400; font-size: 0.95rem; }
+nav.doors a:hover { background: var(--card); text-decoration: underline; }
+nav.doors a[aria-current] { background: var(--ink); color: var(--paper); text-decoration: none; }
+.sn { display: none; }
+.menu { font: inherit; font-size: 0.85rem; padding: 7px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--card); color: var(--ink); cursor: pointer; }
+.menu:focus-visible { outline: 2px solid var(--modal); outline-offset: 2px; }
+.smap { font-size: 0.85rem; }
+.js-search .smap { display: none; }
+
+/* search: results in the reader's own browser, from search.json (doors.py) */
+.search { position: relative; }
+.search input { font: inherit; font-size: 0.9rem; width: 230px; max-width: 100%; padding: 7px 12px; border: 1px solid var(--line); border-radius: 999px;
+  background: var(--card); color: var(--ink); }
+.search input:focus-visible { outline: 2px solid var(--modal); outline-offset: 1px; }
+.search .results { position: absolute; right: 0; top: calc(100% + 6px); z-index: 30; width: min(420px, calc(100vw - 32px)); max-height: min(70vh, 560px);
+  overflow: auto; padding: 6px 6px 8px; background: var(--card); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); }
+.search .results[hidden] { display: none; }
+.search .rk { margin: 8px 8px 2px; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--soft); }
+.search .rk.none { text-transform: none; letter-spacing: 0; font-size: 0.9rem; }
+.search ul { list-style: none; margin: 0; padding: 0; }
+.search .results a { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; padding: 6px 8px; border-radius: 8px; color: var(--ink); text-decoration: none; }
+.search .results a span { color: var(--soft); font-size: 0.82rem; white-space: nowrap; }
+.search .results a:hover, .search .results a:focus { background: var(--paper); }
+.search .results a:focus-visible { outline: 2px solid var(--modal); outline-offset: -2px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* breadcrumbs, and a note for a student who lands on a teachers' page */
+.crumbs ol { list-style: none; display: flex; flex-wrap: wrap; margin: 0; padding: 12px 0 0; font-size: 0.85rem; color: var(--soft); }
+.crumbs li + li::before { content: "\203A"; margin: 0 8px; }
+.crumbs a { color: var(--soft); }
+.for-teachers p { margin-top: 14px; padding: 12px 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
+
+@media (max-width: 760px) {
+  header.site .tools { gap: 10px 8px; }
+  .menu { order: -1; }
+  .theme button, .view button { padding: 6px 10px; }
+  .search { order: 5; flex-basis: 100%; }
+  .search input { width: 100%; }
+  .js-menu nav.doors { display: none; }
+  .js-menu header.open nav.doors { display: grid; gap: 2px; margin-inline: 0; }
+  .js-menu header.open nav.doors a { padding: 10px 12px; border-radius: 10px; }
+}
+@media (min-width: 761px) { .menu { display: none; } }
 nav.site a { text-decoration: none; font-weight: 400; }
 nav.site a:hover { text-decoration: underline; }
 footer.site { border-top: 1px solid var(--line); margin-top: 48px; }
@@ -345,3 +392,55 @@ footer.site p + p { margin-top: 6px; }
 @keyframes lm-draw { 0% { opacity: 0; stroke-dasharray: 1; stroke-dashoffset: 1; } 1% { opacity: 1; } 100% { opacity: 1; stroke-dasharray: 1; stroke-dashoffset: 0; } }
 @media (prefers-reduced-motion: reduce) { .stage * { animation: none !important; } }
 @media (max-width: 640px) { .stage .cap { font-size: 1rem; } .stage-morph .sums { font-size: 1.12rem; } }
+
+/* the doors' pages and the home page's way in (doors.py, 8 November 2026) */
+.door-hero .sum { font-family: var(--display); font-size: 1.2rem; color: var(--soft); }
+.door-hero .sum span { color: var(--ink); }
+.board { font-size: 0.9rem; color: var(--soft); }
+.door-word { margin-top: 6px; }
+.door-word svg { max-width: 100%; height: auto; }
+.door-tiles, .door-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; margin-top: 6px; }
+.dtile, .door-tile { display: grid; align-content: start; gap: 6px; padding: 16px 18px; background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+  color: var(--ink); text-decoration: none; transition: border-color 0.15s ease; }
+.dtile:hover, .door-tile:hover { border-color: var(--modal); }
+.dtile b, .door-tile .dn { font-family: var(--display); font-weight: 500; font-size: 1.25rem; line-height: 1.2; }
+.dtile span, .door-tile .pw { color: var(--soft); font-size: 0.92rem; line-height: 1.45; }
+.doors-home .wrap { padding-block: 32px 12px; display: grid; gap: 10px; }
+.words.fam { gap: 22px 34px; }
+.fam figcaption { display: grid; gap: 4px; max-width: 36ch; font-size: 0.95rem; color: var(--ink); }
+.fam .ws { font-family: var(--display); font-size: 1.1rem; }
+.fam figcaption .t-only { color: var(--soft); font-size: 0.88rem; line-height: 1.45; }
+.s-soon { font-family: var(--display); font-size: 1.4rem; }
+.smap-tree { display: grid; gap: 14px; margin: 0; padding-left: 1.1em; }
+.smap-tree > li > span { display: block; color: var(--soft); font-size: 0.92rem; }
+.smap-tree .who { display: inline; margin-left: 6px; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.smap-tree .kids { margin: 6px 0 0; padding-left: 1.3em; display: grid; gap: 2px; }
+.smap-tree .kids span { color: var(--soft); font-size: 0.88rem; }
+@media (prefers-reduced-motion: reduce) { .dtile, .door-tile { transition: none; } }
+
+/* teacher and student view: the same pages two ways (doors.py). Student view hides the teacher's notes and the build's
+   under-construction notes, shows five doors with a short word each, and draws a step's words big for the board. */
+.s-only { display: none !important; }
+html[data-view="student"] .t-only, html[data-view="student"] .uc { display: none !important; }
+html[data-view="student"] .s-only { display: revert !important; }
+html[data-view="student"] :is(nav.doors, .door-grid, .crumbs) .dn { display: none; }
+html[data-view="student"] :is(nav.doors, .crumbs) .sn { display: inline; }
+html[data-view="student"] nav.doors a { font-size: 1.05rem; }
+html[data-view="student"] .door-tile .sn { display: block; padding-block: 18px; text-align: center; font-family: var(--display); font-weight: 500; font-size: clamp(2rem, 5vw, 2.8rem); line-height: 1.1; }
+html[data-view="student"] .door-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+html[data-view="student"] body { font-size: 19px; }
+html[data-view="student"] .plate { grid-template-columns: minmax(0, 1fr); }
+html[data-view="student"] .words .word svg { width: auto !important; height: clamp(150px, 21vw, 240px) !important; }
+html[data-view="student"] .words .word .plain { font-size: clamp(36px, 10vw, 104px) !important; }
+html[data-view="student"] .s-step { font-size: clamp(2.6rem, 7vw, 4rem); }
+html[data-view="student"] .stage .cap { display: none; }
+html[data-view="student"] .tile { grid-template-rows: auto; }
+html[data-view="student"] .tile .w { font-size: 1.15rem; }
+html[data-view="student"] .key { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+html[data-view="student"] .mark .mw svg { height: 110px; }
+html[data-view="student"] .door-hero h1.s-only { font-size: clamp(2.6rem, 7vw, 4rem); }
+html[data-view="student"] .pn a span { font-family: var(--display); font-size: 1.5rem; letter-spacing: 0; text-transform: none; color: var(--ink); }
+html[data-view="student"] .pn .prev span::before { content: "\2190\00a0"; content: "\2190\00a0" / ""; }
+html[data-view="student"] .pn .next span::after { content: "\00a0\2192"; content: "\00a0\2192" / ""; }
+html[data-view="student"] .word.unmarked figcaption { display: none; }
+html[data-view="student"] .for-teachers ~ main { display: none; }

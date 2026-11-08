@@ -93,14 +93,14 @@ def write(OUT, page, header, footer, svg_of, LW):
 </ul>
 <p>Contractions take a red apostrophe in place of the vowel they drop.</p>
 <div class="examples">{examples}</div>
-<p>In a sentence, the parts are named for their jobs: the actor, the operator, the action and the acted-on. The operator is the word that can move to the front to make a question. <a href="definitions.html#sentences">Definitions</a> has each of them, and <a href="index.html#marks">Reading the marks</a> has the legend, with a drawing of each mark.</p>
+<p>In a sentence, the parts are named for their jobs: the actor, the operator, the action and the acted-on. The operator is the word that can move to the front to make a question. <a href="definitions.html#sentences">Definitions</a> has each of them, and <a href="notations.html#marks">Notations</a> has the legend, with a drawing of each mark.</p>
 </div></section>
 
 <section class="about" aria-labelledby="use-h"><div class="wrap prose">
 <h2 id="use-h">How it&rsquo;s used</h2>
 <p>It isn&rsquo;t a program. It&rsquo;s an exploration of ways to provide access, and an invitation to experiment with our methods and synthesize our understandings. It can sit beside any systematic phonics program, synthetic or analytic, and it aims to be systematic, analytic, synthetic, responsive, diagnostic and agnostic.</p>
 <p>Its teaching cycle is the learning loop. Learners move among seeing, listening, speaking, reading and writing: a clean pass, then back to the start, back to any earlier mode, or between any two. Each pass can swap a part (a sound, its articulation, an actor, an action, an operator, a preposition) to fit the learner&rsquo;s need, interest and skill in the moment.</p>
-<p>The <a href="index.html#route">route</a> through English spelling on this site is its own scope and sequence, with Edward Carney&rsquo;s <i>A Survey of English Spelling</i> as its backbone and his page references on every step.</p>
+<p>The <a href="progressions.html">route</a> through English spelling on this site is its own scope and sequence, with Edward Carney&rsquo;s <i>A Survey of English Spelling</i> as its backbone and his page references on every step.</p>
 </div></section>
 
 <section class="about" aria-labelledby="who-h"><div class="wrap prose">

@@ -12,6 +12,7 @@ STANDALONE = "--standalone" in sys.argv[3:]
 import legomorphic_words as LW
 from known_codes import all_codes
 import site_codes as SC
+import doors
 
 route = json.load(open(sys.argv[1], encoding="utf-8"))
 OUT = pathlib.Path(sys.argv[2]); (OUT / "steps").mkdir(parents=True, exist_ok=True)
@@ -20,9 +21,9 @@ for w, c in SC.SITE_CODES.items(): codes.setdefault(w, c)
 LW.W.clear(); LW.W.update(codes)
 STEPS = route["steps"]; N = len(STEPS)
 BUILT = "8 November 2026"
-FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
-         '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600'
-         '&family=Lexend:wght@300;400;500&display=swap">')
+# The fonts come from the site itself (fonts/fonts.css, copied from build/fonts), so a page asks nothing of anyone but
+# its host. Until 8 November 2026 they came from Google Fonts.
+def FONTS(up=""): return f'<link rel="stylesheet" href="{up}fonts/fonts.css">'
 
 def md(s):
     """The manual's inline markdown (italics for cited words) to HTML."""
@@ -92,12 +93,16 @@ def page(title, body, depth, desc):
 <link rel="icon" href="{up}favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="{up}apple-touch-icon.png">
 <script>try {{ const t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; }} catch (e) {{}}</script>
-{FONTS}
+{doors.VIEW_HEAD}
+{FONTS(up)}
 <link rel="stylesheet" href="{up}site.css">
 </head>
 <body>
 {body}
 {THEME_JS}
+{doors.VIEW_JS}
+{doors.MENU_JS}
+{doors.SEARCH_JS}
 </body>
 </html>
 """
@@ -131,18 +136,19 @@ THEME_SWITCH = ('<div class="theme" role="group" aria-label="Page colours" hidde
                 '<button type="button" data-pick="light">Bright</button><button type="button" data-pick="dark">Night</button></div>')
 
 def header(depth):
+    """The brand, then search, the site map link and the two switches, then the seven doors (doors.py). The page's
+    breadcrumb goes where <!--crumbs--> is, once every page is written (doors.finish)."""
     up = "../" * depth
-    return (f'<header class="site"><div class="wrap"><a class="brand" href="{up}index.html"><span class="logo">{LOGO}</span><span class="name"><small>Legomorphic Notation</small>Sound and Word Atlas</span></a>'
-            f'<div class="tools"><nav class="site" aria-label="Site"><a href="{up}index.html#route">The route</a><a href="{up}index.html#marks">Reading the marks</a>'
-            f'<a href="{up}definitions.html">Definitions</a><a href="{up}cards.html">Word cards</a><a href="{up}word-lists.html">Word lists</a><a href="{up}presentations.html">Presentations</a><a href="{up}about.html">About</a></nav>'
-            f'{THEME_SWITCH}</div></div></header>')
+    search, smap, view, menu, door_nav = doors.header_parts(up)
+    return (f'<header class="site"><div class="wrap"><div class="masthead"><a class="brand" href="{up}index.html"><span class="logo">{LOGO}</span><span class="name"><small>Legomorphic Notation</small>Sound and Word Atlas</span></a>'
+            f'<div class="tools">{search}{smap}{view}{THEME_SWITCH}{menu}</div></div>{door_nav}</div></header><!--crumbs-->')
 
 def footer(depth):
     up = "../" * depth
     return ('<footer class="site"><div class="wrap"><p>Page references are to Edward Carney, <i>A Survey of English Spelling</i> '
             '(Routledge, 1994). Updated ' + BUILT + '.</p>'
             '<p>&copy; 2026 Dante Wetherow, B.Ed., M.Ed. Shared under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>. '
-            f'<a href="{up}credits.html">Credits and contact</a></p></div></footer>')
+            f'<a href="{up}credits.html">Credits and contact</a> &middot; <a href="{up}sitemap.html">Site map</a></p></div></footer>')
 
 def fname(n): return f"{n:02d}.html"
 
@@ -215,22 +221,24 @@ for i, s in enumerate(STEPS):
     um = uc("the words in plain letters aren't marked here yet. " + " ".join(f"{md(why)} Next: {md(nxt)}" for why, nxt in unmarked)) if unmarked else ""
     draft = uc(DRAFT_NOTE) if n >= DRAFT_FROM else ""
     pn = '<nav class="pn" aria-label="Steps">'
-    pn += (f'<a class="prev" href="{fname(prev_s["n"])}"><span>Step {prev_s["n"]}</span>{md(prev_s["title"])}</a>' if prev_s else '<span></span>')
-    pn += (f'<a class="next" href="{fname(next_s["n"])}"><span>Step {next_s["n"]}</span>{md(next_s["title"])}</a>' if next_s else '<span></span>')
+    pn += (f'<a class="prev" href="{fname(prev_s["n"])}"><span>Step {prev_s["n"]}</span><b class="t-only">{md(prev_s["title"])}</b></a>' if prev_s else '<span></span>')
+    pn += (f'<a class="next" href="{fname(next_s["n"])}"><span>Step {next_s["n"]}</span><b class="t-only">{md(next_s["title"])}</b></a>' if next_s else '<span></span>')
     pn += "</nav>"
     body = f"""{header(1)}
 <main class="wrap">
 <div class="step-head">
-<p class="eyebrow"><a href="../index.html#band-{re.sub(r'[^a-z]+', '-', band.lower()).strip('-')}">{html.escape(band)}</a> · Step {n} of {N}</p>
-<h1>{md(s['title'])}</h1>
+<p class="eyebrow t-only"><a href="../progressions.html#band-{re.sub(r'[^a-z]+', '-', band.lower()).strip('-')}">{html.escape(band)}</a> · Step {n} of {N}</p>
+<h1 class="t-only">{md(s['title'])}</h1>
+<h1 class="s-only s-step">Step {n}</h1>
 {draft}
+<p class="board t-only"><a href="?view=student">Open this step in student view</a>, for the board.</p>
 </div>
 <div class="plate">
 <section class="words" aria-label="The step's words, marked">
 {''.join(cells)}
 {um}
 </section>
-<aside class="notes">
+<aside class="notes t-only">
 {''.join(notes)}
 </aside>
 </div>
@@ -280,8 +288,8 @@ KEY = [("Sound circle", "One circle under each sound: red for a vowel sound, bla
 # (legomorphic_words.svg_one_mark). The step pages show every word with all its marks.
 def one_mark(word, mark, name):
     return LW.svg_one_mark(word, mark, F=34.0, label=f"{word}, with only its {name.lower()} drawn")
-key_html = "".join(f'<figure class="mark"><figcaption><b>{name}</b></figcaption><div class="mw">{one_mark(w, m, name)}</div>'
-                   f'<p>{what}</p></figure>' for name, what, w, m in KEY)
+key_html = "".join(f'<figure class="mark" id="{doors.mark_id(name)}"><figcaption><b>{name}</b></figcaption><div class="mw">{one_mark(w, m, name)}</div>'
+                   f'<p class="t-only">{what}</p></figure>' for name, what, w, m in KEY)
 
 uniq = {w for s in STEPS for g in groups_of(s["words_md"]) for w in g}
 n_words = len(uniq) + sum(len(v) - 1 for w, v in SC.VARIANTS.items() if w in uniq)
@@ -289,34 +297,30 @@ n_marked = n_words - len([w for w in uniq if w in SC.UNMARKED or (w not in LW.W 
 
 home_head = f"""<title>Sound and Word Atlas</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-{FONTS}
+{FONTS()}
 <link rel="stylesheet" href="site.css">
 """
 import landing
 for w in ("legomorphic", "note", "notate", "notation"): assert w in LW.W, w
+ROUTE_LEAD = md(route["intro"].split(" The orientation map")[0])
+# The route and the legend moved behind their doors on 8 November 2026 (Progressions and Notations). An old link to
+# #route, #band-... or #marks lands on the home page, which sends it on.
+OLD_ANCHORS = """<script>(() => { const h = location.hash;
+  if (h === '#route' || h.indexOf('#band-') === 0) location.replace('progressions.html' + (h.indexOf('#band-') === 0 ? h : ''));
+  else if (h === '#marks') location.replace('notations.html'); })();</script>"""
 home_body = f"""{header(0)}
+{OLD_ANCHORS}
 <main>
 {landing.html_block(LW)}
-<section class="route" id="route" aria-labelledby="route-h"><div class="wrap">
-<h2 id="route-h">The route at a glance</h2>
-<p class="lead">{md(route["intro"].split(" The orientation map")[0])} Open a step to see its words marked, the marks it brings in, and the pages in Carney's survey that back it.</p>
-<p class="sub">Each word is shown with its letters in colour: red for vowel letters, green for <em>sh</em>, <em>th</em> and <em>ch</em>, black for the rest.</p>
-{''.join(bands_html)}
-</div></section>
-<section class="marks" id="marks" aria-labelledby="marks-h"><div class="wrap">
-<h2 id="marks-h">Reading the marks</h2>
-<p class="sub">Twelve marks, each drawn alone on one word. A step page shows a word with all its marks at once.</p>
-<div class="key">{key_html}</div>
-{uc("next, the legend in full, with the rule behind each mark.")}
-</div></section>
-<section class="about" id="about" aria-labelledby="about-h"><div class="wrap">
+{doors.doors_section()}
+<section class="about t-only" id="about" aria-labelledby="about-h"><div class="wrap">
 <h2 id="about-h">What&rsquo;s here</h2>
 <div class="cols">
-<div><h3>The route</h3><p>{N} steps in {len(route["bands"])} bands, with {n_words} different words, {n_marked} of them marked. Each step page has its words, the marks it brings in, and the pages in Carney&rsquo;s survey that back it.</p></div>
-<div><h3>To print and present</h3><p>Printable cards for the ELP high-frequency words and all of Dolch&rsquo;s sight words are on the <a href="cards.html">Word cards</a> page, and <a href="word-lists.html">Word lists</a> shows where the ELP words come from. The first session of the staff series, with its handouts, is under <a href="presentations.html">Presentations</a>.</p></div>
-<div><h3>The notation</h3><p><a href="about.html">About</a> explains the notation and its name, <a href="definitions.html">Definitions</a> has its words, and <a href="credits.html">Credits</a> names the writers it draws on.</p></div>
+<div><h3>The route</h3><p>{N} steps in {len(route["bands"])} bands, with {n_words} different words, {n_marked} of them marked, under <a href="progressions.html">Progressions</a>. Each step page has its words, the marks it brings in, and the pages in Carney&rsquo;s survey that back it.</p></div>
+<div><h3>To print and present</h3><p>Under <a href="instructions.html">Instructions</a>: printable cards for the ELP high-frequency words and all of Dolch&rsquo;s sight words, where the ELP words come from, and the first session of the staff series with its handouts.</p></div>
+<div><h3>The notation</h3><p><a href="notations.html">Notations</a> has the marks. Under <a href="explanations.html">Explanations</a>, About explains the notation and its name, Definitions has its words, and Credits names the writers it draws on.</p></div>
 </div>
-{uc(f"steps {DRAFT_FROM} to {N} are a first draft, and a few words show in plain letters until their marking is settled. Next: the legend in full, the word families and the teaching routines.")}
+{uc(f"steps {DRAFT_FROM} to {N} are a first draft, and a few words show in plain letters until their marking is settled. Next: the first contrast, <i>hop</i> and <i>hope</i>, built in full, then the legend in full and the roots.")}
 </div></section>
 </main>
 {footer(0)}"""
@@ -402,7 +406,7 @@ if ELP_FILE.exists() and all((OUT / "cards" / f).exists() for f, *_ in CARD_SETS
 </div></section>{dolch_html}{ws_html}
 <section class="about" aria-label="Notes"><div class="wrap"><div class="cols">
 <div><h3>Printing</h3><p>Print in colour and double-sided, flipping on the long edge, so each back lands behind its front. Print one sheet first and hold it up to a window to check that the backs line up, then cut on the grey lines. Spaces left over on a sheet are blank cards to write on.</p></div>
-<div><h3>The coding</h3><p>The coded side shows the word in the notation, and <a href="index.html#marks">Reading the marks</a> says what each mark means.</p>{uc("a few markings are still being settled, most of the word sums and a few of the Dolch words among them. Next: settle them, then update the cards that change.")}</div>
+<div><h3>The coding</h3><p>The coded side shows the word in the notation, and <a href="notations.html">Notations</a> says what each mark means.</p>{uc("a few markings are still being settled, most of the word sums and a few of the Dolch words among them. Next: settle them, then update the cards that change.")}</div>
 <div><h3>Where the words come from</h3><p>The Early Literacy Profile (ELP) Assessment &amp; Instructional Guide, Central Okanagan Public Schools (2025), pp. 16&ndash;17. The guide doesn't name a source for its lists; it says they were aligned with a phonics scope and sequence, keeping one word for each pattern. All but three of its 148 words are E. W. Dolch&rsquo;s (1936), as <a href="word-lists.html">Word lists</a> shows. These cards aren't an SD23 publication. The district's own <a href="https://assessment.sd23.bc.ca/elp">ELP page</a> is the place for the assessment itself.</p></div>
 <div><h3>Word sums</h3><p>Word sums and word matrices come from Melvyn Ramsden's Real Spelling, and Peter Bowers brought them into classrooms as structured word inquiry. The base words come from the ELP lists and E. W. Dolch's grade 3 list (Dolch, 1936).</p></div>
 </div></div></section>
@@ -425,9 +429,24 @@ about_pages.write(OUT, page, header, footer, svg_of, LW)
 import definitions
 definitions.write(OUT, page, header, footer, svg_of, KEY, LW)
 
+(OUT / "fonts").mkdir(exist_ok=True)                           # the fonts, served from the site
+for f in (HERE / "fonts").iterdir():
+    shutil.copy(f, OUT / "fonts" / f.name)
+
+PAGES = doors.tree(STEPS, plain)
+DOLCH_ALL = json.loads((HERE / "data" / "dolch.json").read_text(encoding="utf-8"))
+ELP_ALL = json.loads((HERE / "data" / "elp_hfw.json").read_text(encoding="utf-8"))
+list_words = {w for v in ELP_ALL["lists"].values() for w in v["words"]} | {w for l in DOLCH_ALL["levels"] for w in l["words"]} | set(DOLCH_ALL.get("nouns", []))
+X = dict(uc=uc, md=md, plain=plain, route_lead=ROUTE_LEAD, bands_html="".join(bands_html), key_html=key_html, svg_of=svg_of, LW=LW,
+         draft_note=f"steps {DRAFT_FROM} to {N} are a first draft, and a few words show in plain letters until their marking is settled. Next: a second look at their order and their words.",
+         morph=landing.MORPH, STEPS=STEPS, pages=PAGES, groups_of=groups_of, KEY=KEY, terms=definitions.terms(KEY), list_words=list_words)
+doors.write(OUT, page, header, footer, X)
+n_search = doors.write_search(OUT, X)
+
 if (HERE / "site.css").exists():
     shutil.copy(HERE / "site.css", OUT / "site.css")
 shutil.copy(HERE / "logo.svg", OUT / "favicon.svg")          # the tab icon: the logo's own colour rules, light or dark
 for icon in ("favicon-32.png", "apple-touch-icon.png"):      # for browsers that can't use an SVG icon
     shutil.copy(HERE / icon, OUT / icon)
-print("wrote", OUT, "| words", n_words, "marked", n_marked)
+n_crumbs = doors.finish(OUT, PAGES)
+print("wrote", OUT, "| words", n_words, "marked", n_marked, "| search records", n_search, "| pages with breadcrumbs", n_crumbs)
