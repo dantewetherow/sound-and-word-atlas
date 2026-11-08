@@ -1,7 +1,7 @@
 """Marking codes for route words that had none in the deck tools, written for the site on 5 November 2026.
 
 Same code as legomorphic_words.py (see its docstring). Each line follows a word the tools already mark:
-the analog is named in the comment. Words in UNMARKED are shown in plain letters until a marking is decided.
+the analog is named in the comment. Words in UNMARKED are shown in plain letters until a marking is settled.
 CALLS lists the places where these codes rest on a choice. They are in the manual's Marking calls tab under
 "From the atlas site" (added 5 November 2026), with telephone and photograph, for a ruling; once ruled, change
 the codes here to match and rebuild."""
@@ -81,22 +81,14 @@ VARIANTS = {
     "live": [("c.l l.i c.v e>", "a live show"), ("c.l s.i c.v e0", "we live here")],
 }
 
-# Shown in plain letters until their marking is decided.
-UNMARKED = {
-    "I'm": "the red apostrophe is not drawn on the site yet",
-    "it's": "the red apostrophe is not drawn on the site yet",
-    "isn't": "the red apostrophe is not drawn on the site yet",
-    "don't": "the red apostrophe is not drawn on the site yet",
-    "can't": "the red apostrophe is not drawn on the site yet",
-    "won't": "the red apostrophe is not drawn on the site yet",
-    "we're": "the red apostrophe is not drawn on the site yet",
-    "act": "marked in the act family deck", "action": "marked in the act family deck",
-    "actor": "marked in the act family deck", "active": "marked in the act family deck",
-    "react": "marked in the act family deck", "create": "marked in the create family deck",
-    "creation": "marked in the create family deck", "creator": "marked in the create family deck",
-    "telephone": "whether a seam goes between the Greek roots is open",
-    "photograph": "whether a seam goes between the Greek roots is open",
-}
+# Shown in plain letters until their marking is settled, each with why and what comes next, for the step page's
+# under-construction note (build_site.py).
+CONTRACTION = ("The contractions aren't drawn here yet.", "draw them with the red apostrophe, as the verb-system cards do.")
+FAMILY = ("*Act*, *create* and their families are marked in the family decks, which aren't on the site yet.", "bring their marking over from those decks.")
+GREEK = ("Whether a seam goes between the Greek parts of *telephone* and *photograph* is still being decided.", "decide, then draw them.")
+UNMARKED = {**{w: CONTRACTION for w in ("I'm", "it's", "isn't", "don't", "can't", "won't", "we're")},
+            **{w: FAMILY for w in ("act", "action", "actor", "active", "react", "create", "creation", "creator")},
+            "telephone": GREEK, "photograph": GREEK}
 
 # Choices these codes make that the manual and the cards do not settle outright.
 CALLS = [

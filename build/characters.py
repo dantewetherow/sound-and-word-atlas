@@ -87,7 +87,7 @@ def lifted(LW, word, F=58.0, label=None, pad=0.08, scale=1.0, em=None, px_height
 
 
 def team(LW, scale=0.95):
-    """The Dialogue Team making a claim, then the flip: Could moves to the front, outlined in blue as on the word cards."""
+    """The Dialogue Team making a claim, then the flip: Could moves to the front, outlined as on the word cards."""
     def member(word, name, role, moving=False):
         return (f'<figure class="member{" moving" if moving else ""}">{lifted(LW, word, label=f"{name}, {word} with its letters lifted out", scale=scale, em=scale / 16)}'
                 f'<figcaption><b>{name}</b><span>{role}</span></figcaption></figure>')

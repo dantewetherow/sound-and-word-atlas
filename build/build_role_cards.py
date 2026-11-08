@@ -6,9 +6,8 @@ already verb-system cards (the forms of be, have and do, the modals, and don't).
 Actor cards, for actors and the acted-on: the personal pronouns I, me, you, he, him, she, her, we, us, they, them and
 it, then Dolch's 95 nouns. 107 cards.
 
-The cards carry no colour for the sentence roles. They first had a pale wash (red for actions, green for actors), and
-the verb-system cards a band; both came off on 6 November 2026 because they cluttered the cards. The list pages name
-the roles in words, and their flips outline the card that moves, as the Session 1 sentence cards do.
+The cards carry no colour for the sentence roles. The list pages name the roles in words, and their flips outline the
+card that moves, in ink, as the Session 1 sentence cards do.
 
 The cards are drawn with build_handouts.py's pieces (fonts, card geometry, marking), so the sets match. NOUN_CODES has
 the 72 nouns the notation didn't mark yet, each following the word named in its comment. CALLS lists the choices they

@@ -24,24 +24,25 @@ SENTENCES = [   # (term, part of speech, definition, source or None)
      "were transformed from. Here the kernel is what's built first, and the rest grows onto it in time."),
     ("actor", "noun",
      "Who or what the sentence is about, usually the one doing the action. In the picture of a sentence as a head, a body "
-     "and legs, the actor is the head. Green in the sentence colours: <i>she</i> in <i>She could go.</i>", None),
+     "and legs, the actor is the head: <i>she</i> in <i>She could go.</i>", None),
     ("action", "noun",
-     "What the actor does: the body. Red in the sentence colours: <i>go</i> in <i>She could go.</i> A sentence with a form "
+     "What the actor does: the body, as <i>go</i> is in <i>She could go.</i> A sentence with a form "
      "of <i>be</i> and no other verb, like <i>She is here</i>, has no action.", None),
     ("acted-on", "noun",
-     "Who or what the action is done to: the legs. Green, like the actor: <i>the note</i> in <i>She could read the note.</i> "
+     "Who or what the action is done to: the legs, as <i>the note</i> is in <i>She could read the note.</i> "
      "Not every sentence has one. <i>She could go</i> doesn't.", None),
     ("operator", "noun",
      "The first helping verb in a sentence: the word that carries <i>not</i> and moves to the front to make a question, as "
-     "<i>could</i> does in <i>She could go</i> and <i>Could she go?</i> Operators are forms of <i>be</i>, <i>have</i> and "
-     "<i>do</i>, and the modals. Blue, but only in the forms that can move to the front, like <i>is</i>, <i>has</i> and "
-     "<i>did</i>. <i>Been</i>, <i>being</i> and <i>done</i> never move, so they take the verb's red.",
+     "<i>could</i> does in <i>She could go</i> and <i>Could she go?</i> Operators are the modals and the forms of "
+     "<i>be</i>, <i>have</i> and <i>do</i> that can move to the front, like <i>is</i>, <i>has</i> and <i>did</i>. "
+     "<i>Been</i>, <i>being</i> and <i>done</i> never move, so they are never operators.",
      "Adopted from Randolph Quirk, Sidney Greenbaum, Geoffrey Leech and Jan Svartvik, <i>A Comprehensive Grammar of the "
      "English Language</i> (Longman, 1985)."),
     ("modal", "noun",
      "An operator that says how sure, able, allowed or bound the claim is: <i>can, could, will, would, shall, should, may, "
-     "might</i> and <i>must</i>. The nine modals are always operators, so they're always blue. The semi-modals (<i>have "
-     "to, ought to, going to, used to</i>) don't move to the front, so they stay red.", None),
+     "might</i> and <i>must</i>. The nine modals are always operators. The semi-modals (<i>have to, ought to, going to, "
+     "used to</i>) mean what modals mean but don't move to the front themselves: <i>Do we have to go? Are we going to "
+     "go?</i>", None),
     ("query", "noun",
      "A question word: <i>who, what, where, when, why</i> or <i>how</i>. A query asks for more than yes or no, and it comes "
      "before the operator: <i>Where could she go?</i> The name keeps it apart from the operator.", None),
@@ -52,7 +53,7 @@ SENTENCES = [   # (term, part of speech, definition, source or None)
      "question starts with a query: <i>Where could she go?</i>", None),
     ("flip", "noun and verb",
      "Moving the operator across the actor, to turn a claim into a question and back: <i>She could go. Could she go?</i> On "
-     "the word cards, the card that moves is outlined in blue.", None),
+     "the word cards, the card that moves is outlined.", None),
 ]
 
 TEACHING = [

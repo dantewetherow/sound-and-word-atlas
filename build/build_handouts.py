@@ -1,10 +1,12 @@
 """Printable handouts for Session 1 (Sounds, feedback and learning loops).
 
-Builds four PDFs:
+Builds six PDFs:
   sounds-and-marks-key.pdf        two sides, landscape: the 44 sounds, and the marks with exemplar words and contrasts
   operator-cards.pdf              three pages, portrait: the nine modal operators as fold-over tent cards, marked on one face, blank on the other,
                                   and three blank cards
   operator-cards-instructions.pdf one page, landscape: making the cards, running a loop, marking by hand
+  modal-cards.pdf                 the operator cards' first version (8 October), with the marking of that day
+  modal-cards-instructions.pdf    the instruction sheet that went with them
   sentence-cards.pdf              nine pages, landscape: a demonstration set of 48 shorter tent cards about reading and writing
                                   (operators, not, actors, actions, things to read, -ing and -s, an extra p and n for doubling,
                                   a period and a question mark) after a page that lists them and shows flips
@@ -227,17 +229,36 @@ CARDS_CSS = """
 .tag{position:absolute;font-size:6.6pt;letter-spacing:.04em;color:#8d8577;background:#fff;padding:0 .04in;}
 """
 
-def cards_pages():
+def cards_pages(marker=None):
+    marker = marker or mark
     slots = MODALS + [None] * ((-len(MODALS)) % 4)
     pages = []
     for p in range(0, len(slots), 4):
         cards = ""
         for k, w in enumerate(slots[p:p + 4]):
             x, y = (k % 2) * 4.25, (k // 2) * 5.5
-            cards += f'<div class="card" style="left:{x}in;top:{y}in">' + (f'<div class="face">{mark(w, .80)}</div>' if w else "") + "</div>"
+            cards += f'<div class="card" style="left:{x}in;top:{y}in">' + (f'<div class="face">{marker(w, .80)}</div>' if w else "") + "</div>"
         guides = '<div class="cut v"></div><div class="cut h"></div><div class="fold" style="top:2.75in"></div><div class="fold" style="top:8.25in"></div>'
         pages.append(f'<section class="page">{cards}{guides}</section>')
     return "".join(pages)
+
+# ------------------------------------------------------------------ the modal cards: the operator cards' first version
+# The same tent cards as given out on 8 October, with the marking of that day, which boxed a doubled letter instead of
+# putting a bar under it (will, shall). They were rebuilt on 8 November 2026 so the swoop sits where it does everywhere
+# else; the rest is as it was made.
+FIRST_VERSION = {"will": "c.w s.i x.ll", "shall": "g.sh s.a x.ll"}
+
+def first_mark(word, f_in):
+    if word not in FIRST_VERSION: return mark(word, f_in)
+    had, old = word in LW.W, LW.W.get(word)
+    LW.W[word] = FIRST_VERSION[word]
+    try: svg = mark(word, f_in)
+    finally:
+        if had: LW.W[word] = old
+        else: LW.W.pop(word, None)
+    bars = re.findall(r'<line [^>]*stroke="var\(--ink\)"[^>]*/>', svg)      # the black bar under the boxed ll
+    assert len(bars) == 1, (word, bars)
+    return svg.replace(bars[0], "")
 
 # ------------------------------------------------------------------ the instruction sheet
 def fold_picture():
@@ -268,10 +289,17 @@ SHEET_CSS = """
 .why .src{grid-column:1 / -1;font-size:7.2pt;line-height:1.45;color:var(--soft);margin:.03in 0 0;}
 """
 
-def sheet_page():
+def sheet_page(first=False):
+    """The operator cards' instructions, or with first=True the modal cards' (8 October), which differ in a few words."""
+    lead = ("Tent cards for the nine modals, plus three blank ones, to fold, stand up and mark by hand." if first else
+            "Tent cards for the nine modals, the operators that turn a statement into a question, plus three blank ones.")
+    bar = ("Draw a bar under letters that spell a sound together, like <i>sh</i> and <i>oul</i>. Box a doubled letter, like <i>ll</i>, instead." if first else
+           "Draw a bar under letters that spell a sound together, like <i>sh</i>, <i>oul</i> and the <i>ll</i> of <i>will</i>. Add a box only when a vowel follows, as in <i>filling</i>, and keep the bar.")
+    foot = ("<span>Sounds to Sentences</span><span>Goes with the modal cards and the key to the marks</span>" if first else
+            "<span>Sounds, Symbols and Sentences · Session 1</span><span>Goes with the operator cards and the key to the marks</span>")
     return f"""<section class="page">
-  <h1>Operator cards</h1>
-  <p class="lead">Tent cards for the nine modals, the operators that turn a statement into a question, plus three blank ones.</p>
+  <h1>{"Modal cards" if first else "Operator cards"}</h1>
+  <p class="lead">{lead}</p>
   <div class="cols">
     <div>
       <h2>Make the cards</h2>
@@ -288,7 +316,7 @@ def sheet_page():
       <ol>
         <li>Pick a card, stand it up and build a sentence around it: <i>We&nbsp;could&nbsp;go.</i></li>
         <li>Make a clean pass through each mode: see it, hear it, say it, read it, write it.</li>
-        <li>Swap a part: the actor, the action or the operator. <i>She&nbsp;should&nbsp;run.</i></li>
+        <li>Swap a part: the actor, the action or the {"modal" if first else "operator"}. <i>She&nbsp;should&nbsp;run.</i></li>
         <li>Tip it into a question, then say both: <i>Should&nbsp;she&nbsp;run?</i></li>
         <li>Loop back to whichever mode needs another pass.</li>
       </ol>
@@ -300,7 +328,7 @@ def sheet_page():
       <ol>
         <li>Write the word on the blank face, and say it slowly.</li>
         <li>Put a circle under each sound, and a swoop under the syllable.</li>
-        <li>Draw a bar under letters that spell a sound together, like <i>sh</i>, <i>oul</i> and the <i>ll</i> of <i>will</i>. Add a box only when a vowel follows, as in <i>filling</i>, and keep the bar.</li>
+        <li>{bar}</li>
         <li>Go over each vowel in red, with any letters that share its bar, and <i>sh</i> in green.</li>
         <li>Add a cup over a short vowel.</li>
         <li>Turn the card over and check it against the printed face.</li>
@@ -322,7 +350,7 @@ def sheet_page():
     </div>
     <p class="src">Boxes: Lane (2021), <i>Using Elkonin Boxes</i>, University of Florida Literacy Institute; Ross &amp; Joseph (2019), <i>Preventing School Failure</i> 63, 43–51. New letters: Araújo, Domingues &amp; Fernandes (2022), <i>Educational Psychology Review</i> 34, 1577–1612; Ibaibarriaga, Acha &amp; Perea (2026), <i>Reading and Writing</i> 39, 2389–2411. Spelling: Cunningham &amp; Stanovich (1990), <i>Journal of Educational Psychology</i> 82, 159–162; Vaughn, Schumm &amp; Gordon (1993), <i>Journal of Learning Disabilities</i> 26, 191–198; Ouellette &amp; Tims (2014), <i>Frontiers in Psychology</i> 5, 117. Dyslexia: Cerni, Lonciari &amp; Job (2025), <i>Learning and Instruction</i> 98, 102119.</p>
   </div>
-  <div class="foot"><span>Sounds, Symbols and Sentences · Session 1</span><span>Goes with the operator cards and the key to the marks</span></div>
+  <div class="foot">{foot}</div>
 </section>"""
 
 # ------------------------------------------------------------------ the sentence cards: a demonstration set, landscape
@@ -393,7 +421,7 @@ SENT_CSS = """
 .flips .jn .tile:not(:first-child){border-left-style:dashed;border-top-left-radius:0;border-bottom-left-radius:0;}
 .flips .jn .tile:not(:last-child){border-top-right-radius:0;border-bottom-right-radius:0;}
 .tile{display:inline-block;font-size:11.5pt;line-height:1;padding:.055in .09in .065in;border:.8pt solid #b9b0a1;border-radius:3pt;min-width:.3in;text-align:center;background:#fff;}
-.tile.op{border:1.6pt solid var(--modal);color:var(--modal);font-weight:500;}
+.tile.op{border:1.6pt solid var(--ink);font-weight:500;}          /* the card that moves: outlined in ink, with no colour for its role */
 .flips .arrow{color:var(--soft);font-size:12pt;}
 .fs > p{font-size:8.6pt;color:var(--soft);margin:.08in 0 0;}
 .notes{margin-top:.12in;}
@@ -461,6 +489,8 @@ DOCS = [
  ("sounds-and-marks-key", "The 44 sounds of English, and marking a word", SOUNDS_CSS + MARKS_CSS, sounds_page() + marks_page(), ("11in", "8.5in")),
  ("operator-cards", "Operator cards", CARDS_CSS, cards_pages(), ("8.5in", "11in")),
  ("operator-cards-instructions", "Operator cards: instructions", SOUNDS_CSS + SHEET_CSS, sheet_page(), ("11in", "8.5in")),
+ ("modal-cards", "Modal cards", CARDS_CSS, cards_pages(first_mark), ("8.5in", "11in")),
+ ("modal-cards-instructions", "Modal cards: instructions", SOUNDS_CSS + SHEET_CSS, sheet_page(first=True), ("11in", "8.5in")),
  ("sentence-cards", "Sentence cards", SOUNDS_CSS + CARDS_CSS.replace("@page{size:8.5in 11in;margin:0;}", "").replace(".page{width:8.5in;height:11in;display:block;}", "") + SENT_CSS,
   sentence_list_page() + sentence_card_pages(), ("11in", "8.5in")),
 ]

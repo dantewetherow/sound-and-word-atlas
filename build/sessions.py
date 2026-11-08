@@ -49,7 +49,8 @@ DECKS = [{
          "107 tent cards for actors and the acted-on: twelve personal pronouns and Dolch&rsquo;s 95 nouns. "
          "The first page lists them and gives flips to try."),
         ("modal-cards", "Modal cards, first version",
-         "The first version of the operator cards, from 8 October: the nine modals as fold-over tent cards, plus three blank cards."),
+         "The first version of the operator cards, from 8 October: the nine modals as fold-over tent cards, plus three blank cards. "
+         "It boxes a doubled letter, like the <i>ll</i> of <i>will</i>, where the operator cards put a bar under it."),
         ("modal-cards-instructions", "Using the modal cards", "The instruction sheet that went with them."),
     ],
 }]

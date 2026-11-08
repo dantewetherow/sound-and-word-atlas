@@ -5,9 +5,8 @@ and en, and the to of to go: 53 cards and a blank. They are the sentence cards' 
 stand with the sentence cards' actors and actions. The first page lists the set, says which words can move to the
 front to make a question, and gives flips to try, with the card that moves outlined.
 
-The cards carry no colour band. One came off on 6 November 2026 because it cluttered the cards. In a sentence the
-colours still follow the ruling of that day: blue if the word can move to the front, red if it stays, with -s and ed
-blue because do carries them to the front (she reads, does she read?), as the Session 1 deck colours the s of likes.
+The cards carry no colour for the sentence roles. The first page says in words which cards move, and its flips outline
+the card that moves, in ink.
 
 The cards are drawn with build_handouts.py's pieces (fonts, card geometry, marking), so the sets match. The codes the
 notation didn't have are below. CALLS lists the choices they rest on; they wait in the manual's Marking calls tab under
@@ -62,8 +61,6 @@ CALLS = [
     ("ed, n’t (cards on their own)", "no syllable swoop",
      "Each is a syllable in some words and not in others (wanted, played; isn’t, can’t). The -s card has none either."),
     ("ed", "the e in a cone", "Silent, as in played and hopped. In wanted it is said weakly: mark it again on the blank face."),
-    ("not, to, the semi-modals", "red in the sentence colours, not blue",
-     "They never move to the front. Formal English can still say Ought we to go?, so ought could be argued blue."),
 ]
 
 FAMILIES = [   # (group, note, [(word, moves to the front)])

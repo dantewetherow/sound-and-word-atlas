@@ -93,7 +93,7 @@ def write(OUT, page, header, footer, svg_of, LW):
 </ul>
 <p>Contractions take a red apostrophe in place of the vowel they drop.</p>
 <div class="examples">{examples}</div>
-<p>In a sentence the colours change jobs. Actors and the things acted on are green, actions are red, and operators, the words that can move to the front to make a question, are blue. <a href="index.html#marks">Reading the marks</a> has the legend with a drawing of each mark.</p>
+<p>In a sentence, the parts are named for their jobs: the actor, the operator, the action and the acted-on. The operator is the word that can move to the front to make a question. <a href="definitions.html#sentences">Definitions</a> has each of them, and <a href="index.html#marks">Reading the marks</a> has the legend, with a drawing of each mark.</p>
 </div></section>
 
 <section class="about" aria-labelledby="use-h"><div class="wrap prose">

@@ -19,7 +19,7 @@ codes, _ = all_codes()
 for w, c in SC.SITE_CODES.items(): codes.setdefault(w, c)
 LW.W.clear(); LW.W.update(codes)
 STEPS = route["steps"]; N = len(STEPS)
-BUILT = "6 November 2026"
+BUILT = "8 November 2026"
 FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
          '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600'
          '&family=Lexend:wght@300;400;500&display=swap">')
@@ -73,7 +73,7 @@ def word_cells(group, F):
                 cells.append(f'<figure class="word">{svg_of(w, F, code, f"{w}, as in {gloss}, marked")}<figcaption>{html.escape(gloss)}</figcaption></figure>')
         elif w in SC.UNMARKED or w not in LW.W:
             cells.append(f'<figure class="word unmarked"><span class="plain" style="font-size:{F:.0f}px">{html.escape(w)}</span>'
-                         f'<figcaption>not marked yet</figcaption></figure>')
+                         f'<figcaption>(under construction)</figcaption></figure>')
         else:
             cells.append(f'<figure class="word">{svg_of(w, F)}</figure>')
     return cells
@@ -139,20 +139,59 @@ def header(depth):
 
 def footer(depth):
     up = "../" * depth
-    return ('<footer class="site"><div class="wrap"><p>Built on ' + BUILT + ' from the <i>Legomorphic Notation</i> manual. '
-            'Steps 16 to 32 are a draft. Page references are to Edward Carney, <i>A Survey of English Spelling</i> (Routledge, 1994).</p>'
+    return ('<footer class="site"><div class="wrap"><p>Page references are to Edward Carney, <i>A Survey of English Spelling</i> '
+            '(Routledge, 1994). Updated ' + BUILT + '.</p>'
             '<p>&copy; 2026 Dante Wetherow, B.Ed., M.Ed. Shared under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>. '
             f'<a href="{up}credits.html">Credits and contact</a></p></div></footer>')
 
 def fname(n): return f"{n:02d}.html"
 
+def uc(text):
+    """What's still being built, and what comes next, in the site's one form for it: (Under construction: ...). The
+    text is HTML, starting in lower case."""
+    return f'<p class="uc">(Under construction: {text})</p>'
+
+# The manual's open items (route["open"]) as the step pages show them: what is still being decided on that step, and
+# what comes next. Each item is found by its first words, and it must name the same steps it is shown on, so a new or
+# changed item in the manual stops the build until its notes here are written.
+UC_OPEN = {
+ "Teams with two sounds": {
+  22: "whether a team with two sounds, like the *oo* of *moon* and *book*, takes a mark to tell its sounds apart is still "
+      "being decided. For now both sounds are marked alike. Next: decide, then redraw the words that change.",
+  24: "*ow* joins the teams with two sounds here, as in *now* and *snow*. Whether those teams take a mark to tell their "
+      "sounds apart is still being decided, and for now both sounds are marked alike. Next: decide, then redraw the words "
+      "that change."},
+ "Step 19 could move up": {
+  19: "this step may move up to follow step 13. Its words turn up in reading from the start, and every unit it uses is in "
+      "place by step 13, where the seam lets *does* be built as *do* + *es*. Next: decide where it sits in the route.",
+  13: "step 19, a vowel that borrows a sound, may move up to follow this step, since every unit it uses is in place by "
+      "here. Next: decide where it sits in the route."},
+ "The black bond bar": {
+  **{n: "the black bond bar, under letters that spell one consonant sound such as *qu*, *wh* and *ng*, is used from early "
+        "in the route but isn't named as a new mark until step 25. Next: decide whether to name it at step 5." for n in (4, 5, 13)},
+  25: "the black bond bar is named as a new mark here, but *qu*, *wh* and *ng* take it from earlier steps. Next: decide "
+      "whether to name it at step 5 instead."},
+ "The pointer pill": {
+  28: "the pointer pill is a proposed mark, not a settled one. Next: decide whether it joins the legend."},
+}
+for item in route["open"]:
+    key = next((k for k in UC_OPEN if item.startswith(k)), None)
+    assert key, f"an open item in the manual has no under-construction note on the site yet: {item[:70]}"
+    named = {int(x) for x in re.findall(r"\b(?:step|steps)\s+(\d+)", item, re.I)} | {int(x) for x in re.findall(r"\band\s+(\d+)\)", item)}
+    assert named == set(UC_OPEN[key]), (key, sorted(named))
+
 def open_items_for(n):
-    out = []
-    for item in route["open"]:
-        nums = {int(x) for x in re.findall(r"\b(?:step|steps)\s+(\d+)", item, re.I)}
-        nums |= {int(x) for x in re.findall(r"\band\s+(\d+)\)", item)}
-        if n in nums: out.append(item)
-    return out
+    return [UC_OPEN[k][n] for k in UC_OPEN if n in UC_OPEN[k] and any(i.startswith(k) for i in route["open"])]
+
+DRAFT_FROM = 16                         # steps 16 to 32 were added as a first draft on 15 October 2026
+DRAFT_NOTE = f"steps {DRAFT_FROM} to {N} are a first draft. Next: a second look at their order and their words."
+
+def new_marks(m):
+    """The step's new marks. The manual writes an undecided one as "open: ..." or "proposed: ...", and the step's
+    under-construction note says what's being decided."""
+    if m.lower() == "none": return "None: the step uses marks already met."
+    if re.match(r"(open|proposed):", m, re.I): return "None settled yet."
+    return md(m)
 
 # ------------------------------------------------------------------ step pages
 for i, s in enumerate(STEPS):
@@ -164,17 +203,17 @@ for i, s in enumerate(STEPS):
         cells.append(f'<div class="group{" pair" if len(inner) > 1 else ""}">' + "".join(inner) + "</div>")
     notes = []
     marks = s["marks"].strip()
-    notes.append(f'<div class="note"><h2>New marks</h2><p>{md(marks) if marks.lower() != "none" else "None: the step uses marks already met."}</p></div>')
+    notes.append(f'<div class="note"><h2>New marks</h2><p>{new_marks(marks)}</p></div>')
     if s.get("contrast_md"):
         notes.append(f'<div class="note"><h2>Contrast</h2><p>{md(s["contrast_md"])}</p></div>')
     k = s["kernel_md"].strip()
     notes.append(f'<div class="note"><h2>Kernel words</h2><p>{md(k) if k.lower() != "none" else "None at this step."}</p></div>')
     notes.append(f'<div class="note"><h2>Carney (1994)</h2><p>{md(s.get("carney", ""))}</p></div>')
-    for item in open_items_for(n):
-        notes.append(f'<div class="note open"><h2>Open on this step</h2><p>{md(item)}</p></div>')
+    for text in open_items_for(n):
+        notes.append(f'<div class="note uc">{uc(md(text))}</div>')
     unmarked = sorted({SC.UNMARKED[w] for g in groups_of(s["words_md"]) for w in g if w in SC.UNMARKED})
-    um = f'<p class="unmarked-note">Words in plain letters are not marked yet: {html.escape("; ".join(unmarked))}.</p>' if unmarked else ""
-    draft = ' <span class="badge">Draft</span>' if n >= 16 else ""
+    um = uc("the words in plain letters aren't marked here yet. " + " ".join(f"{md(why)} Next: {md(nxt)}" for why, nxt in unmarked)) if unmarked else ""
+    draft = uc(DRAFT_NOTE) if n >= DRAFT_FROM else ""
     pn = '<nav class="pn" aria-label="Steps">'
     pn += (f'<a class="prev" href="{fname(prev_s["n"])}"><span>Step {prev_s["n"]}</span>{md(prev_s["title"])}</a>' if prev_s else '<span></span>')
     pn += (f'<a class="next" href="{fname(next_s["n"])}"><span>Step {next_s["n"]}</span>{md(next_s["title"])}</a>' if next_s else '<span></span>')
@@ -182,18 +221,19 @@ for i, s in enumerate(STEPS):
     body = f"""{header(1)}
 <main class="wrap">
 <div class="step-head">
-<p class="eyebrow"><a href="../index.html#band-{re.sub(r'[^a-z]+', '-', band.lower()).strip('-')}">{html.escape(band)}</a> · Step {n} of {N}{draft}</p>
+<p class="eyebrow"><a href="../index.html#band-{re.sub(r'[^a-z]+', '-', band.lower()).strip('-')}">{html.escape(band)}</a> · Step {n} of {N}</p>
 <h1>{md(s['title'])}</h1>
+{draft}
 </div>
 <div class="plate">
 <section class="words" aria-label="The step's words, marked">
 {''.join(cells)}
+{um}
 </section>
 <aside class="notes">
 {''.join(notes)}
 </aside>
 </div>
-{um}
 {pn}
 </main>
 {footer(1)}"""
@@ -219,7 +259,7 @@ bands_html = []
 for b in route["bands"]:
     ss = [x for x in STEPS if x["n"] in b["steps"]]
     slug = re.sub(r"[^a-z]+", "-", b["name"].lower()).strip("-")
-    draft = '<span class="badge">Draft</span>' if min(b["steps"]) >= 16 else ""
+    draft = '<span class="badge">Under construction</span>' if min(b["steps"]) >= DRAFT_FROM else ""
     bands_html.append(f'<section class="band" id="band-{slug}"><div class="band-label"><h3>{html.escape(b["name"])}</h3>'
                       f'<p>Steps {min(b["steps"])} to {max(b["steps"])}</p>{draft}</div>'
                       f'<div class="tiles">{"".join(tile(x) for x in ss)}</div></section>')
@@ -261,16 +301,18 @@ home_body = f"""{header(0)}
 </div></section>
 <section class="marks" id="marks" aria-labelledby="marks-h"><div class="wrap">
 <h2 id="marks-h">Reading the marks</h2>
-<p class="sub">Twelve marks, as the manual's legend gives them. The rules behind them are in the manual.</p>
+<p class="sub">Twelve marks, each drawn on a word that uses it.</p>
 <div class="key">{key_html}</div>
+{uc("next, the legend in full, with the rule behind each mark.")}
 </div></section>
 <section class="about" id="about" aria-labelledby="about-h"><div class="wrap">
-<h2 id="about-h">About this version</h2>
+<h2 id="about-h">What&rsquo;s here</h2>
 <div class="cols">
-<div><h3>What's here</h3><p>The route: {N} steps in {len(route["bands"])} bands, {n_words} different words, {n_marked} of them marked. Printable cards for the ELP high-frequency words and all of Dolch&rsquo;s sight words are on the <a href="cards.html">Word cards</a> page, and <a href="word-lists.html">Word lists</a> shows where the ELP words come from. The first session of the staff series is under <a href="presentations.html">Presentations</a>. The legend in full, the word families and the teaching routines come next.</p></div>
-<div><h3>Where it comes from</h3><p>The route and its notes come from the <i>Legomorphic Notation</i> manual, and the site is rebuilt from it, so corrections go into the manual first. The marks are drawn with the same tools as the session decks. <a href="about.html">About</a> explains the notation and its name, and <a href="credits.html">Credits</a> names the writers it draws on.</p></div>
-<div><h3>Still settling</h3><p>Steps 16 to 32 were added as a draft on 15 October 2026. A few words show in plain letters until their marking is decided.</p></div>
+<div><h3>The route</h3><p>{N} steps in {len(route["bands"])} bands, with {n_words} different words, {n_marked} of them marked. Each step page has its words, the marks it brings in, and the pages in Carney&rsquo;s survey that back it.</p></div>
+<div><h3>To print and present</h3><p>Printable cards for the ELP high-frequency words and all of Dolch&rsquo;s sight words are on the <a href="cards.html">Word cards</a> page, and <a href="word-lists.html">Word lists</a> shows where the ELP words come from. The first session of the staff series, with its handouts, is under <a href="presentations.html">Presentations</a>.</p></div>
+<div><h3>The notation</h3><p><a href="about.html">About</a> explains the notation and its name, <a href="definitions.html">Definitions</a> has its words, and <a href="credits.html">Credits</a> names the writers it draws on.</p></div>
 </div>
+{uc(f"steps {DRAFT_FROM} to {N} are a first draft, and a few words show in plain letters until their marking is settled. Next: the legend in full, the word families and the teaching routines.")}
 </div></section>
 </main>
 {footer(0)}"""
@@ -356,7 +398,7 @@ if ELP_FILE.exists() and all((OUT / "cards" / f).exists() for f, *_ in CARD_SETS
 </div></section>{dolch_html}{ws_html}
 <section class="about" aria-label="Notes"><div class="wrap"><div class="cols">
 <div><h3>Printing</h3><p>Print in colour and double-sided, flipping on the long edge, so each back lands behind its front. Print one sheet first and hold it up to a window to check that the backs line up, then cut on the grey lines. Spaces left over on a sheet are blank cards to write on.</p></div>
-<div><h3>The coding</h3><p>The coded sides show the markings as they stand in the manual now. Some words still have marking calls open, including most of the word sum markings and a few of the Dolch words, which are new, and the cards will be rebuilt when those are ruled.</p></div>
+<div><h3>The coding</h3><p>The coded side shows the word in the notation, and <a href="index.html#marks">Reading the marks</a> says what each mark means.</p>{uc("a few markings are still being settled, most of the word sums and a few of the Dolch words among them. Next: settle them, then update the cards that change.")}</div>
 <div><h3>Where the words come from</h3><p>The Early Literacy Profile (ELP) Assessment &amp; Instructional Guide, Central Okanagan Public Schools (2025), pp. 16&ndash;17. The guide doesn't name a source for its lists; it says they were aligned with a phonics scope and sequence, keeping one word for each pattern. All but three of its 148 words are E. W. Dolch&rsquo;s (1936), as <a href="word-lists.html">Word lists</a> shows. These cards aren't an SD23 publication. The district's own <a href="https://assessment.sd23.bc.ca/elp">ELP page</a> is the place for the assessment itself.</p></div>
 <div><h3>Word sums</h3><p>Word sums and word matrices come from Melvyn Ramsden's Real Spelling, and Peter Bowers brought them into classrooms as structured word inquiry. The base words come from the ELP lists and E. W. Dolch's grade 3 list (Dolch, 1936).</p></div>
 </div></div></section>
