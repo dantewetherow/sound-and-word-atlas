@@ -74,7 +74,7 @@ W = {
  "over": "l.o | c.v r.er ; vault 2>0", "before": "c.b l.e | c.f r.or e0 ; vault 3>1", "first": "c.f r.ir c.st", "hurt": "c.h r.ur c.t",
  "for": "c.f r.or", "under": "s.u c.n | c.d r.er", "start": "c.st r.ar c.t",
  # ---- list 9
- "because": "c.b l.e | c.c t.au c.s e0", "been": "c.b t.ee c.n", "both": "c.b l.o g.th", "buy": "k.bu l.y", "old": "l.o c.ld",
+ "because": "c.b l.e | c.c t.au c.s e0", "been": "c.b t.ee c.n ; seam 1", "both": "c.b l.o g.th", "buy": "k.bu l.y", "old": "l.o c.ld",
  "does": "c.d b.o + e0 c.s", "goes": "c.g l.o + e0 c.s", "many": "c.m b.a c.n | b.y", "pull": "c.p b.u k.ll", "their": "g.th r.eir",
  # ---- list 10, vowel teams
  "please": "c.pl t.ea c.s e0", "each": "t.ea g.ch", "eat": "t.ea c.t", "say": "c.s t.ay", "green": "c.gr t.ee c.n", "read": "c.r t.ea c.d",
