@@ -342,7 +342,7 @@ def sheet_page(first=False):
       <p>Elkonin boxes ask for the same two decisions, and a 2019 review of small studies found that they help with phonemic awareness, letter sounds and spelling.</p>
     </div>
     <div>
-      <p>Handwriting has support while letters are still new: across 50 experiments, learners who wrote new letters or symbols by hand recognised them better than learners who typed them or only looked. In a kindergarten study, the children who wrote also read the new words better.</p>
+      <p>Handwriting has support while letters are still new: across 50 experiments, learners who wrote new letters or symbols by hand recognised them better than learners who typed them or only looked. In a kindergarten study, the learners who wrote also read the new words better.</p>
     </div>
     <div>
       <p>Once letters are known, studies of spelling mostly find no difference between pencil and keyboard. In one small study of Italian middle-school students, those with dyslexia learned new words better on a keyboard. Where forming letters is the hard part, write the word for the learner to mark.</p>

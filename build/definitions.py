@@ -75,14 +75,30 @@ TEACHING = [
      "inquiry. See <a href=\"credits.html\">Credits</a>."),
     ("copywrite", "noun",
      "The older practice underneath copyright: taking what others have said and written, and writing it again in your own "
-     "hand. It's what children do as they learn to talk, read and write, and what this site does with the writers it "
+     "hand. It's what every learner does on the way to talking, reading and writing, and what this site does with the writers it "
      "builds on.", "Coined for the notation. See <a href=\"credits.html#copywrite\">Credits</a>."),
+]
+
+STUDY = [   # words for studying language, each with an everyday word to stand in for it
+    ("synchronic", "adjective",
+     "Looking at a language as it is at one time, the way it's used now, without its history. A synchronic reading of "
+     "<i class=\"nw\">-ion</i> asks what the ending does in the words in use today: <i>action</i>, <i>notation</i>, "
+     "<i>explanation</i>. In everyday words, a <b>snapshot</b>.",
+     "Adopted from Ferdinand de Saussure, whose <i>Course in General Linguistics</i> (1916) set it against diachronic. From "
+     "Greek <i>syn</i>, &ldquo;together,&rdquo; and <i>khronos</i>, &ldquo;time&rdquo;: belonging to the same time."),
+    ("diachronic", "adjective",
+     "Looking at a language through time, at how its words, sounds and spellings have changed. A diachronic reading of "
+     "<i>before</i> finds Old English <i>beforan</i>, where <i>be</i>, &ldquo;by,&rdquo; was joined to <i>foran</i>, "
+     "&ldquo;from the front,&rdquo; and finds <i>for</i> and <i>fore</i> growing from one root. In everyday words, a "
+     "<b>time-lapse</b>.",
+     "Adopted from Ferdinand de Saussure, as synchronic is. From Greek <i>dia</i>, &ldquo;through,&rdquo; and "
+     "<i>khronos</i>, &ldquo;time.&rdquo;"),
 ]
 
 EXTRA_MARKS = [   # marks the legend doesn't list on its own
     ("Sender", "The letter a vowel vault comes from: a silent <em>e</em>, or a vowel after one consonant, like the <em>a</em> "
-     "of <em class=\"nw\">-ate</em>, which sends the <em>o</em> of <em>notate</em> its vault", ["notate"]),
-    ("Red apostrophe", "A red apostrophe in a contraction, in place of the vowel it drops", ["contraction"]),
+     "of <em class=\"nw\">-ate</em>, which sends the <em>o</em> of <em>notate</em> its vault", "notate", "vault"),
+    ("Red apostrophe", "A red apostrophe in a contraction, in place of the vowel it drops", "contraction", "apostrophe"),
 ]
 
 
@@ -102,11 +118,11 @@ def write(OUT, page, header, footer, svg_of, KEY, LW):
     contraction = next((w for w in ("can’t", "don’t", "isn’t", "it’s") if w in LW.W),
                        next((w for w in LW.W if "’" in w), None))
     marks = []
-    for name, text, words in list(KEY) + EXTRA_MARKS:
-        words = [contraction if w == "contraction" else w for w in words]
-        drawn = "".join(f'<span class="ex">{svg_of(w, 44)}</span>' for w in words if w and w in LW.W)
+    for name, text, word, mark in list(KEY) + EXTRA_MARKS:      # each mark alone on one word, under its name
+        word = contraction if word == "contraction" else word
+        drawn = LW.svg_one_mark(word, mark, F=44.0, label=f"{word}, with only its {name.lower()} drawn") if word in LW.W else ""
         marks.append(f'<div class="def mk" id="{slug(name)}"><dt>{html.escape(name.lower())}</dt>'
-                     f'<dd><span class="mtext">{text}.</span><span class="mdraw">{drawn}</span></dd></div>')
+                     f'<dd><span class="mdraw">{drawn}</span><span class="mtext">{text}.</span></dd></div>')
     marks_html = '<dl class="defs marks-defs">' + "".join(marks) + "</dl>"
 
     import characters
@@ -121,7 +137,7 @@ def write(OUT, page, header, footer, svg_of, KEY, LW):
 <p class="eyebrow">Definitions</p>
 <h1>The words of the notation</h1>
 <p class="lead">What the words on this site mean here, and where they come from. Each says whether it was coined for the notation or taken from someone else, and from whom.</p>
-<p class="toc"><a href="#word">The word</a><a href="#sentences">Sentences</a><a href="#marks">Marks</a><a href="#teaching">Teaching</a></p>
+<p class="toc"><a href="#word">The word</a><a href="#sentences">Sentences</a><a href="#marks">Marks</a><a href="#teaching">Teaching</a><a href="#study">Studying language</a></p>
 </div></section>
 
 <section class="about" id="word" aria-labelledby="word-h"><div class="wrap prose">
@@ -152,7 +168,7 @@ def write(OUT, page, header, footer, svg_of, KEY, LW):
 <dd>The integration of orthography, morphology, phonology, articulation, semantics and syntax through the legomorphic means: speaking, reading and writing, and the syntax of claims and questions. In plainer words, spelling, word parts, sounds, how the mouth makes them, meaning and word order, learned together through talk, reading and writing. Like <i>phonics</i> and <i>linguistics</i>, it takes a singular verb.<span class="src">Coined for the notation.</span></dd></div>
 
 <div class="def" id="def-legomorphic-notation"><dt>Legomorphic Notation <span class="pos">noun</span></dt>
-<dd>The marks and colours this site draws on ordinary spelling, so that a word&rsquo;s legomorphs can be seen: its sounds, the letters that spell them, its meaningful parts, and the changes letters make to one another. In a sentence, its colours show actors, actions and operators. The marks are listed <a href="#marks">below</a> and drawn in <a href="index.html#marks">Reading the marks</a>.<span class="src">Coined for the notation.</span></dd></div>
+<dd>The marks and colours this site draws on ordinary spelling, so that a word&rsquo;s legomorphs can be seen: its sounds, the letters that spell them, its meaningful parts, and the changes letters make to one another. The marks are listed <a href="#marks">below</a> and drawn in <a href="index.html#marks">Reading the marks</a>.<span class="src">Coined for the notation.</span></dd></div>
 </dl>
 </div></section>
 
@@ -165,13 +181,19 @@ def write(OUT, page, header, footer, svg_of, KEY, LW):
 
 <section class="about" id="marks" aria-labelledby="marks-h"><div class="wrap prose">
 <h2 id="marks-h">Marks</h2>
-<p>The marks Legomorphic Notation draws, with a word that shows each one. Their names are the notation&rsquo;s own. <a href="index.html#marks">Reading the marks</a> has the same marks with the legend&rsquo;s drawings.</p>
+<p>The marks Legomorphic Notation draws, each on one word with that mark alone. Their names are the notation&rsquo;s own. <a href="index.html#marks">Reading the marks</a> has them as a legend.</p>
 {marks_html}
 </div></section>
 
 <section class="about" id="teaching" aria-labelledby="teach-h"><div class="wrap prose">
 <h2 id="teach-h">Teaching</h2>
 {entries(TEACHING)}
+</div></section>
+
+<section class="about" id="study" aria-labelledby="study-h"><div class="wrap prose">
+<h2 id="study-h">Studying language</h2>
+<p>Two ways to look at any word: as it is now, or as it has changed. Each comes with an everyday word that can stand in for it.</p>
+{entries(STUDY)}
 </div></section>
 </main>
 {footer(0)}"""

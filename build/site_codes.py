@@ -7,6 +7,8 @@ CALLS lists the places where these codes rest on a choice. They are in the manua
 the codes here to match and rebuild."""
 
 SITE_CODES = {
+    # the legend: one word with a red, a green and a black bond bar (as speak for ea, much for ch, seeing for -ing)
+    "teaching": "c.t t.ea g.ch + | s.i k.ng",
     # step 2: short vowels closed by one consonant (as am, it, in)
     "at": "s.a c.t", "an": "s.a c.n", "on": "s.o c.n", "up": "s.u c.p",
     # step 3: an open word says its name (as no, go)

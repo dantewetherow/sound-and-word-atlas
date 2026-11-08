@@ -71,7 +71,7 @@ W = {
  "from": "c.fr b.o c.m", "give": "c.g s.i c.v e0", "once": "w.o c.n c.c e0 ; nudge 3>2", "walk": "c.w t.al c.k", "were": "c.w r.er e0",
  "good": "c.g t.oo c.d", "her": "c.h r.er",
  # ---- list 8, r-controlled
- "over": "l.o | c.v r.er ; vault 2>0", "before": "c.b l.e | c.f r.or e0 ; vault 3>1", "first": "c.f r.ir c.st", "hurt": "c.h r.ur c.t",
+ "over": "l.o | c.v r.er ; vault 2>0", "before": "c.b l.e + | c.f r.or e0", "first": "c.f r.ir c.st", "hurt": "c.h r.ur c.t",
  "for": "c.f r.or", "under": "s.u c.n | c.d r.er", "start": "c.st r.ar c.t",
  # ---- list 9
  "because": "c.b l.e | c.c t.au c.s e0", "been": "c.b t.ee c.n ; seam 1", "both": "c.b l.o g.th", "buy": "k.bu l.y", "old": "l.o c.ld",
@@ -118,14 +118,14 @@ CHOICES = [
  ("want, myself", "no box around nt or lf", "A cluster takes the box only where a vowel comes after it in the word and the box stops that vowel's reach (wanted, selfish). Nothing follows nt in want or lf in myself, so they stay plain, as and and must do."),
  ("under", "no box and no blocked vault", "The n closes the first syllable and the d opens the second, as the p and k of napkin do on your card, which has no box. If nd is boxed, a blocked vault from the e follows."),
  ("better, pretty, funny, carry", "a blocked vault from the last vowel to the box", "As in getting and happy. Little has none, following its own marking card, and yellow has none because a vowel unit does not send."),
- ("over, open, before", "a vault from the next vowel back to the long vowel, with no cone", "As in tiger and silent on the cards. In before the vault starts from the o of the or unit."),
+ ("over, open", "a vault from the next vowel back to the long vowel, with no cone", "As in tiger and silent on the cards."),
  ("here", "h, long e, r, and a silent e with a vault", "It follows the ELP's own long-vowel list. The alternative is an r-controlled unit with a cone, like there and where. Your r-controlled card marks hear as h + ear with two circles, so the two spellings of that word differ by a circle here."),
  ("there, where", "an er unit, then e in a cone", "By analogy with were in the manual. The unit says the air sound, and no mark shows that."),
  ("our, your, their", "our and eir as r-controlled units of three letters", "As the cards do for air and ear."),
  ("into, myself", "a seam between the two words", "Seams are drawn for the endings -ing, -es and -y, and where two whole words join and both keep their meaning."),
- ("away, around, again, always, before, because, today, together; said", "no seam", "The first parts a-, al-, be- and to- no longer mean what the small words mean, and said changes its stem. If you want them, seams can go in after a-, al-, be- and to-."),
+ ("away, around, again, always, before, because, today, together; said", "no seam", "The first parts a-, al-, be- and to- no longer mean what the small words mean, and said changes its stem. If you want them, seams can go in after a-, al-, be- and to-. Ruled for before on 8 November 2026: be|fore takes a seam, as a compound bound by use."),
  ("into, myself", "nothing crosses the seam", "Into has two consonants before its o and no box, and myself has an e one consonant after the y and no vault. These seams join two whole words, and your ball page says that seam is a wall. The seam in funny is different: it stands before an ending, and your y-sender page has the y send across it and the nn stop it."),
- ("before, because", "a long mark over the e of be-", "Marked as be is marked on its own, as away and today keep the bare a and o of a and to. Said quickly this e is weak, so a bare e is also defensible. In because nothing sends a vault, since au is a unit."),
+ ("before, because", "a long mark over the e of be-", "Marked as be is marked on its own, as away and today keep the bare a and o of a and to. Said quickly this e is weak, so a bare e is also defensible. In because nothing sends a vault, since au is a unit. Ruled for before on 8 November 2026: be- ends an open syllable at a morpheme boundary, so its e keeps the long mark."),
  ("a, the, away, around, again, today, together, open, seven", "the unstressed vowel is bare", "A weak vowel takes no cup and no bar, as the e of chicken does on its card."),
  ("any, many, very, every, only, pretty, carry, funny", "final y is red and bare", "As in silly and pony on the cards."),
  ("buy", "the silent u is black", "It sits inside the bu unit, as your Session 1 slide draws it."),
@@ -383,6 +383,59 @@ def svg_strip(words, F=80.0, gap=None, label=None, cls=True, extra_class="", css
     style = f' style="width:{width:.0f}px;max-width:100%;height:auto"' if css_height is None else f' style="height:{css_height}px;width:auto;max-width:100%"'
     klass = ("nz " + extra_class).strip()
     return f'<svg class="{klass}" viewBox="0 0 {width:.0f} {H:.0f}" role="img" aria-label="{label}"{style}>' + "".join(parts) + "</svg>", width, H
+
+ONE_MARK = ("circle", "swoop", "short", "long", "bond", "r", "box", "cone", "vault", "nudge", "bv", "seam", "apostrophe")
+
+def svg_one_mark(word, mark, F=58.0, label=None, css_height=None):
+    """A word with one mark drawn and nothing else, for the legend: the letters in ink and only that mark's lines. The
+    r-controlled unit keeps its red vowel and its one circle, as its definition says, and the red apostrophe stays red.
+    The marks are told apart by the layers svg_word draws (circles, swoops, bars, short and long marks, boxes, the cone
+    layer, seams) and, inside the cone layer, by shape and place: a cone is a ring, a vault arcs above the letters, a
+    nudge runs under them."""
+    import re
+    assert mark in ONE_MARK, mark
+    g, wd, H = svg_word(word, F, 0.0, cls=True)
+    B = 1.44 * F
+    num = r"-?\d+(?:\.\d+)?"
+    letters = re.search(r'<g class="nz5".*?</g>', g, re.S).group(0)
+    if mark == "apostrophe":
+        letters = re.sub(r'fill="var\(--(?:verb|subject)\)">([^<’]+)<', r'fill="var(--ink)">\1<', letters)
+    elif mark != "r":
+        letters = re.sub(r'fill="var\(--(?:verb|subject)\)"', 'fill="var(--ink)"', letters)
+    els = [e for e in re.findall(r"<[^>]+/>", g) if 'class="wt"' not in e]
+    layer = lambda e: (re.search(r'class="(nz\d)"', e) or [None, None])[1]
+    ys = lambda e: [float(v) for v in re.findall(r"(?:y1|y2|cy)=\"(" + num + r")\"", e)] or \
+                   [float(v) for v in re.findall(num + r"\s+(" + num + r")", (re.search(r' d="([^"]+)"', e) or [0, ""])[1])]
+    above = lambda e: max(ys(e)) < B
+    below = lambda e: min(ys(e)) > B
+    test = {
+        "circle": lambda e: layer(e) in ("nz1", "nz2"),
+        "swoop": lambda e: layer(e) == "nz3",
+        "short": lambda e: layer(e) == "nz6" and e.startswith("<path"),
+        "long": lambda e: layer(e) == "nz6" and e.startswith("<line"),
+        "bond": lambda e: layer(e) == "nz4",
+        "box": lambda e: layer(e) == "nz7",
+        "cone": lambda e: layer(e) == "nz8" and e.startswith("<circle"),
+        "vault": lambda e: layer(e) == "nz8" and e.startswith("<path") and above(e),
+        "nudge": lambda e: layer(e) == "nz8" and e.startswith("<path") and below(e),
+        "bv": lambda e: layer(e) == "nz8" and e.startswith("<path") and above(e),
+        "seam": lambda e: layer(e) == "nz9",
+        "apostrophe": lambda e: False,
+    }
+    if mark == "r":                                   # the red bar, and the one circle under it
+        bars = [e for e in els if layer(e) == "nz4"]
+        spans = [tuple(sorted(float(v) for v in re.findall(r'x[12]="(' + num + r')"', e))) for e in bars]
+        def under(e):
+            cx = re.search(r'cx="(' + num + r')"', e)
+            return cx and any(a - 1 <= float(cx[1]) <= b + 1 for a, b in spans)
+        keep = bars + [e for e in els if layer(e) in ("nz1", "nz2") and under(e)]
+    else:
+        keep = [e for e in els if test[mark](e)]
+    body = "".join(re.sub(r' class="nz\d"', "", e) for e in keep) + re.sub(r' class="nz5"', "", letters)
+    label = label or f"{word}, with only its {mark} marks"
+    style = f' style="width:{wd:.0f}px;max-width:100%;height:auto"' if css_height is None else f' style="height:{css_height}px;width:auto;max-width:100%"'
+    return f'<svg class="nz one-mark" viewBox="0 0 {wd:.0f} {H:.0f}" role="img" aria-label="{label}"{style}>' + body + "</svg>"
+
 
 def describe(word):
     """A plain-words account of a word's marks, for checking and for the manual."""

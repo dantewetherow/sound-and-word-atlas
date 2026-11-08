@@ -145,7 +145,8 @@ PAIRS = [("see", "saw", "The vowel's spelling changes."), ("find", "found", "i c
 # "From the word sum cards" (added 5 November 2026) for a ruling; once ruled, change the codes here and rebuild.
 CALLS = [
     ("today, always, away, around, before, because", "a seam inside each, as a word sum",
-     "These are marked now without a seam. Before also loses its vault, since nothing crosses the seam before a root."),
+     "These are marked now without a seam. Before also loses its vault, since nothing crosses the seam before a root. "
+     "Ruled for before on 8 November 2026: be|fore, with no vault."),
     ("said", "a seam between ai and d", "Marked now as one piece. The ai keeps a team's second sound."),
     ("wanted, started, wishes, washes", "the e of -ed and -es bare where it adds a syllable",
      "As a weak vowel is bare elsewhere. Where the e is silent (played, goes), it stays in a cone."),

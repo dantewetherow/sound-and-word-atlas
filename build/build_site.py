@@ -264,20 +264,24 @@ for b in route["bands"]:
                       f'<p>Steps {min(b["steps"])} to {max(b["steps"])}</p>{draft}</div>'
                       f'<div class="tiles">{"".join(tile(x) for x in ss)}</div></section>')
 
-KEY = [("Sound circle", "One circle under each sound: red for a vowel sound, black for a consonant, green for <em>sh</em>, <em>th</em>, <em>ch</em>", ["it", "she"]),
-       ("Syllable swoop", "One swoop under each syllable", ["happy"]),
-       ("Short mark", "A cup over a vowel that keeps its short sound", ["get"]),
-       ("Long mark", "A bar over a vowel that says its name", ["go"]),
-       ("Bond bar", "A bar under letters that spell one sound: black for consonant units and for doubled letters, boxed or not, green for <em>sh</em>, <em>th</em>, <em>ch</em>, red for vowel units", ["will", "she", "night"]),
-       ("R-controlled unit", "A red bar under a vowel and its <em>r</em>, with the vowel red, the <em>r</em> black and one circle", ["car"]),
-       ("Block box", "A box around the vowel protector at work: a pair or cluster with a vowel after it, which it stops from reaching back. A pair keeps its bond bar when the box comes; a cluster has none", ["hopping"]),
-       ("Cone of silence", "A dotted ring around a silent <em>e</em>", ["have"]),
-       ("Vowel vault", "An arc from an <em>e</em>, or a vowel after one consonant, back to the vowel it makes long", ["make"]),
-       ("Nice-nudge", "A small arc under the letters from <em>e</em>, <em>i</em> or <em>y</em> to the <em>c</em> or <em>g</em> it softens", ["nice"]),
-       ("Blocked vault", "A half-arc that ends in a red X where a box stops the vault", ["getting"]),
-       ("Morpheme seam", "A dotted line between morphemes", ["going"])]
-key_html = "".join(f'<figure class="mark"><div class="mw">{"".join(svg_of(w, 34) for w in ws)}</div>'
-                   f'<figcaption><b>{name}</b>{what}</figcaption></figure>' for name, what, ws in KEY)
+KEY = [("Sound circle", "One circle under each sound: red for a vowel sound, black for a consonant, green for <em>sh</em>, <em>th</em>, <em>ch</em>", "this", "circle"),
+       ("Syllable swoop", "One swoop under each syllable", "happy", "swoop"),
+       ("Short mark", "A cup over a vowel that keeps its short sound", "get", "short"),
+       ("Long mark", "A bar over a vowel that says its name", "go", "long"),
+       ("Bond bar", "A bar under letters that spell one sound: black for consonant units and for doubled letters, boxed or not, green for <em>sh</em>, <em>th</em>, <em>ch</em>, red for vowel units", "teaching", "bond"),
+       ("R-controlled unit", "A red bar under a vowel and its <em>r</em>, with the vowel red, the <em>r</em> black and one circle", "car", "r"),
+       ("Block box", "A box around the vowel protector at work: a pair or cluster with a vowel after it, which it stops from reaching back. A pair keeps its bond bar when the box comes; a cluster has none", "hopping", "box"),
+       ("Cone of silence", "A dotted ring around a silent <em>e</em>", "have", "cone"),
+       ("Vowel vault", "An arc from an <em>e</em>, or a vowel after one consonant, back to the vowel it makes long", "make", "vault"),
+       ("Nice-nudge", "A small arc under the letters from <em>e</em>, <em>i</em> or <em>y</em> to the <em>c</em> or <em>g</em> it softens", "nice", "nudge"),
+       ("Blocked vault", "A half-arc that ends in a red X where a box stops the vault", "getting", "bv"),
+       ("Morpheme seam", "A dotted line between morphemes", "going", "seam")]
+# Each mark is drawn alone on one word, under its name: the letters in ink and nothing else but that mark
+# (legomorphic_words.svg_one_mark). The step pages show every word with all its marks.
+def one_mark(word, mark, name):
+    return LW.svg_one_mark(word, mark, F=34.0, label=f"{word}, with only its {name.lower()} drawn")
+key_html = "".join(f'<figure class="mark"><figcaption><b>{name}</b></figcaption><div class="mw">{one_mark(w, m, name)}</div>'
+                   f'<p>{what}</p></figure>' for name, what, w, m in KEY)
 
 uniq = {w for s in STEPS for g in groups_of(s["words_md"]) for w in g}
 n_words = len(uniq) + sum(len(v) - 1 for w, v in SC.VARIANTS.items() if w in uniq)
@@ -301,7 +305,7 @@ home_body = f"""{header(0)}
 </div></section>
 <section class="marks" id="marks" aria-labelledby="marks-h"><div class="wrap">
 <h2 id="marks-h">Reading the marks</h2>
-<p class="sub">Twelve marks, each drawn on a word that uses it.</p>
+<p class="sub">Twelve marks, each drawn alone on one word. A step page shows a word with all its marks at once.</p>
 <div class="key">{key_html}</div>
 {uc("next, the legend in full, with the rule behind each mark.")}
 </div></section>

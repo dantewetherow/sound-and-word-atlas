@@ -107,6 +107,7 @@ footer.site .wrap { padding-block: 22px 32px; color: var(--soft); font-size: 0.8
 .mark .mw svg { height: 84px; width: auto; max-width: 100%; }
 .mark figcaption { font-size: 0.9rem; line-height: 1.5; }
 .mark figcaption b { display: block; font-weight: 500; font-size: 0.98rem; }
+.mark > p { font-size: 0.9rem; line-height: 1.5; }
 
 .about .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px 32px; margin-top: 8px; }
 .about .cols > div { display: grid; gap: 6px; align-content: start; }
@@ -264,8 +265,8 @@ table.wl-table tr.off th { font-weight: 500; }
 .defs dt { font-weight: 500; font-size: 1.05rem; }
 .defs dd { margin: 4px 0 0; }
 .defs .src { display: block; margin-top: 6px; font-size: 0.88rem; color: var(--soft); }
-.marks-defs .mk dd { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 20px; align-items: center; }
-.mdraw { display: flex; flex-wrap: wrap; gap: 4px 14px; justify-content: flex-end; }
+.marks-defs .mk dd { display: grid; gap: 4px; justify-items: start; }
+.mdraw { display: flex; flex-wrap: wrap; gap: 4px 14px; }
 .mdraw svg { height: 80px; width: auto; max-width: 100%; }
 .mascot { margin: 12px 0 4px; display: grid; gap: 8px; }
 .mascot .pair { display: flex; align-items: center; gap: 12px; }
