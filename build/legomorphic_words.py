@@ -6,10 +6,14 @@ letters-and-marks form the marking cards use, so the result can be dropped into 
 marking-system page, and it is drawn here at the Sounds to Sentences deck's scale.
 
 THE CODE, unit by unit, left to right
-    c.st    consonants, one sound each (black letters, a black circle each)
+    c.st    consonants, one sound each (black letters, a black circle each); a vowel letter among them stays red with its
+            own black circle, as the u of squ says w (squirrel), like the o of one
     k.kn    a consonant unit: two letters, one sound (black bond bar, one circle); also a doubled spelling that nothing
-            reaches toward (k.ll in will, k.ck in pick): the box waits for an ending
-    g.sh    sh, th, ch (green letters, green bond bar, one green circle)
+            reaches toward (k.ll in will, k.ck in pick): the box waits for an ending. A vowel letter in the unit stays
+            red, as the silent u of k.bu in buy does (8 November 2026)
+    g.sh    sh, th, ch (green letters, green bond bar, one green circle). g.ti is the sh sound spelled ti (notation): a
+            green bar and circle for the sound, with the t black and the i red, since the letters keep their own
+            colours (8 November 2026)
     x.ll    a pair in a block box (black bond bar, one circle): the vowel protector, boxed only where a vowel comes after
             it in the word and the box stops that vowel's reach (filling, hopping, edge). The bar stays when the box comes:
             the bar says the two letters spell one sound, and the box says a reach is stopped. A cluster takes 'box N' on
@@ -33,13 +37,13 @@ THE CODE, unit by unit, left to right
     +       a morpheme seam
 After a semicolon, by unit number (counting from 0, skipping | and +; a group such as c.nt is one unit):
     vault A>B     a vault from the sounded vowel in unit A back to the vowel in unit B. A may be a consonant unit that
-                  holds a vowel letter, which sends the vault: the i of k.ti in notation, as the create family deck
+                  holds a vowel letter, which sends the vault: the i of g.ti in notation, as the create family deck
                   draws creation (the t and i say sh together, and the i still makes the a long)
     bv A>B        a vault from unit A that the box at unit B stops (bv A>B-C for a box over units B to C)
     nudge A>B     a nice-nudge from the vowel in unit A to the c or g in unit B (B may be a box, as the dg of nudge)
     box A         a block box around the cluster in unit A (box A-B for units A to B)
     seam N        a morpheme seam after letter N (counting letters from 0), for a seam inside a unit: notat + ion
-                  puts the seam between the t and the i of k.ti
+                  puts the seam between the t and the i of g.ti
 
 Run:  python3 legomorphic_words.py            checks every word and prints a summary
       python3 legomorphic_words.py --cards    writes legomorphic_words_cards.json (marking-cards form)
@@ -128,7 +132,7 @@ CHOICES = [
  ("before, because", "a long mark over the e of be-", "Marked as be is marked on its own, as away and today keep the bare a and o of a and to. Said quickly this e is weak, so a bare e is also defensible. In because nothing sends a vault, since au is a unit. Ruled for before on 8 November 2026: be- ends an open syllable at a morpheme boundary, so its e keeps the long mark."),
  ("a, the, away, around, again, today, together, open, seven", "the unstressed vowel is bare", "A weak vowel takes no cup and no bar, as the e of chicken does on its card."),
  ("any, many, very, every, only, pretty, carry, funny", "final y is red and bare", "As in silly and pony on the cards."),
- ("buy", "the silent u is black", "It sits inside the bu unit, as your Session 1 slide draws it."),
+ ("buy", "the silent u is red, on the black bar of the bu unit, with one black circle", "Ruled 8 November 2026: a vowel letter stays red inside a unit, as the legend says vowel letters are red, and the bar and circle still say bu spells b. Until then the u was black, as your Session 1 slide drew it."),
  ("look, good, too; how, now, down, brown, grow, show, own, know; eat, read; said, again; been", "a vowel unit with a red bond bar and nothing more", "Units with two sounds are marked alike. The manual lists this as still to decide."),
  ("because, laugh, people", "au and eo as vowel units; gh as a consonant unit", "One-off spellings, marked by the general rule for units."),
  ("old, both, only, find, kind", "a long mark and no vault", "The vowel says its name before two consonants, so nothing sends a vault."),
@@ -169,15 +173,16 @@ def parse(word):
             kind, _, s = tok.partition(".")
             assert kind in ("c", "k", "g", "x", "s", "l", "b", "w", "t", "r") and s, (word, tok)
         cols = list(range(col, col + len(s)))
+        own = lambda ch: "vowel" if ch.lower() in "aeiou" else "consonant"   # a letter's own colour: vowel letters are red
         if kind == "c":
-            for ch in s: letters.append({"ch": ch, "type": "consonant"})
+            for ch in s: letters.append({"ch": ch, "type": own(ch)})
             for c in cols: marks.append({"type": "dot", "cols": [c], "color": "consonant"})
         elif kind == "k":
-            for ch in s: letters.append({"ch": ch, "type": "consonant"})
+            for ch in s: letters.append({"ch": ch, "type": own(ch)})
             marks += [{"type": "blendbar", "from": cols[0], "to": cols[-1], "color": "consonant"}, {"type": "dot", "cols": cols, "color": "consonant"}]
         elif kind == "g":
-            assert s in ("sh", "th", "ch", "tch"), (word, tok)
-            for ch in s: letters.append({"ch": ch, "type": "consonant" if s == "tch" and ch == "t" else "team"})
+            assert s in ("sh", "th", "ch", "tch", "ti"), (word, tok)
+            for ch in s: letters.append({"ch": ch, "type": "team" if s in ("sh", "th", "ch") or (s == "tch" and ch != "t") else own(ch)})
             marks += [{"type": "blendbar", "from": cols[0], "to": cols[-1], "color": "team"}, {"type": "dot", "cols": cols, "color": "team"}]
         elif kind == "x":                                    # the box adds to the bar, never replaces it: a green digraph gets its bar below
             for ch in s: letters.append({"ch": ch, "type": "consonant"})
@@ -220,7 +225,7 @@ def parse(word):
         if op == "vault":
             u = units[int(src)]
             send = u["cols"][0] if u["kind"] in VOWEL_KINDS else next(
-                (c for c, ch in zip(u["cols"], u["text"]) if u["kind"] == "k" and ch.lower() in "aeiouy"), None)
+                (c for c, ch in zip(u["cols"], u["text"]) if u["kind"] in ("k", "g") and ch.lower() in "aeiouy"), None)
             assert send is not None and units[int(dst)]["kind"] == "l", (word, a)
             marks.append({"type": "vault", "from": units[int(dst)]["cols"][0], "to": send, "cone": False})
         elif op == "bv":                                  # a vowel, or a silent e in a cone, whose vault a box stops (funny, edge)
@@ -328,7 +333,8 @@ def svg_word(word, F=80.0, x0=0.0, cls=True):
             out.append(f'<rect{k(7)} x="{f(x1)}" y="{f(B - 0.84 * F)}" width="{f(x2 - x1)}" height="{f(0.96 * F)}" rx="{f(0.10 * F)}" fill="none" stroke="{BLUE}" stroke-width="{f(0.036 * F)}"/>')
         if m["type"] == "seam":
             x = (X(m["after"]) + X(m["after"] + 1)) / 2
-            out.append(f'<line{k(9)} x1="{f(x)}" y1="{f(B - 0.95 * F)}" x2="{f(x)}" y2="{f(B + 0.46 * F)}" stroke="{BLUE}" stroke-width="{f(0.03 * F)}" stroke-dasharray="{f(0.057 * F)} {f(0.057 * F)}"/>')
+            low = 0.38 if any(abs(d["x"] - x) < 0.15 * F for d in dots) else 0.46     # stop short of a circle under the seam (the ti of notation)
+            out.append(f'<line{k(9)} x1="{f(x)}" y1="{f(B - 0.95 * F)}" x2="{f(x)}" y2="{f(B + low * F)}" stroke="{BLUE}" stroke-width="{f(0.03 * F)}" stroke-dasharray="{f(0.057 * F)} {f(0.057 * F)}"/>')
         if m["type"] in ("cone", "vault") and m.get("cone", True):
             ex = X(m["col"] if m["type"] == "cone" else m["to"])
             out.append(f'<circle{k(8)} cx="{f(ex)}" cy="{f(B - 0.26 * F)}" r="{f(0.37 * F)}" fill="none" stroke="{QUIET}" stroke-width="{f(0.038 * F)}" stroke-linecap="round" stroke-dasharray="{f(0.012 * F)} {f(0.078 * F)}"/>')

@@ -264,11 +264,11 @@ for b in route["bands"]:
                       f'<p>Steps {min(b["steps"])} to {max(b["steps"])}</p>{draft}</div>'
                       f'<div class="tiles">{"".join(tile(x) for x in ss)}</div></section>')
 
-KEY = [("Sound circle", "One circle under each sound: red for a vowel sound, black for a consonant, green for <em>sh</em>, <em>th</em>, <em>ch</em>", "this", "circle"),
+KEY = [("Sound circle", "One circle under each sound: red for a vowel sound, black for a consonant, green for <em>sh</em>, <em>th</em>, <em>ch</em> and the <em>sh</em> of <em>-tion</em>", "this", "circle"),
        ("Syllable swoop", "One swoop under each syllable", "happy", "swoop"),
        ("Short mark", "A cup over a vowel that keeps its short sound", "get", "short"),
        ("Long mark", "A bar over a vowel that says its name", "go", "long"),
-       ("Bond bar", "A bar under letters that spell one sound: black for consonant units and for doubled letters, boxed or not, green for <em>sh</em>, <em>th</em>, <em>ch</em>, red for vowel units", "teaching", "bond"),
+       ("Bond bar", "A bar under letters that spell one sound: black for consonant units and for doubled letters, boxed or not, green for <em>sh</em>, <em>th</em>, <em>ch</em> and the <em>ti</em> of <em>-tion</em>, red for vowel units. The letters keep their own colours", "teaching", "bond"),
        ("R-controlled unit", "A red bar under a vowel and its <em>r</em>, with the vowel red, the <em>r</em> black and one circle", "car", "r"),
        ("Block box", "A box around the vowel protector at work: a pair or cluster with a vowel after it, which it stops from reaching back. A pair keeps its bond bar when the box comes; a cluster has none", "hopping", "box"),
        ("Cone of silence", "A dotted ring around a silent <em>e</em>", "have", "cone"),
@@ -300,7 +300,7 @@ home_body = f"""{header(0)}
 <section class="route" id="route" aria-labelledby="route-h"><div class="wrap">
 <h2 id="route-h">The route at a glance</h2>
 <p class="lead">{md(route["intro"].split(" The orientation map")[0])} Open a step to see its words marked, the marks it brings in, and the pages in Carney's survey that back it.</p>
-<p class="sub">Each word is shown with its letters in colour: red for vowels, green for <em>sh</em>, <em>th</em> and <em>ch</em>, black for the rest.</p>
+<p class="sub">Each word is shown with its letters in colour: red for vowel letters, green for <em>sh</em>, <em>th</em> and <em>ch</em>, black for the rest.</p>
 {''.join(bands_html)}
 </div></section>
 <section class="marks" id="marks" aria-labelledby="marks-h"><div class="wrap">

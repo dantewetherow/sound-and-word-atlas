@@ -85,7 +85,7 @@ def write(OUT, page, header, footer, svg_of, LW):
 <section class="about" aria-labelledby="shows-h"><div class="wrap prose">
 <h2 id="shows-h">What it shows</h2>
 <p>The notation explores four systems at once: orthography, phonology, morphology and syntax. It works through graphemes, phonemes and morphemes, and through the order in time in which a message is put together.</p>
-<p>In a word, vowels are red, consonants black, and <i>sh</i>, <i>th</i> and <i>ch</i> green. The marks fall into three groups.</p>
+<p>In a word, vowel letters are red, even inside a unit (the <i>u</i> of <i>buy</i>), consonant letters black, and <i>sh</i>, <i>th</i> and <i>ch</i> green. The marks fall into three groups.</p>
 <ul class="marks-list">
 <li><b>Sounds.</b> A sound circle under each sound, a bond bar under letters that spell a single sound, a cup or a bar over a vowel for short or long, and a red bar under a vowel and its <i>r</i>.</li>
 <li><b>Parts.</b> A syllable swoop under each syllable, and a morpheme seam between meaningful parts.</li>

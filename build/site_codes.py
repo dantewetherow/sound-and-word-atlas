@@ -75,7 +75,7 @@ SITE_CODES = {
     "legomorphic": "c.l s.e c.g | l.o + | c.m r.or | k.ph + s.i c.c",
     "note": "c.n l.o c.t e>",                                    # as the sentence cards mark it
     "notate": "c.n l.o | c.t + l.a c.t e> ; vault 3>1",
-    "notation": "c.n l.o | c.t + l.a | k.ti b.o c.n ; vault 3>1 ; vault 4>3 ; seam 4",
+    "notation": "c.n l.o | c.t + l.a | g.ti b.o c.n ; vault 3>1 ; vault 4>3 ; seam 4",
 }
 
 # A spelling that is two words, each with its own marking (from flsz_family.py).
@@ -107,6 +107,8 @@ CALLS = [
      "The seam between lego and morph joins two Greek roots, which is still open for telephone and photograph. "
      "The e is short, as in Lego, so leg closes its syllable, as lem does in lemon."),
     ("notate", "note + ate: the e drops, and the a of ate sends a vault back to the o", "As making and photo."),
-    ("notation", "notate + ion: ti as a black unit across a seam, with the vault sent from its i",
-     "As the create family deck draws creation: the t and i say sh together, and the i still makes the a long."),
+    ("notation", "notate + ion: ti as a green unit across a seam, the t black and the i red, with the vault sent from the i",
+     "Ruled 8 November 2026: the t and i say sh together, so their bar and circle are green, as for sh, and the letters "
+     "keep their own colours, so the i is red, and it still makes the a long. Until then ti was a black unit, as the "
+     "create family deck draws creation."),
 ]
