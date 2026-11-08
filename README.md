@@ -2,7 +2,9 @@
 
 A route through English spelling for teachers: 32 steps in eight bands, with every word drawn in Legomorphic Notation. Each step has its own page with its words marked, the marks it brings in, its kernel words and contrasts, and the pages in Edward Carney's *A Survey of English Spelling* (Routledge, 1994) that back it.
 
-The site is at https://dantewetherow.github.io/sound-and-word-atlas/.
+The site is at https://legomorphics.ca/. The old address, https://dantewetherow.github.io/sound-and-word-atlas/, forwards there.
+
+The domains are registered at Porkbun, which also holds their DNS. legomorphics.ca points at GitHub Pages (four A records, four AAAA records, and www as a CNAME to dantewetherow.github.io), and the TXT record that verifies it with GitHub (`_github-pages-challenge-dantewetherow`) has to stay. legomorphics.com forwards permanently to legomorphics.ca, and logomorphics.ca and logomorphics.com forward there for now with temporary redirects. `docs/CNAME` holds the custom domain: the builds leave it alone, and it shouldn't be deleted.
 
 ## What's where
 

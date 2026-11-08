@@ -16,7 +16,7 @@ holding @fontsource-variable/fraunces, @fontsource-variable/lexend and @fontsour
 """
 import html, pathlib, re, subprocess, sys
 HERE = pathlib.Path(__file__).resolve().parent
-SITE = "https://dantewetherow.github.io/sound-and-word-atlas/"
+SITE = "https://legomorphics.ca/"
 DECKS = [{
     "file": "sounds-symbols-and-sentences",
     "title": "Sounds, Symbols and Sentences",
