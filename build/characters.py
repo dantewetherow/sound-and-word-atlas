@@ -6,13 +6,15 @@ actor, operator and action of a claim; when Could flips to the front, the claim 
 
 A lifted word keeps every mark svg_word draws, in its order. With the letters gone, the marks drawn above them (long
 and short marks, the cone, the vault) come down by DROP letter sizes to close the gap, and the marks drawn under them
-(bond bars, circles, swoops, nudges) stay where they were. The swoop already sits low enough to read as a mouth: it
-was lowered for the faces first, then in the notation itself (7 November 2026). The drawing is then cropped to its
-marks. Boxes and seams, which run through the letters, aren't moved, so a word with
+(bond bars, circles, nudges) stay where they were. The swoop is the mouth, and comes down MOUTH letter sizes more than
+in a word, so it reads as a smile (8 November 2026; it was lowered for the faces first, then in the notation itself on
+7 November, which brought the notation's swoop level with the faces' and left the faces' smile high). The drawing is then
+cropped to its marks. Boxes and seams, which run through the letters, aren't moved, so a word with
 either would need more thought before it joins the team."""
 import math, re
 
 DROP = 0.62
+MOUTH = 0.25
 TEAM = [("she", "She", "actor"), ("could", "Could", "operator"), ("go", "Go", "action")]
 NUM = r"-?\d+(?:\.\d+)?"
 
@@ -71,6 +73,8 @@ def lifted(LW, word, F=58.0, label=None, pad=0.08, scale=1.0, em=None, px_height
     for el in re.findall(r"<[^>]+/>", g):
         first = re.search(f'(?:cy|y1)="({NUM})"', el) or re.search(f'd="M{NUM} ({NUM})', el)
         dy = DROP * F if re.search(r'class="nz(6|8)"', el) and first and float(first[1]) < B else 0.0
+        if 'class="nz3"' in el:                            # the swoop is the mouth: lower than in a word, so it reads as a smile
+            dy = MOUTH * F
         if weight != 1.0:
             el = _weigh(el, weight)
         el = re.sub(r' class="nz\d"', "", el)

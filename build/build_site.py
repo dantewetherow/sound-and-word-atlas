@@ -125,7 +125,7 @@ THEME_JS = """<script>(() => {
 # night. The brand link names the site, so the drawing is hidden from screen readers. Go, the logo (logo.py,
 # build/logo.svg), stays the browser tab's icon, where Note's cone and vault are too fine to read.
 import about_pages, characters
-LOGO = characters.lifted(LW, "note", px_height=48, weight=1.7)
+LOGO = characters.lifted(LW, "note", px_height=54, weight=1.7)   # 48px until his mouth came down on 8 November 2026; the same scale as before
 
 THEME_SWITCH = ('<div class="theme" role="group" aria-label="Page colours" hidden>'
                 '<button type="button" data-pick="light">Bright</button><button type="button" data-pick="dark">Night</button></div>')

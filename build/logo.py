@@ -171,7 +171,8 @@ def split(nm):
 
 # ------------------------------------------------------------------ the logo candidates
 # Measures in F, the letter size, as svg_word draws them: circles a slot of .67F apart, the swoop's ends .29F under the
-# circles' centres with its control .49F under them and .107F past the outer circles (since 7 November 2026); the cup .257F each side of its
+# circles' centres with its control .49F under them and .107F past the outer circles (since 7 November 2026), then MOUTH lower
+# again, as on Note and the Dialogue Team, so it reads as a smile (8 November 2026); the cup .257F each side of its
 # vowel with its control .2F under its ends; the bar .279F each side; the cone a dotted ring; the vault leaving the
 # cone's top and ending .21F over the bar, with its arrowhead. A logo drops the letters, so the marks above come down
 # to sit BROW over the circles, the cone sits in the row of circles where the e would be, and WEIGHT thickens circles
@@ -187,6 +188,7 @@ MARKS = {   # name: (circles left to right, (mark above, over which circle), wha
                   "empty red circle"),
 }
 WEIGHT, BROW, SLOT, CONE = 1.5, 0.33, 0.67, 0.30
+from characters import MOUTH                                 # the faces' mouths sit lower than a word's swoop (8 November 2026)
 CHOSEN = "go"
 PAPER = "#f4efe6"                                          # the site's --paper, behind the PNG icons
 
@@ -197,11 +199,11 @@ def mark(name, F=100.0):
     r, sws, swm = 0.072 * WEIGHT * F, 0.046 * WEIGHT * F, 0.05 * WEIGHT * F
     xs = [SLOT * F * (i - (n - 1) / 2) for i in range(n)]
     xl, xr = xs[0] - 0.107 * F, xs[-1] + 0.107 * F
-    body, box = [], [xl - sws, -r, xr + sws, 0.39 * F + sws]
+    body, box = [], [xl - sws, -r, xr + sws, (0.39 + MOUTH) * F + sws]
     def grow(x0, y0, x1, y1): box[:] = [min(box[0], x0), min(box[1], y0), max(box[2], x1), max(box[3], y1)]
     for x, c in zip(xs, dots):
         body.append(f'<circle class="{c}" cx="{x:.2f}" cy="0" r="{r:.2f}"/>')
-    body.append(f'<path class="b st" d="M{xl:.2f} {.29 * F:.2f} Q{(xl + xr) / 2:.2f} {.49 * F:.2f} {xr:.2f} {.29 * F:.2f}" '
+    body.append(f'<path class="b st" d="M{xl:.2f} {(.29 + MOUTH) * F:.2f} Q{(xl + xr) / 2:.2f} {(.49 + MOUTH) * F:.2f} {xr:.2f} {(.29 + MOUTH) * F:.2f}" '
                 f'stroke-width="{sws:.2f}" stroke-linecap="round"/>')
     xt = 0.0
     if top:

@@ -60,7 +60,7 @@ header.site { border-bottom: 1px solid var(--line); }
 header.site .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 28px; padding-block: 16px; }
 .brand { font-family: var(--display); font-size: 1.3rem; font-weight: 500; color: var(--ink); text-decoration: none; line-height: 1.2; }
 .brand { display: flex; align-items: center; gap: 10px; }
-.brand .logo svg { display: block; margin: -6px 0; }
+.brand .logo svg { display: block; margin: -9px 0; }
 .brand .name { display: block; }
 .brand small { display: block; font-family: var(--body); font-size: 0.7rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--soft); }
 header.site .tools { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 22px; }

@@ -259,6 +259,9 @@ def card_spec(word):
 # (bond bar at +0.30 F under the baseline, circle at +0.56 F, swoop at +0.85 F, long mark at -0.91 F ...).
 # The swoop came down from +0.73 F to +0.85 F on 7 November 2026, everywhere the notation is drawn, so it reads as a
 # smile under the circles rather than a line hugging them; a word drawing grew from 2.36 F to 2.48 F tall to hold it.
+# The vaults were trimmed on 8 November 2026: a vault sent from an i or j leaves above its dot (the i of notation's -ion
+# touched it), and where a vowel takes a vault and sends one, the arrow lands right of centre and the next vault leaves
+# left of it, so the two no longer meet (the a of notate and notation).
 SWOOP, HEIGHT = 0.85, 2.48
 INK, RED, GREEN, BLUE, QUIET = "var(--ink)", "var(--verb)", "var(--subject)", "var(--modal)", "var(--soft)"   # the cone is drawn in the soft text grey, which shows from the back of a room
 # How far each Lexend letter's ink reaches left and right of its centre, as a share of the letter size (measured from the font).
@@ -308,6 +311,11 @@ def svg_word(word, F=80.0, x0=0.0, cls=True):
         x2 = X(n - 1) + (INKX[p["letters"][n - 1]["ch"]][1] + 0.05) * F
         out.append(f'<rect class="wt" x="{f(x1)}" y="{f(B - 0.56 * F)}" width="{f(x2 - x1)}" height="{f(0.56 * F)}" rx="{f(0.12 * F)}" fill="var(--line)"/>')
     has_top = {m["col"] for m in p["marks"] if m["type"] in ("breve", "macron")}
+    def leaves(col):                                         # how far above the baseline a vault leaves its sender: over its cup or bar, over the dot of an i or j, or over the letter
+        if col in has_top: return 1.10
+        return 0.97 if p["letters"][col]["ch"] in "ij" else 0.74
+    takes = {m["from"] for m in p["marks"] if m["type"] == "vault"}    # vowels a vault lands on
+    sends = {m["to"] for m in p["marks"] if m["type"] == "vault"}      # and vowels that send one
     dots = [{"x": mid(m["cols"]) + m.get("dx", 0) * F, "lo": min(m["cols"]), "hi": max(m["cols"]), "color": m["color"]} for m in p["marks"] if m["type"] == "dot"]
     def arrow(x, y, dx, dy, size, sw, colour, layer):
         d = math.hypot(dx, dy) or 1; dx, dy = dx / d, dy / d; th = 0.5; c, s = math.cos(th), math.sin(th)
@@ -336,14 +344,15 @@ def svg_word(word, F=80.0, x0=0.0, cls=True):
             x = X(m["col"]); out.append(f'<path{k(6)} d="M{f(x - 0.257 * F)} {f(B - 0.975 * F)} Q{f(x)} {f(B - 0.775 * F)} {f(x + 0.257 * F)} {f(B - 0.975 * F)}" fill="none" stroke="{RED}" stroke-width="{f(0.05 * F)}" stroke-linecap="round"/>')
         elif t == "vault":
             xs, xt = X(m["to"]), X(m["from"])               # 'to' is the sender, 'from' the vowel made long
-            ys = B - 0.63 * F if m.get("cone", True) else B - (1.10 if m["to"] in has_top else 0.74) * F
-            ex, ey = xt + 0.05 * F, B - 1.12 * F
-            c1 = (xs - 0.04 * F, B - 1.40 * F); c2 = (xt + 0.46 * F, B - 1.40 * F)
+            if m["to"] in takes: xs -= 0.08 * F               # a vowel that takes a vault and sends one (the a of notation): the two ends part
+            ys = B - 0.63 * F if m.get("cone", True) else B - leaves(m["to"]) * F
+            ex, ey = xt + (0.16 if m["from"] in sends else 0.05) * F, B - 1.12 * F
+            c1 = (xs - 0.04 * F, B - 1.40 * F); c2 = (ex + 0.41 * F, B - 1.40 * F)
             out.append(f'<path{k(8)} d="M{f(xs)} {f(ys)} C{f(c1[0])} {f(c1[1])} {f(c2[0])} {f(c2[1])} {f(ex)} {f(ey)}" fill="none" stroke="{BLUE}" stroke-width="{f(0.043 * F)}" stroke-linecap="round"/>')
             out.append(arrow(ex, ey, ex - c2[0], ey - c2[1], 0.12 * F, 0.043 * F, BLUE, 8))
         elif t == "blockedvault":
             xv, bx = X(m["from"]), (X(m["blockFrom"]) + X(m["blockTo"])) / 2
-            ys = B - (1.10 if m["from"] in has_top else 0.74) * F
+            ys = B - leaves(m["from"]) * F
             yx = B - 1.07 * F
             out.append(f'<path{k(8)} d="M{f(xv)} {f(ys)} Q{f((xv + bx) / 2 + 0.10 * F)} {f(B - 1.52 * F)} {f(bx + 0.07 * F)} {f(yx)}" fill="none" stroke="{BLUE}" stroke-width="{f(0.043 * F)}" stroke-linecap="round"/>')
             d = 0.08 * F
