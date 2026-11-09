@@ -15,13 +15,13 @@ LEGO_STEPS = [   # (layers it brings in, caption)
     ("4", "Bars where letters spell a single sound: <i>or</i> and <i>ph</i>."),
     ("5", "Then the letters."),
     ("6", "A cup over a short vowel, a bar over a long one."),
-    ("9", "Seams where the parts join: <i>lego + morph + ic</i>. The <i>o</i> ends its part, so it says its name, as in <i>go</i>."),
+    ("9", "Seams where the parts join: <i>lego + morph + ic</i>. The <i>o</i> ends its part, so it spells its name, as in <i>go</i>."),
 ]
 STEP = 1.6          # seconds between steps
 START = 0.4
 
 MORPH = [   # (word, word sum, caption)
-    ("note", "<i>note</i>", "The silent <i>e</i> sends a vault back, so the <i>o</i> says its name."),
+    ("note", "<i>note</i>", "The silent <i>e</i> sends a vault back, so the <i>o</i> spells its name."),
     ("notate", "<i>not(e) + ate</i> &rarr; <i>notate</i>",
      "The <i>e</i> drops at the seam, and the <i>a</i> of <i>ate</i> takes over its job."),
     ("notation", "<i>notat(e) + ion</i> &rarr; <i>notation</i>",

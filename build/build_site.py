@@ -280,7 +280,7 @@ for b in route["bands"]:
 KEY = [("Sound circle", "One circle under each sound: red for a vowel sound, black for a consonant, green for <em>sh</em>, <em>th</em>, <em>ch</em> and the <em>sh</em> of <em>-tion</em>", "this", "circle"),
        ("Syllable swoop", "One swoop under each syllable", "happy", "swoop"),
        ("Short mark", "A cup over a vowel that keeps its short sound", "get", "short"),
-       ("Long mark", "A bar over a vowel that says its name", "go", "long"),
+       ("Long mark", "A bar over a vowel that spells its name", "go", "long"),
        ("Bond bar", "A bar under letters that work as one unit, most of them spelling one sound: black for consonant units and for doubled letters, boxed or not, green for <em>sh</em>, <em>th</em>, <em>ch</em> and the <em>ti</em> of <em>-tion</em>, red for vowel units. The letters keep their own colours. <em>Qu</em> is the consonant unit with two sounds: the bar ties the <em>q</em> to the <em>u</em> it always comes with, and a circle under each letter counts the <em>k</em> and the <em>w</em>", "teaching", "bond"),
        ("R-controlled unit", "A red bar under a vowel and its <em>r</em>, with the vowel red, the <em>r</em> black and one circle", "car", "r"),
        ("Block box", "A box around the vowel protector at work: a pair or cluster with a vowel after it, which it stops from reaching back. A pair keeps its bond bar when the box comes; a cluster has none", "hopping", "box"),
@@ -305,7 +305,7 @@ home_head = f"""<title>Sound and Word Atlas</title>
 {FONTS()}
 <link rel="stylesheet" href="site.css">
 """
-import landing
+import landing, walk
 for w in ("legomorphic", "note", "notate", "notation"): assert w in LW.W, w
 ROUTE_LEAD = md(route["intro"].split(" The orientation map")[0])
 # The route and the legend moved behind their doors on 8 November 2026 (Progressions and Notations). An old link to
@@ -317,6 +317,7 @@ home_body = f"""{header(0)}
 {OLD_ANCHORS}
 <main>
 {landing.html_block(LW)}
+{walk.section(head='<h2 class="walk-h"><span class="t-only">Mark a word</span><span class="s-only">Pick a word</span></h2><p class="sub t-only">Type a word that&rsquo;s on the site, then tap through it, reading from its letters or spelling from its sounds. The <a href="walk.html">Word walk</a> page has it on its own.</p>', lazy=True, url=False)}
 {doors.doors_section()}
 <section class="about t-only" id="about" aria-labelledby="about-h"><div class="wrap">
 <h2 id="about-h">What&rsquo;s here</h2>

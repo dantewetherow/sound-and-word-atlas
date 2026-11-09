@@ -109,14 +109,24 @@ def write(OUT, door_page, X):
         index.append([w, wid])
     (OUT / "walk" / "index.json").write_text(json.dumps(index, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 
-    picks = [w for w in ("which", "make", "little", "squirrel", "notation") if any(w == i[0] for i in index)]
-    chips = "".join(f'<button type="button" class="chip" data-w="{html.escape(w)}">{html.escape(w)}</button>' for w in picks)
     body = f"""<section class="hero walk-hero"><div class="wrap">
 <h1><span class="t-only">Word walk</span><span class="s-only">Pick a word</span></h1>
 <p class="lead t-only">Type a word, then tap through it. <b>Read it</b> starts from the letters and decodes; <b>Spell it</b> starts from the syllables, then the sounds, then the letters.</p>
 </div></section>
-<section class="walk" aria-label="Word walk" data-default="which"><div class="wrap">
-<div class="walk-bar">
+{section(note=X["uc"]("the walk takes the words marked on this site. Any other word would need an automatic first pass from a pronunciation dictionary, which would get some wrong. Next: a draft for other words, for teachers to check."))}"""
+    door_page("walk", "Word walk · Sound and Word Atlas", "Type a word and walk through it: reading from its letters, spelling from its sounds.", body)
+    return len(index), skipped
+
+
+PICKS = ("which", "make", "little", "squirrel", "notation")
+
+
+def section(note="", head="", lazy=False, url=True, default="which"):
+    """The walk: the word field, the try-one chips, the two walks, the stage and its controls, and the script. walk.html
+    has it whole; the home page has a copy (head, lazy, and no ?w= in its address), since 9 November 2026."""
+    chips = "".join(f'<button type="button" class="chip" data-w="{html.escape(w)}">{html.escape(w)}</button>' for w in PICKS)
+    return f"""<section class="walk" aria-label="Word walk" data-default="{default}"{' data-lazy="1"' if lazy else ''}{' data-url="off"' if not url else ''}><div class="wrap">
+{head}<div class="walk-bar">
 <form class="walk-form" role="search" autocomplete="off">
 <label class="sr" for="walk-q">A word</label>
 <input id="walk-q" type="text" list="walk-words" placeholder="Type a word" spellcheck="false" autocapitalize="off">
@@ -133,11 +143,9 @@ def write(OUT, door_page, X):
 <div class="walk-nav"><button type="button" class="walk-back">Back</button><span class="walk-dots" aria-hidden="true"></span><button type="button" class="walk-next">Next</button><button type="button" class="walk-all">Show it all</button></div>
 <p class="walk-where"></p>
 <noscript><p>The word walk needs script. Each word is also on its step page.</p></noscript>
-{X["uc"]("the walk takes the words marked on this site. Any other word would need an automatic first pass from a pronunciation dictionary, which would get some wrong. Next: a draft for other words, for teachers to check.")}
+{note}
 </div></section>
 {WALK_JS}"""
-    door_page("walk", "Word walk · Sound and Word Atlas", "Type a word and walk through it: reading from its letters, spelling from its sounds.", body)
-    return len(index), skipped
 
 
 WALK_JS = r"""<script>(() => {
@@ -202,9 +210,10 @@ WALK_JS = r"""<script>(() => {
       word = j; form_ = 0; input.value = j.w;
       formsBox.hidden = j.forms.length < 2;
       formsBox.innerHTML = j.forms.length < 2 ? '' : j.forms.map((f, i) => '<button type="button" data-form="' + i + '" aria-pressed="' + (i === 0) + '">' + esc(f.gloss) + '</button>').join('');
-      where.innerHTML = j.where.length ? 'On the site: ' + j.where.map(l => '<a' + (l.x ? ' class="t-only"' : '') + ' href="' + esc(l.u) + '">' + esc(l.t) + '</a>').join(' · ') : '';
+      const allT = j.where.length && j.where.every(l => l.x);   // only teachers' links: student view shows no line at all
+      where.innerHTML = j.where.length ? '<span' + (allT ? ' class="t-only"' : '') + '>On the site: ' + j.where.map(l => '<a' + (l.x ? ' class="t-only"' : '') + ' href="' + esc(l.u) + '">' + esc(l.t) + '</a>').join(' · ') + '</span>' : '';
       draw();
-      const u = new URL(location.href); u.searchParams.set('w', j.w); history.replaceState(null, '', u);
+      if (root.dataset.url !== 'off') { const u = new URL(location.href); u.searchParams.set('w', j.w); history.replaceState(null, '', u); }
     });
   }
   const go = d => { const s = Math.max(0, Math.min(steps.length - 1, step + d)); if (s !== step) { step = s; apply(); } };
@@ -218,8 +227,13 @@ WALK_JS = r"""<script>(() => {
   $('.walk-next').addEventListener('click', () => go(1));
   $('.walk-back').addEventListener('click', () => go(-1));
   $('.walk-all').addEventListener('click', () => { step = steps.length - 1; apply(); });
-  fetch('walk/index.json').then(r => r.json()).then(j => {
+  const start = () => fetch('walk/index.json').then(r => r.json()).then(j => {
     index = j; list.innerHTML = j.map(([w]) => '<option value="' + esc(w) + '">').join('');
-    show(params.get('w') || root.dataset.default);
+    show((root.dataset.url !== 'off' && params.get('w')) || root.dataset.default);
   });
+  // on the home page the walk waits until it scrolls into view
+  if (root.dataset.lazy === '1' && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { io.disconnect(); start(); } }, {rootMargin: '200px'});
+    io.observe(root);
+  } else start();
 })();</script>"""

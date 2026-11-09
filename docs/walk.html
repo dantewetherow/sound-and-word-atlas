@@ -103,9 +103,10 @@
       word = j; form_ = 0; input.value = j.w;
       formsBox.hidden = j.forms.length < 2;
       formsBox.innerHTML = j.forms.length < 2 ? '' : j.forms.map((f, i) => '<button type="button" data-form="' + i + '" aria-pressed="' + (i === 0) + '">' + esc(f.gloss) + '</button>').join('');
-      where.innerHTML = j.where.length ? 'On the site: ' + j.where.map(l => '<a' + (l.x ? ' class="t-only"' : '') + ' href="' + esc(l.u) + '">' + esc(l.t) + '</a>').join(' · ') : '';
+      const allT = j.where.length && j.where.every(l => l.x);   // only teachers' links: student view shows no line at all
+      where.innerHTML = j.where.length ? '<span' + (allT ? ' class="t-only"' : '') + '>On the site: ' + j.where.map(l => '<a' + (l.x ? ' class="t-only"' : '') + ' href="' + esc(l.u) + '">' + esc(l.t) + '</a>').join(' · ') + '</span>' : '';
       draw();
-      const u = new URL(location.href); u.searchParams.set('w', j.w); history.replaceState(null, '', u);
+      if (root.dataset.url !== 'off') { const u = new URL(location.href); u.searchParams.set('w', j.w); history.replaceState(null, '', u); }
     });
   }
   const go = d => { const s = Math.max(0, Math.min(steps.length - 1, step + d)); if (s !== step) { step = s; apply(); } };
@@ -119,10 +120,15 @@
   $('.walk-next').addEventListener('click', () => go(1));
   $('.walk-back').addEventListener('click', () => go(-1));
   $('.walk-all').addEventListener('click', () => { step = steps.length - 1; apply(); });
-  fetch('walk/index.json').then(r => r.json()).then(j => {
+  const start = () => fetch('walk/index.json').then(r => r.json()).then(j => {
     index = j; list.innerHTML = j.map(([w]) => '<option value="' + esc(w) + '">').join('');
-    show(params.get('w') || root.dataset.default);
+    show((root.dataset.url !== 'off' && params.get('w')) || root.dataset.default);
   });
+  // on the home page the walk waits until it scrolls into view
+  if (root.dataset.lazy === '1' && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { io.disconnect(); start(); } }, {rootMargin: '200px'});
+    io.observe(root);
+  } else start();
 })();</script>
 </main>
 <footer class="site"><div class="wrap"><p>Page references are to Edward Carney, <i>A Survey of English Spelling</i> (Routledge, 1994). Updated 8 November 2026.</p><p>&copy; 2026 Dante Wetherow, B.Ed., M.Ed. Shared under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>. <a href="credits.html">Credits and contact</a> &middot; <a href="sitemap.html">Site map</a></p></div></footer>

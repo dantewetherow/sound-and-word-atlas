@@ -40,7 +40,7 @@
     68,
     73
    ],
-   "note": "An open vowel says its name from step 3, and y arrives as a vowel. UFLI teaches y as a consonant at lesson 30, and as the vowel of my at 73."
+   "note": "An open vowel spells its name from step 3, and y arrives as a vowel. UFLI teaches y as a consonant at lesson 30, and as the vowel of my at 73."
   },
   "4": {
    "lessons": [
@@ -277,7 +277,7 @@
  },
  "contrasts": [
   {
-   "what": "A vowel says its name in an open syllable",
+   "what": "A vowel spells its name in an open syllable",
    "route": "steps 1 and 3",
    "ufli": "lessons 66 and 68"
   },

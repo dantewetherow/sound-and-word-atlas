@@ -231,7 +231,7 @@ def write(OUT, page, header, footer, X):
 <section class="about"><div class="wrap"><div class="door-tiles"><a class="dtile walk-tile" href="walk.html"><b><span class="t-only">Word walk</span><span class="s-only">Pick a word</span></b><span class="t-only">Type a word and tap through it: reading from its letters, spelling from its sounds.</span></a></div></div></section>
 <section class="about" id="note-family" aria-labelledby="nf-h"><div class="wrap">
 <h2 id="nf-h">A family: <i>note</i>, <i>notate</i>, <i>notation</i></h2>
-<p class="sub t-only">Each word is built from the one before it. At each seam the <i>e</i> drops, and its job, making the <i>o</i> say its name, passes to the next vowel.</p>
+<p class="sub t-only">Each word is built from the one before it. At each seam the <i>e</i> drops, and its job, making the <i>o</i> spell its name, passes to the next vowel.</p>
 <div class="words fam">{fam}</div>
 </div></section>
 <section class="about" aria-labelledby="next-h"><div class="wrap">

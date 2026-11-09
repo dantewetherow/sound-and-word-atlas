@@ -35,7 +35,7 @@ VERB_CODES = {
     "can’t": "c.c s.a c.n ap c.t",                   # can and n't share one n
     "couldn’t": "c.c t.oul c.d | c.n ap c.t", "wouldn’t": "c.w t.oul c.d | c.n ap c.t",
     "shouldn’t": "g.sh t.oul c.d | c.n ap c.t",
-    "won’t": "c.w l.o c.n ap c.t",                   # will becomes wo-, and the o says its name, as in don't
+    "won’t": "c.w l.o c.n ap c.t",                   # will becomes wo-, and the o spells its name, as in don't
     "mustn’t": "c.m s.u k.st | c.n ap c.t",          # the t of must goes quiet, so st spells one sound
     "ought": "t.ough c.t",                           # ough as one vowel sound, as oul in could
     "used": "l.u c.s + e> c.d",                      # use + d, as liked

@@ -29,7 +29,7 @@ DOLCH_CODES = {
 CALLS = [
     ("don’t", "a long mark over the o, the red apostrophe, and no seam",
      "The apostrophe follows the I’m marking card, which says it does the same job in don’t: it stands in for the dropped "
-     "o of not. The o says its name before nt, as in old and both, so it takes a long mark and no vault."),
+     "o of not. The o spells its name before nt, as in old and both, so it takes a long mark and no vault."),
     ("six", "one circle under the x",
      "The x spells two sounds, k and then s. Rule 1 would give it two circles, as the o of one has two. No card shows an x yet."),
     ("thank, think, drink", "n and k as two consonants, with no mark for the ng sound of the n",

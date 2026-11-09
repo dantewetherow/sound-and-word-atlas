@@ -11,7 +11,7 @@ SITE_CODES = {
     "teaching": "c.t t.ea g.ch + | s.i k.ng",
     # step 2: short vowels closed by one consonant (as am, it, in)
     "at": "s.a c.t", "an": "s.a c.n", "on": "s.o c.n", "up": "s.u c.p",
-    # step 3: an open word says its name (as no, go)
+    # step 3: an open word spells its name (as no, go)
     "so": "c.s l.o",
     # step 4: one consonant closes it (as not, bed)
     "met": "c.m s.e c.t", "wet": "c.w s.e c.t", "got": "c.g s.o c.t",

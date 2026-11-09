@@ -530,3 +530,6 @@ html[data-view="student"] .walk-stage svg { max-height: 52vh; }
 .s-lead { font-size: 1.6rem; }
 .rkids { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 12px 28px; font-family: var(--display); font-size: clamp(2rem, 5vw, 3rem); }
 .rkids b { color: var(--verb); }
+.walk-h { margin: 0 0 4px; }
+.walk .wrap > .sub { margin: 0 0 14px; }
+main > .walk { padding-block: 28px 8px; }

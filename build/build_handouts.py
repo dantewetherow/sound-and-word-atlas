@@ -170,7 +170,7 @@ MARKS = [   # (exemplar or exemplars, name, what it shows, columns it spans)
  ("ship", "Sound circle", "A circle under each sound: red for a vowel, black for a consonant, green for <i>sh, th, ch</i>.", 1),
  ("napkin", "Syllable swoop", "A swoop under each syllable.", 1),
  ("it", "Short mark", "A cup over a vowel that keeps its short sound.", 1),
- ("go", "Long mark", "A bar over a vowel that says its name.", 1),
+ ("go", "Long mark", "A bar over a vowel that spells its name.", 1),
  ("do", "No mark", "A lone vowel with no cup and no bar borrows another vowel’s sound, or is said weakly.", 1),
  ("should", "Bond bar", "A bar under the letters of a single sound. All the letters of a vowel sound are red.", 1),
  ("her", "R-controlled unit", "A red bar under a vowel and its <i>r</i>. The <i>r</i> stays black, and they share a circle.", 1),

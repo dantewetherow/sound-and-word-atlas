@@ -29,7 +29,7 @@ THE CODE, unit by unit, left to right
             x.tch keeps its t black, its ch green and its green bar under all three, as g.tch does in catch (catching).
             With nothing after them they stay g.sh, g.th and g.tch
     s.a     a vowel that keeps its short sound (cup)
-    l.o     a vowel that says its name (bar)
+    l.o     a vowel that spells its name (bar)
     b.o     a bare vowel: it borrows another vowel's sound, or is unstressed (no cup, no bar)
     w.o     a vowel letter that spells two sounds, a consonant sound and then a vowel sound: the o of one
             (two circles under the one letter, black then red; no cup, no bar)
@@ -123,7 +123,7 @@ def code_of(word):
 CHOICES = [
  ("I", "a long mark over I", "The manual's legend and step 1 give I the long mark. The older marking card for a and I shows no mark."),
  ("one, once", "two circles under the o, black and then red", "The o spells /w/ and then the short u sound. Rule 1 asks for a circle for each sound, so the o carries two. None of your cards shows two circles under a single letter, so this is rule 1 applied and not a mark you have drawn. With one circle the word shows two circles for three sounds."),
- ("use", "a single circle under the long u", "Long u says its name, and your 44-sounds sheet counts it as a single vowel. Said slowly it is /y/ and then /oo/, the two sounds that take a circle each in you. New has the same question if you say it nyoo."),
+ ("use", "a single circle under the long u", "Long u spells its name, and your 44-sounds sheet counts it as a single vowel. Said slowly it is /y/ and then /oo/, the two sounds that take a circle each in you. New has the same question if you say it nyoo."),
  ("two", "a black bond bar under tw", "The silent w is joined to t as a consonant unit, like kn and wr. It could instead join the vowel."),
  ("goes, does", "a seam after go and do, then e in a cone, then s", "The manual says do + es and go + es. The e of -es is treated as a silent e. The alternative is an oe vowel unit."),
  ("want, myself", "no box around nt or lf", "A cluster takes the box only where a vowel comes after it in the word and the box stops that vowel's reach (wanted, selfish). Nothing follows nt in want or lf in myself, so they stay plain, as and and must do."),
@@ -142,7 +142,7 @@ CHOICES = [
  ("buy", "the silent u is red, on the black bar of the bu unit, with one black circle", "Ruled 8 November 2026: a vowel letter stays red inside a unit, as the legend says vowel letters are red, and the bar and circle still say bu spells b. Until then the u was black, as your Session 1 slide drew it."),
  ("look, good, too; how, now, down, brown, grow, show, own, know; eat, read; said, again; been", "a vowel unit with a red bond bar and nothing more", "Units with two sounds are marked alike. The manual lists this as still to decide."),
  ("because, laugh, people", "au and eo as vowel units; gh as a consonant unit", "One-off spellings, marked by the general rule for units."),
- ("old, both, only, find, kind", "a long mark and no vault", "The vowel says its name before two consonants, so nothing sends a vault."),
+ ("old, both, only, find, kind", "a long mark and no vault", "The vowel spells its name before two consonants, so nothing sends a vault."),
  ("find, kind, old, round, found", "no box around nd or ld", "Nothing follows nd or ld in these words, so nothing is boxed. In finding and older a vowel does follow, but the box protects a short vowel and these have none, so the family keeps no box, as rolling does."),
  ("water", "the syllable break is wat-er", "Other, any, many, very, seven and never keep the consonant with their short first vowel, and water is treated the same way because its a says a short sound. The dictionary breaks it wa-ter."),
  ("every", "ev, er, y in three syllables", "Said carefully. In running speech the middle syllable is often dropped."),

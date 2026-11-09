@@ -12,7 +12,7 @@ that can't use an SVG icon (favicon-32.png, apple-touch-icon.png). Note, the mas
 (characters.py). The candidates were a word's own
 marks with its letters lifted out, so every mark is true (6 November 2026):
 
-  go          two circles and a swoop, a bar over the red one: a vowel that ends its syllable says its name
+  go          two circles and a swoop, a bar over the red one: a vowel that ends its syllable spells its name
   it          red first, with a cup over it: a short vowel closed by a consonant
   leg         three circles and a swoop, a cup over the red one
   leg-bare    three circles and a swoop
