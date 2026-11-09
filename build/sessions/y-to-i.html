@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Y to i at the seam</title>
+<meta name="description" content="A presentation for teachers: why the y of happy becomes i in happier, and why it stays in played, slyly and carrying, by how each spelling would read.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&family=Lexend:wght@300;400;500;600&family=Gentium+Plus&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#f4efe6;--panel:#fbf8f1;--line:#e0d8c7;--ink:#2b2b2b;--soft:#6b6256;--subject:#3a7d44;--verb:#b5402f;--modal:#3f6488;
+  --serif:"Fraunces",Georgia,serif;--sans:"Lexend",system-ui,sans-serif;}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#1d1b18;--panel:#26231f;--line:#3b362f;--ink:#ece5d8;--soft:#a89e8f;--subject:#7dbb87;--verb:#e2836e;--modal:#95b6db;}}
+:root[data-theme="dark"]{--paper:#1d1b18;--panel:#26231f;--line:#3b362f;--ink:#ece5d8;--soft:#a89e8f;--subject:#7dbb87;--verb:#e2836e;--modal:#95b6db;}
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);overflow:hidden;-webkit-font-smoothing:antialiased}
+#viewport{position:relative;width:100%;height:100%;overflow:hidden}
+#stage{position:absolute;top:0;left:0;width:1600px;height:900px;transform-origin:0 0;background:var(--paper)}
+.slide{position:absolute;inset:0;padding:96px 132px 110px;display:flex;flex-direction:column;visibility:hidden}
+.slide.on{visibility:visible}
+.slide.mid{justify-content:center}
+.num{position:absolute;left:132px;bottom:40px;font-size:20px;color:var(--soft);font-variant-numeric:tabular-nums}
+.progress{position:absolute;left:0;bottom:0;height:4px;background:var(--soft);opacity:.28;transition:width .35s ease}
+.kicker{font-size:24px;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);margin:0 0 18px}
+.display{font-family:var(--serif);font-weight:600;font-size:128px;line-height:1;letter-spacing:-.018em;margin:0}
+.display.small{font-size:92px;line-height:1.08}
+.display .r,.r{color:var(--verb)}
+.subtitle{font-family:var(--serif);font-style:italic;font-size:46px;margin:18px 0 0}
+.lede{font-size:36px;color:var(--soft);margin:30px 0 0;max-width:1180px}
+.head{font-family:var(--serif);font-weight:500;font-size:64px;line-height:1.1;letter-spacing:-.012em;margin:0 0 30px;max-width:1300px}
+.body{font-size:30px;line-height:1.5;margin:0 0 18px;max-width:1150px}
+.body i,.q i,.lede i,.head i,.sum i,.sums i,.steps i{font-family:var(--serif);font-style:italic}
+.q{font-family:var(--serif);font-style:italic;font-size:44px;line-height:1.25;margin:30px 0 0;max-width:1200px}
+.q.np{font-size:48px;padding-left:30px;border-left:4px solid var(--modal);margin:0 0 34px}
+.q.end{font-size:38px;margin-top:40px;padding-top:28px;border-top:1.5px solid var(--line)}
+.source{font-size:22px;color:var(--soft);margin:auto 0 0}
+.title .pair{display:flex;align-items:center;gap:26px;margin-top:56px}
+.op{font-family:var(--serif);font-size:56px;color:var(--soft)}
+.row{display:flex;align-items:flex-end;gap:30px;margin:18px 0}
+.row.big{gap:40px;margin:6px 0 10px}
+.row .gap{width:80px}
+.mw{display:block;width:auto;max-width:100%}
+.type{font-family:var(--sans);font-size:120px;line-height:1;margin:6px 0 22px;letter-spacing:.02em;align-self:flex-start}
+.hl{color:var(--verb);text-decoration:underline;text-decoration-thickness:6px;text-underline-offset:14px}
+table.sums{border-collapse:collapse;font-size:40px;margin:6px 0 20px;align-self:flex-start}
+table.sums td{padding:10px 40px 10px 0;vertical-align:baseline}
+table.sums td.mis{font-family:var(--sans);color:var(--soft)}
+table.sums .hl{text-decoration-thickness:4px;text-underline-offset:9px}
+table.sums.try{font-size:38px}
+.cols3{display:grid;grid-template-columns:repeat(3,1fr);gap:56px;margin-top:6px}
+.cols3 > div{border-top:1.5px solid var(--line);padding-top:20px}
+.sum{font-size:38px;margin:0 0 14px}
+.cols3 .body{font-size:27px}
+ol.steps{margin:6px 0 0;padding-left:36px;font-size:28px;line-height:1.45;max-width:1300px}
+ol.steps li{margin:0 0 6px}
+/* builds: a click brings the next part in */
+[data-s]{opacity:0;transition:opacity .45s ease,transform .45s ease;transform:translateY(10px)}
+[data-s].in{opacity:1;transform:none}
+svg [data-s]{transform:none}
+svg .dr[data-s]{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .8s ease,opacity .2s ease}
+svg .dr[data-s].in{stroke-dashoffset:0}
+tr[data-s]{transform:none}
+@media (prefers-reduced-motion: reduce){[data-s]{transition:none}}
+#controls{position:fixed;right:18px;bottom:16px;display:flex;gap:8px;opacity:0;transition:opacity .3s ease}
+body.awake #controls,#controls:focus-within{opacity:1}
+#controls a,#controls button{font:inherit;font-size:22px;width:44px;height:44px;display:grid;place-items:center;border:1px solid var(--line);border-radius:999px;background:var(--panel);color:var(--ink);text-decoration:none;cursor:pointer}
+#controls a:focus-visible,#controls button:focus-visible{outline:3px solid var(--modal);outline-offset:3px}
+</style>
+</head>
+<body>
+<div id="viewport"><div id="stage">
+<section class="slide mid" aria-label="Title">
+<div class="title">
+<p class="kicker">Legomorphic Notation &middot; for teachers</p>
+<h1 class="display">Y to <span class="r">i</span> at the seam</h1>
+<p class="subtitle">How a spelling would read decides the letter</p>
+<div class="pair"><svg class="mw" viewBox="0 0 395 248" style="height:150px" role="img" aria-label="happy, marked"><rect x="164.7" y="60.0" width="135.1" height="96.0" rx="10.0" fill="none" stroke="var(--modal)" stroke-width="3.6"/><g font-family="Lexend, system-ui, sans-serif" font-size="100.0" font-weight="400" text-anchor="middle"><text x="63.5" y="144.0" fill="var(--ink)">h</text><text x="130.5" y="144.0" fill="var(--verb)">a</text><text x="197.5" y="144.0" fill="var(--ink)">p</text><text x="264.5" y="144.0" fill="var(--ink)">p</text><text x="331.5" y="144.0" fill="var(--verb)">y</text></g><path d="M104.8 46.5 Q130.5 66.5 156.2 46.5" fill="none" stroke="var(--verb)" stroke-width="5.0" stroke-linecap="round"/><line x1="171.8" y1="177.0" x2="290.2" y2="177.0" stroke="var(--ink)" stroke-width="5.0" stroke-linecap="round"/><path d="M331.5 70.0 Q291.2 -8.0 238.0 37.0" fill="none" stroke="var(--modal)" stroke-width="4.3" stroke-linecap="round"/><path d="M223.0 29.0 L239.0 45.0 M239.0 29.0 L223.0 45.0" fill="none" stroke="var(--verb)" stroke-width="5.0" stroke-linecap="round"/><circle cx="63.5" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="130.5" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="130.5" cy="200.0" r="7.2" fill="var(--verb)"/><circle cx="231.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="331.5" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="331.5" cy="200.0" r="7.2" fill="var(--verb)"/><path d="M52.8 229.0 Q147.2 249.0 241.7 229.0" fill="none" stroke="var(--modal)" stroke-width="4.6" stroke-linecap="round"/><path d="M310.8 229.0 Q331.5 249.0 352.2 229.0" fill="none" stroke="var(--modal)" stroke-width="4.6" stroke-linecap="round"/></svg><span class="op">+ er &rarr;</span><svg class="mw" viewBox="0 0 551 248" style="height:150px" role="img" aria-label="happier, marked"><rect x="164.7" y="60.0" width="135.1" height="96.0" rx="10.0" fill="none" stroke="var(--modal)" stroke-width="3.6"/><line x1="376.0" y1="49.0" x2="376.0" y2="190.0" stroke="var(--modal)" stroke-width="3.0" stroke-dasharray="5.7 5.7"/><g font-family="Lexend, system-ui, sans-serif" font-size="100.0" font-weight="400" text-anchor="middle"><text x="63.5" y="144.0" fill="var(--ink)">h</text><text x="130.5" y="144.0" fill="var(--verb)">a</text><text x="197.5" y="144.0" fill="var(--ink)">p</text><text x="264.5" y="144.0" fill="var(--ink)">p</text><text x="331.5" y="144.0" fill="var(--verb)">i</text><text x="420.5" y="144.0" fill="var(--verb)">e</text><text x="487.5" y="144.0" fill="var(--ink)">r</text></g><path d="M104.8 46.5 Q130.5 66.5 156.2 46.5" fill="none" stroke="var(--verb)" stroke-width="5.0" stroke-linecap="round"/><line x1="171.8" y1="177.0" x2="290.2" y2="177.0" stroke="var(--ink)" stroke-width="5.0" stroke-linecap="round"/><line x1="394.8" y1="177.0" x2="513.2" y2="177.0" stroke="var(--verb)" stroke-width="5.0" stroke-linecap="round"/><path d="M331.5 47.0 Q291.2 -8.0 238.0 37.0" fill="none" stroke="var(--modal)" stroke-width="4.3" stroke-linecap="round"/><path d="M223.0 29.0 L239.0 45.0 M239.0 29.0 L223.0 45.0" fill="none" stroke="var(--verb)" stroke-width="5.0" stroke-linecap="round"/><circle cx="63.5" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="130.5" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="130.5" cy="200.0" r="7.2" fill="var(--verb)"/><circle cx="231.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="331.5" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="331.5" cy="200.0" r="7.2" fill="var(--verb)"/><circle cx="454.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="454.0" cy="200.0" r="7.2" fill="var(--verb)"/><path d="M52.8 229.0 Q147.2 249.0 241.7 229.0" fill="none" stroke="var(--modal)" stroke-width="4.6" stroke-linecap="round"/><path d="M310.8 229.0 Q331.5 249.0 352.2 229.0" fill="none" stroke="var(--modal)" stroke-width="4.6" stroke-linecap="round"/><path d="M433.3 229.0 Q454.0 249.0 474.7 229.0" fill="none" stroke="var(--modal)" stroke-width="4.6" stroke-linecap="round"/></svg></div>
+</div>
+</section>
+<section class="slide " aria-label="Where it sits" data-max="2">
+<h2 class="head">Step 29 of the route: <i>-y</i>, <i>-ly</i> and y turns to i</h2>
+<p class="body">The words: <i>sadly</i>, <i>slowly</i>, <i>happily</i>, <i>happier</i>, <i>tried</i>, <i>carries</i>. The contrast: <i>try</i> and <i>tried</i>, <i>play</i> and <i>played</i>.</p>
+<div class="row" data-s="1"><svg class="mw" viewBox="0 0 261 248" style="height:130px" role="img" aria-label="try, marked"><g font-family="Lexend, system-ui, sans-serif" font-size="100.0" font-weight="400" text-anchor="middle"><text x="63.5" y="144.0" fill="var(--ink)">t</text><text x="130.5" y="144.0" fill="var(--ink)">r</text><text x="197.5" y="144.0" fill="var(--verb)">y</text></g><line x1="169.6" y1="53.0" x2="225.4" y2="53.0" stroke="var(--verb)" stroke-width="5.0" stroke-linecap="round"/><circle cx="63.5" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="130.5" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="197.5" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="197.5" cy="200.0" r="7.2" fill="var(--verb)"/><path d="M52.8 229.0 Q130.5 249.0 208.2 229.0" fill="none" stroke="var(--modal)" stroke-width="4.6" stroke-linecap="round"/></svg><svg class="mw" viewBox="0 0 417 248" style="height:130px" role="img" aria-label="tried, marked"><line x1="242.0" y1="49.0" x2="242.0" y2="190.0" stroke="var(--modal)" stroke-width="3.0" stroke-dasharray="5.7 5.7"/><circle cx="286.5" cy="118.0" r="37.0" fill="none" stroke="var(--soft)" stroke-width="3.8" stroke-linecap="round" stroke-dasharray="1.2 7.8"/><g font-family="Lexend, system-ui, sans-serif" font-size="100.0" font-weight="400" text-anchor="middle"><text x="63.5" y="144.0" fill="var(--ink)">t</text><text x="130.5" y="144.0" fill="var(--ink)">r</text><text x="197.5" y="144.0" fill="var(--verb)">i</text><text x="286.5" y="144.0" fill="var(--verb)">e</text><text x="353.5" y="144.0" fill="var(--ink)">d</text></g><line x1="169.6" y1="53.0" x2="225.4" y2="53.0" stroke="var(--verb)" stroke-width="5.0" stroke-linecap="round"/><circle cx="63.5" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="130.5" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="197.5" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="197.5" cy="200.0" r="7.2" fill="var(--verb)"/><circle cx="353.5" cy="200.0" r="7.2" fill="var(--ink)"/><path d="M52.8 229.0 Q208.5 249.0 364.2 229.0" fill="none" stroke="var(--modal)" stroke-width="4.6" stroke-linecap="round"/></svg><span class="gap"></span><svg class="mw" viewBox="0 0 328 248" style="height:130px" role="img" aria-label="play, marked"><g font-family="Lexend, system-ui, sans-serif" font-size="100.0" font-weight="400" text-anchor="middle"><text x="63.5" y="144.0" fill="var(--ink)">p</text><text x="130.5" y="144.0" fill="var(--ink)">l</text><text x="197.5" y="144.0" fill="var(--verb)">a</text><text x="264.5" y="144.0" fill="var(--verb)">y</text></g><line x1="171.8" y1="177.0" x2="290.2" y2="177.0" stroke="var(--verb)" stroke-width="5.0" stroke-linecap="round"/><circle cx="63.5" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="130.5" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="231.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="231.0" cy="200.0" r="7.2" fill="var(--verb)"/><path d="M52.8 229.0 Q147.2 249.0 241.7 229.0" fill="none" stroke="var(--modal)" stroke-width="4.6" stroke-linecap="round"/></svg><svg class="mw" viewBox="0 0 484 248" style="height:130px" role="img" aria-label="played, marked"><line x1="309.0" y1="49.0" x2="309.0" y2="190.0" stroke="var(--modal)" stroke-width="3.0" stroke-dasharray="5.7 5.7"/><circle cx="353.5" cy="118.0" r="37.0" fill="none" stroke="var(--soft)" stroke-width="3.8" stroke-linecap="round" stroke-dasharray="1.2 7.8"/><g font-family="Lexend, system-ui, sans-serif" font-size="100.0" font-weight="400" text-anchor="middle"><text x="63.5" y="144.0" fill="var(--ink)">p</text><text x="130.5" y="144.0" fill="var(--ink)">l</text><text x="197.5" y="144.0" fill="var(--verb)">a</text><text x="264.5" y="144.0" fill="var(--verb)">y</text><text x="353.5" y="144.0" fill="var(--verb)">e</text><text x="420.5" y="144.0" fill="var(--ink)">d</text></g><line x1="171.8" y1="177.0" x2="290.2" y2="177.0" stroke="var(--verb)" stroke-width="5.0" stroke-linecap="round"/><circle cx="63.5" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="130.5" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="231.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="231.0" cy="200.0" r="7.2" fill="var(--verb)"/><circle cx="420.5" cy="200.0" r="7.2" fill="var(--ink)"/><path d="M52.8 229.0 Q242.0 249.0 431.2 229.0" fill="none" stroke="var(--modal)" stroke-width="4.6" stroke-linecap="round"/></svg></div>
+<p class="q" data-s="2">Why does <i>try</i> change and <i>play</i> not?</p>
+</section>
+<section class="slide " aria-label="The rule as it is often taught" data-max="2">
+<h2 class="head">The rule as it is often taught</h2>
+<p class="q np">Change y to i before a suffix, unless the suffix begins with i.</p>
+<p class="body" data-s="1">It works as a mnemonic: it says what to do. It doesn&rsquo;t say why.</p>
+<p class="body" data-s="2">The reason often given, that English words don&rsquo;t end in i, lacks a premise: once a suffix joins, the y isn&rsquo;t at the end of anything.</p>
+</section>
+<section class="slide mid" aria-label="A better question" data-max="1">
+<h2 class="display small">Put the y back,<br>and read what you&rsquo;ve written.</h2>
+<p class="lede" data-s="1">The y becomes i where, as y, it would be read wrong in its new place.</p>
+</section>
+<section class="slide " aria-label="happy and er" data-max="3">
+<h2 class="head"><i>happy</i> + <i>er</i></h2>
+<div class="build">
+<p class="type" data-s="1">happ<span class="hl">yer</span></p>
+<p class="body" data-s="2">Before a vowel, y reads as a consonant, as it does in <i>yes</i> and <i>yellow</i>. A reader says <b>hap&middot;pyer</b>.</p>
+<div class="row" data-s="3"><svg class="mw" viewBox="0 0 551 248" style="height:210px" role="img" aria-label="happier, marked"><rect x="164.7" y="60.0" width="135.1" height="96.0" rx="10.0" fill="none" stroke="var(--modal)" stroke-width="3.6"/><line x1="376.0" y1="49.0" x2="376.0" y2="190.0" stroke="var(--modal)" stroke-width="3.0" stroke-dasharray="5.7 5.7"/><g font-family="Lexend, system-ui, sans-serif" font-size="100.0" font-weight="400" text-anchor="middle"><text x="63.5" y="144.0" fill="var(--ink)">h</text><text x="130.5" y="144.0" fill="var(--verb)">a</text><text x="197.5" y="144.0" fill="var(--ink)">p</text><text x="264.5" y="144.0" fill="var(--ink)">p</text><text x="331.5" y="144.0" fill="var(--verb)">i</text><text x="420.5" y="144.0" fill="var(--verb)">e</text><text x="487.5" y="144.0" fill="var(--ink)">r</text></g><path d="M104.8 46.5 Q130.5 66.5 156.2 46.5" fill="none" stroke="var(--verb)" stroke-width="5.0" stroke-linecap="round"/><line x1="171.8" y1="177.0" x2="290.2" y2="177.0" stroke="var(--ink)" stroke-width="5.0" stroke-linecap="round"/><line x1="394.8" y1="177.0" x2="513.2" y2="177.0" stroke="var(--verb)" stroke-width="5.0" stroke-linecap="round"/><path d="M331.5 47.0 Q291.2 -8.0 238.0 37.0" fill="none" stroke="var(--modal)" stroke-width="4.3" stroke-linecap="round"/><path d="M223.0 29.0 L239.0 45.0 M239.0 29.0 L223.0 45.0" fill="none" stroke="var(--verb)" stroke-width="5.0" stroke-linecap="round"/><circle cx="63.5" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="130.5" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="130.5" cy="200.0" r="7.2" fill="var(--verb)"/><circle cx="231.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="331.5" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="331.5" cy="200.0" r="7.2" fill="var(--verb)"/><circle cx="454.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="454.0" cy="200.0" r="7.2" fill="var(--verb)"/><path d="M52.8 229.0 Q147.2 249.0 241.7 229.0" fill="none" stroke="var(--modal)" stroke-width="4.6" stroke-linecap="round"/><path d="M310.8 229.0 Q331.5 249.0 352.2 229.0" fill="none" stroke="var(--modal)" stroke-width="4.6" stroke-linecap="round"/><path d="M433.3 229.0 Q454.0 249.0 474.7 229.0" fill="none" stroke="var(--modal)" stroke-width="4.6" stroke-linecap="round"/></svg></div>
+<p class="body" data-s="3">With i, nothing reads as a consonant: <b>hap&middot;pi&middot;er</b>.</p>
+</div>
+</section>
+<section class="slide " aria-label="More before a vowel" data-max="4">
+<h2 class="head">The same misread, every time</h2>
+<table class="sums">
+<tr data-s="1"><td><i>funny</i> + <i>er</i></td><td class="mis">funn<span class="hl">yer</span></td><td>&rarr; <i>funnier</i></td></tr>
+<tr data-s="2"><td><i>carry</i> + <i>es</i></td><td class="mis">carr<span class="hl">yes</span></td><td>&rarr; <i>carries</i></td></tr>
+<tr data-s="3"><td><i>try</i> + <i>ed</i></td><td class="mis">tr<span class="hl">yed</span></td><td>&rarr; <i>tried</i></td></tr>
+</table>
+<div class="row" data-s="4"><svg class="mw" viewBox="0 0 551 248" style="height:130px" role="img" aria-label="carries, marked"><rect x="167.5" y="60.0" width="127.0" height="96.0" rx="10.0" fill="none" stroke="var(--modal)" stroke-width="3.6"/><line x1="376.0" y1="49.0" x2="376.0" y2="190.0" stroke="var(--modal)" stroke-width="3.0" stroke-dasharray="5.7 5.7"/><circle cx="420.5" cy="118.0" r="37.0" fill="none" stroke="var(--soft)" stroke-width="3.8" stroke-linecap="round" stroke-dasharray="1.2 7.8"/><g font-family="Lexend, system-ui, sans-serif" font-size="100.0" font-weight="400" text-anchor="middle"><text x="63.5" y="144.0" fill="var(--ink)">c</text><text x="130.5" y="144.0" fill="var(--verb)">a</text><text x="197.5" y="144.0" fill="var(--ink)">r</text><text x="264.5" y="144.0" fill="var(--ink)">r</text><text x="331.5" y="144.0" fill="var(--verb)">i</text><text x="420.5" y="144.0" fill="var(--verb)">e</text><text x="487.5" y="144.0" fill="var(--ink)">s</text></g><line x1="171.8" y1="177.0" x2="290.2" y2="177.0" stroke="var(--ink)" stroke-width="5.0" stroke-linecap="round"/><path d="M331.5 47.0 Q291.2 -8.0 238.0 37.0" fill="none" stroke="var(--modal)" stroke-width="4.3" stroke-linecap="round"/><path d="M223.0 29.0 L239.0 45.0 M239.0 29.0 L223.0 45.0" fill="none" stroke="var(--verb)" stroke-width="5.0" stroke-linecap="round"/><circle cx="63.5" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="130.5" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="130.5" cy="200.0" r="7.2" fill="var(--verb)"/><circle cx="231.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="331.5" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="331.5" cy="200.0" r="7.2" fill="var(--verb)"/><circle cx="487.5" cy="200.0" r="7.2" fill="var(--ink)"/><path d="M52.8 229.0 Q147.2 249.0 241.7 229.0" fill="none" stroke="var(--modal)" stroke-width="4.6" stroke-linecap="round"/><path d="M320.8 229.0 Q409.5 249.0 498.2 229.0" fill="none" stroke="var(--modal)" stroke-width="4.6" stroke-linecap="round"/></svg><svg class="mw" viewBox="0 0 417 248" style="height:130px" role="img" aria-label="tried, marked"><line x1="242.0" y1="49.0" x2="242.0" y2="190.0" stroke="var(--modal)" stroke-width="3.0" stroke-dasharray="5.7 5.7"/><circle cx="286.5" cy="118.0" r="37.0" fill="none" stroke="var(--soft)" stroke-width="3.8" stroke-linecap="round" stroke-dasharray="1.2 7.8"/><g font-family="Lexend, system-ui, sans-serif" font-size="100.0" font-weight="400" text-anchor="middle"><text x="63.5" y="144.0" fill="var(--ink)">t</text><text x="130.5" y="144.0" fill="var(--ink)">r</text><text x="197.5" y="144.0" fill="var(--verb)">i</text><text x="286.5" y="144.0" fill="var(--verb)">e</text><text x="353.5" y="144.0" fill="var(--ink)">d</text></g><line x1="169.6" y1="53.0" x2="225.4" y2="53.0" stroke="var(--verb)" stroke-width="5.0" stroke-linecap="round"/><circle cx="63.5" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="130.5" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="197.5" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="197.5" cy="200.0" r="7.2" fill="var(--verb)"/><circle cx="353.5" cy="200.0" r="7.2" fill="var(--ink)"/><path d="M52.8 229.0 Q208.5 249.0 364.2 229.0" fill="none" stroke="var(--modal)" stroke-width="4.6" stroke-linecap="round"/></svg></div>
+</section>
+<section class="slide " aria-label="Before a consonant" data-max="3">
+<h2 class="head">Before a consonant, too</h2>
+<table class="sums">
+<tr data-s="1"><td><i>happy</i> + <i>ness</i></td><td class="mis">happ<span class="hl">y</span>ness</td><td>&rarr; <i>happiness</i></td></tr>
+<tr data-s="1"><td><i>merry</i> + <i>ment</i></td><td class="mis">merr<span class="hl">y</span>ment</td><td>&rarr; <i>merriment</i></td></tr>
+<tr data-s="1"><td><i>happy</i> + <i>ly</i></td><td class="mis">happ<span class="hl">y</span>ly</td><td>&rarr; <i>happily</i></td></tr>
+</table>
+<p class="body" data-s="2">Inside a word, a y between consonants invites the reading it has in <i>shyness</i> and <i>dryly</i>. The misreads aren&rsquo;t certain, but they&rsquo;re there to be made.</p>
+<p class="body" data-s="3">An i lets the sound shorten, as it does when we say these words: <b>hap&middot;pi&middot;ness</b>, <b>mer&middot;ri&middot;ment</b>.</p>
+<div class="row" data-s="3"><svg class="mw" viewBox="0 0 551 248" style="height:130px" role="img" aria-label="happily, marked"><rect x="164.7" y="60.0" width="135.1" height="96.0" rx="10.0" fill="none" stroke="var(--modal)" stroke-width="3.6"/><line x1="376.0" y1="49.0" x2="376.0" y2="190.0" stroke="var(--modal)" stroke-width="3.0" stroke-dasharray="5.7 5.7"/><g font-family="Lexend, system-ui, sans-serif" font-size="100.0" font-weight="400" text-anchor="middle"><text x="63.5" y="144.0" fill="var(--ink)">h</text><text x="130.5" y="144.0" fill="var(--verb)">a</text><text x="197.5" y="144.0" fill="var(--ink)">p</text><text x="264.5" y="144.0" fill="var(--ink)">p</text><text x="331.5" y="144.0" fill="var(--verb)">i</text><text x="420.5" y="144.0" fill="var(--ink)">l</text><text x="487.5" y="144.0" fill="var(--verb)">y</text></g><path d="M104.8 46.5 Q130.5 66.5 156.2 46.5" fill="none" stroke="var(--verb)" stroke-width="5.0" stroke-linecap="round"/><line x1="171.8" y1="177.0" x2="290.2" y2="177.0" stroke="var(--ink)" stroke-width="5.0" stroke-linecap="round"/><path d="M331.5 47.0 Q291.2 -8.0 238.0 37.0" fill="none" stroke="var(--modal)" stroke-width="4.3" stroke-linecap="round"/><path d="M223.0 29.0 L239.0 45.0 M239.0 29.0 L223.0 45.0" fill="none" stroke="var(--verb)" stroke-width="5.0" stroke-linecap="round"/><circle cx="63.5" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="130.5" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="130.5" cy="200.0" r="7.2" fill="var(--verb)"/><circle cx="231.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="331.5" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="331.5" cy="200.0" r="7.2" fill="var(--verb)"/><circle cx="420.5" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="487.5" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="487.5" cy="200.0" r="7.2" fill="var(--verb)"/><path d="M52.8 229.0 Q147.2 249.0 241.7 229.0" fill="none" stroke="var(--modal)" stroke-width="4.6" stroke-linecap="round"/><path d="M310.8 229.0 Q331.5 249.0 352.2 229.0" fill="none" stroke="var(--modal)" stroke-width="4.6" stroke-linecap="round"/><path d="M409.8 229.0 Q454.0 249.0 498.2 229.0" fill="none" stroke="var(--modal)" stroke-width="4.6" stroke-linecap="round"/></svg></div>
+</section>
+<section class="slide " aria-label="When y stays" data-max="3">
+<h2 class="head">When the y stays</h2>
+<div class="cols3">
+<div data-s="1"><p class="sum"><i>sly</i> + <i>ly</i> &rarr; <i>slyly</i></p><p class="body"><i>Slily</i> would read as <i>slilly</i>: an i between consonants reads short, as in <i>silly</i>.</p></div>
+<div data-s="2"><p class="sum"><i>play</i> + <i>ed</i> &rarr; <i>played</i></p><p class="body">The y belongs to a team, <i>ay</i>. It&rsquo;s read with the a already, so there&rsquo;s nothing to misread.</p><svg class="mw" viewBox="0 0 484 248" style="height:100px" role="img" aria-label="played, marked"><line x1="309.0" y1="49.0" x2="309.0" y2="190.0" stroke="var(--modal)" stroke-width="3.0" stroke-dasharray="5.7 5.7"/><circle cx="353.5" cy="118.0" r="37.0" fill="none" stroke="var(--soft)" stroke-width="3.8" stroke-linecap="round" stroke-dasharray="1.2 7.8"/><g font-family="Lexend, system-ui, sans-serif" font-size="100.0" font-weight="400" text-anchor="middle"><text x="63.5" y="144.0" fill="var(--ink)">p</text><text x="130.5" y="144.0" fill="var(--ink)">l</text><text x="197.5" y="144.0" fill="var(--verb)">a</text><text x="264.5" y="144.0" fill="var(--verb)">y</text><text x="353.5" y="144.0" fill="var(--verb)">e</text><text x="420.5" y="144.0" fill="var(--ink)">d</text></g><line x1="171.8" y1="177.0" x2="290.2" y2="177.0" stroke="var(--verb)" stroke-width="5.0" stroke-linecap="round"/><circle cx="63.5" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="130.5" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="231.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="231.0" cy="200.0" r="7.2" fill="var(--verb)"/><circle cx="420.5" cy="200.0" r="7.2" fill="var(--ink)"/><path d="M52.8 229.0 Q242.0 249.0 431.2 229.0" fill="none" stroke="var(--modal)" stroke-width="4.6" stroke-linecap="round"/></svg></div>
+<div data-s="3"><p class="sum"><i>carry</i> + <i>ing</i> &rarr; <i>carrying</i></p><p class="body"><i>Carriing</i> would set i beside i, a pair English almost never writes. The y keeps the two apart.</p></div>
+</div>
+</section>
+<section class="slide mid" aria-label="The rule, as reading" data-max="1">
+<h2 class="head">The rule, said as reading</h2>
+<p class="q np">The y becomes i at a seam where y would be read wrong. It stays where i would be read wrong, or where it is part of a team.</p>
+<p class="body" data-s="1">Learners can test it themselves: write the word both ways, and read each aloud as written.</p>
+</section>
+<section class="slide " aria-label="In the notation" data-max="6">
+<h2 class="head">In the notation</h2>
+<div class="row big"><svg class="mw" viewBox="0 0 395 248" style="height:200px" role="img" aria-label="happy, marked"><rect class="nz7" data-s="5" x="164.7" y="60.0" width="135.1" height="96.0" rx="10.0" fill="none" stroke="var(--modal)" stroke-width="3.6"/><g class="nz5" data-s="1" font-family="Lexend, system-ui, sans-serif" font-size="100.0" font-weight="400" text-anchor="middle"><text x="63.5" y="144.0" fill="var(--ink)">h</text><text x="130.5" y="144.0" fill="var(--verb)">a</text><text x="197.5" y="144.0" fill="var(--ink)">p</text><text x="264.5" y="144.0" fill="var(--ink)">p</text><text x="331.5" y="144.0" fill="var(--verb)">y</text></g><path class="nz6" data-s="3" d="M104.8 46.5 Q130.5 66.5 156.2 46.5" fill="none" stroke="var(--verb)" stroke-width="5.0" stroke-linecap="round"/><line class="nz4" data-s="1" x1="171.8" y1="177.0" x2="290.2" y2="177.0" stroke="var(--ink)" stroke-width="5.0" stroke-linecap="round"/><path pathLength="1" class="nz8 dr" data-s="5" d="M331.5 70.0 Q291.2 -8.0 238.0 37.0" fill="none" stroke="var(--modal)" stroke-width="4.3" stroke-linecap="round"/><path pathLength="1" class="nz8 dr" data-s="5" d="M223.0 29.0 L239.0 45.0 M239.0 29.0 L223.0 45.0" fill="none" stroke="var(--verb)" stroke-width="5.0" stroke-linecap="round"/><circle class="nz1" data-s="2" cx="63.5" cy="200.0" r="7.2" fill="var(--ink)"/><circle class="nz1" data-s="2" cx="130.5" cy="200.0" r="7.2" fill="var(--ink)"/><circle class="nz2" data-s="2" cx="130.5" cy="200.0" r="7.2" fill="var(--verb)"/><circle class="nz1" data-s="2" cx="231.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle class="nz1" data-s="2" cx="331.5" cy="200.0" r="7.2" fill="var(--ink)"/><circle class="nz2" data-s="2" cx="331.5" cy="200.0" r="7.2" fill="var(--verb)"/><path pathLength="1" class="nz3 dr" data-s="4" d="M52.8 229.0 Q147.2 249.0 241.7 229.0" fill="none" stroke="var(--modal)" stroke-width="4.6" stroke-linecap="round"/><path pathLength="1" class="nz3 dr" data-s="4" d="M310.8 229.0 Q331.5 249.0 352.2 229.0" fill="none" stroke="var(--modal)" stroke-width="4.6" stroke-linecap="round"/></svg><span class="op">&rarr;</span><svg class="mw" viewBox="0 0 551 248" style="height:200px" role="img" aria-label="happier, marked"><rect class="nz7" data-s="5" x="164.7" y="60.0" width="135.1" height="96.0" rx="10.0" fill="none" stroke="var(--modal)" stroke-width="3.6"/><line class="nz9" data-s="6" x1="376.0" y1="49.0" x2="376.0" y2="190.0" stroke="var(--modal)" stroke-width="3.0" stroke-dasharray="5.7 5.7"/><g class="nz5" data-s="1" font-family="Lexend, system-ui, sans-serif" font-size="100.0" font-weight="400" text-anchor="middle"><text x="63.5" y="144.0" fill="var(--ink)">h</text><text x="130.5" y="144.0" fill="var(--verb)">a</text><text x="197.5" y="144.0" fill="var(--ink)">p</text><text x="264.5" y="144.0" fill="var(--ink)">p</text><text x="331.5" y="144.0" fill="var(--verb)">i</text><text x="420.5" y="144.0" fill="var(--verb)">e</text><text x="487.5" y="144.0" fill="var(--ink)">r</text></g><path class="nz6" data-s="3" d="M104.8 46.5 Q130.5 66.5 156.2 46.5" fill="none" stroke="var(--verb)" stroke-width="5.0" stroke-linecap="round"/><line class="nz4" data-s="1" x1="171.8" y1="177.0" x2="290.2" y2="177.0" stroke="var(--ink)" stroke-width="5.0" stroke-linecap="round"/><line class="nz4" data-s="1" x1="394.8" y1="177.0" x2="513.2" y2="177.0" stroke="var(--verb)" stroke-width="5.0" stroke-linecap="round"/><path pathLength="1" class="nz8 dr" data-s="5" d="M331.5 47.0 Q291.2 -8.0 238.0 37.0" fill="none" stroke="var(--modal)" stroke-width="4.3" stroke-linecap="round"/><path pathLength="1" class="nz8 dr" data-s="5" d="M223.0 29.0 L239.0 45.0 M239.0 29.0 L223.0 45.0" fill="none" stroke="var(--verb)" stroke-width="5.0" stroke-linecap="round"/><circle class="nz1" data-s="2" cx="63.5" cy="200.0" r="7.2" fill="var(--ink)"/><circle class="nz1" data-s="2" cx="130.5" cy="200.0" r="7.2" fill="var(--ink)"/><circle class="nz2" data-s="2" cx="130.5" cy="200.0" r="7.2" fill="var(--verb)"/><circle class="nz1" data-s="2" cx="231.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle class="nz1" data-s="2" cx="331.5" cy="200.0" r="7.2" fill="var(--ink)"/><circle class="nz2" data-s="2" cx="331.5" cy="200.0" r="7.2" fill="var(--verb)"/><circle class="nz1" data-s="2" cx="454.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle class="nz2" data-s="2" cx="454.0" cy="200.0" r="7.2" fill="var(--verb)"/><path pathLength="1" class="nz3 dr" data-s="4" d="M52.8 229.0 Q147.2 249.0 241.7 229.0" fill="none" stroke="var(--modal)" stroke-width="4.6" stroke-linecap="round"/><path pathLength="1" class="nz3 dr" data-s="4" d="M310.8 229.0 Q331.5 249.0 352.2 229.0" fill="none" stroke="var(--modal)" stroke-width="4.6" stroke-linecap="round"/><path pathLength="1" class="nz3 dr" data-s="4" d="M433.3 229.0 Q454.0 249.0 474.7 229.0" fill="none" stroke="var(--modal)" stroke-width="4.6" stroke-linecap="round"/></svg></div>
+<ol class="steps">
+<li data-s="1">The letters, and the bar under <i>pp</i>: two letters, one sound.</li>
+<li data-s="2">A circle for each sound, red for the vowel sounds, the y&rsquo;s and the i&rsquo;s among them.</li>
+<li data-s="3">A cup over the short a, and nothing over the y or the i: both are bare, unstressed, with the same sound.</li>
+<li data-s="4">The syllables: <i>happy</i> has two, <i>happier</i> three.</li>
+<li data-s="5">The box around <i>pp</i> stops the reach of the y, and of the i, so the a stays short.</li>
+<li data-s="6">The seam falls after the i: <i>happi</i> + <i>er</i>. The letter changes; its job doesn&rsquo;t.</li>
+</ol>
+</section>
+<section class="slide " aria-label="Try these" data-max="7">
+<h2 class="head">Try these</h2>
+<p class="body">Write each both ways and read them aloud. Then click for the answer.</p>
+<table class="sums try"><tr><td><i>cry</i> + <i>ed</i></td><td class="ans" data-s="1">&rarr; <i>cried</i></td></tr><tr><td><i>baby</i> + <i>es</i></td><td class="ans" data-s="2">&rarr; <i>babies</i></td></tr><tr><td><i>busy</i> + <i>ly</i></td><td class="ans" data-s="3">&rarr; <i>busily</i></td></tr><tr><td><i>enjoy</i> + <i>ed</i></td><td class="ans" data-s="4">&rarr; <i>enjoyed</i></td></tr><tr><td><i>try</i> + <i>ing</i></td><td class="ans" data-s="5">&rarr; <i>trying</i></td></tr><tr><td><i>shy</i> + <i>ly</i></td><td class="ans" data-s="6">&rarr; <i>shyly</i></td></tr><tr><td><i>pretty</i> + <i>er</i></td><td class="ans" data-s="7">&rarr; <i>prettier</i></td></tr></table>
+</section>
+<section class="slide mid" aria-label="To take back" data-max="1">
+<h2 class="head">To take back to class</h2>
+<p class="body">When a learner writes <i>happyness</i> or <i>carryed</i>, ask them to read it back exactly as written. The misread is the lesson.</p>
+<p class="q end" data-s="1">Where else does a letter change at a seam so that a word reads as it should?</p>
+</section>
+<section class="slide mid" aria-label="Sources">
+<h2 class="head">Sources</h2>
+<p class="body">Edward Carney, <i>A Survey of English Spelling</i> (Routledge, 1994): <i>-y</i> and <i>-ies</i> (<i>berry</i>, <i>berries</i>), p. 70; <i>carry</i>, <i>carried</i>, <i>carries</i>, p. 135; <i>i</i> before some endings (<i>happiness</i>), p. 136.</p>
+<p class="body">The words are marked in Legomorphic Notation; the marks are on the Notations page of the Sound and Word Atlas, and this is step 29 of its route.</p>
+<p class="source">Shared under CC BY-NC-SA 4.0.</p>
+</section>
+  <div class="progress" id="progress" aria-hidden="true"></div>
+  <div class="num" id="num" aria-live="polite"></div>
+</div>
+<div id="controls">
+  <a id="home" href="../presentations.html" title="All presentations" aria-label="All presentations on the Sound and Word Atlas" onclick="event.stopPropagation()">&#8962;</a>
+  <button id="prev" aria-label="Previous slide">&lsaquo;</button>
+  <button id="next" aria-label="Next slide">&rsaquo;</button>
+  <button id="full" aria-label="Full screen">&#10530;</button>
+</div>
+</div>
+<script>
+(function(){
+  var vp = document.getElementById("viewport"), stage = document.getElementById("stage");
+  var slides = [].slice.call(document.querySelectorAll(".slide")), N = slides.length, cur = 0, KEY = "deck:y-to-i";
+  var num = document.getElementById("num"), prog = document.getElementById("progress");
+  function fit(){ var s = Math.min(vp.clientWidth / 1600, vp.clientHeight / 900);
+    stage.style.transform = "translate(" + (vp.clientWidth - 1600 * s) / 2 + "px," + (vp.clientHeight - 900 * s) / 2 + "px) scale(" + s + ")"; }
+  window.addEventListener("resize", fit); fit();
+  function max(sl){ return parseInt(sl.getAttribute("data-max") || "0", 10); }
+  function step(sl, k){ sl._k = k; sl.querySelectorAll("[data-s]").forEach(function(el){
+    var on = parseInt(el.getAttribute("data-s"), 10) <= k;
+    if (el.classList.contains("in") !== on) el.classList.toggle("in", on); }); }
+  function show(n, back){
+    n = Math.max(0, Math.min(N - 1, n));
+    slides.forEach(function(sl, i){ var on = i === n; sl.classList.toggle("on", on); sl.setAttribute("aria-hidden", on ? "false" : "true"); });
+    cur = n; step(slides[n], back ? max(slides[n]) : 0);
+    num.textContent = (n + 1) + " / " + N; prog.style.width = ((n + 1) / N * 100) + "%";
+    try { history.replaceState(null, "", "#" + (n + 1)); } catch (e) {}
+    try { localStorage.setItem(KEY, String(n)); } catch (e) {}
+  }
+  function next(){ var sl = slides[cur]; if ((sl._k || 0) < max(sl)) { step(sl, (sl._k || 0) + 1); return; } if (cur < N - 1) show(cur + 1); }
+  function prev(){ var sl = slides[cur]; if ((sl._k || 0) > 0) { step(sl, sl._k - 1); return; } if (cur > 0) show(cur - 1, true); }
+  function full(){ try { if (!document.fullscreenElement) document.documentElement.requestFullscreen(); else document.exitFullscreen(); } catch (e) {} }
+  document.getElementById("prev").addEventListener("click", function(e){ e.stopPropagation(); prev(); });
+  document.getElementById("next").addEventListener("click", function(e){ e.stopPropagation(); next(); });
+  document.getElementById("full").addEventListener("click", function(e){ e.stopPropagation(); full(); });
+  document.addEventListener("keydown", function(e){
+    if (e.target && e.target.closest && e.target.closest("button,a") && (e.key === " " || e.key === "Enter")) return;
+    if (["ArrowRight", "ArrowDown", "PageDown", " "].indexOf(e.key) > -1){ e.preventDefault(); next(); }
+    else if (["ArrowLeft", "ArrowUp", "PageUp"].indexOf(e.key) > -1){ e.preventDefault(); prev(); }
+    else if (e.key === "Home") show(0); else if (e.key === "End") show(N - 1);
+    else if (e.key === "f" || e.key === "F") full();
+  });
+  stage.addEventListener("click", function(e){ if (e.target.closest("a,button")) return;
+    var r = stage.getBoundingClientRect(); if (e.clientX - r.left < r.width / 3) prev(); else next(); });
+  var tx = null, ty = null;
+  vp.addEventListener("touchstart", function(e){ tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, {passive: true});
+  vp.addEventListener("touchend", function(e){ if (tx === null) return; var dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty;
+    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) { if (dx < 0) next(); else prev(); } tx = null; }, {passive: true});
+  var idle; function wake(){ document.body.classList.add("awake"); clearTimeout(idle); idle = setTimeout(function(){ document.body.classList.remove("awake"); }, 2600); }
+  ["mousemove", "touchstart", "keydown"].forEach(function(ev){ document.addEventListener(ev, wake, {passive: true}); });
+  window.addEventListener("hashchange", function(){ var h = parseInt((location.hash || "").replace("#", ""), 10); if (h >= 1 && h <= N && h - 1 !== cur) show(h - 1); });
+  var h = parseInt((location.hash || "").replace("#", ""), 10), s0 = 0;
+  if (h >= 1 && h <= N) s0 = h - 1; else { try { var v = parseInt(localStorage.getItem(KEY), 10); if (v >= 0 && v < N) s0 = v; } catch (e) {} }
+  show(s0);
+})();
+</script>
+</body>
+</html>

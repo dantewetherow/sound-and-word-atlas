@@ -40,7 +40,7 @@ PAGES = [
     ("derivations.html", "derivations", "Derivations", "Where words come from, and the sources the roots will cite."),
     ("roots/leg.html", "derivations", "*leg-: to gather", "The first root family: Greek and Latin words for gathering, choosing, reading and saying."),
     ("instructions.html", "instructions", "Instructions", "How to teach it: presentations and word cards."),
-    ("presentations.html", "instructions", "Presentations", "The staff series: each session's deck and its handouts."),
+    ("presentations.html", "instructions", "Presentations", "The staff series and decks on single concepts, with their handouts."),
     ("cards.html", "instructions", "Word cards", "Printable cards: the ELP and Dolch words, and grade 3 word sums."),
     ("connections.html", "connections", "Connections", "How the route lines up with the word lists and programs schools already use."),
     ("word-lists.html", "connections", "ELP and Dolch", "Where the ELP words come from in Dolch's lists."),

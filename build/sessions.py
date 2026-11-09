@@ -53,6 +53,14 @@ DECKS = [{
          "It boxes a doubled letter, like the <i>ll</i> of <i>will</i>, where the operator cards put a bar under it."),
         ("modal-cards-instructions", "Using the modal cards", "The instruction sheet that went with them."),
     ],
+}, {
+    "file": "y-to-i",
+    "title": "Y to i at the seam",
+    "kicker": "For teachers",
+    "previews": [1, 5, 8, 10],
+    "about": ("Why the <i>y</i> of <i>happy</i> becomes <i>i</i> in <i>happier</i>, and why it stays in <i>played</i>, <i>slyly</i> "
+              "and <i>carrying</i>: put the <i>y</i> back and read what you&rsquo;ve written. It builds a click at a time, with the words "
+              "marked in the notation, and sits on step 29 of the route."),
 }]
 
 
@@ -108,8 +116,8 @@ def write(OUT, page, header, footer):
 <main>
 <section class="hero"><div class="wrap">
 <p class="eyebrow">Presentations</p>
-<h1>Sessions for teachers</h1>
-<p class="lead">Slide decks from a staff series on Legomorphic Notation. They build a click at a time, the way the marks are taught, so they work for presenting to colleagues and for going through on your own.</p>
+<h1>Presentations for teachers</h1>
+<p class="lead">Slide decks from a staff series on Legomorphic Notation, and decks on single concepts. They build a click at a time, the way the marks are taught, so they work for presenting to colleagues and for going through on your own.</p>
 </div></section>
 <section class="about" aria-label="Decks"><div class="wrap"><div class="decks">
 {"".join(blocks)}
