@@ -87,7 +87,7 @@ def write(OUT, page, header, footer, svg_of, LW):
 <p>The notation explores four systems at once: orthography, phonology, morphology and syntax. It works through graphemes, phonemes and morphemes, and through the order in time in which a message is put together.</p>
 <p>In a word, vowel letters are red, even inside a unit (the <i>u</i> of <i>buy</i>), consonant letters black, and <i>sh</i>, <i>th</i> and <i>ch</i> green. The marks fall into three groups.</p>
 <ul class="marks-list">
-<li><b>Sounds.</b> A sound circle under each sound, a bond bar under letters that spell a single sound, a cup or a bar over a vowel for short or long, and a red bar under a vowel and its <i>r</i>.</li>
+<li><b>Sounds.</b> A sound circle under each sound, a bond bar under letters that work as one unit, a cup or a bar over a vowel for short or long, and a red bar under a vowel and its <i>r</i>.</li>
 <li><b>Parts.</b> A syllable swoop under each syllable, and a morpheme seam between meaningful parts.</li>
 <li><b>Letters working on letters.</b> The vowel vault, an arc from an <i>e</i>, or from a vowel after a single consonant, back to the vowel it makes long. The block box, around a pair or cluster of consonants that stops that reach, and the blocked vault, which ends in a red X where it does. The cone of silence around a silent <i>e</i>, and the nice-nudge from <i>e</i>, <i>i</i> or <i>y</i> to the <i>c</i> or <i>g</i> it softens.</li>
 </ul>

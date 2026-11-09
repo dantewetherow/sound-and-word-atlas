@@ -101,6 +101,18 @@ nav.doors a[aria-current] { background: var(--ink); color: var(--paper); text-de
 .search .results a:hover, .search .results a:focus { background: var(--paper); }
 .search .results a:focus-visible { outline: 2px solid var(--modal); outline-offset: -2px; }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.search .more { font: inherit; font-size: 0.82rem; margin: 4px 8px 6px; padding: 4px 12px; border: 1px solid var(--line); border-radius: 999px;
+  background: transparent; color: var(--ink); cursor: pointer; }
+.search .more:hover { border-color: var(--modal); }
+.search .more:focus-visible { outline: 2px solid var(--modal); outline-offset: 1px; }
+.search .more[hidden] { display: none; }
+
+/* the word a search lands on: a step's word, a family word, or a word in the word lists' table */
+.word[id], .wl-table span[id] { scroll-margin: 96px 0; }
+.word:target { outline: 3px solid var(--modal); outline-offset: 8px; border-radius: 12px; }
+.wl-table span:target { outline: 2px solid var(--modal); outline-offset: 2px; border-radius: 4px; }
+@media (prefers-reduced-motion: no-preference) { .word:target, .wl-table span:target { animation: found 1.4s ease-out 1; } }
+@keyframes found { 0% { outline-color: transparent; } 25% { outline-color: var(--modal); } }
 
 /* breadcrumbs, and a note for a student who lands on a teachers' page */
 .crumbs ol { list-style: none; display: flex; flex-wrap: wrap; margin: 0; padding: 12px 0 0; font-size: 0.85rem; color: var(--soft); }

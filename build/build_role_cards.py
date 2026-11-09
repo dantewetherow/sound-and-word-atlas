@@ -85,7 +85,7 @@ NOUN_CODES = {
     "sister": "c.s s.i c.s | c.t r.er",                      # as after
     "snow": "c.sn t.ow",                                     # as grow
     "song": "c.s s.o k.ng",                                  # as long
-    "squirrel": "c.squ r.ir | c.r b.e c.l",                  # q and u say k and w; ir as in bird
+    "squirrel": "c.s q.qu r.ir | c.r b.e c.l",              # qu on its black bar, q and u saying k and w; ir as in bird
     "stick": "c.st s.i k.ck",                                # as pick
     "street": "c.str t.ee c.t",                              # as stroll and green
     "thing": "g.th s.i k.ng",                                # as sing
@@ -124,8 +124,8 @@ CALLS = [
     ("picture", "the t black, and ure as an r-controlled ur with the e in a cone",
      "The t says ch here. A green circle would follow its sound; the letter stays black."),
     ("robin", "a closed first syllable with no vault", "As lemon and seven."),
-    ("squirrel", "squ as three sounds, with the u red and its own black circle; ir as an r-controlled unit; the second r starting the next syllable",
-     "The u says w, as it does after q. Ruled 8 November 2026: the u is red, as a vowel letter, with a black circle for the w, as the o of one has. A black bar under qu is still to settle."),
+    ("squirrel", "qu on a black bond bar with a black circle under each letter, the u red; ir as an r-controlled unit; the second r starting the next syllable",
+     "Ruled 8 November 2026. The u is red, as a vowel letter, with a black circle for the w. The black bar ties q to the u it never comes without, as the manual's cards and appendix already do (equipment), and shows a reader counting red letters that this u isn't the vowel. The two circles count the two sounds, k and w, as the route does at step 4 and as Carney's sound-to-spelling account has it (the u spells w)."),
     ("wind", "a short mark over the i", "The noun. Wind, the verb, would take a long mark, as find does."),
     ("Santa Claus, good-bye", "drawn as two marked words, with a hyphen between good and bye",
      "Christmas and Santa Claus keep their capitals, as I does."),

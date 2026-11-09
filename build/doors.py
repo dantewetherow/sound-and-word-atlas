@@ -108,40 +108,55 @@ SEARCH_JS = """<script>(() => {
   box.hidden = false; document.documentElement.classList.add('js-search');
   let data = null, loading = null;
   const load = () => loading || (loading = fetch(up + 'search.json').then(r => r.json()).then(j => { data = j; render(); }).catch(() => { data = []; }));
-  const KINDS = [['word', 'Words'], ['step', 'Steps'], ['mark', 'Marks'], ['term', 'Terms'], ['page', 'Pages']];
+  const KINDS = [['word', 'Words'], ['step', 'Steps'], ['mark', 'Marks'], ['term', 'Terms'], ['page', 'Pages']], CAP = 6;
   const norm = s => s.toLowerCase().normalize('NFD').replace(/[\\u0300-\\u036f]/g, '').replace(/[’']/g, '');
   const esc = s => s.replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
   const student = () => document.documentElement.dataset.view === 'student';
   function render() {
-    const t = norm(q.value.trim());
+    const said = q.value.trim(), t = norm(said);
     if (!t) { out.hidden = true; out.innerHTML = ''; count.textContent = ''; return; }
     if (!data) { load(); return; }
-    const hits = {};
+    // several words are also looked up one at a time, in the order typed: she could go
+    const terms = [...new Set(t.split(/[^a-z0-9-]+/).filter(Boolean))], many = terms.length > 1;
+    const hits = {}, found = new Set();
     for (const r of data) {
       if (r.x && student()) continue;
       const l = norm(r.l), k = r.k ? norm(r.k) : '';
-      const s = l === t ? 0 : l.startsWith(t) ? 1 : l.includes(t) ? 2 : (' ' + k).includes(' ' + t) ? 3 : k.includes(t) ? 4 : -1;
+      let s = l === t ? 0 : l.startsWith(t) ? 1 : l.includes(t) ? 2 : (' ' + k).includes(' ' + t) ? 3 : k.includes(t) ? 4 : -1;
+      if (many && r.t === 'word' && terms.includes(l)) { s = 0.5 + terms.indexOf(l) / 1000; found.add(l); }
+      else if (s < 0 && many && terms.every(w => (l + ' ' + k).includes(w))) s = 5;   // every word typed, in any order: short vowel
       if (s >= 0) (hits[r.t] = hits[r.t] || []).push([s, r]);
     }
     let h = '', n = 0;
     for (const [kind, label] of KINDS) {
-      const list = (hits[kind] || []).sort((a, b) => a[0] - b[0] || a[1].l.length - b[1].l.length || a[1].l.localeCompare(b[1].l)).slice(0, 6);
+      const list = (hits[kind] || []).sort((a, b) => a[0] - b[0] || a[1].l.length - b[1].l.length || a[1].l.localeCompare(b[1].l));
       if (!list.length) continue;
-      h += '<p class="rk">' + label + '</p><ul>' + list.map(([, r]) => '<li><a href="' + up + r.u + '">' + esc(r.l) + (r.s ? '<span>' + esc(r.s) + '</span>' : '') + '</a></li>').join('') + '</ul>';
+      const more = list.length > CAP;
+      h += '<p class="rk">' + label + (more ? ' (' + list.length + ')' : '') + '</p><ul>'
+         + list.map(([, r], i) => '<li' + (i >= CAP ? ' hidden' : '') + '><a href="' + esc(up + r.u) + '">' + esc(r.l) + (r.s ? '<span>' + esc(r.s) + '</span>' : '') + '</a></li>').join('')
+         + '</ul>' + (more ? '<button type="button" class="more">Show all ' + list.length + '</button>' : '');
       n += list.length;
     }
-    out.innerHTML = n ? h : '<p class="rk none">Nothing found. The <a href="' + up + 'sitemap.html">site map</a> lists every page.</p>';
+    const missing = many && found.size ? terms.filter(w => !found.has(w) && (w.length > 1 || w === 'a' || w === 'i')) : [];
+    if (n && missing.length) h += '<p class="rk none">Not on the site yet: ' + missing.map(esc).join(', ') + '</p>';
+    out.innerHTML = n ? h : '<p class="rk none">Nothing found for \\u201c' + esc(said) + '\\u201d. The <a href="' + up + 'sitemap.html">site map</a> lists every page.</p>';
     out.hidden = false;
     count.textContent = n ? n + (n === 1 ? ' result' : ' results') : 'No results';
   }
-  const links = () => [...out.querySelectorAll('a')];
+  const links = () => [...out.querySelectorAll('a, button.more')].filter(e => !e.hidden && !e.closest('[hidden]'));
   const close = () => { out.hidden = true; };
+  out.addEventListener('click', e => {             // Show all: the rest of that group, and focus on the first of them
+    const b = e.target.closest('button.more'); if (!b) return;
+    const ul = b.previousElementSibling, first = ul.querySelector('li[hidden] a');
+    ul.querySelectorAll('li[hidden]').forEach(li => { li.hidden = false; });
+    b.hidden = true; if (first) first.focus();
+  });
   q.addEventListener('focus', load);
   q.addEventListener('input', render);
   q.addEventListener('keydown', e => {
     if (e.key === 'ArrowDown') { const a = links()[0]; if (a) { e.preventDefault(); a.focus(); } }
     else if (e.key === 'Escape') { q.value = ''; render(); }
-    else if (e.key === 'Enter') { const a = links()[0]; if (a) { e.preventDefault(); location.href = a.href; } }
+    else if (e.key === 'Enter') { const a = out.querySelector('a'); if (a && !out.hidden) { e.preventDefault(); location.href = a.href; } }
   });
   out.addEventListener('keydown', e => {
     const ls = links(), i = ls.indexOf(document.activeElement);
@@ -203,7 +218,7 @@ def write(OUT, page, header, footer, X):
 
     # Explorations: the first family on the site, note to notation; hop and hope come next.
     LW, svg_of = X["LW"], X["svg_of"]
-    fam = "".join(f'<figure class="word">{svg_of(w, 58, label=f"{w}, marked")}<figcaption><span class="ws">{s}</span><span class="t-only">{c}</span></figcaption></figure>'
+    fam = "".join(f'<figure class="word" id="{word_id(w)}">{svg_of(w, 58, label=f"{w}, marked")}<figcaption><span class="ws">{s}</span><span class="t-only">{c}</span></figcaption></figure>'
                   for w, s, c in X["morph"])
     door_page("explorations", "Explorations · Sound and Word Atlas", "Words to take apart and build: families and contrasts.", f"""{door_head("explorations")}
 <section class="about" id="note-family" aria-labelledby="nf-h"><div class="wrap">
@@ -317,11 +332,25 @@ def write_search(OUT, X):
         for g in X["groups_of"](st["words_md"]):
             for w in g: where.setdefault(w, []).append(st["n"])
     for w, ns in sorted(where.items()):
-        add("word", w, f"steps/{ns[0]:02d}.html", "Step " + ", ".join(str(n) for n in ns[:3]) + ("…" if len(ns) > 3 else ""))
+        add("word", w, f"steps/{ns[0]:02d}.html#{word_id(w)}", "Step " + ", ".join(str(n) for n in ns[:3]) + ("…" if len(ns) > 3 else ""))
+    # Words on the lists but not the route land on their place in the word lists' table, which holds every ELP word and
+    # Dolch's 220, or, for Dolch's nouns, on their page of the actor cards: six cards a page after the list page, the
+    # pronouns first (build_role_cards.py)
+    elp_of, dolch_of = {}, {w: "Dolch " + l["name"].lower() for l in X["dolch"]["levels"] for w in l["words"]}
+    for n, L in X["elp"]["lists"].items():
+        for w in L["words"]: elp_of.setdefault(w, f"ELP list {n}")
+    actors = "I me you he him she her we us they them it".split() + X["dolch"]["nouns"]
+    from pypdf import PdfReader
+    cards = OUT / "sessions" / "handouts" / "actor-cards.pdf"
+    assert len(PdfReader(str(cards)).pages) == 1 + -(-len(actors) // 6), "the actor cards' pages have changed"
     for w in sorted(X["list_words"]):
-        if w not in where: add("word", w, "word-lists.html#table", "on the word lists", teacher=True)
+        if w in where: continue
+        if w in elp_of or w in dolch_of:
+            add("word", w, f"word-lists.html#{word_id(w)}", ", ".join(x for x in (elp_of.get(w), dolch_of.get(w)) if x), teacher=True)
+        else:
+            add("word", w, f"sessions/handouts/actor-cards.pdf#page={2 + actors.index(w) // 6}", "Dolch noun, actor cards", teacher=True)
     for w, *_ in X["morph"]:   # the family on Explorations
-        if w not in where: add("word", w, "explorations.html#note-family", "Explorations")
+        if w not in where: add("word", w, f"explorations.html#{word_id(w)}", "Explorations")
     for st in X["STEPS"]:
         words = " ".join(w for g in X["groups_of"](st["words_md"]) for w in g)
         add("step", f"Step {st['n']}: {X['plain'](st['title'])}", f"steps/{st['n']:02d}.html", st["band"],
@@ -338,6 +367,11 @@ def write_search(OUT, X):
 
 
 def mark_id(name): return "mark-" + re.sub(r"[^a-z]+", "-", name.lower()).strip("-")
+
+
+def word_id(w):
+    """The id a word's figure or entry carries, so a search lands on the word itself: w-dont for don't, w-i for I."""
+    return "w-" + re.sub(r"[^a-z0-9]+", "-", w.lower().replace("’", "").replace("'", "")).strip("-")
 
 
 # ------------------------------------------------------------------ breadcrumbs, the current door, and teachers' pages

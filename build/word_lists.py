@@ -4,7 +4,7 @@ build_site.py calls write() and hands it its page, header, footer and coloured f
 data/elp_hfw.json and data/dolch.json, and every count on the page is worked out from them, so a correction to either
 list carries through. The page works without its script: the table holds every word, and the script only fills in
 the panel under each chart when part of a bar is tapped."""
-import html, json, pathlib
+import html, json, pathlib, re
 HERE = pathlib.Path(__file__).resolve().parent
 esc = html.escape
 
@@ -154,16 +154,20 @@ def write(OUT, page, header, footer, coloured, LW):
                      f'<div class="track"><div class="bar" style="width:{100 * len(L["words"]) / top2:.2f}%">{"".join(segs)}</div></div></div>')
     legend2 = "".join(f'<li><span class="sw d-{l["key"]}"></span>{esc(l["name"])}</li>' for l in levels) + '<li><span class="sw d-none"></span>Not in Dolch&rsquo;s 220</li>'
 
-    # The table: every word once
+    # The table: every word once, each with an id so a search can land on it
+    import doors
+    wid = lambda w: f'<span id="{doors.word_id(w)}">{esc(w)}</span>'
     head = "".join(f'<th scope="col">{esc(l["name"])}</th>' for l in levels) + '<th scope="col">Not in Dolch&rsquo;s 220</th>'
     trs = []
     for L in lists:
         g = "K" if L["grade"] == "K" else f'Gr {L["grade"]}'
-        cells = [", ".join(esc(w) for w in L["words"] if w in level_of and level_of[w] is l) for l in levels]
-        cells.append(", ".join(esc(w) + (" (a Dolch noun)" if w in nouns else "") for w in L["words"] if w not in level_of))
+        cells = [", ".join(wid(w) for w in L["words"] if w in level_of and level_of[w] is l) for l in levels]
+        cells.append(", ".join(wid(w) + (" (a Dolch noun)" if w in nouns else "") for w in L["words"] if w not in level_of))
         trs.append(f'<tr><th scope="row">{L["n"]} &middot; {esc(L["name"])} ({g})</th>' + "".join(f"<td>{c}</td>" for c in cells) + "</tr>")
     trs.append('<tr class="off"><th scope="row">Not on the ELP lists</th>' +
-               "".join(f'<td>{", ".join(esc(w) for w in l["words"] if w not in list_of)}</td>' for l in levels) + "<td></td></tr>")
+               "".join(f'<td>{", ".join(wid(w) for w in l["words"] if w not in list_of)}</td>' for l in levels) + "<td></td></tr>")
+    ids = re.findall(r'<span id="([^"]+)">', "".join(trs))
+    assert len(ids) == len(set(ids)), "a word appears twice in the table"
 
     cw = {w: coloured(w) for w in sorted(set(elp_words) | set(level_of))}   # sorted, so a rebuild writes the same page
     data = {"levels": [{"key": l["key"], "name": l["name"], "words": l["words"]} for l in levels],

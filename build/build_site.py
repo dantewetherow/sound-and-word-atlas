@@ -66,17 +66,22 @@ def coloured(word, code=None):
     cls = {"vowel": "v", "team": "g", "consonant": ""}
     return '<span class="cw">' + "".join(f'<span class="{cls[l["type"]]}">{html.escape(l["ch"])}</span>' if cls[l["type"]] else html.escape(l["ch"]) for l in letters) + "</span>"
 
-def word_cells(group, F):
+def word_cells(group, F, seen=None):
+    """The figures for a group of words. With seen (the page's words so far), a word's first figure on the page gets
+    an id, so a search can land on it (doors.word_id)."""
     cells = []
     for w in group:
+        tag = ""
+        if seen is not None and w not in seen:
+            seen.add(w); tag = f' id="{doors.word_id(w)}"'
         if w in SC.VARIANTS:
-            for code, gloss in SC.VARIANTS[w]:
-                cells.append(f'<figure class="word">{svg_of(w, F, code, f"{w}, as in {gloss}, marked")}<figcaption>{html.escape(gloss)}</figcaption></figure>')
+            for k, (code, gloss) in enumerate(SC.VARIANTS[w]):
+                cells.append(f'<figure class="word"{tag if k == 0 else ""}>{svg_of(w, F, code, f"{w}, as in {gloss}, marked")}<figcaption>{html.escape(gloss)}</figcaption></figure>')
         elif w in SC.UNMARKED or w not in LW.W:
-            cells.append(f'<figure class="word unmarked"><span class="plain" style="font-size:{F:.0f}px">{html.escape(w)}</span>'
+            cells.append(f'<figure class="word unmarked"{tag}><span class="plain" style="font-size:{F:.0f}px">{html.escape(w)}</span>'
                          f'<figcaption>(under construction)</figcaption></figure>')
         else:
-            cells.append(f'<figure class="word">{svg_of(w, F)}</figure>')
+            cells.append(f'<figure class="word"{tag}>{svg_of(w, F)}</figure>')
     return cells
 
 def page(title, body, depth, desc):
@@ -173,7 +178,7 @@ UC_OPEN = {
   13: "step 19, a vowel that borrows a sound, may move up to follow this step, since every unit it uses is in place by "
       "here. Next: decide where it sits in the route."},
  "The black bond bar": {
-  **{n: "the black bond bar, under letters that spell one consonant sound such as *qu*, *wh* and *ng*, is used from early "
+  **{n: "the black bond bar, under consonant units such as *qu*, *wh* and *ng*, is used from early "
         "in the route but isn't named as a new mark until step 25. Next: decide whether to name it at step 5." for n in (4, 5, 13)},
   25: "the black bond bar is named as a new mark here, but *qu*, *wh* and *ng* take it from earlier steps. Next: decide "
       "whether to name it at step 5 instead."},
@@ -203,9 +208,9 @@ def new_marks(m):
 for i, s in enumerate(STEPS):
     n = s["n"]; band = s["band"]
     prev_s = STEPS[i - 1] if i else None; next_s = STEPS[i + 1] if i + 1 < N else None
-    cells = []
+    cells, seen = [], set()
     for g in groups_of(s["words_md"]):
-        inner = word_cells(g, 58)
+        inner = word_cells(g, 58, seen)
         cells.append(f'<div class="group{" pair" if len(inner) > 1 else ""}">' + "".join(inner) + "</div>")
     notes = []
     marks = s["marks"].strip()
@@ -276,7 +281,7 @@ KEY = [("Sound circle", "One circle under each sound: red for a vowel sound, bla
        ("Syllable swoop", "One swoop under each syllable", "happy", "swoop"),
        ("Short mark", "A cup over a vowel that keeps its short sound", "get", "short"),
        ("Long mark", "A bar over a vowel that says its name", "go", "long"),
-       ("Bond bar", "A bar under letters that spell one sound: black for consonant units and for doubled letters, boxed or not, green for <em>sh</em>, <em>th</em>, <em>ch</em> and the <em>ti</em> of <em>-tion</em>, red for vowel units. The letters keep their own colours", "teaching", "bond"),
+       ("Bond bar", "A bar under letters that work as one unit, most of them spelling one sound: black for consonant units and for doubled letters, boxed or not, green for <em>sh</em>, <em>th</em>, <em>ch</em> and the <em>ti</em> of <em>-tion</em>, red for vowel units. The letters keep their own colours. <em>Qu</em> is the consonant unit with two sounds: the bar ties the <em>q</em> to the <em>u</em> it always comes with, and a circle under each letter counts the <em>k</em> and the <em>w</em>", "teaching", "bond"),
        ("R-controlled unit", "A red bar under a vowel and its <em>r</em>, with the vowel red, the <em>r</em> black and one circle", "car", "r"),
        ("Block box", "A box around the vowel protector at work: a pair or cluster with a vowel after it, which it stops from reaching back. A pair keeps its bond bar when the box comes; a cluster has none", "hopping", "box"),
        ("Cone of silence", "A dotted ring around a silent <em>e</em>", "have", "cone"),
@@ -439,7 +444,8 @@ ELP_ALL = json.loads((HERE / "data" / "elp_hfw.json").read_text(encoding="utf-8"
 list_words = {w for v in ELP_ALL["lists"].values() for w in v["words"]} | {w for l in DOLCH_ALL["levels"] for w in l["words"]} | set(DOLCH_ALL.get("nouns", []))
 X = dict(uc=uc, md=md, plain=plain, route_lead=ROUTE_LEAD, bands_html="".join(bands_html), key_html=key_html, svg_of=svg_of, LW=LW,
          draft_note=f"steps {DRAFT_FROM} to {N} are a first draft, and a few words show in plain letters until their marking is settled. Next: a second look at their order and their words.",
-         morph=landing.MORPH, STEPS=STEPS, pages=PAGES, groups_of=groups_of, KEY=KEY, terms=definitions.terms(KEY), list_words=list_words)
+         morph=landing.MORPH, STEPS=STEPS, pages=PAGES, groups_of=groups_of, KEY=KEY, terms=definitions.terms(KEY), list_words=list_words,
+         elp=ELP_ALL, dolch=DOLCH_ALL)
 doors.write(OUT, page, header, footer, X)
 n_search = doors.write_search(OUT, X)
 

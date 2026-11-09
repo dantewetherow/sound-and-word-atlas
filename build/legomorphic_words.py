@@ -6,8 +6,13 @@ letters-and-marks form the marking cards use, so the result can be dropped into 
 marking-system page, and it is drawn here at the Sounds to Sentences deck's scale.
 
 THE CODE, unit by unit, left to right
-    c.st    consonants, one sound each (black letters, a black circle each); a vowel letter among them stays red with its
-            own black circle, as the u of squ says w (squirrel), like the o of one
+    c.st    consonants, one sound each (black letters, a black circle each); a vowel letter among them would stay red with
+            its own black circle
+    q.qu    qu, the pair that always comes together: a black bond bar under both letters and a black circle under each,
+            since the q says k and the u says w (squirrel, equipment). The u stays red, as a vowel letter. The bar ties q to
+            the u it never comes without, and tells a reader counting red letters that this u isn't the syllable's vowel;
+            the two circles count its two sounds, as the route does (qu is k and w at step 4, as x is k and s). Where qu
+            says k alone (antique, conquer) it is k.qu: the bar and one circle, the u silent, as in buy (8 November 2026)
     k.kn    a consonant unit: two letters, one sound (black bond bar, one circle); also a doubled spelling that nothing
             reaches toward (k.ll in will, k.ck in pick): the box waits for an ending. A vowel letter in the unit stays
             red, as the silent u of k.bu in buy does (8 November 2026)
@@ -171,7 +176,7 @@ def parse(word):
         elif tok == "ap": kind, s = "ap", "’"
         else:
             kind, _, s = tok.partition(".")
-            assert kind in ("c", "k", "g", "x", "s", "l", "b", "w", "t", "r") and s, (word, tok)
+            assert kind in ("c", "k", "q", "g", "x", "s", "l", "b", "w", "t", "r") and s, (word, tok)
         cols = list(range(col, col + len(s)))
         own = lambda ch: "vowel" if ch.lower() in "aeiou" else "consonant"   # a letter's own colour: vowel letters are red
         if kind == "c":
@@ -180,6 +185,11 @@ def parse(word):
         elif kind == "k":
             for ch in s: letters.append({"ch": ch, "type": own(ch)})
             marks += [{"type": "blendbar", "from": cols[0], "to": cols[-1], "color": "consonant"}, {"type": "dot", "cols": cols, "color": "consonant"}]
+        elif kind == "q":                                    # qu: one unit, two sounds, so one bar and a circle under each letter
+            assert s.lower() == "qu", (word, tok)
+            for ch in s: letters.append({"ch": ch, "type": own(ch)})
+            marks.append({"type": "blendbar", "from": cols[0], "to": cols[-1], "color": "consonant"})
+            for c in cols: marks.append({"type": "dot", "cols": [c], "color": "consonant"})
         elif kind == "g":
             assert s in ("sh", "th", "ch", "tch", "ti"), (word, tok)
             for ch in s: letters.append({"ch": ch, "type": "team" if s in ("sh", "th", "ch") or (s == "tch" and ch != "t") else own(ch)})
@@ -455,7 +465,7 @@ def svg_one_mark(word, mark, F=58.0, label=None, css_height=None):
 def describe(word):
     """A plain-words account of a word's marks, for checking and for the manual."""
     p = parse(word); bits = []
-    names = {"c": "", "k": "unit", "g": "green unit", "x": "boxed", "s": "short", "l": "long", "b": "bare", "w": "two sounds, two circles", "t": "vowel unit", "r": "r-unit", "le": "le unit", "e0": "cone", "e>": "cone and vault", "ap": "red apostrophe"}
+    names = {"c": "", "k": "unit", "q": "qu, two sounds", "g": "green unit", "x": "boxed", "s": "short", "l": "long", "b": "bare", "w": "two sounds, two circles", "t": "vowel unit", "r": "r-unit", "le": "le unit", "e0": "cone", "e>": "cone and vault", "ap": "red apostrophe"}
     for u in p["units"]:
         bits.append(u["text"] + (f" ({names[u['kind']]})" if names[u["kind"]] else ""))
     extra = [m["type"] for m in p["marks"] if m["type"] in ("blockedvault", "nudge", "seam")] + ["vault (no cone)" for m in p["marks"] if m["type"] == "vault" and m.get("cone") is False] \
