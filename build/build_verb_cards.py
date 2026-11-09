@@ -57,7 +57,7 @@ CALLS = [
     ("having", "a break before v, the seam after it, and no vault", "The e of have drops, as in making, but the a stays short."),
     ("ought", "ough as one vowel unit", "As oul in could and igh in light."),
     ("used", "use + d, with the e in a cone and a vault back to the u",
-     "As liked. In used to, the s says s and the d says t, and the marks don’t show that."),
+     "As liked. In used to, the s spells s and the d spells t, and the marks don’t show that."),
     ("ed, n’t (cards on their own)", "no syllable swoop",
      "Each is a syllable in some words and not in others (wanted, played; isn’t, can’t). The -s card has none either."),
     ("ed", "the e in a cone", "Silent, as in played and hopped. In wanted it is said weakly: mark it again on the blank face."),

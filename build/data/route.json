@@ -113,7 +113,7 @@
   },
   {
    "n": 3,
-   "title": "Open words spell their name",
+   "title": "Open vowels spell their names",
    "band": "Sounds and syllables",
    "words_md": "*he, me, we, be, my, by, so, no, go*; contrast *go/do, so/to*",
    "marks": "none",
@@ -256,7 +256,7 @@
    "words_md": "*nice, face, place, age, page, huge*",
    "marks": "nice-nudge",
    "kernel_md": "none",
-   "carney": "*c* says /s/ before *e* (rule C.8), p. 303; *g* says /j/ before *e*, *i* and *y* (rules G.9 and G.12), pp. 326–327",
+   "carney": "*c* spells /s/ before *e* (rule C.8), p. 303; *g* spells /j/ before *e*, *i* and *y* (rules G.9 and G.12), pp. 326–327",
    "words": [
     "nice",
     "face",

@@ -108,7 +108,7 @@ CALLS = [
      "The e is short, as in Lego, so leg closes its syllable, as lem does in lemon."),
     ("notate", "note + ate: the e drops, and the a of ate sends a vault back to the o", "As making and photo."),
     ("notation", "notate + ion: ti as a green unit across a seam, the t black and the i red, with the vault sent from the i",
-     "Ruled 8 November 2026: the t and i say sh together, so their bar and circle are green, as for sh, and the letters "
+     "Ruled 8 November 2026: the t and i spell sh together, so their bar and circle are green, as for sh, and the letters "
      "keep their own colours, so the i is red, and it still makes the a long. Until then ti was a black unit, as the "
      "create family deck draws creation."),
 ]

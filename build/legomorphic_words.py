@@ -9,11 +9,11 @@ THE CODE, unit by unit, left to right
     c.st    consonants, one sound each (black letters, a black circle each); a vowel letter among them would stay red with
             its own black circle
     q.qu    qu, the pair that always comes together: a black bond bar under both letters and a black circle under each,
-            since the q says k and the u says w (squirrel, equipment). The u stays red, as a vowel letter. The bar ties q to
+            since the q spells k and the u spells w (squirrel, equipment). The u stays red, as a vowel letter. The bar ties q to
             the u it never comes without, and tells a reader counting red letters that this u isn't the syllable's vowel;
             the two circles count its two sounds, as the route does (qu is k and w at step 4, as x is k and s). Where qu
-            says k alone (antique, conquer) it is k.qu: the bar and one circle, the u silent, as in buy (8 November 2026)
-            The letter x (six, box) stays c.x, with one black circle, though it says k and s: ruled 8 November 2026, since x
+            spells k alone (antique, conquer) it is k.qu: the bar and one circle, the u silent, as in buy (8 November 2026)
+            The letter x (six, box) stays c.x, with one black circle, though it spells k and s: ruled 8 November 2026, since x
             isn't known to cause common reading or spelling errors. Sound-box guides count it as two sounds
     k.kn    a consonant unit: two letters, one sound (black bond bar, one circle); also a doubled spelling that nothing
             reaches toward (k.ll in will, k.ck in pick): the box waits for an ending. A vowel letter in the unit stays
@@ -45,7 +45,7 @@ THE CODE, unit by unit, left to right
 After a semicolon, by unit number (counting from 0, skipping | and +; a group such as c.nt is one unit):
     vault A>B     a vault from the sounded vowel in unit A back to the vowel in unit B. A may be a consonant unit that
                   holds a vowel letter, which sends the vault: the i of g.ti in notation, as the create family deck
-                  draws creation (the t and i say sh together, and the i still makes the a long)
+                  draws creation (the t and i spell sh together, and the i still makes the a long)
     bv A>B        a vault from unit A that the box at unit B stops (bv A>B-C for a box over units B to C)
     nudge A>B     a nice-nudge from the vowel in unit A to the c or g in unit B (B may be a box, as the dg of nudge)
     box A         a block box around the cluster in unit A (box A-B for units A to B)
@@ -131,7 +131,7 @@ CHOICES = [
  ("better, pretty, funny, carry", "a blocked vault from the last vowel to the box", "As in getting and happy. Little has none, following its own marking card, and yellow has none because a vowel unit does not send."),
  ("over, open", "a vault from the next vowel back to the long vowel, with no cone", "As in tiger and silent on the cards."),
  ("here", "h, long e, r, and a silent e with a vault", "It follows the ELP's own long-vowel list. The alternative is an r-controlled unit with a cone, like there and where. Your r-controlled card marks hear as h + ear with two circles, so the two spellings of that word differ by a circle here."),
- ("there, where", "an er unit, then e in a cone", "By analogy with were in the manual. The unit says the air sound, and no mark shows that."),
+ ("there, where", "an er unit, then e in a cone", "By analogy with were in the manual. The unit spells the air sound, and no mark shows that."),
  ("our, your, their", "our and eir as r-controlled units of three letters", "As the cards do for air and ear."),
  ("into, myself", "a seam between the two words", "Seams are drawn for the endings -ing, -es and -y, and where two whole words join and both keep their meaning."),
  ("away, around, again, always, before, because, today, together; said", "no seam", "The first parts a-, al-, be- and to- no longer mean what the small words mean, and said changes its stem. If you want them, seams can go in after a-, al-, be- and to-. Ruled for before on 8 November 2026: be|fore takes a seam, as a compound bound by use."),
@@ -144,20 +144,20 @@ CHOICES = [
  ("because, laugh, people", "au and eo as vowel units; gh as a consonant unit", "One-off spellings, marked by the general rule for units."),
  ("old, both, only, find, kind", "a long mark and no vault", "The vowel spells its name before two consonants, so nothing sends a vault."),
  ("find, kind, old, round, found", "no box around nd or ld", "Nothing follows nd or ld in these words, so nothing is boxed. In finding and older a vowel does follow, but the box protects a short vowel and these have none, so the family keeps no box, as rolling does."),
- ("water", "the syllable break is wat-er", "Other, any, many, very, seven and never keep the consonant with their short first vowel, and water is treated the same way because its a says a short sound. The dictionary breaks it wa-ter."),
+ ("water", "the syllable break is wat-er", "Other, any, many, very, seven and never keep the consonant with their short first vowel, and water is treated the same way because its a spells a short sound. The dictionary breaks it wa-ter."),
  ("every", "ev, er, y in three syllables", "Said carefully. In running speech the middle syllable is often dropped."),
  ("carry", "the a is bare", "Most Canadians say this a like the e of very, so it borrows, as in any and many. Said with the a of cat, it takes a cup."),
- ("was, is, has, does, goes, these, those, use, please, because, always; of", "s saying /z/ and f saying /v/ are unmarked", "The notation has no mark for a consonant letter borrowing another's sound."),
+ ("was, is, has, does, goes, these, those, use, please, because, always; of", "s spelling /z/ and f spelling /v/ are unmarked", "The notation has no mark for a consonant letter borrowing another's sound."),
  ("funny", "a seam after the doubled n", "Fun + y is a live join, and your y-sender page puts the seam after the doubled letters. Pretty, carry and better get a box and no seam, as inherited doubles do on your medial-double page."),
  ("little, yellow, better, pretty, funny, carry", "the doubled letters stay in the first syllable", "As chick|en and ball|oon on the cards. Your medial-double page writes rab·bit, which splits the pair."),
  ("never, seven, every, very", "a short mark, with no vault and no box", "A single consonant stands before the next vowel and the first vowel is still short, as your medial-v page describes. Nothing in the marks explains it."),
  ("from", "the o is bare", "Most Canadian speakers say it with the short u sound, so it borrows. Said with a short o, it would take a cup."),
- ("any, many, pretty", "the first vowel is bare", "Each borrows another vowel's short sound: the a says short e, and the e of pretty says short i. Your y-sender page lists pretty with a short e."),
+ ("any, many, pretty", "the first vowel is bare", "Each borrows another vowel's short sound: the a spells short e, and the e of pretty spells short i. Your y-sender page lists pretty with a short e."),
  ("walk", "al as a vowel unit", "The silent l joins the vowel, as in could. Small and always keep a sounded l, so their a is bare."),
  ("put, pull; was, want, what, wash, water, small, always; of, some, come, one, once, done, does, other; to, do, who, two, into, today, together", "the vowel is bare", "Rule 7, decided on 6 October, applied word by word. Each of these borrows another vowel's sound."),
  ("please, because, one, once, are, were, there, where, before", "a silent e in a cone, with no vault", "Rules 4 and 7 name give, have, come, some and done. Every other silent e that makes no vowel long is marked the same way."),
- ("what, when, which, why, where, white, who", "wh as a black unit with one circle", "As kn and wr are marked. Green is kept for sh, th and ch. In who the unit says /h/, and no mark shows that."),
- ("warm, work", "ar and or as r-controlled units", "After w, ar says the or sound and or says the er sound. No mark shows the change."),
+ ("what, when, which, why, where, white, who", "wh as a black unit with one circle", "As kn and wr are marked. Green is kept for sh, th and ch. In who the unit spells /h/, and no mark shows that."),
+ ("warm, work", "ar and or as r-controlled units", "After w, ar spells the or sound and or spells the er sound. No mark shows the change."),
 ]
 
 VOWEL_KINDS = {"s", "l", "b", "w", "t", "r", "le"}

@@ -33,7 +33,7 @@ CALLS = [
     ("six", "one circle under the x",
      "The x spells two sounds, k and then s. Rule 1 would give it two circles, as the o of one has two. No card shows an x yet."),
     ("thank, think, drink", "n and k as two consonants, with no mark for the ng sound of the n",
-     "As s saying z is unmarked. In sing, bring and long the ng spells one sound and keeps its unit, as in going."),
+     "As s spelling z is unmarked. In sing, bring and long the ng spells one sound and keeps its unit, as in going."),
     ("its", "a seam before the s", "Its is it + s, as gets is get + s. Without the seam, ts is a final cluster."),
     ("upon", "no seam, and the first vowel bare",
      "As away and today are marked on the K–2 cards, since up- no longer means up. The word sum cards would put a seam after up."),

@@ -15,7 +15,7 @@ NOUN_CODES = {
     "chair": "g.ch r.air",                                   # as hair
     "chicken": "g.ch s.i x.ck | b.e c.n ; bv 3>2",           # as pretty and seven
     "children": "g.ch s.i c.l | c.d + c.r b.e c.n",          # child + ren, with the break before d, as making
-    "Christmas": "k.Ch c.r s.i k.st + | c.m b.a c.s",        # Christ + mas; ch says k, and st says s, as in mustn't
+    "Christmas": "k.Ch c.r s.i k.st + | c.m b.a c.s",        # Christ + mas; ch spells k, and st spells s, as in mustn't
     "coat": "c.c t.oa c.t",                                  # as boat
     "corn": "c.c r.or c.n",                                  # as for
     "cow": "c.c t.ow",                                       # as how
@@ -58,14 +58,14 @@ NOUN_CODES = {
     "robin": "c.r s.o c.b | s.i c.n",                        # as lemon and napkin
     "Santa": "c.S s.a c.n | c.t b.a",                        # as under, with a bare final a
     "Claus": "c.Cl t.au c.s",                                # as because
-    "school": "c.s k.ch t.oo c.l",                           # ch says k
+    "school": "c.s k.ch t.oo c.l",                           # ch spells k
     "seed": "c.s t.ee c.d",                                  # as see
     "sheep": "g.sh t.ee c.p",                                # as sleep
     "shoe": "g.sh t.oe",                                     # as blue
     "sister": "c.s s.i c.s | c.t r.er",                      # as after
     "snow": "c.sn t.ow",                                     # as grow
     "song": "c.s s.o k.ng",                                  # as long
-    "squirrel": "c.s q.qu r.ir | c.r b.e c.l",              # qu on its black bar, q and u saying k and w; ir as in bird
+    "squirrel": "c.s q.qu r.ir | c.r b.e c.l",              # qu on its black bar, q and u spelling k and w; ir as in bird
     "stick": "c.st s.i k.ck",                                # as pick
     "street": "c.str t.ee c.t",                              # as stroll and green
     "thing": "g.th s.i k.ng",                                # as sing

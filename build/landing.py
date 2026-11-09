@@ -25,7 +25,7 @@ MORPH = [   # (word, word sum, caption)
     ("notate", "<i>not(e) + ate</i> &rarr; <i>notate</i>",
      "The <i>e</i> drops at the seam, and the <i>a</i> of <i>ate</i> takes over its job."),
     ("notation", "<i>notat(e) + ion</i> &rarr; <i>notation</i>",
-     "The <i>e</i> drops again. The <i>i</i> of <i>ion</i> takes over the vault, and says <i>sh</i> with the <i>t</i>, "
+     "The <i>e</i> drops again. The <i>i</i> of <i>ion</i> takes over the vault, and spells <i>sh</i> with the <i>t</i>, "
      "right across the seam."),
 ]
 
