@@ -35,6 +35,7 @@ PAGES = [
     ("progressions.html", "progressions", "Progressions", "The route through English spelling: the steps in their bands."),
     ("notations.html", "notations", "Notations", "The marks of Legomorphic Notation, each drawn alone on one word."),
     ("explorations.html", "explorations", "Explorations", "Words to take apart and build, starting with note, notate and notation."),
+    ("walk.html", "explorations", "Word walk", "Type a word and walk through it: reading from its letters, spelling from its sounds."),
     ("constructions.html", "constructions", "Constructions", "How sentences are built, and the flip from claim to question."),
     ("derivations.html", "derivations", "Derivations", "Where words come from, and the sources the roots will cite."),
     ("instructions.html", "instructions", "Instructions", "How to teach it: presentations and word cards."),
@@ -226,6 +227,7 @@ def write(OUT, page, header, footer, X):
     fam = "".join(f'<figure class="word" id="{word_id(w)}">{svg_of(w, 58, label=f"{w}, marked")}<figcaption><span class="ws">{s}</span><span class="t-only">{c}</span></figcaption></figure>'
                   for w, s, c in X["morph"])
     door_page("explorations", "Explorations · Sound and Word Atlas", "Words to take apart and build: families and contrasts.", f"""{door_head("explorations")}
+<section class="about"><div class="wrap"><div class="door-tiles"><a class="dtile walk-tile" href="walk.html"><b><span class="t-only">Word walk</span><span class="s-only">Pick a word</span></b><span class="t-only">Type a word and tap through it: reading from its letters, spelling from its sounds.</span></a></div></div></section>
 <section class="about" id="note-family" aria-labelledby="nf-h"><div class="wrap">
 <h2 id="nf-h">A family: <i>note</i>, <i>notate</i>, <i>notation</i></h2>
 <p class="sub t-only">Each word is built from the one before it. At each seam the <i>e</i> drops, and its job, making the <i>o</i> say its name, passes to the next vowel.</p>
@@ -285,6 +287,10 @@ def write(OUT, page, header, footer, X):
 {tiles(pick("explanations"))}
 {uc("next, pages of ideas: the primary terms from phone to sememe, grapheme two ways, why English spells the way it does, and what the name claims.")}
 </div></section>""")
+
+    # The word walk (walk.py), behind Explorations.
+    import walk
+    X["walk"] = walk.write(OUT, door_page, X)
 
     # Connections: the crosswalks (connections.py).
     import connections

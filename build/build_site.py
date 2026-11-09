@@ -446,7 +446,7 @@ list_words = {w for v in ELP_ALL["lists"].values() for w in v["words"]} | {w for
 X = dict(uc=uc, md=md, plain=plain, route_lead=ROUTE_LEAD, bands_html="".join(bands_html), key_html=key_html, svg_of=svg_of, LW=LW,
          draft_note=f"steps {DRAFT_FROM} to {N} are a first draft, and a few words show in plain letters until their marking is settled. Next: a second look at their order and their words.",
          morph=landing.MORPH, STEPS=STEPS, pages=PAGES, groups_of=groups_of, KEY=KEY, terms=definitions.terms(KEY), list_words=list_words,
-         elp=ELP_ALL, dolch=DOLCH_ALL)
+         elp=ELP_ALL, dolch=DOLCH_ALL, SC=SC, with_code=with_code)
 doors.write(OUT, page, header, footer, X)
 n_search = doors.write_search(OUT, X)
 
