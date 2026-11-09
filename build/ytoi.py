@@ -73,9 +73,9 @@ slide("A better question", f"""<h2 class="display small">Put the y back,<br>and 
 slide("happy and er", f"""<h2 class="head">{i("happy")} + {i("er")}</h2>
 <div class="build">
 <p class="type" data-s="1">happ<span class="hl">yer</span></p>
-<p class="body" data-s="2">Before a vowel, y reads as a consonant, as it does in {i("yes")} and {i("yellow")}. A reader says <b>hap&middot;pyer</b>.</p>
+<p class="body" data-s="2">Before a vowel, y reads as a consonant, as it does in {i("yes")} and {i("yellow")}. A reader says <b>happ&middot;yer</b>.</p>
 <div class="row" data-s="3">{word("happier", 210)}</div>
-<p class="body" data-s="3">With i, nothing reads as a consonant: <b>hap&middot;pi&middot;er</b>.</p>
+<p class="body" data-s="3">With i, nothing reads as a consonant: <b>happ&middot;i&middot;er</b>.</p>
 </div>""", steps=3)
 
 # 6 more before a vowel
@@ -95,7 +95,7 @@ slide("Before a consonant", f"""<h2 class="head">Before a consonant, too</h2>
 <tr data-s="1"><td>{i("happy")} + {i("ly")}</td><td class="mis">happ<span class="hl">y</span>ly</td><td>&rarr; {i("happily")}</td></tr>
 </table>
 <p class="body" data-s="2">Inside a word, a y between consonants invites the reading it has in {i("shyness")} and {i("dryly")}. The misreads aren&rsquo;t certain, but they&rsquo;re there to be made.</p>
-<p class="body" data-s="3">An i lets the sound shorten, as it does when we say these words: <b>hap&middot;pi&middot;ness</b>, <b>mer&middot;ri&middot;ment</b>.</p>
+<p class="body" data-s="3">An i lets the sound shorten, as it does when we say these words: <b>happ&middot;i&middot;ness</b>, <b>merr&middot;i&middot;ment</b>.</p>
 <div class="row" data-s="3">{word("happily", 130)}</div>""", steps=3)
 
 # 8 when y stays
