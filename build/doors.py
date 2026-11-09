@@ -38,6 +38,7 @@ PAGES = [
     ("walk.html", "explorations", "Word walk", "Type a word and walk through it: reading from its letters, spelling from its sounds."),
     ("constructions.html", "constructions", "Constructions", "How sentences are built, and the flip from claim to question."),
     ("derivations.html", "derivations", "Derivations", "Where words come from, and the sources the roots will cite."),
+    ("roots/leg.html", "derivations", "*leg-: to gather", "The first root family: Greek and Latin words for gathering, choosing, reading and saying."),
     ("instructions.html", "instructions", "Instructions", "How to teach it: presentations and word cards."),
     ("presentations.html", "instructions", "Presentations", "The staff series: each session's deck and its handouts."),
     ("cards.html", "instructions", "Word cards", "Printable cards: the ELP and Dolch words, and grade 3 word sums."),
@@ -263,14 +264,16 @@ def write(OUT, page, header, footer, X):
 </div></section>""")
 
     # Derivations: the plan for the roots, and what's here now.
+    import roots
+    X["roots"] = roots.write(OUT, page, header, footer, X)
     door_page("derivations", "Derivations · Sound and Word Atlas", "Where words come from, and the sources the roots will cite.", f"""{door_head("derivations")}
+<section class="about"><div class="wrap"><div class="door-tiles"><a class="dtile" href="roots/leg.html"><b>*leg-<span class="t-only">: to gather</span></b><span class="t-only">The first root family: <i>logic</i>, <i>collect</i>, <i>legend</i>, <i>lesson</i>, <i>loyal</i>, and the notation&rsquo;s own name.</span><span class="s-only">gather</span></a></div></div></section>
 <section class="about t-only" aria-labelledby="dv-h"><div class="wrap prose">
 <h2 id="dv-h">Roots, and the meanings of parts</h2>
 <p>A word can be read as it is used now, or traced back through time: <a href="definitions.html#study">synchronic and diachronic</a>, a snapshot and a time-lapse. This door is for the time-lapse. <i>Before</i> is an example: Old English <i>beforan</i>, from <i>be-</i> &lsquo;by&rsquo; and <i>foran</i> &lsquo;in front&rsquo;, and <i>for</i> and <i>fore</i> grow from the same root.</p>
 <p>The roots will follow Calvert Watkins&rsquo;s <i>American Heritage Dictionary of Indo-European Roots</i> (3rd ed., 2011), which is built root first and lists the English words from each root, with links to the <a href="https://lrc.la.utexas.edu/lex">Indo-European Lexicon</a> of the Linguistics Research Center at the University of Texas at Austin. Not every word has a known root. <i>Hop</i> and <i>hope</i> go back through Old English to early Germanic, and no further that anyone can show, and their pages will say so.</p>
 {uc("next, a root page for every root behind the route's words, each citing its source, and a plain meaning for every part of a word.")}
-</div></section>
-<section class="about s-only"><div class="wrap"><p class="s-soon">Where words come from is coming soon.</p></div></section>""")
+</div></section>""")
 
     # Instructions and Explanations: teachers' doors, leading to the pages that are already here.
     def tiles(items):
@@ -366,6 +369,8 @@ def write_search(OUT, X):
             add("word", w, f"cards/dolch-word-cards-nouns.pdf#page={2 * (nouns.index(w) // 10) + 2}", "Dolch noun, word cards", teacher=True)
     for w, *_ in X["morph"]:   # the family on Explorations
         if w not in where: add("word", w, f"explorations.html#{word_id(w)}", "Explorations")
+    for w, u in X.get("roots", []):   # the root families' words, behind Derivations
+        if w not in where: add("word", w, u, "Root family: *leg-")
     for st in X["STEPS"]:
         words = " ".join(w for g in X["groups_of"](st["words_md"]) for w in g)
         add("step", f"Step {st['n']}: {X['plain'](st['title'])}", f"steps/{st['n']:02d}.html", st["band"],
