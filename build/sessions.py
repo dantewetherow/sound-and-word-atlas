@@ -139,7 +139,8 @@ def make_files(fonts, OUT):
         subprocess.run([sys.executable, str(HERE / "make_offline_deck.py"), str(HERE / "sessions" / f"{f}.html"), str(fonts), str(offline)], check=True)
         s = offline.read_text(encoding="utf-8")
         assert s.count('href="../presentations.html"') == 1
-        offline.write_text(s.replace('href="../presentations.html"', f'href="{SITE}presentations.html"'), encoding="utf-8")
+        s = re.sub(r'href="\.\./([^"]+)"', lambda m: f'href="{SITE}{m.group(1)}"', s)
+        offline.write_text(s, encoding="utf-8")
         with sync_playwright() as p:
             b = p.chromium.launch()
             for n in d["previews"]:

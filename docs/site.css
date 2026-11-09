@@ -521,7 +521,8 @@ html[data-view="student"] .walk-stage svg { max-height: 52vh; }
 .rbranch ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 .rbranch li { display: grid; gap: 1px; scroll-margin: 96px 0; }
 .rbranch li:target { outline: 2px solid var(--modal); outline-offset: 4px; border-radius: 6px; }
-.rw { font-family: var(--display); font-size: 1.2rem; }
+.rw { font-family: var(--display); font-size: 1.2rem; color: var(--ink); text-decoration: underline dotted var(--soft); text-underline-offset: 5px; }
+.rw:hover { text-decoration-style: solid; }
 .rw b { color: var(--verb); font-weight: 600; }
 .rs { font-size: 0.85rem; color: var(--soft); }
 .rs b { color: var(--ink); font-weight: 500; }

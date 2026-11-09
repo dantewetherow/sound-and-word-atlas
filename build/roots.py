@@ -8,7 +8,13 @@ American Heritage Dictionary of Indo-European Roots (3rd ed., 2011), which this 
 
 Each word in a family gets an id (doors.word_id), and write() returns (word, link) for the search."""
 import html
+from urllib.parse import quote
 import doors
+
+def etym(word, slug):
+    """Where a family word's own history is: its Etymonline entry (by search, so the link holds), or for the notation's
+    own name, its entry in Definitions."""
+    return "../definitions.html#def-legomorphic" if word == "legomorphic" else f"https://www.etymonline.com/search?q={quote(word)}"
 
 LEG = {
     "slug": "leg", "root": "*leg-", "gloss": "to gather, to collect",
@@ -81,7 +87,7 @@ def write(OUT, page, header, footer, X):
             items = []
             for w, parts, sp, mean in words:
                 ws = " + ".join(f"<b>{html.escape(p)}</b>" if p == sp else html.escape(p) for p in parts) if parts else ""
-                items.append(f'<li id="{doors.word_id(w)}"><span class="rw">{bold_root(w, sp)}</span>'
+                items.append(f'<li id="{doors.word_id(w)}"><a class="rw" href="{etym(w, R["slug"])}">{bold_root(w, sp)}</a>'
                              + (f'<span class="rs">{ws}</span>' if ws else "") + f'<span class="rm">{mean}</span></li>')
                 found.append((w, f"roots/{R['slug']}.html#{doors.word_id(w)}"))
             cards.append(f'<section class="rbranch"><h3>{lang}</h3><p class="rh">{head}</p><ul>{"".join(items)}</ul></section>')
@@ -107,7 +113,7 @@ def write(OUT, page, header, footer, X):
 </div></section>
 <section class="about t-only" aria-labelledby="fam-h"><div class="wrap">
 <h2 id="fam-h">The family</h2>
-<p class="sub">Each word with its parts, where they can be shown, and what it means.</p>
+<p class="sub">Each word with its parts, where they can be shown, and what it means. Each word links to its history in Etymonline.</p>
 <div class="rbranches">{"".join(cards)}</div>
 </div></section>
 <section class="about t-only" aria-labelledby="src-h"><div class="wrap prose">

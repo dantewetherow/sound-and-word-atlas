@@ -16,6 +16,8 @@ import html, json, pathlib, re
 HERE = pathlib.Path(__file__).resolve().parent
 
 FRY_PUBLISHER = "https://www.teachercreated.com/company/partnerships/dr-edward-fry.php"
+FRY_COUNTED = "https://www.uen.org/earlylearning/word_lists.shtml"        # the copy the counts were made from
+UFLI_COPYRIGHT = "https://ufli.education.ufl.edu/copyright/"
 FRY_COUNTS = {"in_dolch": "86 or 87", "dolch_nouns": ["day", "time", "water", "way"], "neither": "about ten",
               "elp": "64 or 65", "elp_only": ["each", "other", "people"]}
 
@@ -48,7 +50,7 @@ def write(OUT, door_page, door_head, uc, X):
     fry = f"""<section class="about" id="fry" aria-labelledby="fry-h"><div class="wrap prose">
 <h2 id="fry-h">Fry&rsquo;s Instant Words</h2>
 <p>Edward Fry&rsquo;s first 100 Instant Words overlap Dolch&rsquo;s heavily: {F["in_dolch"]} of them are among Dolch&rsquo;s 220 sight words, four more are Dolch nouns (<i>{"</i>, <i>".join(F["dolch_nouns"][:-1])}</i> and <i>{F["dolch_nouns"][-1]}</i>), and {F["neither"]} are on neither of his lists. Of the 100, {F["elp"]} are on the ELP lists, among them the three ELP words Dolch doesn&rsquo;t have: <i>{F["elp_only"][0]}</i>, <i>{F["elp_only"][1]}</i> and <i>{F["elp_only"][2]}</i>.</p>
-<p>Fry&rsquo;s lists are still under copyright, so they aren&rsquo;t reproduced here and the site makes no Fry cards. Teacher Created Resources publishes them: <a href="{FRY_PUBLISHER}">Dr. Edward Fry</a>. Versions in circulation differ by a word or two, so some counts above are ranges.</p>
+<p>Fry&rsquo;s lists are still under copyright, so they aren&rsquo;t reproduced here and the site makes no Fry cards. Teacher Created Resources publishes them: <a href="{FRY_PUBLISHER}">Dr. Edward Fry</a>. The counts come from the first 100 as the <a href="{FRY_COUNTED}">Utah Education Network</a> prints them. Versions in circulation differ by a word or two, so some counts are ranges.</p>
 </div></section>"""
     door_page("connections", "Connections · Sound and Word Atlas", "How the route lines up with the word lists and programs schools already use.",
               f"""{door_head("connections")}
@@ -77,7 +79,7 @@ def write(OUT, door_page, door_head, uc, X):
 <p class="eyebrow t-only">Connections</p>
 <h1>The route and UFLI Foundations</h1>
 <p class="lead">Where each step of the route meets UFLI Foundations, by lesson number, so a school that runs UFLI can see where a step lands in its {D["of"]} lessons, and where the two orders part.</p>
-<p class="sub">{html.escape(D["made"])} UFLI&rsquo;s own scope and sequence, with its lesson names, is in the <a href="{D["link"]}">UFLI Foundations Toolbox</a>.</p>
+<p class="sub">{html.escape(D["made"])} UFLI asks that its materials be linked rather than copied (its <a href="{UFLI_COPYRIGHT}">copyright statement</a> says so), so its lesson names stay on its own site: its scope and sequence is in the <a href="{D["link"]}">UFLI Foundations Toolbox</a>.</p>
 </div></section>
 <section class="about" id="steps" aria-labelledby="cw-h"><div class="wrap">
 <h2 id="cw-h">Step by step</h2>

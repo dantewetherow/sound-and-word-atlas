@@ -139,7 +139,7 @@ slide("To take back", f"""<h2 class="head">To take back to class</h2>
 # 13 sources
 slide("Sources", f"""<h2 class="head">Sources</h2>
 <p class="body">Edward Carney, <i>A Survey of English Spelling</i> (Routledge, 1994): <i>-y</i> and <i>-ies</i> (<i>berry</i>, <i>berries</i>), p. 70; <i>carry</i>, <i>carried</i>, <i>carries</i>, p. 135; <i>i</i> before some endings (<i>happiness</i>), p. 136.</p>
-<p class="body">The words are marked in Legomorphic Notation; the marks are on the Notations page of the Sound and Word Atlas, and this is step 29 of its route.</p>
+<p class="body">The words are marked in Legomorphic Notation. The marks are on the Sound and Word Atlas&rsquo;s <a href="../notations.html">Notations</a> page, and this is <a href="../steps/29.html">step 29</a> of its route.</p>
 <p class="source">Shared under CC BY-NC-SA 4.0.</p>""", "mid")
 
 FONTS = """<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -175,6 +175,7 @@ body{background:var(--paper);color:var(--ink);font-family:var(--sans);overflow:h
 .q.np{font-size:48px;padding-left:30px;border-left:4px solid var(--modal);margin:0 0 34px}
 .q.end{font-size:38px;margin-top:40px;padding-top:28px;border-top:1.5px solid var(--line)}
 .source{font-size:22px;color:var(--soft);margin:auto 0 0}
+.body a{color:var(--modal);text-underline-offset:5px}
 .title .pair{display:flex;align-items:center;gap:26px;margin-top:56px}
 .op{font-family:var(--serif);font-size:56px;color:var(--soft)}
 .row{display:flex;align-items:flex-end;gap:30px;margin:18px 0}
