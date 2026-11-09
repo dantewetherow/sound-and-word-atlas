@@ -141,7 +141,7 @@ THEME_SWITCH = ('<div class="theme" role="group" aria-label="Page colours" hidde
                 '<button type="button" data-pick="light">Bright</button><button type="button" data-pick="dark">Night</button></div>')
 
 def header(depth):
-    """The brand, then search, the site map link and the two switches, then the seven doors (doors.py). The page's
+    """The brand, then search, the site map link and the two switches, then the doors (doors.py). The page's
     breadcrumb goes where <!--crumbs--> is, once every page is written (doors.finish)."""
     up = "../" * depth
     search, smap, view, menu, door_nav = doors.header_parts(up)
@@ -322,7 +322,7 @@ home_body = f"""{header(0)}
 <h2 id="about-h">What&rsquo;s here</h2>
 <div class="cols">
 <div><h3>The route</h3><p>{N} steps in {len(route["bands"])} bands, with {n_words} different words, {n_marked} of them marked, under <a href="progressions.html">Progressions</a>. Each step page has its words, the marks it brings in, and the pages in Carney&rsquo;s survey that back it.</p></div>
-<div><h3>To print and present</h3><p>Under <a href="instructions.html">Instructions</a>: printable cards for the ELP high-frequency words and all of Dolch&rsquo;s sight words, where the ELP words come from, and the first session of the staff series with its handouts.</p></div>
+<div><h3>To print and present</h3><p>Under <a href="instructions.html">Instructions</a>: printable cards for the ELP high-frequency words and all of Dolch&rsquo;s sight words, and the first session of the staff series with its handouts. <a href="connections.html">Connections</a> lines the route up with the ELP and Dolch lists and with UFLI Foundations.</p></div>
 <div><h3>The notation</h3><p><a href="notations.html">Notations</a> has the marks. Under <a href="explanations.html">Explanations</a>, About explains the notation and its name, Definitions has its words, and Credits names the writers it draws on.</p></div>
 </div>
 {uc(f"steps {DRAFT_FROM} to {N} are a first draft, and a few words show in plain letters until their marking is settled. Next: the first contrast, <i>hop</i> and <i>hope</i>, built in full, then the legend in full and the roots.")}
@@ -381,7 +381,8 @@ if ELP_FILE.exists() and all((OUT / "cards" / f).exists() for f, *_ in CARD_SETS
     # The Dolch sight word cards (build_dolch_cards.py), shown when all five PDFs are there.
     DOLCH = json.loads((HERE / "data" / "dolch.json").read_text(encoding="utf-8"))
     elp_words = {w for v in ELP["lists"].values() for w in v["words"]}
-    dolch_sets = [(f'dolch-word-cards-{l["key"]}.pdf', l) for l in DOLCH["levels"]]
+    dolch_sets = [(f'dolch-word-cards-{l["key"]}.pdf', l) for l in DOLCH["levels"]] \
+               + [("dolch-word-cards-nouns.pdf", {"name": "Nouns", "words": DOLCH["nouns"]})]   # his 95 nouns, since 8 November 2026
     dolch_html = ""
     if all((OUT / "cards" / f).exists() for f, _ in dolch_sets):
         dtiles = []
@@ -390,11 +391,11 @@ if ELP_FILE.exists() and all((OUT / "cards" / f).exists() for f, *_ in CARD_SETS
             kb = round((OUT / "cards" / f).stat().st_size / 1024)
             dtiles.append(f'<div><h3>{html.escape(l["name"])}</h3><p>{n} cards on {-(-n // 10)} sheets, {on} of them on the ELP lists.</p>'
                           f'<p><a href="cards/{f}" download>Download the PDF</a> ({kb} KB)</p></div>')
-        n_d = sum(len(l["words"]) for l in DOLCH["levels"])
+        n_d, n_n = sum(len(l["words"]) for l in DOLCH["levels"]), len(DOLCH["nouns"])
         dolch_html = f"""
 <section class="about" id="dolch" aria-labelledby="dolch-h"><div class="wrap">
 <h2 id="dolch-h">Dolch sight words</h2>
-<p class="sub">All {n_d} of E. W. Dolch&rsquo;s sight words (1936), one set for each of his levels, 10 to a page. Each card&rsquo;s tag names its level and the ELP list that teaches the word, if one does, so you can set aside the cards a class has already met. <a href="word-lists.html">Where the ELP words come from</a> shows how the two lists line up.</p>
+<p class="sub">All {n_d} of E. W. Dolch&rsquo;s sight words (1936), one set for each of his levels, and a sixth set for his {n_n} nouns, 10 to a page. Each card&rsquo;s tag names its level and the ELP list that teaches the word, if one does, so you can set aside the cards a class has already met. <a href="word-lists.html">Where the ELP words come from</a> shows how the two lists line up.</p>
 <div class="cols">{''.join(dtiles)}</div>
 </div></section>"""
     cards_body = f"""{header(0)}

@@ -456,3 +456,16 @@ html[data-view="student"] .pn .prev span::before { content: "\2190\00a0"; conten
 html[data-view="student"] .pn .next span::after { content: "\00a0\2192"; content: "\00a0\2192" / ""; }
 html[data-view="student"] .word.unmarked figcaption { display: none; }
 html[data-view="student"] .for-teachers ~ main { display: none; }
+
+/* crosswalks (connections.py): a step, what the route teaches, and the other program's numbers */
+table.cw-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; line-height: 1.45; }
+table.cw-table th, table.cw-table td { padding: 10px 12px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+table.cw-table thead th { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.03em; color: var(--soft); }
+table.cw-table tbody th { font-weight: 500; white-space: nowrap; }
+table.cw-table tr:last-child th, table.cw-table tr:last-child td { border-bottom: 0; }
+table.cw-table td:first-of-type { width: 46%; }
+.cw-t { margin: 0; }
+.cw-w, .cw-note { margin: 4px 0 0; color: var(--soft); font-size: 0.88rem; }
+.cw-table .nums { font-variant-numeric: tabular-nums; font-weight: 500; }
+.cw-table .nums.none { font-weight: 400; color: var(--soft); }
+@media (max-width: 560px) { table.cw-table th, table.cw-table td { padding: 8px; } table.cw-table td:first-of-type { width: auto; } }

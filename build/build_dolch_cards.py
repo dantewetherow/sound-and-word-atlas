@@ -1,4 +1,6 @@
-"""Sight word cards for all 220 of E. W. Dolch's words, in five sets: Pre-primer, Primer, First, Second and Third grade.
+"""Sight word cards for all 220 of E. W. Dolch's words, in five sets: Pre-primer, Primer, First, Second and Third grade,
+and since 8 November 2026 a sixth set for his 95 nouns, which he kept off his sight vocabulary. Santa Claus and good-bye are
+drawn as two marked words, as the actor cards draw them.
 
 The sheets work the way the ELP cards do (build_elp_cards.py): one PDF per set for double-sided printing, flipping on
 the long edge, with plain words on each odd page and the same words coded on the even page after it, each behind its
@@ -6,7 +8,7 @@ plain card. Every set is 10 cards to a page. Each card's tag names its Dolch lev
 ELP list that teaches it, so a teacher can see which cards a class has already met there.
 
 Codes come from the deck tools and legomorphic_words.py, then site_codes.py, then dolch_codes.py for the 43 words that
-had none. The words come from data/dolch.json.
+had none, then noun_codes.py for the nouns. The words come from data/dolch.json.
 
 Run:  python3 build/build_dolch_cards.py <node_modules with @fontsource-variable/lexend> docs/cards <work folder>
 """
@@ -17,12 +19,14 @@ import legomorphic_words as LW
 from known_codes import all_codes
 from site_codes import SITE_CODES
 from dolch_codes import DOLCH_CODES
+from noun_codes import NOUN_CODES
 from playwright.async_api import async_playwright
 
 FONTS, OUT, WORK = (pathlib.Path(a) for a in sys.argv[1:4])
 codes, _ = all_codes()
 for w, c in {**SITE_CODES, **DOLCH_CODES}.items(): codes.setdefault(w, c)
 codes["live"] = DOLCH_CODES["live"]            # Dolch lists live with the verbs: the live of "we live here"
+for w, c in NOUN_CODES.items(): codes.setdefault(w, c)
 LW.W.clear(); LW.W.update(codes)
 esc = html.escape
 DOLCH = json.loads((HERE / "data" / "dolch.json").read_text(encoding="utf-8"))
@@ -30,7 +34,10 @@ ELP = json.loads((HERE / "data" / "elp_hfw.json").read_text(encoding="utf-8"))
 ELP_LIST = {w: n for n, v in ELP["lists"].items() for w in v["words"]}
 
 # (file name, set title, level key in dolch.json, columns, rows, card width and height in inches)
-SETS = [(f"dolch-word-cards-{lv['key']}", lv["name"], lv["key"], 2, 5, 3.9, 2.0) for lv in DOLCH["levels"]]
+SETS = [(f"dolch-word-cards-{lv['key']}", lv["name"], lv["key"], 2, 5, 3.9, 2.0) for lv in DOLCH["levels"]] \
+     + [("dolch-word-cards-nouns", "Nouns", "nouns", 2, 5, 3.9, 2.0)]
+PAIRS = {"Santa Claus": ("Santa", "Claus")}        # two marked words, as on the actor cards
+HYPHENED = {"good-bye": ("good", "bye")}
 PAGE_W, PAGE_H = 8.5, 11.0
 PAD_X, PAD_TOP, PAD_BOTTOM = 0.20, 0.15, 0.25
 PLAIN_CAP = 1.10
@@ -41,6 +48,8 @@ FOOT = ("Print in colour, double-sided, flipping on the long edge; cut on the gr
         "Words from E. W. Dolch (1936). Tags name the word&rsquo;s ELP list, if it has one.")
 
 def cards_for(key):
+    if key == "nouns":
+        return [(w, "Dolch noun · " + (f"ELP list {ELP_LIST[w]}" if w in ELP_LIST else "not on the ELP lists")) for w in DOLCH["nouns"]]
     lv = next(l for l in DOLCH["levels"] if l["key"] == key)
     name = lv["name"][0].lower() + lv["name"][1:]
     return [(w, f"Dolch {name} · " + (f"ELP list {ELP_LIST[w]}" if w in ELP_LIST else "not on the ELP lists")) for w in lv["words"]]
@@ -68,8 +77,20 @@ html,body{margin:0;padding:0;background:#fff;color:var(--ink);font-family:"Lexen
 .foot p{margin:0 0 .03in;}
 """
 
+def drawn(word):
+    """(markup, width, height) at a letter size of 100: one word, two words side by side, or two joined by a hyphen."""
+    parts = PAIRS.get(word) or HYPHENED.get(word)
+    if not parts: return LW.svg_word(word, 100.0, 0.0, cls=False)
+    g1, w1, H = LW.svg_word(parts[0], 100.0, 0.0, cls=False)
+    g2, w2, _ = LW.svg_word(parts[1], 100.0, w1, cls=False)
+    hy = ""
+    if word in HYPHENED:                         # a hyphen in the gap the two words' margins leave, at the middle of an x
+        y = 1.44 * 100 - 28
+        hy = f'<line x1="{w1 - 12:.1f}" y1="{y:.1f}" x2="{w1 + 12:.1f}" y2="{y:.1f}" stroke="var(--ink)" stroke-width="7" stroke-linecap="round"/>'
+    return g1 + hy + g2, w1 + w2, H
+
 def coded(word, F):
-    g, w, H = LW.svg_word(word, 100.0, 0.0, cls=False)
+    g, w, H = drawn(word)
     return (f'<svg viewBox="0 0 {w:.1f} {H:.1f}" style="width:{w / 100 * F:.3f}in;height:{H / 100 * F:.3f}in" '
             f'role="img" aria-label="{esc(word)}, coded">{g}</svg>')
 
@@ -79,7 +100,7 @@ def sheet_pages(title, cards, cols, rows, cw, ch, F_plain, F_coded, sheet, n_she
     area = f"left:{PAD_X}in;right:{PAD_X}in;top:{PAD_TOP}in;bottom:{PAD_BOTTOM}in"
     def head(side):
         return (f'<div class="head" style="left:{x0}in;width:{gw}in;top:{y0 - .32:.2f}in">'
-                f'<span>Dolch sight words · {esc(title)}</span><span>Sheet {sheet} of {n_sheets} · {side}</span></div>')
+                f'<span>{"Dolch nouns" if title == "Nouns" else "Dolch sight words · " + esc(title)}</span><span>Sheet {sheet} of {n_sheets} · {side}</span></div>')
     front, back = [], []
     for i, card in enumerate(cards):
         r, c = divmod(i, cols)
@@ -90,10 +111,10 @@ def sheet_pages(title, cards, cols, rows, cw, ch, F_plain, F_coded, sheet, n_she
         word, label = card
         box = f'width:{cw}in;height:{ch}in'
         front.append(f'<div class="card" data-word="{esc(word)}" data-slot="{r},{c}" style="left:{xf:.3f}in;top:{y:.3f}in;{box}">'
-                     f'<div class="word" style="{area}"><span class="plain" style="font-size:{F_plain:.3f}in">{esc(word)}</span></div>'
+                     f'<div class="word" style="{area}"><span class="plain" style="font-size:{F_plain[word]:.3f}in">{esc(word)}</span></div>'
                      f'<div class="tag">{esc(label)}</div></div>')
         back.append(f'<div class="card" data-word="{esc(word)}" data-slot="{r},{cols - 1 - c}" style="left:{xb:.3f}in;top:{y:.3f}in;{box}">'
-                    f'<div class="word" style="{area}">{coded(word, F_coded)}</div>'
+                    f'<div class="word" style="{area}">{coded(word, F_coded[word])}</div>'
                     f'<div class="tag">{esc(label)}</div></div>')
     over = .15
     cuts = "".join(f'<div class="cut" style="left:{x0 + c * cw - .0035:.4f}in;top:{y0 - over}in;width:.007in;height:{gh + 2 * over}in"></div>' for c in range(cols + 1))
@@ -131,12 +152,15 @@ async def main():
             cards = cards_for(key)
             aw, ah = cw - 2 * PAD_X, ch - PAD_TOP - PAD_BOTTOM
             plain_w = await page.evaluate(MEASURE_JS, [w for w, _ in cards])
-            F_plain = min(PLAIN_CAP, ah / PLAIN_HEIGHT, aw / max(plain_w.values()))
-            F_coded = min(ah / LW.HEIGHT, aw / max(LW.svg_word(w, 1.0, 0, cls=False)[1] for w, _ in cards))
+            single = [w for w, _ in cards if w not in PAIRS and w not in HYPHENED]   # a two-word card shrinks alone
+            F_plain = min(PLAIN_CAP, ah / PLAIN_HEIGHT, aw / max(plain_w[w] for w in single))
+            F_coded = min(ah / LW.HEIGHT, aw / max(drawn(w)[1] / 100 for w in single))
+            fp = {w: min(F_plain, aw / plain_w[w]) for w, _ in cards}
+            fc = {w: min(F_coded, aw / (drawn(w)[1] / 100)) for w, _ in cards}
             per = cols * rows
             slots = cards + [None] * ((-len(cards)) % per)
             n_sheets = len(slots) // per
-            body = "".join(sheet_pages(title, slots[s * per:(s + 1) * per], cols, rows, cw, ch, F_plain, F_coded, s + 1, n_sheets) for s in range(n_sheets))
+            body = "".join(sheet_pages(title, slots[s * per:(s + 1) * per], cols, rows, cw, ch, fp, fc, s + 1, n_sheets) for s in range(n_sheets))
             f = WORK / f"{name}.html"
             f.write_text(f'<!doctype html><html lang="en-CA"><head><meta charset="utf-8"><title>{esc(name)}</title><style>{CSS}</style></head><body>{body}</body></html>', encoding="utf-8")
             await page.goto(f.as_uri()); await page.evaluate("document.fonts.ready")

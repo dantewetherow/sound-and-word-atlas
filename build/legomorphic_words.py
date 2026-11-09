@@ -13,6 +13,8 @@ THE CODE, unit by unit, left to right
             the u it never comes without, and tells a reader counting red letters that this u isn't the syllable's vowel;
             the two circles count its two sounds, as the route does (qu is k and w at step 4, as x is k and s). Where qu
             says k alone (antique, conquer) it is k.qu: the bar and one circle, the u silent, as in buy (8 November 2026)
+            The letter x (six, box) stays c.x, with one black circle, though it says k and s: ruled 8 November 2026, since x
+            isn't known to cause common reading or spelling errors. Sound-box guides count it as two sounds
     k.kn    a consonant unit: two letters, one sound (black bond bar, one circle); also a doubled spelling that nothing
             reaches toward (k.ll in will, k.ck in pick): the box waits for an ending. A vowel letter in the unit stays
             red, as the silent u of k.bu in buy does (8 November 2026)

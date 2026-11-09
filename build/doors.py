@@ -1,7 +1,8 @@
-"""The seven doors, the site's tree, breadcrumbs, search and the Teacher/Student view (8 November 2026).
+"""The eight doors, the site's tree, breadcrumbs, search and the Teacher/Student view (8 November 2026).
 
-The site plan (Sound and Word Atlas: site plan) names seven doors as one word family, each a doing turned into a thing
-with -ion: Progressions, Notations, Explorations, Constructions, Derivations, Instructions and Explanations. Today's
+The site plan (Sound and Word Atlas: site plan) names the doors as one word family, each a doing turned into a thing
+with -ion: Progressions, Notations, Explorations, Constructions, Derivations, Instructions and Explanations, and since
+8 November 2026 Connections, the crosswalks (connections.py). Today's
 pages sit behind them. PAGES is the one place that says which page sits behind which door: the header's doors, the
 breadcrumbs, the site map and the search's page records all come from it.
 
@@ -22,23 +23,26 @@ DOORS = [   # slug, name, word sum, in plain words, the short word in student vi
     ("explorations", "Explorations", "explor(e) + at(e) + ion + s", "Words to take apart and build: families and contrasts.", "Words"),
     ("constructions", "Constructions", "construct + ion + s", "How sentences are built: actors, operators and actions, and the flip from claim to question.", "Sentences"),
     ("derivations", "Derivations", "deriv(e) + at(e) + ion + s", "Where words come from: roots, and what the parts of words mean.", "Roots"),
-    ("instructions", "Instructions", "instruct + ion + s", "How to teach it: presentations, word cards and word lists.", None),
+    ("instructions", "Instructions", "instruct + ion + s", "How to teach it: presentations and word cards.", None),
+    ("connections", "Connections", "connect + ion + s", "How the route lines up with the word lists and programs schools already use.", None),
     ("explanations", "Explanations", "expla(i)n + at(e) + ion + s", "Why it works: definitions, the notation and its name, and credits.", None),
 ]
 DOOR = {d[0]: d for d in DOORS}
 
 # The tree: (path, door, title, one-line summary). Steps join it in tree(). A page behind a teachers' door is for teachers.
 PAGES = [
-    ("index.html", None, "Home", "Legomorphic Notation and the seven doors into the atlas."),
+    ("index.html", None, "Home", "Legomorphic Notation and the doors into the atlas."),
     ("progressions.html", "progressions", "Progressions", "The route through English spelling: the steps in their bands."),
     ("notations.html", "notations", "Notations", "The marks of Legomorphic Notation, each drawn alone on one word."),
     ("explorations.html", "explorations", "Explorations", "Words to take apart and build, starting with note, notate and notation."),
     ("constructions.html", "constructions", "Constructions", "How sentences are built, and the flip from claim to question."),
     ("derivations.html", "derivations", "Derivations", "Where words come from, and the sources the roots will cite."),
-    ("instructions.html", "instructions", "Instructions", "How to teach it: presentations, word cards and word lists."),
+    ("instructions.html", "instructions", "Instructions", "How to teach it: presentations and word cards."),
     ("presentations.html", "instructions", "Presentations", "The staff series: each session's deck and its handouts."),
     ("cards.html", "instructions", "Word cards", "Printable cards: the ELP and Dolch words, and grade 3 word sums."),
-    ("word-lists.html", "instructions", "Word lists", "Where the ELP words come from in Dolch's lists."),
+    ("connections.html", "connections", "Connections", "How the route lines up with the word lists and programs schools already use."),
+    ("word-lists.html", "connections", "ELP and Dolch", "Where the ELP words come from in Dolch's lists."),
+    ("ufli.html", "connections", "UFLI Foundations", "Where each step of the route meets UFLI's lessons, by lesson number."),
     ("explanations.html", "explanations", "Explanations", "Why it works: definitions, the notation and its name, and credits."),
     ("definitions.html", "explanations", "Definitions", "What the notation's words mean, and where they come from."),
     ("about.html", "explanations", "About the notation", "The notation, its name, and how it came about."),
@@ -46,6 +50,7 @@ PAGES = [
     ("sitemap.html", None, "Site map", "Every page, door by door."),
 ]
 TEACHERS = {s for s, *_, w in DOORS if w is None}
+NUMBER = {7: "Seven", 8: "Eight", 9: "Nine", 10: "Ten"}
 
 
 def tree(STEPS, plain):
@@ -176,7 +181,7 @@ def door_head(slug, extra=""):
     student = f'<h1 class="s-only">{sw}</h1>' if sw else ""
     board = '<p class="board t-only"><a href="?view=student">Open this page in student view</a>, for the board.</p>' if sw else ""
     return (f'<section class="hero door-hero"><div class="wrap">'
-            f'<p class="eyebrow t-only">One of seven doors</p>'
+            f'<p class="eyebrow t-only">One of {NUMBER[len(DOORS)].lower()} doors</p>'
             f'<h1 class="t-only">{name}</h1>{student}'
             f'<p class="sum t-only" aria-label="Word sum: {html.escape(ws)} makes {word}s"><span>{html.escape(ws)}</span> &rarr; <i>{word}s</i></p>'
             f'<p class="lead t-only">{plain_words}</p>{extra}{board}'
@@ -184,7 +189,7 @@ def door_head(slug, extra=""):
 
 
 def write(OUT, page, header, footer, X):
-    """The seven door pages and the site map. X carries what they need from build_site: the route, the legend, the
+    """The door pages and the site map. X carries what they need from build_site: the route, the legend, the
     drawing tools and the helpers."""
     uc, md = X["uc"], X["md"]
 
@@ -281,6 +286,10 @@ def write(OUT, page, header, footer, X):
 {uc("next, pages of ideas: the primary terms from phone to sememe, grapheme two ways, why English spells the way it does, and what the name claims.")}
 </div></section>""")
 
+    # Connections: the crosswalks (connections.py).
+    import connections
+    connections.write(OUT, door_page, door_head, uc, X)
+
     # The site map: the tree, written out.
     items = []
     for slug, name, _, plain_words, sw in DOORS:
@@ -307,7 +316,7 @@ def doors_section():
         out.append(f'<a class="door-tile{" t-only" if sw is None else ""}" href="{slug}.html"><span class="dn">{name}</span>'
                    f'{f"<span class=sn>{sw}</span>" if sw else ""}<span class="pw t-only">{plain_words}</span></a>')
     return f"""<section class="doors-home" id="doors-home" aria-labelledby="doors-h"><div class="wrap">
-<h2 id="doors-h"><span class="t-only">Seven doors in</span><span class="s-only">Pick a door</span></h2>
+<h2 id="doors-h"><span class="t-only">{NUMBER[len(DOORS)]} doors in</span><span class="s-only">Pick a door</span></h2>
 <p class="sub t-only">Each door is a ramp: its first page asks the least, and each step in asks a little more. The names are one word family, so the way in teaches the ending they share: <i>progress + ion</i>, <i>not(e) + at(e) + ion</i>, <i>construct + ion</i>.</p>
 <div class="door-grid">{"".join(out)}</div>
 </div></section>"""
@@ -334,21 +343,21 @@ def write_search(OUT, X):
     for w, ns in sorted(where.items()):
         add("word", w, f"steps/{ns[0]:02d}.html#{word_id(w)}", "Step " + ", ".join(str(n) for n in ns[:3]) + ("…" if len(ns) > 3 else ""))
     # Words on the lists but not the route land on their place in the word lists' table, which holds every ELP word and
-    # Dolch's 220, or, for Dolch's nouns, on their page of the actor cards: six cards a page after the list page, the
-    # pronouns first (build_role_cards.py)
+    # Dolch's 220, or, for Dolch's nouns, on the coded side of their card in the noun set: ten cards a sheet, each sheet a
+    # plain page and then its coded page (build_dolch_cards.py)
     elp_of, dolch_of = {}, {w: "Dolch " + l["name"].lower() for l in X["dolch"]["levels"] for w in l["words"]}
     for n, L in X["elp"]["lists"].items():
         for w in L["words"]: elp_of.setdefault(w, f"ELP list {n}")
-    actors = "I me you he him she her we us they them it".split() + X["dolch"]["nouns"]
+    nouns = X["dolch"]["nouns"]
     from pypdf import PdfReader
-    cards = OUT / "sessions" / "handouts" / "actor-cards.pdf"
-    assert len(PdfReader(str(cards)).pages) == 1 + -(-len(actors) // 6), "the actor cards' pages have changed"
+    cards = OUT / "cards" / "dolch-word-cards-nouns.pdf"
+    assert len(PdfReader(str(cards)).pages) == 2 * -(-len(nouns) // 10), "the noun cards' pages have changed"
     for w in sorted(X["list_words"]):
         if w in where: continue
         if w in elp_of or w in dolch_of:
             add("word", w, f"word-lists.html#{word_id(w)}", ", ".join(x for x in (elp_of.get(w), dolch_of.get(w)) if x), teacher=True)
         else:
-            add("word", w, f"sessions/handouts/actor-cards.pdf#page={2 + actors.index(w) // 6}", "Dolch noun, actor cards", teacher=True)
+            add("word", w, f"cards/dolch-word-cards-nouns.pdf#page={2 * (nouns.index(w) // 10) + 2}", "Dolch noun, word cards", teacher=True)
     for w, *_ in X["morph"]:   # the family on Explorations
         if w not in where: add("word", w, f"explorations.html#{word_id(w)}", "Explorations")
     for st in X["STEPS"]:
