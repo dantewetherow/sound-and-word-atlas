@@ -532,6 +532,46 @@ html[data-view="student"] .walk-stage svg { max-height: 52vh; }
 .rkids b { color: var(--verb); }
 .rrow { margin-top: 12px; justify-content: flex-start; }
 .rrow .word figcaption { font-size: 0.85rem; }
+/* a family clustered by spelling (roots.py): the roads in, the drill-down, the parts */
+.roads-wrap { overflow-x: auto; }
+.roads { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 0.95rem; }
+.roads th, .roads td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.roads th { font-weight: 500; color: var(--soft); font-size: 0.85rem; }
+.rchips { display: flex; flex-wrap: wrap; gap: 6px; }
+.cchips { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 14px; }
+.cchip { display: inline-grid; justify-items: start; padding: 5px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--card); color: var(--ink); text-decoration: none; line-height: 1.25; }
+.cchip b { font-family: var(--display); font-weight: 600; color: var(--verb); }
+.cchip span { font-size: 0.75rem; color: var(--soft); }
+.cchip:hover { border-color: var(--soft); }
+.cchip.on { border-color: var(--verb); box-shadow: inset 0 0 0 1px var(--verb); }
+.cpanel { padding: 16px 18px 8px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; margin-bottom: 14px; scroll-margin: 96px 0; }
+.cx-on .cpanel { display: none; }
+.cx-on .cpanel.on { display: block; }
+.cpanel h3 { margin: 0; }
+.cpanel h3 b { color: var(--verb); }
+.cpanel .rh { margin: 4px 0 6px; color: var(--soft); font-size: 0.92rem; }
+.cnote { margin: 0 0 6px; font-size: 0.92rem; }
+.cgroup { display: grid; gap: 10px; padding: 12px 0; border-top: 1px solid var(--line); }
+.wsum { display: grid; gap: 2px; scroll-margin: 96px 0; }
+.wsum.hit, .wsum:target { outline: 2px solid var(--modal); outline-offset: 4px; border-radius: 6px; }
+.sum { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 2px; font-size: 1rem; }
+.sum .pl, .sum .to { color: var(--soft); white-space: pre; }
+.part { font: inherit; color: var(--ink); background: none; border: 0; padding: 1px 4px; margin: 0; border-radius: 6px; cursor: pointer; text-decoration: underline dotted var(--soft); text-underline-offset: 4px; }
+.part.root { color: var(--verb); font-weight: 600; }
+.part:hover { background: color-mix(in srgb, var(--modal) 12%, transparent); }
+.part.sel { background: color-mix(in srgb, var(--modal) 22%, transparent); text-decoration: none; }
+.part:focus-visible { outline: 2px solid var(--modal); outline-offset: 1px; }
+.sum .rw { margin-left: 2px; }
+.pcard { margin: 2px 0 6px; padding: 10px 14px; border-left: 3px solid var(--modal); background: var(--paper); border-radius: 8px; font-size: 0.92rem; }
+.pcard p { margin: 0; }
+.pcard .pin, .pgloss .pin { color: var(--soft); }
+.pcard a { color: var(--modal); }
+.pgcols { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px 24px; margin-top: 8px; }
+.pgcol h3 { margin: 0 0 6px; }
+.pgloss { margin: 0; display: grid; gap: 8px; }
+.pg { display: grid; gap: 1px; }
+.pg dt { font-family: var(--display); font-weight: 600; }
+.pg dd { margin: 0; font-size: 0.9rem; }
 .walk-h { margin: 0 0 4px; }
 .walk .wrap > .sub { margin: 0 0 14px; }
 main > .walk { padding-block: 28px 8px; }
