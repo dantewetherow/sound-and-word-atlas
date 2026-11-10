@@ -34,7 +34,7 @@ def etym(word, slug):
 # ------------------------------------------------------------------ *leg-
 # The roads in: (from, its meaning, [(cluster key, the spellings it gave)])
 ROADS = [
-    ("Latin <i>legere</i>", "to gather, to choose, to read", [("leg", "leg"), ("lect", "lect"), ("lig", "lig"), ("french", "les, lite")]),
+    ("Latin <i>legere</i>", "to gather, to choose, to read", [("leg", "leg"), ("lect", "lect"), ("lig", "lig"), ("french", "les, lite"), ("lego", "lego")]),
     ("Latin <i>l&emacr;g&amacr;re</i>", "to send with a charge", [("leg", "leg"), ("lege", "lege, league")]),
     ("Latin <i>l&emacr;x</i>, <i>l&emacr;gis</i>", "law; its link to the root is uncertain", [("leg", "leg"), ("legis", "legis"), ("lege", "lege"), ("french", "loy")]),
     ("Greek <i>legein</i>, <i>logos</i>, <i>lexis</i>", "to say, to gather; a word", [("log", "log"), ("logue", "logue"), ("lex", "lex"), ("lect", "lect"), ("lego", "lego")]),
@@ -137,10 +137,14 @@ CLUSTERS = [
          [("lexicon", ["lex", "-ic", "-on"], "the words of a language"), ("lexical", ["lex", "-ic", "-al"], "to do with words"),
           ("dyslexia", ["dys-", "lex", "-ia"], "a lasting difficulty with reading and spelling words")],
      ]},
-    {"key": "lego", "label": "lego", "spells": ["lego"], "head": "I gather, I say",
-     "road": "Greek <i>leg&omacr;</i>, the verb itself",
+    {"key": "lego", "label": "lego", "spells": ["leg"], "head": "I gather",
+     "road": "Greek <i>l&eacute;g&omacr;</i> and Latin <i>leg&omacr;</i>, the verb itself, which both languages inherited from "
+             "the root: in Greek, I gather, I count, I say; in Latin, I gather, I choose, I read",
+     "note": "The <i>&omacr;</i> is the ending for I in both languages, so <i>lego</i> is leg + o, gather + I, as Latin "
+             "<i>veto</i> is I forbid and <i>credo</i> I believe.",
      "groups": [
-         [("legomorphic", ["lego", "morph", "-ic"], "this notation&rsquo;s name: <i>leg&omacr;</i>, I gather, I say, and <i>morph</i>, form")],
+         [("legomorphic", ["leg", "-o", "morph", "-ic"], "this notation&rsquo;s name: <i>leg&omacr;</i>, I gather, in Greek "
+           "and Latin alike, and <i>morph</i>, form")],
      ]},
 ]
 
@@ -189,6 +193,7 @@ PARTS = {
     "-ize": "make, do",
     "-ia": "a condition (Greek)",
     "-on": "a Greek ending: <i>lexikon</i>, a word book",
+    "-o": "I: the ending of the verb&rsquo;s I form in Greek and Latin alike (<i>l&eacute;g&omacr;</i>, <i>leg&omacr;</i>), as in Latin <i>veto</i>, I forbid",
     # other roots
     "lat": "carried: Latin <i>l&amacr;tus</i>, another root. A <i>l&emacr;gis l&amacr;tor</i> carried a law forward",
     "antho": "flower (Greek <i>anthos</i>)",
@@ -201,7 +206,8 @@ PARTS = {
     "morph": "form (Greek <i>morph&emacr;</i>)",
 }
 ROOT_PARTS = {
-    "leg": "gather, read; send; or law: Latin <i>legere</i>, <i>l&emacr;g&amacr;re</i> or <i>l&emacr;x</i>",
+    "leg": "gather, read; send; or law: Latin <i>legere</i>, <i>l&emacr;g&amacr;re</i> or <i>l&emacr;x</i>; in "
+           "<i>legomorphic</i>, Greek and Latin <i>leg&omacr;</i>, I gather",
     "lect": "gathered, chosen, read: Latin <i>lectus</i>, the past form of <i>legere</i>",
     "lig": "choose, gather: Latin <i>-ligere</i>, <i>legere</i> after a prefix",
     "legis": "of law: Latin <i>l&emacr;gis</i>",
@@ -211,7 +217,6 @@ ROOT_PARTS = {
     "log": "word, reason, account: Greek <i>logos</i>",
     "logue": "word, talk: Greek <i>logos</i>",
     "lex": "word, speech: Greek <i>lexis</i>",
-    "lego": "I gather, I say: Greek <i>leg&omacr;</i>",
 }
 
 LEG = {
@@ -220,14 +225,17 @@ LEG = {
     "lead": "To gather, to collect. Speakers of Greek and Latin carried this Proto-Indo-European root into words about "
             "words: gathering words is choosing them, reading them and saying them. English borrowed the family back again "
             "and again, and the notation&rsquo;s own name is one of them.",
-    "drawn": ("legomorphic", "legomorphic, marked: lego + morph + ic"),
+    "drawn": ("legomorphic", "legomorphic, marked: leg + o + morph + ic"),
     "sources": [("Etymonline, *leg-", "https://www.etymonline.com/word/%2Aleg-"),
                 ("Indo-European Lexicon, leg̑- (Linguistics Research Center, University of Texas at Austin), with Latin&rsquo;s "
                  "prefixed forms of <i>legere</i>", "https://lrc.la.utexas.edu/lex/master/1131"),
                 ("Etymonline, <i>eligible</i>: Latin <i>eligere</i>, <i>ex</i> + <i>legere</i>", "https://www.etymonline.com/word/eligible"),
                 ("Etymonline, <i>intelligible</i>: Latin <i>intellegere</i>, <i>inter</i> + <i>legere</i>", "https://www.etymonline.com/word/intelligible"),
                 ("Etymonline, <i>elegant</i>: a form of <i>eligere</i>&rsquo;s present participle", "https://www.etymonline.com/word/elegant"),
-                ("Wiktionary, Proto-Indo-European *leǵ-", "https://en.wiktionary.org/wiki/Reconstruction:Proto-Indo-European/le%C7%B5-")],
+                ("Wiktionary, Proto-Indo-European *leǵ-", "https://en.wiktionary.org/wiki/Reconstruction:Proto-Indo-European/le%C7%B5-"),
+                ("Wiktionary, Ancient Greek <i>λέγω</i>: gather, choose, count, say; its I form", "https://en.wiktionary.org/wiki/%CE%BB%CE%AD%CE%B3%CF%89"),
+                ("Wiktionary, Latin <i>leg&omacr;</i>: choose, gather, read; its I form", "https://en.wiktionary.org/wiki/lego#Latin"),
+                ("Etymonline, <i>veto</i>: Latin, I forbid", "https://www.etymonline.com/word/veto")],
     "roads": ROADS, "clusters": CLUSTERS, "parts": PARTS, "root_parts": ROOT_PARTS,
     "students": ["collect", "select", "elect", "lesson", "legend", "logic", "dialogue"],
     "s_lead": "These words come from one old word that meant <i>gather</i>.",

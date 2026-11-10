@@ -15,7 +15,7 @@ LEGO_STEPS = [   # (layers it brings in, caption)
     ("4", "Bars where letters spell a single sound: <i>or</i> and <i>ph</i>."),
     ("5", "Then the letters."),
     ("6", "A cup over a short vowel, a bar over a long one."),
-    ("9", "Seams where the parts join: <i>lego + morph + ic</i>. The <i>o</i> ends its part, so it spells its name, as in <i>go</i>."),
+    ("9", "Seams where the parts join: <i>leg + o + morph + ic</i>. The <i>o</i> is a part of its own, meaning &ldquo;I,&rdquo; so it spells its name, as in <i>go</i>."),
 ]
 STEP = 1.6          # seconds between steps
 START = 0.4
@@ -55,7 +55,7 @@ def css():
 
 
 def html_block(LW):
-    lego, _ = svg(LW, "legomorphic", 80, label="legomorphic, marked in full: lego + morph + ic")
+    lego, _ = svg(LW, "legomorphic", 80, label="legomorphic, marked in full: leg + o + morph + ic")
     widths = [LW.svg_word(w, 80, 0.0, cls=False)[1] for w, _, _ in MORPH]
     W = max(widths)
     words = "".join(svg(LW, w, 80, width=W, label=f"{w}, marked", klass=f"w{i + 1}")[0] for i, (w, _, _) in enumerate(MORPH))

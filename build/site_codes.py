@@ -73,7 +73,7 @@ SITE_CODES = {
     "photo": "k.ph l.o | c.t l.o ; vault 3>1", "phone": "k.ph l.o c.n e>", "graph": "c.gr s.a k.ph",
     "alphabet": "s.a c.l | k.ph b.a | c.b s.e c.t",
     # the landing page: the notation's own name, and note to notation (as making and photo; creation as the create family deck)
-    "legomorphic": "c.l s.e c.g | l.o + | c.m r.or | k.ph + s.i c.c",
+    "legomorphic": "c.l s.e c.g + | l.o + | c.m r.or | k.ph + s.i c.c",   # leg + o + morph + ic since 10 November 2026
     "note": "c.n l.o c.t e>",                                    # as the sentence cards mark it
     "notate": "c.n l.o | c.t + l.a c.t e> ; vault 3>1",
     "notation": "c.n l.o | c.t + l.a | g.ti b.o c.n ; vault 3>1 ; vault 4>3 ; seam 4",
@@ -108,9 +108,11 @@ CALLS = [
     ("wrong", "a short mark over o, and ng as a black unit", "As going's ng."),
     ("climb", "a long mark and no vault before mb", "As find and kind."),
     ("photo", "a vault from the second o to the first", "As pony."),
-    ("legomorphic", "seams after lego and after morph, a short e, and a long o with no vault",
-     "The o is long because it ends its morpheme, as in go and going, so nothing after the seam sends it a vault. "
-     "The seam between lego and morph joins two Greek roots, which is still open for telephone and photograph. "
+    ("legomorphic", "seams after leg, after o and after morph, a short e, and a long o with no vault",
+     "Seam after leg added 10 November 2026, at Dante's question. The o is the verb's ending for I, in Greek and Latin "
+     "alike (leg-o, gather-I), so it is a morpheme of its own; read instead as the linking o of biology, it still sits "
+     "between seams. It is long because it ends its morpheme, as in go and going, so nothing after the seam sends it a "
+     "vault. The seam between o and morph joins two Greek parts, which is still open for telephone and photograph. "
      "The e is short, as in Lego, so leg closes its syllable, as lem does in lemon."),
     ("notate", "note + ate: the e drops, and the a of ate sends a vault back to the o", "As making and photo."),
     ("notation", "notate + ion: ti as a green unit across a seam, the t black and the i red, with the vault sent from the i",
