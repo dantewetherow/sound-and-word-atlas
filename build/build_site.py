@@ -20,7 +20,7 @@ codes, _ = all_codes()
 for w, c in SC.SITE_CODES.items(): codes.setdefault(w, c)
 LW.W.clear(); LW.W.update(codes)
 STEPS = route["steps"]; N = len(STEPS)
-BUILT = "8 November 2026"
+BUILT = "9 November 2026"
 # The fonts come from the site itself (fonts/fonts.css, copied from build/fonts), so a page asks nothing of anyone but
 # its host. Until 8 November 2026 they came from Google Fonts.
 def FONTS(up=""): return f'<link rel="stylesheet" href="{up}fonts/fonts.css">'

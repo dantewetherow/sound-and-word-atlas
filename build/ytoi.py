@@ -120,7 +120,7 @@ slide("In the notation", f"""<h2 class="head">In the notation</h2>
 <li data-s="3">A cup over the short a, and nothing over the y or the i: both are bare, unstressed, with the same sound.</li>
 <li data-s="4">The syllables: {i("happy")} has two, {i("happier")} three.</li>
 <li data-s="5">The box around {i("pp")} stops the reach of the y, and of the i, so the a stays short.</li>
-<li data-s="6">The seam falls after the i: {i("happi")} + {i("er")}. The letter changes; its job doesn&rsquo;t.</li>
+<li data-s="6">The seams: {i("hap")} meets the y in {i("happ")} + {i("y")}, and the i takes the y&rsquo;s place in {i("happ")} + {i("i")} + {i("er")}. The letter changes; its job doesn&rsquo;t.</li>
 </ol>""", steps=6)
 
 # 11 try these

@@ -74,7 +74,10 @@ def write(OUT, door_page, X):
         for g in X["groups_of"](st["words_md"]):
             for w in g:
                 where.setdefault(w, []).append({"t": f"Step {st['n']}", "u": f"steps/{st['n']:02d}.html#{doors.word_id(w)}"})
-    words = set(where) | set(X["list_words"]) | {w for w, *_ in X["morph"]} | {"legomorphic"}
+    fam = {}
+    for w, u, label in X.get("roots", []):   # the families behind Derivations, for their words that are drawn
+        fam.setdefault(w, []).append({"t": label, "u": u})
+    words = set(where) | set(X["list_words"]) | {w for w, *_ in X["morph"]} | {"legomorphic"} | {w for w in fam if w in LW.W}
     elp = {w for L in X["elp"]["lists"].values() for w in L["words"]}
     d220 = {w for l in X["dolch"]["levels"] for w in l["words"]}
     nouns = X["dolch"]["nouns"]
@@ -104,6 +107,7 @@ def write(OUT, door_page, X):
         if w in elp or w in d220: links.append({"t": "Word lists", "u": f"word-lists.html#{doors.word_id(w)}", "x": 1})
         if w in nouns: links.append({"t": "Noun cards", "u": f"cards/dolch-word-cards-nouns.pdf#page={2 * (nouns.index(w) // 10) + 2}", "x": 1})
         if w in {m for m, *_ in X["morph"]}: links.append({"t": "Explorations", "u": f"explorations.html#{doors.word_id(w)}"})
+        links += fam.get(w, [])
         wid = doors.word_id(w)
         (OUT / "walk" / f"{wid}.json").write_text(json.dumps({"w": w, "forms": out, "where": links}, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
         index.append([w, wid])

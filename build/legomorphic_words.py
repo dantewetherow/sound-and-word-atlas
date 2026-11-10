@@ -148,7 +148,7 @@ CHOICES = [
  ("every", "ev, er, y in three syllables", "Said carefully. In running speech the middle syllable is often dropped."),
  ("carry", "the a is bare", "Most Canadians say this a like the e of very, so it borrows, as in any and many. Said with the a of cat, it takes a cup."),
  ("was, is, has, does, goes, these, those, use, please, because, always; of", "s spelling /z/ and f spelling /v/ are unmarked", "The notation has no mark for a consonant letter borrowing another's sound."),
- ("funny", "a seam after the doubled n", "Fun + y is a live join, and your y-sender page puts the seam after the doubled letters. Pretty, carry and better get a box and no seam, as inherited doubles do on your medial-double page."),
+ ("funny", "a seam after the doubled n", "Fun + y is a live join, and your y-sender page puts the seam after the doubled letters. Pretty, carry and better get a box and no seam, as inherited doubles do on your medial-double page. Happy takes the seam, ruled 9 November 2026: hap is no longer said alone, but happen, hapless and mishap show the join."),
  ("little, yellow, better, pretty, funny, carry", "the doubled letters stay in the first syllable", "As chick|en and ball|oon on the cards. Your medial-double page writes rab·bit, which splits the pair."),
  ("never, seven, every, very", "a short mark, with no vault and no box", "A single consonant stands before the next vowel and the first vowel is still short, as your medial-v page describes. Nothing in the marks explains it."),
  ("from", "the o is bare", "Most Canadian speakers say it with the short u sound, so it borrows. Said with a short o, it would take a cup."),

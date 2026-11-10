@@ -1,4 +1,5 @@
-"""Marking codes for route words that had none in the deck tools, written for the site on 5 November 2026.
+"""Marking codes for route words that had none in the deck tools, written for the site on 5 November 2026, and for
+the hap family's page (roots/hap.html), added 9 November 2026.
 
 Same code as legomorphic_words.py (see its docstring). Each line follows a word the tools already mark:
 the analog is named in the comment. Words in UNMARKED are shown in plain letters until a marking is settled.
@@ -32,7 +33,7 @@ SITE_CODES = {
     "doing": "c.d b.o + | s.i k.ng", "being": "c.b l.e + | s.i k.ng", "played": "c.pl t.ay + e0 c.d",
     # step 14: the box (as funny, pretty; a cluster box as the manual's helped)
     "help": "c.h s.e c.lp", "helped": "c.h s.e c.lp + e0 c.d ; box 2 ; bv 3>2",
-    "sun": "c.s s.u c.n", "sunny": "c.s s.u x.nn + | b.y ; bv 3>2", "happy": "c.h s.a x.pp | b.y ; bv 3>2",
+    "sun": "c.s s.u c.n", "sunny": "c.s s.u x.nn + | b.y ; bv 3>2", "happy": "c.h s.a x.pp + | b.y ; bv 3>2",   # hap + y, as sunny
     # step 15: the e drops, its jobs move (as hoping, giving, jazy)
     "making": "c.m l.a | c.k + s.i k.ng ; vault 3>1", "having": "c.h s.a c.v + | s.i k.ng",
     "race": "c.r l.a c.c e> ; nudge 3>2", "racing": "c.r l.a | c.c + s.i k.ng ; vault 3>1 ; nudge 3>2",
@@ -61,11 +62,11 @@ SITE_CODES = {
     "hair": "c.h r.air", "hear": "c.h r.ear", "more": "c.m r.or e0", "care": "c.c r.ar e0",
     # step 29: -y, -ly and y turns to i (as going's seam, funny, goes)
     "sadly": "c.s s.a c.d + | c.l b.y", "slowly": "c.sl t.ow + | c.l b.y",
-    "happily": "c.h s.a x.pp | b.i + | c.l b.y ; bv 3>2", "happier": "c.h s.a x.pp | b.i + | r.er ; bv 3>2",
+    "happily": "c.h s.a x.pp + | b.i + | c.l b.y ; bv 3>2", "happier": "c.h s.a x.pp + | b.i + | r.er ; bv 3>2",
     "tried": "c.tr l.i + e0 c.d", "carries": "c.c b.a x.rr | b.i + e0 c.s ; bv 3>2",
     # step 30: un- and re-, the seam before the root (as into; re- marked as be is)
     "undo": "s.u c.n + | c.d b.o", "untie": "s.u c.n + | c.t t.ie",
-    "unhappy": "s.u c.n + | c.h s.a x.pp | b.y ; bv 5>4", "unlock": "s.u c.n + | c.l s.o k.ck",
+    "unhappy": "s.u c.n + | c.h s.a x.pp + | b.y ; bv 5>4", "unlock": "s.u c.n + | c.l s.o k.ck",
     "redo": "c.r l.e + | c.d b.o", "replay": "c.r l.e + | c.pl t.ay",
     "refill": "c.r l.e + | c.f s.i k.ll", "reread": "c.r l.e + | c.r t.ea c.d",
     # step 32: ph as a black bond bar (as kn); photo as pony
@@ -76,6 +77,11 @@ SITE_CODES = {
     "note": "c.n l.o c.t e>",                                    # as the sentence cards mark it
     "notate": "c.n l.o | c.t + l.a c.t e> ; vault 3>1",
     "notation": "c.n l.o | c.t + l.a | g.ti b.o c.n ; vault 3>1 ; vault 4>3 ; seam 4",
+    # the hap family (roots/hap.html), 9 November 2026: hap doubles its p only before a vowel
+    "happen": "c.h s.a x.pp + | b.e c.n ; bv 3>2",                  # as happy, with -en as the en of seven
+    "hapless": "c.h s.a c.p + | c.l b.e k.ss",                      # as hopeless, with no box: l can't reach back
+    "mishap": "c.m s.i c.s + | c.h s.a c.p",                        # as unlock: s and h on either side of the seam
+    "haphazard": "c.h s.a c.p + | c.h s.a c.z | r.ar c.d",          # p and h on either side of the seam; ar as in car
 }
 
 # A spelling that is two words, each with its own marking (from flsz_family.py).
@@ -111,4 +117,14 @@ CALLS = [
      "Ruled 8 November 2026: the t and i spell sh together, so their bar and circle are green, as for sh, and the letters "
      "keep their own colours, so the i is red, and it still makes the a long. Until then ti was a black unit, as the "
      "create family deck draws creation."),
+    ("happy, happier, happily, unhappy", "a seam after the doubled p: hap + y, as sun + y",
+     "Ruled 9 November 2026. Hap, chance or luck, isn't said on its own now, but its family shows the join: happen, "
+     "hapless, mishap, haphazard. The double p alone doesn't show a seam, since rabbit and lesson double with nothing "
+     "to join. Until then happy was drawn as an inherited double with no seam, as pretty is."),
+    ("happen", "happ + en: a seam after the doubled p, and the e of -en bare",
+     "As happy. Etymonline gives happen as hap with the verb-forming -n; the e is said weakly, as in seven."),
+    ("hapless", "hap + less: one p and no box", "A consonant follows the seam, so nothing doubles. The e of -less is bare, as in hopeless."),
+    ("mishap, haphazard", "s and h, and p and h, on either side of a seam, each with its own circle",
+     "The seam splits what would otherwise read as sh and ph. The ar of hazard takes the r-controlled unit of car, "
+     "though it spells the er sound: a unit's second sound is marked alike, as look's oo is."),
 ]

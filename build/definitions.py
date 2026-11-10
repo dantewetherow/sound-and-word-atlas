@@ -93,6 +93,16 @@ STUDY = [   # words for studying language, each with an everyday word to stand i
      "<b>time-lapse</b>.",
      "Adopted from Ferdinand de Saussure, as synchronic is. From Greek <i>dia</i>, &ldquo;through,&rdquo; and "
      "<i>khronos</i>, &ldquo;time.&rdquo;"),
+    ("free", "adjective",
+     "Said of a morpheme that can be a word on its own: <i>fun</i> in <i>funny</i>, <i>sun</i> in <i>sunny</i>. A seam "
+     "after a free base is easy to see. In everyday words, it <b>stands alone</b>.",
+     "Adopted from Leonard Bloomfield, whose <i>Language</i> (1933) set free forms, which can be said alone, against "
+     "bound forms, which can&rsquo;t."),
+    ("bound", "adjective",
+     "Said of a morpheme that is never a word on its own: endings like <i class=\"nw\">-y</i> and <i class=\"nw\">-ness</i>, "
+     "and bases that have stopped being said alone, like <i>hap</i> in <i>happy</i> and <i>mishap</i>. A family of words "
+     "is what shows a bound base. See <a href=\"roots/hap.html\">hap</a>. In everyday words, it <b>needs a partner</b>.",
+     "Adopted from Leonard Bloomfield, as free is."),
 ]
 
 EXTRA_MARKS = [   # marks the legend doesn't list on its own
