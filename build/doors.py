@@ -1,57 +1,71 @@
-"""The eight doors, the site's tree, breadcrumbs, search and the Teacher/Student view (8 November 2026).
+"""The site's layers, its tree, breadcrumbs, search and the Teacher/Student view.
 
-The site plan (Sound and Word Atlas: site plan) names the doors as one word family, each a doing turned into a thing
-with -ion: Progressions, Notations, Explorations, Constructions, Derivations, Instructions and Explanations, and since
-8 November 2026 Connections, the crosswalks (connections.py). Today's
-pages sit behind them. PAGES is the one place that says which page sits behind which door: the header's doors, the
-breadcrumbs, the site map and the search's page records all come from it.
+Since 10 November 2026 the atlas has three layers and a shelf, so a teacher holds three things in mind, not eight:
+Steps (the route, in order, with the marks), Words (look up a word: its walk and its sum) and Parts (prefixes,
+suffixes, roots and joins, each with its words; parts.py). Everything a teacher prints, presents or checks is on the
+For teachers shelf. From 8 to 10 November there were eight doors named as one -ion family (Progressions, Notations,
+Explorations, Constructions, Derivations, Instructions, Connections, Explanations); their pages keep their addresses
+and now sit inside a layer or on the shelf (HEADS). PAGES is the one place that says which page sits where: the
+header, the breadcrumbs, the site map and the search's page records all come from it.
 
 The Teacher/Student switch shows the same pages two ways, as Bright/Night shows them in two colourings. Student view
-shows five doors, each with a short word, draws the words on a step page big, and hides the teacher's notes and the
-build's under-construction notes. Instructions and Explanations are teachers' doors, so student view leaves them out.
-A link ending ?view=student opens a page in student view, for the board, and the pick is kept in this browser.
-Without script, a page shows the teacher view.
+is for the board: it draws the words big and hides the teacher's notes and the build's under-construction notes. A
+link ending ?view=student opens a page that way, and the pick is kept in this browser. Without script, a page shows
+the teacher view.
 
-Search runs in the reader's browser over search.json, which the build writes: every word on the route and the lists,
-every step, mark, term and page. Nothing typed leaves the device. Without script the box stays hidden, and the header's
-Site map link stands in for it."""
+Search runs in the reader's browser over search.json, which the build writes: every word, part, step, mark, term and
+page. Nothing typed leaves the device. Without script the box stays hidden, and the header's Site map link stands in."""
 import html, json, re
 
-DOORS = [   # slug, name, word sum, in plain words, the short word in student view (None: a teachers' door)
-    ("progressions", "Progressions", "progress + ion + s", "The route through English spelling, step by step.", "Steps"),
-    ("notations", "Notations", "not(e) + at(e) + ion + s", "The marks, and what each one shows.", "Marks"),
-    ("explorations", "Explorations", "explor(e) + at(e) + ion + s", "Words to take apart and build: families and contrasts.", "Words"),
-    ("constructions", "Constructions", "construct + ion + s", "How sentences are built: actors, operators and actions, and the flip from claim to question.", "Sentences"),
-    ("derivations", "Derivations", "deriv(e) + at(e) + ion + s", "Where words come from: roots, and what the parts of words mean.", "Roots"),
-    ("instructions", "Instructions", "instruct + ion + s", "How to teach it: presentations and word cards.", None),
-    ("connections", "Connections", "connect + ion + s", "How the route lines up with the word lists and programs schools already use.", None),
-    ("explanations", "Explanations", "expla(i)n + at(e) + ion + s", "Why it works: definitions, the notation and its name, and credits.", None),
+DOORS = [   # slug, name, (unused), in plain words, the short word in student view (None: for teachers only)
+    ("progressions", "Steps", "", "The route through English spelling, in order. Start here to learn the notation.", "Steps"),
+    ("walk", "Words", "", "Look up a word and walk through it: its marks, a move at a time, and its parts.", "Words"),
+    ("parts", "Parts", "", "Prefixes, suffixes, roots and joins, each with every word that has it.", "Parts"),
+    ("teachers", "For teachers", "", "To print and present, how the route lines up with programs, and the reasons and sources.", None),
 ]
 DOOR = {d[0]: d for d in DOORS}
 
-# The tree: (path, door, title, one-line summary). Steps join it in tree(). A page behind a teachers' door is for teachers.
+# The pages that were doors until 10 November 2026, and now sit inside a layer or on the teachers' shelf: slug ->
+# (heading, in plain words, the heading in student view or None).
+HEADS = {
+    "progressions": ("Steps", DOORS[0][3], "Steps"),
+    "notations": ("The marks", "The marks, and what each one shows.", "Marks"),
+    "explorations": ("A family: note, notate, notation", "A word built in three moves, each from the one before.", "Words"),
+    "constructions": ("Sentences", "How sentences are built: actors, operators and actions, and the flip from claim to question.", "Sentences"),
+    "derivations": ("Roots and their sources", "Where words come from, and the sources the roots cite.", "Roots"),
+    "instructions": ("To print and present", "Presentations and word cards.", None),
+    "connections": ("Connections", "How the route lines up with the word lists and programs schools already use.", None),
+    "explanations": ("Reasons and sources", "Definitions, the notation and its name, and credits.", None),
+    "teachers": ("For teachers", DOORS[3][3], None),
+}
+
+# The tree: (path, layer, title, one-line summary). Steps join it in tree().
 PAGES = [
-    ("index.html", None, "Home", "Legomorphic Notation and the doors into the atlas."),
-    ("progressions.html", "progressions", "Progressions", "The route through English spelling: the steps in their bands."),
-    ("notations.html", "notations", "Notations", "The marks of Legomorphic Notation, each drawn alone on one word."),
-    ("explorations.html", "explorations", "Explorations", "Words to take apart and build, starting with note, notate and notation."),
-    ("walk.html", "explorations", "Word walk", "Type a word and walk through it: reading from its letters, spelling from its sounds."),
-    ("constructions.html", "constructions", "Constructions", "How sentences are built, and the flip from claim to question."),
-    ("derivations.html", "derivations", "Derivations", "Where words come from, and the sources the roots will cite."),
-    ("roots/leg.html", "derivations", "*leg-: to gather", "The first root family: Greek and Latin words for gathering, choosing, reading and saying."),
-    ("roots/hap.html", "derivations", "hap: chance, luck", "A base family: happy, happen, mishap and haphazard, and why happy has two p's and mishap one."),
-    ("instructions.html", "instructions", "Instructions", "How to teach it: presentations and word cards."),
-    ("presentations.html", "instructions", "Presentations", "The staff series and decks on single concepts, with their handouts."),
-    ("cards.html", "instructions", "Word cards", "Printable cards: the ELP and Dolch words, and grade 3 word sums."),
-    ("connections.html", "connections", "Connections", "How the route lines up with the word lists and programs schools already use."),
-    ("word-lists.html", "connections", "ELP and Dolch", "Where the ELP words come from in Dolch's lists."),
-    ("ufli.html", "connections", "UFLI Foundations", "Where each step of the route meets UFLI's lessons, by lesson number."),
-    ("explanations.html", "explanations", "Explanations", "Why it works: definitions, the notation and its name, and credits."),
-    ("definitions.html", "explanations", "Definitions", "What the notation's words mean, and where they come from."),
-    ("about.html", "explanations", "About the notation", "The notation, its name, and how it came about."),
-    ("credits.html", "explanations", "Credits and contact", "The writers the notation draws on, and how to get in touch."),
-    ("sitemap.html", None, "Site map", "Every page, door by door."),
+    ("index.html", None, "Home", "Legomorphic Notation and the three layers of the atlas."),
+    ("progressions.html", "progressions", "Steps", "The route through English spelling: the steps in their bands."),
+    ("notations.html", "progressions", "The marks", "The marks of Legomorphic Notation, each drawn alone on one word."),
+    ("walk.html", "walk", "Words", "Look up a word and walk through it, a move at a time, with its parts."),
+    ("explorations.html", "walk", "A family: note", "Note, notate and notation, each built from the one before."),
+    ("parts.html", "parts", "Parts", "Prefixes, suffixes, roots and joins, each with every word that has it."),
+    ("roots/leg.html", "parts", "*leg-: to gather", "The first root family: Greek and Latin words for gathering, choosing, reading and saying."),
+    ("roots/hap.html", "parts", "hap: chance, luck", "A base family: happy, happen, mishap and haphazard, and why happy has two p's and mishap one."),
+    ("derivations.html", "parts", "Roots and their sources", "Where words come from, and the sources the roots cite."),
+    ("teachers.html", "teachers", "For teachers", "To print and present, connections to programs, and the reasons and sources."),
+    ("constructions.html", "teachers", "Sentences", "How sentences are built, and the flip from claim to question."),
+    ("instructions.html", "teachers", "To print and present", "Presentations and word cards."),
+    ("presentations.html", "teachers", "Presentations", "The staff series and decks on single concepts, with their handouts."),
+    ("cards.html", "teachers", "Word cards", "Printable cards: the ELP and Dolch words, and grade 3 word sums."),
+    ("connections.html", "teachers", "Connections", "How the route lines up with the word lists and programs schools already use."),
+    ("word-lists.html", "teachers", "ELP and Dolch", "Where the ELP words come from in Dolch's lists."),
+    ("ufli.html", "teachers", "UFLI Foundations", "Where each step of the route meets UFLI's lessons, by lesson number."),
+    ("explanations.html", "teachers", "Reasons and sources", "Definitions, the notation and its name, and credits."),
+    ("definitions.html", "teachers", "Definitions", "What the notation's words mean, and where they come from."),
+    ("about.html", "teachers", "About the notation", "The notation, its name, and how it came about."),
+    ("credits.html", "teachers", "Credits and contact", "The writers the notation draws on, and how to get in touch."),
+    ("sitemap.html", None, "Site map", "Every page, layer by layer."),
 ]
+# Pages on the teachers' shelf that the board view still shows.
+BOARD_OK = {"constructions.html"}
 TEACHERS = {s for s, *_, w in DOORS if w is None}
 NUMBER = {7: "Seven", 8: "Eight", 9: "Nine", 10: "Ten"}
 
@@ -116,7 +130,7 @@ SEARCH_JS = """<script>(() => {
   box.hidden = false; document.documentElement.classList.add('js-search');
   let data = null, loading = null;
   const load = () => loading || (loading = fetch(up + 'search.json').then(r => r.json()).then(j => { data = j; render(); }).catch(() => { data = []; }));
-  const KINDS = [['word', 'Words'], ['step', 'Steps'], ['mark', 'Marks'], ['term', 'Terms'], ['page', 'Pages']], CAP = 6;
+  const KINDS = [['word', 'Words'], ['part', 'Parts'], ['step', 'Steps'], ['mark', 'Marks'], ['term', 'Terms'], ['page', 'Pages']], CAP = 6;
   const norm = s => s.toLowerCase().normalize('NFD').replace(/[\\u0300-\\u036f]/g, '').replace(/[’']/g, '');
   const esc = s => s.replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
   const student = () => document.documentElement.dataset.view === 'student';
@@ -179,14 +193,11 @@ SEARCH_JS = """<script>(() => {
 
 # ------------------------------------------------------------------ the pages
 def door_head(slug, extra=""):
-    _, name, ws, plain_words, sw = DOOR[slug]
-    word = name[:-1].lower()
+    name, plain_words, sw = HEADS[slug]
     student = f'<h1 class="s-only">{sw}</h1>' if sw else ""
     board = '<p class="board t-only"><a href="?view=student">Open this page in student view</a>, for the board.</p>' if sw else ""
     return (f'<section class="hero door-hero"><div class="wrap">'
-            f'<p class="eyebrow t-only">One of {NUMBER[len(DOORS)].lower()} doors</p>'
             f'<h1 class="t-only">{name}</h1>{student}'
-            f'<p class="sum t-only" aria-label="Word sum: {html.escape(ws)} makes {word}s"><span>{html.escape(ws)}</span> &rarr; <i>{word}s</i></p>'
             f'<p class="lead t-only">{plain_words}</p>{extra}{board}'
             f'</div></section>')
 
@@ -198,7 +209,7 @@ def write(OUT, page, header, footer, X):
 
     def door_page(slug, title, desc, inner):
         body = f"""{header(0)}
-<main class="door-page" data-door="{slug}">
+<main class="door-page">
 {inner}
 </main>
 {footer(0)}"""
@@ -229,7 +240,6 @@ def write(OUT, page, header, footer, X):
     fam = "".join(f'<figure class="word" id="{word_id(w)}">{svg_of(w, 58, label=f"{w}, marked")}<figcaption><span class="ws">{s}</span><span class="t-only">{c}</span></figcaption></figure>'
                   for w, s, c in X["morph"])
     door_page("explorations", "Explorations · Sound and Word Atlas", "Words to take apart and build: families and contrasts.", f"""{door_head("explorations")}
-<section class="about"><div class="wrap"><div class="door-tiles"><a class="dtile walk-tile" href="walk.html"><b><span class="t-only">Word walk</span><span class="s-only">Pick a word</span></b><span class="t-only">Type a word and tap through it: reading from its letters, spelling from its sounds.</span></a></div></div></section>
 <section class="about" id="note-family" aria-labelledby="nf-h"><div class="wrap">
 <h2 id="nf-h">A family: <i>note</i>, <i>notate</i>, <i>notation</i></h2>
 <p class="sub t-only">Each word is built from the one before it. At each seam the <i>e</i> drops, and its job, making the <i>o</i> spell its name, passes to the next vowel.</p>
@@ -240,6 +250,7 @@ def write(OUT, page, header, footer, X):
 {uc("next, the first contrast, <i>hop</i> and <i>hope</i>, built in full: their families marked, cards to print, a presentation for teachers and an exercise for students. Then more families and contrasts, and a page for every word.")}
 <p class="t-only">For word sums now, the <a href="cards.html#word-sums">grade 3 word sum cards</a> take high-frequency words apart at their seams.</p>
 <p class="s-only s-soon">More words to take apart are coming soon.</p>
+<p><a href="parts.html">Every word that&rsquo;s taken apart, by its parts</a>.</p>
 </div></section>""")
 
     # Constructions: the Dialogue Team and the sentence cards.
@@ -271,7 +282,7 @@ def write(OUT, page, header, footer, X):
 <section class="about"><div class="wrap"><div class="door-tiles"><a class="dtile" href="roots/leg.html"><b>*leg-<span class="t-only">: to gather</span></b><span class="t-only">The first root family: <i>logic</i>, <i>collect</i>, <i>legend</i>, <i>lesson</i>, <i>loyal</i>, and the notation&rsquo;s own name.</span><span class="s-only">gather</span></a><a class="dtile" href="roots/hap.html"><b>hap<span class="t-only">: chance, luck</span></b><span class="t-only">A base family: <i>happy</i>, <i>happen</i>, <i>mishap</i>, <i>hapless</i>, <i>haphazard</i>, <i>perhaps</i>, and why <i>happy</i> has two p&rsquo;s.</span><span class="s-only">luck</span></a></div></div></section>
 <section class="about t-only" aria-labelledby="dv-h"><div class="wrap prose">
 <h2 id="dv-h">Roots, and the meanings of parts</h2>
-<p>A word can be read as it is used now, or traced back through time: <a href="definitions.html#study">synchronic and diachronic</a>, a snapshot and a time-lapse. This door is for the time-lapse. <i>Before</i> is an example: Old English <i>beforan</i>, from <i>be-</i> &lsquo;by&rsquo; and <i>foran</i> &lsquo;in front&rsquo;, and <i>for</i> and <i>fore</i> grow from the same root.</p>
+<p>A word can be read as it is used now, or traced back through time: <a href="definitions.html#study">synchronic and diachronic</a>, a snapshot and a time-lapse. This page is for the time-lapse. <i>Before</i> is an example: Old English <i>beforan</i>, from <i>be-</i> &lsquo;by&rsquo; and <i>foran</i> &lsquo;in front&rsquo;, and <i>for</i> and <i>fore</i> grow from the same root.</p>
 <p>The roots will follow Calvert Watkins&rsquo;s <i>American Heritage Dictionary of Indo-European Roots</i> (3rd ed., 2011), which is built root first and lists the English words from each root, with links to the <a href="https://lrc.la.utexas.edu/lex">Indo-European Lexicon</a> of the Linguistics Research Center at the University of Texas at Austin. Not every word has a known root. <i>Hop</i> and <i>hope</i> go back through Old English to early Germanic, and no further that anyone can show, and their pages will say so.</p>
 {uc("next, a root page for every root behind the route's words, each citing its source, and a plain meaning for every part of a word.")}
 </div></section>""")
@@ -281,18 +292,27 @@ def write(OUT, page, header, footer, X):
         return '<div class="door-tiles">' + "".join(
             f'<a class="dtile" href="{p}"><b>{t}</b><span>{s}</span></a>' for p, t, s in items) + "</div>"
     pick = lambda door: [(p, t, s) for p, d, t, s in PAGES if d == door and p != f"{door}.html"]
-    door_page("instructions", "Instructions · Sound and Word Atlas", "How to teach it: presentations, word cards and word lists.", f"""{door_head("instructions")}
+    door_page("instructions", "To print and present · Sound and Word Atlas", "Presentations and word cards.", f"""{door_head("instructions")}
 <section class="about"><div class="wrap">
-{tiles(pick("instructions"))}
+{tiles([x for x in pick("teachers") if x[0] in ("presentations.html", "cards.html")])}
 {uc("next, the routines: the learning loop, marking a word by hand, flips from claim to question, and word sums at the seam.")}
 </div></section>""")
-    door_page("explanations", "Explanations · Sound and Word Atlas", "Why it works: definitions, the notation and its name, and credits.", f"""{door_head("explanations")}
+    door_page("explanations", "Reasons and sources · Sound and Word Atlas", "Definitions, the notation and its name, and credits.", f"""{door_head("explanations")}
 <section class="about"><div class="wrap">
-{tiles(pick("explanations"))}
+{tiles([x for x in pick("teachers") if x[0] in ("definitions.html", "about.html", "credits.html")])}
 {uc("next, pages of ideas: the primary terms from phone to sememe, grapheme two ways, why English spells the way it does, and what the name claims.")}
 </div></section>""")
 
-    # The word walk (walk.py), behind Explorations.
+    # The teachers' shelf: everything a teacher prints, presents or checks, on one page.
+    shelf = [("To print and present", ("presentations.html", "cards.html")), ("Sentences", ("constructions.html",)),
+             ("Connections", ("word-lists.html", "ufli.html")), ("Reasons and sources", ("definitions.html", "about.html", "credits.html"))]
+    by_path = {p: (p, t_, s) for p, d, t_, s in PAGES}
+    door_page("teachers", "For teachers · Sound and Word Atlas", DOOR["teachers"][3], f"""{door_head("teachers")}
+{"".join(f'<section class="about"><div class="wrap"><h2>{h}</h2>{tiles([by_path[p] for p in ps])}</div></section>' for h, ps in shelf)}""")
+
+    # The Parts layer (parts.py), then the Words layer (walk.py), which shows each word's sum.
+    import parts
+    X["parts"] = parts.write(OUT, door_page, X)
     import walk
     X["walk"] = walk.write(OUT, door_page, X)
 
@@ -303,31 +323,28 @@ def write(OUT, page, header, footer, X):
     # The site map: the tree, written out.
     items = []
     for slug, name, _, plain_words, sw in DOORS:
-        sub = [(p, t, s) for p, d, t, s in X["pages"] if d == slug and p != f"{slug}.html"]
-        kids = ""
-        if slug == "progressions":
-            kids = "".join(f'<li><a href="steps/{s["n"]:02d}.html">Step {s["n"]}: {md(s["title"])}</a></li>' for s in X["STEPS"])
-        else:
-            kids = "".join(f'<li><a href="{p}">{t}</a> <span>{html.escape(s)}</span></li>' for p, t, s in sub)
-        who = '<span class="who">for teachers</span>' if sw is None else ""
-        items.append(f'<li{" class=t-only" if sw is None else ""}><a href="{slug}.html"><b>{name}</b></a> {who}<span>{plain_words}</span>'
-                     + (f'<ol class="kids">{kids}</ol>' if slug == "progressions" else f'<ul class="kids">{kids}</ul>' if kids else "") + "</li>")
-    door_page("sitemap", "Site map · Sound and Word Atlas", "Every page of the Sound and Word Atlas, door by door.", f"""<section class="hero"><div class="wrap">
+        sub = [(p, t_, s) for p, d, t_, s in X["pages"] if d == slug and p != f"{slug}.html" and not p.startswith("steps/")]
+        kids = "".join(f'<li><a href="{p}">{t_}</a> <span>{html.escape(s)}</span></li>' for p, t_, s in sub)
+        steps = "".join(f'<li><a href="steps/{s["n"]:02d}.html">Step {s["n"]}: {md(s["title"])}</a></li>' for s in X["STEPS"]) if slug == "progressions" else ""
+        items.append(f'<li{" class=t-only" if sw is None else ""}><a href="{slug}.html"><b>{name}</b></a> <span>{plain_words}</span>'
+                     + (f'<ol class="kids">{steps}</ol>' if steps else "") + (f'<ul class="kids">{kids}</ul>' if kids else "") + "</li>")
+    door_page("sitemap", "Site map · Sound and Word Atlas", "Every page of the Sound and Word Atlas, layer by layer.", f"""<section class="hero"><div class="wrap">
 <h1>Site map</h1>
-<p class="lead">Every page, door by door. The doors are named as one family: each turns a doing into a thing with <i>-ion</i>.</p>
+<p class="lead">Every page. Three layers hold the atlas: the steps in order, the words one at a time, and the parts words are built from. The rest is on the teachers&rsquo; shelf.</p>
 </div></section>
 <section class="about"><div class="wrap"><ul class="smap-tree"><li><a href="index.html"><b>Home</b></a></li>{"".join(items)}</ul></div></section>""")
 
 
 def doors_section():
-    """The way in on the home page: a tile for each door, with its short word in student view."""
+    """The way in on the home page: the three layers, then the teachers' shelf."""
     out = []
-    for slug, name, ws, plain_words, sw in DOORS:
-        out.append(f'<a class="door-tile{" t-only" if sw is None else ""}" href="{slug}.html"><span class="dn">{name}</span>'
-                   f'{f"<span class=sn>{sw}</span>" if sw else ""}<span class="pw t-only">{plain_words}</span></a>')
+    for n, (slug, name, _, plain_words, sw) in enumerate(DOORS, 1):
+        num = f'<span class="ln">{n}</span>' if sw else ""
+        out.append(f'<a class="door-tile{" t-only shelf" if sw is None else ""}" href="{slug}.html">{num}<span class="dn">{name}</span>{f"<span class=sn>{sw}</span>" if sw else ""}'
+                   f'<span class="pw t-only">{plain_words}</span></a>')
     return f"""<section class="doors-home" id="doors-home" aria-labelledby="doors-h"><div class="wrap">
-<h2 id="doors-h"><span class="t-only">{NUMBER[len(DOORS)]} doors in</span><span class="s-only">Pick a door</span></h2>
-<p class="sub t-only">Each door is a ramp: its first page asks the least, and each step in asks a little more. The names are one word family, so the way in teaches the ending they share: <i>progress + ion</i>, <i>not(e) + at(e) + ion</i>, <i>construct + ion</i>.</p>
+<h2 id="doors-h"><span class="t-only">Three layers</span><span class="s-only">Pick one</span></h2>
+<p class="sub t-only">The atlas is a language for teaching spelling and reading, for a teacher to use with learners. Learn it in order in Steps, look up any word in Words, and see what words share in Parts.</p>
 <div class="door-grid">{"".join(out)}</div>
 </div></section>"""
 
@@ -370,8 +387,13 @@ def write_search(OUT, X):
             add("word", w, f"cards/dolch-word-cards-nouns.pdf#page={2 * (nouns.index(w) // 10) + 2}", "Dolch noun, word cards", teacher=True)
     for w, *_ in X["morph"]:   # the family on Explorations
         if w not in where: add("word", w, f"explorations.html#{word_id(w)}", "Explorations")
-    for w, u, label in X.get("roots", []):   # the families' words, behind Derivations
+    for w, u, label in X.get("roots", []):   # the families' words
         if w not in where: add("word", w, u, label)
+    P = X.get("parts")
+    if P:
+        for w, d in P["sums"].items():           # every other analysed word: its walk if it's marked, else its place in Parts
+            if P["marked"](w): add("word", w, "walk.html?w=" + w, "Words")
+        for k, u, s in P["search"]: add("part", k, u, s)
     for st in X["STEPS"]:
         words = " ".join(w for g in X["groups_of"](st["words_md"]) for w in g)
         add("step", f"Step {st['n']}: {X['plain'](st['title'])}", f"steps/{st['n']:02d}.html", st["band"],
@@ -382,7 +404,7 @@ def write_search(OUT, X):
         add("term", term, "definitions.html#" + anchor, "Definitions", teacher=True)
     for p, d, t, s in X["pages"]:
         if p.startswith("steps/"): continue
-        add("page", t, p, "Door" if p == f"{d}.html" else DOOR[d][1] if d else "", k=s, teacher=d in TEACHERS)
+        add("page", t, p, DOOR[d][1] if d and p != f"{d}.html" else "", k=s, teacher=d in TEACHERS and p not in BOARD_OK)
     (OUT / "search.json").write_text(json.dumps(recs, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     return len(recs)
 
@@ -398,8 +420,7 @@ def word_id(w):
 # ------------------------------------------------------------------ breadcrumbs, the current door, and teachers' pages
 def door_label(d):
     """A door's name, with its short word beside it for student view (a teachers' door has none)."""
-    _, name, _, _, sw = DOOR[d]
-    return f'<span class="dn">{name}</span><span class="sn">{sw}</span>' if sw else name
+    return DOOR[d][1]
 
 
 def finish(OUT, pages):
@@ -420,9 +441,9 @@ def finish(OUT, pages):
             here = door_label(d) if d and p == f"{d}.html" else html.escape(t.split(":")[0] if p.startswith("steps/") else t)
             trail.append(f'<li aria-current="page">{here}</li>')
         crumbs = f'<nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><ol>{"".join(trail)}</ol></div></nav>' if trail else ""
-        if d in TEACHERS:
+        if d in TEACHERS and p not in BOARD_OK:
             crumbs += (f'<div class="for-teachers s-only"><div class="wrap"><p>This page is for teachers. To read it, pick Teacher at the top '
-                       f'of the page, or go <a href="{up}index.html">back to the doors</a>.</p></div></div>')
+                       f'of the page, or go <a href="{up}index.html">back to the start</a>.</p></div></div>')
         src = src.replace("<!--crumbs-->", crumbs, 1)
         if d:
             src = src.replace(f'data-door="{d}">', f'data-door="{d}" aria-current="{"page" if p == f"{d}.html" else "true"}">', 1)

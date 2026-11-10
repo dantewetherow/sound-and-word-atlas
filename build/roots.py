@@ -549,7 +549,7 @@ def write(OUT, page, header, footer, X):
         body = f"""{header(1)}
 <main class="root-page">
 <section class="hero"><div class="wrap">
-<p class="eyebrow t-only">Derivations &middot; {R["kind"]}</p>
+<p class="eyebrow t-only">Parts &middot; {R["kind"]}</p>
 <h1><span class="t-only">{R["root"]}</span><span class="s-only">{R["h1_s"]}</span></h1>
 <p class="lead t-only">{R["lead"]}</p>
 <div class="door-word t-only">{drawn}</div>

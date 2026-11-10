@@ -141,7 +141,7 @@ def write(OUT, page, header, footer, svg_of, LW):
 <section class="about" id="histories" aria-labelledby="wh-h"><div class="wrap prose">
 <h2 id="wh-h">Words and their histories</h2>
 <ul class="credits">
-<li><b>Douglas Harper</b>, <a href="https://www.etymonline.com/">Online Etymology Dictionary</a>. The histories behind <a href="derivations.html">Derivations</a>: every word in a family links to its entry.</li>
+<li><b>Douglas Harper</b>, <a href="https://www.etymonline.com/">Online Etymology Dictionary</a>. The histories behind <a href="parts.html">Parts</a>: every word in a family links to its entry.</li>
 <li><b>Calvert Watkins</b>, <i>The American Heritage Dictionary of Indo-European Roots</i>, 3rd ed. (Houghton Mifflin Harcourt, 2011). The roots are to follow it; the families aren&rsquo;t checked against it yet.</li>
 <li><b>The Linguistics Research Center</b>, University of Texas at Austin, <a href="https://lrc.la.utexas.edu/lex">Indo-European Lexicon</a>, which follows <b>Julius Pokorny</b>, <i>Indogermanisches etymologisches W&ouml;rterbuch</i> (1959). The English, Latin and Greek words from each root, as on the <a href="roots/leg.html">*leg-</a> and <a href="roots/hap.html">hap</a> pages.</li>
 <li><b>Wiktionary</b>, for the verb in both languages, <a href="https://en.wiktionary.org/wiki/%CE%BB%CE%AD%CE%B3%CF%89">Greek λέγω</a> and <a href="https://en.wiktionary.org/wiki/lego#Latin">Latin <i>legō</i></a>, and for the root, <a href="https://en.wiktionary.org/wiki/Reconstruction:Proto-Indo-European/le%C7%B5-">*leǵ-</a>.</li>

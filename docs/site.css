@@ -579,3 +579,33 @@ html[data-view="student"] .walk-stage svg { max-height: 52vh; }
 .walk-h { margin: 0 0 4px; }
 .walk .wrap > .sub { margin: 0 0 14px; }
 main > .walk { padding-block: 28px 8px; }
+
+/* the three layers (10 November 2026): the home tiles, the Parts page, and a word's sum under its walk */
+.door-tile .ln { font-family: var(--body); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; color: var(--soft); }
+.door-tile.shelf { background: transparent; border-style: dashed; }
+.pfilter { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-top: 6px; }
+.pfilter input { flex: 1 1 260px; max-width: 420px; min-width: 0; font: inherit; padding: 10px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--card); color: var(--ink); }
+.pcount { color: var(--soft); font-size: 0.9rem; }
+.plist { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr)); gap: 10px; align-items: start; margin-top: 8px; }
+details.pcard { background: var(--card); border: 1px solid var(--line); border-radius: 12px; min-width: 0; }
+details.pcard[open] { grid-column: 1 / -1; }
+details.pcard summary { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; padding: 12px 16px; cursor: pointer; }
+details.pcard summary b { font-family: var(--display); font-weight: 500; font-size: 1.2rem; }
+details.pcard .pm { color: var(--soft); font-size: 0.92rem; flex: 1 1 12ch; min-width: 0; }
+details.pcard .pcnt { color: var(--soft); font-size: 0.8rem; white-space: nowrap; margin-left: auto; }
+details.pcard > :not(summary) { margin-inline: 16px; }
+.pwords { list-style: none; padding: 0; margin-block: 2px 12px; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 6px 24px; }
+.pwords li { min-width: 0; overflow-wrap: anywhere; }
+.pwords li.hit { background: color-mix(in srgb, var(--modal) 14%, transparent); border-radius: 6px; padding-inline: 6px; margin-inline: -6px; }
+.pwords a { text-decoration: none; color: var(--ink); }
+.pwords a:hover { text-decoration: underline; }
+.pwords b { color: var(--verb); font-weight: 600; }
+.pstate { font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--soft); border: 1px solid var(--line); border-radius: 999px; padding: 1px 7px; white-space: nowrap; }
+.pmean { display: block; color: var(--soft); font-size: 0.86rem; }
+.pwith, .psrc, .pwhat { font-size: 0.9rem; color: var(--soft); margin-bottom: 10px; }
+.walk-sum { text-align: center; font-size: 1.1rem; margin-top: 10px; overflow-wrap: anywhere; }
+.walk-sum:empty { display: none; }
+.walk-sum .ws-l { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--soft); margin-right: 6px; }
+.walk-sum .ws-m { display: block; color: var(--soft); font-size: 0.92rem; }
+.walk-plain { font-family: "Lexend", var(--body); font-size: clamp(2.4rem, 9vw, 5rem); line-height: 1.4; }
+.walk.sum-only :is(.walk-nav, .walk-modes) { visibility: hidden; }

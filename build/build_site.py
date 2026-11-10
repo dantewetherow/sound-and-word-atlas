@@ -18,6 +18,9 @@ route = json.load(open(sys.argv[1], encoding="utf-8"))
 OUT = pathlib.Path(sys.argv[2]); (OUT / "steps").mkdir(parents=True, exist_ok=True)
 codes, _ = all_codes()
 for w, c in SC.SITE_CODES.items(): codes.setdefault(w, c)
+import word_sum_codes as WSC                                  # the grade 3 word sum cards' markings, for Words and Parts
+for _, _, items in WSC.SECTIONS:
+    for item in items: codes.setdefault(item[1], item[2])
 LW.W.clear(); LW.W.update(codes)
 STEPS = route["steps"]; N = len(STEPS)
 BUILT = "10 November 2026"
@@ -340,11 +343,11 @@ home_body = f"""{header(0)}
 <section class="about t-only" id="about" aria-labelledby="about-h"><div class="wrap">
 <h2 id="about-h">What&rsquo;s here</h2>
 <div class="cols">
-<div><h3>The route</h3><p>{N} steps in {len(route["bands"])} bands, with {n_words} different words, {n_marked} of them marked, under <a href="progressions.html">Progressions</a>. Each step page has its words, the marks it brings in, and the pages in Carney&rsquo;s survey that back it.</p></div>
-<div><h3>To print and present</h3><p>Under <a href="instructions.html">Instructions</a>: printable cards for the ELP high-frequency words and all of Dolch&rsquo;s sight words, and the first session of the staff series with its handouts. <a href="connections.html">Connections</a> lines the route up with the ELP and Dolch lists and with UFLI Foundations.</p></div>
-<div><h3>The notation</h3><p><a href="notations.html">Notations</a> has the marks. Under <a href="explanations.html">Explanations</a>, About explains the notation and its name, Definitions has its words, and Credits names the writers it draws on.</p></div>
+<div><h3>The route</h3><p>{N} steps in {len(route["bands"])} bands, with {n_words} different words, {n_marked} of them marked, in <a href="progressions.html">Steps</a>. Each step page has its words, the marks it brings in, and the pages in Carney&rsquo;s survey that back it.</p></div>
+<div><h3>To print and present</h3><p><a href="teachers.html">For teachers</a> has printable cards for the ELP high-frequency words and all of Dolch&rsquo;s sight words, and the first session of the staff series with its handouts. <a href="connections.html">Connections</a>, there too, lines the route up with the ELP and Dolch lists and with UFLI Foundations.</p></div>
+<div><h3>The notation</h3><p><a href="notations.html">The marks</a> are with the steps. On the teachers&rsquo; shelf, About explains the notation and its name, Definitions has its words, and Credits names the writers it draws on.</p></div>
 </div>
-{uc(f"steps {DRAFT_FROM} to {N} are a first draft, and a few words show in plain letters until their marking is settled. Next: the first contrast, <i>hop</i> and <i>hope</i>, built in full, then the legend in full and the roots.")}
+{uc(f"steps {DRAFT_FROM} to {N} are a first draft, and a few words show in plain letters until their marking is settled. Next: more families in Parts, starting with <i>accommodate</i>, and a word built from left to right in Words.")}
 </div></section>
 </main>
 {footer(0)}"""
@@ -431,7 +434,7 @@ if ELP_FILE.exists() and all((OUT / "cards" / f).exists() for f, *_ in CARD_SETS
 </div></section>{dolch_html}{ws_html}
 <section class="about" aria-label="Notes"><div class="wrap"><div class="cols">
 <div><h3>Printing</h3><p>Print in colour and double-sided, flipping on the long edge, so each back lands behind its front. Print one sheet first and hold it up to a window to check that the backs line up, then cut on the grey lines. Spaces left over on a sheet are blank cards to write on.</p></div>
-<div><h3>The coding</h3><p>The coded side shows the word in the notation, and <a href="notations.html">Notations</a> says what each mark means.</p>{uc("a few markings are still being settled, most of the word sums and a few of the Dolch words among them. Next: settle them, then update the cards that change.")}</div>
+<div><h3>The coding</h3><p>The coded side shows the word in the notation, and <a href="notations.html">The marks</a> page says what each mark means.</p>{uc("a few markings are still being settled, most of the word sums and a few of the Dolch words among them. Next: settle them, then update the cards that change.")}</div>
 <div><h3>Where the words come from</h3><p>The Early Literacy Profile (ELP) Assessment &amp; Instructional Guide, Central Okanagan Public Schools (2025), pp. 16&ndash;17. The guide doesn't name a source for its lists; it says they were aligned with a phonics scope and sequence, keeping one word for each pattern. All but three of its 148 words are E. W. Dolch&rsquo;s (1936), as <a href="word-lists.html">Word lists</a> shows. These cards aren't an SD23 publication. The district's own <a href="https://assessment.sd23.bc.ca/elp">ELP page</a> is the place for the assessment itself.</p></div>
 <div><h3>Word sums</h3><p>Word sums and word matrices come from Melvyn Ramsden's Real Spelling, and Peter Bowers brought them into classrooms as structured word inquiry. The base words come from the ELP lists and E. W. Dolch's grade 3 list (Dolch, 1936).</p></div>
 </div></div></section>

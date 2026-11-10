@@ -200,7 +200,7 @@ def write(OUT, page, header, footer, svg_of, KEY, LW):
 
 <section class="about" id="marks" aria-labelledby="marks-h"><div class="wrap prose">
 <h2 id="marks-h">Marks</h2>
-<p>The marks Legomorphic Notation draws, each on one word with that mark alone. Their names are the notation&rsquo;s own. <a href="notations.html">Notations</a> has them as a legend.</p>
+<p>The marks Legomorphic Notation draws, each on one word with that mark alone. Their names are the notation&rsquo;s own. <a href="notations.html">The marks</a> page has them as a legend.</p>
 {marks_html}
 </div></section>
 

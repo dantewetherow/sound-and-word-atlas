@@ -77,7 +77,8 @@ def write(OUT, door_page, X):
     fam = {}
     for w, u, label in X.get("roots", []):   # the families behind Derivations, for their words that are drawn
         fam.setdefault(w, []).append({"t": label, "u": u})
-    words = set(where) | set(X["list_words"]) | {w for w, *_ in X["morph"]} | {"legomorphic"} | {w for w in fam if w in LW.W}
+    P = X.get("parts") or {"sums": {}}
+    words = set(where) | set(X["list_words"]) | {w for w, *_ in X["morph"]} | {"legomorphic"} | {w for w in fam if w in LW.W} | set(P["sums"])
     elp = {w for L in X["elp"]["lists"].values() for w in L["words"]}
     d220 = {w for l in X["dolch"]["levels"] for w in l["words"]}
     nouns = X["dolch"]["nouns"]
@@ -85,14 +86,26 @@ def write(OUT, door_page, X):
     for f in (OUT / "walk").glob("*.json"): f.unlink()
     index, skipped = [], []
     for w in sorted(words, key=lambda x: (x.lower(), x)):
-        if w in SC.UNMARKED: skipped.append(w); continue
+        sum_ = P["sums"].get(w)
+        wid = doors.word_id(w)
+        def sum_only():
+            """A word that's taken apart but not marked yet: its sum and where its family is, with no drawing."""
+            links = [{"t": sum_["home"][1], "u": sum_["home"][0]}] if sum_["home"] else []
+            (OUT / "walk" / f"{wid}.json").write_text(json.dumps({"w": w, "forms": [], "where": links, "sum": sum_["parts"], "mean": sum_["mean"]}, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+            index.append([w, wid])
+        if w in SC.UNMARKED:
+            if sum_: sum_only()
+            else: skipped.append(w)
+            continue
         forms = SC.VARIANTS.get(w) or [(None, "")]
         undo = []
         try:
             for part in (PAIRS.get(w) or HYPHENED.get(w) or (w,)):          # the nouns' codes, only while they're drawn
                 if part not in LW.W and part in NOUN_CODES: undo.append(with_code(part, NOUN_CODES[part]))
             if not all(p in LW.W for p in (PAIRS.get(w) or HYPHENED.get(w) or (w,))) and not SC.VARIANTS.get(w):
-                skipped.append(w); continue
+                if sum_: sum_only()
+                else: skipped.append(w)
+                continue
             out = []
             for code, gloss in forms:
                 u2 = with_code(w, code) if code else None
@@ -108,17 +121,19 @@ def write(OUT, door_page, X):
         if w in nouns: links.append({"t": "Noun cards", "u": f"cards/dolch-word-cards-nouns.pdf#page={2 * (nouns.index(w) // 10) + 2}", "x": 1})
         if w in {m for m, *_ in X["morph"]}: links.append({"t": "Explorations", "u": f"explorations.html#{doors.word_id(w)}"})
         links += fam.get(w, [])
-        wid = doors.word_id(w)
-        (OUT / "walk" / f"{wid}.json").write_text(json.dumps({"w": w, "forms": out, "where": links}, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+        rec = {"w": w, "forms": out, "where": links}
+        if sum_: rec["sum"], rec["mean"] = sum_["parts"], sum_["mean"]
+        (OUT / "walk" / f"{wid}.json").write_text(json.dumps(rec, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
         index.append([w, wid])
     (OUT / "walk" / "index.json").write_text(json.dumps(index, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 
     body = f"""<section class="hero walk-hero"><div class="wrap">
-<h1><span class="t-only">Word walk</span><span class="s-only">Pick a word</span></h1>
-<p class="lead t-only">Type a word, then tap through it. <b>Read it</b> starts from the letters and decodes; <b>Spell it</b> starts from the syllables, then the sounds, then the letters.</p>
+<h1><span class="t-only">Words</span><span class="s-only">Pick a word</span></h1>
+<p class="lead t-only">Look up a word, then tap or swipe through it. <b>Read it</b> starts from the letters and decodes; <b>Spell it</b> starts from the syllables, then the sounds, then the letters. Under the word is its sum: tap a part to see every word that shares it.</p>
 </div></section>
-{section(note=X["uc"]("the walk takes the words marked on this site. Any other word would need an automatic first pass from a pronunciation dictionary, which would get some wrong. Next: a draft for other words, for teachers to check."))}"""
-    door_page("walk", "Word walk · Sound and Word Atlas", "Type a word and walk through it: reading from its letters, spelling from its sounds.", body)
+{section(note=X["uc"]("a word is either marked, so it can be walked, or shown as a word sum only. Next: the word built from left to right, a unit at a swipe, starting from plain letters; and draft marks for more words, labelled as drafts, for teachers to check."))}
+<section class="about t-only"><div class="wrap"><p><a href="explorations.html">A family built in three moves: <i>note</i>, <i>notate</i>, <i>notation</i></a>. Every analysed word, by its parts, is in <a href="parts.html">Parts</a>.</p></div></section>"""
+    door_page("walk", "Words · Sound and Word Atlas", "Look up a word and walk through it: its marks, a move at a time, and its parts.", body)
     return len(index), skipped
 
 
@@ -142,9 +157,10 @@ def section(note="", head="", lazy=False, url=True, default="which"):
 <div class="chips" aria-label="Try one">{chips}</div>
 <div class="walk-forms" hidden></div>
 <p class="walk-msg" role="status"></p>
-<div class="walk-stage" tabindex="0" aria-label="The word. Tap, or press the right arrow, for the next step."></div>
+<div class="walk-stage" tabindex="0" aria-label="The word. Tap, swipe left, or press the right arrow, for the next step."></div>
 <p class="walk-cap" aria-live="polite"></p>
 <div class="walk-nav"><button type="button" class="walk-back">Back</button><span class="walk-dots" aria-hidden="true"></span><button type="button" class="walk-next">Next</button><button type="button" class="walk-all">Show it all</button></div>
+<p class="walk-sum"></p>
 <p class="walk-where"></p>
 <noscript><p>The word walk needs script. Each word is also on its step page.</p></noscript>
 {note}
@@ -156,7 +172,7 @@ WALK_JS = r"""<script>(() => {
   const root = document.querySelector('.walk'); if (!root || !window.fetch) return;
   const $ = s => root.querySelector(s);
   const form = $('.walk-form'), input = $('#walk-q'), list = $('#walk-words'), stage = $('.walk-stage'), cap = $('.walk-cap'),
-        dots = $('.walk-dots'), msg = $('.walk-msg'), where = $('.walk-where'), formsBox = $('.walk-forms');
+        dots = $('.walk-dots'), msg = $('.walk-msg'), where = $('.walk-where'), formsBox = $('.walk-forms'), sumBox = $('.walk-sum');
   const student = () => document.documentElement.dataset.view === 'student';
   const norm = s => s.trim().toLowerCase().replace(/[’']/g, '').replace(/\s+/g, ' ');
   const esc = s => String(s).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
@@ -201,6 +217,11 @@ WALK_JS = r"""<script>(() => {
   }
   function draw() {
     if (!word) return;
+    root.classList.toggle('sum-only', !word.forms.length);
+    if (!word.forms.length) {      // taken apart, not marked yet: the word in plain letters
+      stage.innerHTML = '<span class="walk-plain">' + esc(word.w) + '</span>'; steps = []; step = 0;
+      cap.innerHTML = 'This word isn’t marked yet. Its parts are below.'; dots.innerHTML = ''; return;
+    }
     const f = word.forms[form_];
     stage.innerHTML = '<svg viewBox="0 0 ' + f.W + ' ' + f.H + '" role="img" aria-label="' + esc(word.w) + ', marked">' + f.svg + '</svg>';
     steps = plan(f); step = 0; stage.getBoundingClientRect(); requestAnimationFrame(apply);
@@ -216,6 +237,8 @@ WALK_JS = r"""<script>(() => {
       formsBox.innerHTML = j.forms.length < 2 ? '' : j.forms.map((f, i) => '<button type="button" data-form="' + i + '" aria-pressed="' + (i === 0) + '">' + esc(f.gloss) + '</button>').join('');
       const allT = j.where.length && j.where.every(l => l.x);   // only teachers' links: student view shows no line at all
       where.innerHTML = j.where.length ? '<span' + (allT ? ' class="t-only"' : '') + '>On the site: ' + j.where.map(l => '<a' + (l.x ? ' class="t-only"' : '') + ' href="' + esc(l.u) + '">' + esc(l.t) + '</a>').join(' · ') + '</span>' : '';
+      sumBox.innerHTML = j.sum ? '<span class="ws-l">Word sum</span> ' + j.sum.map(p => '<a href="' + esc(p.u) + '"' + (p.m ? ' title="' + esc(p.m) + '"' : '') + '>' + p.s + '</a>').join(' + ') + ' &rarr; <i>' + esc(j.w) + '</i>'
+        + (j.mean ? '<span class="ws-m t-only">' + esc(j.mean) + '</span>' : '') : '';
       draw();
       if (root.dataset.url !== 'off') { const u = new URL(location.href); u.searchParams.set('w', j.w); history.replaceState(null, '', u); }
     });
@@ -226,8 +249,13 @@ WALK_JS = r"""<script>(() => {
   root.querySelectorAll('[data-mode]').forEach(b => b.addEventListener('click', () => { mode = b.dataset.mode; draw(); }));
   formsBox.addEventListener('click', e => { const b = e.target.closest('[data-form]'); if (!b) return; form_ = +b.dataset.form;
     formsBox.querySelectorAll('[data-form]').forEach(x => x.setAttribute('aria-pressed', String(x === b))); draw(); });
-  stage.addEventListener('click', () => go(1));
+  stage.addEventListener('click', () => { if (swiped) { swiped = false; return; } go(1); });
   stage.addEventListener('keydown', e => { if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(1); } else if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); } });
+  // swipe left for the next move, right to go back, as a page turns
+  let sx = null, sy = null, swiped = false;
+  stage.addEventListener('touchstart', e => { const t = e.touches[0]; sx = t.clientX; sy = t.clientY; swiped = false; }, {passive: true});
+  stage.addEventListener('touchend', e => { if (sx === null) return; const t = e.changedTouches[0], dx = t.clientX - sx, dy = t.clientY - sy; sx = null;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > 1.5 * Math.abs(dy)) { swiped = true; go(dx < 0 ? 1 : -1); } });
   $('.walk-next').addEventListener('click', () => go(1));
   $('.walk-back').addEventListener('click', () => go(-1));
   $('.walk-all').addEventListener('click', () => { step = steps.length - 1; apply(); });
