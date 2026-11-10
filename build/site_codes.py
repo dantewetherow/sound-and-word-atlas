@@ -1,5 +1,6 @@
-"""Marking codes for route words that had none in the deck tools, written for the site on 5 November 2026, and for
-the hap family's page (roots/hap.html), added 9 November 2026.
+"""Marking codes for route words that had none in the deck tools, written for the site on 5 November 2026, for
+the hap family's page (roots/hap.html), added 9 November 2026, and for step 16's new words and contrasts, added
+10 November 2026.
 
 Same code as legomorphic_words.py (see its docstring). Each line follows a word the tools already mark:
 the analog is named in the comment. Words in UNMARKED are shown in plain letters until a marking is settled.
@@ -38,9 +39,13 @@ SITE_CODES = {
     "making": "c.m l.a | c.k + s.i k.ng ; vault 3>1", "having": "c.h s.a c.v + | s.i k.ng",
     "race": "c.r l.a c.c e> ; nudge 3>2", "racing": "c.r l.a | c.c + s.i k.ng ; vault 3>1 ; nudge 3>2",
     "ice": "l.i c.c e> ; nudge 2>1", "icy": "l.i | c.c + b.y ; vault 2>0 ; nudge 2>1",
-    # step 16: open and closed in longer words (as over, open, pony)
+    # step 16: open and closed in longer words (as over, open, pony; seven and lemon for a short first vowel)
     "silent": "c.s l.i | c.l b.e c.nt ; vault 3>1", "tiger": "c.t l.i | c.g r.er ; vault 3>1",
     "paper": "c.p l.a | c.p r.er ; vault 3>1", "music": "c.m l.u | c.s s.i c.c ; vault 3>1",
+    # its contrasts, 10 November 2026: robin as the role cards draw it (noun_codes.py), robot as music, river as never
+    # and tiger, silly as middle and sunny without the seam
+    "robin": "c.r s.o c.b | s.i c.n", "robot": "c.r l.o | c.b s.o c.t ; vault 3>1",
+    "river": "c.r s.i c.v | r.er", "silly": "c.s s.i x.ll | b.y ; bv 3>2",
     # step 17: consonant + le (as the table and bugle card, and little)
     "table": "c.t l.a | c.b le ; vault 3>1", "bugle": "c.b l.u | c.g le ; vault 3>1",
     "title": "c.t l.i | c.t le ; vault 3>1", "apple": "s.a x.pp | le", "middle": "c.m s.i x.dd | le",
@@ -129,4 +134,16 @@ CALLS = [
     ("mishap, haphazard", "s and h, and p and h, on either side of a seam, each with its own circle",
      "The seam splits what would otherwise read as sh and ph. The ar of hazard takes the r-controlled unit of car, "
      "though it spells the er sound: a unit's second sound is marked alike, as look's oo is."),
+    # step 16's new words and contrasts, 10 November 2026
+    ("robin", "a short o closed by b, and a short i in -in, with no vault",
+     "As lemon and seven, and as the role cards draw robin. The i of -in is said lightly but still has the sound of "
+     "the i in sit, so it takes a short mark, as in music and doing."),
+    ("robot", "a long first o with a vault from the second o, which is short",
+     "As tiger and music: one consonant between, and the first o spells its name. The second o is short, as in hot, "
+     "for most speakers; said weakly, it would be bare."),
+    ("river", "a short i closed by v, with no vault, and er as the r-controlled unit",
+     "As seven and never: a short first vowel takes the consonant into its syllable (riv·er), and er is marked as in tiger."),
+    ("silly", "a box over ll and a blocked vault from y, with no seam",
+     "As middle. Silly comes from Old English gesælig, happy or fortunate (Etymonline), not from sill + y, so its double l "
+     "is inherited, as the tt of pretty is. Happy has a seam and silly doesn't, though both once meant fortunate."),
 ]

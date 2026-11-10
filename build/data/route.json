@@ -368,19 +368,24 @@
    "n": 16,
    "title": "Open and closed in longer words",
    "band": "Single vowels",
-   "words_md": "*silent, tiger, paper, music, open, over*; contrast *silent/silly, open/seven*",
-   "marks": "none: the vault reaches across the syllable, and a weak vowel stays bare",
+   "words_md": "long: *tiger, paper, music, open*; short: *seven, lemon, robin*; weak: *today, around*; contrast *even/seven, robot/robin, tiger/river, silent/silly*",
+   "marks": "none: a long first vowel takes the vault, a short one takes the consonant into its syllable (*sev·en*), and a weak one stays bare",
    "kernel_md": "none",
    "carney": "In a vowel-consonant-vowel run the first vowel is often short, and hard to predict without stress, p. 275; open syllables, p. 134",
+   "move": "Try the first vowel long, then short, then weak. Keep the one that makes a word you know, then mark it.",
+   "research": "Kearns (2020): with one consonant between two vowels, the first vowel of a two-syllable word is long 47% of the time, short 25% and weak 21%. In longer words it is long only 19% of the time. The vowel matters: *u* is usually long (84%), and *e* is long only 18% of the time and weak 60%.",
    "words": [
-    "silent",
     "tiger",
     "paper",
     "music",
     "open",
-    "over"
+    "seven",
+    "lemon",
+    "robin",
+    "today",
+    "around"
    ],
-   "contrast_md": "*silent/silly, open/seven*"
+   "contrast_md": "*even/seven, robot/robin, tiger/river, silent/silly*"
   },
   {
    "n": 17,
@@ -711,6 +716,7 @@
   }
  ],
  "carney_intro": "Edward Carney's *A Survey of English Spelling* (Routledge, 1994) describes every unit on the route, and the atlas leans on it from the first step to the last. The pages are Carney's printed pages; a sound named on its own is the start of his section on that sound. How a phonics program lines up with the route is in a crosswalk, a separate PDF for each program. The first is for UFLI Foundations.",
+ "moves_intro": "Some steps teach a move: what a learner tries when the marks alone don't settle a word. Each move is listed with the research behind it. Devin M. Kearns, \"Does English Have Useful Syllable Division Patterns?\" *Reading Research Quarterly* 55, no. S1 (2020): S145–S160, counted how the vowels are said in 14,844 words from texts for grades 1 to 8. His figures describe the words, not learners. Added 10 November 2026.",
  "open": [
   "Teams with two sounds (steps 22 and 24). The Orton-Gillingham manual puts a bar or a cup over *oo* (p. 17), and the vicinity pattern page says a team takes no long mark, short mark or vault. The marking calls of 7 October mark both sounds alike for now.",
   "Step 19 could move up to follow step 13. Its words are met in marked text from rung 1, and every unit it uses is in place by step 13, where the seam lets *does* be built as *do* + *es*.",

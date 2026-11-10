@@ -20,7 +20,7 @@ codes, _ = all_codes()
 for w, c in SC.SITE_CODES.items(): codes.setdefault(w, c)
 LW.W.clear(); LW.W.update(codes)
 STEPS = route["steps"]; N = len(STEPS)
-BUILT = "9 November 2026"
+BUILT = "10 November 2026"
 # The fonts come from the site itself (fonts/fonts.css, copied from build/fonts), so a page asks nothing of anyone but
 # its host. Until 8 November 2026 they came from Google Fonts.
 def FONTS(up=""): return f'<link rel="stylesheet" href="{up}fonts/fonts.css">'
@@ -32,15 +32,25 @@ def md(s):
 
 def plain(s): return re.sub(r"\*", "", s)
 
-def groups_of(words_md):
-    """The step's words, kept in the groups the manual writes them in (be/bed is a pair)."""
+def sets_of(words_md):
+    """The step's words in the runs the manual writes between semicolons, each with its label where the manual gives
+    one (step 16: "long: *tiger, paper, music, open*; short: ..."), and in each run the groups (be/bed is a pair)."""
     main = words_md.replace("**", "").split("; contrast")[0].replace("*", "")
     out = []
-    for item in re.split(r"[;,]", main):
-        for part in item.split("→"):
-            g = [w.strip() for w in part.split("/") if w.strip()]
-            if g: out.append(g)
+    for run in main.split(";"):
+        m = re.match(r"\s*([a-z][a-z ]*):\s*(.*)$", run, re.S)
+        label, run = (m.group(1), m.group(2)) if m else ("", run)
+        groups = []
+        for item in run.split(","):
+            for part in item.split("→"):
+                g = [w.strip() for w in part.split("/") if w.strip()]
+                if g: groups.append(g)
+        if groups: out.append((label, groups))
     return out
+
+def groups_of(words_md):
+    """The step's words, kept in the groups the manual writes them in (be/bed is a pair)."""
+    return [g for _, groups in sets_of(words_md) for g in groups]
 
 def with_code(word, code):
     """Put a word's code in place for one drawing, and afterwards leave LW.W as it was (no stray empty code behind)."""
@@ -209,17 +219,25 @@ for i, s in enumerate(STEPS):
     n = s["n"]; band = s["band"]
     prev_s = STEPS[i - 1] if i else None; next_s = STEPS[i + 1] if i + 1 < N else None
     cells, seen = [], set()
-    for g in groups_of(s["words_md"]):
-        inner = word_cells(g, 58, seen)
-        cells.append(f'<div class="group{" pair" if len(inner) > 1 else ""}">' + "".join(inner) + "</div>")
+    for label, groups in sets_of(s["words_md"]):
+        if label: cells.append(f'<p class="set-label">{html.escape(label.capitalize())}</p>')
+        for g in groups:
+            inner = word_cells(g, 58, seen)
+            cells.append(f'<div class="group{" pair" if len(inner) > 1 else ""}">' + "".join(inner) + "</div>")
     notes = []
     marks = s["marks"].strip()
     notes.append(f'<div class="note"><h2>New marks</h2><p>{new_marks(marks)}</p></div>')
+    # The move: what a learner tries when the marks alone don't settle a word (the manual's "Moves and research").
+    if s.get("move"):
+        notes.append(f'<div class="note"><h2>The move</h2><p>{md(s["move"])}</p></div>')
     if s.get("contrast_md"):
         notes.append(f'<div class="note"><h2>Contrast</h2><p>{md(s["contrast_md"])}</p></div>')
     k = s["kernel_md"].strip()
     notes.append(f'<div class="note"><h2>Kernel words</h2><p>{md(k) if k.lower() != "none" else "None at this step."}</p></div>')
     notes.append(f'<div class="note"><h2>Carney (1994)</h2><p>{md(s.get("carney", ""))}</p></div>')
+    if s.get("research"):
+        notes.append(f'<div class="note"><h2>Research</h2><p>{md(s["research"])} '
+                     f'<a href="../credits.html#research">The full references</a>.</p></div>')
     for text in open_items_for(n):
         notes.append(f'<div class="note uc">{uc(md(text))}</div>')
     unmarked = sorted({SC.UNMARKED[w] for g in groups_of(s["words_md"]) for w in g if w in SC.UNMARKED})
