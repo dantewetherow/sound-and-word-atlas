@@ -77,6 +77,14 @@ SITE_CODES = {
     # step 32: ph as a black bond bar (as kn); photo as pony
     "photo": "k.ph l.o | c.t l.o ; vault 3>1", "phone": "k.ph l.o c.n e>", "graph": "c.gr s.a k.ph",
     "alphabet": "s.a c.l | k.ph b.a | c.b s.e c.t",
+    # the steps' contrasts, drawn on the step pages since 10 November 2026, each as the word named beside it
+    "cost": "c.c s.o c.st", "mint": "c.m s.i c.nt",              # as must and went: short before two consonants
+    "mind": "c.m l.i c.nd",                                       # as find and kind
+    "bone": "c.b l.o c.n e>",                                     # as home
+    "gone": "c.g b.o c.n e0",                                     # as done: a borrowing vowel, bare, and an e in a cone
+    "due": "c.d t.ue", "dew": "c.d t.ew",                         # as blue and new
+    "snow": "c.sn t.ow",                                          # as the noun cards draw it
+    "knot": "k.kn s.o c.t", "wrap": "k.wr s.a c.p", "rap": "c.r s.a c.p",   # as know and write; rap as not
     # the landing page: the notation's own name, and note to notation (as making and photo; creation as the create family deck)
     "legomorphic": "c.l s.e c.g + | l.o + | c.m r.or | k.ph + s.i c.c",   # leg + o + morph + ic since 10 November 2026
     "note": "c.n l.o c.t e>",                                    # as the sentence cards mark it
@@ -134,6 +142,9 @@ CALLS = [
     ("mishap, haphazard", "s and h, and p and h, on either side of a seam, each with its own circle",
      "The seam splits what would otherwise read as sh and ph. The ar of hazard takes the r-controlled unit of car, "
      "though it spells the er sound: a unit's second sound is marked alike, as look's oo is."),
+    ("gone", "a bare o and an e in a cone, as done",
+     "Gone has the short o of got for most speakers, and done has the u of up. Both are marked as borrowing vowels at step 19, "
+     "since the e sends no vault. A short mark on gone's o would be the other reading."),
     # step 16's new words and contrasts, 10 November 2026
     ("robin", "a short o closed by b, and a short i in -in, with no vault",
      "As lemon and seven, and as the role cards draw robin. The i of -in is said lightly but still has the sound of "

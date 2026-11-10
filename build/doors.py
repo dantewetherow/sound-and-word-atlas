@@ -369,6 +369,10 @@ def write_search(OUT, X):
             for w in g: where.setdefault(w, []).append(st["n"])
     for w, ns in sorted(where.items()):
         add("word", w, f"steps/{ns[0]:02d}.html#{word_id(w)}", "Step " + ", ".join(str(n) for n in ns[:3]) + ("…" if len(ns) > 3 else ""))
+    for st in X["STEPS"]:                    # contrast words that are on no step's own list
+        for item in (st.get("contrast_md") or "").replace("*", "").split(","):
+            for w in (x.strip() for x in item.split("/")):
+                if w and w not in where: add("word", w, f"steps/{st['n']:02d}.html", f"Step {st['n']}, contrast")
     # Words on the lists but not the route land on their place in the word lists' table, which holds every ELP word and
     # Dolch's 220, or, for Dolch's nouns, on the coded side of their card in the noun set: ten cards a sheet, each sheet a
     # plain page and then its coded page (build_dolch_cards.py)

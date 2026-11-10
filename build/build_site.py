@@ -51,6 +51,14 @@ def sets_of(words_md):
         if groups: out.append((label, groups))
     return out
 
+def contrasts_of(s):
+    """The step's contrasts as groups: go/do is a pair, bone/done/gone a three."""
+    out = []
+    for item in (s.get("contrast_md") or "").replace("*", "").split(","):
+        g = [w.strip() for w in item.split("/") if w.strip()]
+        if g: out.append(g)
+    return out
+
 def groups_of(words_md):
     """The step's words, kept in the groups the manual writes them in (be/bed is a pair)."""
     return [g for _, groups in sets_of(words_md) for g in groups]
@@ -227,14 +235,18 @@ for i, s in enumerate(STEPS):
         for g in groups:
             inner = word_cells(g, 58, seen)
             cells.append(f'<div class="group{" pair" if len(inner) > 1 else ""}">' + "".join(inner) + "</div>")
+    # The contrasts, drawn: each pair side by side, so the one difference shows (since 10 November 2026).
+    cons = contrasts_of(s)
+    if cons:
+        cells.append('<p class="set-label">Contrast</p>')
+        for g in cons:
+            cells.append('<div class="group pair">' + "".join(word_cells(g, 58)) + "</div>")
     notes = []
     marks = s["marks"].strip()
     notes.append(f'<div class="note"><h2>New marks</h2><p>{new_marks(marks)}</p></div>')
     # The move: what a learner tries when the marks alone don't settle a word (the manual's "Moves and research").
     if s.get("move"):
         notes.append(f'<div class="note"><h2>The move</h2><p>{md(s["move"])}</p></div>')
-    if s.get("contrast_md"):
-        notes.append(f'<div class="note"><h2>Contrast</h2><p>{md(s["contrast_md"])}</p></div>')
     k = s["kernel_md"].strip()
     notes.append(f'<div class="note"><h2>Kernel words</h2><p>{md(k) if k.lower() != "none" else "None at this step."}</p></div>')
     notes.append(f'<div class="note"><h2>Carney (1994)</h2><p>{md(s.get("carney", ""))}</p></div>')

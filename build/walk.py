@@ -74,6 +74,12 @@ def write(OUT, door_page, X):
         for g in X["groups_of"](st["words_md"]):
             for w in g:
                 where.setdefault(w, []).append({"t": f"Step {st['n']}", "u": f"steps/{st['n']:02d}.html#{doors.word_id(w)}"})
+    for st in X["STEPS"]:                    # the steps' contrast words, after the steps' own words
+        for item in (st.get("contrast_md") or "").replace("*", "").split(","):
+            for w in item.split("/"):
+                w = w.strip()
+                if w and not any(l["t"] == f"Step {st['n']}" for l in where.get(w, [])):
+                    where.setdefault(w, []).append({"t": f"Step {st['n']}, contrast", "u": f"steps/{st['n']:02d}.html"})
     fam = {}
     for w, u, label in X.get("roots", []):   # the families behind Derivations, for their words that are drawn
         fam.setdefault(w, []).append({"t": label, "u": u})
