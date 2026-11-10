@@ -57,7 +57,7 @@ def wordmark():
 def write(OUT, page, header, footer, svg_of, LW):
     import characters
     mark = wordmark()
-    note = characters.lifted(LW, "note", label="Note, the notation's mascot: note with its letters lifted out", scale=1.2)
+    gno = characters.lifted(LW, "gno", label="Gno, the notation's mascot: gno with its letters lifted out", scale=1.2)
     examples ="".join(f'<figure class="ex">{svg_of(w, 56)}<figcaption>{cap}</figcaption></figure>' for w, cap in EXAMPLES)
     about = f"""{header(0)}
 <main>
@@ -67,7 +67,7 @@ def write(OUT, page, header, footer, svg_of, LW):
 <h1>Legomorphic Notation</h1>
 <p class="lead">A set of marks and colours drawn on ordinary spelling, so that what a reader usually has to work out alone is there for everyone to see: how many sounds a word has, which letters spell each sound, where its meaningful parts join, and which letters change the sounds of others.</p>
 </div>
-<figure class="mascot-hero"><a href="definitions.html#def-legomorph">{note}</a><figcaption>Note, the notation&rsquo;s mascot: <i>note</i> with its letters lifted out</figcaption></figure>
+<figure class="mascot-hero"><a href="definitions.html#def-legomorph">{gno}</a><figcaption>Gno, the notation&rsquo;s mascot: <i>gno</i> with its letters lifted out, gn under one black bar and o spelling its name. His bar is cut short, for a brow.</figcaption></figure>
 </div></section>
 
 <section class="about" aria-labelledby="word-h"><div class="wrap prose">

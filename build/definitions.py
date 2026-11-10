@@ -147,7 +147,7 @@ def write(OUT, page, header, footer, svg_of, KEY, LW):
     import characters
     unsize = lambda svg: re.sub(r' style="[^"]*"', "", svg, count=1)
     note_marked = unsize(svg_of("note", 64, label="note, marked"))
-    note_lifted = characters.lifted(LW, "note", label="Note, the mascot: note with its letters lifted out")
+    note_lifted = characters.lifted(LW, "note", label="Note: note with its letters lifted out")
     team = characters.team(LW)
 
     body = f"""{header(0)}
@@ -180,7 +180,7 @@ def write(OUT, page, header, footer, svg_of, KEY, LW):
 <li>In the grammar of legomorphics, a prime: one of the first categories a sentence is assembled from, such as the actor, the action and the acted-on (Latin <i>primus</i>, first).</li>
 </ol>
 <figure class="mascot"><div class="pair">{note_marked}<span class="to" aria-hidden="true">&rarr;</span>{note_lifted}</div>
-<figcaption>Note, the notation&rsquo;s mascot: <i>note</i> with its letters lifted out and the gap they leave closed, so its legomorphs stand on their own. The three circles are its phonemes, and the vault from the silent <i>e</i> in its cone to the bar over the <i>o</i> is its transformation.</figcaption></figure>
+<figcaption>Note: <i>note</i> with its letters lifted out and the gap they leave closed, so its legomorphs stand on their own. The three circles are its phonemes, and the vault from the silent <i>e</i> in its cone to the bar over the <i>o</i> is its transformation.</figcaption></figure>
 <span class="src">Coined for the notation.</span></dd></div>
 
 <div class="def" id="def-legomorphics"><dt>legomorphics <span class="pos">noun, singular</span> <span class="pron">/ˌlɛɡoʊˈmɔrfɪks/</span></dt>

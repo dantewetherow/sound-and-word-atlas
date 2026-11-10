@@ -1,8 +1,15 @@
 """The notation's characters: words with their letters lifted out, so their marks stand on their own as faces.
 
-Note, the mascot, is note; he sits beside the site's name in the header. The Dialogue Team is She, Could and Go, the
-actor, operator and action of a claim; when Could flips to the front, the claim becomes a question. Chosen on
-7 November 2026.
+Gno, the mascot and the site's icon since 10 November 2026, is gno: gn as one sound under a black bond bar, as kn in
+know, and o with a long mark, spelling its name. He sits beside the site's name in the header, stands on the About page,
+and is the browser tab's icon (logo.py). He is the one character changed after lifting: his bond bar is cut to the
+length of his long mark, centred where it was (SHORT_BAR), so it reads as a short brow under the raised red one. The
+others are their words' marks exactly.
+
+Note, note lifted, was the mascot from 7 to 10 November 2026; he stays in Definitions as the worked example of a word
+whose legomorphs stand on their own. The Dialogue Team is She, Could and Go, the actor, operator and action of a claim;
+when Could flips to the front, the claim becomes a question. Chosen on 7 November 2026; whether the team stays, and
+where each character goes, decorative, instructional or both, is open.
 
 A lifted word keeps every mark svg_word draws, in its order. With the letters gone, the marks drawn above them (long
 and short marks, the cone, the vault) come down by DROP letter sizes to close the gap, and the marks drawn under them
@@ -17,6 +24,25 @@ DROP = 0.62
 MOUTH = 0.25
 TEAM = [("she", "She", "actor"), ("could", "Could", "operator"), ("go", "Go", "action")]
 NUM = r"-?\d+(?:\.\d+)?"
+CODES = {"gno": "k.gn l.o"}     # the characters' words that aren't on the site's route or lists
+SHORT_BAR = {"gno"}             # bond bars cut to the long mark's length, centred where they were (Gno's short brow)
+
+
+def _shorten_bars(els):
+    """Each bond bar cut to the length of the word's long mark, centred where it was."""
+    longs = [e for e in els if e.startswith('<line class="nz6"')]
+    if not longs:
+        return els
+    x1, x2 = (float(re.search(f' {a}="({NUM})"', longs[0])[1]) for a in ("x1", "x2"))
+    half = abs(x2 - x1) / 2
+    def cut(e):
+        if not e.startswith('<line class="nz4"'):
+            return e
+        a, b = (float(re.search(f' {k}="({NUM})"', e)[1]) for k in ("x1", "x2"))
+        m = (a + b) / 2
+        e = re.sub(f' x1="{NUM}"', f' x1="{m - half:.1f}"', e, count=1)
+        return re.sub(f' x2="{NUM}"', f' x2="{m + half:.1f}"', e, count=1)
+    return [cut(e) for e in els]
 
 
 def _points(el):
@@ -65,12 +91,17 @@ def lifted(LW, word, F=58.0, label=None, pad=0.08, scale=1.0, em=None, px_height
     site's variables, so it follows the page between bright and night. With em, the width is set in ems, so a group of
     drawings can be scaled together by its font size. With px_height, the drawing is sized to that height. Weight
     thickens the marks for small sizes, like the header's."""
+    if word in CODES and word not in LW.W:
+        LW.W[word] = CODES[word]
     g, _, _ = LW.svg_word(word, F, 0.0, cls=True)
     B = 1.44 * F                                           # svg_word's baseline
     g = re.sub(r'<rect class="wt"[^>]*/>', "", g)
     g = re.sub(r'<g class="nz5".*?</g>', "", g, flags=re.S)
+    els = re.findall(r"<[^>]+/>", g)
+    if word in SHORT_BAR:
+        els = _shorten_bars(els)
     out, pts = [], []
-    for el in re.findall(r"<[^>]+/>", g):
+    for el in els:
         first = re.search(f'(?:cy|y1)="({NUM})"', el) or re.search(f'd="M{NUM} ({NUM})', el)
         dy = DROP * F if re.search(r'class="nz(6|8)"', el) and first and float(first[1]) < B else 0.0
         if 'class="nz3"' in el:                            # the swoop is the mouth: lower than in a word, so it reads as a smile

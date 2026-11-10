@@ -7,10 +7,12 @@ The wordmark, from Dante's sketches of 6 November 2026, which replace the d b q 
                             and written to build/wordmark.svg, which about_pages.py draws into the page
   split   λέγ┊ō┊morph┊ic    the word as the notation reads it in English: leg, o, morph and ic, with seams
 
-The logo: go, chosen on 7 November 2026 for the browser tab, written to build/logo.svg with PNG copies for browsers
-that can't use an SVG icon (favicon-32.png, apple-touch-icon.png). Note, the mascot, sits beside the name in the header
-(characters.py). The candidates were a word's own
-marks with its letters lifted out, so every mark is true (6 November 2026):
+The logo: Gno, the mascot, since 10 November 2026, written to build/logo.svg with PNG copies for browsers that can't
+use an SVG icon (favicon-32.png, apple-touch-icon.png). He is drawn as the header draws him (characters.lifted, with
+his short brow), with heavier marks so they hold in a browser tab, and his colours turned into the classes below so the
+file stands on its own (lifted_mark). From 7 to 10 November 2026 the logo was go's marks, drawn by mark(), while Note
+sat in the header. The candidates mark() draws were a word's own marks with its letters lifted out, so every mark is
+true (6 November 2026):
 
   go          two circles and a swoop, a bar over the red one: a vowel that ends its syllable spells its name
   it          red first, with a cup over it: a short vowel closed by a consonant
@@ -189,8 +191,27 @@ MARKS = {   # name: (circles left to right, (mark above, over which circle), wha
 }
 WEIGHT, BROW, SLOT, CONE = 1.5, 0.33, 0.67, 0.30
 from characters import MOUTH                                 # the faces' mouths sit lower than a word's swoop (8 November 2026)
-CHOSEN = "go"
+CHOSEN = "gno"                                             # a character's word (lifted_mark), or a name in MARKS (mark); go until 10 November 2026
+ICON_WEIGHT = 2.2                                          # how much heavier the icon's marks are than the header's lifted face
 PAPER = "#f4efe6"                                          # the site's --paper, behind the PNG icons
+CLASSES = {"ink": "k", "verb": "r", "modal": "b", "soft": "q"}
+
+
+def lifted_mark(word):
+    """A character as the icon: the face characters.lifted draws, marks made heavier, its colours turned from the site's
+    variables into the classes in STYLE, in a square with a little room around it."""
+    import re
+    import legomorphic_words as LW, characters
+    s = characters.lifted(LW, word, weight=ICON_WEIGHT)
+    x0, y0, w, h = (float(v) for v in re.search(r'viewBox="([^"]+)"', s)[1].split())
+    body = re.sub(r"^<svg[^>]*>|</svg>$", "", s)
+    body = re.sub(r'(?: fill="none")? stroke="var\(--(\w+)\)"', lambda m: f' class="{CLASSES[m[1]]} st"', body)
+    body = re.sub(r'fill="var\(--(\w+)\)"', lambda m: f'class="{CLASSES[m[1]]}"', body)
+    side = max(w, h) * 1.12
+    mx, my = x0 + w / 2, y0 + h / 2
+    return svg([body], mx - side / 2, my - side / 2, mx + side / 2, my + side / 2,
+               f"Legomorphic Notation logo: Gno, gno with its letters lifted out: a short black brow over one circle, a "
+               f"raised red bar over the other, and a swoop for a smile", pad=0)
 
 
 def mark(name, F=100.0):
@@ -252,7 +273,7 @@ if __name__ == "__main__":
     (HERE / "wordmark.svg").write_text(whole(nm), encoding="utf-8")
     (out / "wordmark-split.svg").write_text(split(nm), encoding="utf-8")
     for name in MARKS: (out / f"mark-{name}.svg").write_text(mark(name), encoding="utf-8")
-    logo = mark(CHOSEN)
+    logo = mark(CHOSEN) if CHOSEN in MARKS else lifted_mark(CHOSEN)
     (HERE / "logo.svg").write_text(logo, encoding="utf-8")
     from playwright.sync_api import sync_playwright         # the PNG icons: the mark on the paper colour, light marks
     with sync_playwright() as pw:

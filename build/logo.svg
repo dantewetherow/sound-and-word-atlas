@@ -1,8 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="-61 -54 139 139" role="img" aria-label="Legomorphic Notation logo: two sound circles and a swoop, a bar over the red one: the marks of go">
-<title>Legomorphic Notation logo: two sound circles and a swoop, a bar over the red one: the marks of go</title>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="26 50 119 119" role="img" aria-label="Legomorphic Notation logo: Gno, gno with its letters lifted out: a short black brow over one circle, a raised red bar over the other, and a swoop for a smile">
+<title>Legomorphic Notation logo: Gno, gno with its letters lifted out: a short black brow over one circle, a raised red bar over the other, and a swoop for a smile</title>
 <style>.k{fill:#2b2b2b}.r{fill:#b5402f}.k.st,.r.st,.b.st,.b.seam,.q.st{fill:none}.k.st{stroke:#2b2b2b}.r.st{stroke:#b5402f}.b.st,.b.seam{stroke:#3f6488}.q.st{stroke:#6b6256}@media (prefers-color-scheme:dark){.k{fill:#ece5d8}.r{fill:#e2836e}.k.st{stroke:#ece5d8}.r.st{stroke:#e2836e}.b.st,.b.seam{stroke:#95b6db}.q.st{stroke:#a89e8f}}</style>
-<circle class="k" cx="-33.50" cy="0" r="10.80"/>
-<circle class="r" cx="33.50" cy="0" r="10.80"/>
-<path class="b st" d="M-44.20 54.00 Q0.00 74.00 44.20 54.00" stroke-width="6.90" stroke-linecap="round"/>
-<line class="r st" x1="5.60" y1="-33.00" x2="61.40" y2="-33.00" stroke-width="7.50" stroke-linecap="round"/>
+<line x1="40.1" y1="102.7" x2="72.4" y2="102.7" class="k st" stroke-width="6.38" stroke-linecap="round"/><g transform="translate(0 36.0)"><line x1="98.4" y1="30.7" x2="130.7" y2="30.7" class="r st" stroke-width="6.38" stroke-linecap="round"/></g><circle cx="56.3" cy="116.0" r="9.24" class="k"/><circle cx="114.6" cy="116.0" r="9.24" class="k"/><circle cx="114.6" cy="116.0" r="9.24" class="r"/><g transform="translate(0 14.5)"><path d="M50.1 132.8 Q85.4 144.4 120.8 132.8" class="b st" stroke-width="5.94" stroke-linecap="round"/></g>
 </svg>

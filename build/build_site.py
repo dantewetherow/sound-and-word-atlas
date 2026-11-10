@@ -131,11 +131,11 @@ THEME_JS = """<script>(() => {
   if (dark.addEventListener) dark.addEventListener('change', show);
   sw.hidden = false; show();
 })();</script>"""
-# Note, the mascot, beside the site's name in the header (characters.py), in the site's colours so he follows bright and
-# night. The brand link names the site, so the drawing is hidden from screen readers. Go, the logo (logo.py,
-# build/logo.svg), stays the browser tab's icon, where Note's cone and vault are too fine to read.
+# Gno, the mascot, beside the site's name in the header (characters.py), in the site's colours so he follows bright and
+# night. The brand link names the site, so the drawing is hidden from screen readers. He is the browser tab's icon too
+# (logo.py, build/logo.svg). Note sat here from 7 to 10 November 2026, and Go's marks were the tab's icon.
 import about_pages, characters
-LOGO = characters.lifted(LW, "note", px_height=54, weight=1.7)   # 48px until his mouth came down on 8 November 2026; the same scale as before
+LOGO = characters.lifted(LW, "gno", px_height=54, weight=1.7)
 
 THEME_SWITCH = ('<div class="theme" role="group" aria-label="Page colours" hidden>'
                 '<button type="button" data-pick="light">Bright</button><button type="button" data-pick="dark">Night</button></div>')
