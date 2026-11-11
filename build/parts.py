@@ -54,10 +54,41 @@ JOINS = [
     ("f-to-v", "f turns to v", "A few words that end in <i>f</i> or <i>fe</i> write <i>v</i> before <i>-es</i>, as they are said.", None, None),
 ]
 
+# A lesson that rides on a part: (heading, paragraphs). It opens the part's card, and Parts lists it under Lessons.
+LESSONS = {
+    "-ion": ("It&rsquo;s -ion, not -tion", [
+        "The t in <i>action</i> belongs to <i>act</i>. The suffix is <b>-ion</b>: act + ion, collect + ion, product + ion. "
+        "Taught as <i>-tion</i>, the base loses its last letter and its family goes out of sight: <i>ac</i> isn&rsquo;t the base, "
+        "and <i>act</i> is: it is in <i>actor</i>, <i>active</i> and <i>react</i>.",
+        "This is also why the letter before it varies. It is the base&rsquo;s own letter: t in act + ion, s in discuss + ion and "
+        "tens(e) + ion. A speller who finds the base knows which letter to write, and one who memorizes <i>-tion</i> and "
+        "<i>-sion</i> as endings has to guess.",
+        "What the i does is join the letter before it. T and i together spell the sh sound, so the notation gives them one "
+        "green bond bar across the seam, the t still black and the i still red. In <i>opinion</i> and <i>union</i> the i "
+        "spells the y sound instead, and nothing before it changes.",
+        "Where a verb ends in <i>-ate</i>, the longer ending is two parts with the e dropped: educat(e) + ion, "
+        "notat(e) + ion. Where there is no such verb, as in inform + ation, English uses <i>-ation</i> whole.",
+        "And <i>-ion</i> moves the stress to the syllable just before it: <b>ED</b>ucate, edu<b>CA</b>tion. More on that is "
+        "with <a href=\"roots/deuk.html#shift-h\">produce and production</a>."]),
+}
+# The lessons the families carry, for the Parts page's list: (title, link, where).
+FAMILY_LESSONS = [
+    ("Stress tells the verb from the noun", "roots/deuk.html#stress-h", "*deuk-: produce, conduct"),
+    ("An ending can move the stress", "roots/deuk.html#shift-h", "*deuk-: educate, education"),
+    ("Duce or duct?", "roots/deuk.html#c-duct", "*deuk-: reduce, reduction"),
+    ("A double at the front of a word", "roots/sem.html#front-h", "*sem-: assimilate, collect"),
+    ("Accommodate: two doubles, two joins", "roots/med.html#accommodate-h", "*med-"),
+    ("Does the double p show the seam?", "roots/hap.html#double-h", "hap: happy"),
+    ("Letter pairs the seam splits", "roots/hap.html#pairs-h", "hap: mishap, haphazard"),
+    ("Lig or lect?", "roots/leg.html#c-lig", "*leg-: eligible, elect"),
+]
+
 # Sums the seams can't give, or give wrongly: word -> parts as the sum writes them ("(e)" a dropped letter).
 SUMS = {
     "being": ["be", "-ing"], "into": ["in", "to"], "today": ["to", "day"], "myself": ["my", "self"],
     "notate": ["not(e)", "-ate"], "notation": ["not(e)", "-at(e)", "-ion"], "legomorphic": ["leg", "-o", "morph", "-ic"],
+    "action": ["act", "-ion"], "actor": ["act", "-or"], "active": ["act", "-ive"], "react": ["re-", "act"],
+    "creation": ["creat(e)", "-ion"], "creator": ["creat(e)", "-or"],
     "teaching": ["teach", "-ing"], "hoping": ["hop(e)", "-ing"], "diving": ["div(e)", "-ing"],
     "flossing": ["floss", "-ing"], "sniffing": ["sniff", "-ing"], "jazzy": ["jazz", "-y"], "said": ["say>i", "-d"],
     "knives": ["knife>ve", "-s"], "wives": ["wife>ve", "-s"], "wolves": ["wolf>v", "-es"], "leaves": ["leaf>v", "-es"],
@@ -283,8 +314,12 @@ def write(OUT, door_page, X):
         if k in on_steps:
             stacks += '<p class="pwith">On the route: ' + ", ".join(f'<a href="steps/{n:02d}.html#parts">Step {n}</a>' for n in on_steps[k]) + ".</p>"
         src = f'<p class="psrc t-only"><a href="https://www.etymonline.com/search?q={quote(k)}">Its history in Etymonline</a></p>'
+        lesson = ""
+        if k in LESSONS:
+            lh, lp = LESSONS[k]
+            lesson = f'<div class="plesson" id="lesson-{pid(k)[2:]}"><h3>{lh}</h3>{"".join(f"<p>{x}</p>" for x in lp)}</div>'
         return (f'<details class="ppart" id="{pid(k)}" data-k="{html.escape(bare(k))}" data-words="{html.escape(" ".join(w for w, _ in ws))}">'
-                f'<summary><b>{html.escape(k)}</b>{f"<span class=pm>{mean}</span>" if mean else ""}<span class="pcnt">{n} {"word" if n == 1 else "words"}</span></summary>'
+                f'<summary><b>{html.escape(k)}</b>{f"<span class=pm>{mean}</span>" if mean else ""}<span class="pcnt">{n} {"word" if n == 1 else "words"}</span></summary>{lesson}'
                 f'<ul class="pwords">{"".join(word_li(w, k) for w, _ in ws)}</ul>{stacks}{src}</details>')
 
     groups = [("pre", "Prefixes", "Before the base."), ("suf", "Suffixes", "After the base. One word can stack several."),
@@ -324,6 +359,11 @@ def write(OUT, door_page, X):
 <p class="sub t-only">A root or base with all its words gathered, however each is spelled.</p>
 <div class="door-tiles">{fams}</div>
 <p class="t-only"><a href="derivations.html">Where the roots come from, and the sources they cite</a>.</p>
+</div></section>
+<section class="about" id="lessons" aria-labelledby="les-h"><div class="wrap">
+<h2 id="les-h">Lessons</h2>
+<p class="sub t-only">What a part or a family teaches about spelling, each with its words.</p>
+<ul class="plessons">{"".join(f'<li><a href="#{pid(k)}">{LESSONS[k][0]}</a> <span>{html.escape(k)}</span></li>' for k in LESSONS)}{"".join(f'<li><a href="{u}">{t}</a> <span>{html.escape(w)}</span></li>' for t, u, w in FAMILY_LESSONS)}</ul>
 </div></section>
 {"".join(secs)}
 <section class="about t-only"><div class="wrap">

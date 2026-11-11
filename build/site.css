@@ -628,3 +628,9 @@ details.ppart > :not(summary) { margin-inline: 16px; }
 .partfig figcaption b { font-family: var(--display); font-weight: 500; font-size: 1rem; color: var(--ink); }
 .partfig figcaption a { text-decoration: none; }
 .words > .set-why { flex-basis: 100%; color: var(--soft); font-size: 0.88rem; margin: 0; }
+/* a lesson inside a part's card, and the list of lessons on Parts */
+.plesson { border-left: 3px solid var(--modal); padding: 4px 0 4px 14px; margin-block: 4px 16px; max-width: 70ch; }
+.plesson h3 { font-family: var(--display); font-weight: 500; font-size: 1.15rem; margin: 0 0 6px; }
+.plesson p { margin: 0 0 8px; font-size: 0.95rem; }
+.plessons { list-style: none; padding: 0; margin: 8px 0 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr)); gap: 8px 28px; }
+.plessons span { color: var(--soft); font-size: 0.85rem; display: block; }

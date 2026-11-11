@@ -118,7 +118,11 @@ PART_CODES = {
     "-s": "c.s", "-es": "e0 c.s", "-ed": "e0 c.d", "-ing": "s.i k.ng",
     "a-": "b.a", "-able": "b.a | c.b le", "-ible": "b.i | c.b le", "ple": "c.p le", "-y": "b.y", "-ly": "c.l b.y",
     "graph": "c.gr s.a k.ph", "phone": "k.ph l.o c.n e>", "morph": "c.m r.or k.ph",
+    "-ive": "s.i c.v e0",                                         # as give and live (step 8)
+    "-ion": "s.a c.c | g.ti b.o c.n ; seam 2",                    # drawn inside action, as notation's ti (ruled 8 November 2026)
 }
+# A part drawn inside a word, because its marks need a letter of the base: the word its code spells.
+PART_WORD = {"-ion": "action"}
 
 # A spelling that is two words, each with its own marking (from flsz_family.py; produce and conduct are drafts of
 # 10 November 2026 for the *deuk- family: the verb's first vowel is weak, so bare, and the noun's is said in full).

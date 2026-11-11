@@ -250,7 +250,9 @@ for i, s in enumerate(STEPS):
         for k in s["parts"]:
             mean = RT.ROOT_PARTS.get(k) or PT.MEANS.get(k) or RT.PARTS.get(k) or ""
             mean = re.split(r"[:;]", re.sub(r"<[^>]+>", "", html.unescape(mean)))[0].strip()
-            figs.append(f'<figure class="word partfig">{svg_of(k.strip("-"), 58, SC.PART_CODES[k], f"{k}, marked")}'
+            inside = SC.PART_WORD.get(k)
+            if inside: mean += f", in {inside}"
+            figs.append(f'<figure class="word partfig">{svg_of(inside or k.strip("-"), 58, SC.PART_CODES[k], f"{k}, marked")}'
                         f'<figcaption><a href="../parts.html#{PT.pid(k)}"><b>{html.escape(k)}</b></a>{" " + html.escape(mean) if mean else ""}</figcaption></figure>')
         cells.append('<div class="group partset">' + "".join(figs) + "</div>")
         cells.append(f'<p class="set-why t-only">{md(s["parts_why"])} Each is marked as it&rsquo;s said on its own; inside a word many are said weakly.</p>')

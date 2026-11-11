@@ -269,6 +269,10 @@
    "marks": "cone of silence; vowel vault in *gave*",
    "kernel_md": "*have*",
    "carney": "The *e* after *v* in *have* and *love*, p. 13; *ve* as the doubled *v*, p. 121; no final *v* (*nerve*, *serve*), p. 189; a final *v* only in short forms and slang (*gov*, *rev*), p. 231",
+   "parts": [
+    "-ive"
+   ],
+   "parts_why": "The e keeps v off the end and sends no vault, as *give*.",
    "words": [
     "have",
     "has",
@@ -778,6 +782,10 @@
    "marks": "none",
    "kernel_md": "none",
    "carney": "Words from Latin, pp. 96–101; *-tion*, p. 420; *-er* and *-or*, p. 426",
+   "parts": [
+    "-ion"
+   ],
+   "parts_why": "The suffix of *action* and *creation*. It is -ion, not -tion: the t belongs to the base, act + ion. It is drawn inside *action*, since its i joins the letter before it.",
    "words": [
     "act",
     "action",
