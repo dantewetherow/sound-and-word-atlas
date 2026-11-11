@@ -145,6 +145,9 @@ CLUSTERS = [
      "groups": [
          [("legomorphic", ["leg", "-o", "morph", "-ic"], "this notation&rsquo;s name: <i>leg&omacr;</i>, I gather, in Greek "
            "and Latin alike, and <i>morph</i>, form")],
+         [("prolegomenon", ["pro-", "leg", "-omenon"], "what is said beforehand: a formal introduction to a study. Greek "
+           "<i>prolegein</i>, to say before; more than one are <i>prolegomena</i>. <a href=\"#w-prologue\"><i>Prologue</i></a> "
+           "is its plainer twin: pro + logue")],
      ]},
 ]
 
@@ -192,6 +195,7 @@ PARTS = {
     "-y": "the Greek ending <i>-ia</i>: a study, an art, a quality; not the y of <i>happy</i>",
     "-ize": "make, do",
     "-ia": "a condition (Greek)",
+    "-omenon": "a Greek ending: a thing being done. A <i>phenomenon</i> is a thing appearing; a <i>prolegomenon</i>, a thing being said first",
     "-on": "a Greek ending: <i>lexikon</i>, a word book",
     "-o": "I: the ending of the verb&rsquo;s I form in Greek and Latin alike (<i>l&eacute;g&omacr;</i>, <i>leg&omacr;</i>), as in Latin <i>veto</i>, I forbid",
     # other roots
