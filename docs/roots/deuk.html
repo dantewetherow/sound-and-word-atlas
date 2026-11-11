@@ -170,9 +170,13 @@
     else { head.classList.remove('pinned', 'open'); hold.style.height = '';
       const m = head.querySelector('.menu'); if (m) m.setAttribute('aria-expanded', 'false'); }
   };
-  const check = () => set(root.dataset.view !== 'student' && scrollY > (pinned ? H : head.offsetHeight));
-  addEventListener('scroll', check, {passive: true});
-  addEventListener('resize', () => { set(false); check(); });
+  // pin once the header has gone; unpin only once there's room for it again, so it can't flicker at the line
+  const check = () => set(root.dataset.view !== 'student' && (pinned ? scrollY > H - head.offsetHeight : scrollY > head.offsetHeight));
+  let ticking = false;
+  addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(() => { ticking = false; check(); }); } }, {passive: true});
+  // a phone's address bar showing and hiding is a resize too: only a change of width means the header needs measuring
+  let W = innerWidth;
+  addEventListener('resize', () => { if (innerWidth === W) return; W = innerWidth; set(false); check(); });
   new MutationObserver(check).observe(root, {attributes: true, attributeFilter: ['data-view']});
   check();
 })();</script>
