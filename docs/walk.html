@@ -74,7 +74,7 @@
     } else {
       S.push({show: [3], band: true, cap: 'Say it and count: ' + beats(f.sylls.length) + '.'});
       S.push({show: [1, 2], band: true, cap: 'Say each sound: ' + f.sounds + '. Red is a vowel sound.'});
-      S.push({show: [5, 4], cap: 'Spell each sound: ' + f.units.map(it).join(' · ') + '.'});
+      S.push({show: [5, 4], spell: true, cap: f.bars.length ? 'Spell each sound. A bar first where a sound takes more than one letter, then the letters: ' + f.units.map(it).join(' · ') + '.' : 'Spell each sound: ' + f.units.map(it).join(' · ') + '.'});
       S.push(...marks);
     }
     return S;
@@ -86,7 +86,8 @@
       const n = +((el.getAttribute('class') || '').match(/nz(\d)/) || [])[1];
       el.classList.toggle('on', shown.has(n));
     });
-    stage.classList.toggle('plain', !!(steps[step] && steps[step].plain));   // the first move: every letter in ink, no marks
+    stage.classList.toggle('plain', !!(steps[step] && steps[step].plain));
+    stage.classList.toggle('spelling', mode === 'spell');   // reading: letters, then the bar joins them; spelling: the bar, then the letters fill it   // the first move: every letter in ink, no marks
     const wt = stage.querySelector('.wt'); if (wt) wt.classList.toggle('on', band && !shown.has(5));
     cap.innerHTML = steps[step] ? steps[step].cap : '';
     dots.innerHTML = steps.map((_, i) => '<i class="' + (i === step ? 'now' : i < step ? 'done' : '') + '"></i>').join('');
@@ -101,6 +102,7 @@
     }
     const f = word.forms[form_];
     stage.innerHTML = '<svg viewBox="0 0 ' + f.W + ' ' + f.H + '" role="img" aria-label="' + esc(word.w) + ', marked">' + f.svg + '</svg>';
+    stage.querySelectorAll('line.nz4').forEach(l => { l.setAttribute('pathLength', '1'); l.classList.add('dr'); });   // a bar draws across, left to right
     steps = plan(f); step = 0; stage.getBoundingClientRect(); requestAnimationFrame(apply);
     root.querySelectorAll('[data-mode]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.mode === mode)));
   }
