@@ -656,12 +656,14 @@ details.ppart > :not(summary) { margin-inline: 16px; }
   .list-page section { padding-block: 2px !important; margin: 0 !important; }
   .list-page .lprinciple { margin: 4px 0 0; font-size: 11.5pt; }
   .list-page .hero { padding-top: 0; }
+  .list-page .wrap { display: block !important; padding-block: 2px !important; }   /* a grid won't break across pages */
+  .list-page .lwork .wrap { display: grid !important; }
   .list-page h2 { margin: 10px 0 4px; font-size: 15pt; }
   .ltable td { padding: 3px 14px 3px 0; }
-  .ltable .lw svg { height: 62px !important; width: auto !important; }
+  .ltable .lw svg { height: 58px !important; width: auto !important; }
   .ltable { font-size: 11pt; }
   .list-page .rrow { padding: 8px 12px; }
-  .list-page .rrow svg { height: 66px !important; width: auto !important; }
+  .list-page .rrow svg { height: 56px !important; width: auto !important; }
   .list-page .rrow { margin: 4px 0 0; }
   .lwork { break-before: page; }
   .lblanks li { margin-bottom: 22px; }
