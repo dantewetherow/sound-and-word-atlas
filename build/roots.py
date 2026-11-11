@@ -264,7 +264,7 @@ HAP = {
     "sources": [("Etymonline: <i>hap</i>, <i>happy</i>, <i>happen</i>, <i>mishap</i>, <i>haphazard</i>, <i>perhaps</i> and the rest", "https://www.etymonline.com/search?q=hap"),
                 ("Indo-European Lexicon, kob- (Linguistics Research Center, University of Texas at Austin)", "https://lrc.la.utexas.edu/lex/master/0991"),
                 ("Edward Carney, <i>A Survey of English Spelling</i> (Routledge, 1994): <i>chubby</i>, <i>shabby</i> and "
-                 "<i>happy</i>, pp. 1&ndash;3, and the spellings of /p/, p. 16, in the publisher&rsquo;s preview",
+                 "<i>happy</i>, pp. 1&ndash;3, and the spellings of /p/, p. 16",
                  "https://api.pageplace.de/preview/DT0400.9781134872244_A23786723/preview-9781134872244_A23786723.pdf"),
                 ("Greg Brooks, <i>Dictionary of the British English Spelling System</i>, ch. 4: <i>happy</i> among the doubled p&rsquo;s",
                  "https://books.openbookpublishers.com/10.11647/obp.0053/ch4.xhtml"),
@@ -494,8 +494,11 @@ DEUK = {
     ],
     "students": ["produce", "product", "reduce", "conduct", "educate", "duct", "tug"],
     "s_lead": "These words come from one old word that meant <i>lead</i> or <i>pull</i>.",
-    "uc": "the word list follows the Indo-European Lexicon, which follows Pokorny. Next: check it against Etymonline&rsquo;s "
-          "entry for the root and against Watkins; and decide whether the notation needs a mark for a weak vowel or for stress.",
+    "uc": "the word list follows the Indo-European Lexicon, which follows Pokorny, and was checked on 10 November 2026 against "
+          "Etymonline&rsquo;s list for the root, read in a copy of that dictionary. Etymonline doesn&rsquo;t list <i>subdue</i> "
+          "or <i>educe</i>; the Lexicon does. <i>Product</i>, <i>induct</i> and <i>reproduce</i> are in neither list and are here "
+          "as plain kin of <i>produce</i> and <i>induction</i>. Next: check it against Watkins, and decide whether the notation "
+          "needs a mark for a weak vowel or for stress.",
     "label": "Root family: *deuk-",
     "desc": "The root *deuk-, to lead, and its family: produce, reduce, conduct, educate, duke and tug, with why reduce makes reduction and how stress tells proDUCE from PROduce.",
 }
@@ -622,8 +625,11 @@ SEM = {
     ],
     "students": ["same", "some", "similar", "simple", "single", "assemble", "resemble"],
     "s_lead": "These words come from one old word that meant <i>one</i> or <i>same</i>.",
-    "uc": "the word list follows the Indo-European Lexicon, which follows Pokorny. Next: check it against Etymonline&rsquo;s "
-          "entry for the root and against Watkins; and decide whether the route needs a step for prefixes that change to match.",
+    "uc": "the word list follows the Indo-European Lexicon, which follows Pokorny, and was checked on 10 November 2026 against "
+          "Etymonline&rsquo;s list for the root, read in a copy of that dictionary: <i>simulate</i>, <i>simulation</i>, "
+          "<i>homophone</i> and <i>homonym</i> are in it. <i>Simile</i> and <i>homograph</i> are in neither list and are here as "
+          "plain kin of <i>similar</i> and <i>homophone</i>. Next: check it against Watkins, and decide whether the route needs a "
+          "step for prefixes that change to match.",
     "label": "Root family: *sem-",
     "desc": "The root *sem-, one or same, and its family: similar, simple, single, assemble, resemble and same, with a lesson on assimilation: why assimilate, collect and accommodate double at the front.",
 }
@@ -698,7 +704,7 @@ MED = {
             "which is easy once its parts are seen.",
     "drawn": ("mode", "mode, marked"),
     "sources": [("Indo-European Lexicon, med- (Linguistics Research Center, University of Texas at Austin), which follows Pokorny: the list this family is drawn from", "https://lrc.la.utexas.edu/lex/master/1238"),
-                ("Etymonline, *med-", "https://www.etymonline.com/search?q=*med-"),
+                ("Etymonline, *med-, read on its page for <i>modus</i>", "https://www.etymonline.com/word/modus"),
                 ("Etymonline: <i>accommodate</i>, from Latin <i>ad</i> + <i>commodare</i>", "https://www.etymonline.com/search?q=accommodate"),
                 ("Etymonline: <i>must</i>", "https://www.etymonline.com/search?q=must")],
     "roads": MED_ROADS, "clusters": MED_CLUSTERS, "parts": PARTS, "root_parts": ROOT_PARTS,
@@ -714,8 +720,8 @@ MED = {
     ],
     "students": ["mode", "model", "modern", "medicine", "remedy", "must", "accommodate"],
     "s_lead": "These words come from one old word that meant <i>measure</i>.",
-    "uc": "the word list follows the Indo-European Lexicon, which follows Pokorny. Next: check it against Etymonline&rsquo;s "
-          "entry for the root and against Watkins.",
+    "uc": "the word list follows the Indo-European Lexicon, which follows Pokorny, and was checked on 10 November 2026 against "
+          "Etymonline&rsquo;s list for the root, which has every word here. Next: check it against Watkins.",
     "label": "Root family: *med-",
     "desc": "The root *med-, to take the right measure, and its family: mode, model, modern, medicine, must and accommodate, with why accommodate has two c's and two m's.",
 }
