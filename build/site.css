@@ -115,7 +115,9 @@ nav.doors a[aria-current] { background: var(--ink); color: var(--paper); text-de
 @keyframes found { 0% { outline-color: transparent; } 25% { outline-color: var(--modal); } }
 
 /* breadcrumbs, and a note for a student who lands on a teachers' page */
-.crumbs ol { list-style: none; display: flex; flex-wrap: wrap; margin: 0; padding: 12px 0 0; font-size: 0.85rem; color: var(--soft); }
+.crumbs ol { list-style: none; display: flex; flex-wrap: wrap; margin: 0; padding: 0; font-size: 0.85rem; color: var(--soft); }
+header.site .crumbs { border-top: 1px solid var(--line); padding-top: 10px; }
+html[data-view="student"] .crumbs { display: none; }
 .crumbs li + li::before { content: "\203A"; margin: 0 8px; }
 .crumbs a { color: var(--soft); }
 .for-teachers p { margin-top: 14px; padding: 12px 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
@@ -499,32 +501,40 @@ table.cw-table td:first-of-type { width: 46%; }
 .walk-stage svg .dr { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 0.8s ease, opacity 0.2s ease; }
 .walk-stage svg .dr.on { stroke-dashoffset: 0; }
 .walk-stage:not(.spelling) svg .nz4.on { transition-delay: 0.3s; }
-/* Try it: the learner's marks, and the site's underneath */
-.walk.trying .walk-stage, .walk.trying .walk-cap, .walk.trying .walk-nav { display: none; }
-.walk-try { margin-top: 8px; }
-.try-jobs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 6px; }
-.try-jobs button, .try-acts button { font: inherit; font-size: 0.92rem; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--ink); cursor: pointer; }
-.try-jobs button[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
-.try-say { margin: 4px 0 8px; }
-.try-row { display: grid; grid-template-columns: 3.4em 1fr; align-items: center; gap: 6px; background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 10px 12px; margin-top: 8px; }
-.try-ours { background: transparent; border-style: dashed; }
+/* Try it: the learner marks the word on the stage, with a mark picked from the tools; the site's marks can go underneath */
+.walk.trying .walk-cap, .walk.trying .walk-nav, .walk.trying.texting .walk-stage { display: none; }
+.walk.trying .walk-stage { touch-action: none; cursor: crosshair; -webkit-touch-callout: none; }
+.walk.trying .walk-board { display: grid; grid-template-columns: 10.5em minmax(0, 1fr); gap: 10px; align-items: start; margin-top: 8px; }
+.walk.trying.texting .walk-board { grid-template-columns: 1fr; }
+.walk.trying .walk-board .walk-stage { margin-top: 0; }
+.try-tools { display: grid; gap: 4px; }
+.try-tools[hidden] { display: none; }
+.try-tools button { display: flex; align-items: center; gap: 8px; font: inherit; font-size: 0.9rem; text-align: left; padding: 7px 10px; border-radius: 12px;
+  border: 1px solid var(--line); background: var(--card); color: var(--ink); cursor: pointer; }
+.try-tools button svg { width: 22px; height: 22px; flex: none; }
+.try-tools button[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.try-tools button:focus-visible { outline: 2px solid var(--modal); outline-offset: 2px; }
+.try-say { margin: 10px 0 6px; }
+.try-row { display: grid; grid-template-columns: 3.4em 1fr; align-items: center; gap: 6px; border: 1px dashed var(--line); border-radius: 16px; padding: 10px 12px; margin-top: 8px; }
 .try-lab { font-size: 0.85rem; color: var(--soft); }
 .try-board { min-width: 0; display: grid; place-items: center; }
-.tb-row { position: relative; display: flex; align-items: stretch; justify-content: center; font-size: min(4.2rem, calc((100vw - 130px) / (var(--n) * var(--k, 0.94)))); line-height: 1; padding: 0.42em 0 0.72em; }
-.tb-row .tl, .tb-row .tg { font: inherit; color: var(--ink); background: none; border: 0; padding: 0; margin: 0; }
-.tb-row .tl { font-family: "Lexend", var(--body); padding: 0.06em 0.02em; border-radius: 6px; }
-.tb-row .tg { width: 0.3em; }
-.tb-row.job-prt .tg { width: 0.46em; }
-.tb-row.job-prt { --k: 1.08; }
-.tb-row button { cursor: pointer; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
-.tb-row button.tl:hover, .tb-row button.tl:focus-visible { background: color-mix(in srgb, var(--ink) 7%, transparent); outline: none; }
-.tb-row button.tg { margin: -0.4em 0 -0.5em; border-radius: 6px; }
-.tb-row button.tg:hover, .tb-row button.tg:focus-visible { background: color-mix(in srgb, var(--modal) 14%, transparent); outline: none; }
-.tb-ink { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+.try-board svg { width: 100%; max-width: 900px; height: auto; max-height: 34vh; }
+.try-board svg [class*="nz"], .try-board svg .wt { opacity: 0; }
+.try-board svg .on { opacity: 1; }
+.try-text:empty { display: none; }
+.try-text { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 14px 12px; }
 .try-given { margin: 0; font-size: 1.25rem; text-align: center; }
 .try-in { display: block; width: min(22em, 100%); margin: 8px auto 2px; font: inherit; font-size: 1.3rem; padding: 8px 10px; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); color: var(--ink); text-align: center; }
 .try-count { min-height: 1.4em; margin: 8px 0 4px; }
-.try-acts { display: flex; gap: 8px; }
+.try-acts { display: flex; flex-wrap: wrap; gap: 8px; }
+.try-acts button { font: inherit; font-size: 0.92rem; padding: 6px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--ink); cursor: pointer; }
+.try-acts button[hidden] { display: none; }
+.try-acts button:disabled { opacity: 0.45; cursor: default; }
+@media (max-width: 760px) {
+  .walk.trying .walk-board { grid-template-columns: 1fr; }
+  .try-tools { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; }
+  .try-tools button { flex: none; border-radius: 999px; padding: 6px 12px 6px 9px; white-space: nowrap; }
+}
 .walk-stage.spelling svg .nz5.on { transition-delay: 0.85s; }
 .walk-cap { min-height: 3em; margin: 14px 0 0; font-size: 1.2rem; line-height: 1.45; }
 .walk-nav { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 8px; }
@@ -724,3 +734,33 @@ details.ppart > :not(summary) { margin-inline: 16px; }
 .cname .blank { display: inline-block; width: 12ch; border-bottom: 1.5px solid var(--ink); margin-inline: 6px 14px; height: 1.1em; }
 .cname .blank.long { width: 20ch; }
 .cscroll { overflow-x: auto; max-width: 100%; }
+
+/* the pinned header (doors.PIN_JS): scrolled past, the logo, the trail, search and Menu stay at the top. Not on the board. */
+html:not([data-view="student"]) { scroll-padding-top: 84px; }
+header.site.pinned { position: fixed; top: 0; left: 0; right: 0; z-index: 60; background: var(--paper); border-bottom: 1px solid var(--line);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07); }
+@media (prefers-reduced-motion: no-preference) { header.site.pinned { animation: pin-in 0.18s ease-out; } }
+@keyframes pin-in { from { transform: translateY(-100%); } }
+header.site.pinned .wrap { grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: "brand crumbs tools" "doors doors doors"; align-items: center; gap: 4px 18px; padding-block: 6px; }
+header.site.pinned .masthead { display: contents; }
+header.site.pinned .brand { grid-area: brand; font-size: 1rem; }
+header.site.pinned .brand small, header.site.pinned :is(.theme, .smap) { display: none; }
+header.site.pinned .brand .logo svg { height: 34px; width: auto; margin: -4px 0; }
+header.site.pinned .tools { grid-area: tools; flex-wrap: nowrap; gap: 8px; }
+header.site.pinned .crumbs { grid-area: crumbs; border: 0; padding: 0; min-width: 0; }
+header.site.pinned .crumbs ol { flex-wrap: nowrap; overflow: hidden; white-space: nowrap; }
+header.site.pinned .crumbs li[aria-current] { overflow: hidden; text-overflow: ellipsis; }
+header.site.pinned nav.doors { grid-area: doors; display: none; }
+header.site.pinned.open nav.doors { display: flex; padding-block: 6px 4px; }
+@media (min-width: 761px) { .js-menu header.site.pinned .menu { display: inline-block; } }
+@media (max-width: 760px) {
+  header.site.pinned .wrap { grid-template-columns: auto minmax(0, 1fr); grid-template-areas: "brand tools" "crumbs crumbs" "doors doors"; gap: 6px 10px; }
+  header.site.pinned .brand .name { display: none; }
+  header.site.pinned .view { display: none; }
+  header.site.pinned .search { position: static; }
+  header.site.pinned .search .results { right: 16px; top: calc(100% + 4px); }
+  header.site.pinned .search { flex: 1; order: 0; flex-basis: auto; }
+  header.site.pinned .menu { order: 1; }
+  header.site.pinned .crumbs ol { font-size: 0.8rem; }
+  header.site.pinned.open nav.doors { display: grid; }
+}

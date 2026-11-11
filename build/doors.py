@@ -129,6 +129,26 @@ MENU_JS = """<script>(() => {
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && head.classList.contains('open')) { head.classList.remove('open'); b.setAttribute('aria-expanded', 'false'); b.focus(); } });
 })();</script>"""
 
+# Scrolled past, the header pins to the top in a compact form: the logo, the breadcrumb trail, search and Menu. Not on
+# the board, where the page is for the room and the trail is hidden. head-hold keeps the header's height while it's
+# pinned, so nothing on the page moves.
+PIN_JS = """<script>(() => {
+  const head = document.querySelector('header.site'), hold = head && head.parentElement, root = document.documentElement;
+  if (!head || !hold.classList.contains('head-hold')) return;
+  let pinned = false, H = 0;
+  const set = on => {
+    if (on === pinned) return; pinned = on;
+    if (on) { H = head.offsetHeight; hold.style.height = H + 'px'; head.classList.add('pinned'); }
+    else { head.classList.remove('pinned', 'open'); hold.style.height = '';
+      const m = head.querySelector('.menu'); if (m) m.setAttribute('aria-expanded', 'false'); }
+  };
+  const check = () => set(root.dataset.view !== 'student' && scrollY > (pinned ? H : head.offsetHeight));
+  addEventListener('scroll', check, {passive: true});
+  addEventListener('resize', () => { set(false); check(); });
+  new MutationObserver(check).observe(root, {attributes: true, attributeFilter: ['data-view']});
+  check();
+})();</script>"""
+
 SEARCH_JS = """<script>(() => {
   const box = document.querySelector('.search');
   if (!box || !window.fetch) return;
@@ -452,11 +472,12 @@ def finish(OUT, pages):
                 trail.append(f'<li><a href="{up}{d}.html">{door_label(d)}</a></li>')
             here = door_label(d) if d and p == f"{d}.html" else html.escape(t.split(":")[0] if p.startswith("steps/") else t)
             trail.append(f'<li aria-current="page">{here}</li>')
-        crumbs = f'<nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><ol>{"".join(trail)}</ol></div></nav>' if trail else ""
+        crumbs = f'<nav class="crumbs" aria-label="Breadcrumb"><ol>{"".join(trail)}</ol></nav>' if trail else ""
+        notice = ""
         if d in TEACHERS and p not in BOARD_OK:
-            crumbs += (f'<div class="for-teachers s-only"><div class="wrap"><p>This page is all details, so the board has nothing to show. To read it, pick Details at the top '
+            notice = (f'<div class="for-teachers s-only"><div class="wrap"><p>This page is all details, so the board has nothing to show. To read it, pick Details at the top '
                        f'of the page, or go <a href="{up}index.html">back to the start</a>.</p></div></div>')
-        src = src.replace("<!--crumbs-->", crumbs, 1)
+        src = src.replace("<!--crumbs-->", crumbs, 1).replace("<!--after-head-->", notice, 1)
         if d:
             src = src.replace(f'data-door="{d}">', f'data-door="{d}" aria-current="{"page" if p == f"{d}.html" else "true"}">', 1)
         f.write_text(src, encoding="utf-8")

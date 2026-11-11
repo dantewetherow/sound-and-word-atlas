@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="site.css">
 </head>
 <body>
-<header class="site"><div class="wrap"><div class="masthead"><a class="brand" href="index.html"><span class="logo"><svg class="lifted" viewBox="33.0 59.6 104.8 100.5" width="56" height="54" aria-hidden="true"><line x1="40.1" y1="102.7" x2="72.4" y2="102.7" stroke="var(--ink)" stroke-width="4.93" stroke-linecap="round"/><g transform="translate(0 36.0)"><line x1="98.4" y1="30.7" x2="130.7" y2="30.7" stroke="var(--verb)" stroke-width="4.93" stroke-linecap="round"/></g><circle cx="56.3" cy="116.0" r="7.14" fill="var(--ink)"/><circle cx="114.6" cy="116.0" r="7.14" fill="var(--ink)"/><circle cx="114.6" cy="116.0" r="7.14" fill="var(--verb)"/><g transform="translate(0 14.5)"><path d="M50.1 132.8 Q85.4 144.4 120.8 132.8" fill="none" stroke="var(--modal)" stroke-width="4.59" stroke-linecap="round"/></g></svg></span><span class="name"><small>Legomorphic Notation</small>Sound and Word Atlas</span></a><div class="tools"><div class="search" data-up="" role="search" hidden><label class="sr" for="q">Search the atlas</label><input id="q" type="search" placeholder="Search words, steps, marks" autocomplete="off" spellcheck="false" aria-describedby="q-count"><span class="sr" id="q-count" aria-live="polite"></span><div class="results" hidden></div></div><a class="smap" href="sitemap.html">Site map</a><div class="view" role="group" aria-label="View" hidden><button type="button" data-v="teacher">Details</button><button type="button" data-v="student">Board</button></div><div class="theme" role="group" aria-label="Page colours" hidden><button type="button" data-pick="light">Bright</button><button type="button" data-pick="dark">Night</button></div><button class="menu" type="button" aria-expanded="false" aria-controls="doors" hidden>Menu</button></div></div><nav class="doors" id="doors" aria-label="Doors"><a class="door" href="progressions.html" data-door="progressions"><span class="dn">Steps</span><span class=sn>Steps</span></a><a class="door" href="walk.html" data-door="walk"><span class="dn">Words</span><span class=sn>Words</span></a><a class="door" href="parts.html" data-door="parts"><span class="dn">Parts</span><span class=sn>Parts</span></a><a class="door t-only" href="teachers.html" data-door="teachers"><span class="dn">For teachers</span></a></nav></div></header>
+<div class="head-hold"><header class="site"><div class="wrap"><div class="masthead"><a class="brand" href="index.html"><span class="logo"><svg class="lifted" viewBox="33.0 59.6 104.8 100.5" width="56" height="54" aria-hidden="true"><line x1="40.1" y1="102.7" x2="72.4" y2="102.7" stroke="var(--ink)" stroke-width="4.93" stroke-linecap="round"/><g transform="translate(0 36.0)"><line x1="98.4" y1="30.7" x2="130.7" y2="30.7" stroke="var(--verb)" stroke-width="4.93" stroke-linecap="round"/></g><circle cx="56.3" cy="116.0" r="7.14" fill="var(--ink)"/><circle cx="114.6" cy="116.0" r="7.14" fill="var(--ink)"/><circle cx="114.6" cy="116.0" r="7.14" fill="var(--verb)"/><g transform="translate(0 14.5)"><path d="M50.1 132.8 Q85.4 144.4 120.8 132.8" fill="none" stroke="var(--modal)" stroke-width="4.59" stroke-linecap="round"/></g></svg></span><span class="name"><small>Legomorphic Notation</small>Sound and Word Atlas</span></a><div class="tools"><div class="search" data-up="" role="search" hidden><label class="sr" for="q">Search the atlas</label><input id="q" type="search" placeholder="Search words, steps, marks" autocomplete="off" spellcheck="false" aria-describedby="q-count"><span class="sr" id="q-count" aria-live="polite"></span><div class="results" hidden></div></div><a class="smap" href="sitemap.html">Site map</a><div class="view" role="group" aria-label="View" hidden><button type="button" data-v="teacher">Details</button><button type="button" data-v="student">Board</button></div><div class="theme" role="group" aria-label="Page colours" hidden><button type="button" data-pick="light">Bright</button><button type="button" data-pick="dark">Night</button></div><button class="menu" type="button" aria-expanded="false" aria-controls="doors" hidden>Menu</button></div></div><nav class="doors" id="doors" aria-label="Doors"><a class="door" href="progressions.html" data-door="progressions"><span class="dn">Steps</span><span class=sn>Steps</span></a><a class="door" href="walk.html" data-door="walk"><span class="dn">Words</span><span class=sn>Words</span></a><a class="door" href="parts.html" data-door="parts"><span class="dn">Parts</span><span class=sn>Parts</span></a><a class="door t-only" href="teachers.html" data-door="teachers"><span class="dn">For teachers</span></a></nav></div></header></div>
 <script>(() => { const h = location.hash;
   if (h === '#route' || h.indexOf('#band-') === 0) location.replace('progressions.html' + (h.indexOf('#band-') === 0 ? h : ''));
   else if (h === '#marks') location.replace('notations.html'); })();</script>
@@ -82,16 +82,16 @@
 <div class="chips" aria-label="Try one"><button type="button" class="chip" data-w="which">which</button><button type="button" class="chip" data-w="make">make</button><button type="button" class="chip" data-w="little">little</button><button type="button" class="chip" data-w="squirrel">squirrel</button><button type="button" class="chip" data-w="notation">notation</button></div>
 <div class="walk-forms" hidden></div>
 <p class="walk-msg" role="status"></p>
-<div class="walk-stage" tabindex="0" aria-label="The word. Tap, swipe left, or press the right arrow, for the next step."></div>
+<div class="walk-board"><div class="try-tools" role="group" aria-label="What to mark" hidden></div>
+<div class="walk-stage" tabindex="0" aria-label="The word. Tap, swipe left, or press the right arrow, for the next step."></div></div>
 <p class="walk-cap" aria-live="polite"></p>
 <div class="walk-nav"><button type="button" class="walk-back">Back</button><span class="walk-dots" aria-hidden="true"></span><button type="button" class="walk-next">Next</button><button type="button" class="walk-all">Show it all</button></div>
 <div class="walk-try" hidden>
-<div class="try-jobs" role="group" aria-label="What to try"></div>
 <p class="try-say"></p>
-<div class="try-row try-yours"><span class="try-lab">Yours</span><div class="try-board"></div></div>
+<div class="try-text"></div>
 <div class="try-row try-ours" hidden><span class="try-lab">Ours</span><div class="try-board"></div></div>
 <p class="try-count" aria-live="polite"></p>
-<div class="try-acts"><button type="button" class="try-show" aria-pressed="false">Show ours</button><button type="button" class="try-clear">Clear</button></div>
+<div class="try-acts"><button type="button" class="try-undo">Undo</button><button type="button" class="try-clear">Clear</button><button type="button" class="try-show" aria-pressed="false">Show ours</button></div>
 </div>
 <p class="walk-sum"></p>
 <div class="pcard walk-pop" hidden aria-live="polite"></div>
@@ -151,17 +151,19 @@
   }
   function draw() {
     if (!word) return;
-    root.classList.toggle('trying', mode === 'try');
-    tryBox.hidden = mode !== 'try';
+    const trying = mode === 'try';
+    root.classList.toggle('trying', trying); tryBox.hidden = toolsBox.hidden = !trying; if (!trying) root.classList.remove('texting');
     root.querySelectorAll('[data-mode]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.mode === mode)));
-    if (mode === 'try') { tryOpen(); return; }
     root.classList.toggle('sum-only', !word.forms.length);
     if (!word.forms.length) {      // taken apart, not marked yet: the word in plain letters
       stage.innerHTML = '<span class="walk-plain">' + esc(word.w) + '</span>'; steps = []; step = 0;
-      cap.innerHTML = 'This word isn’t marked yet. Its parts are below.'; dots.innerHTML = ''; return;
+      cap.innerHTML = 'This word isn’t marked yet. Its parts are below.'; dots.innerHTML = '';
+      if (trying) tryOpen(); return;
     }
     const f = word.forms[form_];
-    stage.innerHTML = '<svg viewBox="0 0 ' + f.W + ' ' + f.H + '" role="img" aria-label="' + esc(word.w) + ', marked">' + f.svg + '</svg>';
+    stage.innerHTML = '<svg viewBox="0 0 ' + f.W + ' ' + f.H + '" role="img" aria-label="' + esc(word.w) + (trying ? ', to mark' : ', marked') + '">' + f.svg + '</svg>';
+    if (trying) { steps = []; step = 0; tryOpen(); return; }
+    stage.classList.remove('plain');
     stage.querySelectorAll('line.nz4').forEach(l => { l.setAttribute('pathLength', '1'); l.classList.add('dr'); });   // a bar draws across, left to right
     steps = plan(f); step = 0; stage.getBoundingClientRect(); requestAnimationFrame(apply);
     root.querySelectorAll('[data-mode]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.mode === mode)));
@@ -189,8 +191,8 @@
   root.querySelectorAll('[data-mode]').forEach(b => b.addEventListener('click', () => { mode = b.dataset.mode; draw(); }));
   formsBox.addEventListener('click', e => { const b = e.target.closest('[data-form]'); if (!b) return; form_ = +b.dataset.form;
     formsBox.querySelectorAll('[data-form]').forEach(x => x.setAttribute('aria-pressed', String(x === b))); draw(); });
-  stage.addEventListener('click', () => { if (swiped) { swiped = false; return; } go(1); });
-  stage.addEventListener('keydown', e => { if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(1); } else if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); } });
+  stage.addEventListener('click', () => { if (mode === 'try') return; if (swiped) { swiped = false; return; } go(1); });
+  stage.addEventListener('keydown', e => { if (mode === 'try') return; if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(1); } else if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); } });
   // tap a part of the sum: what it means, and the other words that have it (as on the family pages)
   const pop = $('.walk-pop'); let partsData = null;
   const closePop = () => { pop.hidden = true; sumBox.querySelectorAll('.part.sel').forEach(b => b.classList.remove('sel')); };
@@ -207,126 +209,147 @@
     pop.hidden = false; b.classList.add('sel');
   });
   pop.addEventListener('click', e => { const a = e.target.closest('a[data-w]'); if (a) { e.preventDefault(); input.value = a.dataset.w; show(a.dataset.w); } });
-  // Try it: the learner marks the word first, and the site's marks can be set underneath to compare. Nothing is scored.
-  const tryBox = $('.walk-try'), jobsBox = $('.try-jobs'), say = $('.try-say'), countBox = $('.try-count'),
-        yoursB = $('.try-yours .try-board'), oursRow = $('.try-ours'), oursB = $('.try-ours .try-board'), showB = $('.try-show');
-  const JOBS = {
-    syl: ['Syllables', 'Tap between two letters to split the syllables. Tap again to take the split out.'],
-    snd: ['Sounds', 'Tap a letter for each sound you say. Tap between two letters to bar letters that work together.'],
-    vow: ['Vowels', 'Tap a vowel letter: once for a cup (short), twice for a bar (long), three times to clear.'],
-    prt: ['Parts', 'Tap between two letters where one part ends and the next begins.'],
+  // Try it: the learner marks the word on the stage itself, picking a mark first so a tap or a swipe means one thing,
+  // and the site's marks can be set underneath to compare. Nothing is scored.
+  const tryBox = $('.walk-try'), toolsBox = $('.try-tools'), say = $('.try-say'), countBox = $('.try-count'), textBox = $('.try-text'),
+        oursRow = $('.try-ours'), oursB = $('.try-ours .try-board'), showB = $('.try-show');
+  const NS = 'http://www.w3.org/2000/svg';
+  const ICON = {
+    circ: '<circle cx="11" cy="11" r="4.5" fill="currentColor"/>',
+    bond: '<line x1="3" y1="11" x2="19" y2="11" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>',
+    swoop: '<path d="M3 8 Q11 18 19 8" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>',
+    breve: '<path d="M5 7 Q11 17 17 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>',
+    macron: '<line x1="5" y1="11" x2="17" y2="11" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>',
+    seam: '<line x1="11" y1="3" x2="11" y2="19" stroke="currentColor" stroke-width="2.2" stroke-dasharray="3 3"/>',
+    sum: '<path d="M11 5V17M5 11H17" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>',
+    join: '<path d="M4 11H17M12 6l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>'
+  };
+  const TOOLS = {
+    circ: ['Sound circles', 'Tap a letter for each sound you say. Where two or more letters spell one sound, swipe across them for one circle.', 'sound circle'],
+    bond: ['Bond bars', 'Swipe across letters that work together to bond them with a bar.', 'bond bar'],
+    swoop: ['Syllable swoops', 'Swipe under each syllable, from its first letter to its last. Tap a letter for a syllable of one letter.', 'syllable swoop'],
+    breve: ['Breves', 'Tap a vowel with a short sound to give it a breve.', 'breve'],
+    macron: ['Macrons', 'Tap a vowel with a long sound to give it a macron.', 'macron'],
+    seam: ['Seams', 'Tap between two letters where one part ends and the next begins.', 'seam'],
     sum: ['Word sum', 'Write the word sum. Put + between the parts and brackets round a letter that drops or changes: <i>hop(e) + ing</i>.'],
     join: ['Put together', 'Here are the parts. Write the word they make.']
   };
-  let T = null, Y = null, job = 'syl', showing = false;
-  const fresh = () => ({syl: new Set(), d: new Set(), b: new Set(), vow: new Map(), prt: new Set(), sum: '', join: ''});
+  const MARKS = ['circ', 'bond', 'swoop', 'breve', 'macron', 'seam'], LAYERS = {circ: [1, 2], bond: [4], swoop: [3], breve: [6], macron: [6], seam: [9]};
+  let T = null, G = null, Y = null, tool = 'circ', showing = false, undo = [];
+  const fresh = () => ({circ: [], bond: [], swoop: [], breve: [], macron: [], seam: [], sum: '', join: ''});
   const plainSum = () => word.sum.map(p => p.s.replace(/\(([^)&]*)&rarr;[^)]*\)/g, '$1').replace(/[()]/g, '')).join(' + ');
   const sumText = () => word.sum.map(p => p.s.replace(/&rarr;/g, '→')).join(' + ');
+  const svgOf = () => stage.querySelector('svg');
   function tryOpen() {
-    const f = word.forms[form_] || {};
-    if (!Y || Y.w !== word.w || Y.f !== form_) { Y = fresh(); Y.w = word.w; Y.f = form_; showing = false; }
-    T = f.try || null;
-    const jobs = (T ? ['syl', 'snd', 'vow', 'prt'] : []).concat(word.sum && word.sum.length > 1 ? ['sum', 'join'] : []);
-    if (!jobs.includes(job)) job = jobs[0];
-    jobsBox.innerHTML = jobs.map(k => '<button type="button" data-job="' + k + '" aria-pressed="' + (k === job) + '">' + JOBS[k][0] + '</button>').join('');
-    if (!jobs.length) { say.textContent = 'This word has nothing to try yet.'; yoursB.innerHTML = ''; oursRow.hidden = true; countBox.textContent = ''; return; }
+    const f = word.forms[form_];
+    if (!Y || Y.w !== word.w || Y.f !== form_) { Y = Object.assign(fresh(), {w: word.w, f: form_}); undo = []; showing = false; }
+    T = f && f.try || null; G = null;
+    const svg = svgOf();
+    if (T && svg) {          // the letters' places, read off the drawing: the marks go where the site's would
+      const ts = [...svg.querySelectorAll('g.nz5 text')];
+      if (ts.length === T.L.length) {
+        const x = ts.map(t => +t.getAttribute('x')), base = +ts[0].getAttribute('y');
+        G = {x, base, gaps: x.slice(1).map((v, i) => (v + x[i]) / 2)};
+        stage.classList.add('plain');
+        svg.querySelectorAll('[class*="nz"]').forEach(el => el.classList.toggle('on', /\bnz5\b/.test(el.getAttribute('class'))));
+        svg.insertAdjacentHTML('beforeend', '<g class="yours"></g><g class="ghost"></g>');
+      }
+    }
+    const tools = (G ? MARKS : []).concat(word.sum && word.sum.length > 1 ? ['sum', 'join'] : []);
+    if (!tools.includes(tool)) tool = tools[0];
+    toolsBox.innerHTML = tools.map(k => '<button type="button" data-tool="' + k + '" aria-pressed="' + (k === tool) + '"><svg viewBox="0 0 22 22" aria-hidden="true">' + ICON[k] + '</svg><span>' + TOOLS[k][0] + '</span></button>').join('');
+    toolsBox.hidden = !tools.length;
+    if (!tools.length) { say.textContent = 'This word has nothing to mark yet.'; return; }
     tryDraw();
   }
+  const isText = () => tool === 'sum' || tool === 'join';
   function tryDraw() {
-    say.innerHTML = JOBS[job][1];
+    root.classList.toggle('texting', isText());
+    say.innerHTML = TOOLS[tool][1];
     showB.textContent = showing ? 'Hide ours' : 'Show ours'; showB.setAttribute('aria-pressed', String(showing));
+    $('.try-undo').hidden = isText(); $('.try-undo').disabled = !undo.length;
     oursRow.hidden = !showing;
-    if (job === 'sum' || job === 'join') {
-      const k = job, v = Y[k];
-      yoursB.innerHTML = (k === 'join' ? '<p class="try-given">' + esc(plainSum()) + ' &rarr;</p>' : '<p class="try-given"><i>' + esc(word.w) + '</i> &rarr;</p>')
-        + '<input class="try-in" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="' + (k === 'join' ? 'The word' : 'The word sum') + '" value="' + esc(v) + '">';
-      const inp = yoursB.querySelector('input'); inp.addEventListener('input', () => { Y[k] = inp.value; });
+    if (isText()) {
+      const k = tool;
+      textBox.innerHTML = (k === 'join' ? '<p class="try-given">' + esc(plainSum()) + ' &rarr;</p>' : '<p class="try-given"><i>' + esc(word.w) + '</i> &rarr;</p>')
+        + '<input class="try-in" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="' + (k === 'join' ? 'The word' : 'The word sum') + '" value="' + esc(Y[k]) + '">';
+      const inp = textBox.querySelector('input'); inp.addEventListener('input', () => { Y[k] = inp.value; });
       inp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); showing = true; tryDraw(); } });
       oursB.innerHTML = '<p class="try-given">' + (k === 'join' ? esc(sumText()) + ' &rarr; <i>' + esc(word.w) + '</i>' : '<i>' + esc(word.w) + '</i> &rarr; ' + esc(sumText())) + '</p>';
       countBox.textContent = ''; return;
     }
-    board(yoursB, true); if (showing) board(oursB, false);
+    textBox.innerHTML = '';
+    ink(svgOf().querySelector('g.yours'), Y);
+    if (showing) ours();
     countBox.innerHTML = counts();
   }
-  // a learner's marks, in the same shape as the site's: dots [from, to, vowel], bars [from, to], cuts
-  function mine() {
-    const L = T.L, n = L.length, bars = [...Y.b].sort((a, b) => a - b), group = [];   // a bar at gap g joins letters g-1 and g
-    let g = 0; for (let i = 0; i < n; i++) { if (i && !Y.b.has(i)) g++; group.push(g); }
-    const runs = []; bars.forEach(c => { const r = runs[runs.length - 1]; if (r && r[1] === c - 1) r[1] = c; else runs.push([c - 1, c]); });
-    const d = [];
-    for (const i of [...Y.d].sort((a, b) => a - b)) {
-      const mates = [...Y.d].filter(j => group[j] === group[i]);
-      if (mates.length === 1) { const all = [...Array(n).keys()].filter(j => group[j] === group[i]); d.push([all[0], all[all.length - 1], 0]); }
-      else d.push([i, i, 0]);
-    }
-    return {sy: [...Y.syl], d, b: runs.map(r => [r[0], r[1], 'y']), sh: [...Y.vow].filter(([, v]) => v === 1).map(([k]) => k),
-            lg: [...Y.vow].filter(([, v]) => v === 2).map(([k]) => k), sm: [...Y.prt]};
+  // the learner's marks, drawn as the site draws them (legomorphic_words.py, at 80 units a letter's height)
+  function ink(g, m, ghost) {
+    if (!g || !G) return;
+    const x = G.x, B = G.base, line = (x1, y1, x2, y2, c, w, d) => '<line x1="' + x1 + '" y1="' + y1 + '" x2="' + x2 + '" y2="' + y2 + '" stroke="' + c + '" stroke-width="' + w + '" stroke-linecap="round"' + (d ? ' stroke-dasharray="4.6 4.6"' : '') + '/>';
+    let o = '';
+    m.seam.forEach(k => { o += line(G.gaps[k - 1], B - 76, G.gaps[k - 1], B + 36.8, 'var(--modal)', 2.4, 1); });
+    m.breve.forEach(i => { o += '<path d="M' + (x[i] - 20.6) + ' ' + (B - 78) + ' Q' + x[i] + ' ' + (B - 62) + ' ' + (x[i] + 20.6) + ' ' + (B - 78) + '" fill="none" stroke="var(--verb)" stroke-width="4" stroke-linecap="round"/>'; });
+    m.macron.forEach(i => { o += line(x[i] - 22.3, B - 72.8, x[i] + 22.3, B - 72.8, 'var(--verb)', 4); });
+    m.bond.forEach(([a, b]) => { o += line(x[a] - 20.6, B + 26.4, x[b] + 20.6, B + 26.4, 'var(--ink)', 4); });
+    m.circ.forEach(([a, b]) => { o += '<circle cx="' + (x[a] + x[b]) / 2 + '" cy="' + (B + 44.8) + '" r="5.8" fill="var(--ink)"/>'; });
+    m.swoop.forEach(([a, b]) => { o += '<path d="M' + (x[a] - 8.6) + ' ' + (B + 68) + ' Q' + (x[a] + x[b]) / 2 + ' ' + (B + 84) + ' ' + (x[b] + 8.6) + ' ' + (B + 68) + '" fill="none" stroke="var(--modal)" stroke-width="3.7" stroke-linecap="round"/>'; });
+    g.innerHTML = o; g.style.opacity = ghost ? 0.35 : '';
+  }
+  const used = () => MARKS.filter(k => k === tool || Y[k].length);
+  function ours() {
+    const f = word.forms[form_], show = new Set([5]); used().forEach(k => LAYERS[k].forEach(n => show.add(n)));
+    oursB.innerHTML = '<svg viewBox="0 0 ' + f.W + ' ' + f.H + '" role="img" aria-label="' + esc(word.w) + ', as the site marks it">' + f.svg + '</svg>';
+    oursB.querySelectorAll('[class*="nz"]').forEach(el => { const n = +((el.getAttribute('class') || '').match(/nz(\d)/) || [])[1]; el.classList.toggle('on', show.has(n)); });
   }
   function counts() {
-    const a = mine(), plural = (n, w) => n + ' ' + w + (n === 1 ? '' : 's');
-    const one = {syl: m => plural(m.sy.length + 1, 'syllable'), snd: m => plural(m.d.length, 'sound'), prt: m => plural(m.sm.length + 1, 'part'),
-      vow: m => m.sh.length + ' short, ' + m.lg.length + ' long'}[job];
-    if (job === 'syl' && !Y.syl.size && !showing) return '';
-    if (job === 'snd' && !Y.d.size && !showing) return '';
-    if (job === 'vow' && !Y.vow.size && !showing) return '';
-    if (job === 'prt' && !Y.prt.size && !showing) return '';
-    return 'Yours: ' + one(a) + '.' + (showing ? ' Ours: ' + one(T) + '.' : '');
+    const mine = {circ: Y.circ.length, bond: Y.bond.length, swoop: Y.swoop.length, breve: Y.breve.length, macron: Y.macron.length, seam: Y.seam.length},
+          site = {circ: T.d.length, bond: T.b.length, swoop: T.sy.length + 1, breve: T.sh.length, macron: T.lg.length, seam: T.sm.length};
+    const ks = used().filter(k => mine[k] || showing); if (!ks.length) return '';
+    const say_ = c => ks.map(k => c[k] + ' ' + TOOLS[k][2] + (c[k] === 1 ? '' : 's')).join(', ');
+    return 'Yours: ' + say_(mine) + '.' + (showing ? '<br>Ours: ' + say_(site) + '.' : '');
   }
-  const COLOR = {v: 'var(--verb)', c: 'var(--ink)', t: 'var(--subject)', y: 'var(--ink)'};
-  function board(el, live) {
-    const L = T.L, n = L.length, m = live ? mine() : T;
-    const gapOn = live ? {syl: Y.syl, snd: Y.b, prt: Y.prt}[job] : null;
-    let h = '<div class="tb-row job-' + job + '" style="--n:' + n + '">';
-    for (let i = 0; i < n; i++) {
-      if (i) h += live && job !== 'vow' ? '<button type="button" class="tg' + (gapOn && gapOn.has(i) ? ' on' : '') + '" data-g="' + i + '" aria-label="between ' + esc(L[i - 1]) + ' and ' + esc(L[i]) + '"></button>' : '<span class="tg"></span>';
-      h += live && (job === 'snd' || job === 'vow') ? '<button type="button" class="tl" data-i="' + i + '">' + esc(L[i]) + '</button>' : '<span class="tl">' + esc(L[i]) + '</span>';
+  // a tap or a swipe on the stage, read for the mark that's picked
+  const span = (a, b, list) => list.filter(([p, q]) => !(q < a || p > b));
+  function act(t, x0, x1, tap) {
+    const n = G.x.length, near = v => G.x.reduce((k, c, i) => Math.abs(c - v) < Math.abs(G.x[k] - v) ? i : k, 0);
+    const gap = v => G.gaps.reduce((k, c, i) => Math.abs(c - v) < Math.abs(G.gaps[k - 1] - v) ? i + 1 : k, 1);
+    const lo = Math.min(x0, x1), hi = Math.max(x0, x1), pad = 14;
+    let a = G.x.findIndex(c => c >= lo - pad), b = n - 1 - [...G.x].reverse().findIndex(c => c <= hi + pad);
+    if (tap || a < 0 || b < a || a >= n) a = b = near(tap ? x0 : (x0 + x1) / 2);
+    const m = JSON.parse(JSON.stringify(Y));
+    if (t === 'seam') { if (n < 2) return null; const k = gap(tap ? x0 : (x0 + x1) / 2), i = m.seam.indexOf(k); i < 0 ? m.seam.push(k) : m.seam.splice(i, 1); }
+    else if (t === 'breve' || t === 'macron') { const o = t === 'breve' ? 'macron' : 'breve', i = near(x0);
+      m[o] = m[o].filter(v => v !== i); m[t].includes(i) ? m[t] = m[t].filter(v => v !== i) : m[t].push(i); }
+    else {
+      const hit = span(a, b, m[t]);
+      if (tap) { if (hit.length) m[t] = m[t].filter(r => !hit.includes(r)); else if (t !== 'bond') m[t].push([a, a]); }
+      else { if (t === 'bond' && a === b) return null; m[t] = m[t].filter(r => !hit.includes(r)); m[t].push([a, b]); }
+      m[t].sort((p, q) => p[0] - q[0]);
     }
-    el.innerHTML = h + '<svg class="tb-ink" aria-hidden="true"></svg></div>';
-    const row = el.firstChild, svg = row.lastChild;
-    const ink = () => {
-      const R = row.getBoundingClientRect(), ls = [...row.querySelectorAll('.tl')].map(x => x.getBoundingClientRect()),
-            gs = [...row.querySelectorAll('.tg')].map(x => x.getBoundingClientRect());
-      if (!ls.length) return;
-      const fs = parseFloat(getComputedStyle(row).fontSize), top = ls[0].top - R.top, bot = ls[0].bottom - R.top,
-            xl = i => ls[i].left - R.left, xr = i => ls[i].right - R.left, xc = (a, b) => (xl(a) + xr(b)) / 2, xg = g => (gs[g - 1].left + gs[g - 1].right) / 2 - R.left;
-      const sw = Math.max(2, fs * 0.05), base = bot + fs * 0.06;
-      let o = '';
-      const show = k => live ? job === k : (job === k);
-      if (show('syl')) m.sy.forEach(g => { o += '<line x1="' + xg(g) + '" y1="' + (top + fs * 0.12) + '" x2="' + xg(g) + '" y2="' + (bot - fs * 0.02) + '" stroke="var(--ink)" stroke-width="' + sw + '" stroke-linecap="round"/>'; });
-      if (show('prt')) m.sm.forEach(g => { const x = xg(g), y = (top + bot) / 2, r = fs * 0.13;
-        o += '<path d="M' + (x - r) + ' ' + y + 'H' + (x + r) + 'M' + x + ' ' + (y - r) + 'V' + (y + r) + '" stroke="var(--modal)" stroke-width="' + sw + '" stroke-linecap="round"/>'; });
-      if (show('snd')) {
-        m.b.forEach(([a, b, c]) => { o += '<line x1="' + (xl(a) + fs * 0.06) + '" y1="' + (base + fs * 0.12) + '" x2="' + (xr(b) - fs * 0.06) + '" y2="' + (base + fs * 0.12) + '" stroke="' + COLOR[c] + '" stroke-width="' + sw * 1.3 + '" stroke-linecap="round"/>'; });
-        m.d.forEach(([a, b, v]) => { o += '<circle cx="' + xc(a, b) + '" cy="' + (base + fs * 0.36) + '" r="' + fs * 0.07 + '" fill="' + (v ? 'var(--verb)' : 'var(--ink)') + '"/>'; });
-      }
-      if (show('vow')) {
-        const y = top + fs * 0.02, w = fs * 0.17;
-        m.sh.forEach(i => { const x = xc(i, i); o += '<path d="M' + (x - w) + ' ' + (y - w * 0.6) + 'Q' + x + ' ' + (y + w * 0.9) + ' ' + (x + w) + ' ' + (y - w * 0.6) + '" fill="none" stroke="var(--verb)" stroke-width="' + sw + '" stroke-linecap="round"/>'; });
-        m.lg.forEach(i => { const x = xc(i, i); o += '<line x1="' + (x - w) + '" y1="' + y + '" x2="' + (x + w) + '" y2="' + y + '" stroke="var(--verb)" stroke-width="' + sw + '" stroke-linecap="round"/>'; });
-      }
-      svg.setAttribute('viewBox', '0 0 ' + R.width + ' ' + R.height); svg.innerHTML = o;
-    };
-    requestAnimationFrame(ink); el._ink = ink;
+    return m;
   }
-  addEventListener('resize', () => { if (mode === 'try' && T) [yoursB, oursB].forEach(b => b._ink && b._ink()); });
-  jobsBox.addEventListener('click', e => { const b = e.target.closest('[data-job]'); if (!b) return; job = b.dataset.job; showing = false;
-    jobsBox.querySelectorAll('[data-job]').forEach(x => x.setAttribute('aria-pressed', String(x === b))); tryDraw(); });
-  yoursB.addEventListener('click', e => {
-    const g = e.target.closest('.tg[data-g]'), l = e.target.closest('.tl[data-i]');
-    const flip = (set, k) => set.has(k) ? set.delete(k) : set.add(k);
-    if (g) { const k = +g.dataset.g; if (job === 'syl') flip(Y.syl, k); else if (job === 'snd') flip(Y.b, k); else if (job === 'prt') flip(Y.prt, k); }
-    else if (l) { const k = +l.dataset.i; if (job === 'snd') flip(Y.d, k); else if (job === 'vow') { const v = ((Y.vow.get(k) || 0) + 1) % 3; v ? Y.vow.set(k, v) : Y.vow.delete(k); } }
-    else return;
-    tryDraw();
-  });
+  let px = null, py = null, pid = null;
+  const toSvg = e => { const svg = svgOf(), pt = svg.createSVGPoint(); pt.x = e.clientX; pt.y = e.clientY; return pt.matrixTransform(svg.getScreenCTM().inverse()); };
+  stage.addEventListener('pointerdown', e => { if (mode !== 'try' || !G || isText() || !svgOf()) return; e.preventDefault();
+    const p = toSvg(e); px = p.x; py = p.y; pid = e.pointerId; try { stage.setPointerCapture(pid); } catch (err) {} });
+  stage.addEventListener('pointermove', e => { if (px === null || e.pointerId !== pid) return; const p = toSvg(e);
+    if (Math.abs(p.x - px) < 10) { svgOf().querySelector('g.ghost').innerHTML = ''; return; }
+    const m = act(tool, px, p.x, false); if (m) ink(svgOf().querySelector('g.ghost'), Object.fromEntries(MARKS.map(k => [k, k === tool ? m[k].filter(r => !JSON.stringify(Y[k]).includes(JSON.stringify(r))) : []])), true); });
+  const lift = e => { if (px === null || e.pointerId !== pid) return; const p = toSvg(e), tap = Math.abs(p.x - px) < 10 && Math.abs(p.y - py) < 30;
+    const m = e.type === 'pointerup' ? act(tool, px, p.x, tap) : null; px = null; svgOf().querySelector('g.ghost').innerHTML = '';
+    if (m) { undo.push(JSON.stringify(Y)); Y = m; tryDraw(); } };
+  stage.addEventListener('pointerup', lift); stage.addEventListener('pointercancel', lift);
+  toolsBox.addEventListener('click', e => { const b = e.target.closest('[data-tool]'); if (!b) return; tool = b.dataset.tool;
+    toolsBox.querySelectorAll('[data-tool]').forEach(x => x.setAttribute('aria-pressed', String(x === b))); tryDraw(); });
   showB.addEventListener('click', () => { showing = !showing; tryDraw(); });
-  $('.try-clear').addEventListener('click', () => { if (!Y) return;
-    if (job === 'syl') Y.syl.clear(); else if (job === 'snd') { Y.d.clear(); Y.b.clear(); } else if (job === 'vow') Y.vow.clear(); else if (job === 'prt') Y.prt.clear(); else Y[job] = '';
-    showing = false; tryDraw(); });
+  $('.try-undo').addEventListener('click', () => { if (undo.length) { Y = JSON.parse(undo.pop()); tryDraw(); } });
+  $('.try-clear').addEventListener('click', () => { if (!Y) return; undo.push(JSON.stringify(Y));
+    if (isText()) Y[tool] = ''; else MARKS.forEach(k => { Y[k] = []; }); showing = false; tryDraw(); });
   // swipe left for the next move, right to go back, as a page turns
   // the first few pixels decide the direction: sideways locks the page so it can't scroll, up or down scrolls as usual
   let sx = null, sy = null, lx = null, swiped = false, axis = null;
-  stage.addEventListener('touchstart', e => { if (e.touches.length > 1) { sx = null; return; } const t = e.touches[0]; sx = lx = t.clientX; sy = t.clientY; swiped = false; axis = null; }, {passive: true});
+  stage.addEventListener('touchstart', e => { if (mode === 'try' || e.touches.length > 1) { sx = null; return; } const t = e.touches[0]; sx = lx = t.clientX; sy = t.clientY; swiped = false; axis = null; }, {passive: true});
   stage.addEventListener('touchmove', e => { if (sx === null) return; if (e.touches.length > 1) { sx = null; axis = null; return; }
     const t = e.touches[0], dx = t.clientX - sx, dy = t.clientY - sy; lx = t.clientX;
     if (!axis && Math.max(Math.abs(dx), Math.abs(dy)) > 8) axis = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
@@ -399,6 +422,22 @@
   document.documentElement.classList.add('js-menu'); b.hidden = false;
   b.addEventListener('click', () => { const open = head.classList.toggle('open'); b.setAttribute('aria-expanded', String(open)); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && head.classList.contains('open')) { head.classList.remove('open'); b.setAttribute('aria-expanded', 'false'); b.focus(); } });
+})();</script>
+<script>(() => {
+  const head = document.querySelector('header.site'), hold = head && head.parentElement, root = document.documentElement;
+  if (!head || !hold.classList.contains('head-hold')) return;
+  let pinned = false, H = 0;
+  const set = on => {
+    if (on === pinned) return; pinned = on;
+    if (on) { H = head.offsetHeight; hold.style.height = H + 'px'; head.classList.add('pinned'); }
+    else { head.classList.remove('pinned', 'open'); hold.style.height = '';
+      const m = head.querySelector('.menu'); if (m) m.setAttribute('aria-expanded', 'false'); }
+  };
+  const check = () => set(root.dataset.view !== 'student' && scrollY > (pinned ? H : head.offsetHeight));
+  addEventListener('scroll', check, {passive: true});
+  addEventListener('resize', () => { set(false); check(); });
+  new MutationObserver(check).observe(root, {attributes: true, attributeFilter: ['data-view']});
+  check();
 })();</script>
 <script>(() => {
   const box = document.querySelector('.search');

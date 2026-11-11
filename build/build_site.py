@@ -129,6 +129,7 @@ def page(title, body, depth, desc):
 {THEME_JS}
 {doors.VIEW_JS}
 {doors.MENU_JS}
+{doors.PIN_JS}
 {doors.SEARCH_JS}
 </body>
 </html>
@@ -164,11 +165,12 @@ THEME_SWITCH = ('<div class="theme" role="group" aria-label="Page colours" hidde
 
 def header(depth):
     """The brand, then search, the site map link and the two switches, then the doors (doors.py). The page's
-    breadcrumb goes where <!--crumbs--> is, once every page is written (doors.finish)."""
+    breadcrumb goes where <!--crumbs--> is, inside the header, once every page is written (doors.finish). Scrolled past,
+    the header pins to the top in a compact form (doors.PIN_JS); head-hold keeps its place so the page doesn't jump."""
     up = "../" * depth
     search, smap, view, menu, door_nav = doors.header_parts(up)
-    return (f'<header class="site"><div class="wrap"><div class="masthead"><a class="brand" href="{up}index.html"><span class="logo">{LOGO}</span><span class="name"><small>Legomorphic Notation</small>Sound and Word Atlas</span></a>'
-            f'<div class="tools">{search}{smap}{view}{THEME_SWITCH}{menu}</div></div>{door_nav}</div></header><!--crumbs-->')
+    return (f'<div class="head-hold"><header class="site"><div class="wrap"><div class="masthead"><a class="brand" href="{up}index.html"><span class="logo">{LOGO}</span><span class="name"><small>Legomorphic Notation</small>Sound and Word Atlas</span></a>'
+            f'<div class="tools">{search}{smap}{view}{THEME_SWITCH}{menu}</div></div>{door_nav}<!--crumbs--></div></header></div><!--after-head-->')
 
 def footer(depth):
     up = "../" * depth
