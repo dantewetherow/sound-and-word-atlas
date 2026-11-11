@@ -92,6 +92,10 @@ SITE_CODES = {
     "cub": "c.c s.u c.b", "cube": "c.c l.u c.b e>", "cap": "c.c s.a c.p", "cape": "c.c l.a c.p e>",
     "rag": "c.r s.a c.g", "rage": "c.r l.a c.g e> ; nudge 3>2", "bubble": "c.b s.u x.bb | le",   # bubble as apple and middle
     "mode": "c.m l.o c.d e>",                                     # the *med- page's word, as home
+    # the first spelling list (lists.py), 10 November 2026: says as gets, with the team marked alike though its sound
+    # shifts; pay and lay as say; laid as paid; stay and stayed as play and played
+    "says": "c.s t.ay + c.s", "pay": "c.p t.ay", "lay": "c.l t.ay", "laid": "c.l t.ai c.d",
+    "stay": "c.st t.ay", "stayed": "c.st t.ay + e0 c.d",
     "same": "c.s l.a c.m e>",                                     # the *sem- page's word, as name
     "duct": "c.d s.u c.ct",                                       # the *deuk- page's word; ct as the nt of went
     # the landing page: the notation's own name, and note to notation (as making and photo; creation as the create family deck)

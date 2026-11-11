@@ -68,6 +68,8 @@ PAGES = [
     ("credits.html", "teachers", "Credits and contact", "The writers the notation draws on, and how to get in touch."),
     ("sitemap.html", None, "Site map", "Every page, layer by layer."),
 ]
+import lists as _lists
+PAGES[-1:-1] = _lists.PAGES                 # the spelling lists, on the teachers' shelf
 # Pages on the teachers' shelf that the board view still shows.
 BOARD_OK = {"constructions.html"}
 TEACHERS = {s for s, *_, w in DOORS if w is None}
@@ -308,7 +310,9 @@ def write(OUT, page, header, footer, X):
 </div></section>""")
 
     # The teachers' shelf: everything a teacher prints, presents or checks, on one page.
-    shelf = [("To print and present", ("presentations.html", "cards.html")), ("Sentences", ("constructions.html",)),
+    import lists
+    lists.write(OUT, page, header, footer, X)
+    shelf = [("To print and present", ("presentations.html", "cards.html")), ("Spelling lists", tuple(p for p, *_ in lists.PAGES)), ("Sentences", ("constructions.html",)),
              ("Connections", ("word-lists.html", "ufli.html")), ("Reasons and sources", ("definitions.html", "about.html", "credits.html"))]
     by_path = {p: (p, t_, s) for p, d, t_, s in PAGES}
     door_page("teachers", "For teachers · Sound and Word Atlas", DOOR["teachers"][3], f"""{door_head("teachers")}

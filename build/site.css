@@ -634,3 +634,38 @@ details.ppart > :not(summary) { margin-inline: 16px; }
 .plesson p { margin: 0 0 8px; font-size: 0.95rem; }
 .plessons { list-style: none; padding: 0; margin: 8px 0 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr)); gap: 8px 28px; }
 .plessons span { color: var(--soft); font-size: 0.85rem; display: block; }
+/* spelling lists (lists.py): a learner's sheet that prints clean */
+.lprinciple { font-size: 1.15rem; max-width: 62ch; border-left: 3px solid var(--modal); padding-left: 16px; }
+.ltable { border-collapse: collapse; width: 100%; max-width: 860px; }
+.ltable td { padding: 8px 18px 8px 0; border-bottom: 1px solid var(--line); vertical-align: middle; }
+.ltable .lw svg { display: block; height: 62px; width: auto; }
+.ltable .ls { white-space: nowrap; }
+.ltable .lsent { color: var(--soft); }
+.llisten { margin-top: 14px; color: var(--soft); max-width: 62ch; }
+.lwork .wrap { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 10px 44px; }
+.lblanks { padding-left: 22px; margin: 6px 0 0; }
+.lblanks li { margin-bottom: 14px; display: list-item; }
+.lblanks li > span { vertical-align: baseline; }
+.lblanks .blank { display: inline-block; width: 9ch; border-bottom: 1.5px solid var(--ink); margin-inline: 8px; height: 1.2em; }
+.lblanks .blank.short { width: 6ch; }
+.lblanks .hint, .lblanks .ans { color: var(--soft); font-size: 0.88rem; }
+@media (max-width: 560px) { .ltable td { display: block; border: 0; padding: 2px 0; } .ltable tr { display: block; border-bottom: 1px solid var(--line); padding: 8px 0; } }
+@media print {
+  header, footer, nav, .crumbs, .noprint, .t-only, .uc { display: none !important; }
+  body { background: #fff; color: #000; }
+  .list-page section { padding-block: 2px !important; margin: 0 !important; }
+  .list-page .lprinciple { margin: 4px 0 0; font-size: 11.5pt; }
+  .list-page .hero { padding-top: 0; }
+  .list-page h2 { margin: 10px 0 4px; font-size: 15pt; }
+  .ltable td { padding: 3px 14px 3px 0; }
+  .ltable .lw svg { height: 62px !important; width: auto !important; }
+  .ltable { font-size: 11pt; }
+  .list-page .rrow { padding: 8px 12px; }
+  .list-page .rrow svg { height: 66px !important; width: auto !important; }
+  .list-page .rrow { margin: 4px 0 0; }
+  .lwork { break-before: page; }
+  .lblanks li { margin-bottom: 22px; }
+  .lblanks .blank { width: 14ch; }
+  .list-page h1 { font-size: 26pt; margin: 0 0 6px; }
+  .list-page a { color: inherit; text-decoration: none; }
+}
