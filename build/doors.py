@@ -129,9 +129,9 @@ MENU_JS = """<script>(() => {
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && head.classList.contains('open')) { head.classList.remove('open'); b.setAttribute('aria-expanded', 'false'); b.focus(); } });
 })();</script>"""
 
-# Scrolled past, the header pins to the top in a compact form: the logo, the breadcrumb trail, search and Menu. Not on
-# the board, where the page is for the room and the trail is hidden. head-hold keeps the header's height while it's
-# pinned, so nothing on the page moves.
+# Scrolled past, the header pins to the top in a compact form: the logo, the breadcrumb trail, search and Menu. On the
+# board too, since 11 November 2026, though the trail stays hidden there. head-hold keeps the header's height while
+# it's pinned, so nothing on the page moves.
 PIN_JS = """<script>(() => {
   const head = document.querySelector('header.site'), hold = head && head.parentElement, root = document.documentElement;
   if (!head || !hold.classList.contains('head-hold')) return;
@@ -143,13 +143,13 @@ PIN_JS = """<script>(() => {
       const m = head.querySelector('.menu'); if (m) m.setAttribute('aria-expanded', 'false'); }
   };
   // pin once the header has gone; unpin only once there's room for it again, so it can't flicker at the line
-  const check = () => set(root.dataset.view !== 'student' && (pinned ? scrollY > H - head.offsetHeight : scrollY > head.offsetHeight));
+  const check = () => set(pinned ? scrollY > H - head.offsetHeight : scrollY > head.offsetHeight);
   let ticking = false;
   addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(() => { ticking = false; check(); }); } }, {passive: true});
   // a phone's address bar showing and hiding is a resize too: only a change of width means the header needs measuring
   let W = innerWidth;
   addEventListener('resize', () => { if (innerWidth === W) return; W = innerWidth; set(false); check(); });
-  new MutationObserver(check).observe(root, {attributes: true, attributeFilter: ['data-view']});
+  new MutationObserver(() => { set(false); check(); }).observe(root, {attributes: true, attributeFilter: ['data-view']});   // the board's header is a different height
   check();
 })();</script>"""
 

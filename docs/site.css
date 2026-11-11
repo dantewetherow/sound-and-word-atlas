@@ -735,8 +735,8 @@ details.ppart > :not(summary) { margin-inline: 16px; }
 .cname .blank.long { width: 20ch; }
 .cscroll { overflow-x: auto; max-width: 100%; }
 
-/* the pinned header (doors.PIN_JS): scrolled past, the logo, the trail, search and Menu stay at the top. Not on the board. */
-html:not([data-view="student"]) { scroll-padding-top: 84px; }
+/* the pinned header (doors.PIN_JS): scrolled past, the logo, the trail, search and Menu stay at the top, on the board too */
+html { scroll-padding-top: 84px; }
 header.site.pinned { position: fixed; top: 0; left: 0; right: 0; z-index: 60; background: var(--paper); border-bottom: 1px solid var(--line);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07); }
 @media (prefers-reduced-motion: no-preference) { header.site.pinned { animation: pin-in 0.18s ease-out; } }
