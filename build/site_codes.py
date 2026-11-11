@@ -104,6 +104,22 @@ SITE_CODES = {
     "haphazard": "c.h s.a c.p + | c.h s.a c.z | r.ar c.d",          # p and h on either side of the seam; ar as in car
 }
 
+# The affixes and roots placed on the steps (the manual's "Parts on the steps", 10 November 2026), each marked as it is
+# said on its own and as the step's own words are: un as up, re as he, sub as bed, mode as home, duce as nice.
+PART_CODES = {
+    "in-": "s.i c.n", "un-": "s.u c.n", "ad-": "s.a c.d", "ab-": "s.a c.b", "ob-": "s.o c.b", "im-": "s.i c.m", "il-": "s.i c.l",
+    "en-": "s.e c.n", "ex-": "s.e c.x", "re-": "c.r l.e", "de-": "c.d l.e", "be-": "c.b l.e", "e-": "l.e",
+    "sub-": "c.s s.u c.b", "dis-": "c.d s.i c.s", "mis-": "c.m s.i c.s", "con-": "c.c s.o c.n", "com-": "c.c s.o c.m",
+    "hap": "c.h s.a c.p", "leg": "c.l s.e c.g", "mod": "c.m s.o c.d", "med": "c.m s.e c.d", "-th": "g.th",
+    "duct": "c.d s.u c.ct", "lect": "c.l s.e c.ct", "trans-": "c.tr s.a c.ns", "-est": "s.e c.st", "-less": "c.l s.e k.ss", "-ness": "c.n s.e k.ss",
+    "mode": "c.m l.o c.d e>", "note": "c.n l.o c.t e>", "-ate": "l.a c.t e>", "-ize": "l.i c.z e>",
+    "duce": "c.d l.u c.c e> ; nudge 3>2", "-ance": "b.a c.n c.c e0 ; nudge 3>2", "-ence": "b.e c.n c.c e0 ; nudge 3>2",
+    "-er": "r.er", "-or": "r.or", "-ar": "r.ar", "per-": "c.p r.er",
+    "-s": "c.s", "-es": "e0 c.s", "-ed": "e0 c.d", "-ing": "s.i k.ng",
+    "a-": "b.a", "-able": "b.a | c.b le", "-ible": "b.i | c.b le", "ple": "c.p le", "-y": "b.y", "-ly": "c.l b.y",
+    "graph": "c.gr s.a k.ph", "phone": "k.ph l.o c.n e>", "morph": "c.m r.or k.ph",
+}
+
 # A spelling that is two words, each with its own marking (from flsz_family.py; produce and conduct are drafts of
 # 10 November 2026 for the *deuk- family: the verb's first vowel is weak, so bare, and the noun's is said in full).
 VARIANTS = {

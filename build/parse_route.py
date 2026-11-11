@@ -1,5 +1,6 @@
 """Parse the manual's route section (converted text) into route.json: bands, steps, words, marks, kernel, Carney, and
-the move and its research for the steps that teach one (the manual's "Moves and research", added 10 November 2026)."""
+the move and its research for the steps that teach one (the manual's "Moves and research", added 10 November 2026),
+and the affixes and roots placed at each step (its "Parts on the steps", added the same day)."""
 import re, json, sys
 src, out = sys.argv[1], sys.argv[2]
 t = open(src, encoding="utf-8").read()
@@ -28,6 +29,9 @@ for n, _, pages in rows:
 moves_intro, rows = table3("Moves and research", "The move | Research")
 for n, move, research in rows:
     steps[int(n)]["move"], steps[int(n)]["research"] = move, research
+parts_intro, rows = table3("Parts on the steps", "Affixes and roots | Why here")
+for n, ps, why in rows:
+    steps[int(n)]["parts"], steps[int(n)]["parts_why"] = [x.strip() for x in ps.replace("*", "").split(",") if x.strip()], why
 open_m = re.search(r"Open on these steps:\n(.+?)\n\n### Carney", t, re.S)
 open_items = [re.sub(r"\s+", " ", x).strip() for x in open_m.group(1).split("- ") if x.strip()]
 notes = re.search(r"\| Steps 16 to 32(.+?)\nOpen on these steps", t, re.S)
@@ -45,7 +49,7 @@ for s in steps.values():
     c = re.search(r"; contrast (.+)$", s["words_md"])
     s["contrast_md"] = c.group(1) if c else ""
 json.dump({"intro": intro, "bands": bands, "steps": [steps[k] for k in sorted(steps)],
-           "carney_intro": carney_intro, "moves_intro": moves_intro, "open": open_items,
+           "carney_intro": carney_intro, "moves_intro": moves_intro, "parts_intro": parts_intro, "open": open_items,
            "note_16_32": ("Steps 16 to 32" + notes.group(1)).strip() if notes else ""},
           open(out, "w"), ensure_ascii=False, indent=1)
 print(len(steps), "steps;", [ (b["name"], b["steps"]) for b in bands ])

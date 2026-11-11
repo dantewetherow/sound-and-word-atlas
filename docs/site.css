@@ -622,3 +622,9 @@ details.ppart > :not(summary) { margin-inline: 16px; }
 .gpop { margin-top: 6px; }
 .gpop p + p { margin-top: 4px; }
 .gpop a, .pwords .gpop a { color: var(--modal); text-decoration: underline; }
+/* affixes and roots placed on a step */
+.words > .partset { display: flex; flex-wrap: wrap; gap: 14px 30px; flex-basis: 100%; align-items: flex-end; }
+.partfig figcaption { font-size: 0.85rem; color: var(--soft); text-align: center; max-width: 16ch; margin-inline: auto; }
+.partfig figcaption b { font-family: var(--display); font-weight: 500; font-size: 1rem; color: var(--ink); }
+.partfig figcaption a { text-decoration: none; }
+.words > .set-why { flex-basis: 100%; color: var(--soft); font-size: 0.88rem; margin: 0; }

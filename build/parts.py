@@ -32,7 +32,10 @@ MEANS = {
     "-ly": "in that way; like", "-er": "more; or one who does it", "-est": "most", "-en": "make or become; or a past form",
     "-less": "without", "-ness": "the state of being", "-ate": "make, do; or a Latin past form", "-ion": "the act or result of",
     "-ic": "having to do with", "-ful": "full of, given to", "-th": "the number in order; or a state",
-    "-able": "able to be", "-d": "<i>-ed</i> without its e, in <i>said</i>, <i>paid</i> and <i>laid</i>",
+    "-able": "able to be", "ob-": "against, toward", "im-": "not, or into: Latin <i>in-</i>, written <i>im-</i> before m, b and p",
+    "ex-": "out", "hap": "chance, luck", "note": "a mark", "ad-": "to, toward", "ab-": "away, from", "-ize": "make, do",
+    "-ence": "the state of being", "-ance": "the act or state of", "-or": "one who, the thing that", "-ar": "like, having to do with",
+    "per-": "through", "-ible": "able to be", "ple": "fold", "graph": "write", "phone": "sound, voice", "morph": "form", "-d": "<i>-ed</i> without its e, in <i>said</i>, <i>paid</i> and <i>laid</i>",
 }
 PREFIXES = {"un", "re", "mis", "be", "a", "out", "per", "dis", "de", "pre"}
 SUFFIXES = {"s", "es", "ed", "ing", "y", "ly", "er", "est", "en", "less", "ness", "ate", "ion", "ic", "ful", "th", "al", "or", "ive", "able"}
@@ -243,6 +246,9 @@ def write(OUT, door_page, X):
                 e["words"].append((w, "start" if pos == 0 else "end" if pos == len(d["parts"]) - 1 else "middle"))
         for j in d["joins"]: joined[j].append(w)
 
+    on_steps = X.get("step_parts", {})                    # parts the manual places on the route: each gets a card
+    for k in on_steps:
+        index.setdefault(k, {"kind": "root" if k in root_spells else kind_of(k), "words": []})
     marked = lambda w: (w in LW.W or w in X["SC"].VARIANTS) and w not in X["SC"].UNMARKED
     def word_link(w):
         d = words[w]
@@ -274,6 +280,8 @@ def write(OUT, door_page, X):
         n = len(ws)
         stack = with_it(k) if e["kind"] in ("pre", "suf") else []
         stacks = (f'<p class="pwith t-only">Found beside: ' + ", ".join(f'<a href="#{pid(x)}">{html.escape(x)}</a>' for x in stack) + ".</p>") if stack else ""
+        if k in on_steps:
+            stacks += '<p class="pwith">On the route: ' + ", ".join(f'<a href="steps/{n:02d}.html#parts">Step {n}</a>' for n in on_steps[k]) + ".</p>"
         src = f'<p class="psrc t-only"><a href="https://www.etymonline.com/search?q={quote(k)}">Its history in Etymonline</a></p>'
         return (f'<details class="ppart" id="{pid(k)}" data-k="{html.escape(bare(k))}" data-words="{html.escape(" ".join(w for w, _ in ws))}">'
                 f'<summary><b>{html.escape(k)}</b>{f"<span class=pm>{mean}</span>" if mean else ""}<span class="pcnt">{n} {"word" if n == 1 else "words"}</span></summary>'
@@ -284,7 +292,7 @@ def write(OUT, door_page, X):
               ("base", "Bases", "A word, or a part that carries the main meaning, that other parts join.")]
     secs = []
     for kind, head, sub in groups:
-        ks = sorted((k for k, e in index.items() if e["kind"] == kind and not (kind == "base" and len(e["words"]) < 2)),
+        ks = sorted((k for k, e in index.items() if e["kind"] == kind and not (kind == "base" and len(e["words"]) < 2 and k not in on_steps)),
                     key=lambda k: (-len(index[k]["words"]), bare(k)))
         if not ks: continue
         secs.append(f'<section class="about pgroup" id="g-{kind}" aria-labelledby="g-{kind}-h"><div class="wrap">'
@@ -337,7 +345,7 @@ def write(OUT, door_page, X):
                "u": f"parts.html#{pid(k)}", "w": sorted(w for w, _ in e["words"])} for k, e in index.items()}
     (OUT / "parts.json").write_text(json.dumps(pop, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     recs = [(k, f"parts.html#{pid(k)}", {"pre": "Prefix", "suf": "Suffix", "root": "Root", "base": "Base"}[e["kind"]] + f", {len(e['words'])} words")
-            for k, e in index.items() if not (e["kind"] == "base" and len(e["words"]) < 2)]
+            for k, e in index.items() if not (e["kind"] == "base" and len(e["words"]) < 2 and k not in on_steps)]
     print(f"wrote parts.html | {len(words)} words, {n_sum} sum only, {len(index)} parts")
     return {"sums": sums, "search": recs, "marked": marked}
 

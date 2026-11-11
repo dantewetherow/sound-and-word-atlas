@@ -83,6 +83,10 @@
    "marks": "sound circle, syllable swoop, long, short",
    "kernel_md": "*is*",
    "carney": "Short vowels can't end an open syllable and long vowels can, p. 134; short i, p. 135; long i, p. 151",
+   "parts": [
+    "in-"
+   ],
+   "parts_why": "Closed by one consonant, as *in*.",
    "words": [
     "I",
     "it",
@@ -100,6 +104,17 @@
    "marks": "none",
    "kernel_md": "*am*",
    "carney": "The short word rule: lexical words usually have at least three letters, and function words can have two, pp. 131–133; short a, p. 143; short u, p. 147; short o, p. 149; *s* for /z/, p. 238",
+   "parts": [
+    "un-",
+    "ad-",
+    "ab-",
+    "ob-",
+    "im-",
+    "il-",
+    "en-",
+    "ex-"
+   ],
+   "parts_why": "A short vowel closed by one consonant, as *at* and *up*.",
    "words": [
     "at",
     "an",
@@ -119,6 +134,13 @@
    "marks": "none",
    "kernel_md": "*be, go, do*",
    "carney": "Long vowels can end an open syllable, p. 134; *be* beside *bee*, p. 133; long e, p. 155; long i, p. 151; long o, p. 171",
+   "parts": [
+    "re-",
+    "de-",
+    "be-",
+    "e-"
+   ],
+   "parts_why": "Open, so the vowel spells its name, as *he* and *me*.",
    "words": [
     "he",
     "me",
@@ -140,6 +162,18 @@
    "marks": "none",
    "kernel_md": "*got*",
    "carney": "Short vowels, p. 134; each short vowel, pp. 135–150",
+   "parts": [
+    "sub-",
+    "dis-",
+    "mis-",
+    "con-",
+    "com-",
+    "hap",
+    "leg",
+    "mod",
+    "med"
+   ],
+   "parts_why": "One consonant closes it, as *bed* and *not*.",
    "words": [
     "be",
     "bed",
@@ -165,6 +199,10 @@
    "marks": "green bond bar",
    "kernel_md": "none",
    "carney": "*h* as a helper (auxiliary) letter in *ch*, *sh* and *ph*, p. 39; *ch*, p. 226; *th*, p. 232; *sh*, p. 240; *wh*, p. 253",
+   "parts": [
+    "-th"
+   ],
+   "parts_why": "Two letters, one sound, as *with*.",
    "words": [
     "the",
     "she",
@@ -185,6 +223,15 @@
    "marks": "black bond bar on doubled endings (*will*, *spell*); the box comes with endings at step 14",
    "kernel_md": "*has, had, did, can, will, shall, must, get, went*",
    "carney": "At the end of a word, doubling is largely limited to *ff*, *ss*, *ll*, *ck*, *tch* and *dge* (rule #D5), p. 123; *add*, *egg* and the short word rule, pp. 123, 131",
+   "parts": [
+    "duct",
+    "lect",
+    "trans-",
+    "-est",
+    "-less",
+    "-ness"
+   ],
+   "parts_why": "Closed, with two consonants after the vowel, as *must* and *spell*.",
    "words": [
     "has",
     "had",
@@ -240,6 +287,13 @@
    "marks": "the vault on every vowel–consonant–*e* word",
    "kernel_md": "none",
    "carney": "The *e* marks a long vowel, p. 129; *matting* beside *mating*, p. 114",
+   "parts": [
+    "mode",
+    "note",
+    "-ate",
+    "-ize"
+   ],
+   "parts_why": "The final e sends the vault, as *home* and *name*.",
    "words": [
     "make",
     "like",
@@ -257,6 +311,12 @@
    "marks": "nice-nudge",
    "kernel_md": "none",
    "carney": "*c* spells /s/ before *e* (rule C.8), p. 303; *g* spells /j/ before *e*, *i* and *y* (rules G.9 and G.12), pp. 326–327",
+   "parts": [
+    "duce",
+    "-ance",
+    "-ence"
+   ],
+   "parts_why": "The final e nudges the c soft, as *nice*; in *duce* it sends the vault too.",
    "words": [
     "nice",
     "face",
@@ -293,6 +353,13 @@
    "marks": "r-controlled unit",
    "kernel_md": "*are, were*",
    "carney": "*ar*, p. 177; *or*, p. 181; *er*, *ir* and *ur*, p. 186",
+   "parts": [
+    "-er",
+    "-or",
+    "-ar",
+    "per-"
+   ],
+   "parts_why": "A vowel and r as one unit, as *her* and *for*.",
    "words": [
     "or",
     "for",
@@ -313,6 +380,13 @@
    "marks": "morpheme seam",
    "kernel_md": "*being, doing, going, gets*",
    "carney": "*-ed* and *-s* keep one spelling, pp. 18–19 (table 5); *ng*, p. 248",
+   "parts": [
+    "-s",
+    "-es",
+    "-ed",
+    "-ing"
+   ],
+   "parts_why": "The suffixes this step joins at the seam.",
    "words": [
     "gets",
     "sees",
@@ -374,6 +448,10 @@
    "carney": "In a vowel-consonant-vowel run the first vowel is often short, and hard to predict without stress, p. 275; open syllables, p. 134",
    "move": "Try the first vowel long, then short, then weak. Keep the one that makes a word you know, then mark it.",
    "research": "Kearns (2020): with one consonant between two vowels, the first vowel of a two-syllable word is long 47% of the time, short 25% and weak 21%. In longer words it is long only 19% of the time. The vowel matters: *u* is usually long (84%), and *e* is long only 18% of the time and weak 60%.",
+   "parts": [
+    "a-"
+   ],
+   "parts_why": "A weak vowel alone in its syllable, as *around*.",
    "words": [
     "tiger",
     "paper",
@@ -395,6 +473,12 @@
    "marks": "none: a red bond bar and one red circle under *le*",
    "kernel_md": "none",
    "carney": "*le* is a vowel and a consonant with the letters switched, p. 129; a short vowel before *le* doubles (*bubble*, *bottle*; rule #D9), p. 124; *le* beside *al*, *el*, *il* and *ol*, p. 433",
+   "parts": [
+    "-able",
+    "-ible",
+    "ple"
+   ],
+   "parts_why": "Consonant + le, as *table*.",
    "words": [
     "table",
     "bugle",
@@ -646,6 +730,11 @@
    "marks": "none: the seam",
    "kernel_md": "none",
    "carney": "*-y* and *-ies* (*berry*, *berries*), p. 70; *carry*, *carried*, *carries*, p. 135; *i* before some endings (*happiness*), p. 136",
+   "parts": [
+    "-y",
+    "-ly"
+   ],
+   "parts_why": "The suffixes of this step.",
    "words": [
     "sadly",
     "slowly",
@@ -664,6 +753,11 @@
    "marks": "none: the seam, before the root",
    "kernel_md": "*undo, redo*",
    "carney": "No section of its own. A morpheme keeps its spelling, p. 18; *re-enact* beside *react*, p. 48",
+   "parts": [
+    "un-",
+    "re-"
+   ],
+   "parts_why": "Back again, now joined to words.",
    "words": [
     "undo",
     "untie",
@@ -704,6 +798,12 @@
    "marks": "none: the black bond bar under *ph*",
    "kernel_md": "none",
    "carney": "*ph* in words from Greek, p. 228; words from Greek, pp. 96–101",
+   "parts": [
+    "graph",
+    "phone",
+    "morph"
+   ],
+   "parts_why": "*ph* as one unit.",
    "words": [
     "photo",
     "phone",
@@ -717,6 +817,7 @@
  ],
  "carney_intro": "Edward Carney's *A Survey of English Spelling* (Routledge, 1994) describes every unit on the route, and the atlas leans on it from the first step to the last. The pages are Carney's printed pages; a sound named on its own is the start of his section on that sound. How a phonics program lines up with the route is in a crosswalk, a separate PDF for each program. The first is for UFLI Foundations.",
  "moves_intro": "Some steps teach a move: what a learner tries when the marks alone don't settle a word. Each move is listed with the research behind it. Devin M. Kearns, \"Does English Have Useful Syllable Division Patterns?\" *Reading Research Quarterly* 55, no. S1 (2020): S145–S160, counted how the vowels are said in 14,844 words from texts for grades 1 to 8. His figures describe the words, not learners. Added 10 November 2026.",
+ "parts_intro": "The commonest prefixes and suffixes, and the roots the families use, each placed at the step whose pattern it shows, so a part met on the route is met again in its families. Each is marked as it is said on its own. Inside a word many are said weakly, as the *con* of the verb *conduct* is, and there the vowel would be bare. Added 10 November 2026.",
  "open": [
   "Teams with two sounds (steps 22 and 24). The Orton-Gillingham manual puts a bar or a cup over *oo* (p. 17), and the vicinity pattern page says a team takes no long mark, short mark or vault. The marking calls of 7 October mark both sounds alike for now.",
   "Step 19 could move up to follow step 13. Its words are met in marked text from rung 1, and every unit it uses is in place by step 13, where the seam lets *does* be built as *do* + *es*.",

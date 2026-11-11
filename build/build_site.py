@@ -241,6 +241,19 @@ for i, s in enumerate(STEPS):
         cells.append('<p class="set-label">Contrast</p>')
         for g in cons:
             cells.append('<div class="group pair">' + "".join(word_cells(g, 58)) + "</div>")
+    # The affixes and roots placed at this step (the manual's "Parts on the steps"): each marked as the step's words are,
+    # with its meaning, and a link to every word that has it.
+    if s.get("parts"):
+        import parts as PT, roots as RT
+        cells.append('<p class="set-label" id="parts">Affixes and roots</p>')
+        figs = []
+        for k in s["parts"]:
+            mean = RT.ROOT_PARTS.get(k) or PT.MEANS.get(k) or RT.PARTS.get(k) or ""
+            mean = re.split(r"[:;]", re.sub(r"<[^>]+>", "", html.unescape(mean)))[0].strip()
+            figs.append(f'<figure class="word partfig">{svg_of(k.strip("-"), 58, SC.PART_CODES[k], f"{k}, marked")}'
+                        f'<figcaption><a href="../parts.html#{PT.pid(k)}"><b>{html.escape(k)}</b></a>{" " + html.escape(mean) if mean else ""}</figcaption></figure>')
+        cells.append('<div class="group partset">' + "".join(figs) + "</div>")
+        cells.append(f'<p class="set-why t-only">{md(s["parts_why"])} Each is marked as it&rsquo;s said on its own; inside a word many are said weakly.</p>')
     notes = []
     marks = s["marks"].strip()
     notes.append(f'<div class="note"><h2>New marks</h2><p>{new_marks(marks)}</p></div>')
@@ -481,6 +494,9 @@ X = dict(uc=uc, md=md, plain=plain, route_lead=ROUTE_LEAD, bands_html="".join(ba
          draft_note=f"steps {DRAFT_FROM} to {N} are a first draft, and a few words show in plain letters until their marking is settled. Next: a second look at their order and their words.",
          morph=landing.MORPH, STEPS=STEPS, pages=PAGES, groups_of=groups_of, KEY=KEY, terms=definitions.terms(KEY), list_words=list_words,
          elp=ELP_ALL, dolch=DOLCH_ALL, SC=SC, with_code=with_code)
+X["step_parts"] = {}
+for s in STEPS:
+    for k in s.get("parts", []): X["step_parts"].setdefault(k, []).append(s["n"])
 doors.write(OUT, page, header, footer, X)
 n_search = doors.write_search(OUT, X)
 
