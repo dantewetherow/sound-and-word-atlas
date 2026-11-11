@@ -68,7 +68,12 @@ def facts(LW, word):
                       "d": [[m["cols"][0], m["cols"][-1], 1 if m.get("color") == "vowel" else 0] for m in p["marks"] if m["type"] == "dot"],
                       "b": [[m["from"], m["to"], COL.get(m.get("color"), "c")] for m in p["marks"] if m["type"] == "blendbar"],
                       "sh": [m["col"] for m in p["marks"] if m["type"] == "breve"], "lg": [m["col"] for m in p["marks"] if m["type"] == "macron"],
-                      "sm": [m["after"] + 1 for m in p["marks"] if m["type"] == "seam"]}
+                      "sm": [m["after"] + 1 for m in p["marks"] if m["type"] == "seam"],
+                      # the jobs: vaults [sender, receiver], block boxes [from, to], blocked vaults [sender, box from, box to], cones
+                      "v": [[m["to"], m["from"]] for m in p["marks"] if m["type"] == "vault"],     # parse() keeps a vault as from the vowel to its sender
+                      "bx": [[m["from"], m["to"]] for m in p["marks"] if m["type"] == "block"],
+                      "bv": [[m["from"], m["blockFrom"], m["blockTo"]] for m in p["marks"] if m["type"] == "blockedvault"],
+                      "cn": [m["col"] for m in p["marks"] if m["type"] == "cone"] + [m["to"] for m in p["marks"] if m["type"] == "vault" and m.get("cone", True)]}
     return out
 
 
@@ -135,6 +140,7 @@ def write(OUT, door_page, X):
         if w in {m for m, *_ in X["morph"]}: links.append({"t": "Explorations", "u": f"explorations.html#{doors.word_id(w)}"})
         links += fam.get(w, [])
         rec = {"w": w, "forms": out, "where": links}
+        if w in SC.OPEN: rec["open"] = 1
         if sum_: rec["sum"], rec["mean"] = sum_["parts"], sum_["mean"]
         (OUT / "walk" / f"{wid}.json").write_text(json.dumps(rec, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
         index.append([w, wid])
@@ -142,7 +148,7 @@ def write(OUT, door_page, X):
 
     body = f"""<section class="hero walk-hero"><div class="wrap">
 <h1><span class="t-only">Words</span><span class="s-only">Pick a word</span></h1>
-<p class="lead t-only">Look up a word, then tap or swipe through it, or try marking it first. <b>Read it</b> starts from the word in plain letters and decodes; <b>Spell it</b> starts from the syllables, then the sounds, then the letters. <b>Try it</b> puts the marks in the learner’s hands: pick sound circles, bond bars, syllable swoops, short or long marks, or seams, then tap or swipe them onto the word, or write its word sum. <b>Show ours</b> sets the site’s marks underneath to talk about; nothing is scored. Under the word is its sum: tap a part to see every word that shares it.</p>
+<p class="lead t-only">Look up a word, then tap or swipe through it, or try marking it first. <b>Read it</b> starts from the word in plain letters and decodes; <b>Spell it</b> starts from the syllables, then the sounds, then the letters. <b>Try it</b> puts the marks in the learner’s hands: pick sound circles, bond bars, syllable swoops, short or long marks, cones, vowel vaults, block boxes or seams, then tap or swipe them onto the word, or write its word sum. <b>Show ours</b> sets the site’s marks underneath to talk about; nothing is scored. Under the word is its sum: tap a part to see every word that shares it.</p>
 </div></section>
 {section(note=X["uc"]("a word is either marked, so it can be walked, or shown as a word sum only. Next: the word built from left to right, a unit at a swipe; and draft marks for more words, labelled as drafts, for teachers to check."))}
 <section class="about t-only"><div class="wrap"><p><a href="explorations.html">A family built in three moves: <i>note</i>, <i>notate</i>, <i>notation</i></a>. Every analysed word, by its parts, is in <a href="parts.html">Parts</a>.</p></div></section>"""
@@ -175,6 +181,7 @@ def section(note="", head="", lazy=False, url=True, default="which"):
 <p class="try-say"></p>
 <div class="try-text"></div>
 <div class="try-row try-ours" hidden><span class="try-lab">Ours</span><div class="try-board"></div></div>
+<p class="try-open" hidden>The site&rsquo;s call on this word is still open, so take ours as a draft to talk about, not the answer.</p>
 <p class="try-count" aria-live="polite"></p>
 <div class="try-acts"><button type="button" class="try-undo">Undo</button><button type="button" class="try-clear">Clear</button><button type="button" class="try-show" aria-pressed="false">Show ours</button></div>
 </div>
@@ -334,22 +341,31 @@ WALK_JS = r"""<script>(() => {
     breve: '<path d="M5 7 Q11 17 17 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>',
     macron: '<line x1="5" y1="11" x2="17" y2="11" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>',
     seam: '<line x1="11" y1="3" x2="11" y2="19" stroke="currentColor" stroke-width="2.2" stroke-dasharray="3 3"/>',
+    cone: '<circle cx="11" cy="11" r="7.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="0.4 3.4"/>',
+    vault: '<path d="M18 17 C18 4 6 4 5 10" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M8 9.6 L5 10 L6.3 7.3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
+    box: '<rect x="4" y="5" width="14" height="12" rx="2.5" fill="none" stroke="currentColor" stroke-width="2.2"/>',
     sum: '<path d="M11 5V17M5 11H17" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>',
     join: '<path d="M4 11H17M12 6l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>'
   };
   const TOOLS = {
-    circ: ['Sound circles', 'Tap a letter for each sound you say. Where two or more letters spell one sound, swipe across them for one circle.', 'sound circle'],
-    bond: ['Bond bars', 'Swipe across letters that work together to bond them with a bar.', 'bond bar'],
-    swoop: ['Syllable swoops', 'Swipe under each syllable, from its first letter to its last. Tap a letter for a syllable of one letter.', 'syllable swoop'],
-    breve: ['Short', 'Tap a vowel with a short sound to give it a short mark.', 'short mark'],
-    macron: ['Long', 'Tap a vowel with a long sound to give it a long mark.', 'long mark'],
-    seam: ['Seams', 'Tap between two letters where one part ends and the next begins.', 'seam'],
+    circ: ['Sound circles', 'Tap a letter for each sound you say. Where two or more letters spell one sound, swipe across them for one circle.', 'sound circle', 'sound circles'],
+    bond: ['Bond bars', 'Swipe across letters that work together to bond them with a bar.', 'bond bar', 'bond bars'],
+    swoop: ['Syllable swoops', 'Swipe under each syllable, from its first letter to its last. Tap a letter for a syllable of one letter.', 'syllable swoop', 'syllable swoops'],
+    breve: ['Short', 'Tap a vowel with a short sound to give it a short mark.', 'short mark', 'short marks'],
+    macron: ['Long', 'Tap a vowel with a long sound to give it a long mark.', 'long mark', 'long marks'],
+    cone: ['Cone', 'Tap a letter that makes no sound of its own to put it in a cone of silence.', 'cone of silence', 'cones of silence'],
+    vault: ['Vowel vault', 'Swipe from the letter doing the job back to the vowel it makes long: from the e of <i>hope</i> to the o. A block box in the way blocks the vault.', 'vowel vault', 'vowel vaults'],
+    box: ['Block box', 'Swipe across the consonants that stop a vault, to put them in a block box.', 'block box', 'block boxes'],
+    seam: ['Seams', 'Tap between two letters where one part ends and the next begins.', 'seam', 'seams'],
     sum: ['Word sum', 'Write the word sum. Put + between the parts and brackets round a letter that drops or changes: <i>hop(e) + ing</i>.'],
     join: ['Put together', 'Here are the parts. Write the word they make.']
   };
-  const MARKS = ['circ', 'bond', 'swoop', 'breve', 'macron', 'seam'], LAYERS = {circ: [1, 2], bond: [4], swoop: [3], breve: [6], macron: [6], seam: [9]};
+  const MARKS = ['circ', 'bond', 'swoop', 'breve', 'macron', 'cone', 'vault', 'box', 'seam'],
+        LAYERS = {circ: [1, 2], bond: [4], swoop: [3], breve: [6], macron: [6], cone: [8], vault: [7, 8], box: [7], seam: [9]};
   let T = null, G = null, Y = null, tool = 'circ', showing = false, undo = [];
-  const fresh = () => ({circ: [], bond: [], swoop: [], breve: [], macron: [], seam: [], sum: '', join: ''});
+  const fresh = () => ({circ: [], bond: [], swoop: [], breve: [], macron: [], cone: [], vault: [], box: [], seam: [], sum: '', join: ''});
+  // a learner's vault is blocked when one of their block boxes stands between its sender and the vowel
+  const blocker = (m, [s, r]) => m.box.find(([a, b]) => a > Math.min(s, r) && b < Math.max(s, r));
   const plainSum = () => word.sum.map(p => p.s.replace(/\(([^)&]*)&rarr;[^)]*\)/g, '$1').replace(/[()]/g, '')).join(' + ');
   const sumText = () => word.sum.map(p => p.s.replace(/&rarr;/g, '→')).join(' + ');
   const svgOf = () => stage.querySelector('svg');
@@ -381,7 +397,7 @@ WALK_JS = r"""<script>(() => {
     say.innerHTML = TOOLS[tool][1];
     showB.textContent = showing ? 'Hide ours' : 'Show ours'; showB.setAttribute('aria-pressed', String(showing));
     $('.try-undo').hidden = isText(); $('.try-undo').disabled = !undo.length;
-    oursRow.hidden = !showing;
+    oursRow.hidden = !showing; $('.try-open').hidden = !(showing && word.open);
     if (isText()) {
       const k = tool;
       textBox.innerHTML = (k === 'join' ? '<p class="try-given">' + esc(plainSum()) + ' &rarr;</p>' : '<p class="try-given"><i>' + esc(word.w) + '</i> &rarr;</p>')
@@ -406,6 +422,20 @@ WALK_JS = r"""<script>(() => {
     m.macron.forEach(i => { o += line(x[i] - 22.3, B - 72.8, x[i] + 22.3, B - 72.8, 'var(--verb)', 4); });
     m.bond.forEach(([a, b]) => { o += line(x[a] - 20.6, B + 26.4, x[b] + 20.6, B + 26.4, 'var(--ink)', 4); });
     m.circ.forEach(([a, b]) => { o += '<circle cx="' + (x[a] + x[b]) / 2 + '" cy="' + (B + 44.8) + '" r="5.8" fill="var(--ink)"/>'; });
+    m.cone.forEach(i => { o += '<circle cx="' + x[i] + '" cy="' + (B - 20.8) + '" r="29.6" fill="none" stroke="var(--soft)" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 6.2"/>'; });
+    m.box.forEach(([a, b]) => { o += '<rect x="' + (x[a] - 24) + '" y="' + (B - 67.2) + '" width="' + (x[b] - x[a] + 48) + '" height="76.8" rx="8" fill="none" stroke="var(--modal)" stroke-width="2.9"/>'; });
+    m.vault.forEach(([s, r]) => {
+      const k = s > r ? 1 : -1, ys = m.cone.includes(s) ? B - 50.4 : B - 88, bx = blocker(m, [s, r]), path = d => '<path d="' + d + '" fill="none" stroke="var(--modal)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>';
+      if (bx) {        // blocked: the vault comes down on the box, with a red cross
+        const c = (x[bx[0]] + x[bx[1]]) / 2, e = c + 4.6 * k, y = B - 85.6;
+        o += path('M' + x[s] + ' ' + ys + ' Q' + ((x[s] + e) / 2 + 5.2 * k) + ' ' + (B - 121.6) + ' ' + e + ' ' + y);
+        o += '<path d="M' + (c - 6.4) + ' ' + (y - 6.4) + ' L' + (c + 6.4) + ' ' + (y + 6.4) + ' M' + (c + 6.4) + ' ' + (y - 6.4) + ' L' + (c - 6.4) + ' ' + (y + 6.4) + '" fill="none" stroke="var(--verb)" stroke-width="4" stroke-linecap="round"/>';
+      } else {
+        const e = x[r] + 4 * k, y = B - 89.6;
+        o += path('M' + x[s] + ' ' + ys + ' C' + (x[s] - 3.2 * k) + ' ' + (B - 112) + ' ' + (x[r] + 32.8 * k) + ' ' + (B - 112) + ' ' + e + ' ' + y);
+        o += path('M' + (e + 9.6 * k) + ' ' + (y - 1) + ' L' + e + ' ' + y + ' L' + (e + 4.4 * k) + ' ' + (y - 8.6));
+      }
+    });
     m.swoop.forEach(([a, b]) => { o += '<path d="M' + (x[a] - 8.6) + ' ' + (B + 68) + ' Q' + (x[a] + x[b]) / 2 + ' ' + (B + 84) + ' ' + (x[b] + 8.6) + ' ' + (B + 68) + '" fill="none" stroke="var(--modal)" stroke-width="3.7" stroke-linecap="round"/>'; });
     g.innerHTML = o; g.style.opacity = ghost ? 0.35 : '';
   }
@@ -416,10 +446,16 @@ WALK_JS = r"""<script>(() => {
     oursB.querySelectorAll('[class*="nz"]').forEach(el => { const n = +((el.getAttribute('class') || '').match(/nz(\d)/) || [])[1]; el.classList.toggle('on', show.has(n)); });
   }
   function counts() {
-    const mine = {circ: Y.circ.length, bond: Y.bond.length, swoop: Y.swoop.length, breve: Y.breve.length, macron: Y.macron.length, seam: Y.seam.length},
-          site = {circ: T.d.length, bond: T.b.length, swoop: T.sy.length + 1, breve: T.sh.length, macron: T.lg.length, seam: T.sm.length};
-    const ks = used().filter(k => mine[k] || showing); if (!ks.length) return '';
-    const say_ = c => ks.map(k => c[k] + ' ' + TOOLS[k][2] + (c[k] === 1 ? '' : 's')).join(', ');
+    const blocked = Y.vault.filter(v => blocker(Y, v)).length;
+    const mine = {circ: Y.circ.length, bond: Y.bond.length, swoop: Y.swoop.length, breve: Y.breve.length, macron: Y.macron.length,
+                  cone: Y.cone.length, vault: Y.vault.length - blocked, bv: blocked, box: Y.box.length, seam: Y.seam.length},
+          site = {circ: T.d.length, bond: T.b.length, swoop: T.sy.length + 1, breve: T.sh.length, macron: T.lg.length,
+                  cone: T.cn.length, vault: T.v.length, bv: T.bv.length, box: T.bx.length, seam: T.sm.length};
+    const NAME = Object.assign({bv: [0, 0, 'blocked vault', 'blocked vaults']}, TOOLS);
+    let ks = used().filter(k => mine[k] || showing);
+    if (ks.includes('vault') || ks.includes('box')) ks.splice(Math.max(ks.indexOf('vault'), ks.indexOf('box')) + 1, 0, 'bv');
+    ks = ks.filter(k => k !== 'bv' || mine.bv || showing); if (!ks.length) return '';
+    const say_ = c => ks.map(k => c[k] + ' ' + NAME[k][c[k] === 1 ? 2 : 3]).join(', ');
     return 'Yours: ' + say_(mine) + '.' + (showing ? '<br>Ours: ' + say_(site) + '.' : '');
   }
   // a tap or a swipe on the stage, read for the mark that's picked
@@ -431,6 +467,18 @@ WALK_JS = r"""<script>(() => {
     let a = G.x.findIndex(c => c >= lo - pad), b = n - 1 - [...G.x].reverse().findIndex(c => c <= hi + pad);
     if (tap || a < 0 || b < a || a >= n) a = b = near(tap ? x0 : (x0 + x1) / 2);
     const m = JSON.parse(JSON.stringify(Y));
+    if (t === 'cone') { const i = near(x0); m.cone.includes(i) ? m.cone = m.cone.filter(v => v !== i) : m.cone.push(i); return m; }
+    if (t === 'vault') {           // from the letter the swipe starts on to the one it ends on; a tap takes off a vault there
+      const s = near(x0), r = near(x1);
+      if (tap || s === r) { const keep = m.vault.filter(([p, q]) => p !== s && q !== s); if (keep.length === m.vault.length) return null; m.vault = keep; return m; }
+      m.vault = m.vault.filter(([p]) => p !== s); m.vault.push([s, r]); return m;
+    }
+    if (t === 'box') {
+      const hit = span(a, b, m.box);
+      if (tap) { if (hit.length) m.box = m.box.filter(r => !hit.includes(r)); else m.box.push([a, a]); }
+      else { m.box = m.box.filter(r => !hit.includes(r)); m.box.push([a, b]); }
+      m.box.sort((p, q) => p[0] - q[0]); return m;
+    }
     if (t === 'seam') { if (n < 2) return null; const k = gap(tap ? x0 : (x0 + x1) / 2), i = m.seam.indexOf(k); i < 0 ? m.seam.push(k) : m.seam.splice(i, 1); }
     else if (t === 'breve' || t === 'macron') { const o = t === 'breve' ? 'macron' : 'breve', i = near(x0);
       m[o] = m[o].filter(v => v !== i); m[t].includes(i) ? m[t] = m[t].filter(v => v !== i) : m[t].push(i); }
@@ -448,7 +496,11 @@ WALK_JS = r"""<script>(() => {
     const p = toSvg(e); px = p.x; py = p.y; pid = e.pointerId; try { stage.setPointerCapture(pid); } catch (err) {} });
   stage.addEventListener('pointermove', e => { if (px === null || e.pointerId !== pid) return; const p = toSvg(e);
     if (Math.abs(p.x - px) < 10) { svgOf().querySelector('g.ghost').innerHTML = ''; return; }
-    const m = act(tool, px, p.x, false); if (m) ink(svgOf().querySelector('g.ghost'), Object.fromEntries(MARKS.map(k => [k, k === tool ? m[k].filter(r => !JSON.stringify(Y[k]).includes(JSON.stringify(r))) : []])), true); });
+    const m = act(tool, px, p.x, false); if (!m) return;
+    // the swipe so far, faint: just the new mark, or for a vault or a box the jobs as they'd stand, so a block shows
+    const jobs = tool === 'vault' || tool === 'box', same = (k, r) => Y[k].some(q => JSON.stringify(q) === JSON.stringify(r));
+    const g = Object.fromEntries(MARKS.map(k => [k, jobs ? (['vault', 'box', 'cone'].includes(k) ? m[k] : []) : k === tool ? m[k].filter(r => !same(k, r)) : []]));
+    ink(svgOf().querySelector('g.ghost'), g, true); });
   const lift = e => { if (px === null || e.pointerId !== pid) return; const p = toSvg(e), tap = Math.abs(p.x - px) < 10 && Math.abs(p.y - py) < 30;
     const m = e.type === 'pointerup' ? act(tool, px, p.x, tap) : null; px = null; svgOf().querySelector('g.ghost').innerHTML = '';
     if (m) { undo.push(JSON.stringify(Y)); Y = m; tryDraw(); } };

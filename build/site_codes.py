@@ -159,6 +159,11 @@ UNMARKED = {**{w: CONTRACTION for w in ("I'm", "it's", "isn't", "don't", "can't"
             **{w: FAMILY for w in ("act", "action", "actor", "active", "react", "create", "creation", "creator")},
             "telephone": GREEK, "photograph": GREEK}
 
+# Words whose marking waits on Dante's ruling (the Marking calls in the manual, 11 November 2026). The word walk's Try it
+# says so under Ours, so a learner's defensible mark isn't shown up by a call that isn't made yet. Take a word off once
+# it's ruled.
+OPEN = {"robin", "robot", "river", "silly", "gone", "produce", "conduct", "over", "pony", "photo", "said", "paid"}
+
 # Choices these codes make that the manual and the cards do not settle outright.
 CALLS = [
     ("silent", "the weak e of -lent is bare", "The silent card puts a short mark on it; the later rule leaves a weak vowel bare."),

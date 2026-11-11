@@ -523,6 +523,8 @@ table.cw-table td:first-of-type { width: 46%; }
 .try-tools button { --tc: var(--ink); }
 .try-tools button[data-tool="swoop"], .try-tools button[data-tool="seam"] { --tc: var(--modal); }
 .try-tools button[data-tool="breve"], .try-tools button[data-tool="macron"] { --tc: var(--verb); }
+.try-tools button[data-tool="vault"], .try-tools button[data-tool="box"] { --tc: var(--modal); }
+.try-tools button[data-tool="cone"] { --tc: var(--soft); }
 .try-tools button[data-tool="sum"], .try-tools button[data-tool="join"] { --tc: var(--soft); }
 .try-tools button svg { color: var(--tc); }
 .try-tools button[aria-pressed="true"] { border-color: var(--tc); box-shadow: inset 0 0 0 1px var(--tc); background: color-mix(in srgb, var(--tc) 14%, var(--card)); font-weight: 500; }
@@ -536,9 +538,11 @@ table.cw-table td:first-of-type { width: 46%; }
 .try-board svg .on { opacity: 1; }
 .try-text:empty { display: none; }
 .try-text { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 14px 12px; }
-.try-given { margin: 0; font-size: 1.25rem; text-align: center; }
-.try-in { display: block; width: min(22em, 100%); margin: 8px auto 2px; font: inherit; font-size: 1.3rem; padding: 8px 10px; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); color: var(--ink); text-align: center; }
+.try-given { margin: 0; font-size: clamp(1.45rem, 4.2vw, 2rem); text-align: center; }
+.try-in { display: block; width: min(22em, 100%); margin: 8px auto 2px; font: inherit; font-size: clamp(1.35rem, 3.8vw, 1.8rem); padding: 8px 10px; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); color: var(--ink); text-align: center; }
 .try-count { min-height: 1.4em; margin: 8px 0 4px; }
+.try-open { margin: 6px 0 0; font-size: 0.92rem; color: var(--soft); }
+.try-open[hidden] { display: none; }
 .try-acts { display: flex; flex-wrap: wrap; gap: 8px; }
 .try-acts button { font: inherit; font-size: 0.92rem; padding: 6px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--ink); cursor: pointer; }
 .try-acts button[hidden] { display: none; }
@@ -654,10 +658,10 @@ details.ppart > :not(summary) { margin-inline: 16px; }
 .pstate { font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--soft); border: 1px solid var(--line); border-radius: 999px; padding: 1px 7px; white-space: nowrap; }
 .pmean { display: block; color: var(--soft); font-size: 0.86rem; }
 .pwith, .psrc, .pwhat { font-size: 0.9rem; color: var(--soft); margin-bottom: 10px; }
-.walk-sum { text-align: center; font-size: 1.1rem; margin-top: 10px; overflow-wrap: anywhere; }
+.walk-sum { text-align: center; font-size: clamp(1.45rem, 4.2vw, 2.5rem); line-height: 1.35; margin-top: 14px; overflow-wrap: anywhere; }
 .walk-sum:empty { display: none; }
-.walk-sum .ws-l { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--soft); margin-right: 6px; }
-.walk-sum .ws-m { display: block; color: var(--soft); font-size: 0.92rem; }
+.walk-sum .ws-l { font-size: 0.8rem; vertical-align: middle; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--soft); margin-right: 6px; }
+.walk-sum .ws-m { display: block; color: var(--soft); font-size: 0.95rem; line-height: 1.5; margin-top: 4px; }
 .walk-plain { font-family: "Lexend", var(--body); font-size: clamp(2.4rem, 9vw, 5rem); line-height: 1.4; }
 .walk.sum-only :is(.walk-nav, .walk-modes) { visibility: hidden; }
 /* the walk's first move: the word as it's written, every letter in ink */
