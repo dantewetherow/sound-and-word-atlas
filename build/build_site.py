@@ -18,6 +18,7 @@ route = json.load(open(sys.argv[1], encoding="utf-8"))
 OUT = pathlib.Path(sys.argv[2]); (OUT / "steps").mkdir(parents=True, exist_ok=True)
 codes, _ = all_codes()
 for w, c in SC.SITE_CODES.items(): codes.setdefault(w, c)
+codes.update(SC.SITE_RULED)                                   # rulings that change a word the deck tools still mark the old way
 import word_sum_codes as WSC                                  # the grade 3 word sum cards' markings, for Words and Parts
 for _, _, items in WSC.SECTIONS:
     for item in items: codes.setdefault(item[1], item[2])
@@ -41,7 +42,7 @@ def sets_of(words_md):
     main = words_md.replace("**", "").split("; contrast")[0].replace("*", "")
     out = []
     for run in main.split(";"):
-        m = re.match(r"\s*([a-z][a-z ]*):\s*(.*)$", run, re.S)
+        m = re.match(r"\s*([^*:]+):\s*(.*)$", run, re.S)
         label, run = (m.group(1), m.group(2)) if m else ("", run)
         groups = []
         for item in run.split(","):

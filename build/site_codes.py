@@ -40,11 +40,13 @@ SITE_CODES = {
     "race": "c.r l.a c.c e> ; nudge 3>2", "racing": "c.r l.a | c.c + s.i k.ng ; vault 3>1 ; nudge 3>2",
     "ice": "l.i c.c e> ; nudge 2>1", "icy": "l.i | c.c + b.y ; vault 2>0 ; nudge 2>1",
     # step 16: open and closed in longer words (as over, open, pony; seven and lemon for a short first vowel)
-    "silent": "c.s l.i | c.l b.e c.nt ; vault 3>1", "tiger": "c.t l.i | c.g r.er ; vault 3>1",
-    "paper": "c.p l.a | c.p r.er ; vault 3>1", "music": "c.m l.u | c.s s.i c.c ; vault 3>1",
+    "silent": "c.s l.i | c.l b.e c.nt", "tiger": "c.t l.i | c.g r.er",
+    "paper": "c.p l.a | c.p r.er",
+    # music and basic are two parts, muse + ic and base + ic: the i took the dropped e's place, so it sends the vault (as making)
+    "music": "c.m l.u | c.s + s.i c.c ; vault 3>1", "basic": "c.b l.a | c.s + s.i c.c ; vault 3>1",
     # its contrasts, 10 November 2026: robin as the role cards draw it (noun_codes.py), robot as music, river as never
     # and tiger, silly as middle and sunny without the seam
-    "robin": "c.r s.o c.b | s.i c.n", "robot": "c.r l.o | c.b s.o c.t ; vault 3>1",
+    "robin": "c.r s.o c.b | s.i c.n", "robot": "c.r l.o | c.b s.o c.t",
     "river": "c.r s.i c.v | r.er", "silly": "c.s s.i x.ll | b.y ; bv 3>2",
     # step 17: consonant + le (as the table and bugle card, and little)
     "table": "c.t l.a | c.b le ; vault 3>1", "bugle": "c.b l.u | c.g le ; vault 3>1",
@@ -102,6 +104,15 @@ SITE_CODES = {
     "hapless": "c.h s.a c.p + | c.l b.e k.ss",                      # as hopeless, with no box: l can't reach back
     "mishap": "c.m s.i c.s + | c.h s.a c.p",                        # as unlock: s and h on either side of the seam
     "haphazard": "c.h s.a c.p + | c.h s.a c.z | r.ar c.d",          # p and h on either side of the seam; ar as in car
+}
+
+# Rulings that change a word the deck tools (legomorphic_words.py, the card decks) still mark the old way. The site
+# takes these; the decks and printed cards keep their marks until they are rebuilt.
+# 10 November 2026, step 16: a long first vowel in a one-part word has its long mark and no vault, since no letter
+# causes it (open, even, as tiger and paper above); today and around take the seam their word sum cards give them.
+SITE_RULED = {
+    "open": "l.o | c.p b.e c.n", "even": "l.e | c.v b.e c.n",
+    "today": "c.t b.o + | c.d t.ay", "around": "b.a + | c.r t.ou c.nd",
 }
 
 # The affixes and roots placed on the steps (the manual's "Parts on the steps", 10 November 2026), each marked as it is
@@ -185,8 +196,15 @@ CALLS = [
     ("robin", "a short o closed by b, and a short i in -in, with no vault",
      "As lemon and seven, and as the role cards draw robin. The i of -in is said lightly but still has the sound of "
      "the i in sit, so it takes a short mark, as in music and doing."),
-    ("robot", "a long first o with a vault from the second o, which is short",
-     "As tiger and music: one consonant between, and the first o spells its name. The second o is short, as in hot, "
+    ("tiger, paper, open, even, robot, silent", "a long mark on the first vowel and no vault",
+     "Changed 10 November 2026 at Dante's direction, after the noun produce: these are one part each, and no letter makes "
+     "the first vowel long, so a vault would name a cause that isn't there. Until then each had a vault from the next vowel. "
+     "Over, pony and photo still have that vault and wait for the same ruling."),
+    ("music, basic", "a seam before ic, and a vault from the i to the long vowel",
+     "Added 10 November 2026: muse + ic and base + ic. The i took the dropped e's place and its job, as in making. Music is "
+     "from Greek mousike, of the Muses; basic is base + ic (Etymonline)."),
+    ("robot", "a long first o, and a second o that is short",
+     "One consonant between, and the first o spells its name. The second o is short, as in hot, "
      "for most speakers; said weakly, it would be bare."),
     ("river", "a short i closed by v, with no vault, and er as the r-controlled unit",
      "As seven and never: a short first vowel takes the consonant into its syllable (riv·er), and er is marked as in tiger."),

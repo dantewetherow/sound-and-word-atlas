@@ -87,6 +87,7 @@ FAMILY_LESSONS = [
 SUMS = {
     "being": ["be", "-ing"], "into": ["in", "to"], "today": ["to", "day"], "myself": ["my", "self"],
     "notate": ["not(e)", "-ate"], "notation": ["not(e)", "-at(e)", "-ion"], "legomorphic": ["leg", "-o", "morph", "-ic"],
+    "music": ["mus(e)", "-ic"], "basic": ["bas(e)", "-ic"],
     "action": ["act", "-ion"], "actor": ["act", "-or"], "active": ["act", "-ive"], "react": ["re-", "act"],
     "creation": ["creat(e)", "-ion"], "creator": ["creat(e)", "-or"],
     "teaching": ["teach", "-ing"], "hoping": ["hop(e)", "-ing"], "diving": ["div(e)", "-ing"],

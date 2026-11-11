@@ -446,12 +446,12 @@
    "n": 16,
    "title": "Open and closed in longer words",
    "band": "Single vowels",
-   "words_md": "long: *tiger, paper, music, open*; short: *seven, lemon, robin*; weak: *today, around*; contrast *even/seven, robot/robin, tiger/river, silent/silly*",
-   "marks": "none: a long first vowel takes the vault, a short one takes the consonant into its syllable (*sev·en*), and a weak one stays bare",
+   "words_md": "one part, long: *tiger, paper, open, robot*; one part, short: *seven, lemon, robin*; two parts: *music, basic, today, around*; contrast *even/seven, robot/robin, tiger/river, silent/silly*",
+   "marks": "none: a long first vowel has its long mark, and nothing sends it a vault; a short one takes the consonant into its syllable (*sev·en*); a weak one stays bare. Where a suffix took a dropped *e*'s place, its vowel sends the vault: *mus(e) + ic*",
    "kernel_md": "none",
    "carney": "In a vowel-consonant-vowel run the first vowel is often short, and hard to predict without stress, p. 275; open syllables, p. 134",
    "move": "Try the first vowel long, then short, then weak. Keep the one that makes a word you know, then mark it.",
-   "research": "Kearns (2020): with one consonant between two vowels, the first vowel of a two-syllable word is long 47% of the time, short 25% and weak 21%. In longer words it is long only 19% of the time. The vowel matters: *u* is usually long (84%), and *e* is long only 18% of the time and weak 60%.",
+   "research": "Kearns (2020), whose example word for this pattern is *tiger*: with one consonant between two vowels, the first vowel of a two-syllable word is long 47% of the time, short 25% and weak 21%. In longer words it is long only 19% of the time. The vowel matters: *u* is usually long (84%), and *e* is long only 18% of the time and weak 60%.",
    "parts": [
     "a-"
    ],
@@ -459,11 +459,13 @@
    "words": [
     "tiger",
     "paper",
-    "music",
     "open",
+    "robot",
     "seven",
     "lemon",
     "robin",
+    "music",
+    "basic",
     "today",
     "around"
    ],
