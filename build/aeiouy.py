@@ -64,7 +64,7 @@ slide("Alone at the end of a short word", f"""<h2 class="head">1. Alone at the e
 # 7 job 2
 slide("At the end of a longer word", f"""<h2 class="head">2. At the end of a longer word: the long e sound</h2>
 <div class="row">{word("happy", 140)}{word("funny", 140)}{word("baby", 140)}{word("very", 140)}{word("only", 140)}</div>
-<p class="body" data-s="1">It is said as long e, the sound of {i("me")}. The syllable has no stress, so the notation leaves the y bare: red, with no mark over it.</p>
+<p class="body" data-s="1">It is said as long e, the sound of {i("me")}.</p>
 <p class="body" data-s="2">Often it is a part of its own, the suffix {i("-y")} or {i("-ly")}: hap + p + y, fun + n + y, on(e) + ly.</p>""", steps=2)
 
 # 8 job 3
