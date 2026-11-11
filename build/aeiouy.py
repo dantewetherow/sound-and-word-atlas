@@ -3,8 +3,8 @@ whose slide vocabulary, styles and script it reuses.
 
 The saying is "a, e, i, o, u and sometimes y". Dante Wetherow's correction is "typically": y spells a vowel nearly
 everywhere, and a consonant in one place, at the start of a word or syllable before a vowel. The deck gives a count,
-the one consonant place (after Carney, p. 255), the four vowel jobs (alone at the end of a short word, at the end of a
-longer word, in a team at the end, and inside words from Greek), how y and i trade places, and a sort to try.
+the one consonant place (after Carney, p. 255), the four vowel jobs (alone at the end of a short word; at the end of a
+longer word, where it is the long e sound; in a team at the end, and inside words from Greek), how y and i trade places, and a sort to try.
 
 The count was made for this deck from the 20,000 commonest English words in the wordfreq list (Robyn Speer): 2,197
 have a y; 75 begin with one; 1,581 end in one. In running text the share that begin with y is higher, about a fifth,
@@ -62,9 +62,9 @@ slide("Alone at the end of a short word", f"""<h2 class="head">1. Alone at the e
 <p class="body" data-s="2">In a longer word the same y has the stress: {i("reply")}, {i("deny")}, {i("July")}.</p>""", steps=2)
 
 # 7 job 2
-slide("At the end of a longer word", f"""<h2 class="head">2. At the end of a longer word: the light sound of {i("happy")}</h2>
+slide("At the end of a longer word", f"""<h2 class="head">2. At the end of a longer word: the long e sound</h2>
 <div class="row">{word("happy", 140)}{word("funny", 140)}{word("baby", 140)}{word("very", 140)}{word("only", 140)}</div>
-<p class="body" data-s="1">The syllable has no stress, so the y is bare: red, with no mark over it.</p>
+<p class="body" data-s="1">It is said as long e, the sound of {i("me")}. The syllable has no stress, so the notation leaves the y bare: red, with no mark over it.</p>
 <p class="body" data-s="2">Often it is a part of its own, the suffix {i("-y")} or {i("-ly")}: hap + p + y, fun + n + y, on(e) + ly.</p>""", steps=2)
 
 # 8 job 3
@@ -98,10 +98,10 @@ slide("Y and i trade places", f"""<h2 class="head">Y and {i("i")} trade places</
 # 11 the test
 slide("One test", f"""<h2 class="head">One test, for a reader</h2>
 <p class="q np">Is the y at the start of a syllable, with a vowel after it? Then it is a consonant. Anywhere else, it is a vowel.</p>
-<p class="body" data-s="1">And for a speller: at the end of a word, where you hear the name of {i("i")} or the light sound of {i("happy")}, write y.</p>""", "mid", steps=1)
+<p class="body" data-s="1">And for a speller: at the end of a word, write y for the name of {i("i")}, and for long e at the end of a longer word.</p>""", "mid", steps=1)
 
 # 12 try these
-pairs = [("yard", "consonant"), ("sky", "vowel: the name of i"), ("penny", "vowel: the light sound"), ("enjoy", "vowel: in a team"),
+pairs = [("yard", "consonant"), ("sky", "vowel: the name of i"), ("penny", "vowel: long e"), ("enjoy", "vowel: in a team"),
          ("myth", "vowel: short, as in him"), ("beyond", "consonant: it starts a syllable"), ("type", "vowel: long, as in time"), ("yawn", "consonant")]
 rows = "".join(f'<tr><td>{i(a)}</td><td class="ans" data-s="{k + 1}">{b}</td></tr>' for k, (a, b) in enumerate(pairs))
 slide("Try these", f"""<h2 class="head">Try these: consonant or vowel?</h2>
