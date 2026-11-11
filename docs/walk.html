@@ -38,6 +38,7 @@
 <p class="walk-cap" aria-live="polite"></p>
 <div class="walk-nav"><button type="button" class="walk-back">Back</button><span class="walk-dots" aria-hidden="true"></span><button type="button" class="walk-next">Next</button><button type="button" class="walk-all">Show it all</button></div>
 <p class="walk-sum"></p>
+<div class="pcard walk-pop" hidden aria-live="polite"></div>
 <p class="walk-where"></p>
 <noscript><p>The word walk needs script. Each word is also on its step page.</p></noscript>
 <p class="uc">(Under construction: a word is either marked, so it can be walked, or shown as a word sum only. Next: the word built from left to right, a unit at a swipe; and draft marks for more words, labelled as drafts, for teachers to check.)</p>
@@ -113,7 +114,8 @@
       formsBox.innerHTML = j.forms.length < 2 ? '' : j.forms.map((f, i) => '<button type="button" data-form="' + i + '" aria-pressed="' + (i === 0) + '">' + esc(f.gloss) + '</button>').join('');
       const allT = j.where.length && j.where.every(l => l.x);   // only teachers' links: student view shows no line at all
       where.innerHTML = j.where.length ? '<span' + (allT ? ' class="t-only"' : '') + '>On the site: ' + j.where.map(l => '<a' + (l.x ? ' class="t-only"' : '') + ' href="' + esc(l.u) + '">' + esc(l.t) + '</a>').join(' · ') + '</span>' : '';
-      sumBox.innerHTML = j.sum ? '<span class="ws-l">Word sum</span> ' + j.sum.map(p => '<a href="' + esc(p.u) + '"' + (p.m ? ' title="' + esc(p.m) + '"' : '') + '>' + p.s + '</a>').join(' + ') + ' &rarr; <i>' + esc(j.w) + '</i>'
+      pop.hidden = true;
+      sumBox.innerHTML = j.sum ? '<span class="ws-l">Word sum</span> ' + j.sum.map(p => '<button type="button" class="part' + (p.r ? ' root' : '') + '" data-p="' + esc(p.k) + '">' + p.s + '</button>').join(' + ') + ' &rarr; <i>' + esc(j.w) + '</i>'
         + (j.mean ? '<span class="ws-m t-only">' + esc(j.mean) + '</span>' : '') : '';
       draw();
       if (root.dataset.url !== 'off') { const u = new URL(location.href); u.searchParams.set('w', j.w); history.replaceState(null, '', u); }
@@ -127,6 +129,22 @@
     formsBox.querySelectorAll('[data-form]').forEach(x => x.setAttribute('aria-pressed', String(x === b))); draw(); });
   stage.addEventListener('click', () => { if (swiped) { swiped = false; return; } go(1); });
   stage.addEventListener('keydown', e => { if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(1); } else if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); } });
+  // tap a part of the sum: what it means, and the other words that have it (as on the family pages)
+  const pop = $('.walk-pop'); let partsData = null;
+  const closePop = () => { pop.hidden = true; sumBox.querySelectorAll('.part.sel').forEach(b => b.classList.remove('sel')); };
+  sumBox.addEventListener('click', async e => {
+    const b = e.target.closest('.part'); if (!b) return;
+    if (b.classList.contains('sel')) { closePop(); return; }
+    if (!partsData) { try { partsData = await (await fetch('parts.json')).json(); } catch (err) { partsData = {}; } }
+    const k = b.dataset.p, d = partsData[k]; closePop(); if (!d) return;
+    const others = d.w.filter(w => w !== word.w), few = others.slice(0, 14);
+    pop.innerHTML = '<p><b>' + esc(k) + '</b>' + (d.m ? ' ' + d.m + '.' : '') + '</p>'
+      + (others.length ? '<p class="pin">Also in ' + few.map(w => '<a href="walk.html?w=' + encodeURIComponent(w) + '" data-w="' + esc(w) + '">' + esc(w) + '</a>').join(', ')
+        + (others.length > few.length ? ', and ' + (others.length - few.length) + ' more' : '') + '.</p>' : '<p class="pin">No other word here has it yet.</p>')
+      + '<p class="pin"><a href="' + esc(d.u) + '">See it in Parts</a></p>';
+    pop.hidden = false; b.classList.add('sel');
+  });
+  pop.addEventListener('click', e => { const a = e.target.closest('a[data-w]'); if (a) { e.preventDefault(); input.value = a.dataset.w; show(a.dataset.w); } });
   // swipe left for the next move, right to go back, as a page turns
   let sx = null, sy = null, swiped = false;
   stage.addEventListener('touchstart', e => { const t = e.touches[0]; sx = t.clientX; sy = t.clientY; swiped = false; }, {passive: true});

@@ -240,7 +240,7 @@ def write(OUT, door_page, X):
         stack = with_it(k) if e["kind"] in ("pre", "suf") else []
         stacks = (f'<p class="pwith t-only">Found beside: ' + ", ".join(f'<a href="#{pid(x)}">{html.escape(x)}</a>' for x in stack) + ".</p>") if stack else ""
         src = f'<p class="psrc t-only"><a href="https://www.etymonline.com/search?q={quote(k)}">Its history in Etymonline</a></p>'
-        return (f'<details class="pcard" id="{pid(k)}" data-k="{html.escape(bare(k))}" data-words="{html.escape(" ".join(w for w, _ in ws))}">'
+        return (f'<details class="ppart" id="{pid(k)}" data-k="{html.escape(bare(k))}" data-words="{html.escape(" ".join(w for w, _ in ws))}">'
                 f'<summary><b>{html.escape(k)}</b>{f"<span class=pm>{mean}</span>" if mean else ""}<span class="pcnt">{n} {"word" if n == 1 else "words"}</span></summary>'
                 f'<ul class="pwords">{"".join(word_li(w, k) for w, _ in ws)}</ul>{stacks}{src}</details>')
 
@@ -259,7 +259,7 @@ def write(OUT, door_page, X):
         ws = sorted(joined[jid])
         if not ws: continue
         step = f' <a href="{u}">{ulabel}</a> teaches it, with Carney&rsquo;s pages.' if u else ""
-        jcards.append(f'<details class="pcard" id="j-{jid}" data-k="{html.escape(head.lower())}" data-words="{html.escape(" ".join(ws))}">'
+        jcards.append(f'<details class="ppart" id="j-{jid}" data-k="{html.escape(head.lower())}" data-words="{html.escape(" ".join(ws))}">'
                       f'<summary><b>{head}</b><span class="pcnt">{len(ws)} {"word" if len(ws) == 1 else "words"}</span></summary>'
                       f'<p class="pwhat t-only">{what}{step}</p><ul class="pwords">{"".join(word_li(w) for w in ws)}</ul></details>')
     secs.append(f'<section class="about pgroup" id="g-join" aria-labelledby="g-join-h"><div class="wrap"><h2 id="g-join-h">Joins</h2>'
@@ -294,8 +294,12 @@ def write(OUT, door_page, X):
         row = []
         for p in d["parts"]:
             k, s = split_part(p)
-            row.append({"s": s, "u": f"parts.html#{pid(k)}", "m": re.sub(r"<[^>]+>", "", html.unescape(root_means.get(k) or means.get(k, "")))})
+            row.append({"s": s, "k": k, "r": int(index[k]["kind"] == "root"), "u": f"parts.html#{pid(k)}", "m": re.sub(r"<[^>]+>", "", html.unescape(root_means.get(k) or means.get(k, "")))})
         sums[w] = {"parts": row, "mean": re.sub(r"<[^>]+>", "", html.unescape(d["mean"])), "home": d["home"]}
+    # for the popup on a word's sum (Words): each part's meaning and the words that share it
+    pop = {k: {"m": root_means.get(k) or means.get(k, "") or (f"Latin <i>{ASSIM[k]}</i>, written another way" if k in ASSIM else ""),
+               "u": f"parts.html#{pid(k)}", "w": sorted(w for w, _ in e["words"])} for k, e in index.items()}
+    (OUT / "parts.json").write_text(json.dumps(pop, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     recs = [(k, f"parts.html#{pid(k)}", {"pre": "Prefix", "suf": "Suffix", "root": "Root", "base": "Base"}[e["kind"]] + f", {len(e['words'])} words")
             for k, e in index.items() if not (e["kind"] == "base" and len(e["words"]) < 2)]
     print(f"wrote parts.html | {len(words)} words, {n_sum} sum only, {len(index)} parts")
@@ -304,7 +308,7 @@ def write(OUT, door_page, X):
 
 PARTS_JS = """<script>(() => {
   const f = document.querySelector('.pfilter'); if (!f) return;
-  const q = f.querySelector('input'), count = f.querySelector('.pcount'), parts = [...document.querySelectorAll('details.pcard')];
+  const q = f.querySelector('input'), count = f.querySelector('.pcount'), parts = [...document.querySelectorAll('details.ppart')];
   f.hidden = false; f.addEventListener('submit', e => e.preventDefault());
   const norm = s => s.toLowerCase().replace(/[^a-z]/g, '');
   function run() {
@@ -315,7 +319,7 @@ PARTS_JS = """<script>(() => {
       d.hidden = !hit; if (t) d.open = hit && (k === t || ws.includes(t)); if (hit) n++;
       d.querySelectorAll('li').forEach(li => li.classList.toggle('hit', !!t && li.dataset.w === t));
     });
-    document.querySelectorAll('.pgroup').forEach(s => { s.hidden = !s.querySelector('details.pcard:not([hidden])'); });
+    document.querySelectorAll('.pgroup').forEach(s => { s.hidden = !s.querySelector('details.ppart:not([hidden])'); });
     count.textContent = t ? n + (n === 1 ? ' part' : ' parts') : '';
   }
   q.addEventListener('input', run);
