@@ -150,24 +150,21 @@ def write(OUT, door_page, X):
     return len(index), skipped
 
 
-PICKS = ("which", "make", "little", "squirrel", "notation")
 
 
 def section(note="", head="", lazy=False, url=True, default="which"):
-    """The walk: the word field, the try-one chips, the two walks, the stage and its controls, and the script. walk.html
+    """The walk: the word field and its suggestions, the three walks, the stage and its controls, and the script. walk.html
     has it whole; the home page has a copy (head, lazy, and no ?w= in its address), since 9 November 2026."""
-    chips = "".join(f'<button type="button" class="chip" data-w="{html.escape(w)}">{html.escape(w)}</button>' for w in PICKS)
     return f"""<section class="walk" aria-label="Word walk" data-default="{default}"{' data-lazy="1"' if lazy else ''}{' data-url="off"' if not url else ''}><div class="wrap">
 {head}<div class="walk-bar">
 <form class="walk-form" role="search" autocomplete="off">
 <label class="sr" for="walk-q">A word</label>
-<input id="walk-q" type="text" list="walk-words" placeholder="Type a word" spellcheck="false" autocapitalize="off">
-<datalist id="walk-words"></datalist>
+<div class="walk-field"><input id="walk-q" type="search" placeholder="Type a word" spellcheck="false" autocapitalize="off" autocorrect="off" enterkeyhint="go" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="walk-sug">
+<div class="walk-sug" id="walk-sug" role="listbox" aria-label="Words on the site" hidden></div></div>
 <button type="submit" class="btn">Show it</button>
 </form>
 <div class="walk-modes" role="group" aria-label="Walk"><button type="button" data-mode="read" aria-pressed="true">Read it</button><button type="button" data-mode="spell" aria-pressed="false">Spell it</button><button type="button" data-mode="try" aria-pressed="false">Try it</button></div>
 </div>
-<div class="chips" aria-label="Try one">{chips}</div>
 <div class="walk-forms" hidden></div>
 <p class="walk-msg" role="status"></p>
 <div class="walk-board"><div class="try-tools" role="group" aria-label="What to mark" hidden></div>
@@ -193,7 +190,7 @@ def section(note="", head="", lazy=False, url=True, default="which"):
 WALK_JS = r"""<script>(() => {
   const root = document.querySelector('.walk'); if (!root || !window.fetch) return;
   const $ = s => root.querySelector(s);
-  const form = $('.walk-form'), input = $('#walk-q'), list = $('#walk-words'), stage = $('.walk-stage'), cap = $('.walk-cap'),
+  const form = $('.walk-form'), input = $('#walk-q'), sug = $('.walk-sug'), stage = $('.walk-stage'), cap = $('.walk-cap'),
         dots = $('.walk-dots'), msg = $('.walk-msg'), where = $('.walk-where'), formsBox = $('.walk-forms'), sumBox = $('.walk-sum');
   const student = () => document.documentElement.dataset.view === 'student';
   const norm = s => s.trim().toLowerCase().replace(/[’']/g, '').replace(/\s+/g, ' ');
@@ -277,8 +274,33 @@ WALK_JS = r"""<script>(() => {
     });
   }
   const go = d => { const s = Math.max(0, Math.min(steps.length - 1, step + d)); if (s !== step) { step = s; apply(); } };
-  form.addEventListener('submit', e => { e.preventDefault(); show(input.value); });
-  root.querySelectorAll('.chip').forEach(b => b.addEventListener('click', () => show(b.dataset.w)));
+  form.addEventListener('submit', e => { e.preventDefault(); sugClose(); input.blur(); show(input.value); });
+  // the word field: the site's own suggestions, which leave the cursor in the field (a browser's list took it away on a
+  // tablet, a tap for every letter deleted), and a tap in the field selects the word that's there, so typing replaces it
+  let sugs = [], sugAt = -1;
+  const sugClose = () => { sug.hidden = true; sug.innerHTML = ''; sugs = []; sugAt = -1; input.setAttribute('aria-expanded', 'false'); input.removeAttribute('aria-activedescendant'); };
+  const sugMark = () => { sug.querySelectorAll('[role="option"]').forEach((o, i) => o.setAttribute('aria-selected', String(i === sugAt)));
+    if (sugAt >= 0) { input.setAttribute('aria-activedescendant', 'walk-sug-' + sugAt); sug.children[sugAt].scrollIntoView({block: 'nearest'}); } else input.removeAttribute('aria-activedescendant'); };
+  function sugShow() {
+    const t = norm(input.value); if (!t || !index.length) { sugClose(); return; }
+    const words = index.map(([w]) => w), first = words.filter(w => norm(w).startsWith(t)), more = words.filter(w => !norm(w).startsWith(t) && norm(w).includes(t));
+    sugs = first.concat(more).slice(0, 10); sugAt = -1;
+    if (!sugs.length || (sugs.length === 1 && norm(sugs[0]) === t && word && norm(word.w) === t)) { sugClose(); return; }
+    sug.innerHTML = sugs.map((w, i) => '<div role="option" id="walk-sug-' + i + '" data-w="' + esc(w) + '" aria-selected="false">' + esc(w) + '</div>').join('');
+    sug.hidden = false; input.setAttribute('aria-expanded', 'true');
+  }
+  const pick = w => { sugClose(); input.blur(); show(w); };
+  input.addEventListener('input', sugShow);
+  input.addEventListener('focus', () => { setTimeout(() => { if (document.activeElement === input) input.setSelectionRange(0, input.value.length); }, 0); });
+  input.addEventListener('blur', () => setTimeout(sugClose, 150));
+  input.addEventListener('keydown', e => {
+    if (e.key === 'ArrowDown' && sugs.length) { e.preventDefault(); sugAt = Math.min(sugs.length - 1, sugAt + 1); sugMark(); }
+    else if (e.key === 'ArrowUp' && sugs.length) { e.preventDefault(); sugAt = Math.max(-1, sugAt - 1); sugMark(); }
+    else if (e.key === 'Escape') sugClose();
+    else if (e.key === 'Enter' && sugAt >= 0) { e.preventDefault(); pick(sugs[sugAt]); }
+  });
+  sug.addEventListener('pointerdown', e => e.preventDefault());      // keep the field's focus until the pick is made
+  sug.addEventListener('click', e => { const o = e.target.closest('[data-w]'); if (o) pick(o.dataset.w); });
   root.querySelectorAll('[data-mode]').forEach(b => b.addEventListener('click', () => { mode = b.dataset.mode; draw(); }));
   formsBox.addEventListener('click', e => { const b = e.target.closest('[data-form]'); if (!b) return; form_ = +b.dataset.form;
     formsBox.querySelectorAll('[data-form]').forEach(x => x.setAttribute('aria-pressed', String(x === b))); draw(); });
@@ -453,7 +475,7 @@ WALK_JS = r"""<script>(() => {
   $('.walk-back').addEventListener('click', () => go(-1));
   $('.walk-all').addEventListener('click', () => { step = steps.length - 1; apply(); });
   const start = () => fetch('walk/index.json').then(r => r.json()).then(j => {
-    index = j; list.innerHTML = j.map(([w]) => '<option value="' + esc(w) + '">').join('');
+    index = j;
     show((root.dataset.url !== 'off' && params.get('w')) || root.dataset.default);
   });
   // on the home page the walk waits until it scrolls into view
