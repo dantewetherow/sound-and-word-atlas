@@ -269,7 +269,7 @@ for i, s in enumerate(STEPS):
 <h1 class="t-only">{md(s['title'])}</h1>
 <h1 class="s-only s-step">Step {n}</h1>
 {draft}
-<p class="board t-only"><a href="?view=student">Open this step in student view</a>, for the board.</p>
+<p class="board t-only"><a href="?view=board">Open this step on the board</a>: the words big, the notes hidden.</p>
 </div>
 <div class="plate">
 <section class="words" aria-label="The step's words, marked">

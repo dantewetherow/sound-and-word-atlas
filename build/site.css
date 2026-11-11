@@ -609,3 +609,5 @@ details.pcard > :not(summary) { margin-inline: 16px; }
 .walk-sum .ws-m { display: block; color: var(--soft); font-size: 0.92rem; }
 .walk-plain { font-family: "Lexend", var(--body); font-size: clamp(2.4rem, 9vw, 5rem); line-height: 1.4; }
 .walk.sum-only :is(.walk-nav, .walk-modes) { visibility: hidden; }
+/* the walk's first move: the word as it's written, every letter in ink */
+.walk-stage.plain .nz5, .walk-stage.plain .nz5 * { fill: var(--ink) !important; }

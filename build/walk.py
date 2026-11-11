@@ -135,9 +135,9 @@ def write(OUT, door_page, X):
 
     body = f"""<section class="hero walk-hero"><div class="wrap">
 <h1><span class="t-only">Words</span><span class="s-only">Pick a word</span></h1>
-<p class="lead t-only">Look up a word, then tap or swipe through it. <b>Read it</b> starts from the letters and decodes; <b>Spell it</b> starts from the syllables, then the sounds, then the letters. Under the word is its sum: tap a part to see every word that shares it.</p>
+<p class="lead t-only">Look up a word, then tap or swipe through it. <b>Read it</b> starts from the word in plain letters and decodes; <b>Spell it</b> starts from the syllables, then the sounds, then the letters. Under the word is its sum: tap a part to see every word that shares it.</p>
 </div></section>
-{section(note=X["uc"]("a word is either marked, so it can be walked, or shown as a word sum only. Next: the word built from left to right, a unit at a swipe, starting from plain letters; and draft marks for more words, labelled as drafts, for teachers to check."))}
+{section(note=X["uc"]("a word is either marked, so it can be walked, or shown as a word sum only. Next: the word built from left to right, a unit at a swipe; and draft marks for more words, labelled as drafts, for teachers to check."))}
 <section class="about t-only"><div class="wrap"><p><a href="explorations.html">A family built in three moves: <i>note</i>, <i>notate</i>, <i>notation</i></a>. Every analysed word, by its parts, is in <a href="parts.html">Parts</a>.</p></div></section>"""
     door_page("walk", "Words · Sound and Word Atlas", "Look up a word and walk through it: its marks, a move at a time, and its parts.", body)
     return len(index), skipped
@@ -196,6 +196,7 @@ WALK_JS = r"""<script>(() => {
     if (f.jobs.length) marks.push({show: [7, 8], cap: 'Letters doing jobs: ' + and(f.jobs) + '.'});
     if (f.parts.length > 1) marks.push({show: [9], cap: 'The parts: ' + f.parts.map(it).join(' + ') + '.'});
     if (mode === 'read') {
+      S.push({show: [5], plain: true, cap: 'The word as it’s written.'});
       S.push({show: [5, 4], cap: f.bars.length ? 'The letters. A bar joins letters that work together: ' + and(f.bars.map(it)) + '.' : 'The letters, each on its own.'});
       S.push({show: [1, 2], cap: 'A circle for each sound: ' + f.sounds + '. Red is a vowel sound.'});
       S.push(...marks.filter(m => m.show[0] !== 9));
@@ -216,6 +217,7 @@ WALK_JS = r"""<script>(() => {
       const n = +((el.getAttribute('class') || '').match(/nz(\d)/) || [])[1];
       el.classList.toggle('on', shown.has(n));
     });
+    stage.classList.toggle('plain', !!(steps[step] && steps[step].plain));   // the first move: every letter in ink, no marks
     const wt = stage.querySelector('.wt'); if (wt) wt.classList.toggle('on', band && !shown.has(5));
     cap.innerHTML = steps[step] ? steps[step].cap : '';
     dots.innerHTML = steps.map((_, i) => '<i class="' + (i === step ? 'now' : i < step ? 'done' : '') + '"></i>').join('');

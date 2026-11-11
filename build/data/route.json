@@ -327,7 +327,7 @@
    "n": 14,
    "title": "The box blocks the vault",
    "band": "Morphemes",
-   "words_md": "*spell/spelling, get/getting, **help/helped, **sun/sunny, happy*; contrast *hoping/hopping, filing/filling*",
+   "words_md": "*spell/spelling, get/getting, **help/helped, **sun/sunny, happy*",
    "marks": "block box and blocked vault, where two consonants stop a reach, doubled or already there (*spelling*, *getting**, helped*)",
    "kernel_md": "*getting*",
    "carney": "Doubling marks a short vowel, p. 114; *ck*, *tch* and *dge* as the doubled spellings (rule #D3), p. 121; *tch* as the doubled *ch*, p. 226",
@@ -342,13 +342,13 @@
     "sunny",
     "happy"
    ],
-   "contrast_md": "*hoping/hopping, filing/filling*"
+   "contrast_md": ""
   },
   {
    "n": 15,
    "title": "The *e* drops, its jobs move",
    "band": "Morphemes",
-   "words_md": "*make/making, have/having, race/racing, ice/icy*",
+   "words_md": "*make/making, have/having, race/racing, ice/icy*; contrast *hoping/hopping, filing/filling*",
    "marks": "none: the vault and nudge move to the suffix vowel",
    "kernel_md": "*having*",
    "carney": "The *e* drops before an ending that begins with a vowel, p. 130, and stays where it still nudges *c* or *g* (*noticeable*), p. 131",
@@ -362,7 +362,7 @@
     "ice",
     "icy"
    ],
-   "contrast_md": ""
+   "contrast_md": "*hoping/hopping, filing/filling*"
   },
   {
    "n": 16,

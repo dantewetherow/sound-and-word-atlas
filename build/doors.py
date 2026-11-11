@@ -8,8 +8,9 @@ Explorations, Constructions, Derivations, Instructions, Connections, Explanation
 and now sit inside a layer or on the shelf (HEADS). PAGES is the one place that says which page sits where: the
 header, the breadcrumbs, the site map and the search's page records all come from it.
 
-The Teacher/Student switch shows the same pages two ways, as Bright/Night shows them in two colourings. Student view
-is for the board: it draws the words big and hides the teacher's notes and the build's under-construction notes. A
+The Details/Board switch (named Teacher/Student until 10 November 2026, and still "teacher" and "student" in the
+code) shows the same pages two ways, as Bright/Night shows them in two colourings. The site is a teacher's, used with
+learners, so the second view is the board: it draws the words big and hides the teacher's notes and the build's under-construction notes. A
 link ending ?view=student opens a page that way, and the pick is kept in this browser. Without script, a page shows
 the teacher view.
 
@@ -79,12 +80,12 @@ def tree(STEPS, plain):
 
 # ------------------------------------------------------------------ the header's pieces
 VIEW_HEAD = ("<script>(() => { const r = document.documentElement; let v = null;"
-             " try { v = new URLSearchParams(location.search).get('view'); } catch (e) {}"
+             " try { v = new URLSearchParams(location.search).get('view'); if (v === 'board') v = 'student'; if (v === 'details') v = 'teacher'; } catch (e) {}"
              " try { if (v === 'student' || v === 'teacher') localStorage.setItem('view', v); else v = localStorage.getItem('view'); } catch (e) {}"
              " if (v === 'student') r.dataset.view = 'student'; })();</script>")
 
 VIEW_SWITCH = ('<div class="view" role="group" aria-label="View" hidden>'
-               '<button type="button" data-v="teacher">Teacher</button><button type="button" data-v="student">Student</button></div>')
+               '<button type="button" data-v="teacher">Details</button><button type="button" data-v="student">Board</button></div>')
 
 
 def header_parts(up):
@@ -195,7 +196,7 @@ SEARCH_JS = """<script>(() => {
 def door_head(slug, extra=""):
     name, plain_words, sw = HEADS[slug]
     student = f'<h1 class="s-only">{sw}</h1>' if sw else ""
-    board = '<p class="board t-only"><a href="?view=student">Open this page in student view</a>, for the board.</p>' if sw else ""
+    board = '<p class="board t-only"><a href="?view=board">Open this page on the board</a>: the words big, the notes hidden.</p>' if sw else ""
     return (f'<section class="hero door-hero"><div class="wrap">'
             f'<h1 class="t-only">{name}</h1>{student}'
             f'<p class="lead t-only">{plain_words}</p>{extra}{board}'
@@ -446,7 +447,7 @@ def finish(OUT, pages):
             trail.append(f'<li aria-current="page">{here}</li>')
         crumbs = f'<nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><ol>{"".join(trail)}</ol></div></nav>' if trail else ""
         if d in TEACHERS and p not in BOARD_OK:
-            crumbs += (f'<div class="for-teachers s-only"><div class="wrap"><p>This page is for teachers. To read it, pick Teacher at the top '
+            crumbs += (f'<div class="for-teachers s-only"><div class="wrap"><p>This page is all details, so the board has nothing to show. To read it, pick Details at the top '
                        f'of the page, or go <a href="{up}index.html">back to the start</a>.</p></div></div>')
         src = src.replace("<!--crumbs-->", crumbs, 1)
         if d:
