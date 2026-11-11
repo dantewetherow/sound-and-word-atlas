@@ -499,6 +499,32 @@ table.cw-table td:first-of-type { width: 46%; }
 .walk-stage svg .dr { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 0.8s ease, opacity 0.2s ease; }
 .walk-stage svg .dr.on { stroke-dashoffset: 0; }
 .walk-stage:not(.spelling) svg .nz4.on { transition-delay: 0.3s; }
+/* Try it: the learner's marks, and the site's underneath */
+.walk.trying .walk-stage, .walk.trying .walk-cap, .walk.trying .walk-nav { display: none; }
+.walk-try { margin-top: 8px; }
+.try-jobs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 6px; }
+.try-jobs button, .try-acts button { font: inherit; font-size: 0.92rem; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--ink); cursor: pointer; }
+.try-jobs button[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.try-say { margin: 4px 0 8px; }
+.try-row { display: grid; grid-template-columns: 3.4em 1fr; align-items: center; gap: 6px; background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 10px 12px; margin-top: 8px; }
+.try-ours { background: transparent; border-style: dashed; }
+.try-lab { font-size: 0.85rem; color: var(--soft); }
+.try-board { min-width: 0; display: grid; place-items: center; }
+.tb-row { position: relative; display: flex; align-items: stretch; justify-content: center; font-size: min(4.2rem, calc((100vw - 130px) / (var(--n) * var(--k, 0.94)))); line-height: 1; padding: 0.42em 0 0.72em; }
+.tb-row .tl, .tb-row .tg { font: inherit; color: var(--ink); background: none; border: 0; padding: 0; margin: 0; }
+.tb-row .tl { font-family: "Lexend", var(--body); padding: 0.06em 0.02em; border-radius: 6px; }
+.tb-row .tg { width: 0.3em; }
+.tb-row.job-prt .tg { width: 0.46em; }
+.tb-row.job-prt { --k: 1.08; }
+.tb-row button { cursor: pointer; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+.tb-row button.tl:hover, .tb-row button.tl:focus-visible { background: color-mix(in srgb, var(--ink) 7%, transparent); outline: none; }
+.tb-row button.tg { margin: -0.4em 0 -0.5em; border-radius: 6px; }
+.tb-row button.tg:hover, .tb-row button.tg:focus-visible { background: color-mix(in srgb, var(--modal) 14%, transparent); outline: none; }
+.tb-ink { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+.try-given { margin: 0; font-size: 1.25rem; text-align: center; }
+.try-in { display: block; width: min(22em, 100%); margin: 8px auto 2px; font: inherit; font-size: 1.3rem; padding: 8px 10px; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); color: var(--ink); text-align: center; }
+.try-count { min-height: 1.4em; margin: 8px 0 4px; }
+.try-acts { display: flex; gap: 8px; }
 .walk-stage.spelling svg .nz5.on { transition-delay: 0.85s; }
 .walk-cap { min-height: 3em; margin: 14px 0 0; font-size: 1.2rem; line-height: 1.45; }
 .walk-nav { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 8px; }

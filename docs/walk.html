@@ -19,7 +19,7 @@
 <main class="door-page">
 <section class="hero walk-hero"><div class="wrap">
 <h1><span class="t-only">Words</span><span class="s-only">Pick a word</span></h1>
-<p class="lead t-only">Look up a word, then tap or swipe through it. <b>Read it</b> starts from the word in plain letters and decodes; <b>Spell it</b> starts from the syllables, then the sounds, then the letters. Under the word is its sum: tap a part to see every word that shares it.</p>
+<p class="lead t-only">Look up a word, then tap or swipe through it, or try marking it first. <b>Read it</b> starts from the word in plain letters and decodes; <b>Spell it</b> starts from the syllables, then the sounds, then the letters. <b>Try it</b> has the learner mark the syllables, sounds, vowels or parts, or write the word sum, and then sets ours underneath to talk about; nothing is scored. Under the word is its sum: tap a part to see every word that shares it.</p>
 </div></section>
 <section class="walk" aria-label="Word walk" data-default="which"><div class="wrap">
 <div class="walk-bar">
@@ -29,7 +29,7 @@
 <datalist id="walk-words"></datalist>
 <button type="submit" class="btn">Show it</button>
 </form>
-<div class="walk-modes" role="group" aria-label="Walk"><button type="button" data-mode="read" aria-pressed="true">Read it</button><button type="button" data-mode="spell" aria-pressed="false">Spell it</button></div>
+<div class="walk-modes" role="group" aria-label="Walk"><button type="button" data-mode="read" aria-pressed="true">Read it</button><button type="button" data-mode="spell" aria-pressed="false">Spell it</button><button type="button" data-mode="try" aria-pressed="false">Try it</button></div>
 </div>
 <div class="chips" aria-label="Try one"><button type="button" class="chip" data-w="which">which</button><button type="button" class="chip" data-w="make">make</button><button type="button" class="chip" data-w="little">little</button><button type="button" class="chip" data-w="squirrel">squirrel</button><button type="button" class="chip" data-w="notation">notation</button></div>
 <div class="walk-forms" hidden></div>
@@ -37,6 +37,14 @@
 <div class="walk-stage" tabindex="0" aria-label="The word. Tap, swipe left, or press the right arrow, for the next step."></div>
 <p class="walk-cap" aria-live="polite"></p>
 <div class="walk-nav"><button type="button" class="walk-back">Back</button><span class="walk-dots" aria-hidden="true"></span><button type="button" class="walk-next">Next</button><button type="button" class="walk-all">Show it all</button></div>
+<div class="walk-try" hidden>
+<div class="try-jobs" role="group" aria-label="What to try"></div>
+<p class="try-say"></p>
+<div class="try-row try-yours"><span class="try-lab">Yours</span><div class="try-board"></div></div>
+<div class="try-row try-ours" hidden><span class="try-lab">Ours</span><div class="try-board"></div></div>
+<p class="try-count" aria-live="polite"></p>
+<div class="try-acts"><button type="button" class="try-show" aria-pressed="false">Show ours</button><button type="button" class="try-clear">Clear</button></div>
+</div>
 <p class="walk-sum"></p>
 <div class="pcard walk-pop" hidden aria-live="polite"></div>
 <p class="walk-where"></p>
@@ -55,7 +63,7 @@
   const and = a => a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1];
   let index = [], word = null, form_ = 0, mode = 'read', step = 0, steps = [];
   const params = new URLSearchParams(location.search);
-  if (params.get('m') === 'spell') mode = 'spell';
+  if (params.get('m') === 'spell' || params.get('m') === 'try') mode = params.get('m');
 
   function plan(f) {
     const S = [], beats = n => '<span class="t-only">' + n + (n === 1 ? ' syllable' : ' syllables') + '</span><span class="s-only">' + n + (n === 1 ? ' beat' : ' beats') + '</span>';
@@ -95,6 +103,10 @@
   }
   function draw() {
     if (!word) return;
+    root.classList.toggle('trying', mode === 'try');
+    tryBox.hidden = mode !== 'try';
+    root.querySelectorAll('[data-mode]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.mode === mode)));
+    if (mode === 'try') { tryOpen(); return; }
     root.classList.toggle('sum-only', !word.forms.length);
     if (!word.forms.length) {      // taken apart, not marked yet: the word in plain letters
       stage.innerHTML = '<span class="walk-plain">' + esc(word.w) + '</span>'; steps = []; step = 0;
@@ -147,6 +159,122 @@
     pop.hidden = false; b.classList.add('sel');
   });
   pop.addEventListener('click', e => { const a = e.target.closest('a[data-w]'); if (a) { e.preventDefault(); input.value = a.dataset.w; show(a.dataset.w); } });
+  // Try it: the learner marks the word first, and the site's marks can be set underneath to compare. Nothing is scored.
+  const tryBox = $('.walk-try'), jobsBox = $('.try-jobs'), say = $('.try-say'), countBox = $('.try-count'),
+        yoursB = $('.try-yours .try-board'), oursRow = $('.try-ours'), oursB = $('.try-ours .try-board'), showB = $('.try-show');
+  const JOBS = {
+    syl: ['Syllables', 'Tap between two letters to split the syllables. Tap again to take the split out.'],
+    snd: ['Sounds', 'Tap a letter for each sound you say. Tap between two letters to bar letters that work together.'],
+    vow: ['Vowels', 'Tap a vowel letter: once for a cup (short), twice for a bar (long), three times to clear.'],
+    prt: ['Parts', 'Tap between two letters where one part ends and the next begins.'],
+    sum: ['Word sum', 'Write the word sum. Put + between the parts and brackets round a letter that drops or changes: <i>hop(e) + ing</i>.'],
+    join: ['Put together', 'Here are the parts. Write the word they make.']
+  };
+  let T = null, Y = null, job = 'syl', showing = false;
+  const fresh = () => ({syl: new Set(), d: new Set(), b: new Set(), vow: new Map(), prt: new Set(), sum: '', join: ''});
+  const plainSum = () => word.sum.map(p => p.s.replace(/\(([^)&]*)&rarr;[^)]*\)/g, '$1').replace(/[()]/g, '')).join(' + ');
+  const sumText = () => word.sum.map(p => p.s.replace(/&rarr;/g, '→')).join(' + ');
+  function tryOpen() {
+    const f = word.forms[form_] || {};
+    if (!Y || Y.w !== word.w || Y.f !== form_) { Y = fresh(); Y.w = word.w; Y.f = form_; showing = false; }
+    T = f.try || null;
+    const jobs = (T ? ['syl', 'snd', 'vow', 'prt'] : []).concat(word.sum && word.sum.length > 1 ? ['sum', 'join'] : []);
+    if (!jobs.includes(job)) job = jobs[0];
+    jobsBox.innerHTML = jobs.map(k => '<button type="button" data-job="' + k + '" aria-pressed="' + (k === job) + '">' + JOBS[k][0] + '</button>').join('');
+    if (!jobs.length) { say.textContent = 'This word has nothing to try yet.'; yoursB.innerHTML = ''; oursRow.hidden = true; countBox.textContent = ''; return; }
+    tryDraw();
+  }
+  function tryDraw() {
+    say.innerHTML = JOBS[job][1];
+    showB.textContent = showing ? 'Hide ours' : 'Show ours'; showB.setAttribute('aria-pressed', String(showing));
+    oursRow.hidden = !showing;
+    if (job === 'sum' || job === 'join') {
+      const k = job, v = Y[k];
+      yoursB.innerHTML = (k === 'join' ? '<p class="try-given">' + esc(plainSum()) + ' &rarr;</p>' : '<p class="try-given"><i>' + esc(word.w) + '</i> &rarr;</p>')
+        + '<input class="try-in" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="' + (k === 'join' ? 'The word' : 'The word sum') + '" value="' + esc(v) + '">';
+      const inp = yoursB.querySelector('input'); inp.addEventListener('input', () => { Y[k] = inp.value; });
+      inp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); showing = true; tryDraw(); } });
+      oursB.innerHTML = '<p class="try-given">' + (k === 'join' ? esc(sumText()) + ' &rarr; <i>' + esc(word.w) + '</i>' : '<i>' + esc(word.w) + '</i> &rarr; ' + esc(sumText())) + '</p>';
+      countBox.textContent = ''; return;
+    }
+    board(yoursB, true); if (showing) board(oursB, false);
+    countBox.innerHTML = counts();
+  }
+  // a learner's marks, in the same shape as the site's: dots [from, to, vowel], bars [from, to], cuts
+  function mine() {
+    const L = T.L, n = L.length, bars = [...Y.b].sort((a, b) => a - b), group = [];   // a bar at gap g joins letters g-1 and g
+    let g = 0; for (let i = 0; i < n; i++) { if (i && !Y.b.has(i)) g++; group.push(g); }
+    const runs = []; bars.forEach(c => { const r = runs[runs.length - 1]; if (r && r[1] === c - 1) r[1] = c; else runs.push([c - 1, c]); });
+    const d = [];
+    for (const i of [...Y.d].sort((a, b) => a - b)) {
+      const mates = [...Y.d].filter(j => group[j] === group[i]);
+      if (mates.length === 1) { const all = [...Array(n).keys()].filter(j => group[j] === group[i]); d.push([all[0], all[all.length - 1], 0]); }
+      else d.push([i, i, 0]);
+    }
+    return {sy: [...Y.syl], d, b: runs.map(r => [r[0], r[1], 'y']), sh: [...Y.vow].filter(([, v]) => v === 1).map(([k]) => k),
+            lg: [...Y.vow].filter(([, v]) => v === 2).map(([k]) => k), sm: [...Y.prt]};
+  }
+  function counts() {
+    const a = mine(), plural = (n, w) => n + ' ' + w + (n === 1 ? '' : 's');
+    const one = {syl: m => plural(m.sy.length + 1, 'syllable'), snd: m => plural(m.d.length, 'sound'), prt: m => plural(m.sm.length + 1, 'part'),
+      vow: m => m.sh.length + ' short, ' + m.lg.length + ' long'}[job];
+    if (job === 'syl' && !Y.syl.size && !showing) return '';
+    if (job === 'snd' && !Y.d.size && !showing) return '';
+    if (job === 'vow' && !Y.vow.size && !showing) return '';
+    if (job === 'prt' && !Y.prt.size && !showing) return '';
+    return 'Yours: ' + one(a) + '.' + (showing ? ' Ours: ' + one(T) + '.' : '');
+  }
+  const COLOR = {v: 'var(--verb)', c: 'var(--ink)', t: 'var(--subject)', y: 'var(--ink)'};
+  function board(el, live) {
+    const L = T.L, n = L.length, m = live ? mine() : T;
+    const gapOn = live ? {syl: Y.syl, snd: Y.b, prt: Y.prt}[job] : null;
+    let h = '<div class="tb-row job-' + job + '" style="--n:' + n + '">';
+    for (let i = 0; i < n; i++) {
+      if (i) h += live && job !== 'vow' ? '<button type="button" class="tg' + (gapOn && gapOn.has(i) ? ' on' : '') + '" data-g="' + i + '" aria-label="between ' + esc(L[i - 1]) + ' and ' + esc(L[i]) + '"></button>' : '<span class="tg"></span>';
+      h += live && (job === 'snd' || job === 'vow') ? '<button type="button" class="tl" data-i="' + i + '">' + esc(L[i]) + '</button>' : '<span class="tl">' + esc(L[i]) + '</span>';
+    }
+    el.innerHTML = h + '<svg class="tb-ink" aria-hidden="true"></svg></div>';
+    const row = el.firstChild, svg = row.lastChild;
+    const ink = () => {
+      const R = row.getBoundingClientRect(), ls = [...row.querySelectorAll('.tl')].map(x => x.getBoundingClientRect()),
+            gs = [...row.querySelectorAll('.tg')].map(x => x.getBoundingClientRect());
+      if (!ls.length) return;
+      const fs = parseFloat(getComputedStyle(row).fontSize), top = ls[0].top - R.top, bot = ls[0].bottom - R.top,
+            xl = i => ls[i].left - R.left, xr = i => ls[i].right - R.left, xc = (a, b) => (xl(a) + xr(b)) / 2, xg = g => (gs[g - 1].left + gs[g - 1].right) / 2 - R.left;
+      const sw = Math.max(2, fs * 0.05), base = bot + fs * 0.06;
+      let o = '';
+      const show = k => live ? job === k : (job === k);
+      if (show('syl')) m.sy.forEach(g => { o += '<line x1="' + xg(g) + '" y1="' + (top + fs * 0.12) + '" x2="' + xg(g) + '" y2="' + (bot - fs * 0.02) + '" stroke="var(--ink)" stroke-width="' + sw + '" stroke-linecap="round"/>'; });
+      if (show('prt')) m.sm.forEach(g => { const x = xg(g), y = (top + bot) / 2, r = fs * 0.13;
+        o += '<path d="M' + (x - r) + ' ' + y + 'H' + (x + r) + 'M' + x + ' ' + (y - r) + 'V' + (y + r) + '" stroke="var(--modal)" stroke-width="' + sw + '" stroke-linecap="round"/>'; });
+      if (show('snd')) {
+        m.b.forEach(([a, b, c]) => { o += '<line x1="' + (xl(a) + fs * 0.06) + '" y1="' + (base + fs * 0.12) + '" x2="' + (xr(b) - fs * 0.06) + '" y2="' + (base + fs * 0.12) + '" stroke="' + COLOR[c] + '" stroke-width="' + sw * 1.3 + '" stroke-linecap="round"/>'; });
+        m.d.forEach(([a, b, v]) => { o += '<circle cx="' + xc(a, b) + '" cy="' + (base + fs * 0.36) + '" r="' + fs * 0.07 + '" fill="' + (v ? 'var(--verb)' : 'var(--ink)') + '"/>'; });
+      }
+      if (show('vow')) {
+        const y = top + fs * 0.02, w = fs * 0.17;
+        m.sh.forEach(i => { const x = xc(i, i); o += '<path d="M' + (x - w) + ' ' + (y - w * 0.6) + 'Q' + x + ' ' + (y + w * 0.9) + ' ' + (x + w) + ' ' + (y - w * 0.6) + '" fill="none" stroke="var(--verb)" stroke-width="' + sw + '" stroke-linecap="round"/>'; });
+        m.lg.forEach(i => { const x = xc(i, i); o += '<line x1="' + (x - w) + '" y1="' + y + '" x2="' + (x + w) + '" y2="' + y + '" stroke="var(--verb)" stroke-width="' + sw + '" stroke-linecap="round"/>'; });
+      }
+      svg.setAttribute('viewBox', '0 0 ' + R.width + ' ' + R.height); svg.innerHTML = o;
+    };
+    requestAnimationFrame(ink); el._ink = ink;
+  }
+  addEventListener('resize', () => { if (mode === 'try' && T) [yoursB, oursB].forEach(b => b._ink && b._ink()); });
+  jobsBox.addEventListener('click', e => { const b = e.target.closest('[data-job]'); if (!b) return; job = b.dataset.job; showing = false;
+    jobsBox.querySelectorAll('[data-job]').forEach(x => x.setAttribute('aria-pressed', String(x === b))); tryDraw(); });
+  yoursB.addEventListener('click', e => {
+    const g = e.target.closest('.tg[data-g]'), l = e.target.closest('.tl[data-i]');
+    const flip = (set, k) => set.has(k) ? set.delete(k) : set.add(k);
+    if (g) { const k = +g.dataset.g; if (job === 'syl') flip(Y.syl, k); else if (job === 'snd') flip(Y.b, k); else if (job === 'prt') flip(Y.prt, k); }
+    else if (l) { const k = +l.dataset.i; if (job === 'snd') flip(Y.d, k); else if (job === 'vow') { const v = ((Y.vow.get(k) || 0) + 1) % 3; v ? Y.vow.set(k, v) : Y.vow.delete(k); } }
+    else return;
+    tryDraw();
+  });
+  showB.addEventListener('click', () => { showing = !showing; tryDraw(); });
+  $('.try-clear').addEventListener('click', () => { if (!Y) return;
+    if (job === 'syl') Y.syl.clear(); else if (job === 'snd') { Y.d.clear(); Y.b.clear(); } else if (job === 'vow') Y.vow.clear(); else if (job === 'prt') Y.prt.clear(); else Y[job] = '';
+    showing = false; tryDraw(); });
   // swipe left for the next move, right to go back, as a page turns
   // the first few pixels decide the direction: sideways locks the page so it can't scroll, up or down scrolls as usual
   let sx = null, sy = null, lx = null, swiped = false, axis = null;
