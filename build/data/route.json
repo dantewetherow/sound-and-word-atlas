@@ -79,7 +79,7 @@
    "n": 1,
    "title": "Open or closed",
    "band": "Sounds and syllables",
-   "words_md": "*I* / *it, in, is, if*",
+   "words_md": "*I* / *it, in, is, if*; contrast *I/it, I/in*",
    "marks": "sound circle, syllable swoop, long, short",
    "kernel_md": "*is*",
    "carney": "Short vowels can't end an open syllable and long vowels can, p. 134; short i, p. 135; long i, p. 151",
@@ -90,7 +90,7 @@
     "is",
     "if"
    ],
-   "contrast_md": ""
+   "contrast_md": "*I/it, I/in*"
   },
   {
    "n": 2,
@@ -136,7 +136,7 @@
    "n": 4,
    "title": "One consonant closes it",
    "band": "Sounds and syllables",
-   "words_md": "*be/bed, me/met, we/wet, go/got, no/not, hi/him/hit*",
+   "words_md": "*be/bed, me/met, we/wet, go/got, no/not, hi/him/hit*; contrast *so/sob*",
    "marks": "none",
    "kernel_md": "*got*",
    "carney": "Short vowels, p. 134; each short vowel, pp. 135–150",
@@ -155,13 +155,13 @@
     "him",
     "hit"
    ],
-   "contrast_md": ""
+   "contrast_md": "*so/sob*"
   },
   {
    "n": 5,
    "title": "Two letters, one sound",
    "band": "Units",
-   "words_md": "*the, she, this, that, with, much, such, which*",
+   "words_md": "*the, she, this, that, with, much, such, which*; contrast *she/shed*",
    "marks": "green bond bar",
    "kernel_md": "none",
    "carney": "*h* as a helper (auxiliary) letter in *ch*, *sh* and *ph*, p. 39; *ch*, p. 226; *th*, p. 232; *sh*, p. 240; *wh*, p. 253",
@@ -175,7 +175,7 @@
     "such",
     "which"
    ],
-   "contrast_md": ""
+   "contrast_md": "*she/shed*"
   },
   {
    "n": 6,
@@ -236,7 +236,7 @@
    "n": 9,
    "title": "The vault",
    "band": "Jobs across letters",
-   "words_md": "*make, like, time, home, name*",
+   "words_md": "*make, like, time, home, name*; contrast *mad/made, dim/dime, hop/hope, not/note, cub/cube*",
    "marks": "the vault on every vowel–consonant–*e* word",
    "kernel_md": "none",
    "carney": "The *e* marks a long vowel, p. 129; *matting* beside *mating*, p. 114",
@@ -247,13 +247,13 @@
     "home",
     "name"
    ],
-   "contrast_md": ""
+   "contrast_md": "*mad/made, dim/dime, hop/hope, not/note, cub/cube*"
   },
   {
    "n": 10,
    "title": "The nice-nudge",
    "band": "Jobs across letters",
-   "words_md": "*nice, face, place, age, page, huge*",
+   "words_md": "*nice, face, place, age, page, huge*; contrast *cap/cape/face, rag/rage*",
    "marks": "nice-nudge",
    "kernel_md": "none",
    "carney": "*c* spells /s/ before *e* (rule C.8), p. 303; *g* spells /j/ before *e*, *i* and *y* (rules G.9 and G.12), pp. 326–327",
@@ -265,7 +265,7 @@
     "page",
     "huge"
    ],
-   "contrast_md": ""
+   "contrast_md": "*cap/cape/face, rag/rage*"
   },
   {
    "n": 11,
@@ -327,7 +327,7 @@
    "n": 14,
    "title": "The box blocks the vault",
    "band": "Morphemes",
-   "words_md": "*spell/spelling, get/getting, **help/helped, **sun/sunny, happy*",
+   "words_md": "*spell/spelling, get/getting, **help/helped, **sun/sunny, happy*; contrast *hoping/hopping, filing/filling*",
    "marks": "block box and blocked vault, where two consonants stop a reach, doubled or already there (*spelling*, *getting**, helped*)",
    "kernel_md": "*getting*",
    "carney": "Doubling marks a short vowel, p. 114; *ck*, *tch* and *dge* as the doubled spellings (rule #D3), p. 121; *tch* as the doubled *ch*, p. 226",
@@ -342,7 +342,7 @@
     "sunny",
     "happy"
    ],
-   "contrast_md": ""
+   "contrast_md": "*hoping/hopping, filing/filling*"
   },
   {
    "n": 15,
@@ -391,7 +391,7 @@
    "n": 17,
    "title": "Consonant + le",
    "band": "Single vowels",
-   "words_md": "*table, bugle, title, little, apple, middle*",
+   "words_md": "*table, bugle, title, little, apple, middle*; contrast *title/little, table/apple, bugle/bubble*",
    "marks": "none: a red bond bar and one red circle under *le*",
    "kernel_md": "none",
    "carney": "*le* is a vowel and a consonant with the letters switched, p. 129; a short vowel before *le* doubles (*bubble*, *bottle*; rule #D9), p. 124; *le* beside *al*, *el*, *il* and *ol*, p. 433",
@@ -403,7 +403,7 @@
     "apple",
     "middle"
    ],
-   "contrast_md": ""
+   "contrast_md": "*title/little, table/apple, bugle/bubble*"
   },
   {
    "n": 18,

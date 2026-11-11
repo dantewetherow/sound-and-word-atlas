@@ -85,6 +85,10 @@ SITE_CODES = {
     "due": "c.d t.ue", "dew": "c.d t.ew",                         # as blue and new
     "snow": "c.sn t.ow",                                          # as the noun cards draw it
     "knot": "k.kn s.o c.t", "wrap": "k.wr s.a c.p", "rap": "c.r s.a c.p",   # as know and write; rap as not
+    # contrasts added to steps 4, 5, 9, 10 and 17 on 10 November 2026: closed words as not and bed, vaulted ones as make and page
+    "sob": "c.s s.o c.b", "shed": "g.sh s.e c.d", "mad": "c.m s.a c.d", "dim": "c.d s.i c.m", "dime": "c.d l.i c.m e>",
+    "cub": "c.c s.u c.b", "cube": "c.c l.u c.b e>", "cap": "c.c s.a c.p", "cape": "c.c l.a c.p e>",
+    "rag": "c.r s.a c.g", "rage": "c.r l.a c.g e> ; nudge 3>2", "bubble": "c.b s.u x.bb | le",   # bubble as apple and middle
     # the landing page: the notation's own name, and note to notation (as making and photo; creation as the create family deck)
     "legomorphic": "c.l s.e c.g + | l.o + | c.m r.or | k.ph + s.i c.c",   # leg + o + morph + ic since 10 November 2026
     "note": "c.n l.o c.t e>",                                    # as the sentence cards mark it
