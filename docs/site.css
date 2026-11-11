@@ -507,7 +507,6 @@ table.cw-table td:first-of-type { width: 46%; }
 .walk-stage svg .on { opacity: 1; }
 .walk-stage svg .dr { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 0.8s ease, opacity 0.2s ease; }
 .walk-stage svg .dr.on { stroke-dashoffset: 0; }
-.walk-stage:not(.spelling) svg .nz4.on { transition-delay: 0.3s; }
 /* Try it: the learner marks the word on the stage, with a mark picked from the tools; the site's marks can go underneath */
 .walk.trying .walk-cap, .walk.trying .walk-nav, .walk.trying.texting .walk-stage { display: none; }
 .walk.trying .walk-stage { touch-action: none; cursor: crosshair; -webkit-touch-callout: none; }
@@ -552,7 +551,6 @@ table.cw-table td:first-of-type { width: 46%; }
   .try-tools { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; }
   .try-tools button { flex: none; border-radius: 999px; padding: 6px 12px 6px 9px; white-space: nowrap; }
 }
-.walk-stage.spelling svg .nz5.on { transition-delay: 0.85s; }
 .walk-cap { min-height: 3em; margin: 14px 0 0; font-size: 1.2rem; line-height: 1.45; }
 .walk-nav { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 8px; }
 .walk-nav button { font: inherit; font-size: 0.95rem; padding: 7px 16px; border: 1px solid var(--line); border-radius: 999px; background: var(--card); color: var(--ink); cursor: pointer; }

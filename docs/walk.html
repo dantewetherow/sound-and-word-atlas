@@ -81,8 +81,8 @@
       S.push(...marks.filter(m => m.show[0] === 9));
     } else {
       S.push({show: [3], band: true, cap: 'Say it and count: ' + beats(f.sylls.length) + '.'});
-      S.push({show: [1, 2], band: true, cap: 'Say each sound: ' + f.sounds + '. Red is a vowel sound.'});
-      S.push({show: [5, 4], spell: true, cap: f.bars.length ? 'Spell each sound. A bar first where a sound takes more than one letter, then the letters: ' + f.units.map(it).join(' · ') + '.' : 'Spell each sound: ' + f.units.map(it).join(' · ') + '.'});
+      S.push({show: [1, 2, 4], band: true, cap: 'Say each sound: ' + f.sounds + '. Red is a vowel sound.' + (f.bars.length ? ' A bond bar comes with the sounds whose letters will work together.' : '')});
+      S.push({show: [5], cap: 'Spell each sound: ' + f.units.map(it).join(' · ') + '.'});
       S.push(...marks);
     }
     return S;
@@ -90,12 +90,29 @@
   function apply() {
     const shown = new Set(); let band = false;
     steps.slice(0, step + 1).forEach(s => { s.show.forEach(n => shown.add(n)); band = !!s.band; });
-    stage.querySelectorAll('[class*="nz"]').forEach(el => {
-      const n = +((el.getAttribute('class') || '').match(/nz(\d)/) || [])[1];
-      el.classList.toggle('on', shown.has(n));
+    // what comes on at this step comes on from left to right, a mark's place in the word setting its moment (SWEEP
+    // seconds across the whole word), so a bond bar arrives with the sound circle under it; reading, a bar comes just
+    // after its letters. What goes off goes at once.
+    const layer = el => +((el.getAttribute('class') || '').match(/nz(\d)/) || [])[1];
+    const els = [...stage.querySelectorAll('[class*="nz"]')], fresh = els.filter(el => shown.has(layer(el)) && !el.classList.contains('on'));
+    const mid = el => { const b = el.getBBox(); return b.x + b.width / 2; };
+    const pts = fresh.flatMap(el => el.tagName === 'g' ? [...el.querySelectorAll('text')].map(t => +t.getAttribute('x')) : [mid(el)]);
+    const lo = Math.min(...pts), span = Math.max(...pts) - lo || 1, SWEEP = 0.8, at = x => (SWEEP * (x - lo) / span).toFixed(2) + 's';
+    els.forEach(el => {
+      const on = shown.has(layer(el));
+      if (!on) { el.style.transitionDelay = el.style.transition = ''; el.querySelectorAll('text').forEach(t => { t.style.transition = t.style.opacity = ''; }); }
+      else if (fresh.includes(el)) {
+        if (el.tagName === 'g') {      // the letters: each one fades in at its own moment
+          el.style.transition = 'none'; const ts = [...el.querySelectorAll('text')];
+          ts.forEach(t => { t.style.transition = 'none'; t.style.opacity = '0'; }); el.getBBox();
+          requestAnimationFrame(() => ts.forEach(t => { t.style.transition = 'opacity 0.4s ease ' + at(+t.getAttribute('x')); t.style.opacity = '1'; }));
+        } else {
+          const x = mid(el); el.style.transitionDelay = mode === 'read' && layer(el) === 4 ? (parseFloat(at(x)) + 0.25).toFixed(2) + 's' : at(x);
+        }
+      }
+      el.classList.toggle('on', on);
     });
     stage.classList.toggle('plain', !!(steps[step] && steps[step].plain));
-    stage.classList.toggle('spelling', mode === 'spell');   // reading: letters, then the bar joins them; spelling: the bar, then the letters fill it   // the first move: every letter in ink, no marks
     const wt = stage.querySelector('.wt'); if (wt) wt.classList.toggle('on', band && !shown.has(5));
     cap.innerHTML = steps[step] ? steps[step].cap : '';
     dots.innerHTML = steps.map((_, i) => '<i class="' + (i === step ? 'now' : i < step ? 'done' : '') + '"></i>').join('');
