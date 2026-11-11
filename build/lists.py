@@ -116,6 +116,7 @@ LISTS = [{
     "desc": "A spelling list on a closed set: this, these, that, those, then, there, with their partners in wh.",
 }]
 PAGES = [(f"lists/{L['slug']}.html", "teachers", f"Spelling list: {L['title']}", L["desc"]) for L in LISTS]
+HAS_CHECK = " It comes with a check to give before and after the lesson."
 
 
 # A generalization check for a list (lists/<slug>-check.html): words to dictate before the lesson, after it, and a few
@@ -154,6 +155,8 @@ GROUPS = [("taught", "Taught", "On the list. Was the list learned?"),
           ("limit", "Limit", "Not on the list, where the convention stops. Was it over-learned?"),
           ("invented", "Invented", "Made-up words nobody has seen. Only the convention can get these right."),
           ("control", "Control", "Nothing to do with the lesson. These shouldn&rsquo;t change much.")]
+# A check belongs to its list: the list's page leads to it, and the shelf shows only the lists.
+PAGES[:] = [(p, d, t_, s + (HAS_CHECK if p[6:-5] in CHECKS else "")) for p, d, t_, s in PAGES]
 PAGES += [(f"lists/{s}-check.html", "teachers", f"Check: {C['title']}", C["desc"]) for s, C in CHECKS.items()]
 
 
@@ -169,7 +172,7 @@ def write_check(OUT, page, header, footer, X, slug, C):
     body = f"""{header(1)}
 <main class="list-page check-page">
 <section class="hero noprint"><div class="wrap">
-<p class="eyebrow">Generalization check &middot; for the list <a href="{slug}.html">{C["title"]}</a></p>
+<p class="eyebrow"><a href="{slug}.html">&larr; The spelling list: {C["title"]}</a></p>
 <h1>Check: {C["title"]}</h1>
 <p class="lprinciple">{C["feature"]}</p>
 <p class="board"><a href="#" onclick="window.print(); return false;">Print the check</a>: a sheet for the learner, then the words to say and the key.</p>
@@ -223,7 +226,7 @@ def write(OUT, page, header, footer, X):
 <p class="eyebrow t-only">Spelling list &middot; {L["kind"]}</p>
 <h1>{L["title"]}</h1>
 <p class="lprinciple">{L["principle"]}</p>
-<p class="board t-only noprint"><a href="#" onclick="window.print(); return false;">Print this list</a>: the teacher&rsquo;s notes are left off.{f' <a href="{L["slug"]}-check.html">Its generalization check</a>, to give before and after.' if L["slug"] in CHECKS else ""}</p>
+<p class="board t-only noprint"><a href="#" onclick="window.print(); return false;">Print this list</a>: the teacher&rsquo;s notes are left off.</p>
 </div></section>
 <section class="about"><div class="wrap">
 <h2>The words</h2>
@@ -238,6 +241,11 @@ def write(OUT, page, header, footer, X):
 <div><h2>Use it</h2><ol class="lblanks use">{use}</ol></div>
 <div><h2>Check: not on the list</h2><ol class="lblanks">{check}</ol></div>
 </div></section>
+{f"""<section class="about t-only noprint lcheck"><div class="wrap">
+<h2>Did it generalize?</h2>
+<p class="sub">This list has a check: {len(CHECKS[L["slug"]]["items"]) + len(CHECKS[L["slug"]]["invented"])} words to give before the lesson, after it, and a few weeks later. Most of them aren&rsquo;t on the list, so it shows whether the convention was learned or only the words.</p>
+<p><a class="btn" href="{L["slug"]}-check.html">Open the check</a></p>
+</div></section>""" if L["slug"] in CHECKS else ""}
 <section class="about t-only noprint"><div class="wrap prose">
 <h2>For the teacher</h2>
 {"".join(f"<p>{n}</p>" for n in L["notes"])}
