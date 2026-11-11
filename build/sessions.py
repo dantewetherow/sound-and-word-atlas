@@ -70,6 +70,15 @@ DECKS = [{
               "its place, and its jobs: <i>make</i>, <i>making</i>. The deck shows when the <i>e</i> stays instead "
               "(<i>hopeless</i>, <i>noticeable</i>, <i>seeing</i>), then follows the same join through stacked suffixes: "
               "<i>educate</i>, <i>education</i>, <i>educational</i>. It sits on step 15 of the route."),
+}, {
+    "file": "typically-y",
+    "title": "A, E, I, O, U and typically Y",
+    "kicker": "For teachers",
+    "previews": [1, 3, 6, 8],
+    "about": ("The saying is &ldquo;and sometimes y&rdquo;. A count says otherwise: of the commonest words with a <i>y</i>, about "
+              "three in a hundred begin with it, and nearly every other <i>y</i> spells a vowel. The deck shows the one place "
+              "<i>y</i> is a consonant, its four vowel jobs (<i>my</i>, <i>happy</i>, <i>play</i>, <i>myth</i>), how <i>y</i> and "
+              "<i>i</i> trade places, and a sort to try."),
 }]
 
 

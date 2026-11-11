@@ -96,6 +96,9 @@ SITE_CODES = {
     # shifts; pay and lay as say; laid as paid; stay and stayed as play and played
     "says": "c.s t.ay + c.s", "pay": "c.p t.ay", "lay": "c.l t.ay", "laid": "c.l t.ai c.d",
     "stay": "c.st t.ay", "stayed": "c.st t.ay + e0 c.d",
+    # the deck "A, E, I, O, U and typically Y" (aeiouy.py), 10 November 2026: y as a vowel takes the vowel's marks, so myth
+    # as him, type as time, sky as my, key as they, baby as pony without the vault
+    "myth": "c.m s.y g.th", "type": "c.t l.y c.p e>", "sky": "c.sk l.y", "key": "c.k t.ey", "baby": "c.b l.a | c.b b.y",
     "same": "c.s l.a c.m e>",                                     # the *sem- page's word, as name
     "duct": "c.d s.u c.ct",                                       # the *deuk- page's word; ct as the nt of went
     # the landing page: the notation's own name, and note to notation (as making and photo; creation as the create family deck)
