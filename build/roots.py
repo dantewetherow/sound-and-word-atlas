@@ -146,7 +146,7 @@ CLUSTERS = [
          [("legomorphic", ["leg", "-o", "morph", "-ic"], "this notation&rsquo;s name: <i>leg&omacr;</i>, I gather, in Greek "
            "and Latin alike, and <i>morph</i>, form")],
          [("prolegomenon", ["pro-", "leg", "-omenon"], "what is said beforehand: a formal introduction to a study. Greek "
-           "<i>prolegein</i>, to say before; more than one are <i>prolegomena</i>. <a href=\"#w-prologue\"><i>Prologue</i></a> "
+           "<i>prolegein</i>, to say before; more than one are <i>prolegomena</i>. <i>Prologue</i> "
            "is its plainer twin: pro + logue")],
      ]},
 ]
