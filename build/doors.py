@@ -49,6 +49,7 @@ PAGES = [
     ("explorations.html", "walk", "A family: note", "Note, notate and notation, each built from the one before."),
     ("parts.html", "parts", "Parts", "Prefixes, suffixes, roots and joins, each with every word that has it."),
     ("roots/leg.html", "parts", "*leg-: to gather", "The first root family: Greek and Latin words for gathering, choosing, reading and saying."),
+    ("roots/deuk.html", "parts", "*deuk-: to lead", "A root family: produce, reduce, conduct, educate, duke and tug, with a lesson on stress."),
     ("roots/hap.html", "parts", "hap: chance, luck", "A base family: happy, happen, mishap and haphazard, and why happy has two p's and mishap one."),
     ("derivations.html", "parts", "Roots and their sources", "Where words come from, and the sources the roots cite."),
     ("teachers.html", "teachers", "For teachers", "To print and present, connections to programs, and the reasons and sources."),
@@ -68,7 +69,7 @@ PAGES = [
 # Pages on the teachers' shelf that the board view still shows.
 BOARD_OK = {"constructions.html"}
 TEACHERS = {s for s, *_, w in DOORS if w is None}
-NUMBER = {7: "Seven", 8: "Eight", 9: "Nine", 10: "Ten"}
+NUMBER = {2: "Two", 3: "Three", 4: "Four", 5: "Five", 6: "Six", 7: "Seven", 8: "Eight", 9: "Nine", 10: "Ten"}
 
 
 def tree(STEPS, plain):

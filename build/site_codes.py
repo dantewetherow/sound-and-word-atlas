@@ -89,6 +89,7 @@ SITE_CODES = {
     "sob": "c.s s.o c.b", "shed": "g.sh s.e c.d", "mad": "c.m s.a c.d", "dim": "c.d s.i c.m", "dime": "c.d l.i c.m e>",
     "cub": "c.c s.u c.b", "cube": "c.c l.u c.b e>", "cap": "c.c s.a c.p", "cape": "c.c l.a c.p e>",
     "rag": "c.r s.a c.g", "rage": "c.r l.a c.g e> ; nudge 3>2", "bubble": "c.b s.u x.bb | le",   # bubble as apple and middle
+    "duct": "c.d s.u c.ct",                                       # the *deuk- page's word; ct as the nt of went
     # the landing page: the notation's own name, and note to notation (as making and photo; creation as the create family deck)
     "legomorphic": "c.l s.e c.g + | l.o + | c.m r.or | k.ph + s.i c.c",   # leg + o + morph + ic since 10 November 2026
     "note": "c.n l.o c.t e>",                                    # as the sentence cards mark it
@@ -101,8 +102,11 @@ SITE_CODES = {
     "haphazard": "c.h s.a c.p + | c.h s.a c.z | r.ar c.d",          # p and h on either side of the seam; ar as in car
 }
 
-# A spelling that is two words, each with its own marking (from flsz_family.py).
+# A spelling that is two words, each with its own marking (from flsz_family.py; produce and conduct are drafts of
+# 10 November 2026 for the *deuk- family: the verb's first vowel is weak, so bare, and the noun's is said in full).
 VARIANTS = {
+    "produce": [("c.pr b.o | c.d l.u c.c e> ; nudge 5>4", "to produce: the verb"), ("c.pr l.o | c.d l.u c.c e> ; vault 3>1 ; nudge 5>4", "produce: the noun")],
+    "conduct": [("c.c b.o c.n | c.d s.u c.ct", "to conduct: the verb"), ("c.c s.o c.n | c.d s.u c.ct", "conduct: the noun")],
     "live": [("c.l l.i c.v e>", "a live show"), ("c.l s.i c.v e0", "we live here")],
 }
 
@@ -149,6 +153,11 @@ CALLS = [
     ("gone", "a bare o and an e in a cone, as done",
      "Gone has the short o of got for most speakers, and done has the u of up. Both are marked as borrowing vowels at step 19, "
      "since the e sends no vault. A short mark on gone's o would be the other reading."),
+    ("produce, conduct (the *deuk- page), drafts", "two markings each: the verb with a bare first vowel, the noun with a marked one",
+     "Stress falls on the root in the verb (proDUCE, conDUCT) and on the prefix in the noun (PROduce, CONduct). With no "
+     "stress mark, the weak vowel is the only sign. The noun produce is drawn with a long o and a vault from the u, as "
+     "robot; some speakers say a short o, which would close the syllable instead (prod·uce). The ct of duct is one "
+     "consonant cluster, as the nt of went."),
     # step 16's new words and contrasts, 10 November 2026
     ("robin", "a short o closed by b, and a short i in -in, with no vault",
      "As lemon and seven, and as the role cards draw robin. The i of -in is said lightly but still has the sound of "

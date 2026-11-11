@@ -37,7 +37,7 @@ MEANS = {
 PREFIXES = {"un", "re", "mis", "be", "a", "out", "per", "dis", "de", "pre"}
 SUFFIXES = {"s", "es", "ed", "ing", "y", "ly", "er", "est", "en", "less", "ness", "ate", "ion", "ic", "ful", "th", "al", "or", "ive", "able"}
 # A prefix written another way before the root's first letter: the spelling, and the prefix it is.
-ASSIM = {"col-": "com-", "e-": "ex-", "intel-": "inter-", "di-": "dis-", "il-": "in-"}
+ASSIM = {"col-": "com-", "con-": "com-", "e-": "ex-", "intel-": "inter-", "di-": "dis-", "il-": "in-", "tra-": "trans-"}
 
 JOINS = [
     ("double", "A consonant doubles", "The base ends in one vowel letter and one consonant, and the ending starts with a vowel. The "
@@ -187,6 +187,40 @@ def split_part(p):
     return key_of(p), shown(p)
 
 
+def sum_buttons(parts, cur=None, root=None):
+    """A sum's parts as buttons the page's script (pop_js) opens: the part's meaning and the other words that have it."""
+    out = []
+    for p in parts:
+        k, s = split_part(p)
+        cls = "part" + (" cur" if cur is not None and k == cur else "") + (" root" if root is not None and k == root else "")
+        out.append(f'<button type="button" class="{cls}" data-p="{html.escape(k)}">{s}</button>')
+    return '<span class="pl"> + </span>'.join(out)
+
+
+def pop_js(up=""):
+    """Tap a part anywhere outside a family's own explorer and the walk: a card under the word, from parts.json."""
+    return """<script>(() => {
+  const UP = '%s'; let data = null, card = null;
+  document.addEventListener('click', async e => {
+    const a = e.target.closest('.gpop a[data-close]'); if (a) { e.preventDefault(); close(); return; }
+    const b = e.target.closest('.part[data-p]'); if (!b || b.closest('.cx, .walk')) return;
+    e.preventDefault();
+    if (b.classList.contains('sel')) { close(); return; }
+    if (!data) { try { data = await (await fetch(UP + 'parts.json')).json(); } catch (err) { data = {}; } }
+    const k = b.dataset.p, d = data[k]; close(); if (!d) return;
+    const host = b.closest('li, .wsum, p, div'), own = host.dataset.w || '';
+    const others = d.w.filter(w => w !== own), few = others.slice(0, 14), esc = s => s.replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+    card = document.createElement('div'); card.className = 'pcard gpop';
+    card.innerHTML = '<p><b>' + esc(k) + '</b>' + (d.m ? ' ' + d.m + '.' : '') + '</p>'
+      + (others.length ? '<p class="pin">' + (own ? 'Also in ' : 'In ') + few.map(w => '<a href="' + UP + 'walk.html?w=' + encodeURIComponent(w) + '">' + esc(w) + '</a>').join(', ')
+        + (others.length > few.length ? ', and ' + (others.length - few.length) + ' more' : '') + '.</p>' : '')
+      + '<p class="pin"><a href="' + UP + esc(d.u) + '">See it in Parts</a></p>';
+    host.appendChild(card); b.classList.add('sel');
+  });
+  function close() { if (card) card.remove(); card = null; document.querySelectorAll('.part.sel').forEach(x => { if (!x.closest('.cx, .walk')) x.classList.remove('sel'); }); }
+})();</script>""" % up
+
+
 def sum_html(word, parts, bold=None):
     bits = []
     for p in parts:
@@ -209,17 +243,18 @@ def write(OUT, door_page, X):
                 e["words"].append((w, "start" if pos == 0 else "end" if pos == len(d["parts"]) - 1 else "middle"))
         for j in d["joins"]: joined[j].append(w)
 
-    marked = lambda w: w in LW.W and w not in X["SC"].UNMARKED
+    marked = lambda w: (w in LW.W or w in X["SC"].VARIANTS) and w not in X["SC"].UNMARKED
     def word_link(w):
         d = words[w]
         if marked(w): return f'walk.html?w={quote(w)}'
         return d["home"][0] if d["home"] else None
     def word_li(w, bold=None):
         d, u = words[w], word_link(w)
-        s = sum_html(w, d["parts"], bold)
+        wd = f'<i>{html.escape(w)}</i>'
+        s = sum_buttons(d["parts"], bold) + ' <span class="to">&rarr;</span> ' + (f'<a href="{u}">{wd}</a>' if u else wd)
         state = "" if marked(w) else ' <span class="pstate">sum only</span>'
         mean = f' <span class="pmean t-only">{d["mean"]}</span>' if d["mean"] else ""
-        return f'<li data-w="{html.escape(w)}">' + (f'<a href="{u}">{s}</a>' if u else s) + state + mean + "</li>"
+        return f'<li data-w="{html.escape(w)}">' + s + state + mean + "</li>"
 
     def with_it(k):
         """The other affixes this part is found beside, most often first."""
@@ -265,6 +300,7 @@ def write(OUT, door_page, X):
     secs.append(f'<section class="about pgroup" id="g-join" aria-labelledby="g-join-h"><div class="wrap"><h2 id="g-join-h">Joins</h2>'
                 f'<p class="sub t-only">What happens to the spelling where two parts meet.</p><div class="plist">{"".join(jcards)}</div></div></section>')
 
+    X["part_sums"] = {w: d["parts"] for w, d in words.items()}
     fams = "".join(f'<a class="dtile" href="roots/{R["slug"]}.html"><b>{R["root"]}</b><span>{R["gloss"]}</span></a>' for R in roots.ROOTS)
     fams += '<a class="dtile" href="explorations.html#note-family"><b>note</b><span>note, notate, notation</span></a>'
     n_sum = sum(1 for w in words if not marked(w))
@@ -285,7 +321,7 @@ def write(OUT, door_page, X):
 <section class="about t-only"><div class="wrap">
 {X["uc"]("the parts come from the words analysed so far: the route, the grade 3 word sums and the first families. Next: more families, starting with <i>accommodate</i> and the prefix <i>com-</i>, and a search by where a part sits in the word.")}
 </div></section>
-{PARTS_JS}"""
+{PARTS_JS}{pop_js()}"""
     door_page("parts", "Parts · Sound and Word Atlas", "Every analysed word, gathered by the parts it is built from.", body)
 
     # for the Words layer: each word's sum, part by part, and for the search: every part

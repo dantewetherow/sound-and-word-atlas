@@ -1,5 +1,5 @@
-"""Families behind Derivations: roots/<slug>.html. The first, the root *leg-, made on 8 November 2026; the second, the
-base hap, on 9 November 2026.
+"""Families in the Parts layer: roots/<slug>.html. The first, the root *leg-, made on 8 November 2026; the second, the
+base hap, on 9 November 2026; the third, the root *deuk- (duce, duct), on 10 November 2026, with a lesson on stress.
 
 *leg- follows Etymonline's entry for the root, which draws on Calvert Watkins, and the Indo-European Lexicon of the
 Linguistics Research Center at the University of Texas at Austin, which follows Pokorny; every word in the family is
@@ -153,7 +153,7 @@ PARTS = {
     # before the root
     "col-": "with, together: Latin <i>com-</i>, written <i>col-</i> before l",
     "se-": "apart, aside",
-    "e-": "out: Latin <i>ex-</i>, written <i>e-</i> before l",
+    "e-": "out: Latin <i>ex-</i>, written <i>e-</i> before l, d and some other consonants",
     "neg-": "not: Latin <i>neg-</i>, <i>nec</i>",
     "intel-": "between: Latin <i>inter-</i>, written <i>intel-</i> before l",
     "di-": "apart: Latin <i>dis-</i>, written <i>di-</i> before l",
@@ -166,7 +166,7 @@ PARTS = {
     "ana-": "up, back, according to (Greek)",
     "apo-": "away, off (Greek)",
     "cata-": "down, completely (Greek)",
-    "pro-": "before (Greek)",
+    "pro-": "before, forward, forth: Greek and Latin <i>pro</i>",
     "epi-": "upon, after (Greek)",
     "mono-": "one, alone (Greek)",
     "dys-": "bad, hard (Greek)",
@@ -174,7 +174,7 @@ PARTS = {
     "-ion": "the act or result of",
     "-ive": "tending to, doing",
     "-or": "one who, the thing that",
-    "-er": "one who",
+    "-er": "one who, or the thing that",
     "-ful": "full of, given to",
     "-ure": "the act or result of",
     "-ic": "having to do with",
@@ -338,6 +338,165 @@ HAP = {
 ROOTS = [LEG, HAP]
 
 
+# ------------------------------------------------------------------ *deuk-
+# Made 10 November 2026. The word list follows the Indo-European Lexicon's entry (Pokorny's deuk-, to pull, to tow),
+# fetched that day; Etymonline's *deuk- entry (to lead) couldn't be reopened then and is next to check. The family
+# carries two lessons: duce and duct take turns, as lig and lect do; and stress tells the verb from the noun
+# (proDUCE, PROduce), which the marks show only through the weak vowel, since the notation has no stress mark.
+DEUK_ROADS = [
+    ("Latin <i>d&umacr;cere</i>", "to lead, to draw along", [("duce", "duce"), ("duct", "duct")]),
+    ("Latin <i>&emacr;duc&amacr;re</i>", "to bring up, to rear: a verb beside <i>&emacr;d&umacr;cere</i>, to lead out", [("duc", "duc")]),
+    ("Latin <i>dux</i>, <i>ducis</i>, and French", "a leader; and Latin words worn down in French", [("french", "duke, duch, duit, due")]),
+    ("Old English <i>togian</i>, <i>t&emacr;on</i>", "to pull, to draw", [("germanic", "tow, tug, tie, team")]),
+]
+DEUK_CLUSTERS = [
+    {"key": "duce", "label": "duce", "spells": ["duce"], "head": "lead",
+     "road": "Latin <i>d&umacr;cere</i>, to lead, in its present form, after a prefix that says which way",
+     "note": "The final e does two jobs at once: it sends the vault that makes the u long (<a href=\"../steps/09.html\">step 9</a>) and it "
+             "nudges the c soft (<a href=\"../steps/10.html\">step 10</a>). Before a vowel suffix the e drops and the suffix&rsquo;s vowel "
+             "takes over both jobs: <i>producer</i>, <i>reducible</i>, <i>conducive</i>.",
+     "groups": [
+         [("produce", ["pro-", "duce"], "lead forth: make, bring out; as a noun, what is grown"),
+          ("producer", ["pro-", "duc(e)", "-er"], "one who makes or brings out", "duc"),
+          ("reproduce", ["re-", "pro-", "duce"], "make again; make a copy")],
+         [("reduce", ["re-", "duce"], "lead back: bring down, make smaller"),
+          ("reducible", ["re-", "duc(e)", "-ible"], "able to be made smaller", "duc")],
+         [("introduce", ["intro-", "duce"], "lead inside: bring in, make known")],
+         [("induce", ["in-", "duce"], "lead into: bring about, persuade"), ("deduce", ["de-", "duce"], "lead down from: work out by reasoning"),
+          ("educe", ["e-", "duce"], "lead out: draw out"), ("adduce", ["ad-", "duce"], "lead toward: bring forward as proof"),
+          ("seduce", ["se-", "duce"], "lead aside, lead astray")],
+         [("conduce", ["con-", "duce"], "lead together: help to bring about"),
+          ("conducive", ["con-", "duc(e)", "-ive"], "helping to bring about", "duc")],
+         [("traduce", ["tra-", "duce"], "lead across, as a show: speak ill of"),
+          ("transducer", ["trans-", "duc(e)", "-er"], "a device that carries energy across from one form to another", "duc")],
+     ]},
+    {"key": "duct", "label": "duct", "spells": ["duct"], "head": "led",
+     "road": "Latin <i>ductus</i>, led, the past form of <i>d&umacr;cere</i>",
+     "note": "Duce and duct take turns, as <a href=\"leg.html#c-lig\">lig and lect</a> do. The verb ends in duce; <i>-ion</i>, <i>-ive</i> and "
+             "<i>-or</i> join Latin&rsquo;s past form, duct: <i>produce</i> and <i>production</i>, <i>reduce</i> and <i>reduction</i>, "
+             "<i>induce</i> and <i>induction</i>. A speller who hears <i>duk-shun</i> can write duct + ion: the c is hard because a t "
+             "follows it, and <i>ti</i> spells the sh.",
+     "groups": [
+         [("duct", ["duct"], "a pipe or channel that leads something along"), ("ductile", ["duct", "-ile"], "able to be drawn out, as wire is"),
+          ("aqueduct", ["aque", "duct"], "a channel that leads water")],
+         [("product", ["pro-", "duct"], "what is brought forth"), ("production", ["pro-", "duct", "-ion"], "the making of things"),
+          ("productive", ["pro-", "duct", "-ive"], "making a lot"), ("productivity", ["pro-", "duct", "-iv(e)", "-ity"], "how much is made"),
+          ("reproduction", ["re-", "pro-", "duct", "-ion"], "making again; a copy")],
+         [("reduction", ["re-", "duct", "-ion"], "a making smaller")],
+         [("introduction", ["intro-", "duct", "-ion"], "a leading in: a first meeting, an opening part")],
+         [("conduct", ["con-", "duct"], "lead together: guide, lead; as a noun, how someone behaves"),
+          ("conductor", ["con-", "duct", "-or"], "one who leads; a thing that carries heat or current"),
+          ("conduction", ["con-", "duct", "-ion"], "the carrying of heat or current"),
+          ("misconduct", ["mis-", "con-", "duct"], "bad behaviour")],
+         [("induct", ["in-", "duct"], "lead in: bring into a group"), ("induction", ["in-", "duct", "-ion"], "a leading in; reasoning from cases to a rule"),
+          ("inductive", ["in-", "duct", "-ive"], "reasoning from cases to a rule")],
+         [("deduct", ["de-", "duct"], "lead away: take off"), ("deduction", ["de-", "duct", "-ion"], "a taking off; or what is deduced"),
+          ("deductive", ["de-", "duct", "-ive"], "reasoning from a rule to a case")],
+         [("abduct", ["ab-", "duct"], "lead away by force"), ("abduction", ["ab-", "duct", "-ion"], "a taking away by force")],
+         [("seduction", ["se-", "duct", "-ion"], "a leading astray"), ("seductive", ["se-", "duct", "-ive"], "tempting")],
+     ]},
+    {"key": "duc", "label": "duc", "spells": ["duc"], "head": "bring up",
+     "road": "Latin <i>&emacr;duc&amacr;re</i>, to bring up, to rear, a verb that stands beside <i>&emacr;d&umacr;cere</i>, to lead out",
+     "note": "<i>Educate</i> and <i>educe</i> are near twins: e + duc + ate and e + duce. To educate was first to rear a child; the "
+             "sense of leading out what is in the learner is a later reading of the word, and a fair one.",
+     "groups": [
+         [("educate", ["e-", "duc", "-ate"], "bring up, teach"), ("education", ["e-", "duc", "-at(e)", "-ion"], "bringing up, teaching"),
+          ("educator", ["e-", "duc", "-at(e)", "-or"], "one who teaches"),
+          ("educational", ["e-", "duc", "-at(e)", "-ion", "-al"], "having to do with teaching")],
+     ]},
+    {"key": "french", "label": "duke, duch, duit, due", "spells": ["duke", "duch", "duc", "duit", "due"], "head": "a leader; and words worn down in French",
+     "road": "Latin <i>dux</i>, a leader, became French <i>duc</i>; and Latin <i>conductus</i> and <i>subd&umacr;cere</i> lost letters on "
+             "their way through French",
+     "groups": [
+         [("duke", ["duke"], "a leader; a noble next below a prince"), ("duchess", ["duch", "-ess"], "a woman of a duke&rsquo;s rank"),
+          ("duchy", None, "the land a duke rules", "duch"), ("ducal", ["duc", "-al"], "having to do with a duke")],
+         [("conduit", ["con-", "duit"], "a channel that leads water or wires: <i>conduct</i>, through French")],
+         [("subdue", ["sub-", "due"], "bring under control; its sense was shaped by another Latin verb, <i>subdere</i>, to put under")],
+     ]},
+    {"key": "germanic", "label": "tow, tug, tie, team", "spells": ["tow", "tug", "tie", "team"], "head": "pull: English&rsquo;s own words",
+     "road": "Old English <i>togian</i>, to pull, and its kin, which English inherited and never borrowed. In the Germanic languages "
+             "the root&rsquo;s d became t, so these words start with t where Latin&rsquo;s start with d",
+     "note": "<i>Tug</i> and <i>duct</i> are cousins: one came down through Old English, the other was borrowed from Latin. The "
+             "same change of d to t sets <i>two</i> beside <i>dual</i> and <i>ten</i> beside <i>decimal</i>.",
+     "groups": [
+         [("tow", None, "pull along behind", "tow"), ("tug", None, "pull hard", "tug")],
+         [("tie", None, "a cord that draws tight; to fasten with one", "tie")],
+         [("team", None, "animals pulling together in harness; now any group that works together", "team")],
+     ]},
+]
+PARTS.update({
+    "in-": "into, in: Latin <i>in</i>; not the <i>in-</i> that means not",
+    "intro-": "to the inside, inward",
+    "ad-": "to, toward",
+    "con-": "with, together: Latin <i>com-</i>, written <i>con-</i> before d and most other consonants",
+    "tra-": "across: Latin <i>trans-</i>, shortened before d",
+    "trans-": "across",
+    "ab-": "away, from",
+    "sub-": "under",
+    "mis-": "wrongly, badly",
+    "-ile": "able to be",
+    "-ity": "the state of being",
+    "-ess": "a woman who is: an ending that came through French",
+    "aque": "water: Latin <i>aqua</i>, another root",
+})
+ROOT_PARTS.update({
+    "duce": "lead: Latin <i>d&umacr;cere</i>, in its present form",
+    "duct": "led: Latin <i>ductus</i>, the past form of <i>d&umacr;cere</i>",
+    "duc": "lead, bring up: Latin <i>duc-</i>, in <i>&emacr;duc&amacr;re</i>, to bring up, and <i>dux</i>, <i>ducis</i>, a leader",
+    "duke": "a leader: Latin <i>dux</i>, through French <i>duc</i>",
+    "duch": "a leader: French <i>duc</i>, with its c softened before the ending",
+    "duit": "led: Latin <i>ductus</i>, worn down in French",
+    "due": "lead: Latin <i>-d&umacr;cere</i>, worn down in French",
+})
+DEUK = {
+    "slug": "deuk", "root": "*deuk-", "gloss": "to lead, to pull", "kind": "a root family",
+    "h1_s": "*deuk- means &lsquo;lead&rsquo;",
+    "lead": "To lead, to pull along. Latin made this Proto-Indo-European root into <i>d&umacr;cere</i>, to lead, and with a prefix "
+            "in front it says which way: forth, back, in, out, aside, together. English borrowed the verbs with duce and their "
+            "nouns with duct, and kept its own words from the same root, <i>tow</i> and <i>tug</i>. The family teaches two things: "
+            "why <i>reduce</i> makes <i>reduction</i>, and how stress tells <i>proDUCE</i> from <i>PROduce</i>.",
+    "drawn": ("duct", "duct, marked"),
+    "sources": [("Indo-European Lexicon, deuk- (Linguistics Research Center, University of Texas at Austin), which follows Pokorny: the list this family is drawn from", "https://lrc.la.utexas.edu/lex/master/0355"),
+                ("Etymonline, *deuk-", "https://www.etymonline.com/word/%2Adeuk-"),
+                ("Etymonline: <i>produce</i>, verb and noun", "https://www.etymonline.com/search?q=produce"),
+                ("Etymonline: <i>educate</i>, from Latin <i>educare</i>", "https://www.etymonline.com/search?q=educate"),
+                ("Etymonline: <i>subdue</i>", "https://www.etymonline.com/search?q=subdue"),
+                ("Edward Carney, <i>A Survey of English Spelling</i> (Routledge, 1994), for the long vowel before a final e and the soft c before e: his pages are listed with steps 9 and 10", "../progressions.html")],
+    "roads": DEUK_ROADS, "clusters": DEUK_CLUSTERS, "parts": PARTS, "root_parts": ROOT_PARTS,
+    "extra": [
+        ("stress", "Stress tells the verb from the noun",
+         ["<i>Produce</i> is two words with one spelling. The verb is pro<b>DUCE</b>: farms produce food. The noun is "
+          "<b>PRO</b>duce: the food itself. <i>Conduct</i> works the same way: to con<b>DUCT</b> a band, but good <b>CON</b>duct. "
+          "The verb keeps the stress where Latin had it, on the root. The noun pulls it to the front.",
+          "The marks show this only through the first vowel. In the verb the first syllable is said weakly, so its o stays bare. "
+          "In the noun it is said in full, so the o takes a mark. The notation has no mark for stress itself yet, so the weak "
+          "vowel is the only sign of it. These four markings are drafts, waiting for a ruling.",
+          "The pattern runs well beyond this family: <i>record</i>, <i>permit</i>, <i>object</i>, <i>present</i>, <i>contract</i>, "
+          "<i>rebel</i>. A learner who knows it can hear which word is meant, and a speller can see why two words that sound "
+          "different are written alike: the spelling keeps the parts, pro + duce, and leaves the stress to the speaker."],
+         [("produce", "verb: pro<b>DUCE</b>", "c.pr b.o | c.d l.u c.c e> ; nudge 5>4"),
+          ("produce", "noun: <b>PRO</b>duce", "c.pr l.o | c.d l.u c.c e> ; vault 3>1 ; nudge 5>4"),
+          ("conduct", "verb: con<b>DUCT</b>", "c.c b.o c.n | c.d s.u c.ct"),
+          ("conduct", "noun: <b>CON</b>duct", "c.c s.o c.n | c.d s.u c.ct")]),
+        ("shift", "An ending can move the stress",
+         ["Some suffixes decide where the stress falls. Before <i>-ion</i> it lands on the syllable just ahead of the suffix: "
+          "<b>ED</b>ucate becomes edu<b>CA</b>tion, and pro<b>DUCE</b> becomes pro<b>DUC</b>tion. <i>-ity</i> does the same: "
+          "pro<b>DUC</b>tive becomes produc<b>TIV</b>ity. When the stress moves, vowels change with it: the long a of educ<b>A</b>tion "
+          "is weak in <b>ED</b>ucate&rsquo;s cousin <i>educator</i>, and the spelling stays the same throughout.",
+          "This is where spelling by parts earns its keep. The sounds shift from word to word, and the parts don&rsquo;t: "
+          "e + duc + ate, e + duc + at(e) + ion, e + duc + at(e) + or."], []),
+    ],
+    "students": ["produce", "product", "reduce", "conduct", "educate", "duct", "tug"],
+    "s_lead": "These words come from one old word that meant <i>lead</i> or <i>pull</i>.",
+    "uc": "the word list follows the Indo-European Lexicon, which follows Pokorny. Next: check it against Etymonline&rsquo;s "
+          "entry for the root and against Watkins; rule on the draft markings of <i>produce</i> and <i>conduct</i>; and decide "
+          "whether the notation needs a stress mark.",
+    "label": "Root family: *deuk-",
+    "desc": "The root *deuk-, to lead, and its family: produce, reduce, conduct, educate, duke and tug, with why reduce makes reduction and how stress tells proDUCE from PROduce.",
+}
+ROOTS = [LEG, HAP, DEUK]
+
+
 def bold_root(word, spelling):
     i = word.find(spelling)
     return html.escape(word) if i < 0 else html.escape(word[:i]) + "<b>" + html.escape(spelling) + "</b>" + html.escape(word[i + len(spelling):])
@@ -348,7 +507,7 @@ def part_key(p): return p.replace("(", "").replace(")", "")          # -ur(e) is
 def part_kind(p, spells):
     if p.endswith("-"): return "pre"
     if p.startswith("-"): return "suf"
-    return "root" if p in spells else "base"
+    return "root" if p in spells or part_key(p) in spells or part_key(p) + "e" in spells else "base"
 
 
 def cluster_words(R):
@@ -415,8 +574,8 @@ def clusters_html(R):
             "ids": {w: doors.word_id(w) for c, w, *_ in words}}
     script_data = json.dumps(data, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
     return f"""<section class="about t-only" aria-labelledby="rd-h"><div class="wrap">
-<h2 id="rd-h">Four roads in</h2>
-<p class="sub">The root reached English by four roads, each with its own spellings: a time-lapse, or a <a href="../definitions.html#def-diachronic">diachronic</a> view. Pick a spelling to see its words.</p>
+<h2 id="rd-h">{doors.NUMBER[len(R["roads"])]} roads in</h2>
+<p class="sub">The root reached English by {doors.NUMBER[len(R["roads"])].lower()} roads, each with its own spellings: a time-lapse, or a <a href="../definitions.html#def-diachronic">diachronic</a> view. Pick a spelling to see its words.</p>
 <div class="roads-wrap"><table class="roads"><thead><tr><th>From</th><th>Meaning</th><th>Spellings in English</th></tr></thead><tbody>{roads}</tbody></table></div>
 </div></section>
 <section class="about t-only cx" aria-labelledby="fam-h"><div class="wrap">
@@ -505,8 +664,10 @@ def write(OUT, page, header, footer, X):
     found = []
     def drawn_row(items):
         return ('<div class="words rrow">' + "".join(
-            f'<figure class="word">{X["svg_of"](w, 46, label=f"{w}, marked")}<figcaption>{cap}</figcaption></figure>'
-            for w, cap in items) + "</div>") if items else ""
+            f'<figure class="word">{X["svg_of"](it[0], 46, code=it[2] if len(it) > 2 else None, label=f"{it[0]}, marked")}<figcaption>{it[1]}</figcaption></figure>'
+            for it in items) + "</div>") if items else ""
+    import parts as PT
+    sums = PT.collect(X)[0]
     for R in ROOTS:
         if R.get("clusters"):
             middle = clusters_html(R)
@@ -519,8 +680,8 @@ def write(OUT, page, header, footer, X):
             for lang, head, words in R["branches"]:
                 items = []
                 for w, parts, sp, mean in words:
-                    ws = " + ".join(f"<b>{html.escape(p)}</b>" if p == sp else html.escape(p) for p in parts) if parts else ""
-                    items.append(f'<li id="{doors.word_id(w)}"><a class="rw" href="{etym(w, R["slug"])}">{bold_root(w, sp)}</a>'
+                    ws = PT.sum_buttons(sums[w]["parts"], root=R["root"]) if parts and w in sums else ""
+                    items.append(f'<li id="{doors.word_id(w)}" data-w="{html.escape(w)}"><a class="rw" href="{etym(w, R["slug"])}">{bold_root(w, sp)}</a>'
                                  + (f'<span class="rs">{ws}</span>' if ws else "") + f'<span class="rm">{mean}</span></li>')
                     found.append((w, f"roots/{R['slug']}.html#{doors.word_id(w)}", R["label"]))
                 cards.append(f'<section class="rbranch"><h3>{lang}</h3><p class="rh">{head}</p><ul>{"".join(items)}</ul></section>')
@@ -565,6 +726,7 @@ def write(OUT, page, header, footer, X):
 {X["uc"](R["uc"])}
 </div></section>
 </main>
+{"" if R.get("clusters") else PT.pop_js("../")}
 {footer(1)}"""
         (OUT / "roots" / f"{R['slug']}.html").write_text(page(f"{R['root']}: {R['gloss']} · Sound and Word Atlas", body, 1, R["desc"]), encoding="utf-8")
     return found

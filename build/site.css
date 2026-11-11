@@ -615,3 +615,10 @@ details.ppart > :not(summary) { margin-inline: 16px; }
 .walk-pop { max-width: 640px; margin: 10px auto 0; text-align: left; }
 .walk-pop p + p { margin-top: 4px; }
 .walk-sum .part { font-size: inherit; }
+/* part buttons in the Parts lists and the base families, with their popup */
+.pwords .part { padding: 0 2px; }
+.pwords .part.cur { color: var(--verb); font-weight: 600; }
+.pwords .pl, .rs .pl { color: var(--soft); }
+.gpop { margin-top: 6px; }
+.gpop p + p { margin-top: 4px; }
+.gpop a, .pwords .gpop a { color: var(--modal); text-decoration: underline; }
