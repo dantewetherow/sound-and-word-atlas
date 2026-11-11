@@ -1,5 +1,6 @@
 """Families in the Parts layer: roots/<slug>.html. The first, the root *leg-, made on 8 November 2026; the second, the
-base hap, on 9 November 2026; the third, the root *deuk- (duce, duct), on 10 November 2026, with a lesson on stress.
+base hap, on 9 November 2026; then three roots on 10 November 2026, each with a lesson attached: *deuk- (duce, duct;
+stress), *sem- (simil, semble; prefixes that change to match) and *med- (mod, med; accommodate).
 
 *leg- follows Etymonline's entry for the root, which draws on Calvert Watkins, and the Indo-European Lexicon of the
 Linguistics Research Center at the University of Texas at Austin, which follows Pokorny; every word in the family is
@@ -473,13 +474,14 @@ DEUK = {
           "<b>PRO</b>duce: the food itself. <i>Conduct</i> works the same way: to con<b>DUCT</b> a band, but good <b>CON</b>duct. "
           "The verb keeps the stress where Latin had it, on the root. The noun pulls it to the front.",
           "The marks show this only through the first vowel. In the verb the first syllable is said weakly, so its o stays bare. "
-          "In the noun it is said in full, so the o takes a mark. The notation has no mark for stress itself yet, so the weak "
-          "vowel is the only sign of it. These four markings are drafts, waiting for a ruling.",
+          "In the noun it is said in full, so the o takes a long mark. Nothing sends that o a vault: stress makes it long, and "
+          "stress isn&rsquo;t a letter. The notation has no mark for stress itself, so the captions use capitals for it, and the "
+          "weak vowel is the only sign among the marks.",
           "The pattern runs well beyond this family: <i>record</i>, <i>permit</i>, <i>object</i>, <i>present</i>, <i>contract</i>, "
           "<i>rebel</i>. A learner who knows it can hear which word is meant, and a speller can see why two words that sound "
           "different are written alike: the spelling keeps the parts, pro + duce, and leaves the stress to the speaker."],
          [("produce", "verb: pro<b>DUCE</b>", "c.pr b.o | c.d l.u c.c e> ; nudge 5>4"),
-          ("produce", "noun: <b>PRO</b>duce", "c.pr l.o | c.d l.u c.c e> ; vault 3>1 ; nudge 5>4"),
+          ("produce", "noun: <b>PRO</b>duce", "c.pr l.o | c.d l.u c.c e> ; nudge 5>4"),
           ("conduct", "verb: con<b>DUCT</b>", "c.c b.o c.n | c.d s.u c.ct"),
           ("conduct", "noun: <b>CON</b>duct", "c.c s.o c.n | c.d s.u c.ct")]),
         ("shift", "An ending can move the stress",
@@ -493,12 +495,231 @@ DEUK = {
     "students": ["produce", "product", "reduce", "conduct", "educate", "duct", "tug"],
     "s_lead": "These words come from one old word that meant <i>lead</i> or <i>pull</i>.",
     "uc": "the word list follows the Indo-European Lexicon, which follows Pokorny. Next: check it against Etymonline&rsquo;s "
-          "entry for the root and against Watkins; rule on the draft markings of <i>produce</i> and <i>conduct</i>; and decide "
-          "whether the notation needs a stress mark.",
+          "entry for the root and against Watkins; and decide whether the notation needs a mark for a weak vowel or for stress.",
     "label": "Root family: *deuk-",
     "desc": "The root *deuk-, to lead, and its family: produce, reduce, conduct, educate, duke and tug, with why reduce makes reduction and how stress tells proDUCE from PROduce.",
 }
 ROOTS = [LEG, HAP, DEUK]
+
+
+# ------------------------------------------------------------------ *sem-
+# Made 10 November 2026, for the lesson on assimilation: assimilate is ad + simil + ate, and its own first s is the d of
+# ad made like the s after it. The word list follows the Indo-European Lexicon's entry (Pokorny's sem-, one, together),
+# fetched that day; simulate and simulation are plain kin of simultaneous and are in Etymonline's list as I recall it,
+# which is still to be checked against the entry itself.
+SEM_ROADS = [
+    ("Latin <i>similis</i>", "like, of the same kind", [("simil", "simil")]),
+    ("Latin <i>simul</i>", "at the same time, together", [("simul", "simul"), ("semble", "semble")]),
+    ("Latin <i>simplex</i>, <i>singulus</i>", "one-fold; one at a time", [("sim", "sim, sin")]),
+    ("Greek <i>homos</i>", "same", [("homo", "homo")]),
+    ("Old English and Old Norse", "same, some: words English inherited", [("germanic", "same, some, seem")]),
+]
+SEM_CLUSTERS = [
+    {"key": "simil", "label": "simil", "spells": ["simil"], "head": "like",
+     "road": "Latin <i>similis</i>, like, of the same kind",
+     "note": "<i>Assimilate</i> does what it says. It is ad + simil + ate, to make like, and the d of <i>ad-</i> was itself made "
+             "like the s that follows: as + simil + ate. That is why it has two s&rsquo;s.",
+     "groups": [
+         [("similar", ["simil", "-ar"], "alike"), ("similarity", ["simil", "-ar", "-ity"], "a likeness"),
+          ("dissimilar", ["dis-", "simil", "-ar"], "not alike")],
+         [("simile", None, "a likeness drawn in words: as brave as a lion", "simil")],
+         [("assimilate", ["as-", "simil", "-ate"], "make like; take in and make part of oneself"),
+          ("assimilation", ["as-", "simil", "-at(e)", "-ion"], "a making like: in speech, one sound made like its neighbour")],
+     ]},
+    {"key": "simul", "label": "simul", "spells": ["simul"], "head": "together, at one time; make like",
+     "road": "Latin <i>simul</i>, at the same time, and <i>simul&amacr;re</i>, to make like, to copy",
+     "groups": [
+         [("simulate", ["simul", "-ate"], "copy, act like"), ("simulation", ["simul", "-at(e)", "-ion"], "a copy that acts like the real thing")],
+         [("simultaneous", None, "happening at one time", "simul")],
+     ]},
+    {"key": "semble", "label": "semble", "spells": ["semble"], "head": "together; like: worn down in French",
+     "road": "Latin <i>simul</i> and <i>similis</i>, through French, where the vowels changed and a b grew between the m and the l",
+     "note": "<i>Assemble</i> has the same front double as <i>assimilate</i>, for the same reason: ad + semble, written as + semble.",
+     "groups": [
+         [("assemble", ["as-", "semble"], "bring together"), ("assembly", None, "a gathering; a putting together", "sembl")],
+         [("resemble", ["re-", "semble"], "be like"), ("resemblance", ["re-", "sembl(e)", "-ance"], "a likeness", "sembl")],
+         [("ensemble", ["en-", "semble"], "all the parts together; a group that plays as one")],
+     ]},
+    {"key": "sim", "label": "sim, sin", "spells": ["sim", "sin"], "head": "one",
+     "road": "Latin <i>simplex</i>, one-fold, and <i>singulus</i>, one at a time",
+     "groups": [
+         [("simple", ["sim", "ple"], "of one fold: not mixed, not hard"), ("simplicity", ["sim", "plic", "-ity"], "being simple")],
+         [("single", None, "one only", "sin"), ("singular", None, "one of a kind; in grammar, naming one", "sin")],
+     ]},
+    {"key": "homo", "label": "homo", "spells": ["homo"], "head": "same",
+     "road": "Greek <i>homos</i>, same",
+     "note": "Three words a teacher of spelling uses. <i>To</i>, <i>two</i> and <i>too</i> are homophones; <i>produce</i> the verb "
+             "and <i>produce</i> the noun are <a href=\"deuk.html#stress-h\">homographs</a>.",
+     "groups": [
+         [("homophone", ["homo", "phone"], "a word with the same sound as another"),
+          ("homograph", ["homo", "graph"], "a word written the same as another"),
+          ("homonym", ["homo", "nym"], "a word with the same name as another: the same sound, the same spelling, or both")],
+     ]},
+    {"key": "germanic", "label": "same, some, seem", "spells": ["same", "some", "seem"], "head": "English&rsquo;s inherited words",
+     "road": "Old English and Old Norse words from the root, which English inherited and never borrowed",
+     "groups": [
+         [("same", None, "not another", "same"), ("some", None, "a certain one, a certain amount", "some")],
+         [("seem", None, "appear to be: at first, to fit, to be like", "seem")],
+     ]},
+]
+PARTS.update({
+    "as-": "to, toward: Latin <i>ad-</i>, written <i>as-</i> before s",
+    "en-": "in: French <i>en</i>, from Latin <i>in</i>",
+    "-ar": "like, having to do with",
+    "-ance": "the act or state of",
+    "ple": "fold: Latin <i>-plex</i>, another root",
+    "plic": "fold: Latin <i>plic&amacr;re</i>, to fold, another root",
+    "phone": "sound, voice (Greek <i>ph&omacr;n&emacr;</i>)",
+    "graph": "write (Greek <i>graphein</i>)",
+    "nym": "name (Greek <i>onyma</i>)",
+})
+ROOT_PARTS.update({
+    "simil": "like: Latin <i>similis</i>",
+    "simul": "at one time, together; make like: Latin <i>simul</i>, <i>simul&amacr;re</i>",
+    "semble": "together; like: Latin <i>simul</i> and <i>similis</i>, worn down in French",
+    "sim": "one: Latin <i>sim-</i>, in <i>simplex</i>, one-fold",
+    "homo": "same: Greek <i>homos</i>",
+})
+SEM = {
+    "slug": "sem", "root": "*sem-", "gloss": "one; as one, together", "kind": "a root family",
+    "h1_s": "*sem- means &lsquo;one&rsquo; or &lsquo;same&rsquo;",
+    "lead": "One; as one, together. From this Proto-Indo-European root Latin made <i>similis</i>, like, and <i>simul</i>, at the "
+            "same time; Greek made <i>homos</i>, same; and English kept <i>same</i> and <i>some</i>. The family carries a lesson "
+            "in its own spelling. <i>Assimilate</i> means to make like, and its double s is a prefix made like its neighbour.",
+    "drawn": ("same", "same, marked"),
+    "sources": [("Indo-European Lexicon, sem- (Linguistics Research Center, University of Texas at Austin), which follows Pokorny: the list this family is drawn from", "https://lrc.la.utexas.edu/lex/master/1686"),
+                ("Etymonline, *sem- (1)", "https://www.etymonline.com/search?q=*sem-"),
+                ("Etymonline: <i>assimilate</i>, <i>assemble</i>, <i>accommodate</i>, and the prefixes <i>ad-</i>, <i>com-</i>, <i>in-</i>, <i>sub-</i>, <i>ob-</i>, <i>dis-</i> and <i>ex-</i>, each with the forms it takes", "https://www.etymonline.com/search?q=ad-"),
+                ("Edward Carney, <i>A Survey of English Spelling</i> (Routledge, 1994), on doubled consonants: his pages are listed with step 14", "../steps/14.html")],
+    "roads": SEM_ROADS, "clusters": SEM_CLUSTERS, "parts": PARTS, "root_parts": ROOT_PARTS,
+    "extra": [
+        ("front", "A double at the front of a word",
+         ["A double near the end of a word usually marks a suffix joining a short vowel: get + t + ing "
+          "(<a href=\"../steps/14.html\">step 14</a>). A double near the front usually marks something else: a Latin prefix whose "
+          "last letter changed to match the first letter of the root. Two different consonants in a row take two movements of "
+          "the mouth; one held a little longer takes one. Speakers took the easier path, and the spelling recorded it.",
+          "<b>ad-</b>, to, toward: <i>ac</i>cept, <i>af</i>fix, <i>al</i>lot, <i>ap</i>pear, <i>as</i>semble, <i>at</i>tract. "
+          "<b>com-</b>, with: <i>col</i>lect, <i>cor</i>rect, <i>con</i>duct. "
+          "<b>in-</b>, not, or into: <i>il</i>legal, <i>im</i>mature, <i>ir</i>regular. "
+          "<b>sub-</b>, under: <i>suc</i>ceed, <i>suf</i>fix, <i>sup</i>port. "
+          "<b>ob-</b>, against: <i>oc</i>cur, <i>of</i>fer, <i>op</i>pose. "
+          "<b>dis-</b>, apart: <i>dif</i>fer. <b>ex-</b>, out: <i>ef</i>fect.",
+          "<i>Affix</i> and <i>suffix</i> are themselves examples: ad + fix, fastened to, and sub + fix, fastened under. The "
+          "words for word parts were built the way they describe."], []),
+        ("accommodate", "Accommodate: two doubles, two joins",
+         ["<i>Accommodate</i> is ad + com + mod + ate: to fit one thing to another. The d of <i>ad-</i> became c before the c of "
+          "<i>com-</i>, which gives the two c&rsquo;s. Then <i>com-</i> met the m of <i>mod</i>, a measure, which gives the two "
+          "m&rsquo;s with no change at all. A speller who knows the parts writes ac + com + mod + ate and has nothing to remember. Its family is "
+          "<a href=\"med.html\">*med-</a>, to measure."], []),
+        ("test", "A test for the speller",
+         ["Take the front off and see what is left. <i>Collect</i> without <i>col</i> leaves <a href=\"leg.html#c-lect\">lect</a>, "
+          "which turns up in <i>select</i> and <i>elect</i>: a prefix and a root, so the double belongs. <i>Assemble</i> without "
+          "<i>as</i> leaves semble, as in <i>resemble</i>.",
+          "Not every front double is a prefix that changed. In <i>unnatural</i>, <i>misspell</i> and <i>dissatisfied</i> nothing "
+          "changed: each part brought its own letter, un + natural, mis + spell, dis + satisfied. And some doubles have no join "
+          "at all: <i>rabbit</i>, <a href=\"leg.html#w-lesson\"><i>lesson</i></a>. The family is what shows a join, as it does "
+          "for <a href=\"hap.html\"><i>happy</i></a>."], []),
+    ],
+    "students": ["same", "some", "similar", "simple", "single", "assemble", "resemble"],
+    "s_lead": "These words come from one old word that meant <i>one</i> or <i>same</i>.",
+    "uc": "the word list follows the Indo-European Lexicon, which follows Pokorny. Next: check it against Etymonline&rsquo;s "
+          "entry for the root and against Watkins; and decide whether the route needs a step for prefixes that change to match.",
+    "label": "Root family: *sem-",
+    "desc": "The root *sem-, one or same, and its family: similar, simple, single, assemble, resemble and same, with a lesson on assimilation: why assimilate, collect and accommodate double at the front.",
+}
+ROOTS = [LEG, HAP, DEUK, SEM]
+
+
+# ------------------------------------------------------------------ *med-
+# Made 10 November 2026, as the home of accommodate. The word list follows the Indo-European Lexicon's entry
+# (Pokorny's med-, to mete, to allot; to heal, to give advice), fetched that day; accommodation is a plain derivative.
+MED_ROADS = [
+    ("Latin <i>modus</i>", "a measure; a limit; a manner", [("mod", "mod, mode"), ("commod", "mod, after com-"), ("french", "mould")]),
+    ("Latin <i>med&emacr;r&imacr;</i>, <i>medit&amacr;r&imacr;</i>", "to heal; to think over", [("med", "med")]),
+    ("Old English <i>metan</i>, <i>m&omacr;tan</i>", "to measure; to be allowed", [("germanic", "mete, must")]),
+]
+MED_CLUSTERS = [
+    {"key": "mod", "label": "mod, mode", "spells": ["mod", "mode"], "head": "a measure, a manner",
+     "road": "Latin <i>modus</i>, a measure, a limit, a way of doing something",
+     "groups": [
+         [("mode", ["mode"], "a way of doing something"), ("modal", ["mod(e)", "-al"], "having to do with manner; in grammar, a verb such as <i>can</i> or <i>must</i>", "mod")],
+         [("model", None, "a small measure: a pattern to copy", "mod"), ("module", ["mod", "-ule"], "a small measure: a unit that fits with others"),
+          ("modulate", ["mod", "-ul(e)", "-ate"], "adjust to a measure")],
+         [("moderate", None, "kept within measure", "mod"), ("immoderate", None, "beyond measure", "mod")],
+         [("modest", None, "keeping due measure: not boastful", "mod"), ("immodest", None, "not modest", "mod")],
+         [("modern", None, "of just now: Latin <i>modo</i>, by the measure, just now", "mod"), ("modicum", None, "a small amount", "mod")],
+     ]},
+    {"key": "commod", "label": "mod, after com-", "spells": ["mod"], "head": "with due measure: fitting",
+     "road": "Latin <i>commodus</i>, com + modus, with measure: fitting, convenient",
+     "note": "Com + mod doubles the m with nothing changed: each part brings its own. Put <i>ad-</i> in front and its d turns to c "
+             "before the c of com: ac + com + mod + ate.",
+     "groups": [
+         [("accommodate", ["ac-", "com-", "mod", "-ate"], "fit one thing to another; make room for"),
+          ("accommodation", ["ac-", "com-", "mod", "-at(e)", "-ion"], "a fitting in; a place to stay")],
+         [("commodity", ["com-", "mod", "-ity"], "a useful thing; a thing bought and sold"),
+          ("commodious", ["com-", "mod", "-ious"], "roomy"), ("commode", ["com-", "mode"], "a fitting piece of furniture", "mod")],
+     ]},
+    {"key": "med", "label": "med", "spells": ["med"], "head": "heal; think over",
+     "road": "Latin <i>med&emacr;r&imacr;</i>, to heal, to take the right measures for, and <i>medit&amacr;r&imacr;</i>, to think over",
+     "groups": [
+         [("medical", ["med", "-ic", "-al"], "having to do with healing"), ("medicate", ["med", "-ic", "-ate"], "treat with medicine"),
+          ("medicine", None, "the art of healing; what heals", "med")],
+         [("remedy", None, "a cure: what heals again", "med")],
+         [("meditate", None, "think over", "med")],
+     ]},
+    {"key": "french", "label": "mould", "spells": ["mould"], "head": "a shape to measure by",
+     "road": "Latin <i>modulus</i>, a small measure, worn down in French",
+     "groups": [[("mould", None, "a hollow shape that gives its form to what is poured in; <i>mold</i> in American spelling", "mould")]],
+    },
+    {"key": "germanic", "label": "mete, must", "spells": ["mete", "must"], "head": "measure; be allowed: English&rsquo;s own words",
+     "road": "Old English <i>metan</i>, to measure, and <i>m&omacr;tan</i>, to be allowed, to have room to",
+     "note": "<i>Must</i> is on the route as an <a href=\"../constructions.html\">operator</a>. It began as the past form of a verb for "
+             "being allowed, for having the measure of time or room to do a thing.",
+     "groups": [[("mete", None, "measure out, as in <i>mete out</i>", "mete"), ("must", None, "have to: at first, was allowed to", "must")]],
+    },
+]
+PARTS.update({
+    "ac-": "to, toward: Latin <i>ad-</i>, written <i>ac-</i> before c",
+    "com-": "with, together",
+    "-ule": "small",
+    "-ious": "full of, having",
+})
+ROOT_PARTS.update({
+    "mod": "a measure, a manner: Latin <i>modus</i>",
+    "mode": "a measure, a manner: Latin <i>modus</i>",
+    "med": "heal; think over: Latin <i>med&emacr;r&imacr;</i>, <i>medit&amacr;r&imacr;</i>",
+})
+MED = {
+    "slug": "med", "root": "*med-", "gloss": "to take the right measure", "kind": "a root family",
+    "h1_s": "*med- means &lsquo;measure&rsquo;",
+    "lead": "To take the right measure. Latin made this Proto-Indo-European root into <i>modus</i>, a measure or a manner, and "
+            "into verbs for healing and thinking over, which are measures of another kind. English kept <i>mete</i> and "
+            "<i>must</i> from the same root. The family is the home of a word people find hard to spell, <i>accommodate</i>, "
+            "which is easy once its parts are seen.",
+    "drawn": ("mode", "mode, marked"),
+    "sources": [("Indo-European Lexicon, med- (Linguistics Research Center, University of Texas at Austin), which follows Pokorny: the list this family is drawn from", "https://lrc.la.utexas.edu/lex/master/1238"),
+                ("Etymonline, *med-", "https://www.etymonline.com/search?q=*med-"),
+                ("Etymonline: <i>accommodate</i>, from Latin <i>ad</i> + <i>commodare</i>", "https://www.etymonline.com/search?q=accommodate"),
+                ("Etymonline: <i>must</i>", "https://www.etymonline.com/search?q=must")],
+    "roads": MED_ROADS, "clusters": MED_CLUSTERS, "parts": PARTS, "root_parts": ROOT_PARTS,
+    "extra": [
+        ("accommodate", "Accommodate: two doubles, two joins",
+         ["<i>Accommodate</i> is ad + com + mod + ate: to fit one thing to the measure of another. It has two doubles, and "
+          "they aren&rsquo;t the same kind.",
+          "The two c&rsquo;s are a prefix that changed. The d of <i>ad-</i> became c before the c of <i>com-</i>, as it does in "
+          "<i>accept</i> and <i>accuse</i>. The two m&rsquo;s are two parts meeting: <i>com-</i> ends in m and <i>mod</i> begins "
+          "with one, and nothing changed. A speller who writes the parts, ac + com + mod + ate, has no letters to count.",
+          "More on prefixes that change to match is with <a href=\"sem.html#front-h\"><i>assimilate</i></a>, whose own spelling "
+          "shows it."], []),
+    ],
+    "students": ["mode", "model", "modern", "medicine", "remedy", "must", "accommodate"],
+    "s_lead": "These words come from one old word that meant <i>measure</i>.",
+    "uc": "the word list follows the Indo-European Lexicon, which follows Pokorny. Next: check it against Etymonline&rsquo;s "
+          "entry for the root and against Watkins.",
+    "label": "Root family: *med-",
+    "desc": "The root *med-, to take the right measure, and its family: mode, model, modern, medicine, must and accommodate, with why accommodate has two c's and two m's.",
+}
+ROOTS = [LEG, HAP, DEUK, SEM, MED]
 
 
 def bold_root(word, spelling):

@@ -37,7 +37,7 @@ MEANS = {
 PREFIXES = {"un", "re", "mis", "be", "a", "out", "per", "dis", "de", "pre"}
 SUFFIXES = {"s", "es", "ed", "ing", "y", "ly", "er", "est", "en", "less", "ness", "ate", "ion", "ic", "ful", "th", "al", "or", "ive", "able"}
 # A prefix written another way before the root's first letter: the spelling, and the prefix it is.
-ASSIM = {"col-": "com-", "con-": "com-", "e-": "ex-", "intel-": "inter-", "di-": "dis-", "il-": "in-", "tra-": "trans-"}
+ASSIM = {"ac-": "ad-", "as-": "ad-", "col-": "com-", "con-": "com-", "e-": "ex-", "intel-": "inter-", "di-": "dis-", "il-": "in-", "tra-": "trans-"}
 
 JOINS = [
     ("double", "A consonant doubles", "The base ends in one vowel letter and one consonant, and the ending starts with a vowel. The "
