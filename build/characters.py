@@ -3,8 +3,9 @@
 Gno, the mascot and the site's icon since 10 November 2026, is gno: gn as one sound under a black bond bar, as kn in
 know, and o with a long mark, spelling its name. He sits beside the site's name in the header, stands on the About page,
 and is the browser tab's icon (logo.py). He is the one character changed after lifting: his bond bar is cut to the
-length of his long mark, centred where it was (SHORT_BAR), so it reads as a short brow under the raised red one. The
-others are their words' marks exactly.
+length of his long mark, centred where it was (SHORT_BAR), so it reads as a short brow under the raised red one, and
+since 11 November 2026 it sits 0.12 letter sizes higher (LIFT_BAR), to give the black eye under it room. He is a
+character first, so he needn't match the notation exactly. The others are their words' marks exactly.
 
 Note, note lifted, was the mascot from 7 to 10 November 2026; he stays in Definitions as the worked example of a word
 whose legomorphs stand on their own. The Dialogue Team is She, Could and Go, the actor, operator and action of a claim;
@@ -26,6 +27,7 @@ TEAM = [("she", "She", "actor"), ("could", "Could", "operator"), ("go", "Go", "a
 NUM = r"-?\d+(?:\.\d+)?"
 CODES = {"gno": "k.gn l.o"}     # the characters' words that aren't on the site's route or lists
 SHORT_BAR = {"gno"}             # bond bars cut to the long mark's length, centred where they were (Gno's short brow)
+LIFT_BAR = {"gno": 0.12}         # bond bars raised this many letter sizes, to give the eye under them room (Gno's brow)
 
 
 def _shorten_bars(els):
@@ -106,6 +108,8 @@ def lifted(LW, word, F=58.0, label=None, pad=0.08, scale=1.0, em=None, px_height
         dy = DROP * F if re.search(r'class="nz(6|8)"', el) and first and float(first[1]) < B else 0.0
         if 'class="nz3"' in el:                            # the swoop is the mouth: lower than in a word, so it reads as a smile
             dy = MOUTH * F
+        if 'class="nz4"' in el and word in LIFT_BAR:
+            dy = -LIFT_BAR[word] * F
         if weight != 1.0:
             el = _weigh(el, weight)
         el = re.sub(r' class="nz\d"', "", el)
