@@ -66,7 +66,7 @@ slide("When the old stays", f"""<h2 class="head">When the old stays</h2>
 <div class="cols3">
 <div data-s="1"><p class="sum">hope + less &rarr; {i("hopeless")}</p><p class="body">The suffix starts with a consonant. Nothing new arrives to take the {i("e")}&rsquo;s job, so the {i("e")} keeps it.</p></div>
 <div data-s="2"><p class="sum">notice + able &rarr; {i("noticeable")}</p><p class="body">The new vowel can&rsquo;t do the job. An {i("a")} doesn&rsquo;t nudge {i("c")} soft, so the {i("e")} stays to do it. {i("Changeable")} keeps its {i("e")} for the {i("g")}.</p></div>
-<div data-s="3"><p class="sum">see + ing &rarr; {i("seeing")}</p><p class="body">The {i("e")} isn&rsquo;t silent. In {i("seeing")} and {i("being")} it is the vowel of the base, so there is nothing to hand over.{word("being", 90)}</p></div>
+<div data-s="3"><p class="sum">see + ing &rarr; {i("seeing")}</p><p class="body">The {i("e")} is half of a team, {i("ee")}. Drop it and <b>seing</b> would read as {i("ei")}. In {i("being")} the {i("e")} is the base&rsquo;s own vowel.{word("being", 90)}</p></div>
 </div>""", steps=3)
 
 # 7 the test
@@ -118,7 +118,7 @@ slide("A caution", f"""<h2 class="head">A caution: the parts stay, the sounds mo
 
 # 14 sources
 slide("Sources", f"""<h2 class="head">Sources</h2>
-<p class="body">Edward Carney, <i>A Survey of English Spelling</i> (Routledge, 1994): the <i>e</i> drops before an ending that begins with a vowel, p. 130, and stays where it still nudges <i>c</i> or <i>g</i> (<i>noticeable</i>), p. 131.</p>
+<p class="body">Edward Carney, <i>A Survey of English Spelling</i> (Routledge, 1994): the <i>e</i> drops before an ending that begins with a vowel, p. 130, and stays where it still nudges <i>c</i> or <i>g</i> (<i>noticeable</i>), p. 131; the <i>e</i> of <i>ee</i> and <i>oe</i> stays before <i>i</i> (<i>seeing</i>, <i>canoeing</i>), so that <i>ei</i> and <i>oi</i> aren&rsquo;t read, p. 131.</p>
 <p class="body">The histories of the words are in Etymonline. The families are on the Sound and Word Atlas: <a href="../roots/deuk.html">*deuk-</a> for <i>educate</i> and <i>produce</i>, <a href="../roots/med.html">*med-</a> for <i>accommodate</i>, and <a href="../parts.html">Parts</a> for every word with each suffix. This is <a href="../steps/15.html">step 15</a> of its route.</p>
 <p class="source">Shared under CC BY-NC-SA 4.0.</p>""", "mid")
 
