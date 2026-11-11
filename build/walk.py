@@ -278,10 +278,17 @@ WALK_JS = r"""<script>(() => {
   });
   pop.addEventListener('click', e => { const a = e.target.closest('a[data-w]'); if (a) { e.preventDefault(); input.value = a.dataset.w; show(a.dataset.w); } });
   // swipe left for the next move, right to go back, as a page turns
-  let sx = null, sy = null, swiped = false;
-  stage.addEventListener('touchstart', e => { const t = e.touches[0]; sx = t.clientX; sy = t.clientY; swiped = false; }, {passive: true});
-  stage.addEventListener('touchend', e => { if (sx === null) return; const t = e.changedTouches[0], dx = t.clientX - sx, dy = t.clientY - sy; sx = null;
-    if (Math.abs(dx) > 40 && Math.abs(dx) > 1.5 * Math.abs(dy)) { swiped = true; go(dx < 0 ? 1 : -1); } });
+  // the first few pixels decide the direction: sideways locks the page so it can't scroll, up or down scrolls as usual
+  let sx = null, sy = null, lx = null, swiped = false, axis = null;
+  stage.addEventListener('touchstart', e => { if (e.touches.length > 1) { sx = null; return; } const t = e.touches[0]; sx = lx = t.clientX; sy = t.clientY; swiped = false; axis = null; }, {passive: true});
+  stage.addEventListener('touchmove', e => { if (sx === null) return; if (e.touches.length > 1) { sx = null; axis = null; return; }
+    const t = e.touches[0], dx = t.clientX - sx, dy = t.clientY - sy; lx = t.clientX;
+    if (!axis && Math.max(Math.abs(dx), Math.abs(dy)) > 8) axis = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
+    if (axis === 'x' && e.cancelable) e.preventDefault(); }, {passive: false});
+  const endSwipe = e => { if (sx === null) return; const t = e.changedTouches[0], dx = (t ? t.clientX : lx) - sx; sx = null;
+    if (axis === 'x' && Math.abs(dx) > 40) { swiped = true; go(dx < 0 ? 1 : -1); } axis = null; };
+  stage.addEventListener('touchend', endSwipe);
+  stage.addEventListener('touchcancel', () => { sx = null; axis = null; });
   $('.walk-next').addEventListener('click', () => go(1));
   $('.walk-back').addEventListener('click', () => go(-1));
   $('.walk-all').addEventListener('click', () => { step = steps.length - 1; apply(); });

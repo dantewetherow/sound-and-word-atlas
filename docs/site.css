@@ -491,7 +491,7 @@ table.cw-table td:first-of-type { width: 46%; }
 .walk-modes button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
 .chip:focus-visible, .walk-modes button:focus-visible, .walk-forms button:focus-visible, .walk-nav button:focus-visible { outline: 2px solid var(--modal); outline-offset: 2px; }
 .walk-msg { min-height: 1.4em; margin: 10px 0 0; }
-.walk-stage { margin-top: 8px; padding: 18px 12px 6px; background: var(--card); border: 1px solid var(--line); border-radius: 16px; cursor: pointer; display: grid; place-items: center; }
+.walk-stage { margin-top: 8px; padding: 18px 12px 6px; background: var(--card); border: 1px solid var(--line); border-radius: 16px; cursor: pointer; display: grid; place-items: center; touch-action: pan-y pinch-zoom; overscroll-behavior-x: contain; -webkit-user-select: none; user-select: none; }
 .walk-stage:focus-visible { outline: 2px solid var(--modal); outline-offset: 3px; }
 .walk-stage svg { width: 100%; max-width: 900px; height: auto; max-height: 44vh; }
 .walk-stage svg [class*="nz"], .walk-stage svg .wt { opacity: 0; transition: opacity 0.45s ease; }
