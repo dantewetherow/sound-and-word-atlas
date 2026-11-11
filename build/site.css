@@ -753,6 +753,11 @@ header.site.pinned .crumbs li[aria-current] { overflow: hidden; text-overflow: e
 header.site.pinned nav.doors { grid-area: doors; display: none; }
 header.site.pinned.open nav.doors { display: flex; padding-block: 6px 4px; }
 @media (min-width: 761px) { .js-menu header.site.pinned .menu { display: inline-block; } }
+/* a tablet held upright: the logo, search and the switches fill the row, so the trail gets a row of its own */
+@media (min-width: 761px) and (max-width: 1023px) {
+  header.site.pinned .wrap { grid-template-columns: auto minmax(0, 1fr); grid-template-areas: "brand tools" "crumbs crumbs" "doors doors"; gap: 4px 18px; }
+  header.site.pinned .tools { justify-self: end; }
+}
 @media (max-width: 760px) {
   header.site.pinned .wrap { grid-template-columns: auto minmax(0, 1fr); grid-template-areas: "brand tools" "crumbs crumbs" "doors doors"; gap: 6px 10px; }
   header.site.pinned .brand .name { display: none; }
