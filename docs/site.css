@@ -671,3 +671,28 @@ details.ppart > :not(summary) { margin-inline: 16px; }
   .list-page h1 { font-size: 26pt; margin: 0 0 6px; }
   .list-page a { color: inherit; text-decoration: none; }
 }
+/* a generalization check (lists.py): a learner's sheet, the words to say, the key and a tally */
+.cname { float: right; font-family: var(--body); font-size: 0.9rem; font-weight: 400; color: var(--soft); }
+.lblanks .blank.long { width: 16ch; }
+.ccols { columns: 2; column-gap: 48px; max-width: 640px; }
+.ccols li { break-inside: avoid; }
+.ctable { border-collapse: collapse; width: 100%; max-width: 860px; font-size: 0.95rem; }
+.ctable td, .ctable th { padding: 6px 12px 6px 0; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+.ctable th { font-weight: 500; color: var(--soft); font-size: 0.82rem; }
+.ctally td:not(:first-child), .ctally th:not(:first-child) { border-left: 1px solid var(--line); padding-left: 10px; min-width: 62px; }
+.ctally .of { color: var(--soft); font-size: 0.85rem; }
+.ctally .why { display: block; color: var(--soft); font-size: 0.82rem; }
+@media (max-width: 560px) { .ccols { columns: 1; } .ctable { font-size: 0.85rem; } .cname { float: none; display: block; margin-top: 6px; } .ctally .why { display: none; } }
+@media print {
+  .check-page .csheet { break-after: page; }
+  .check-page .csheet h2 { font-size: 18pt; margin-bottom: 14px; }
+  .check-page .ccols li { margin-bottom: 26px; }
+  .check-page .ctable { font-size: 10pt; }
+  .check-page .ctable td, .check-page .ctable th { padding: 3px 10px 3px 0; }
+  .check-page .ctally td { height: 24px; }
+  .check-page .ctally .why { display: none; }
+  .check-page .cteach h2 { margin: 6px 0 2px; }
+}
+.cname .blank { display: inline-block; width: 12ch; border-bottom: 1.5px solid var(--ink); margin-inline: 6px 14px; height: 1.1em; }
+.cname .blank.long { width: 20ch; }
+.cscroll { overflow-x: auto; max-width: 100%; }

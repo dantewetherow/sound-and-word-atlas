@@ -312,7 +312,7 @@ def write(OUT, page, header, footer, X):
     # The teachers' shelf: everything a teacher prints, presents or checks, on one page.
     import lists
     lists.write(OUT, page, header, footer, X)
-    shelf = [("To print and present", ("presentations.html", "cards.html")), ("Spelling lists", tuple(p for p, *_ in lists.PAGES)), ("Sentences", ("constructions.html",)),
+    shelf = [("To print and present", ("presentations.html", "cards.html")), ("Spelling lists", tuple(p for p, *_ in lists.PAGES if not p.endswith('-check.html'))), ("Generalization checks", tuple(p for p, *_ in lists.PAGES if p.endswith("-check.html"))), ("Sentences", ("constructions.html",)),
              ("Connections", ("word-lists.html", "ufli.html")), ("Reasons and sources", ("definitions.html", "about.html", "credits.html"))]
     by_path = {p: (p, t_, s) for p, d, t_, s in PAGES}
     door_page("teachers", "For teachers · Sound and Word Atlas", DOOR["teachers"][3], f"""{door_head("teachers")}

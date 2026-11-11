@@ -118,6 +118,91 @@ LISTS = [{
 PAGES = [(f"lists/{L['slug']}.html", "teachers", f"Spelling list: {L['title']}", L["desc"]) for L in LISTS]
 
 
+# A generalization check for a list (lists/<slug>-check.html): words to dictate before the lesson, after it, and a few
+# weeks later. Four groups: taught words (was the list learned?), transfer words that were never on the list (did the
+# convention generalize, and does the learner know where it stops?), invented words (which nobody can have seen), and
+# control words that have nothing to do with the lesson (these shouldn't improve; if they do as much as the transfer
+# words, something other than the lesson is at work). Each word is scored twice: the whole word, and the target feature.
+# (word, group, sentence, the feature to look for)
+CHECKS = {
+    "the-e-drops": {
+        "title": "the e drops",
+        "feature": "Is the silent e gone before a vowel suffix, and kept before a consonant suffix?",
+        "items": [
+            ("baking", "transfer", "We are baking bread.", "no e before ing: not <i>bakeing</i>"),
+            ("cabin", "control", "They stayed in a cabin.", ""),
+            ("making", "taught", "I am making lunch.", "no e before ing"),
+            ("hopeful", "limit", "She felt hopeful.", "the e is kept: not <i>hopful</i>"),
+            ("shiny", "transfer", "The coin is shiny.", "no e before y: not <i>shiney</i>"),
+            ("lemon", "control", "He cut a lemon.", ""),
+            ("racing", "taught", "They are racing home.", "no e before ing"),
+            ("riding", "transfer", "He is riding a bike.", "no e, and one d: not <i>rideing</i> or <i>ridding</i>"),
+            ("river", "control", "The river is cold.", ""),
+            ("hoping", "taught", "I am hoping for snow.", "no e, and one p: not <i>hopeing</i> or <i>hopping</i>"),
+            ("safely", "limit", "We got home safely.", "the e is kept: not <i>safly</i>"),
+            ("smiling", "transfer", "The baby is smiling.", "no e before ing: not <i>smileing</i>"),
+            ("seven", "control", "I have seven cards.", ""),
+            ("icy", "taught", "The road is icy.", "no e before y: not <i>icey</i>"),
+        ],
+        # invented words: the base is printed on the sheet, so only the join is being tested
+        "invented": [("zake", "ing", "zaking"), ("plome", "ing", "ploming")],
+        "desc": "A check for the list 'the e drops': fourteen words to dictate and two invented ones, before and after the lesson, with a scoring key.",
+    },
+}
+GROUPS = [("taught", "Taught", "On the list. Was the list learned?"),
+          ("transfer", "Transfer", "Not on the list, same convention. Did it generalize?"),
+          ("limit", "Limit", "Not on the list, where the convention stops. Was it over-learned?"),
+          ("invented", "Invented", "Made-up words nobody has seen. Only the convention can get these right."),
+          ("control", "Control", "Nothing to do with the lesson. These shouldn&rsquo;t change much.")]
+PAGES += [(f"lists/{s}-check.html", "teachers", f"Check: {C['title']}", C["desc"]) for s, C in CHECKS.items()]
+
+
+def write_check(OUT, page, header, footer, X, slug, C):
+    n = len(C["items"])
+    blanks = "".join(f'<li><span class="blank long"></span></li>' for _ in C["items"])
+    inv = "".join(f'<li><span>{b} + {s} &rarr;</span><span class="blank long"></span></li>' for b, s, _ in C["invented"])
+    label = {g: l for g, l, _ in GROUPS}
+    key = "".join(f'<tr><td>{k + 1}</td><td><b>{w}</b></td><td>{sent}</td><td>{label[g]}</td><td>{f or "whole word only"}</td></tr>' for k, (w, g, sent, f) in enumerate(C["items"]))
+    key += "".join(f'<tr><td>{n + k + 1}</td><td><b>{a}</b></td><td>(printed: {b} + {s})</td><td>Invented</td><td>no e before {s}</td></tr>' for k, (b, s, a) in enumerate(C["invented"]))
+    count = {g: sum(1 for it in C["items"] if it[1] == g) for g, _, _ in GROUPS}; count["invented"] = len(C["invented"])
+    tally = "".join(f'<tr><td><b>{l}</b> <span class="of">of {count[g]}</span><span class="why">{why}</span></td>' + "<td></td>" * 6 + "</tr>" for g, l, why in GROUPS if count[g])
+    body = f"""{header(1)}
+<main class="list-page check-page">
+<section class="hero noprint"><div class="wrap">
+<p class="eyebrow">Generalization check &middot; for the list <a href="{slug}.html">{C["title"]}</a></p>
+<h1>Check: {C["title"]}</h1>
+<p class="lprinciple">{C["feature"]}</p>
+<p class="board"><a href="#" onclick="window.print(); return false;">Print the check</a>: a sheet for the learner, then the words to say and the key.</p>
+</div></section>
+<section class="about csheet"><div class="wrap">
+<h2>Spelling check <span class="cname">Name <span class="blank long"></span> Date <span class="blank"></span></span></h2>
+<p class="sub">Write each word you hear.</p>
+<ol class="lblanks ccols">{blanks}</ol>
+<p class="sub">These two are made-up words. Add the ending.</p>
+<ol class="lblanks" start="{n + 1}">{inv}</ol>
+</div></section>
+<section class="about cteach"><div class="wrap">
+<h2>To say, and the key</h2>
+<p class="sub">Say the word, then the sentence, then the word again. For the last two, say: &ldquo;These are made-up words. The first part is printed for you. Add the ending and write the whole word.&rdquo; Don&rsquo;t teach these words between checks.</p>
+<p class="sub">Score each word twice: the whole word right, and the feature right. A learner who writes <i>bakin</i> has the feature and not the word.</p>
+<div class="cscroll"><table class="ctable ckey"><thead><tr><th></th><th>Word</th><th>Sentence</th><th>Group</th><th>The feature to look for</th></tr></thead><tbody>{key}</tbody></table></div>
+<h2>The tally</h2>
+<div class="cscroll"><table class="ctable ctally"><thead><tr><th rowspan="2">Group</th><th colspan="2">Before</th><th colspan="2">After</th><th colspan="2">Weeks later</th></tr>
+<tr><th>word</th><th>feature</th><th>word</th><th>feature</th><th>word</th><th>feature</th></tr></thead><tbody>{tally}</tbody></table></div>
+</div></section>
+<section class="about noprint"><div class="wrap prose">
+<h2>Reading the result</h2>
+<p>Give the check before the lesson, after it, and again a few weeks later. The lesson worked if the transfer and invented words rise and the control words don&rsquo;t rise as much. If everything rises together, something other than the lesson did it. If the limit words fall, the convention was over-learned: the e is being dropped everywhere.</p>
+<p>Use words the learners already say. If most can spell a word beforehand, it can&rsquo;t show anything; swap it for another of the same kind.</p>
+<p>With two classes, compare the gain on transfer words against the gain on control words in each. That is suggestive, not proof: the classes differ in more than the lesson. A stronger design needs only one class: teach three lessons in turn, give all three checks each time, and see whether each set of transfer words rises only after its own lesson.</p>
+<p>Keep learners&rsquo; results in the school&rsquo;s own records. Nothing here collects them.</p>
+{X["uc"]("this is the first generalization check, made as a model for the others. The control words are two-syllable words from step 16; they haven&rsquo;t been matched to the others for how common they are.")}
+</div></section>
+</main>
+{footer(1)}"""
+    (OUT / "lists" / f"{slug}-check.html").write_text(page(f"Check: {C['title']} · Sound and Word Atlas", body, 1, C["desc"]), encoding="utf-8")
+
+
 def write(OUT, page, header, footer, X):
     (OUT / "lists").mkdir(exist_ok=True)
     LW, SC = X["LW"], X["SC"]
@@ -138,7 +223,7 @@ def write(OUT, page, header, footer, X):
 <p class="eyebrow t-only">Spelling list &middot; {L["kind"]}</p>
 <h1>{L["title"]}</h1>
 <p class="lprinciple">{L["principle"]}</p>
-<p class="board t-only noprint"><a href="#" onclick="window.print(); return false;">Print this list</a>: the teacher&rsquo;s notes are left off.</p>
+<p class="board t-only noprint"><a href="#" onclick="window.print(); return false;">Print this list</a>: the teacher&rsquo;s notes are left off.{f' <a href="{L["slug"]}-check.html">Its generalization check</a>, to give before and after.' if L["slug"] in CHECKS else ""}</p>
 </div></section>
 <section class="about"><div class="wrap">
 <h2>The words</h2>
@@ -164,5 +249,6 @@ def write(OUT, page, header, footer, X):
 </main>
 {footer(1)}"""
         (OUT / "lists" / f"{L['slug']}.html").write_text(page(f"Spelling list: {L['title']} · Sound and Word Atlas", body, 1, L["desc"]), encoding="utf-8")
-    print(f"wrote {len(LISTS)} spelling list(s)")
+    for slug, C in CHECKS.items(): write_check(OUT, page, header, footer, X, slug, C)
+    print(f"wrote {len(LISTS)} spelling list(s), {len(CHECKS)} check(s)")
     return [(p, t) for p, _, t, _ in PAGES]
