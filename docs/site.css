@@ -519,7 +519,13 @@ table.cw-table td:first-of-type { width: 46%; }
 .try-tools button { display: flex; align-items: center; gap: 8px; font: inherit; font-size: 0.9rem; text-align: left; padding: 7px 10px; border-radius: 12px;
   border: 1px solid var(--line); background: var(--card); color: var(--ink); cursor: pointer; }
 .try-tools button svg { width: 22px; height: 22px; flex: none; }
-.try-tools button[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+/* each tool in its mark's colour: ink for circles and bond bars, blue for swoops and seams, red for short and long */
+.try-tools button { --tc: var(--ink); }
+.try-tools button[data-tool="swoop"], .try-tools button[data-tool="seam"] { --tc: var(--modal); }
+.try-tools button[data-tool="breve"], .try-tools button[data-tool="macron"] { --tc: var(--verb); }
+.try-tools button[data-tool="sum"], .try-tools button[data-tool="join"] { --tc: var(--soft); }
+.try-tools button svg { color: var(--tc); }
+.try-tools button[aria-pressed="true"] { border-color: var(--tc); box-shadow: inset 0 0 0 1px var(--tc); background: color-mix(in srgb, var(--tc) 14%, var(--card)); font-weight: 500; }
 .try-tools button:focus-visible { outline: 2px solid var(--modal); outline-offset: 2px; }
 .try-say { margin: 10px 0 6px; }
 .try-row { display: grid; grid-template-columns: 3.4em 1fr; align-items: center; gap: 6px; border: 1px dashed var(--line); border-radius: 16px; padding: 10px 12px; margin-top: 8px; }

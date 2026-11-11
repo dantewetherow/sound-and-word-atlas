@@ -142,7 +142,7 @@ def write(OUT, door_page, X):
 
     body = f"""<section class="hero walk-hero"><div class="wrap">
 <h1><span class="t-only">Words</span><span class="s-only">Pick a word</span></h1>
-<p class="lead t-only">Look up a word, then tap or swipe through it, or try marking it first. <b>Read it</b> starts from the word in plain letters and decodes; <b>Spell it</b> starts from the syllables, then the sounds, then the letters. <b>Try it</b> puts the marks in the learner’s hands: pick sound circles, bond bars, syllable swoops, breves, macrons or seams, then tap or swipe them onto the word, or write its word sum. <b>Show ours</b> sets the site’s marks underneath to talk about; nothing is scored. Under the word is its sum: tap a part to see every word that shares it.</p>
+<p class="lead t-only">Look up a word, then tap or swipe through it, or try marking it first. <b>Read it</b> starts from the word in plain letters and decodes; <b>Spell it</b> starts from the syllables, then the sounds, then the letters. <b>Try it</b> puts the marks in the learner’s hands: pick sound circles, bond bars, syllable swoops, short or long marks, or seams, then tap or swipe them onto the word, or write its word sum. <b>Show ours</b> sets the site’s marks underneath to talk about; nothing is scored. Under the word is its sum: tap a part to see every word that shares it.</p>
 </div></section>
 {section(note=X["uc"]("a word is either marked, so it can be walked, or shown as a word sum only. Next: the word built from left to right, a unit at a swipe; and draft marks for more words, labelled as drafts, for teachers to check."))}
 <section class="about t-only"><div class="wrap"><p><a href="explorations.html">A family built in three moves: <i>note</i>, <i>notate</i>, <i>notation</i></a>. Every analysed word, by its parts, is in <a href="parts.html">Parts</a>.</p></div></section>"""
@@ -328,7 +328,7 @@ WALK_JS = r"""<script>(() => {
         oursRow = $('.try-ours'), oursB = $('.try-ours .try-board'), showB = $('.try-show');
   const NS = 'http://www.w3.org/2000/svg';
   const ICON = {
-    circ: '<circle cx="11" cy="11" r="4.5" fill="currentColor"/>',
+    circ: '<circle cx="6.5" cy="11" r="3.6" fill="var(--ink)"/><circle cx="15.5" cy="11" r="3.6" fill="var(--verb)"/>',
     bond: '<line x1="3" y1="11" x2="19" y2="11" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>',
     swoop: '<path d="M3 8 Q11 18 19 8" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>',
     breve: '<path d="M5 7 Q11 17 17 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>',
@@ -341,8 +341,8 @@ WALK_JS = r"""<script>(() => {
     circ: ['Sound circles', 'Tap a letter for each sound you say. Where two or more letters spell one sound, swipe across them for one circle.', 'sound circle'],
     bond: ['Bond bars', 'Swipe across letters that work together to bond them with a bar.', 'bond bar'],
     swoop: ['Syllable swoops', 'Swipe under each syllable, from its first letter to its last. Tap a letter for a syllable of one letter.', 'syllable swoop'],
-    breve: ['Breves', 'Tap a vowel with a short sound to give it a breve.', 'breve'],
-    macron: ['Macrons', 'Tap a vowel with a long sound to give it a macron.', 'macron'],
+    breve: ['Short', 'Tap a vowel with a short sound to give it a short mark.', 'short mark'],
+    macron: ['Long', 'Tap a vowel with a long sound to give it a long mark.', 'long mark'],
     seam: ['Seams', 'Tap between two letters where one part ends and the next begins.', 'seam'],
     sum: ['Word sum', 'Write the word sum. Put + between the parts and brackets round a letter that drops or changes: <i>hop(e) + ing</i>.'],
     join: ['Put together', 'Here are the parts. Write the word they make.']
