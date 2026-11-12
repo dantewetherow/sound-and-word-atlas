@@ -123,10 +123,16 @@ def write(OUT, door_page, door_head, uc, X):
     parts = "".join(f'<tr><th scope="row">{italics(c["what"])}</th><td>{html.escape(c["route"])}</td><td>{html.escape(c["ufli"])}</td></tr>'
                     for c in D["contrasts"])
     body = f"""<section class="hero"><div class="wrap">
-<p class="eyebrow t-only">Connections</p>
-<h1>The route and UFLI Foundations</h1>
-<p class="lead">Where each step of the route meets UFLI Foundations, by lesson number, so a school that runs UFLI can see where a step lands in its {D["of"]} lessons, and where the two orders part.</p>
-<p class="sub">{html.escape(D["made"])} UFLI asks that its materials be linked rather than copied (its <a href="{UFLI_COPYRIGHT}">copyright statement</a> says so), so its lesson names stay on its own site: its scope and sequence is in the <a href="{D["link"]}">UFLI Foundations Toolbox</a>. The <a href="lists/index.html#ufli">spelling lists by UFLI lesson</a> follow the same rule: lesson numbers, our descriptions, our words.</p>
+<p class="eyebrow t-only">For teachers</p>
+<h1>UFLI Foundations</h1>
+<p class="lead">Everything on this site for schools that run UFLI Foundations, by UFLI&rsquo;s own lesson numbers: spelling lists for each lesson, the mark to draw at each lesson, and where each of its {D["of"]} lessons meets the route.</p>
+<p class="ufli-nav"><a href="#lists">Spelling lists</a> &middot; <a href="#lessons">What the notation adds</a> &middot; <a href="#chart">Lesson by step</a> &middot; <a href="#steps">Step by step</a> &middot; <a href="#part">Where the orders part</a> &middot; <a href="lists/index.html">Legomorphic spelling</a></p>
+<p class="sub">{html.escape(D["made"])} UFLI asks that its materials be linked rather than copied (its <a href="{UFLI_COPYRIGHT}">copyright statement</a> says so), so its lesson names stay on its own site: its scope and sequence is in the <a href="{D["link"]}">UFLI Foundations Toolbox</a>. The spelling lists below follow the same rule: lesson numbers, our descriptions, our words.</p>
+</div></section>
+<section class="about" id="lists" aria-labelledby="ls-h"><div class="wrap">
+<h2 id="ls-h">Spelling lists by lesson</h2>
+<p class="sub">A list for each lesson that adds a new spelling. Every word uses only what UFLI has taught by that lesson, and none is taken from UFLI&rsquo;s materials. So far the kindergarten and grade 1 lessons, 4 to 110; grade 2 is next. The <a href="lists/index.html">Legomorphic spelling</a> lists follow the route instead.</p>
+<div class="step-btns">{"".join(f'<a class="sbtn" href="lists/{e["slug"]}.html"><b>Lesson {e["n"]}</b><span>{re.sub(r"<[^>]+>", "", e["what"])}</span></a>' for e in ufli_lists.entries())}</div>
 </div></section>
 <section class="about" id="chart" aria-labelledby="ch-h"><div class="wrap">
 <h2 id="ch-h">Lesson by step</h2>
@@ -149,4 +155,4 @@ def write(OUT, door_page, door_head, uc, X):
 <div class="tablewrap"><table class="cw-table"><thead><tr><th scope="col">What</th><th scope="col">The route</th><th scope="col">UFLI</th></tr></thead><tbody>{parts}</tbody></table></div>
 <p class="sub">{html.escape(D["source"])}</p>
 </div></section>"""
-    door_page("ufli", "The route and UFLI Foundations · A Legend for English Words", "Where each step of the route meets UFLI Foundations, by lesson number.", body)
+    door_page("ufli", "UFLI Foundations · A Legend for English Words", "For schools that run UFLI Foundations: spelling lists by lesson, what the notation adds at each lesson, and where the lessons meet the route.", body)

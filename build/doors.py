@@ -63,7 +63,7 @@ PAGES = [
     ("cards.html", "teachers", "Word cards", "Printable cards: the Early Literacy Profile (Central Okanagan) and Dolch words, and grade 3 word sums."),
     ("connections.html", "teachers", "Connections", "How the route lines up with the word lists and programs schools already use."),
     ("word-lists.html", "teachers", "Early Literacy Profile and Dolch", "Where the Early Literacy Profile (Central Okanagan) words come from in Dolch's lists."),
-    ("ufli.html", "teachers", "UFLI Foundations", "Where each step of the route meets UFLI's lessons, by lesson number."),
+    ("ufli.html", "teachers", "UFLI Foundations", "Everything for schools that run UFLI: spelling lists by lesson, what the notation adds at each lesson, and where the lessons meet the route."),
     ("explanations.html", "teachers", "Reasons and sources", "Definitions, the notation and its name, and credits."),
     ("definitions.html", "teachers", "Definitions", "What the notation's words mean, and where they come from."),
     ("about.html", "teachers", "About the notation", "The notation, its name, and how it came about."),
@@ -340,8 +340,8 @@ def write(OUT, page, header, footer, X):
     lists.write(OUT, page, header, footer, X)
     import tents
     tents.write(OUT, page, header, footer, X)
-    shelf = [("To print and present", ("presentations.html", "cards.html", "tents.html")), ("Spelling lists", ("lists/index.html",)), ("Sentences", ("constructions.html",)),
-             ("Connections", ("word-lists.html", "ufli.html")), ("Reasons and sources", ("definitions.html", "about.html", "credits.html"))]
+    shelf = [("Spelling", ("lists/index.html", "ufli.html")), ("To print and present", ("presentations.html", "cards.html", "tents.html")), ("Sentences", ("constructions.html",)),
+             ("Connections", ("word-lists.html",)), ("Reasons and sources", ("definitions.html", "about.html", "credits.html"))]
     by_path = {p: (p, t_, s) for p, d, t_, s in PAGES}
     door_page("teachers", "For teachers · A Legend for English Words", DOOR["teachers"][3], f"""{door_head("teachers")}
 {"".join(f'<section class="about"><div class="wrap"><h2>{h}</h2>{tiles([by_path[p] for p in ps])}</div></section>' for h, ps in shelf)}""")
@@ -478,8 +478,10 @@ def finish(OUT, pages):
             trail.append(f'<li><a href="{up}index.html">Home</a></li>')
             if d and p != f"{d}.html":
                 trail.append(f'<li><a href="{up}{d}.html">{door_label(d)}</a></li>')
-            if p.startswith("lists/") and p != "lists/index.html":
-                trail.append(f'<li><a href="{up}lists/index.html">Spelling lists</a></li>')
+            if p.startswith("lists/ufli-"):
+                trail.append(f'<li><a href="{up}ufli.html">UFLI Foundations</a></li>')
+            elif p.startswith("lists/") and p != "lists/index.html":
+                trail.append(f'<li><a href="{up}lists/index.html">Legomorphic spelling</a></li>')
             here = door_label(d) if d and p == f"{d}.html" else html.escape(t.split(":")[0] if p.startswith("steps/") else t)
             if p.startswith("lists/") and t.startswith("Spelling list: "):
                 here = t[len("Spelling list: "):].split(":")[0]

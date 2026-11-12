@@ -854,3 +854,6 @@ header.site.pinned.open nav.doors { display: flex; padding-block: 6px 4px; }
 .ul-table td:nth-child(2) { width: 24%; }
 .ul-table td:nth-child(3) { width: 56%; }
 .ladds { max-width: 62ch; margin: 10px 0 0; }
+
+.ufli-nav { font-size: 0.95rem; line-height: 1.8; }
+.ufli-nav a { font-weight: 600; }

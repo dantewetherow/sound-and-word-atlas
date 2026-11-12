@@ -150,8 +150,8 @@ KINDS = [(1, "One analog, several words", "One word&rsquo;s spelling carries to 
          (2, "One base, many joins", "One base and the prefixes and suffixes that join it."),
          (3, "One join, many bases", "One way that a suffix joins, tried on many bases."),
          (4, "A closed set", "A small set of words that work together and change together.")]
-INDEX_DESC = "Every spelling list: one for each step, one for each word family, and the four kinds of list they are made from."
-PAGES = [("lists/index.html", "teachers", "Spelling lists", INDEX_DESC)]
+INDEX_DESC = "Spelling lists that follow the route: one for each step and each word family, each with a check, and the four kinds of list they are made from."
+PAGES = [("lists/index.html", "teachers", "Legomorphic spelling", INDEX_DESC)]
 PAGES += [(f"lists/{L['slug']}.html", "teachers", f"Spelling list: {L['title']}", L["desc"]) for L in LISTS]
 HAS_CHECK = " It comes with a check to give before and after the lesson."
 
@@ -277,7 +277,7 @@ def write(OUT, page, header, footer, X):
         body = f"""{header(1)}
 <main class="list-page">
 <section class="hero"><div class="wrap">
-<p class="eyebrow t-only"><a href="index.html">Spelling lists</a> &middot; {L["kind"]}</p>
+<p class="eyebrow t-only"><a href="index.html">Legomorphic spelling</a> &middot; {L["kind"]}</p>
 <h1>{L["title"]}</h1>
 <p class="lprinciple">{L["principle"]}</p>
 <p class="lhome noprint">{home_link(L)}</p>
@@ -328,14 +328,13 @@ def write_index(OUT, page, header, footer, X):
     fams = "".join(f'<a class="dtile" href="{L["slug"]}.html"><b>{L["root"]}</b><span>{", ".join(w for w, _, _ in L["words"][:5])}</span></a>'
                    for L in LISTS if L.get("group") == "family")
     model = {L["pattern"]: L for L in LISTS if L.get("pattern")}
-    uf = "".join(f'<a class="sbtn" href="{e["slug"]}.html"><b>Lesson {e["n"]}</b><span>{re.sub(r"<[^>]+>", "", e["what"])}</span></a>' for e in X["ufli_lists"])
     kinds = "".join(f'<a class="dtile" href="{model[k]["slug"]}.html"><b>{name}</b><span>{why} The model: <i>{model[k]["title"]}</i>.</span></a>'
                     for k, name, why in KINDS)
     body = f"""{header(1)}
 <main class="lists-index">
 <section class="hero"><div class="wrap">
-<h1>Spelling lists</h1>
-<p class="lead">A list for every step on the route and every word family. Each has six to eight words with sentences, a contrast, words to build, sentences to finish, and a check of words that aren&rsquo;t on the list. Print one and the teacher&rsquo;s notes are left off. Each list also has a generalization check, to give before the lesson, after it and a few weeks later: its list&rsquo;s page leads to it.</p>
+<h1>Legomorphic spelling</h1>
+<p class="lead">Spelling lists that follow the route: one for every step and every word family. Each has six to eight words with sentences, a contrast, words to build, sentences to finish, and a check of words that aren&rsquo;t on the list. Print one and the teacher&rsquo;s notes are left off. Each list also has a generalization check, to give before the lesson, after it and a few weeks later: its list&rsquo;s page leads to it.</p>
 </div></section>
 <section class="about"><div class="wrap">
 <h2>Steps</h2>
@@ -343,9 +342,9 @@ def write_index(OUT, page, header, footer, X):
 <div class="step-btns">{steps}</div>
 </div></section>
 <section class="about" id="ufli"><div class="wrap">
-<h2>By UFLI lesson</h2>
-<p class="sub">For schools that run UFLI Foundations: a list for each lesson that adds a new spelling, by UFLI&rsquo;s lesson number. The words are ours, and use only what UFLI has taught by that lesson. So far the kindergarten and grade 1 lessons, 4 to 110; grade 2 is next. <a href="../ufli.html#chart">Where each lesson meets the route</a>.</p>
-<div class="step-btns">{uf}</div>
+<h2>Lined up with UFLI Foundations</h2>
+<p class="sub">For schools that run UFLI: a spelling list for each UFLI lesson that adds a new spelling, by lesson number, with what the notation adds at each one. They live with everything else for UFLI.</p>
+<div class="door-tiles"><a class="dtile" href="../ufli.html#lists"><b>UFLI Foundations</b><span>{len(X["ufli_lists"])} spelling lists by lesson, what the notation adds at each lesson, and where the lessons meet the route.</span></a></div>
 </div></section>
 <section class="about" id="families"><div class="wrap">
 <h2>Families</h2>
@@ -361,4 +360,4 @@ def write_index(OUT, page, header, footer, X):
 </div></section>
 </main>
 {footer(1)}"""
-    (OUT / "lists" / "index.html").write_text(page("Spelling lists · A Legend for English Words", body, 1, INDEX_DESC), encoding="utf-8")
+    (OUT / "lists" / "index.html").write_text(page("Legomorphic spelling · A Legend for English Words", body, 1, INDEX_DESC), encoding="utf-8")
