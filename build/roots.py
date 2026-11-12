@@ -1109,6 +1109,8 @@ def write(OUT, page, header, footer, X):
         kids = "".join(f'<li>{bold_root(w, spell_of[w])}</li>' for w in R["students"])
         dw, dl = R["drawn"]
         drawn = X["svg_of"](dw, 58, label=dl)
+        import landing          # *leg- has legomorphic built up a layer at a time, as the home page had until 12 November 2026
+        drawn_hero = landing.lego_block(X["LW"]) if R["slug"] == "leg" else drawn
         extra = "".join(f"""<section class="about t-only" aria-labelledby="{sid}-h"><div class="wrap">
 <h2 id="{sid}-h">{head}</h2>
 {"".join(f'<p class="sub">{t}</p>' for t in paras)}
@@ -1122,7 +1124,7 @@ def write(OUT, page, header, footer, X):
 <p class="eyebrow t-only">Parts &middot; {R["kind"]}</p>
 <h1><span class="t-only">{R["root"]}</span><span class="s-only">{R["h1_s"]}</span></h1>
 <p class="lead t-only">{R["lead"]}</p>
-<div class="door-word t-only">{drawn}</div>
+<div class="door-word t-only">{drawn_hero}</div>
 </div></section>
 <section class="about s-only"><div class="wrap">
 <p class="s-lead">{R["s_lead"]}</p>

@@ -377,7 +377,7 @@ def doors_section():
                    f'<span class="pw t-only">{plain_words}</span></a>')
     return f"""<section class="doors-home" id="doors-home" aria-labelledby="doors-h"><div class="wrap">
 <h2 id="doors-h"><span class="t-only">Three layers</span><span class="s-only">Pick one</span></h2>
-<p class="sub t-only">The atlas is a language for teaching spelling and reading, for a teacher to use with learners. Learn it in order in Steps, look up any word in Words, and see what words share in Parts.</p>
+<p class="sub t-only">Legomorphic Notation is a language for teaching spelling and reading, for a teacher to use with learners. Learn it in order in Steps, look up any word in Words, and see what words share in Parts.</p>
 <div class="door-grid">{"".join(out)}</div>
 </div></section>"""
 

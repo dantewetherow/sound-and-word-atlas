@@ -1,6 +1,7 @@
-"""The landing section at the top of the home page: legomorphic marked in full, built up the way the decks build a
-word (sounds first, then letters, then marks), and note to notate to notation, with the e dropping at each seam and
-its job moving on. Made on 6 November 2026.
+"""The landing section at the top of the home page: the name, the subtitle and the three layers, then note to notate to
+notation, with the e dropping at each seam and its job moving on. Made on 6 November 2026; on 12 November 2026
+legomorphic, built up the way the decks build a word (sounds first, then letters, then marks), moved to the *leg-
+page (lego_block).
 
 The words are drawn with legomorphic_words.py, with its layer classes (nz1 to nz9, and the wt band that stands in for
 the letters while only the sounds show), and site.css times the layers. Without script, or with reduced motion, the
@@ -54,23 +55,41 @@ def css():
     return "\n".join(out)
 
 
+def _play_js(after_lego):
+    """Each stage plays once it's in view; the morph waits for legomorphic to finish when both are on the page."""
+    wait = int(1000 * (START + STEP * len(LEGO_STEPS))) if after_lego else 0
+    return f"""<script>(() => {{
+  if (!document.documentElement.classList.contains('js')) return;
+  const t0 = performance.now(), lego = {wait};
+  const io = new IntersectionObserver(es => es.forEach(e => {{ if (!e.isIntersecting) return; io.unobserve(e.target);
+    const wait = e.target.id === 'morph' ? Math.max(0, t0 + lego - performance.now()) : 0;
+    setTimeout(() => e.target.classList.add('play'), wait); }}), {{threshold: 0.35}});
+  document.querySelectorAll('.stage').forEach(s => io.observe(s));
+  document.querySelectorAll('[data-replay]').forEach(b => b.addEventListener('click', () => {{
+    const s = document.getElementById(b.dataset.replay); s.classList.remove('play'); void s.getBoundingClientRect(); s.classList.add('play'); }}));
+}})();</script>"""
+
+
+JS_ON = "<script>if (!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) document.documentElement.classList.add('js');</script>"
+
+
 def html_block(LW):
-    lego, _ = svg(LW, "legomorphic", 80, label="legomorphic, marked in full: leg + o + morph + ic")
+    """The home page's top: the name, the subtitle, the three layers as buttons, then note to notate to notation.
+    Since 12 November 2026; legomorphic, built up, is on the *leg- page (lego_block)."""
     widths = [LW.svg_word(w, 80, 0.0, cls=False)[1] for w, _, _ in MORPH]
     W = max(widths)
     words = "".join(svg(LW, w, 80, width=W, label=f"{w}, marked", klass=f"w{i + 1}")[0] for i, (w, _, _) in enumerate(MORPH))
     sums = "".join(f'<span class="s{i + 1}">{s}</span>' for i, (_, s, _) in enumerate(MORPH))
     caps = "".join(f'<span class="c{i + 1}">{c}</span>' for i, (_, _, c) in enumerate(MORPH))
-    lego_caps = "".join(f"<span>{c}</span>" for _, c in LEGO_STEPS)
     return f"""<style>{css()}</style>
-<script>if (!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) document.documentElement.classList.add('js');</script>
+{JS_ON}
 <section class="landing" aria-labelledby="landing-h"><div class="wrap">
 <p class="eyebrow t-only">Legomorphic Notation</p>
-<div class="stage stage-lego" id="lego">{lego}<p class="cap">{lego_caps}</p></div>
 <h1 id="landing-h">A Legend for English Words</h1>
 <p class="sublead">Orthography, morphology, phonology and etymology, brought to light.</p>
 <p class="lead t-only">Legomorphic Notation is a set of marks and colours drawn on ordinary spelling, so that what a reader usually works out alone is there for everyone to see.</p>
-<p class="cta"><a class="btn t-only" href="progressions.html">Follow the route</a><a class="btn ghost t-only" href="about.html">About the notation</a><button class="replay" type="button" data-replay="lego">Play again</button></p>
+<p class="cta three"><a class="btn" href="progressions.html">Steps</a><a class="btn" href="walk.html">Words</a><a class="btn" href="parts.html">Parts</a></p>
+<p class="ctasub t-only">Learn the notation in order, look up a word, or see what words share. <a href="about.html">About the notation</a>.</p>
 </div></section>
 <section class="morph" aria-labelledby="morph-h"><div class="wrap">
 <h2 id="morph-h">From <i>note</i> to <i>notation</i></h2>
@@ -81,13 +100,15 @@ def html_block(LW):
 </div>
 <p><button class="replay" type="button" data-replay="morph">Play again</button></p>
 </div></section>
-<script>(() => {{
-  if (!document.documentElement.classList.contains('js')) return;
-  const t0 = performance.now(), lego = {int(1000 * (START + STEP * len(LEGO_STEPS)))};   // the morph waits for the name to finish
-  const io = new IntersectionObserver(es => es.forEach(e => {{ if (!e.isIntersecting) return; io.unobserve(e.target);
-    const wait = e.target.id === 'morph' ? Math.max(0, t0 + lego - performance.now()) : 0;
-    setTimeout(() => e.target.classList.add('play'), wait); }}), {{threshold: 0.35}});
-  document.querySelectorAll('.stage').forEach(s => io.observe(s));
-  document.querySelectorAll('[data-replay]').forEach(b => b.addEventListener('click', () => {{
-    const s = document.getElementById(b.dataset.replay); s.classList.remove('play'); void s.getBoundingClientRect(); s.classList.add('play'); }}));
-}})();</script>"""
+{_play_js(False)}"""
+
+
+def lego_block(LW):
+    """Legomorphic built up the way the decks build a word, for the *leg- page (on the home page until 12 November 2026)."""
+    lego, _ = svg(LW, "legomorphic", 80, label="legomorphic, marked in full: leg + o + morph + ic")
+    lego_caps = "".join(f"<span>{c}</span>" for _, c in LEGO_STEPS)
+    return f"""<style>{css()}</style>
+{JS_ON}
+<div class="stage stage-lego" id="lego">{lego}<p class="cap">{lego_caps}</p></div>
+<p><button class="replay" type="button" data-replay="lego">Play again</button></p>
+{_play_js(False)}"""

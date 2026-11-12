@@ -383,6 +383,9 @@ footer.site p + p { margin-top: 6px; }
 .stage .cap > span, .stage-morph .sums > span, .stage-morph .mstack > svg { grid-area: 1 / 1; }
 .stage .cap i { font-style: normal; }
 .cta { display: flex; flex-wrap: wrap; gap: 10px 12px; align-items: center; margin: 4px 0 0; }
+.cta.three .btn { min-width: 6.5em; justify-content: center; text-align: center; font-size: 1.05rem; }
+.ctasub { margin: 0; color: var(--soft); font-size: 0.95rem; }
+.root-page .stage-lego { max-width: 860px; }
 .btn.ghost { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--ink); }
 .replay { display: none; background: none; border: 0; padding: 6px 2px; color: var(--soft); font: inherit; font-size: 0.92rem; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
 .js .replay { display: inline-block; }
