@@ -706,6 +706,8 @@ details.ppart > :not(summary) { margin-inline: 16px; }
 .plessons span { color: var(--soft); font-size: 0.85rem; display: block; }
 /* spelling lists (lists.py): a learner's sheet that prints clean */
 .lprinciple { font-size: 1.15rem; max-width: 62ch; border-left: 3px solid var(--modal); padding-left: 16px; }
+.lhome { margin: 12px 0 0; font-size: 1rem; }
+.lhome a { font-weight: 600; }
 .ltable { border-collapse: collapse; width: 100%; max-width: 860px; }
 .ltable td { padding: 8px 18px 8px 0; border-bottom: 1px solid var(--line); vertical-align: middle; }
 .ltable .lw svg { display: block; height: 62px; width: auto; }

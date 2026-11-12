@@ -197,6 +197,15 @@ PAGES[:] = [(p, d, t_, s + (HAS_CHECK if p[6:-5] in CHECKS else "")) for p, d, t
 PAGES += [(f"lists/{s}-check.html", "teachers", f"Check: {C['title']}", C["desc"]) for s, C in CHECKS.items()]
 
 
+def home_link(L, what="list"):
+    """The list's home, from its first link: the step it belongs to, with the step's title, or its family's page."""
+    t, u, _ = L["links"][0]
+    if u.startswith("steps/"):
+        st = step_lists.STEPS[int(u[6:8])]
+        t = f"Step {st['n']}: " + re.sub(r"\*([^*]+)\*", r"<i>\1</i>", st["title"])
+    return f'This {what} goes with <a href="../{u}">{t}</a>.'
+
+
 def write_check(OUT, page, header, footer, X, slug, C):
     n = len(C["items"])
     blanks = "".join(f'<li><span class="blank long"></span></li>' for _ in C["items"])
@@ -210,6 +219,7 @@ def write_check(OUT, page, header, footer, X, slug, C):
 <main class="list-page check-page">
 <section class="hero noprint"><div class="wrap">
 <p class="eyebrow"><a href="{slug}.html">&larr; The spelling list: {C["title"]}</a></p>
+<p class="lhome">{home_link(next(L for L in LISTS if L["slug"] == slug), "check")}</p>
 <h1>Check: {C["title"]}</h1>
 <p class="lprinciple">{C["feature"]}</p>
 <p class="board"><a href="#" onclick="window.print(); return false;">Print the check</a>: a sheet for the learner, then the words to say and the key.</p>
@@ -264,6 +274,7 @@ def write(OUT, page, header, footer, X):
 <p class="eyebrow t-only"><a href="index.html">Spelling lists</a> &middot; {L["kind"]}</p>
 <h1>{L["title"]}</h1>
 <p class="lprinciple">{L["principle"]}</p>
+<p class="lhome noprint">{home_link(L)}</p>
 <p class="board t-only noprint"><a href="#" onclick="window.print(); return false;">Print this list</a>: the teacher&rsquo;s notes are left off.</p>
 </div></section>
 <section class="about"><div class="wrap">
