@@ -9,6 +9,17 @@ CALLS lists the places where these codes rest on a choice. They are in the manua
 the codes here to match and rebuild."""
 
 SITE_CODES = {
+    # step 10, 12 November 2026: the nudge from an e, i or y right after the c or g, as well as from a final e. Syllables
+    # where the spoken word makes sense (ruled that day): closed for a short vowel (cit | y), open for a long one
+    # (gi | ant, cy | cling); seams carry the parts (cycl + ing, ceil + ing). Centre, ceiling and giant are open calls
+    "cent": "c.c s.e c.nt ; nudge 1>0",
+    "city": "c.c s.i c.t | b.y ; nudge 1>0",
+    "cycling": "c.c l.y | c.c c.l + s.i k.ng ; nudge 1>0",
+    "gentle": "c.g s.e c.n | c.t le ; nudge 1>0",
+    "giant": "c.g l.i | b.a c.nt ; nudge 1>0",
+    "gym": "c.g s.y c.m ; nudge 1>0",
+    "centre": "c.c s.e c.n | c.t r.re ; nudge 1>0",
+    "ceiling": "c.c t.ei | c.l + s.i k.ng ; nudge 1>0",
     # the legend: one word with a red, a green and a black bond bar (as speak for ea, much for ch, seeing for -ing)
     "teaching": "c.t t.ea g.ch + | s.i k.ng",
     # step 2: short vowels closed by one consonant (as am, it, in)
@@ -173,7 +184,9 @@ UNMARKED = {**{w: CONTRACTION for w in ("I'm", "it's", "isn't", "don't", "can't"
 # Words whose marking waits on Dante's ruling (the Marking calls in the manual, 11 November 2026). The word walk's Try it
 # says so under Ours, so a learner's defensible mark isn't shown up by a call that isn't made yet. Take a word off once
 # it's ruled.
-OPEN = {"robin", "robot", "river", "silly", "gone", "produce", "conduct", "over", "pony", "photo", "said", "paid"}
+# robin, robot and river came off on 12 November 2026: their syllables go where the spoken word makes sense, and seams
+# carry the parts. Centre (-tre), ceiling (a nudge from the team ei) and giant (gi | ant) went on.
+OPEN = {"silly", "gone", "produce", "conduct", "over", "pony", "photo", "said", "paid", "centre", "ceiling", "giant"}
 
 # Choices these codes make that the manual and the cards do not settle outright.
 CALLS = [

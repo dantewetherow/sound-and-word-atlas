@@ -298,7 +298,7 @@ INKX = {"a": (.285, .246), "b": (.252, .279), "c": (.236, .248), "d": (.286, .26
 BAR = 0.33          # the bond bar sits this far under the baseline, clear of the tails of g and y
 FILL = {"consonant": INK, "vowel": RED, "team": GREEN}
 
-CONE_FIT = False      # True: a cone stretches to a tall letter or one that hangs down (a trial, 12 November 2026)
+CONE_FIT = True       # a cone stretches up to a tall letter and down to one that hangs (12 November 2026)
 
 def slot(word):
     """Letter spacing as a share of the letter size: wider where the word has an m or a w, which are wide letters."""

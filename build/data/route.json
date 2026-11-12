@@ -311,10 +311,12 @@
    "n": 10,
    "title": "The nice-nudge",
    "band": "Jobs across letters",
-   "words_md": "*nice, face, place, age, page, huge*; contrast *cap/cape/face, rag/rage*",
-   "marks": "nice-nudge",
+   "words_md": "a final *e*: *nice, face, place, age, page, huge*; an *e*, *i* or *y* right after: *cent, city, cycling, gentle, giant, gym, centre, ceiling*; contrast *cap/cape/face, rag/rage, cat/cent, got/gym, get/gentle*",
+   "marks": "nice-nudge, from a final *e* and from an *e*, *i* or *y* right after the *c* or *g*",
    "kernel_md": "none",
    "carney": "*c* spells /s/ before *e* (rule C.8), p. 303; *g* spells /j/ before *e*, *i* and *y* (rules G.9 and G.12), pp. 326–327",
+   "move": "Look at the letter right after the *c* or *g*. An *e*, *i* or *y* nudges it soft: *c* says /s/ and *g* says /j/. Any other letter, or none, and it stays hard. The sentence to remember: *The gentle giant went to the gym by cycling to the city centre.* For *c* it nearly always holds. For *g* it usually does, but some old English words keep a hard *g* before *e* or *i*: *get*, *give*, *girl*, *begin*. Try soft first, then hard.",
+   "research": "Carney’s rules: *c* spells /s/ before *e* (C.8), p. 303, and before *i* (*city* is one of his examples), p. 304; *g* spells /j/ before *e* (G.9), p. 326, and before *i* and *y* (G.12), p. 327, except before a further *r* and a consonant (*girl*), with native words such as *get* and *give* keeping a hard *g*.",
    "parts": [
     "duce",
     "-ance",
@@ -322,14 +324,25 @@
    ],
    "parts_why": "The final e nudges the c soft, as *nice*; in *duce* it sends the vault too.",
    "words": [
+    "e",
     "nice",
     "face",
     "place",
     "age",
     "page",
-    "huge"
+    "huge",
+    "i",
+    "y",
+    "cent",
+    "city",
+    "cycling",
+    "gentle",
+    "giant",
+    "gym",
+    "centre",
+    "ceiling"
    ],
-   "contrast_md": "*cap/cape/face, rag/rage*"
+   "contrast_md": "*cap/cape/face, rag/rage, cat/cent, got/gym, get/gentle*"
   },
   {
    "n": 11,
@@ -825,7 +838,7 @@
    "contrast_md": ""
   }
  ],
- "carney_intro": "Edward Carney's *A Survey of English Spelling* (Routledge, 1994) describes every unit on the route, and the atlas leans on it from the first step to the last. The pages are Carney's printed pages; a sound named on its own is the start of his section on that sound. How a phonics program lines up with the route is in a crosswalk, a separate PDF for each program. The first is for UFLI Foundations.",
+ "carney_intro": "Edward Carney's *A Survey of English Spelling* (Routledge, 1994) describes every unit on the route, and the route leans on it from the first step to the last. The pages are Carney's printed pages; a sound named on its own is the start of his section on that sound. How a phonics program lines up with the route is in a crosswalk, a separate PDF for each program. The first is for UFLI Foundations.",
  "moves_intro": "Some steps teach a move: what a learner tries when the marks alone don't settle a word. Each move is listed with the research behind it. Devin M. Kearns, \"Does English Have Useful Syllable Division Patterns?\" *Reading Research Quarterly* 55, no. S1 (2020): S145–S160, counted how the vowels are said in 14,844 words from texts for grades 1 to 8. His figures describe the words, not learners. Added 10 November 2026.",
  "parts_intro": "The commonest prefixes and suffixes, and the roots the families use, each placed at the step whose pattern it shows, so a part met on the route is met again in its families. Each is marked as it is said on its own. Inside a word many are said weakly, as the *con* of the verb *conduct* is, and there the vowel would be bare. Added 10 November 2026.",
  "open": [

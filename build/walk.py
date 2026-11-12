@@ -440,7 +440,9 @@ WALK_JS = r"""<script>(() => {
     m.macron.forEach(i => { o += line(x[i] - 22.3, B - 72.8, x[i] + 22.3, B - 72.8, 'var(--verb)', 4); });
     m.bond.forEach(([a, b]) => { o += line(x[a] - 20.6, B + 26.4, x[b] + 20.6, B + 26.4, 'var(--ink)', 4); });
     m.circ.forEach(([a, b]) => { o += '<circle cx="' + (x[a] + x[b]) / 2 + '" cy="' + (B + 44.8) + '" r="5.8" fill="var(--ink)"/>'; });
-    m.cone.forEach(i => { o += '<circle cx="' + x[i] + '" cy="' + (B - 20.8) + '" r="29.6" fill="none" stroke="var(--soft)" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 6.2"/>'; });
+    m.cone.forEach(i => {     // the cone fits its letter, as the site draws it: up over a tall one, down over one that hangs
+      const ch = (T && T.L[i]) || '', cy = /[bdfhklt]/.test(ch) ? B - 32 : /[gjpqy]/.test(ch) ? B - 11.2 : B - 20.8, ry = /[bdfhklt]/.test(ch) ? 41.6 : /[gjpqy]/.test(ch) ? 40 : 29.6;
+      o += '<ellipse cx="' + x[i] + '" cy="' + cy + '" rx="29.6" ry="' + ry + '" fill="none" stroke="var(--soft)" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 6.2"/>'; });
     m.box.forEach(([a, b]) => { o += '<rect x="' + (x[a] - 24) + '" y="' + (B - 67.2) + '" width="' + (x[b] - x[a] + 48) + '" height="76.8" rx="8" fill="none" stroke="var(--modal)" stroke-width="2.9"/>'; });
     m.vault.forEach(([s, r]) => {
       const k = s > r ? 1 : -1, ys = m.cone.includes(s) ? B - 50.4 : B - 88, bx = blocker(m, [s, r]), path = d => '<path d="' + d + '" fill="none" stroke="var(--modal)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>';
