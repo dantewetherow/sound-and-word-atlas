@@ -11,10 +11,10 @@ set (this, that, these, those). A list is a view of something the site already h
 family, or a section of the manual. This one follows the manual's "Say, pay, lay", which cites Brooks.
 
 Each page prints as a learner's sheet; the teacher's notes are left off the print."""
-import html
+import html, re
 
 LISTS = [{
-    "slug": "open-or-closed", "title": "open or closed: I, it, in, is, if", "kind": "A step&rsquo;s pattern",
+    "slug": "open-or-closed", "group": "step", "n": 1, "title": "open or closed: I, it, in, is, if", "kind": "A step&rsquo;s pattern",
     "principle": "A vowel at the end of a syllable is <b>open</b>: it says its name, as <b>I</b> does. A consonant after it "
                  "<b>closes</b> it, and it says its short sound: <b>it</b>, <b>in</b>, <b>is</b>, <b>if</b>.",
     "words": [("I", "", "I can run."), ("hi", "", "Say hi to Sam."), ("it", "", "It is red."), ("in", "", "Come in."),
@@ -42,7 +42,7 @@ LISTS = [{
               "vowels can, p. 134; short i, p. 135; long i, p. 151; s for /z/, p. 238; <i>find</i> and <i>kind</i>, pp. 332&ndash;333.",
     "desc": "A spelling list for step 1: I, hi, it, in, is, if, him, his, open against closed, with words to close, sentences and a check.",
 }, {
-    "slug": "say-pay-lay", "title": "say, pay, lay", "kind": "One analog, several words",
+    "slug": "say-pay-lay", "pattern": 1, "title": "say, pay, lay", "kind": "One analog, several words",
     "principle": "At the end of a word this sound is spelled <b>ay</b>. Inside a word it is spelled <b>ai</b>. Three verbs add "
                  "a bare <b>d</b> for the past. The d closes the word, so <b>ay</b> turns to <b>ai</b>.",
     # (word, its sum, a sentence)
@@ -74,7 +74,7 @@ LISTS = [{
               "analysis is from the manual, &ldquo;Say, pay, lay&rdquo;.",
     "desc": "A spelling list of seven words: say, says, said, pay, paid, lay, laid, with the convention that explains them, words to build, sentences, and a check.",
 }, {
-    "slug": "hap", "title": "hap: happy, happen, mishap", "kind": "One base, many joins",
+    "slug": "hap", "group": "family", "root": "hap", "pattern": 2, "title": "hap: happy, happen, mishap", "kind": "One base, many joins",
     "principle": "<b>Hap</b> is an old word for luck. Before a vowel it is written <b>happ</b>, so the a stays short. Before a "
                  "consonant, or at the end of a word, it is <b>hap</b>.",
     "words": [("happy", "hap + p + y", "I am happy."), ("happier", "hap + p + (y&rarr;i) + er", "She is happier now."),
@@ -97,7 +97,7 @@ LISTS = [{
     "source": "Etymonline, <i>hap</i> and <i>happy</i>; Edward Carney, <i>A Survey of English Spelling</i> (1994), pp. 1&ndash;3, on <i>happy</i> among the doubles.",
     "desc": "A spelling list on one base: happy, happier, happily, unhappy, happen, mishap, hapless, with why the p doubles in some and not in others.",
 }, {
-    "slug": "the-e-drops", "title": "the e drops: making, hoping, icy", "kind": "One join, many bases",
+    "slug": "the-e-drops", "group": "step", "n": 15, "pattern": 3, "title": "the e drops: making, hoping, icy", "kind": "One join, many bases",
     "principle": "A suffix that starts with a vowel takes the place of a silent <b>e</b>. Out with the old, in with the new: "
                  "the new vowel does the e&rsquo;s job.",
     "words": [("making", "mak(e) + ing", "I am making lunch."), ("taking", "tak(e) + ing", "She is taking a turn."),
@@ -121,7 +121,7 @@ LISTS = [{
     "source": "Edward Carney, <i>A Survey of English Spelling</i> (1994): the e drops before an ending that begins with a vowel, p. 130.",
     "desc": "A spelling list on one join: making, taking, giving, having, racing, hoping, icy, with hoping beside hopping.",
 }, {
-    "slug": "this-that-then", "title": "this, that, these, those, then, there", "kind": "A closed set",
+    "slug": "this-that-then", "group": "step", "n": 28, "pattern": 4, "title": "this, that, these, those, then, there", "kind": "A closed set",
     "principle": "These are the pointing words. Each starts with <b>th</b>, said with a buzz, and each has a partner: one or "
                  "many, near or far, a time or a place.",
     "words": [("this", "", "This one is mine."), ("these", "", "These are mine."), ("that", "", "That one is yours."),
@@ -143,7 +143,16 @@ LISTS = [{
     "source": "Edward Carney, <i>A Survey of English Spelling</i> (1994): the voiced th of <i>the</i>, <i>this</i>, <i>these</i>, <i>that</i>, <i>those</i>, <i>then</i> and <i>there</i>, p. 232.",
     "desc": "A spelling list on a closed set: this, these, that, those, then, there, with their partners in wh.",
 }]
-PAGES = [(f"lists/{L['slug']}.html", "teachers", f"Spelling list: {L['title']}", L["desc"]) for L in LISTS]
+import step_lists                 # a list for every other step and family (12 November 2026)
+LISTS += step_lists.STEP_LISTS
+# The kinds of list, four of them; each model list stands for one.
+KINDS = [(1, "One analog, several words", "One word&rsquo;s spelling carries to others that rhyme with it, letter for letter."),
+         (2, "One base, many joins", "One base and the prefixes and suffixes that join it."),
+         (3, "One join, many bases", "One way that a suffix joins, tried on many bases."),
+         (4, "A closed set", "A small set of words that work together and change together.")]
+INDEX_DESC = "Every spelling list: one for each step, one for each word family, and the four kinds of list they are made from."
+PAGES = [("lists/index.html", "teachers", "Spelling lists", INDEX_DESC)]
+PAGES += [(f"lists/{L['slug']}.html", "teachers", f"Spelling list: {L['title']}", L["desc"]) for L in LISTS]
 HAS_CHECK = " It comes with a check to give before and after the lesson."
 
 
@@ -239,19 +248,20 @@ def write(OUT, page, header, footer, X):
     LW, SC = X["LW"], X["SC"]
     def drawn(w, F=40):
         if w in LW.W and w not in SC.UNMARKED: return X["svg_of"](w, F, label=f"{w}, marked")
-        return f'<span class="plain" style="font-size:{F}px">{html.escape(w)}</span>'
+        return f'<span class="plain" style="font-size:{F}px">{w if "&" in w else html.escape(w)}</span>'
     for L in LISTS:
-        rows = "".join(f'<tr><td class="lw">{drawn(w)}</td>' + (f'<td class="ls">{s} &rarr; <i>{w}</i></td>' if s else "") + f'<td class="lsent">{sent}</td></tr>' for w, s, sent in L["words"])
+        sums = any(s and s != w for w, s, _ in L["words"])
+        rows = "".join(f'<tr><td class="lw">{drawn(w)}</td>' + ((f'<td class="ls">{s} &rarr; <i>{w}</i></td>' if s and s != w else '<td class="ls"></td>') if sums else "") + f'<td class="lsent">{sent}</td></tr>' for w, s, sent in L["words"])
         ctext, cwords = L["contrast"]
-        crow = "".join(f'<figure class="word">{drawn(w, 36)}<figcaption>{s}</figcaption></figure>' for w, s, _ in cwords)
+        crow = "".join(f'<figure class="word">{drawn(w, 36)}<figcaption>{s if s != w else ""}</figcaption></figure>' for w, s, _ in cwords)
         build = "".join(f'<li><span>{b} &rarr;</span><span class="blank"></span></li>' for b in L["build"])
         use = "".join(f'<li>{a} <span class="blank short"></span> <span class="hint">({v})</span> {z}</li>' for a, v, z in L["use"])
-        check = "".join(f'<li><span>{b} &rarr;</span><span class="blank"></span><span class="ans t-only">{html.escape(a)}</span></li>' for b, a in L["check"])
+        check = "".join(f'<li><span>{b} &rarr;</span><span class="blank"></span><span class="ans t-only">{a}</span></li>' for b, a in L["check"])
         links = "".join(f'<li><a href="../{u}">{t}</a>: {what}</li>' for t, u, what in L["links"])
         body = f"""{header(1)}
 <main class="list-page">
 <section class="hero"><div class="wrap">
-<p class="eyebrow t-only">Spelling list &middot; {L["kind"]}</p>
+<p class="eyebrow t-only"><a href="index.html">Spelling lists</a> &middot; {L["kind"]}</p>
 <h1>{L["title"]}</h1>
 <p class="lprinciple">{L["principle"]}</p>
 <p class="board t-only noprint"><a href="#" onclick="window.print(); return false;">Print this list</a>: the teacher&rsquo;s notes are left off.</p>
@@ -277,14 +287,54 @@ def write(OUT, page, header, footer, X):
 <section class="about t-only noprint"><div class="wrap prose">
 <h2>For the teacher</h2>
 {"".join(f"<p>{n}</p>" for n in L["notes"])}
-<p>{"Have the learner build each word from its sum, not copy it, and say" if any(s for _, s, _ in L["words"]) else "Have the learner say"} each sentence before writing it. Six to eight words is the whole list: the convention is what&rsquo;s being learned.</p>
+<p>{"Have the learner build each word from its sum, not copy it, and say" if sums else "Have the learner say"} each sentence before writing it. Six to eight words is the whole list: the convention is what&rsquo;s being learned.</p>
 <ul>{links}</ul>
 <p class="sub">Source: {L["source"]}</p>
-{X["uc"]("the first four spelling lists are models, one of each kind, and since 12 November 2026 step 1 has its own. Next: a list for each step and each family, made from what the site already holds.")}
+{X["uc"]("since 12 November 2026 every step and every family has a list. The four model lists were made first, one of each kind; the rest follow them and haven&rsquo;t been tried in a class yet. Only one list has a check so far.")}
 </div></section>
 </main>
 {footer(1)}"""
         (OUT / "lists" / f"{L['slug']}.html").write_text(page(f"Spelling list: {L['title']} · A Legend for English Words", body, 1, L["desc"]), encoding="utf-8")
     for slug, C in CHECKS.items(): write_check(OUT, page, header, footer, X, slug, C)
+    write_index(OUT, page, header, footer, X)
     print(f"wrote {len(LISTS)} spelling list(s), {len(CHECKS)} check(s)")
     return [(p, t) for p, _, t, _ in PAGES]
+
+
+def write_index(OUT, page, header, footer, X):
+    """lists/index.html: the one door to the lists. Steps by number, families by root, and the four kinds of list."""
+    md = lambda t: re.sub(r"\*([^*]+)\*", r"<i>\1</i>", t)
+    by_n = {L["n"]: L for L in LISTS if L.get("group") == "step"}
+    steps = "".join(f'<a class="sbtn" href="{by_n[st["n"]]["slug"]}.html"><b>Step {st["n"]}</b><span>{md(st["title"])}</span></a>'
+                    for st in step_lists.ROUTE["steps"] if st["n"] in by_n)
+    fams = "".join(f'<a class="dtile" href="{L["slug"]}.html"><b>{L["root"]}</b><span>{", ".join(w for w, _, _ in L["words"][:5])}</span></a>'
+                   for L in LISTS if L.get("group") == "family")
+    model = {L["pattern"]: L for L in LISTS if L.get("pattern")}
+    kinds = "".join(f'<a class="dtile" href="{model[k]["slug"]}.html"><b>{name}</b><span>{why} The model: <i>{model[k]["title"]}</i>.</span></a>'
+                    for k, name, why in KINDS)
+    body = f"""{header(1)}
+<main class="lists-index">
+<section class="hero"><div class="wrap">
+<h1>Spelling lists</h1>
+<p class="lead">A list for every step on the route and every word family. Each has six to eight words with sentences, a contrast, words to build, sentences to finish, and a check of words that aren&rsquo;t on the list. Print one and the teacher&rsquo;s notes are left off.</p>
+</div></section>
+<section class="about"><div class="wrap">
+<h2>Steps</h2>
+<p class="sub">The list for each step on the route, in order.</p>
+<div class="step-btns">{steps}</div>
+</div></section>
+<section class="about"><div class="wrap">
+<h2>Families</h2>
+<p class="sub">One root, many words: each list takes its word sums from the family&rsquo;s page.</p>
+<div class="door-tiles">{fams}</div>
+</div></section>
+<section class="about"><div class="wrap">
+<h2>Patterns</h2>
+<p class="sub">Every list is one of four kinds. The first lists were made as models, one of each.</p>
+<div class="door-tiles">{kinds}</div>
+<p class="sub">The steps and families mix the kinds: a step about a suffix is one join, many bases; a family is one base, many joins.</p>
+<p class="sub">Keep learners&rsquo; results in the school&rsquo;s own records. Nothing here collects them.</p>
+</div></section>
+</main>
+{footer(1)}"""
+    (OUT / "lists" / "index.html").write_text(page("Spelling lists · A Legend for English Words", body, 1, INDEX_DESC), encoding="utf-8")

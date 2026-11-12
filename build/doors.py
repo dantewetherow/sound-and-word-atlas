@@ -337,7 +337,7 @@ def write(OUT, page, header, footer, X):
     # The teachers' shelf: everything a teacher prints, presents or checks, on one page.
     import lists
     lists.write(OUT, page, header, footer, X)
-    shelf = [("To print and present", ("presentations.html", "cards.html")), ("Spelling lists", tuple(p for p, *_ in lists.PAGES if not p.endswith('-check.html'))), ("Sentences", ("constructions.html",)),
+    shelf = [("To print and present", ("presentations.html", "cards.html")), ("Spelling lists", ("lists/index.html",)), ("Sentences", ("constructions.html",)),
              ("Connections", ("word-lists.html", "ufli.html")), ("Reasons and sources", ("definitions.html", "about.html", "credits.html"))]
     by_path = {p: (p, t_, s) for p, d, t_, s in PAGES}
     door_page("teachers", "For teachers · A Legend for English Words", DOOR["teachers"][3], f"""{door_head("teachers")}
@@ -356,7 +356,7 @@ def write(OUT, page, header, footer, X):
     # The site map: the tree, written out.
     items = []
     for slug, name, _, plain_words, sw in DOORS:
-        sub = [(p, t_, s) for p, d, t_, s in X["pages"] if d == slug and p != f"{slug}.html" and not p.startswith("steps/")]
+        sub = [(p, t_, s) for p, d, t_, s in X["pages"] if d == slug and p != f"{slug}.html" and not p.startswith("steps/") and (not p.startswith("lists/") or p == "lists/index.html")]
         kids = "".join(f'<li><a href="{p}">{t_}</a> <span>{html.escape(s)}</span></li>' for p, t_, s in sub)
         steps = "".join(f'<li><a href="steps/{s["n"]:02d}.html">Step {s["n"]}: {md(s["title"])}</a></li>' for s in X["STEPS"]) if slug == "progressions" else ""
         items.append(f'<li{" class=t-only" if sw is None else ""}><a href="{slug}.html"><b>{name}</b></a> <span>{plain_words}</span>'
@@ -475,7 +475,11 @@ def finish(OUT, pages):
             trail.append(f'<li><a href="{up}index.html">Home</a></li>')
             if d and p != f"{d}.html":
                 trail.append(f'<li><a href="{up}{d}.html">{door_label(d)}</a></li>')
+            if p.startswith("lists/") and p != "lists/index.html":
+                trail.append(f'<li><a href="{up}lists/index.html">Spelling lists</a></li>')
             here = door_label(d) if d and p == f"{d}.html" else html.escape(t.split(":")[0] if p.startswith("steps/") else t)
+            if p.startswith("lists/") and t.startswith("Spelling list: "):
+                here = t[len("Spelling list: "):].split(":")[0]
             trail.append(f'<li aria-current="page">{here}</li>')
         crumbs = f'<nav class="crumbs" aria-label="Breadcrumb"><ol>{"".join(trail)}</ol></nav>' if trail else ""
         notice = ""
