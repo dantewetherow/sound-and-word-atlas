@@ -118,6 +118,14 @@ SITE_CODES = {
 # 10 November 2026, step 16: a long first vowel in a one-part word has its long mark and no vault, since no letter
 # causes it (open, even, as tiger and paper above); today and around take the seam their word sum cards give them.
 SITE_RULED = {
+    # ruled 12 November 2026, following Carney and Venezky: the g of sign is an inert letter (Carney 1994: 41, 47, 247),
+    # standing alone in a cone, joined to neither the i nor the n, so it keeps its place across the family and sounds in
+    # signal; the i is long with no vault, as in find and child (Carney's rules I.11, I.12), its length going with the
+    # g's silence (Venezky's compensatory alternation, quoted by Carney 1994: 22). In signal the g is said and closes
+    # the syllable, and the i is short. Signature and designate wait on -ture and on des | ig | nate
+    "sign": "c.s l.i z.g c.n",
+    "signal": "c.s s.i c.g | c.n + b.a c.l",
+    "design": "c.d b.e + | c.s l.i z.g c.n",
     # ruled 12 November 2026: seams at the joins of the parts (il + lustr + ate), syllables crossing them (il | lus | trate);
     # the u is weak, the stress being on il
     "illustrate": "s.i c.l + | c.l b.u c.s | c.tr + l.a c.t e>",

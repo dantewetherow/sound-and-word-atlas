@@ -97,6 +97,7 @@ def write(OUT, door_page, X):
         fam.setdefault(w, []).append({"t": label, "u": u})
     P = X.get("parts") or {"sums": {}}
     words = set(where) | set(X["list_words"]) | {w for w, *_ in X["morph"]} | {"legomorphic"} | {w for w in fam if w in LW.W} | set(P["sums"])
+    words |= {"sign"}        # sign, before its walkthrough is built: in the walk now so sign and signal can be set side by side
     elp = {w for L in X["elp"]["lists"].values() for w in L["words"]}
     d220 = {w for l in X["dolch"]["levels"] for w in l["words"]}
     nouns = X["dolch"]["nouns"]

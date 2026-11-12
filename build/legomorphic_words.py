@@ -37,6 +37,10 @@ THE CODE, unit by unit, left to right
     r.ar    an r-controlled unit (vowel red, r black, red bond bar, one red circle)
     le      the final -le unit (both letters red, red bond bar, one red circle)
     e0      a silent e in a cone of silence, with no vault
+    z.g     a silent consonant letter standing alone in a cone of silence: black, no circle. For an inert letter
+            (Carney 1994: 41), one that sounds in other forms of its morpheme, as the g of sign does in signal: rather
+            than join it to either neighbour, it gets no sound of its own, so it keeps the same place in every form
+            (ruled 12 November 2026, following Carney and Venezky)
     e>      a silent e in a cone, with a vault back to the long vowel before it
     ap      the red apostrophe of a contraction, standing in for the vowel it drops, with no circle (don’t, as the
             marking card draws I’m)
@@ -178,7 +182,7 @@ def parse(word):
         elif tok == "ap": kind, s = "ap", "’"
         else:
             kind, _, s = tok.partition(".")
-            assert kind in ("c", "k", "q", "g", "x", "s", "l", "b", "w", "t", "r") and s, (word, tok)
+            assert kind in ("c", "k", "q", "g", "x", "s", "l", "b", "w", "t", "r", "z") and s, (word, tok)
         cols = list(range(col, col + len(s)))
         own = lambda ch: "vowel" if ch.lower() in "aeiou" else "consonant"   # a letter's own colour: vowel letters are red
         if kind == "c":
@@ -219,6 +223,9 @@ def parse(word):
             assert "r" in s and len(s) >= 2, (word, tok)
             for ch in s: letters.append({"ch": ch, "type": "consonant" if ch == "r" else "vowel"})
             marks += [{"type": "blendbar", "from": cols[0], "to": cols[-1], "color": "vowel"}, {"type": "dot", "cols": cols, "color": "vowel"}]
+        elif kind == "z":                                    # silent consonant, alone in a cone: no circle, as e0 has none
+            assert len(s) == 1 and s.lower() not in "aeiou", (word, tok)
+            letters.append({"ch": s, "type": "consonant"}); marks.append({"type": "cone", "col": col})
         elif kind == "ap":                                   # red, like the vowel it stands in for; it has no sound, so no circle
             letters.append({"ch": "’", "type": "vowel"})
         elif kind == "e0":
@@ -467,7 +474,7 @@ def svg_one_mark(word, mark, F=58.0, label=None, css_height=None):
 def describe(word):
     """A plain-words account of a word's marks, for checking and for the manual."""
     p = parse(word); bits = []
-    names = {"c": "", "k": "unit", "q": "qu, two sounds", "g": "green unit", "x": "boxed", "s": "short", "l": "long", "b": "bare", "w": "two sounds, two circles", "t": "vowel unit", "r": "r-unit", "le": "le unit", "e0": "cone", "e>": "cone and vault", "ap": "red apostrophe"}
+    names = {"c": "", "k": "unit", "q": "qu, two sounds", "g": "green unit", "x": "boxed", "s": "short", "l": "long", "b": "bare", "w": "two sounds, two circles", "t": "vowel unit", "r": "r-unit", "le": "le unit", "e0": "cone", "z": "silent consonant, cone", "e>": "cone and vault", "ap": "red apostrophe"}
     for u in p["units"]:
         bits.append(u["text"] + (f" ({names[u['kind']]})" if names[u["kind"]] else ""))
     extra = [m["type"] for m in p["marks"] if m["type"] in ("blockedvault", "nudge", "seam")] + ["vault (no cone)" for m in p["marks"] if m["type"] == "vault" and m.get("cone") is False] \
