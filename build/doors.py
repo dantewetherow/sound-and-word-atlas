@@ -59,9 +59,10 @@ PAGES = [
     ("constructions.html", "teachers", "Sentences", "How sentences are built, and the flip from claim to question."),
     ("instructions.html", "teachers", "To print and present", "Presentations and word cards."),
     ("presentations.html", "teachers", "Presentations", "The staff series and decks on single concepts, with their handouts."),
-    ("cards.html", "teachers", "Word cards", "Printable cards: the ELP and Dolch words, and grade 3 word sums."),
+    ("tents.html", "teachers", "Affix tent cards", "Prefixes, roots and suffixes on cards that stand up: swap the root, keep the affixes. Extension work with the families."),
+    ("cards.html", "teachers", "Word cards", "Printable cards: the Early Literacy Profile (Central Okanagan) and Dolch words, and grade 3 word sums."),
     ("connections.html", "teachers", "Connections", "How the route lines up with the word lists and programs schools already use."),
-    ("word-lists.html", "teachers", "ELP and Dolch", "Where the ELP words come from in Dolch's lists."),
+    ("word-lists.html", "teachers", "Early Literacy Profile and Dolch", "Where the Early Literacy Profile (Central Okanagan) words come from in Dolch's lists."),
     ("ufli.html", "teachers", "UFLI Foundations", "Where each step of the route meets UFLI's lessons, by lesson number."),
     ("explanations.html", "teachers", "Reasons and sources", "Definitions, the notation and its name, and credits."),
     ("definitions.html", "teachers", "Definitions", "What the notation's words mean, and where they come from."),
@@ -337,7 +338,9 @@ def write(OUT, page, header, footer, X):
     # The teachers' shelf: everything a teacher prints, presents or checks, on one page.
     import lists
     lists.write(OUT, page, header, footer, X)
-    shelf = [("To print and present", ("presentations.html", "cards.html")), ("Spelling lists", ("lists/index.html",)), ("Sentences", ("constructions.html",)),
+    import tents
+    tents.write(OUT, page, header, footer, X)
+    shelf = [("To print and present", ("presentations.html", "cards.html", "tents.html")), ("Spelling lists", ("lists/index.html",)), ("Sentences", ("constructions.html",)),
              ("Connections", ("word-lists.html", "ufli.html")), ("Reasons and sources", ("definitions.html", "about.html", "credits.html"))]
     by_path = {p: (p, t_, s) for p, d, t_, s in PAGES}
     door_page("teachers", "For teachers · A Legend for English Words", DOOR["teachers"][3], f"""{door_head("teachers")}

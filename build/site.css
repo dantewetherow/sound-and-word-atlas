@@ -803,3 +803,41 @@ header.site.pinned.open nav.doors { display: flex; padding-block: 6px 4px; }
   header.site.pinned .crumbs ol { font-size: 0.8rem; }
   header.site.pinned.open nav.doors { display: grid; }
 }
+
+/* the UFLI crosswalk chart: lessons across, steps down */
+.ch-wrap { overflow-x: auto; }
+.ufli-chart { display: block; width: 100%; min-width: 680px; height: auto; }
+.ufli-chart .ch-grid { stroke: var(--line); stroke-width: 1; }
+.ufli-chart .ch-diag { stroke: var(--soft); stroke-width: 1.5; stroke-dasharray: 5 5; opacity: 0.6; }
+.ufli-chart .ch-tx { fill: var(--soft); font-size: 12px; }
+.ufli-chart .ch-ax { fill: var(--ink); font-size: 13px; font-weight: 600; }
+.ufli-chart .ch-dot { fill: var(--paper); stroke: var(--modal); stroke-width: 1.6; }
+.ufli-chart .ch-dot.on { fill: var(--modal); }
+.ufli-chart a:hover .ch-dot, .ufli-chart a:focus .ch-dot { stroke: var(--ink); stroke-width: 2.5; }
+.ulnav a { font-weight: 600; }
+
+/* affix tent cards: on screen, the teacher's side as a tile; in print, the whole tent, two to a page */
+.tents { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 12px; margin-top: 8px; }
+.tent { background: var(--card); border: 1px solid var(--line); border-top: 5px solid var(--tc, var(--soft)); border-radius: 12px; }
+.tent.t-pre { --tc: var(--modal); } .tent.t-suf { --tc: var(--verb); } .tent.t-root { --tc: var(--ink); } .tent.t-proc { --tc: var(--soft); }
+.tpanel { display: grid; gap: 6px; padding: 14px 16px; }
+.tpanel.flip { display: none; }
+.tpart { font-family: var(--display); font-size: 2rem; line-height: 1.1; }
+.tmean { font-weight: 600; }
+.trule, .tex, .tlink { font-size: 0.9rem; color: var(--soft); line-height: 1.4; }
+.tex { font-style: italic; }
+@media print {
+  .tents-page .tset .wrap > h2 { display: none; }
+  .tents { display: block; }
+  .tent { width: 7.5in; height: 4.9in; margin: 0 auto 0.3in; padding: 0; display: grid; grid-template-rows: 1fr 1fr; break-inside: avoid; page-break-inside: avoid;
+          border: 1px solid #999; border-top: 1px solid #999; border-radius: 0; background: #fff; }
+  .tent:nth-child(2n) { page-break-after: always; }
+  .tpanel { place-content: center; text-align: center; padding: 0.2in 0.4in; }
+  .tpanel.flip { display: grid; transform: rotate(180deg); border-bottom: 1px dashed #999; }
+  .tent .tpart { font-size: 72pt; color: #000; }
+  .tent .tpanel:not(.flip) .tpart { font-size: 54pt; }
+  .tmean { font-size: 14pt; } .trule, .tex { font-size: 11pt; color: #333; } .tlink { display: none; }
+  .tset { page-break-before: always; }
+  .tents-page .hero + .tset { page-break-before: auto; }
+  .tents-page .hero { display: none; }
+}

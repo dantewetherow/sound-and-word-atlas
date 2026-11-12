@@ -284,7 +284,7 @@ WALK_JS = r"""<script>(() => {
   function show(w) {
     const n = norm(w), hit = index.find(([x]) => norm(x) === n);
     msg.textContent = '';
-    if (!hit) { msg.innerHTML = it(w.trim()) + ' isn’t marked on this site yet.<span class="t-only"> The walk takes words from the route, the ELP and Dolch lists and the word families.</span>'; return; }
+    if (!hit) { msg.innerHTML = it(w.trim()) + ' isn’t marked on this site yet.<span class="t-only"> The walk takes words from the route, the Early Literacy Profile (Central Okanagan) and Dolch lists and the word families.</span>'; return; }
     fetch('walk/' + hit[1] + '.json').then(r => r.json()).then(j => {
       word = j; form_ = 0; input.value = j.w;
       formsBox.hidden = j.forms.length < 2;

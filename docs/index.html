@@ -189,7 +189,7 @@
   function show(w) {
     const n = norm(w), hit = index.find(([x]) => norm(x) === n);
     msg.textContent = '';
-    if (!hit) { msg.innerHTML = it(w.trim()) + ' isn’t marked on this site yet.<span class="t-only"> The walk takes words from the route, the ELP and Dolch lists and the word families.</span>'; return; }
+    if (!hit) { msg.innerHTML = it(w.trim()) + ' isn’t marked on this site yet.<span class="t-only"> The walk takes words from the route, the Early Literacy Profile (Central Okanagan) and Dolch lists and the word families.</span>'; return; }
     fetch('walk/' + hit[1] + '.json').then(r => r.json()).then(j => {
       word = j; form_ = 0; input.value = j.w;
       formsBox.hidden = j.forms.length < 2;
@@ -470,7 +470,7 @@
 <h2 id="about-h">What&rsquo;s here</h2>
 <div class="cols">
 <div><h3>The route</h3><p>32 steps in 8 bands, with 250 different words, 233 of them marked, in <a href="progressions.html">Steps</a>. Each step page has its words, the marks it brings in, and the pages in Carney&rsquo;s survey that back it.</p></div>
-<div><h3>To print and present</h3><p><a href="teachers.html">For teachers</a> has printable cards for the ELP high-frequency words and all of Dolch&rsquo;s sight words, and the first session of the staff series with its handouts. <a href="connections.html">Connections</a>, there too, lines the route up with the ELP and Dolch lists and with UFLI Foundations.</p></div>
+<div><h3>To print and present</h3><p><a href="teachers.html">For teachers</a> has printable cards for the Early Literacy Profile (Central Okanagan) high-frequency words and all of Dolch&rsquo;s sight words, and the first session of the staff series with its handouts. <a href="connections.html">Connections</a>, there too, lines the route up with the ELP and Dolch lists and with UFLI Foundations.</p></div>
 <div><h3>The notation</h3><p><a href="notations.html">The marks</a> are with the steps. On the teachers&rsquo; shelf, About explains the notation and its name, Definitions has its words, and Credits names the writers it draws on.</p></div>
 </div>
 <p class="uc">(Under construction: steps 16 to 32 are a first draft, and a few words show in plain letters until their marking is settled. Next: more families in Parts, starting with <i>accommodate</i>, and a word built from left to right in Words.)</p>

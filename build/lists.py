@@ -198,6 +198,8 @@ CHECKS.update(checks.build(LISTS))
 # A check belongs to its list: the list's page leads to it, and the shelf shows only the lists.
 PAGES[:] = [(p, d, t_, s + (HAS_CHECK if p[6:-5] in CHECKS else "")) for p, d, t_, s in PAGES]
 PAGES += [(f"lists/{s}-check.html", "teachers", f"Check: {C['title']}", C["desc"]) for s, C in CHECKS.items()]
+import ufli_lists                 # lined up with UFLI Foundations by lesson number (12 November 2026)
+PAGES += ufli_lists.PAGES
 
 
 def home_link(L, what="list"):
@@ -311,6 +313,7 @@ def write(OUT, page, header, footer, X):
 {footer(1)}"""
         (OUT / "lists" / f"{L['slug']}.html").write_text(page(f"Spelling list: {L['title']} · A Legend for English Words", body, 1, L["desc"]), encoding="utf-8")
     for slug, C in CHECKS.items(): write_check(OUT, page, header, footer, X, slug, C)
+    X["ufli_lists"] = ufli_lists.write(OUT, page, header, footer, X)
     write_index(OUT, page, header, footer, X)
     print(f"wrote {len(LISTS)} spelling list(s), {len(CHECKS)} check(s)")
     return [(p, t) for p, _, t, _ in PAGES]
@@ -325,6 +328,7 @@ def write_index(OUT, page, header, footer, X):
     fams = "".join(f'<a class="dtile" href="{L["slug"]}.html"><b>{L["root"]}</b><span>{", ".join(w for w, _, _ in L["words"][:5])}</span></a>'
                    for L in LISTS if L.get("group") == "family")
     model = {L["pattern"]: L for L in LISTS if L.get("pattern")}
+    uf = "".join(f'<a class="sbtn" href="{e["slug"]}.html"><b>Lesson {e["n"]}</b><span>{re.sub(r"<[^>]+>", "", e["what"])}</span></a>' for e in X["ufli_lists"])
     kinds = "".join(f'<a class="dtile" href="{model[k]["slug"]}.html"><b>{name}</b><span>{why} The model: <i>{model[k]["title"]}</i>.</span></a>'
                     for k, name, why in KINDS)
     body = f"""{header(1)}
@@ -338,9 +342,14 @@ def write_index(OUT, page, header, footer, X):
 <p class="sub">The list for each step on the route, in order.</p>
 <div class="step-btns">{steps}</div>
 </div></section>
-<section class="about"><div class="wrap">
+<section class="about" id="ufli"><div class="wrap">
+<h2>By UFLI lesson</h2>
+<p class="sub">For schools that run UFLI Foundations: a list for each lesson that adds a new spelling, by UFLI&rsquo;s lesson number. The words are ours, and use only what UFLI has taught by that lesson. So far the kindergarten lessons, 4 to 68. <a href="../ufli.html#chart">Where each lesson meets the route</a>.</p>
+<div class="step-btns">{uf}</div>
+</div></section>
+<section class="about" id="families"><div class="wrap">
 <h2>Families</h2>
-<p class="sub">One root, many words: each list takes its word sums from the family&rsquo;s page.</p>
+<p class="sub">Extension work, for intermediate and middle school: one root, many words. Each list takes its word sums from the family&rsquo;s page. The <a href="../tents.html">affix tent cards</a> go with them.</p>
 <div class="door-tiles">{fams}</div>
 </div></section>
 <section class="about"><div class="wrap">

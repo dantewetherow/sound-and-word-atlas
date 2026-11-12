@@ -380,7 +380,7 @@ home_body = f"""{header(0)}
 <h2 id="about-h">What&rsquo;s here</h2>
 <div class="cols">
 <div><h3>The route</h3><p>{N} steps in {len(route["bands"])} bands, with {n_words} different words, {n_marked} of them marked, in <a href="progressions.html">Steps</a>. Each step page has its words, the marks it brings in, and the pages in Carney&rsquo;s survey that back it.</p></div>
-<div><h3>To print and present</h3><p><a href="teachers.html">For teachers</a> has printable cards for the ELP high-frequency words and all of Dolch&rsquo;s sight words, and the first session of the staff series with its handouts. <a href="connections.html">Connections</a>, there too, lines the route up with the ELP and Dolch lists and with UFLI Foundations.</p></div>
+<div><h3>To print and present</h3><p><a href="teachers.html">For teachers</a> has printable cards for the Early Literacy Profile (Central Okanagan) high-frequency words and all of Dolch&rsquo;s sight words, and the first session of the staff series with its handouts. <a href="connections.html">Connections</a>, there too, lines the route up with the ELP and Dolch lists and with UFLI Foundations.</p></div>
 <div><h3>The notation</h3><p><a href="notations.html">The marks</a> are with the steps. On the teachers&rsquo; shelf, About explains the notation and its name, Definitions has its words, and Credits names the writers it draws on.</p></div>
 </div>
 {uc(f"steps {DRAFT_FROM} to {N} are a first draft, and a few words show in plain letters until their marking is settled. Next: more families in Parts, starting with <i>accommodate</i>, and a word built from left to right in Words.")}
@@ -461,10 +461,10 @@ if ELP_FILE.exists() and all((OUT / "cards" / f).exists() for f, *_ in CARD_SETS
 <section class="hero"><div class="wrap">
 <p class="eyebrow">Downloads</p>
 <h1>Word cards</h1>
-<p class="lead">Printable cards with the plain word on the front and the coded word on the back: high-frequency words from the SD23 Early Literacy Profile lists, all of Dolch&rsquo;s sight words, and word sums for students who have finished the ELP lists.</p>
+<p class="lead">Printable cards with the plain word on the front and the coded word on the back: high-frequency words from the Early Literacy Profile (Central Okanagan) lists, all of Dolch&rsquo;s sight words, and word sums for students who have finished the ELP lists.</p>
 </div></section>
 <section class="about" id="elp" aria-labelledby="elp-h"><div class="wrap">
-<h2 id="elp-h">ELP high-frequency words</h2>
+<h2 id="elp-h">Early Literacy Profile (Central Okanagan) high-frequency words</h2>
 <div class="cols">{''.join(tiles)}</div>
 {sample}
 </div></section>{dolch_html}{ws_html}
@@ -477,7 +477,7 @@ if ELP_FILE.exists() and all((OUT / "cards" / f).exists() for f, *_ in CARD_SETS
 </main>
 {footer(0)}"""
     (OUT / "cards.html").write_text(page("Word cards · A Legend for English Words", cards_body, 0,
-                                         "Printable high-frequency word cards from the SD23 ELP lists, plain on the front and coded on the back."), encoding="utf-8")
+                                         "Printable high-frequency word cards from the Early Literacy Profile (Central Okanagan) lists, plain on the front and coded on the back."), encoding="utf-8")
     print("wrote cards.html |", ", ".join(t for _, t, *_ in CARD_SETS))
 
 from dolch_codes import DOLCH_CODES

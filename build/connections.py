@@ -5,7 +5,8 @@ already use. doors.py writes the door page through write(); the pages behind it 
 - ufli.html: where each route step meets UFLI Foundations, by lesson number. UFLI's copyright statement allows original
   work made to line up with its scope and sequence, and asks for links rather than copies, so the page gives lesson numbers
   and our own descriptions, never UFLI's lesson names, and links to UFLI's own scope and sequence. The numbers and notes are
-  in data/ufli_crosswalk.json.
+  in data/ufli_crosswalk.json. Since 12 November 2026 it also draws a lesson-by-step chart whose dots link to the
+  spelling lists by UFLI lesson (ufli_lists.py).
 
 Fry's Instant Words are still under copyright (Edward Fry died in 2010; Teacher Created Resources publishes them), so the
 door page compares them in counts and a few words and links to the publisher, and the site makes no Fry cards. The counts
@@ -37,13 +38,38 @@ def italics(s):
     return re.sub(r"\b(would|could|should|will|spell|my|it|I|oul|ay|ee|igh|ll|ss|ck|tch|th|wh|y)\b(?![^<]*>)", r"<i>\1</i>", html.escape(s))
 
 
+def _chart(D, has_list, STEPS):
+    """The visual crosswalk: UFLI lessons across, route steps down, a dot where a lesson lands on a step."""
+    L0, L1, S1 = 1, D["of"], len(STEPS)
+    x0, y0, W, H = 64, 26, 900, 31 * 15
+    X = lambda l: x0 + (l - L0) / (L1 - L0) * W
+    Y = lambda s: y0 + (s - 1) / (S1 - 1) * H
+    title = {st["n"]: re.sub(r"\*([^*]+)\*", r"\1", st["title"]) for st in STEPS}
+    g = [f'<line class="ch-diag" x1="{X(L0):.1f}" y1="{Y(1):.1f}" x2="{X(L1):.1f}" y2="{Y(S1):.1f}"/>']
+    for l in range(10, L1 + 1, 10):
+        g.append(f'<line class="ch-grid" x1="{X(l):.1f}" y1="{y0 - 6}" x2="{X(l):.1f}" y2="{y0 + H + 4}"/><text class="ch-tx" x="{X(l):.1f}" y="{y0 + H + 22}" text-anchor="middle">{l}</text>')
+    for s in [1, 5, 10, 15, 20, 25, 30, S1]:
+        g.append(f'<text class="ch-tx" x="{x0 - 12}" y="{Y(s) + 4:.1f}" text-anchor="end">{s}</text>')
+    g.append(f'<text class="ch-ax" x="{x0 + W / 2:.0f}" y="{y0 + H + 44}" text-anchor="middle">UFLI lesson</text>')
+    g.append(f'<text class="ch-ax" x="16" y="{y0 + H / 2:.0f}" text-anchor="middle" transform="rotate(-90 16 {y0 + H / 2:.0f})">Step on the route</text>')
+    for s, v in sorted(D["map"].items(), key=lambda kv: int(kv[0])):
+        for l in v["lessons"]:
+            tip = f"Lesson {l} · step {s}: {title[int(s)]}"
+            if l in has_list:
+                g.append(f'<a href="lists/{has_list[l]}.html"><circle class="ch-dot on" cx="{X(l):.1f}" cy="{Y(int(s)):.1f}" r="5"><title>{html.escape(tip)}. Open its spelling list.</title></circle></a>')
+            else:
+                g.append(f'<circle class="ch-dot" cx="{X(l):.1f}" cy="{Y(int(s)):.1f}" r="4.5"><title>{html.escape(tip)}</title></circle>')
+    return (f'<div class="tablewrap ch-wrap"><svg class="ufli-chart" viewBox="0 0 {x0 + W + 20} {y0 + H + 56}" role="img" '
+            f'aria-label="UFLI lessons across, steps of the route down: each lesson as a dot at the step where it lands.">{"".join(g)}</svg></div>')
+
+
 def write(OUT, door_page, door_head, uc, X):
     md, groups_of = X["md"], X["groups_of"]
     D = json.loads((HERE / "data" / "ufli_crosswalk.json").read_text(encoding="utf-8"))
 
     # ---- the door page
     tiles = ('<div class="door-tiles">'
-             '<a class="dtile" href="word-lists.html"><b>ELP and Dolch</b><span>Where the ELP high-frequency words come from in E. W. Dolch&rsquo;s 1936 lists, and what the ELP leaves out.</span></a>'
+             '<a class="dtile" href="word-lists.html"><b>Early Literacy Profile and Dolch</b><span>Where the Early Literacy Profile (Central Okanagan) high-frequency words come from in E. W. Dolch&rsquo;s 1936 lists, and what the ELP leaves out.</span></a>'
              '<a class="dtile" href="ufli.html"><b>UFLI Foundations</b><span>Where each step of the route meets UFLI&rsquo;s lessons, by lesson number, and where the two orders part.</span></a>'
              '</div>')
     F = FRY_COUNTS
@@ -63,12 +89,19 @@ def write(OUT, door_page, door_head, uc, X):
 </div></section>""")
 
     # ---- the UFLI crosswalk
+    import ufli_lists
+    has_list = {e["n"]: e["slug"] for e in ufli_lists.entries()}
+    def lesson_nums(ls):
+        """The lesson numbers as ranges, with a link wherever a lesson has a spelling list."""
+        txt = ranges(ls)
+        return re.sub(r"\d+", lambda m: f'<a href="lists/{has_list[int(m.group())]}.html">{m.group()}</a>' if int(m.group()) in has_list else m.group(), txt)
+    chart = _chart(D, has_list, X["STEPS"])
     rows = []
     for st in X["STEPS"]:
         n = st["n"]; m = D["map"][str(n)]
         words = [w for g in groups_of(st["words_md"]) for w in g]
         shown = ", ".join(f"<i>{html.escape(w)}</i>" for w in words[:6]) + (", &hellip;" if len(words) > 6 else "")
-        lessons = f'<span class="nums">{ranges(m["lessons"])}</span>' if m["lessons"] else '<span class="nums none">none</span>'
+        lessons = f'<span class="nums">{lesson_nums(m["lessons"])}</span>' if m["lessons"] else '<span class="nums none">none</span>'
         note = f'<p class="cw-note">{italics(m["note"])}</p>' if m.get("note") else ""
         rows.append(f'<tr><th scope="row"><a href="steps/{n:02d}.html">{n}</a></th>'
                     f'<td><p class="cw-t">{md(st["title"])}</p><p class="cw-w">{shown}</p></td>'
@@ -79,7 +112,13 @@ def write(OUT, door_page, door_head, uc, X):
 <p class="eyebrow t-only">Connections</p>
 <h1>The route and UFLI Foundations</h1>
 <p class="lead">Where each step of the route meets UFLI Foundations, by lesson number, so a school that runs UFLI can see where a step lands in its {D["of"]} lessons, and where the two orders part.</p>
-<p class="sub">{html.escape(D["made"])} UFLI asks that its materials be linked rather than copied (its <a href="{UFLI_COPYRIGHT}">copyright statement</a> says so), so its lesson names stay on its own site: its scope and sequence is in the <a href="{D["link"]}">UFLI Foundations Toolbox</a>.</p>
+<p class="sub">{html.escape(D["made"])} UFLI asks that its materials be linked rather than copied (its <a href="{UFLI_COPYRIGHT}">copyright statement</a> says so), so its lesson names stay on its own site: its scope and sequence is in the <a href="{D["link"]}">UFLI Foundations Toolbox</a>. The <a href="lists/index.html#ufli">spelling lists by UFLI lesson</a> follow the same rule: lesson numbers, our descriptions, our words.</p>
+</div></section>
+<section class="about" id="chart" aria-labelledby="ch-h"><div class="wrap">
+<h2 id="ch-h">Lesson by step</h2>
+<p class="sub">Each dot is a UFLI lesson (across) at the step of the route where it lands (down). Dots on the grey line come in the same order in both; above it, the route gets there sooner. A filled dot has a spelling list: tap it to open the list.</p>
+{chart}
+<p class="sub">Some lessons land on more than one step, so they have more than one dot. Lessons with no dot are reviews or have no step of their own.</p>
 </div></section>
 <section class="about" id="steps" aria-labelledby="cw-h"><div class="wrap">
 <h2 id="cw-h">Step by step</h2>

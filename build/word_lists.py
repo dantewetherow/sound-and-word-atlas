@@ -179,8 +179,8 @@ def write(OUT, page, header, footer, coloured, LW):
 <main>
 <section class="hero"><div class="wrap">
 <p class="eyebrow">Word lists</p>
-<h1>Where the ELP words come from</h1>
-<p class="lead">The ELP guide names no source for its high-frequency lists, but {len(shared) + len(noun_hits)} of its {len(elp_words)} words are E. W. Dolch&rsquo;s, from the sight vocabulary he published in 1936. The other {spell(len(elp_only))} ({i(elp_only)}) are on Fry&rsquo;s first 100 Instant Words. The ELP keeps {len(shared)} of Dolch&rsquo;s {n220} words, sorts them by spelling pattern, and leaves out {len(off)}, most of them short-vowel words that phonics lessons teach.</p>
+<h1>Where the Early Literacy Profile words come from</h1>
+<p class="lead">The Early Literacy Profile (Central Okanagan) (ELP) guide names no source for its high-frequency lists, but {len(shared) + len(noun_hits)} of its {len(elp_words)} words are E. W. Dolch&rsquo;s, from the sight vocabulary he published in 1936. The other {spell(len(elp_only))} ({i(elp_only)}) are on Fry&rsquo;s first 100 Instant Words. The ELP keeps {len(shared)} of Dolch&rsquo;s {n220} words, sorts them by spelling pattern, and leaves out {len(off)}, most of them short-vowel words that phonics lessons teach.</p>
 </div></section>
 
 <section class="about wl" id="by-level" aria-labelledby="lv-h"><div class="wrap">
@@ -220,8 +220,8 @@ def write(OUT, page, header, footer, coloured, LW):
 {footer(0)}
 <script type="application/json" id="wl-data">{blob}</script>
 <script>{SCRIPT}</script>"""
-    (OUT / "word-lists.html").write_text(page("Where the ELP words come from · A Legend for English Words", body, 0,
-                                              "Where the SD23 ELP high-frequency words come from in E. W. Dolch's sight words: tap a bar to see the words."),
+    (OUT / "word-lists.html").write_text(page("Where the Early Literacy Profile words come from · A Legend for English Words", body, 0,
+                                              "Where the Early Literacy Profile (Central Okanagan) high-frequency words come from in E. W. Dolch's sight words: tap a bar to see the words."),
                                          encoding="utf-8")
     print(f"wrote word-lists.html | {len(shared)} shared, {len(off)} left out ({len(off_short)} short-vowel), "
           f"earlier/same/later {earlier}/{same}/{later}, pattern lists {len(on_pattern)}")
