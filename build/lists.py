@@ -183,7 +183,8 @@ CHECKS = {
             ("icy", "taught", "The road is icy.", "no e before y: not <i>icey</i>"),
         ],
         # invented words: the base is printed on the sheet, so only the join is being tested
-        "invented": [("zake", "ing", "zaking"), ("plome", "ing", "ploming")],
+        "invented": [("zake + ing", "zaking", "no e before ing", None), ("plome + ing", "ploming", "no e before ing", None)],
+        "score_eg": "A learner who writes <i>bakin</i> has the feature and not the word.",
         "desc": "A check for the list 'the e drops': fourteen words to dictate and two invented ones, before and after the lesson, with a scoring key.",
     },
 }
@@ -192,6 +193,8 @@ GROUPS = [("taught", "Taught", "On the list. Was the list learned?"),
           ("limit", "Limit", "Not on the list, where the convention stops. Was it over-learned?"),
           ("invented", "Invented", "Made-up words nobody has seen. Only the convention can get these right."),
           ("control", "Control", "Nothing to do with the lesson. These shouldn&rsquo;t change much.")]
+import checks                     # a check for every other list (12 November 2026)
+CHECKS.update(checks.build(LISTS))
 # A check belongs to its list: the list's page leads to it, and the shelf shows only the lists.
 PAGES[:] = [(p, d, t_, s + (HAS_CHECK if p[6:-5] in CHECKS else "")) for p, d, t_, s in PAGES]
 PAGES += [(f"lists/{s}-check.html", "teachers", f"Check: {C['title']}", C["desc"]) for s, C in CHECKS.items()]
@@ -209,10 +212,11 @@ def home_link(L, what="list"):
 def write_check(OUT, page, header, footer, X, slug, C):
     n = len(C["items"])
     blanks = "".join(f'<li><span class="blank long"></span></li>' for _ in C["items"])
-    inv = "".join(f'<li><span>{b} + {s} &rarr;</span><span class="blank long"></span></li>' for b, s, _ in C["invented"])
+    inv = "".join(f'<li><span>{p} &rarr;</span><span class="blank long"></span></li>' if p else '<li><span class="blank long"></span></li>' for p, *_ in C["invented"])
+    printed = any(p for p, *_ in C["invented"])
     label = {g: l for g, l, _ in GROUPS}
     key = "".join(f'<tr><td>{k + 1}</td><td><b>{w}</b></td><td>{sent}</td><td>{label[g]}</td><td>{f or "whole word only"}</td></tr>' for k, (w, g, sent, f) in enumerate(C["items"]))
-    key += "".join(f'<tr><td>{n + k + 1}</td><td><b>{a}</b></td><td>(printed: {b} + {s})</td><td>Invented</td><td>no e before {s}</td></tr>' for k, (b, s, a) in enumerate(C["invented"]))
+    key += "".join(f'<tr><td>{n + k + 1}</td><td><b>{a}</b></td><td>{f"(printed: {p})" if p else f"Say: {say}"}</td><td>Invented</td><td>{f}</td></tr>' for k, (p, a, f, say) in enumerate(C["invented"]))
     count = {g: sum(1 for it in C["items"] if it[1] == g) for g, _, _ in GROUPS}; count["invented"] = len(C["invented"])
     tally = "".join(f'<tr><td><b>{l}</b> <span class="of">of {count[g]}</span><span class="why">{why}</span></td>' + "<td></td>" * 6 + "</tr>" for g, l, why in GROUPS if count[g])
     body = f"""{header(1)}
@@ -228,13 +232,13 @@ def write_check(OUT, page, header, footer, X, slug, C):
 <h2>Spelling check <span class="cname">Name <span class="blank long"></span> Date <span class="blank"></span></span></h2>
 <p class="sub">Write each word you hear.</p>
 <ol class="lblanks ccols">{blanks}</ol>
-<p class="sub">These two are made-up words. Add the ending.</p>
-<ol class="lblanks" start="{n + 1}">{inv}</ol>
+{f"""<p class="sub">{"These are made-up words. Add the ending." if printed else "These are made-up words. Write each one you hear."}</p>
+<ol class="lblanks" start="{n + 1}">{inv}</ol>""" if C["invented"] else ""}
 </div></section>
 <section class="about cteach"><div class="wrap">
 <h2>To say, and the key</h2>
-<p class="sub">Say the word, then the sentence, then the word again. For the last two, say: &ldquo;These are made-up words. The first part is printed for you. Add the ending and write the whole word.&rdquo; Don&rsquo;t teach these words between checks.</p>
-<p class="sub">Score each word twice: the whole word right, and the feature right. A learner who writes <i>bakin</i> has the feature and not the word.</p>
+<p class="sub">Say the word, then the sentence, then the word again.{(" For the made-up words, say: &ldquo;These are made-up words. The first part is printed for you. Add the ending and write the whole word.&rdquo;" if printed else " For the made-up words, say: &ldquo;These are made-up words. Write each one the way you think it&rsquo;s spelled.&rdquo; Say each once more if asked.") if C["invented"] else ""} Don&rsquo;t teach these words between checks.</p>
+<p class="sub">Score each word twice: the whole word right, and the feature right. {C.get("score_eg", "A learner can have the feature right and the word wrong, or the other way round.")}{"" if C["invented"] else C.get("no_inv", "")}</p>
 <div class="cscroll"><table class="ctable ckey"><thead><tr><th></th><th>Word</th><th>Sentence</th><th>Group</th><th>The feature to look for</th></tr></thead><tbody>{key}</tbody></table></div>
 <h2>The tally</h2>
 <div class="cscroll"><table class="ctable ctally"><thead><tr><th rowspan="2">Group</th><th colspan="2">Before</th><th colspan="2">After</th><th colspan="2">Weeks later</th></tr>
@@ -242,11 +246,11 @@ def write_check(OUT, page, header, footer, X, slug, C):
 </div></section>
 <section class="about noprint"><div class="wrap prose">
 <h2>Reading the result</h2>
-<p>Give the check before the lesson, after it, and again a few weeks later. The lesson worked if the transfer and invented words rise and the control words don&rsquo;t rise as much. If everything rises together, something other than the lesson did it. If the limit words fall, the convention was over-learned: the e is being dropped everywhere.</p>
+<p>Give the check before the lesson, after it, and again a few weeks later. The lesson worked if the transfer and invented words rise and the control words don&rsquo;t rise as much. If everything rises together, something other than the lesson did it. If the limit words fall, the convention was over-learned: it is being used where it doesn&rsquo;t belong.</p>
 <p>Use words the learners already say. If most can spell a word beforehand, it can&rsquo;t show anything; swap it for another of the same kind.</p>
 <p>With two classes, compare the gain on transfer words against the gain on control words in each. That is suggestive, not proof: the classes differ in more than the lesson. A stronger design needs only one class: teach three lessons in turn, give all three checks each time, and see whether each set of transfer words rises only after its own lesson.</p>
 <p>Keep learners&rsquo; results in the school&rsquo;s own records. Nothing here collects them.</p>
-{X["uc"]("this is the first generalization check, made as a model for the others. The control words are two-syllable words from step 16; they haven&rsquo;t been matched to the others for how common they are.")}
+{X["uc"]("the check for &lsquo;the e drops&rsquo; was made first, as a model; since 12 November 2026 every list has one, made the same way. None has been tried in a class yet. The control words come from three small sets by level and haven&rsquo;t been matched to the others for how common they are.")}
 </div></section>
 </main>
 {footer(1)}"""
@@ -301,7 +305,7 @@ def write(OUT, page, header, footer, X):
 <p>{"Have the learner build each word from its sum, not copy it, and say" if sums else "Have the learner say"} each sentence before writing it. Six to eight words is the whole list: the convention is what&rsquo;s being learned.</p>
 <ul>{links}</ul>
 <p class="sub">Source: {L["source"]}</p>
-{X["uc"]("since 12 November 2026 every step and every family has a list. The four model lists were made first, one of each kind; the rest follow them and haven&rsquo;t been tried in a class yet. Only one list has a check so far.")}
+{X["uc"]("since 12 November 2026 every step and every family has a list. The four model lists were made first, one of each kind; the rest follow them and haven&rsquo;t been tried in a class yet. Each has a generalization check, also untried.")}
 </div></section>
 </main>
 {footer(1)}"""
@@ -327,7 +331,7 @@ def write_index(OUT, page, header, footer, X):
 <main class="lists-index">
 <section class="hero"><div class="wrap">
 <h1>Spelling lists</h1>
-<p class="lead">A list for every step on the route and every word family. Each has six to eight words with sentences, a contrast, words to build, sentences to finish, and a check of words that aren&rsquo;t on the list. Print one and the teacher&rsquo;s notes are left off.</p>
+<p class="lead">A list for every step on the route and every word family. Each has six to eight words with sentences, a contrast, words to build, sentences to finish, and a check of words that aren&rsquo;t on the list. Print one and the teacher&rsquo;s notes are left off. Each list also has a generalization check, to give before the lesson, after it and a few weeks later: its list&rsquo;s page leads to it.</p>
 </div></section>
 <section class="about"><div class="wrap">
 <h2>Steps</h2>

@@ -480,6 +480,10 @@ def finish(OUT, pages):
             here = door_label(d) if d and p == f"{d}.html" else html.escape(t.split(":")[0] if p.startswith("steps/") else t)
             if p.startswith("lists/") and t.startswith("Spelling list: "):
                 here = t[len("Spelling list: "):].split(":")[0]
+            if p.startswith("lists/") and p.endswith("-check.html"):
+                lt = next((t2 for p2, _, t2, _ in pages if p2 == p[:-11] + ".html"), "")
+                trail.append(f'<li><a href="{up}{p[:-11]}.html">{lt[len("Spelling list: "):].split(":")[0]}</a></li>')
+                here = "Check"
             trail.append(f'<li aria-current="page">{here}</li>')
         crumbs = f'<nav class="crumbs" aria-label="Breadcrumb"><ol>{"".join(trail)}</ol></nav>' if trail else ""
         notice = ""
