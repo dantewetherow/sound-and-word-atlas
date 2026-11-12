@@ -12,6 +12,7 @@ So far these cover the kindergarten lessons (to 68). The grade 1 and 2 lessons f
 
 (lesson, our description, list words, check words, optional sums {word: sum})"""
 import html, json, pathlib, re
+import ufli_lessons
 HERE = pathlib.Path(__file__).resolve().parent
 UFLI_HOME = "https://ufli.education.ufl.edu/foundations/home/"
 
@@ -115,6 +116,7 @@ def write(OUT, page, header, footer, X):
 <h1>UFLI lesson {e["n"]}</h1>
 <p class="lprinciple">{e["what"]}.</p>
 {f'<p class="lhome noprint">This lesson meets the route at {steps}.</p>' if steps else ""}
+{f'<p class="ladds t-only noprint"><b>What the notation adds:</b> {ufli_lessons.L[e["n"]][1]} <a href="../ufli.html#lessons">Every lesson</a>.</p>' if ufli_lessons.L.get(e["n"]) else ""}
 <p class="board t-only noprint"><a href="#" onclick="window.print(); return false;">Print this list</a>: the teacher&rsquo;s notes are left off.</p>
 </div></section>
 <section class="about"><div class="wrap">

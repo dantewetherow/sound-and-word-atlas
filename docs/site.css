@@ -849,3 +849,8 @@ header.site.pinned.open nav.doors { display: flex; padding-block: 6px 4px; }
 .swap-grid tbody th { font-family: var(--display); font-weight: 500; font-size: 1.05rem; white-space: nowrap; background: var(--card); }
 .swap-grid .gn { color: var(--soft); font-family: var(--body); font-size: 0.8rem; }
 .swap-grid td:empty { background: repeating-linear-gradient(135deg, transparent 0 6px, var(--line) 6px 7px); opacity: 0.5; }
+
+.ul-table tr.rev td { color: var(--soft); font-style: italic; }
+.ul-table td:nth-child(2) { width: 24%; }
+.ul-table td:nth-child(3) { width: 56%; }
+.ladds { max-width: 62ch; margin: 10px 0 0; }

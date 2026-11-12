@@ -96,6 +96,20 @@ def write(OUT, door_page, door_head, uc, X):
         txt = ranges(ls)
         return re.sub(r"\d+", lambda m: f'<a href="lists/{has_list[int(m.group())]}.html">{m.group()}</a>' if int(m.group()) in has_list else m.group(), txt)
     chart = _chart(D, has_list, X["STEPS"])
+    import ufli_lessons
+    inv = {}
+    for s_, v in D["map"].items():
+        for l in v["lessons"]: inv.setdefault(l, []).append(int(s_))
+    lrows = []
+    for n, v in sorted(ufli_lessons.L.items()):
+        num = f'<a href="lists/{has_list[n]}.html">{n}</a>' if n in has_list else str(n)
+        st = ", ".join(f'<a href="steps/{k:02d}.html">{k}</a>' for k in sorted(inv.get(n, [])))
+        if v is None:
+            lrows.append(f'<tr class="rev"><th scope="row">{num}</th><td colspan="2">Review: no new mark.</td><td>{st}</td></tr>')
+        else:
+            lrows.append(f'<tr><th scope="row">{num}</th><td>{v[0]}</td><td>{v[1]}</td><td>{st}</td></tr>')
+    by_lesson = (f'<div class="tablewrap"><table class="cw-table ul-table"><thead><tr><th scope="col">Lesson</th><th scope="col">What it brings in</th>'
+                 f'<th scope="col">What the notation adds</th><th scope="col">Step</th></tr></thead><tbody>{"".join(lrows)}</tbody></table></div>')
     rows = []
     for st in X["STEPS"]:
         n = st["n"]; m = D["map"][str(n)]
@@ -119,6 +133,12 @@ def write(OUT, door_page, door_head, uc, X):
 <p class="sub">Each dot is a UFLI lesson (across) at the step of the route where it lands (down). Dots on the grey line come in the same order in both; above it, the route gets there sooner. A filled dot has a spelling list: tap it to open the list.</p>
 {chart}
 <p class="sub">Some lessons land on more than one step, so they have more than one dot. Lessons with no dot are reviews or have no step of their own.</p>
+</div></section>
+<section class="about" id="lessons" aria-labelledby="ul-h"><div class="wrap">
+<h2 id="ul-h">Lesson by lesson: what the notation adds</h2>
+<p class="sub">For a teacher in the middle of UFLI: the mark to draw on the day&rsquo;s words. Both columns are in our own words; UFLI&rsquo;s lesson titles are in its own materials. A linked lesson number opens its spelling list, and a linked step opens the step.</p>
+{by_lesson}
+<p class="sub">Lessons 13 to 128 were checked against the headings of UFLI&rsquo;s Roll and Read pages; lessons 1 to 12 have none, and are the ones to check.</p>
 </div></section>
 <section class="about" id="steps" aria-labelledby="cw-h"><div class="wrap">
 <h2 id="cw-h">Step by step</h2>
