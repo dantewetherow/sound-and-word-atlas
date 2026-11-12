@@ -344,7 +344,7 @@ def write_index(OUT, page, header, footer, X):
 </div></section>
 <section class="about" id="ufli"><div class="wrap">
 <h2>By UFLI lesson</h2>
-<p class="sub">For schools that run UFLI Foundations: a list for each lesson that adds a new spelling, by UFLI&rsquo;s lesson number. The words are ours, and use only what UFLI has taught by that lesson. So far the kindergarten lessons, 4 to 68. <a href="../ufli.html#chart">Where each lesson meets the route</a>.</p>
+<p class="sub">For schools that run UFLI Foundations: a list for each lesson that adds a new spelling, by UFLI&rsquo;s lesson number. The words are ours, and use only what UFLI has taught by that lesson. So far the kindergarten and grade 1 lessons, 4 to 110; grade 2 is next. <a href="../ufli.html#chart">Where each lesson meets the route</a>.</p>
 <div class="step-btns">{uf}</div>
 </div></section>
 <section class="about" id="families"><div class="wrap">

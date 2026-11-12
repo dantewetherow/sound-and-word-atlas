@@ -8,7 +8,7 @@ only the spellings UFLI has taught by that lesson, and that use the lesson's new
 by hand from what it found: one-syllable words until the syllable lessons, no names, nothing a learner shouldn't say
 in class. Review lessons have no list of their own.
 
-So far these cover the kindergarten lessons (to 68). The grade 1 and 2 lessons follow the same way.
+So far these cover the kindergarten and grade 1 lessons (to 110). The grade 2 lessons follow the same way.
 
 (lesson, our description, list words, check words, optional sums {word: sum})"""
 import html, json, pathlib, re
@@ -71,6 +71,55 @@ LESSONS = [
     (66, "Open and closed: a vowel at the end says its name, a consonant after it closes it", ["he", "me", "we", "she", "no", "go", "so", "hi"], ["be"]),
     (67, "Two closed syllables, and compound words", ["sunset", "laptop", "napkin", "basket", "picnic", "magnet", "bathtub", "backpack"], ["contest", "pigpen", "handstand"]),
     (68, "An open syllable, then a closed one", ["robot", "pupil", "even", "hotel", "open", "human", "bonus", "basic"], ["silent", "total", "pilot"]),
+    # grade 1 (12 November 2026)
+    (60, "<b>c</b> before <b>e</b> says /s/, as in <i>face</i> and <i>dance</i>", ["face", "race", "nice", "rice", "ice", "place", "dance", "fence"], ["space", "prince", "slice"]),
+    (61, "<b>g</b> before <b>e</b> says /j/, as in <i>age</i> and <i>hinge</i>", ["age", "page", "cage", "stage", "huge", "hinge", "plunge", "fringe"], ["wage", "bulge", "lunge"]),
+    (62, "A final <b>e</b> that sends no vault: <i>have</i>, <i>give</i>, <i>come</i>", ["have", "give", "live", "love", "come", "some", "done", "none"], ["glove", "shove"]),
+    (69, "<b>tch</b> after a short vowel", ["catch", "match", "patch", "pitch", "itch", "ditch", "fetch", "sketch"], ["hatch", "stitch", "clutch"]),
+    (70, "<b>dge</b> after a short vowel", ["edge", "badge", "bridge", "fudge", "ridge", "judge", "hedge", "wedge"], ["lodge", "nudge", "smudge"]),
+    (72, "<b>i</b> and <b>o</b> say their names before <b>ld</b>, <b>nd</b> and <b>st</b>", ["find", "kind", "mind", "wild", "child", "old", "cold", "most"], ["gold", "blind", "post"]),
+    (73, "<b>y</b> at the end says the name of i", ["my", "by", "why", "try", "fly", "dry", "sky", "cry"], ["shy", "spy", "fry"]),
+    (74, "<b>y</b> at the end of a longer word says the name of e", ["candy", "lucky", "empty", "sandy", "handy", "dusty", "rusty", "silly"], ["messy", "windy", "fifty"]),
+    (75, "A consonant and <b>le</b> make the last syllable", ["candle", "handle", "simple", "puzzle", "tickle", "bubble", "apple", "little"], ["pickle", "wiggle", "bundle"]),
+    (77, "<b>ar</b>: the vowel and its r as one unit", ["car", "star", "park", "dark", "farm", "arm", "yard", "sharp"], ["chart", "smart", "barn"]),
+    (78, "<b>or</b> and <b>ore</b>", ["for", "short", "fork", "born", "storm", "more", "store", "score"], ["north", "horn", "shore"]),
+    (80, "<b>er</b>", ["her", "fern", "herd", "term", "sister", "winter", "under", "river"], ["perch", "silver", "number"]),
+    (81, "<b>ir</b> and <b>ur</b>: the same sound as er", ["bird", "girl", "first", "shirt", "dirt", "turn", "hurt", "burn"], ["third", "curl", "church"]),
+    (82, "<b>or</b> after <b>w</b> says the sound of <i>her</i>", ["work", "word", "worm", "world", "worst", "worth"], ["worker", "worthy"]),
+    (84, "<b>ai</b> inside a word and <b>ay</b> at the end", ["rain", "train", "paint", "wait", "tail", "day", "play", "stay"], ["snail", "chain", "tray"]),
+    (85, "<b>ee</b>, <b>ea</b> and <b>ey</b> for the name of e", ["see", "tree", "feet", "green", "eat", "sea", "read", "key"], ["sheep", "team", "valley"]),
+    (86, "<b>oa</b>, <b>ow</b> and <b>oe</b> for the name of o", ["boat", "road", "coat", "goat", "snow", "grow", "show", "toe"], ["soap", "throw", "slow"]),
+    (87, "<b>ie</b> and <b>igh</b> for the name of i", ["pie", "tie", "high", "night", "light", "right", "bright", "fight"], ["lie", "sight", "flight"]),
+    (89, "<b>oo</b> and <b>u</b> for the vowel of <i>book</i> and <i>put</i>", ["book", "look", "good", "foot", "wood", "cook", "put", "push"], ["hook", "stood", "bush"]),
+    (90, "<b>oo</b> for the vowel of <i>moon</i>", ["moon", "food", "room", "zoo", "soon", "pool", "tooth", "spoon"], ["boot", "roof", "broom"]),
+    (91, "<b>ew</b>, <b>ui</b> and <b>ue</b> for the vowel of <i>moon</i>", ["new", "grew", "blew", "few", "blue", "true", "glue", "fruit"], ["chew", "suit", "clue"]),
+    (93, "<b>au</b>, <b>aw</b> and <b>augh</b> for the vowel of <i>saw</i>", ["saw", "draw", "straw", "paw", "crawl", "haul", "launch", "caught"], ["claw", "taught", "fault"]),
+    (94, "<b>ea</b> for short e (<i>head</i>), and <b>a</b> after w for short o (<i>want</i>)", ["head", "bread", "ready", "heavy", "breath", "want", "wash", "watch"], ["thread", "spread", "wand"]),
+    (95, "<b>oi</b> inside a word and <b>oy</b> at the end", ["oil", "coin", "boil", "join", "point", "boy", "toy", "joy"], ["soil", "voice", "enjoy"]),
+    (96, "<b>ou</b> and <b>ow</b> for the vowel of <i>out</i>", ["out", "loud", "cloud", "round", "mouth", "cow", "now", "down"], ["shout", "crown", "owl"]),
+    (98, "<b>kn</b>, <b>wr</b> and <b>mb</b>: a silent letter in the unit", ["knee", "knock", "knot", "write", "wrap", "wrong", "lamb", "thumb"], ["knife", "wrist", "numb"]),
+    (99, "<b>-s</b> and <b>-es</b> on words that name and words that do", ["toys", "plays", "runs", "jumps", "foxes", "wishes", "glasses", "fixes"], ["brushes", "bunches", "keys"],
+     {"toys": "toy + s", "plays": "play + s", "runs": "run + s", "jumps": "jump + s", "foxes": "fox + es", "wishes": "wish + es", "glasses": "glass + es", "fixes": "fix + es"}),
+    (100, "<b>-er</b> and <b>-est</b> to compare", ["taller", "tallest", "faster", "fastest", "longer", "longest", "smaller", "smallest"], ["colder", "softest", "darker"],
+     {"taller": "tall + er", "tallest": "tall + est", "faster": "fast + er", "fastest": "fast + est", "longer": "long + er", "longest": "long + est", "smaller": "small + er", "smallest": "small + est"}),
+    (101, "<b>-ly</b>: how something is done", ["sadly", "softly", "quickly", "slowly", "kindly", "badly", "loudly", "neatly"], ["gladly", "boldly", "safely"],
+     {"sadly": "sad + ly", "softly": "soft + ly", "quickly": "quick + ly", "slowly": "slow + ly", "kindly": "kind + ly", "badly": "bad + ly", "loudly": "loud + ly", "neatly": "neat + ly"}),
+    (102, "<b>-less</b> and <b>-ful</b>", ["helpful", "useful", "thankful", "hopeful", "endless", "homeless", "helpless", "painless"], ["restful", "sleepless", "fearless"],
+     {"helpful": "help + ful", "useful": "use + ful", "thankful": "thank + ful", "hopeful": "hope + ful", "endless": "end + less", "homeless": "home + less", "helpless": "help + less", "painless": "pain + less"}),
+    (103, "<b>un-</b> at the front", ["undo", "unlock", "unpack", "untie", "unfold", "unzip", "unkind", "unfair"], ["unplug", "unwrap", "unsafe"],
+     {"undo": "un + do", "unlock": "un + lock", "unpack": "un + pack", "untie": "un + tie", "unfold": "un + fold", "unzip": "un + zip", "unkind": "un + kind", "unfair": "un + fair"}),
+    (104, "<b>pre-</b> and <b>re-</b> at the front", ["redo", "reread", "refill", "replay", "rewind", "preheat", "preschool", "pretest"], ["recheck", "retell", "prepay"],
+     {"redo": "re + do", "reread": "re + read", "refill": "re + fill", "replay": "re + play", "rewind": "re + wind", "preheat": "pre + heat", "preschool": "pre + school", "pretest": "pre + test"}),
+    (105, "<b>dis-</b> at the front", ["dislike", "disagree", "disobey", "dishonest", "distrust", "disown", "discount", "dismiss"], ["disarm", "displease", "disconnect"],
+     {"dislike": "dis + like", "disagree": "dis + agree", "disobey": "dis + obey", "dishonest": "dis + honest", "distrust": "dis + trust", "disown": "dis + own", "discount": "dis + count", "dismiss": "dis + miss"}),
+    (107, "A short word doubles its last consonant before <b>-ing</b> and <b>-ed</b>", ["running", "hopping", "sitting", "swimming", "stopped", "hugged", "planned", "clapped"], ["shopping", "grabbed", "chatting"],
+     {"running": "run + n + ing", "hopping": "hop + p + ing", "sitting": "sit + t + ing", "swimming": "swim + m + ing", "stopped": "stop + p + ed", "hugged": "hug + g + ed", "planned": "plan + n + ed", "clapped": "clap + p + ed"}),
+    (108, "Doubling before <b>-er</b> and <b>-est</b>", ["bigger", "biggest", "hotter", "hottest", "sadder", "flatter", "thinnest", "wettest"], ["fatter", "dimmest", "reddest"],
+     {"bigger": "big + g + er", "biggest": "big + g + est", "hotter": "hot + t + er", "hottest": "hot + t + est", "sadder": "sad + d + er", "flatter": "flat + t + er", "thinnest": "thin + n + est", "wettest": "wet + t + est"}),
+    (109, "The <b>e</b> drops before a suffix that starts with a vowel", ["making", "baking", "hoping", "riding", "smiling", "liked", "hoped", "used"], ["shining", "saved", "wider"],
+     {"making": "mak(e) + ing", "baking": "bak(e) + ing", "hoping": "hop(e) + ing", "riding": "rid(e) + ing", "smiling": "smil(e) + ing", "liked": "lik(e) + ed", "hoped": "hop(e) + ed", "used": "us(e) + ed"}),
+    (110, "<b>y</b> turns to <b>i</b> before a suffix", ["tried", "cried", "flies", "babies", "happier", "funniest", "carried", "puppies"], ["dried", "spies", "sunnier"],
+     {"tried": "tr(y&rarr;i) + ed", "cried": "cr(y&rarr;i) + ed", "flies": "fl(y&rarr;i) + es", "babies": "bab(y&rarr;i) + es", "happier": "happ(y&rarr;i) + er", "funniest": "funn(y&rarr;i) + est", "carried": "carr(y&rarr;i) + ed", "puppies": "pupp(y&rarr;i) + es"}),
 ]
 
 
@@ -131,7 +180,7 @@ def write(OUT, page, header, footer, X):
 <p>Every word here uses only spellings that UFLI Foundations has taught by lesson {e["n"]}, and each uses the one this lesson adds. The words are ours: none is taken from UFLI&rsquo;s materials. Say each word, use it in a sentence, and say it again.</p>
 <p class="ulnav">{prev}{" &middot; " if prev and nxt else ""}{nxt}</p>
 <p class="sub">Lined up with <a href="{UFLI_HOME}">UFLI Foundations</a> by lesson number. UFLI didn&rsquo;t make this list and hasn&rsquo;t endorsed it. Lesson descriptions are ours. See <a href="../ufli.html">the route and UFLI Foundations</a> for where each lesson meets the route.</p>
-{X["uc"]("lists for the kindergarten lessons, 4 to 68, since 12 November 2026. The grade 1 and 2 lessons are next.")}
+{X["uc"]("lists for the kindergarten and grade 1 lessons, 4 to 110, since 12 November 2026. The grade 2 lessons are next.")}
 </div></section>
 </main>
 {footer(1)}"""
