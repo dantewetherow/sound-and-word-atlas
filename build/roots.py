@@ -36,30 +36,20 @@ def etym(word, slug):
 # The roads in: (from, its meaning, [(cluster key, the spellings it gave)])
 ROADS = [
     ("Latin <i>legere</i>", "to gather, to choose, to read", [("leg", "leg"), ("lect", "lect"), ("lig", "lig"), ("french", "les, lite"), ("lego", "lego")]),
-    ("Latin <i>l&emacr;g&amacr;re</i>", "to send with a charge", [("leg", "leg"), ("lege", "lege, league")]),
-    ("Latin <i>l&emacr;x</i>, <i>l&emacr;gis</i>", "law; its link to the root is uncertain", [("leg", "leg"), ("legis", "legis"), ("lege", "lege"), ("french", "loy")]),
     ("Greek <i>legein</i>, <i>logos</i>, <i>lexis</i>", "to say, to gather; a word", [("log", "log"), ("logue", "logue"), ("lex", "lex"), ("lect", "lect"), ("lego", "lego")]),
 ]
 
 # The clusters, one for each spelling. A word is (word, parts or None, meaning), or with a fourth item, the letters to
 # set in bold when it has no parts to show.
 CLUSTERS = [
-    {"key": "leg", "label": "leg", "spells": ["leg"], "head": "gather, read; send; law",
-     "road": "Latin <i>legere</i>, to gather, to choose, to read, at the start of a word; <i>l&emacr;g&amacr;re</i>, to send "
-             "with a charge; and <i>l&emacr;x</i>, <i>l&emacr;gis</i>, law",
+    {"key": "leg", "label": "leg", "spells": ["leg"], "head": "gather, choose, read",
+     "road": "Latin <i>legere</i>, to gather, to choose, to read, at the start of a word",
      "note": "<i>Elegant</i> kept the e that <i>eligible</i> turned to i.",
      "groups": [
          [("legend", ["leg", "-end"], "a story to be read"), ("legendary", ["leg", "-end", "-ary"], "told of in legends")],
          [("legible", ["leg", "-ible"], "clear enough to read"), ("illegible", ["il-", "leg", "-ible"], "too unclear to read")],
          [("legion", ["leg", "-ion"], "a body of soldiers, chosen and gathered")],
          [("elegant", ["e-", "leg", "-ant"], "chosen with care, graceful")],
-         [("legume", ["leg", "-ume"], "a bean or a pea: what is picked")],
-         [("delegate", ["de-", "leg", "-ate"], "send someone to act for you"),
-          ("delegation", ["de-", "leg", "-at(e)", "-ion"], "a group sent to act for others"),
-          ("relegate", ["re-", "leg", "-ate"], "send away, move down"),
-          ("legacy", ["leg", "-acy"], "what is handed down")],
-         [("legal", ["leg", "-al"], "to do with the law"), ("illegal", ["il-", "leg", "-al"], "against the law"),
-          ("legitimate", None, "allowed by law", "leg")],
      ]},
     {"key": "lect", "label": "lect", "spells": ["lect"], "head": "gathered, chosen, read",
      "road": "Latin <i>lectus</i>, the past form of <i>legere</i>; and Greek <i>-lektos</i> in <i>dialect</i> and <i>eclectic</i>",
@@ -90,25 +80,11 @@ CLUSTERS = [
           ("intelligible", ["intel-", "lig", "-ible"], "able to be understood")],
          [("diligent", ["di-", "lig", "-ent"], "careful and hard-working"), ("diligence", ["di-", "lig", "-ence"], "careful, steady work")],
      ]},
-    {"key": "legis", "label": "legis", "spells": ["legis"], "head": "of law",
-     "road": "Latin <i>l&emacr;gis</i>, of law, the form <i>l&emacr;x</i> takes in <i>l&emacr;gis l&amacr;tor</i>, a proposer of law",
-     "groups": [
-         [("legislator", ["legis", "lat", "-or"], "someone who brings in laws"), ("legislation", ["legis", "lat", "-ion"], "laws, and the making of them"),
-          ("legislature", ["legis", "lat", "-ure"], "the body that makes laws")],
-     ]},
-    {"key": "lege", "label": "lege, league", "spells": ["lege", "league"], "head": "chosen with; law",
-     "road": "Latin <i>coll&emacr;ga</i>, one chosen along with another, from <i>l&emacr;g&amacr;re</i>; and <i>l&emacr;x</i>, law, in <i>privilege</i>",
-     "groups": [
-         [("college", ["col-", "lege"], "a body of people gathered together"), ("colleague", ["col-", "league"], "someone chosen to work alongside you")],
-         [("privilege", ["privi", "lege"], "a law for one person, a special right")],
-     ]},
-    {"key": "french", "label": "les, loy, lite", "spells": ["les", "loy", "lite"], "head": "worn down in French",
+    {"key": "french", "label": "les, lite", "spells": ["les", "lite"], "head": "worn down in French",
      "road": "Latin words that reached English through French and lost letters on the way: <i>lectio</i>, a reading, became "
-             "<i>le&ccedil;on</i>; <i>l&emacr;g&amacr;lis</i>, legal, became <i>loial</i>; and <i>eligere</i>, to pick out, gave "
-             "<i>eslite</i>, chosen",
+             "<i>le&ccedil;on</i>; and <i>eligere</i>, to pick out, gave <i>eslite</i>, chosen",
      "groups": [
          [("lesson", None, "something to read or learn", "les")],
-         [("loyal", ["loy", "-al"], "faithful"), ("loyalty", ["loy", "-al", "-ty"], "being faithful"), ("disloyal", ["dis-", "loy", "-al"], "not faithful")],
          [("elite", None, "the chosen few", "lite")],
      ]},
     {"key": "log", "label": "log", "spells": ["log"], "head": "word, reason, account",
@@ -151,6 +127,46 @@ CLUSTERS = [
            "is its plainer twin: pro + logue")],
      ]},
 ]
+
+# Words often listed with the root whose road back to it the sources hedge (12 November 2026). They keep their word sums,
+# since the parts hold whatever the history, and stay in search and the word walk; they leave the drill-down, the roads
+# and the board. Watkins (AHD, leg-) gives the law branch as "possibly", with a question mark on Latin lex as a
+# "collection of rules", and a link to *legh- as possible but uncertain; Etymonline gives lex only as "perhaps";
+# legare is built on lex. Latin legumen is of unknown origin (Etymonline).
+DEBATED_LEAD = ("Some words are often listed with the root, but the sources hedge the road back to it. They keep their word "
+                "sums here, since the parts hold whatever the history. What&rsquo;s in doubt is only where the root came from.")
+LEG_DEBATED = {"lead": DEBATED_LEAD, "clusters": [
+    {"key": "law", "label": "leg, legis, loy, lege", "spells": ["leg", "legis", "loy", "lege"], "head": "law",
+     "road": "Latin <i>l&emacr;x</i>, law; <i>l&emacr;gis</i>, of law, as in <i>l&emacr;gis l&amacr;tor</i>, a proposer of law",
+     "why": "Watkins gives this branch as possible only, with a question mark on law as a &lsquo;collection of rules&rsquo;. "
+            "He also names a link to another root, <i>*legh-</i>, to lie, to lay, as possible but uncertain: law as what is "
+            "laid down, which is where English <i>law</i> comes from. Etymonline gives <i>l&emacr;x</i> only as perhaps from "
+            "<i>*leg-</i>.",
+     "groups": [
+         [("legal", ["leg", "-al"], "to do with the law"), ("illegal", ["il-", "leg", "-al"], "against the law"),
+          ("legitimate", None, "allowed by law", "leg")],
+         [("legislator", ["legis", "lat", "-or"], "someone who brings in laws"), ("legislation", ["legis", "lat", "-ion"], "laws, and the making of them"),
+          ("legislature", ["legis", "lat", "-ure"], "the body that makes laws")],
+         [("loyal", ["loy", "-al"], "faithful: Latin <i>l&emacr;g&amacr;lis</i>, legal, worn down in French to <i>loial</i>"),
+          ("loyalty", ["loy", "-al", "-ty"], "being faithful"), ("disloyal", ["dis-", "loy", "-al"], "not faithful")],
+         [("privilege", ["privi", "lege"], "a law for one person, a special right")],
+     ]},
+    {"key": "send", "label": "leg, lege, league", "spells": ["leg", "lege", "league"], "head": "send with a charge",
+     "road": "Latin <i>l&emacr;g&amacr;re</i>, to send with a charge, to appoint; <i>coll&emacr;ga</i>, one chosen along with another",
+     "why": "<i>L&emacr;g&amacr;re</i> is built on <i>l&emacr;x</i>, law, so these words share its doubt.",
+     "groups": [
+         [("delegate", ["de-", "leg", "-ate"], "send someone to act for you"),
+          ("delegation", ["de-", "leg", "-at(e)", "-ion"], "a group sent to act for others"),
+          ("relegate", ["re-", "leg", "-ate"], "send away, move down"),
+          ("legacy", ["leg", "-acy"], "what is handed down")],
+         [("college", ["col-", "lege"], "a body of people gathered together"), ("colleague", ["col-", "league"], "someone chosen to work alongside you")],
+     ]},
+    {"key": "legume", "label": "leg", "spells": ["leg"], "head": "a bean or a pea",
+     "road": "Latin <i>leg&umacr;men</i>, a pulse: beans, peas and lentils",
+     "why": "Latin <i>leg&umacr;men</i> is of unknown origin. That it was named for being picked by hand is one suggestion, "
+            "nothing firmer.",
+     "groups": [[("legume", ["leg", "-ume"], "a bean or a pea")]]},
+]}
 
 # What each part means. The root's own spellings take ROOT_PARTS.
 PARTS = {
@@ -240,13 +256,16 @@ LEG = {
                 ("Wiktionary, Proto-Indo-European *leǵ-", "https://en.wiktionary.org/wiki/Reconstruction:Proto-Indo-European/le%C7%B5-"),
                 ("Wiktionary, Ancient Greek <i>λέγω</i>: gather, choose, count, say; its I form", "https://en.wiktionary.org/wiki/%CE%BB%CE%AD%CE%B3%CF%89"),
                 ("Wiktionary, Latin <i>leg&omacr;</i>: choose, gather, read; its I form", "https://en.wiktionary.org/wiki/lego#Latin"),
-                ("Etymonline, <i>veto</i>: Latin, I forbid", "https://www.etymonline.com/word/veto")],
-    "roads": ROADS, "clusters": CLUSTERS, "parts": PARTS, "root_parts": ROOT_PARTS,
+                ("Etymonline, <i>veto</i>: Latin, I forbid", "https://www.etymonline.com/word/veto"),
+                ("Calvert Watkins, <i>The American Heritage Dictionary of Indo-European Roots</i>, leg-: the law branch given as possible (a copy of the appendix)", "https://www.proto-indo-european.ru/dic-watkins/ier-l.htm"),
+                ("Etymonline, <i>legume</i>: Latin <i>leg&umacr;men</i>, of unknown origin", "https://www.etymonline.com/search?q=legume")],
+    "roads": ROADS, "clusters": CLUSTERS, "debated": LEG_DEBATED, "parts": PARTS, "root_parts": ROOT_PARTS,
     "students": ["collect", "select", "elect", "lesson", "legend", "logic", "dialogue"],
     "s_lead": "These words come from one old word that meant <i>gather</i>.",
     "uc": "the family follows Etymonline, which draws on Calvert Watkins, and the Indo-European Lexicon, which follows "
-          "Pokorny. Wiktionary marks the link from <i>l&emacr;x</i>, law, as uncertain. Next: check the family against "
-          "Watkins&rsquo;s entry, and draw each word in the notation once its marking is ruled.",
+          "Pokorny. On 12 November 2026 it was checked against Watkins&rsquo;s entry, and the words he and Etymonline hedge "
+          "(the law branch, and <i>legume</i>) moved to Marginal or debated. Next: draw each word in the notation once its "
+          "marking is ruled.",
     "label": "Root family: *leg-",
     "desc": "The root *leg-, to gather, to collect, and its family of English words, spelling by spelling, with what each part means.",
 }
@@ -731,14 +750,15 @@ ROOTS = [LEG, HAP, DEUK, SEM, MED]
 # ------------------------------------------------------------------ *leuk-
 # Made 12 November 2026, as the home of illustrate. The word list follows the Indo-European Lexicon's entry (Pokorny's
 # leuk-, to light, shine; see), fetched that day, and was checked against Etymonline's list for the root. Etymonline
-# lists illustration and illumination (the verbs are their stems) and doesn't list lynx under the root, though its
-# entry for lynx traces the name to it, probably for the cat's sharp sight.
+# lists illustration and illumination (the verbs are their stems). Lynx, which Etymonline gives only as probable, is
+# under Marginal or debated (12 November 2026). Illustrate is drawn as Dante ruled that day: il + lustr + ate, the seams
+# at the joins of the parts, the syllables il | lus | trate crossing them.
 LEUK_ROADS = [
     ("Latin <i>l&umacr;str&amacr;re</i>", "to make bright, to light up", [("lustr", "lustr, lustre")]),
     ("Latin <i>l&umacr;men</i>", "a light", [("lumin", "lumen, lumin")]),
     ("Latin <i>l&umacr;x</i>, <i>l&umacr;c&emacr;re</i>", "light; to shine", [("luc", "luc, lux")]),
     ("Latin <i>l&umacr;na</i>", "the moon: the bright one", [("lun", "lun")]),
-    ("Greek <i>leukos</i>", "white, bright", [("greek", "leuk, lynx")]),
+    ("Greek <i>leukos</i>", "white, bright", [("greek", "leuk")]),
     ("Old English <i>l&emacr;oht</i>", "light", [("germanic", "light")]),
 ]
 LEUK_CLUSTERS = [
@@ -778,13 +798,11 @@ LEUK_CLUSTERS = [
     {"key": "lun", "label": "lun", "spells": ["lun"], "head": "the moon",
      "road": "Latin <i>l&umacr;na</i>, the moon, from an older <i>*leuksn&amacr;</i>: the bright one",
      "groups": [[("lunar", ["lun", "-ar"], "having to do with the moon")]]},
-    {"key": "greek", "label": "leuk, lynx", "spells": ["leuk", "leuko", "lynx"], "head": "white, bright",
+    {"key": "greek", "label": "leuk", "spells": ["leuk", "leuko"], "head": "white, bright",
      "road": "Greek <i>leukos</i>, white, bright",
-     "note": "<i>Lynx</i> came to English from Greek through Latin. The cat was probably named for its sharp sight.",
      "groups": [
          [("leukemia", ["leuk", "-emia"], "a cancer of the blood, named for its white cells; <i>leukaemia</i> in British spelling"),
           ("leukocyte", ["leuko", "cyte"], "a white blood cell")],
-         [("lynx", None, "a wild cat with sharp eyes", "lynx")],
      ]},
     {"key": "germanic", "label": "light", "spells": ["light"], "head": "light: English&rsquo;s own word",
      "road": "Old English <i>l&emacr;oht</i>, light",
@@ -815,6 +833,12 @@ ROOT_PARTS.update({
     "leuko": "white: Greek <i>leukos</i>",
     "light": "light: Old English <i>l&emacr;oht</i>",
 })
+LEUK_DEBATED = {"lead": DEBATED_LEAD, "clusters": [
+    {"key": "lynx", "label": "lynx", "spells": ["lynx"], "head": "a wild cat", "road": "Greek <i>lynx</i>, through Latin",
+     "why": "The Indo-European Lexicon lists <i>lynx</i> with the root. Etymonline leaves it off its list for the root, and its "
+            "entry for the word gives the link only as probable: the cat named for its sharp sight.",
+     "groups": [[("lynx", None, "a wild cat with sharp eyes", "lynx")]]},
+]}
 LEUK = {
     "slug": "leuk", "root": "*leuk-", "gloss": "light, brightness", "kind": "a root family",
     "h1_s": "*leuk- means &lsquo;light&rsquo;",
@@ -822,13 +846,13 @@ LEUK = {
             "<i>l&umacr;c&emacr;re</i>, to shine; into <i>l&umacr;men</i>, a light; into <i>l&umacr;str&amacr;re</i>, to make "
             "bright; and into <i>l&umacr;na</i>, the moon, the bright one. Greek made it <i>leukos</i>, white. English kept "
             "<i>light</i>. The family is the home of <i>illustrate</i>: to throw light on a thing, by an example or a picture.",
-    "drawn": ("light", "light, marked"),
+    "drawn": ("illustrate", "illustrate, marked: il + lustr + ate"),
     "sources": [("Indo-European Lexicon, leuk- (Linguistics Research Center, University of Texas at Austin), which follows Pokorny: the list this family is drawn from", "https://lrc.la.utexas.edu/lex/master/1197"),
                 ("Etymonline, *leuk-: the root&rsquo;s list, which has illustration, illumination and every Latin, Greek and English road here", "https://www.etymonline.com/word/*leuk-"),
                 ("Etymonline: <i>illustrate</i>, from Latin <i>ill&umacr;str&amacr;re</i>, in- + <i>l&umacr;str&amacr;re</i>", "https://www.etymonline.com/search?q=illustrate"),
                 ("Etymonline: <i>illuminate</i>, from Latin in- + <i>l&umacr;men</i>", "https://www.etymonline.com/word/Illuminate"),
                 ("Etymonline, *legwh-: the root of <i>light</i>, not heavy, and of <i>lung</i>", "https://www.etymonline.com/word/*legwh-")],
-    "roads": LEUK_ROADS, "clusters": LEUK_CLUSTERS, "parts": PARTS, "root_parts": ROOT_PARTS,
+    "roads": LEUK_ROADS, "clusters": LEUK_CLUSTERS, "debated": LEUK_DEBATED, "parts": PARTS, "root_parts": ROOT_PARTS,
     "extra": [
         ("il", "Il-: in- before l",
          ["Why two l&rsquo;s in <i>illustrate</i>? The first belongs to the prefix. Latin <i>in-</i> became <i>il-</i> before "
@@ -850,13 +874,13 @@ LEUK = {
           "So <i>lighten</i> is two words as well: to make brighter, and to make less heavy. The sentence says which. The "
           "word sum is the same, light + en, because each <i>light</i> is a base in its own right."], []),
     ],
-    "students": ["light", "lighten", "lunar", "lucid", "translucent", "illustrate", "illustration", "lynx"],
+    "students": ["light", "lighten", "lunar", "lucid", "translucent", "illuminate", "illustrate", "illustration"],
     "s_lead": "These words come from one old word that meant <i>light</i>.",
     "uc": "the word list follows the Indo-European Lexicon, which follows Pokorny, and was checked on 12 November 2026 against "
-          "Etymonline&rsquo;s list for the root, which has every word here or the word it&rsquo;s made from, except "
-          "<i>lynx</i>, whose own Etymonline entry gives the root as probable. Next: check it against Watkins.",
+          "Etymonline&rsquo;s list for the root, which has every word here or the word it&rsquo;s made from. <i>Lynx</i>, "
+          "which Etymonline gives only as probable, is under Marginal or debated. Next: check it against Watkins.",
     "label": "Root family: *leuk-",
-    "desc": "The root *leuk-, light, and its family: illustrate, illuminate, lucid, translucent, lunar, light and lynx, with why illustrate has two l's and lucid has a c.",
+    "desc": "The root *leuk-, light, and its family: illustrate, illuminate, lucid, translucent, lunar and light, with why illustrate has two l's and lucid has a c.",
 }
 ROOTS = [LEG, HAP, DEUK, SEM, MED, LEUK]
 
@@ -877,7 +901,7 @@ def part_kind(p, spells):
 def cluster_words(R):
     """Every (cluster, word, parts, meaning, the spelling to bold) on the page, in order."""
     out = []
-    for c in R["clusters"]:
+    for c in R["clusters"] + R.get("debated", {}).get("clusters", []):
         for group in c["groups"]:
             for item in group:
                 w, parts, mean = item[:3]
@@ -916,6 +940,27 @@ def clusters_html(R):
         return (f'<div class="wsum" id="{doors.word_id(w)}"><span class="sum">{btns}<span class="to"> &rarr; </span>{link}</span>'
                 f'<span class="rm">{mean}</span></div>')
 
+    # Marginal or debated: the same word sums, their parts as plain text (the drill-down's script works on its own panels)
+    deb = R.get("debated")
+    def wsum_plain(c, w, parts, mean, bold):
+        link = f'<a class="rw" href="{etym(w, R["slug"])}">{bold_root(w, bold)}</a>'
+        if not parts:
+            return f'<div class="wsum" id="{doors.word_id(w)}"><span class="sum plainw">{link}</span><span class="rm">{mean}</span></div>'
+        ps = '<span class="pl"> + </span>'.join(f'<span class="part {part_kind(p, c["spells"])}">{html.escape(p.strip("-"))}</span>' for p in parts)
+        return f'<div class="wsum" id="{doors.word_id(w)}"><span class="sum">{ps}<span class="to"> &rarr; </span>{link}</span><span class="rm">{mean}</span></div>'
+    debated = ""
+    if deb:
+        blocks = "".join(
+            f'<div class="dcl" id="c-{c["key"]}"><h3><b>{c["label"]}</b>: {c["head"]}</h3><p class="rh">{c["road"]}.</p><p class="cnote">{c["why"]}</p>'
+            + "".join('<div class="cgroup">' + "".join(wsum_plain(c2, w, p, m, b) for c2, w, p, m, b in words if c2 is c and w in [it[0] for it in g]) + "</div>" for g in c["groups"])
+            + "</div>" for c in deb["clusters"])
+        debated = f"""<section class="about t-only debated" aria-labelledby="deb-h"><div class="wrap">
+<h2 id="deb-h">Marginal or debated</h2>
+<p class="sub">{deb["lead"]}</p>
+{blocks}
+</div></section>
+"""
+
     panels = []
     for c in R["clusters"]:
         groups = "".join('<div class="cgroup">' + "".join(wsum(c, w, p, m, b) for c2, w, p, m, b in words
@@ -950,7 +995,7 @@ def clusters_html(R):
 <div class="pcard" hidden aria-live="polite"></div>
 <script type="application/json" id="cx-data">{script_data}</script>
 </div></section>
-<section class="about t-only" aria-labelledby="pt-h"><div class="wrap">
+{debated}<section class="about t-only" aria-labelledby="pt-h"><div class="wrap">
 <h2 id="pt-h">The parts, and what they mean</h2>
 <p class="sub">Every part in the word sums above, with the words that carry it.</p>
 <div class="pgcols">{gloss(roots, "The root&rsquo;s spellings")}{gloss(pre, "Before the root")}{gloss(suf, "After the root")}{gloss(base, "Other roots")}</div>

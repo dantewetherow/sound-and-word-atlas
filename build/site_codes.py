@@ -118,6 +118,9 @@ SITE_CODES = {
 # 10 November 2026, step 16: a long first vowel in a one-part word has its long mark and no vault, since no letter
 # causes it (open, even, as tiger and paper above); today and around take the seam their word sum cards give them.
 SITE_RULED = {
+    # ruled 12 November 2026: seams at the joins of the parts (il + lustr + ate), syllables crossing them (il | lus | trate);
+    # the u is weak, the stress being on il
+    "illustrate": "s.i c.l + | c.l b.u c.s | c.tr + l.a c.t e>",
     "open": "l.o | c.p b.e c.n", "even": "l.e | c.v b.e c.n",
     "today": "c.t b.o + | c.d t.ay", "around": "b.a + | c.r t.ou c.nd",
 }

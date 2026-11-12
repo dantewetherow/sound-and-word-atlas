@@ -615,6 +615,12 @@ html[data-view="student"] .walk-stage svg { max-height: 52vh; }
 .sum .pl, .sum .to { color: var(--soft); white-space: pre; }
 .part { font: inherit; color: var(--ink); background: none; border: 0; padding: 1px 4px; margin: 0; border-radius: 6px; cursor: pointer; text-decoration: underline dotted var(--soft); text-underline-offset: 4px; }
 .part.root { color: var(--verb); font-weight: 600; }
+/* Marginal or debated (roots.py): the family's hedged words, set apart and a little quieter */
+.debated .dcl { border: 1px dashed var(--line); border-radius: 14px; padding: 14px 16px; margin-top: 14px; background: color-mix(in srgb, var(--card) 60%, transparent); }
+.debated .dcl h3 { margin: 0 0 4px; font-size: 1.05rem; }
+.debated .dcl h3 b { color: var(--verb); }
+.debated .part { font: inherit; }
+.debated .cgroup { margin-top: 10px; }
 .part:hover { background: color-mix(in srgb, var(--modal) 12%, transparent); }
 .part.sel { background: color-mix(in srgb, var(--modal) 22%, transparent); text-decoration: none; }
 .part:focus-visible { outline: 2px solid var(--modal); outline-offset: 1px; }
