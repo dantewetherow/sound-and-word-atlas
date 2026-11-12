@@ -143,7 +143,7 @@ def write(OUT, page, header, footer):
 </main>
 {footer(0)}"""
     (OUT / "presentations.html").write_text(
-        page("Presentations · Sound and Word Atlas", body, 0, "Slide decks from a staff series on Legomorphic Notation, to present or go through on your own."),
+        page("Presentations · A Legend for English Words", body, 0, "Slide decks from a staff series on Legomorphic Notation, to present or go through on your own."),
         encoding="utf-8")
     print(f"wrote presentations.html | {len(DECKS)} deck(s)")
 

@@ -220,7 +220,7 @@ def write(OUT, page, header, footer, coloured, LW):
 {footer(0)}
 <script type="application/json" id="wl-data">{blob}</script>
 <script>{SCRIPT}</script>"""
-    (OUT / "word-lists.html").write_text(page("Where the ELP words come from · Sound and Word Atlas", body, 0,
+    (OUT / "word-lists.html").write_text(page("Where the ELP words come from · A Legend for English Words", body, 0,
                                               "Where the SD23 ELP high-frequency words come from in E. W. Dolch's sight words: tap a bar to see the words."),
                                          encoding="utf-8")
     print(f"wrote word-lists.html | {len(shared)} shared, {len(off)} left out ({len(off_short)} short-vowel), "

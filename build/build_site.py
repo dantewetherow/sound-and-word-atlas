@@ -1,4 +1,4 @@
-"""Build the Sound and Word Atlas site (version 1: the route and its steps) from the manual's route data.
+"""Build A Legend for English Words (the Sound and Word Atlas until 12 November 2026; version 1: the route and its steps) from the manual's route data.
 
 usage: python3 build_site.py <route.json> <out dir> [--standalone]
 The route.json comes from the manual (see ../README.md). Words are drawn with legomorphic_words.py and the
@@ -169,7 +169,7 @@ def header(depth):
     the header pins to the top in a compact form (doors.PIN_JS); head-hold keeps its place so the page doesn't jump."""
     up = "../" * depth
     search, smap, view, menu, door_nav = doors.header_parts(up)
-    return (f'<div class="head-hold"><header class="site"><div class="wrap"><div class="masthead"><a class="brand" href="{up}index.html"><span class="logo">{LOGO}</span><span class="name"><small>Legomorphic Notation</small>Sound and Word Atlas</span></a>'
+    return (f'<div class="head-hold"><header class="site"><div class="wrap"><div class="masthead"><a class="brand" href="{up}index.html"><span class="logo">{LOGO}</span><span class="name"><small>Legomorphic Notation</small>A Legend for English Words</span></a>'
             f'<div class="tools">{search}{smap}{view}{THEME_SWITCH}{menu}</div></div>{door_nav}<!--crumbs--></div></header></div><!--after-head-->')
 
 def footer(depth):
@@ -302,7 +302,7 @@ for i, s in enumerate(STEPS):
 </main>
 {footer(1)}"""
     t = f"Step {n}: {plain(s['title'])}"
-    (OUT / "steps" / fname(n)).write_text(page(t, body, 1, f"{t}, on the Sound and Word Atlas route."), encoding="utf-8")
+    (OUT / "steps" / fname(n)).write_text(page(t, body, 1, f"{t}: a step on the route, a lesson in reading and spelling."), encoding="utf-8")
 
 # ------------------------------------------------------------------ home page (the artifact's own page: no doctype, the host adds it)
 def tile(s):
@@ -351,7 +351,7 @@ uniq = {w for s in STEPS for g in groups_of(s["words_md"]) for w in g}
 n_words = len(uniq) + sum(len(v) - 1 for w, v in SC.VARIANTS.items() if w in uniq)
 n_marked = n_words - len([w for w in uniq if w in SC.UNMARKED or (w not in LW.W and w not in SC.VARIANTS)])
 
-home_head = f"""<title>Sound and Word Atlas</title>
+home_head = f"""<title>A Legend for English Words</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 {FONTS()}
 <link rel="stylesheet" href="site.css">
@@ -382,7 +382,7 @@ home_body = f"""{header(0)}
 </main>
 {footer(0)}"""
 if STANDALONE:
-    home = page("Sound and Word Atlas", home_body, 0,
+    home = page("A Legend for English Words", home_body, 0,
                 "A route through English spelling for teachers: 32 steps, with every word marked in Legomorphic Notation.")
 else:
     home = home_head + home_body
@@ -470,7 +470,7 @@ if ELP_FILE.exists() and all((OUT / "cards" / f).exists() for f, *_ in CARD_SETS
 </div></div></section>
 </main>
 {footer(0)}"""
-    (OUT / "cards.html").write_text(page("Word cards · Sound and Word Atlas", cards_body, 0,
+    (OUT / "cards.html").write_text(page("Word cards · A Legend for English Words", cards_body, 0,
                                          "Printable high-frequency word cards from the SD23 ELP lists, plain on the front and coded on the back."), encoding="utf-8")
     print("wrote cards.html |", ", ".join(t for _, t, *_ in CARD_SETS))
 

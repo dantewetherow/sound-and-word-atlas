@@ -43,7 +43,7 @@ LISTS = [{
     "links": [("Step 22", "steps/22.html", "where <i>said</i> sits on the route"), ("Step 13", "steps/13.html", "<i>played</i>, and a suffix at the seam"),
               ("Sentences", "constructions.html", "frames to say the words in")],
     "source": "Greg Brooks, <i>Dictionary of the British English Spelling System</i> (2015), pp. 191, 196 and 230; the "
-              "analysis is from the atlas&rsquo;s manual, &ldquo;Say, pay, lay&rdquo;.",
+              "analysis is from the manual, &ldquo;Say, pay, lay&rdquo;.",
     "desc": "A spelling list of seven words: say, says, said, pay, paid, lay, laid, with the convention that explains them, words to build, sentences, and a check.",
 }, {
     "slug": "hap", "title": "hap: happy, happen, mishap", "kind": "One base, many joins",
@@ -203,7 +203,7 @@ def write_check(OUT, page, header, footer, X, slug, C):
 </div></section>
 </main>
 {footer(1)}"""
-    (OUT / "lists" / f"{slug}-check.html").write_text(page(f"Check: {C['title']} · Sound and Word Atlas", body, 1, C["desc"]), encoding="utf-8")
+    (OUT / "lists" / f"{slug}-check.html").write_text(page(f"Check: {C['title']} · A Legend for English Words", body, 1, C["desc"]), encoding="utf-8")
 
 
 def write(OUT, page, header, footer, X):
@@ -256,7 +256,7 @@ def write(OUT, page, header, footer, X):
 </div></section>
 </main>
 {footer(1)}"""
-        (OUT / "lists" / f"{L['slug']}.html").write_text(page(f"Spelling list: {L['title']} · Sound and Word Atlas", body, 1, L["desc"]), encoding="utf-8")
+        (OUT / "lists" / f"{L['slug']}.html").write_text(page(f"Spelling list: {L['title']} · A Legend for English Words", body, 1, L["desc"]), encoding="utf-8")
     for slug, C in CHECKS.items(): write_check(OUT, page, header, footer, X, slug, C)
     print(f"wrote {len(LISTS)} spelling list(s), {len(CHECKS)} check(s)")
     return [(p, t) for p, _, t, _ in PAGES]

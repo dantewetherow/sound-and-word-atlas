@@ -152,7 +152,7 @@ def write(OUT, door_page, X):
 </div></section>
 {section(note=X["uc"]("a word is either marked, so it can be walked, or shown as a word sum only. Next: the word built from left to right, a unit at a swipe; and draft marks for more words, labelled as drafts, for teachers to check."))}
 <section class="about t-only"><div class="wrap"><p><a href="explorations.html">A family built in three moves: <i>note</i>, <i>notate</i>, <i>notation</i></a>. Every analysed word, by its parts, is in <a href="parts.html">Parts</a>.</p></div></section>"""
-    door_page("walk", "Words · Sound and Word Atlas", "Look up a word and walk through it: its marks, a move at a time, and its parts.", body)
+    door_page("walk", "Words · A Legend for English Words", "Look up a word and walk through it: its marks, a move at a time, and its parts.", body)
     return len(index), skipped
 
 

@@ -19,7 +19,7 @@ page. Nothing typed leaves the device. Without script the box stays hidden, and 
 import html, json, re
 
 DOORS = [   # slug, name, (unused), in plain words, the short word in student view (None: for teachers only)
-    ("progressions", "Steps", "", "The route through English spelling, in order. Start here to learn the notation.", "Steps"),
+    ("progressions", "Steps", "", "Lessons in reading and spelling, in order: the route through English spelling. Start here to learn the notation.", "Steps"),
     ("walk", "Words", "", "Look up a word and walk through it: its marks, a move at a time, and its parts.", "Words"),
     ("parts", "Parts", "", "Prefixes, suffixes, roots and joins, each with every word that has it.", "Parts"),
     ("teachers", "For teachers", "", "To print and present, how the route lines up with programs, and the reasons and sources.", None),
@@ -42,7 +42,7 @@ HEADS = {
 
 # The tree: (path, layer, title, one-line summary). Steps join it in tree().
 PAGES = [
-    ("index.html", None, "Home", "Legomorphic Notation and the three layers of the atlas."),
+    ("index.html", None, "Home", "Legomorphic Notation and the three layers of the site."),
     ("progressions.html", "progressions", "Steps", "The route through English spelling: the steps in their bands."),
     ("notations.html", "progressions", "The marks", "The marks of Legomorphic Notation, each drawn alone on one word."),
     ("walk.html", "walk", "Words", "Look up a word and walk through it, a move at a time, with its parts."),
@@ -96,7 +96,7 @@ VIEW_SWITCH = ('<div class="view" role="group" aria-label="View" hidden>'
 
 def header_parts(up):
     """The search box, the site map link, the view switch, the menu button and the doors, for header()."""
-    search = (f'<div class="search" data-up="{up}" role="search" hidden><label class="sr" for="q">Search the atlas</label>'
+    search = (f'<div class="search" data-up="{up}" role="search" hidden><label class="sr" for="q">Search the site</label>'
               f'<input id="q" type="search" placeholder="Search words, steps, marks" autocomplete="off" spellcheck="false" '
               f'aria-describedby="q-count"><span class="sr" id="q-count" aria-live="polite"></span><div class="results" hidden></div></div>')
     smap = f'<a class="smap" href="{up}sitemap.html">Site map</a>'
@@ -247,7 +247,7 @@ def write(OUT, page, header, footer, X):
         (OUT / f"{slug}.html").write_text(page(title, body, 0, desc), encoding="utf-8")
 
     # Progressions: the route, moved from the home page.
-    door_page("progressions", "Progressions · Sound and Word Atlas", "The route through English spelling, step by step.", f"""{door_head("progressions")}
+    door_page("progressions", "Progressions · A Legend for English Words", "The route through English spelling, step by step.", f"""{door_head("progressions")}
 <section class="route" id="route" aria-labelledby="route-h"><div class="wrap">
 <h2 id="route-h" class="t-only">The route at a glance</h2>
 <p class="lead t-only">{X["route_lead"]} Open a step to see its words marked, the marks it brings in, and the pages in Carney's survey that back it.</p>
@@ -258,7 +258,7 @@ def write(OUT, page, header, footer, X):
 
     # Notations: the legend, moved from the home page.
     note_word = X["svg_of"]("notation", 58, label="notation, marked")
-    door_page("notations", "Notations · Sound and Word Atlas", "The marks of Legomorphic Notation, each drawn alone on one word.", f"""{door_head("notations", f'<div class="door-word">{note_word}</div>')}
+    door_page("notations", "Notations · A Legend for English Words", "The marks of Legomorphic Notation, each drawn alone on one word.", f"""{door_head("notations", f'<div class="door-word">{note_word}</div>')}
 <section class="marks" id="marks" aria-labelledby="marks-h"><div class="wrap">
 <h2 id="marks-h">Reading the marks</h2>
 <p class="sub t-only">Twelve marks, each drawn alone on one word. A step page shows a word with all its marks at once, and <a href="definitions.html#marks">Definitions</a> says where each name comes from.</p>
@@ -270,7 +270,7 @@ def write(OUT, page, header, footer, X):
     LW, svg_of = X["LW"], X["svg_of"]
     fam = "".join(f'<figure class="word" id="{word_id(w)}">{svg_of(w, 58, label=f"{w}, marked")}<figcaption><span class="ws">{s}</span><span class="t-only">{c}</span></figcaption></figure>'
                   for w, s, c in X["morph"])
-    door_page("explorations", "Explorations · Sound and Word Atlas", "Words to take apart and build: families and contrasts.", f"""{door_head("explorations")}
+    door_page("explorations", "Explorations · A Legend for English Words", "Words to take apart and build: families and contrasts.", f"""{door_head("explorations")}
 <section class="about" id="note-family" aria-labelledby="nf-h"><div class="wrap">
 <h2 id="nf-h">A family: <i>note</i>, <i>notate</i>, <i>notation</i></h2>
 <p class="sub t-only">Each word is built from the one before it. At each seam the <i>e</i> drops, and its job, making the <i>o</i> spell its name, passes to the next vowel.</p>
@@ -293,7 +293,7 @@ def write(OUT, page, header, footer, X):
             if any(k in name for k in ("operator", "modal", "sentence", "verb", "action", "actor")) and (OUT / "sessions" / "handouts" / f"{name}.pdf").exists():
                 hand.append(f'<li><a href="sessions/handouts/{name}.pdf">{html.escape(title)}</a><span class="what">{what}</span></li>')
     hands = f'<ul class="handouts">{"".join(hand)}</ul>' if hand else ""
-    door_page("constructions", "Constructions · Sound and Word Atlas", "How sentences are built, and the flip from claim to question.", f"""{door_head("constructions")}
+    door_page("constructions", "Constructions · A Legend for English Words", "How sentences are built, and the flip from claim to question.", f"""{door_head("constructions")}
 <section class="about" id="flip" aria-labelledby="flip-h"><div class="wrap">
 <h2 id="flip-h">From a claim to a question</h2>
 <p class="sub t-only">An actor, an operator and an action make a claim. When the operator moves to the front, the claim becomes a question. The Dialogue Team acts it out with their faces: their words with the letters lifted out.</p>
@@ -309,7 +309,7 @@ def write(OUT, page, header, footer, X):
     # Derivations: the plan for the roots, and what's here now.
     import roots
     X["roots"] = roots.write(OUT, page, header, footer, X)
-    door_page("derivations", "Derivations · Sound and Word Atlas", "Where words come from, and the sources the roots will cite.", f"""{door_head("derivations")}
+    door_page("derivations", "Derivations · A Legend for English Words", "Where words come from, and the sources the roots will cite.", f"""{door_head("derivations")}
 <section class="about"><div class="wrap"><div class="door-tiles"><a class="dtile" href="roots/leg.html"><b>*leg-<span class="t-only">: to gather</span></b><span class="t-only">The first root family: <i>logic</i>, <i>collect</i>, <i>legend</i>, <i>lesson</i>, <i>loyal</i>, and the notation&rsquo;s own name.</span><span class="s-only">gather</span></a><a class="dtile" href="roots/hap.html"><b>hap<span class="t-only">: chance, luck</span></b><span class="t-only">A base family: <i>happy</i>, <i>happen</i>, <i>mishap</i>, <i>hapless</i>, <i>haphazard</i>, <i>perhaps</i>, and why <i>happy</i> has two p&rsquo;s.</span><span class="s-only">luck</span></a></div></div></section>
 <section class="about t-only" aria-labelledby="dv-h"><div class="wrap prose">
 <h2 id="dv-h">Roots, and the meanings of parts</h2>
@@ -323,12 +323,12 @@ def write(OUT, page, header, footer, X):
         return '<div class="door-tiles">' + "".join(
             f'<a class="dtile" href="{p}"><b>{t}</b><span>{s}</span></a>' for p, t, s in items) + "</div>"
     pick = lambda door: [(p, t, s) for p, d, t, s in PAGES if d == door and p != f"{door}.html"]
-    door_page("instructions", "To print and present · Sound and Word Atlas", "Presentations and word cards.", f"""{door_head("instructions")}
+    door_page("instructions", "To print and present · A Legend for English Words", "Presentations and word cards.", f"""{door_head("instructions")}
 <section class="about"><div class="wrap">
 {tiles([x for x in pick("teachers") if x[0] in ("presentations.html", "cards.html")])}
 {uc("next, the routines: the learning loop, marking a word by hand, flips from claim to question, and word sums at the seam.")}
 </div></section>""")
-    door_page("explanations", "Reasons and sources · Sound and Word Atlas", "Definitions, the notation and its name, and credits.", f"""{door_head("explanations")}
+    door_page("explanations", "Reasons and sources · A Legend for English Words", "Definitions, the notation and its name, and credits.", f"""{door_head("explanations")}
 <section class="about"><div class="wrap">
 {tiles([x for x in pick("teachers") if x[0] in ("definitions.html", "about.html", "credits.html")])}
 {uc("next, pages of ideas: the primary terms from phone to sememe, grapheme two ways, why English spells the way it does, and what the name claims.")}
@@ -340,7 +340,7 @@ def write(OUT, page, header, footer, X):
     shelf = [("To print and present", ("presentations.html", "cards.html")), ("Spelling lists", tuple(p for p, *_ in lists.PAGES if not p.endswith('-check.html'))), ("Sentences", ("constructions.html",)),
              ("Connections", ("word-lists.html", "ufli.html")), ("Reasons and sources", ("definitions.html", "about.html", "credits.html"))]
     by_path = {p: (p, t_, s) for p, d, t_, s in PAGES}
-    door_page("teachers", "For teachers · Sound and Word Atlas", DOOR["teachers"][3], f"""{door_head("teachers")}
+    door_page("teachers", "For teachers · A Legend for English Words", DOOR["teachers"][3], f"""{door_head("teachers")}
 {"".join(f'<section class="about"><div class="wrap"><h2>{h}</h2>{tiles([by_path[p] for p in ps])}</div></section>' for h, ps in shelf)}""")
 
     # The Parts layer (parts.py), then the Words layer (walk.py), which shows each word's sum.
@@ -361,9 +361,9 @@ def write(OUT, page, header, footer, X):
         steps = "".join(f'<li><a href="steps/{s["n"]:02d}.html">Step {s["n"]}: {md(s["title"])}</a></li>' for s in X["STEPS"]) if slug == "progressions" else ""
         items.append(f'<li{" class=t-only" if sw is None else ""}><a href="{slug}.html"><b>{name}</b></a> <span>{plain_words}</span>'
                      + (f'<ol class="kids">{steps}</ol>' if steps else "") + (f'<ul class="kids">{kids}</ul>' if kids else "") + "</li>")
-    door_page("sitemap", "Site map · Sound and Word Atlas", "Every page of the Sound and Word Atlas, layer by layer.", f"""<section class="hero"><div class="wrap">
+    door_page("sitemap", "Site map · A Legend for English Words", "Every page of A Legend for English Words, layer by layer.", f"""<section class="hero"><div class="wrap">
 <h1>Site map</h1>
-<p class="lead">Every page. Three layers hold the atlas: the steps in order, the words one at a time, and the parts words are built from. The rest is on the teachers&rsquo; shelf.</p>
+<p class="lead">Every page. Three layers hold the site: the steps in order, the words one at a time, and the parts words are built from. The rest is on the teachers&rsquo; shelf.</p>
 </div></section>
 <section class="about"><div class="wrap"><ul class="smap-tree"><li><a href="index.html"><b>Home</b></a></li>{"".join(items)}</ul></div></section>""")
 

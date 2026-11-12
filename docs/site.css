@@ -141,6 +141,7 @@ footer.site .wrap { padding-block: 22px 32px; color: var(--soft); font-size: 0.8
 /* home */
 .hero .wrap { padding-block: 48px 36px; display: grid; gap: 14px; }
 .lead { font-size: 1.15rem; max-width: 62ch; }
+.sublead { font-size: clamp(1.1rem, 2.4vw, 1.35rem); color: var(--soft); margin: 0 0 14px; max-width: 44ch; }
 .route .wrap, .marks .wrap, .about .wrap { padding-block: 28px; display: grid; gap: 10px; }
 .sub { color: var(--soft); max-width: 66ch; }
 .band { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 20px 28px; padding-block: 24px; border-top: 1px solid var(--line); }

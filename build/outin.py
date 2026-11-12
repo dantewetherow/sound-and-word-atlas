@@ -119,7 +119,7 @@ slide("A caution", f"""<h2 class="head">A caution: the parts stay, the sounds mo
 # 14 sources
 slide("Sources", f"""<h2 class="head">Sources</h2>
 <p class="body">Edward Carney, <i>A Survey of English Spelling</i> (Routledge, 1994): the <i>e</i> drops before an ending that begins with a vowel, p. 130, and stays where it still nudges <i>c</i> or <i>g</i> (<i>noticeable</i>), p. 131; the <i>e</i> of <i>ee</i> and <i>oe</i> stays before <i>i</i> (<i>seeing</i>, <i>canoeing</i>), so that <i>ei</i> and <i>oi</i> aren&rsquo;t read, p. 131.</p>
-<p class="body">The histories of the words are in Etymonline. The families are on the Sound and Word Atlas: <a href="../roots/deuk.html">*deuk-</a> for <i>educate</i> and <i>produce</i>, <a href="../roots/med.html">*med-</a> for <i>accommodate</i>, and <a href="../parts.html">Parts</a> for every word with each suffix. This is <a href="../steps/15.html">step 15</a> of its route.</p>
+<p class="body">The histories of the words are in Etymonline. The families are on A Legend for English Words: <a href="../roots/deuk.html">*deuk-</a> for <i>educate</i> and <i>produce</i>, <a href="../roots/med.html">*med-</a> for <i>accommodate</i>, and <a href="../parts.html">Parts</a> for every word with each suffix. This is <a href="../steps/15.html">step 15</a> of its route.</p>
 <p class="source">Shared under CC BY-NC-SA 4.0.</p>""", "mid")
 
 
@@ -140,7 +140,7 @@ def main():
   <div class="num" id="num" aria-live="polite"></div>
 </div>
 <div id="controls">
-  <a id="home" href="../presentations.html" title="All presentations" aria-label="All presentations on the Sound and Word Atlas" onclick="event.stopPropagation()">&#8962;</a>
+  <a id="home" href="../presentations.html" title="All presentations" aria-label="All presentations on A Legend for English Words" onclick="event.stopPropagation()">&#8962;</a>
   <button id="prev" aria-label="Previous slide">&lsaquo;</button>
   <button id="next" aria-label="Next slide">&rsaquo;</button>
   <button id="full" aria-label="Full screen">&#10530;</button>

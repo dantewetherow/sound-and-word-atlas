@@ -216,6 +216,6 @@ def write(OUT, page, header, footer, svg_of, KEY, LW):
 </div></section>
 </main>
 {footer(0)}"""
-    (OUT / "definitions.html").write_text(page("Definitions · Sound and Word Atlas", body, 0,
+    (OUT / "definitions.html").write_text(page("Definitions · A Legend for English Words", body, 0,
                                                "What legomorphic, legomorph and legomorphics mean, and the words the notation uses for sentences, marks and teaching."),
                                           encoding="utf-8")

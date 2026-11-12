@@ -374,7 +374,7 @@ def write(OUT, door_page, X):
 {X["uc"]("the parts come from the words analysed so far: the route, the grade 3 word sums and the first families. Next: more families, starting with <i>accommodate</i> and the prefix <i>com-</i>, and a search by where a part sits in the word.")}
 </div></section>
 {PARTS_JS}{pop_js()}"""
-    door_page("parts", "Parts · Sound and Word Atlas", "Every analysed word, gathered by the parts it is built from.", body)
+    door_page("parts", "Parts · A Legend for English Words", "Every analysed word, gathered by the parts it is built from.", body)
 
     # for the Words layer: each word's sum, part by part, and for the search: every part
     sums = {}

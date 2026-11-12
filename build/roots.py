@@ -1137,5 +1137,5 @@ def write(OUT, page, header, footer, X):
 </main>
 {"" if R.get("clusters") else PT.pop_js("../")}
 {footer(1)}"""
-        (OUT / "roots" / f"{R['slug']}.html").write_text(page(f"{R['root']}: {R['gloss']} · Sound and Word Atlas", body, 1, R["desc"]), encoding="utf-8")
+        (OUT / "roots" / f"{R['slug']}.html").write_text(page(f"{R['root']}: {R['gloss']} · A Legend for English Words", body, 1, R["desc"]), encoding="utf-8")
     return found

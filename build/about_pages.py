@@ -20,7 +20,7 @@ LICENCE = ('<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creativ
 CONTACT = """<p class="contact"><a class="btn" id="contact" href="#contact-note">Email Dante Wetherow</a></p>
 <p class="sub" id="contact-note">It opens a new message in your email app.<noscript> Write to dante.wetherow at sd23.bc.ca.</noscript></p>
 <script>(() => { const a = document.getElementById('contact'); const u = ['dante', 'wetherow'].join('.'), d = ['sd23', 'bc', 'ca'].join('.');
-  a.href = 'mailto:' + u + '@' + d + '?subject=' + encodeURIComponent('Sound and Word Atlas'); })();</script>"""
+  a.href = 'mailto:' + u + '@' + d + '?subject=' + encodeURIComponent('A Legend for English Words'); })();</script>"""
 
 EXAMPLES = [("could", "A red bond bar under <i>oul</i>, the letters that spell its vowel sound."),
             ("like", "The silent <i>e</i> sits in its cone, and its vault reaches back to make the <i>i</i> long."),
@@ -78,6 +78,7 @@ def write(OUT, page, header, footer, svg_of, LW):
 <p>English has both families. From the Greek come <i>lexicon</i>, <i>dialogue</i> and <i>logic</i>; from the Latin, <i>legible</i>, <i>lecture</i>, <i>collect</i> and <i>select</i>. Linguists trace them all to a Proto-Indo-European root, written *leg-, to collect or gather.</p>
 <p><i>Morphē</i> (μορφή) is Greek for form or shape. It gives us <i>morpheme</i>, and <i>morphology</i>, the study of word forms, which joins the same two roots the other way round.</p>
 <p>So the notation is named for the shapes words take when we gather them: the sounds we pick out and say, the letters we pick out and read, and the parts they build together.</p>
+<p>The site is called <i>A Legend for English Words</i> after the other sense of <i>legend</i>: the key on a map that tells you how to read it. The word is Latin <i>legenda</i>, things to be read, from <i>legere</i>, so it comes from the same root as the notation. The notation is a legend in that sense: it doesn&rsquo;t claim to have mapped every word, but gives the key for reading the one in front of you. The light in the subtitle is another root, <a href="roots/leuk.html"><i>*leuk-</i></a>, the one in <i>illustrate</i> and <i>illuminate</i>.</p>
 <p>The dictionary entry for <i>legomorphic</i>, with <i>legomorph</i> and <i>legomorphics</i>, is on the <a href="definitions.html">Definitions</a> page.</p>
 <p class="sub">Etymologies from the Online Etymology Dictionary: <a href="https://www.etymonline.com/word/*leg-">*leg-</a> and <a href="https://www.etymonline.com/word/morphology">morphology</a>.</p>
 </div></section>
@@ -110,7 +111,7 @@ def write(OUT, page, header, footer, svg_of, LW):
 </div></section>
 </main>
 {footer(0)}"""
-    (OUT / "about.html").write_text(page("About Legomorphic Notation · Sound and Word Atlas", about, 0,
+    (OUT / "about.html").write_text(page("About Legomorphic Notation · A Legend for English Words", about, 0,
                                          "What Legomorphic Notation is, where the word comes from, and how it's used."), encoding="utf-8")
 
     credits = f"""{header(0)}
@@ -219,7 +220,7 @@ def write(OUT, page, header, footer, svg_of, LW):
 </div></section>
 </main>
 {footer(0)}"""
-    (OUT / "credits.html").write_text(page("Credits and copyright · Sound and Word Atlas", credits, 0,
+    (OUT / "credits.html").write_text(page("Credits and copyright · A Legend for English Words", credits, 0,
                                            "The writers Legomorphic Notation draws on, the site's copyright and licence, and how to get in touch."),
                                       encoding="utf-8")
     print("wrote about.html, credits.html")

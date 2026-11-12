@@ -115,7 +115,7 @@ slide("Typically", f"""<h2 class="display small">A, e, i, o, u,<br>and <span cla
 slide("Sources", f"""<h2 class="head">Sources</h2>
 <p class="body">Edward Carney, <i>A Survey of English Spelling</i> (Routledge, 1994): y as a consonant is &ldquo;usually found in word-initial position, often in very common&rdquo; words, and only occasionally inside a single word part (<i>canyon</i>), p. 255; long i at the end of a word (<i>my</i>), p. 151; <i>-y</i> and <i>-ies</i>, p. 70; <i>carry</i>, <i>carried</i>, p. 135.</p>
 <p class="body">The count was made for this deck from the 20,000 commonest words in the <i>wordfreq</i> list (Robyn Speer). It counts spellings, not sounds: a word that begins with y, and a word that ends in one.</p>
-<p class="body">More on y and i at a join is in <a href="y-to-i.html">Y to i at the seam</a>. The marks are on the Sound and Word Atlas&rsquo;s <a href="../notations.html">marks</a> page.</p>
+<p class="body">More on y and i at a join is in <a href="y-to-i.html">Y to i at the seam</a>. The marks are on A Legend for English Words&rsquo;s <a href="../notations.html">marks</a> page.</p>
 <p class="source">Shared under CC BY-NC-SA 4.0.</p>""", "mid")
 
 
@@ -136,7 +136,7 @@ def main():
   <div class="num" id="num" aria-live="polite"></div>
 </div>
 <div id="controls">
-  <a id="home" href="../presentations.html" title="All presentations" aria-label="All presentations on the Sound and Word Atlas" onclick="event.stopPropagation()">&#8962;</a>
+  <a id="home" href="../presentations.html" title="All presentations" aria-label="All presentations on A Legend for English Words" onclick="event.stopPropagation()">&#8962;</a>
   <button id="prev" aria-label="Previous slide">&lsaquo;</button>
   <button id="next" aria-label="Next slide">&rsaquo;</button>
   <button id="full" aria-label="Full screen">&#10530;</button>

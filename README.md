@@ -1,4 +1,6 @@
-# Sound and Word Atlas
+# A Legend for English Words
+
+*Orthography, morphology, phonology and etymology, brought to light.* The site of Legomorphic Notation, at legomorphics.ca. Named *A Legend for English Words* on 12 November 2026, as a trial (it was the Sound and Word Atlas): a legend in the map sense, the key for reading what is in front of you, from Latin *legenda*, things to be read, of the root *\*leg-*; the light of the subtitle is *\*leuk-*. The repository keeps its old name.
 
 A route through English spelling for teachers: 32 steps in eight bands, with every word drawn in Legomorphic Notation. Each step has its own page with its words marked, the marks it brings in, its kernel words and contrasts, and the pages in Edward Carney's *A Survey of English Spelling* (Routledge, 1994) that back it.
 
