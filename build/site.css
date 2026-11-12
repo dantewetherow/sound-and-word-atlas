@@ -841,3 +841,11 @@ header.site.pinned.open nav.doors { display: flex; padding-block: 6px 4px; }
   .tents-page .hero + .tset { page-break-before: auto; }
   .tents-page .hero { display: none; }
 }
+
+/* the swap grids under the tent cards */
+.swap-grid { border-collapse: collapse; font-size: 0.92rem; min-width: 880px; }
+.swap-grid th, .swap-grid td { border: 1px solid var(--line); padding: 6px 8px; text-align: left; vertical-align: top; }
+.swap-grid thead th { font-family: var(--display); font-weight: 500; font-size: 1rem; background: var(--card); }
+.swap-grid tbody th { font-family: var(--display); font-weight: 500; font-size: 1.05rem; white-space: nowrap; background: var(--card); }
+.swap-grid .gn { color: var(--soft); font-family: var(--body); font-size: 0.8rem; }
+.swap-grid td:empty { background: repeating-linear-gradient(135deg, transparent 0 6px, var(--line) 6px 7px); opacity: 0.5; }
