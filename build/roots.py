@@ -163,7 +163,7 @@ PARTS = {
     "di-": "apart: Latin <i>dis-</i>, written <i>di-</i> before l",
     "re-": "again, back",
     "de-": "down, away",
-    "il-": "not: Latin <i>in-</i>, written <i>il-</i> before l",
+    "il-": "not, as in <i>illegal</i>; or in, into, as in <i>illuminate</i>: two Latin prefixes spelled <i>in-</i>, both written <i>il-</i> before l",
     "dis-": "not, the opposite of",
     "dia-": "through, across, between (Greek)",
     "ec-": "out (Greek <i>ek</i>)",
@@ -726,6 +726,139 @@ MED = {
     "desc": "The root *med-, to take the right measure, and its family: mode, model, modern, medicine, must and accommodate, with why accommodate has two c's and two m's.",
 }
 ROOTS = [LEG, HAP, DEUK, SEM, MED]
+
+
+# ------------------------------------------------------------------ *leuk-
+# Made 12 November 2026, as the home of illustrate. The word list follows the Indo-European Lexicon's entry (Pokorny's
+# leuk-, to light, shine; see), fetched that day, and was checked against Etymonline's list for the root. Etymonline
+# lists illustration and illumination (the verbs are their stems) and doesn't list lynx under the root, though its
+# entry for lynx traces the name to it, probably for the cat's sharp sight.
+LEUK_ROADS = [
+    ("Latin <i>l&umacr;str&amacr;re</i>", "to make bright, to light up", [("lustr", "lustr, lustre")]),
+    ("Latin <i>l&umacr;men</i>", "a light", [("lumin", "lumen, lumin")]),
+    ("Latin <i>l&umacr;x</i>, <i>l&umacr;c&emacr;re</i>", "light; to shine", [("luc", "luc, lux")]),
+    ("Latin <i>l&umacr;na</i>", "the moon: the bright one", [("lun", "lun")]),
+    ("Greek <i>leukos</i>", "white, bright", [("greek", "leuk, lynx")]),
+    ("Old English <i>l&emacr;oht</i>", "light", [("germanic", "light")]),
+]
+LEUK_CLUSTERS = [
+    {"key": "lustr", "label": "lustr, lustre", "spells": ["lustr", "lustre"], "head": "make bright; a shine",
+     "road": "Latin <i>l&umacr;str&amacr;re</i>, to make bright, to light up, joined in <i>ill&umacr;str&amacr;re</i> to <i>in-</i>, in, on",
+     "note": "To illustrate is to throw light on a thing. It meant that before it meant pictures: first to make bright or "
+             "famous, then to make clear by examples, and only later to add pictures to a book.",
+     "groups": [
+         [("illustrate", ["il-", "lustr", "-ate"], "throw light on: make clear, by an example or a picture"),
+          ("illustration", ["il-", "lustr", "-at(e)", "-ion"], "an example or a picture that makes something clear"),
+          ("illustrative", ["il-", "lustr", "-at(e)", "-ive"], "serving to make clear")],
+         [("illustrious", ["il-", "lustr", "-ious"], "shining: famous for what one has done")],
+         [("lustre", None, "a soft shine; <i>luster</i> in American spelling", "lustre"),
+          ("lacklustre", ["lack", "lustre"], "without shine: dull")],
+     ]},
+    {"key": "lumin", "label": "lumen, lumin", "spells": ["lumen", "lumin"], "head": "a light",
+     "road": "Latin <i>l&umacr;men</i>, a light; <i>l&umacr;minis</i>, of a light",
+     "note": "Latin wrote <i>lumen</i> on its own and <i>lumin-</i> with an ending after it, as English does: lumen, but "
+             "lumin + ous.",
+     "groups": [
+         [("illuminate", ["il-", "lumin", "-ate"], "light up; make clear"),
+          ("illumination", ["il-", "lumin", "-at(e)", "-ion"], "a lighting up")],
+         [("luminous", ["lumin", "-ous"], "giving off light"), ("luminary", ["lumin", "-ary"], "a body that gives light; a person who lights the way")],
+         [("lumen", ["lumen"], "a measure of light: what a bulb&rsquo;s box counts")],
+     ]},
+    {"key": "luc", "label": "luc, lux", "spells": ["luc", "lux"], "head": "light; shine",
+     "road": "Latin <i>l&umacr;x</i>, light, <i>l&umacr;cis</i>, of light, and <i>l&umacr;c&emacr;re</i>, to shine",
+     "note": "<i>Lux</i> is luc + s. The x spells the c and the s together, so the c is hidden. Take the s away and the c "
+             "comes back: <i>lucid</i>, <i>lucent</i>.",
+     "groups": [
+         [("lucid", ["luc", "-id"], "clear: easy to understand"),
+          ("elucidate", ["e-", "luc", "-id", "-ate"], "make clear: bring out into the light")],
+         [("lucent", ["luc", "-ent"], "shining"), ("translucent", ["trans-", "luc", "-ent"], "letting light through, but not clear like glass")],
+         [("pellucid", ["pel-", "luc", "-id"], "clear right through")],
+         [("lux", ["lux"], "a measure of the light falling on a surface")],
+     ]},
+    {"key": "lun", "label": "lun", "spells": ["lun"], "head": "the moon",
+     "road": "Latin <i>l&umacr;na</i>, the moon, from an older <i>*leuksn&amacr;</i>: the bright one",
+     "groups": [[("lunar", ["lun", "-ar"], "having to do with the moon")]]},
+    {"key": "greek", "label": "leuk, lynx", "spells": ["leuk", "leuko", "lynx"], "head": "white, bright",
+     "road": "Greek <i>leukos</i>, white, bright",
+     "note": "<i>Lynx</i> came to English from Greek through Latin. The cat was probably named for its sharp sight.",
+     "groups": [
+         [("leukemia", ["leuk", "-emia"], "a cancer of the blood, named for its white cells; <i>leukaemia</i> in British spelling"),
+          ("leukocyte", ["leuko", "cyte"], "a white blood cell")],
+         [("lynx", None, "a wild cat with sharp eyes", "lynx")],
+     ]},
+    {"key": "germanic", "label": "light", "spells": ["light"], "head": "light: English&rsquo;s own word",
+     "road": "Old English <i>l&emacr;oht</i>, light",
+     "note": "Not every <i>light</i> is this root&rsquo;s. See <a href=\"#two-h\">Two lights</a>.",
+     "groups": [
+         [("light", ["light"], "brightness: what lets us see"), ("lighten", ["light", "-en"], "make brighter")],
+         [("lightning", None, "a flash of light in a storm: once <i>lightening</i>", "light")],
+     ]},
+]
+PARTS.update({
+    "pel-": "through: Latin <i>per-</i>, written <i>pel-</i> before l",
+    "lack": "be without: an English word",
+    "-ous": "full of, having",
+    "-id": "having the quality of: Latin <i>-idus</i>",
+    "-emia": "a condition of the blood (Greek <i>haima</i>, blood)",
+    "cyte": "a cell (Greek <i>kytos</i>, a hollow)",
+    "-en": "make, or become",
+})
+ROOT_PARTS.update({
+    "lustr": "make bright: Latin <i>l&umacr;str&amacr;re</i>",
+    "lustre": "a shine: Latin <i>l&umacr;str&amacr;re</i>, through French",
+    "lumin": "a light: Latin <i>l&umacr;men</i>, <i>l&umacr;minis</i>",
+    "lumen": "a light: Latin <i>l&umacr;men</i>",
+    "luc": "light, shine: Latin <i>l&umacr;x</i>, <i>l&umacr;cis</i>, <i>l&umacr;c&emacr;re</i>",
+    "lux": "light: Latin <i>l&umacr;x</i>",
+    "lun": "the moon: Latin <i>l&umacr;na</i>",
+    "leuk": "white: Greek <i>leukos</i>",
+    "leuko": "white: Greek <i>leukos</i>",
+    "light": "light: Old English <i>l&emacr;oht</i>",
+})
+LEUK = {
+    "slug": "leuk", "root": "*leuk-", "gloss": "light, brightness", "kind": "a root family",
+    "h1_s": "*leuk- means &lsquo;light&rsquo;",
+    "lead": "Light, brightness: to shine. Latin made this Proto-Indo-European root into <i>l&umacr;x</i>, light, and "
+            "<i>l&umacr;c&emacr;re</i>, to shine; into <i>l&umacr;men</i>, a light; into <i>l&umacr;str&amacr;re</i>, to make "
+            "bright; and into <i>l&umacr;na</i>, the moon, the bright one. Greek made it <i>leukos</i>, white. English kept "
+            "<i>light</i>. The family is the home of <i>illustrate</i>: to throw light on a thing, by an example or a picture.",
+    "drawn": ("light", "light, marked"),
+    "sources": [("Indo-European Lexicon, leuk- (Linguistics Research Center, University of Texas at Austin), which follows Pokorny: the list this family is drawn from", "https://lrc.la.utexas.edu/lex/master/1197"),
+                ("Etymonline, *leuk-: the root&rsquo;s list, which has illustration, illumination and every Latin, Greek and English road here", "https://www.etymonline.com/word/*leuk-"),
+                ("Etymonline: <i>illustrate</i>, from Latin <i>ill&umacr;str&amacr;re</i>, in- + <i>l&umacr;str&amacr;re</i>", "https://www.etymonline.com/search?q=illustrate"),
+                ("Etymonline: <i>illuminate</i>, from Latin in- + <i>l&umacr;men</i>", "https://www.etymonline.com/word/Illuminate"),
+                ("Etymonline, *legwh-: the root of <i>light</i>, not heavy, and of <i>lung</i>", "https://www.etymonline.com/word/*legwh-")],
+    "roads": LEUK_ROADS, "clusters": LEUK_CLUSTERS, "parts": PARTS, "root_parts": ROOT_PARTS,
+    "extra": [
+        ("il", "Il-: in- before l",
+         ["Why two l&rsquo;s in <i>illustrate</i>? The first belongs to the prefix. Latin <i>in-</i> became <i>il-</i> before "
+          "the l of <i>lustr</i> and <i>lumin</i>, as it does before <i>legal</i>. Each part brings its own l: il + lustr + ate, "
+          "il + lumin + ate.",
+          "Here <i>in-</i> means in, into: to put light into a thing. In <i>illegal</i> it means not. They are two Latin "
+          "prefixes spelled alike, and both are written <i>il-</i> before l. <i>Pellucid</i> does the same with "
+          "<i>per-</i>, through: pel + luc + id.",
+          "More on prefixes that change to match is with <a href=\"sem.html#front-h\"><i>assimilate</i></a>."], []),
+        ("lux", "The c inside lux",
+         ["<i>Lux</i>, light, ends in x, and x spells two sounds, /k/ and /s/. In Latin those were the c of the root and an "
+          "ending s: luc + s. Wherever the s isn&rsquo;t there, the c shows again: <i>lucid</i>, <i>lucent</i>, "
+          "<i>translucent</i>, <i>elucidate</i>. A speller who knows the root is <i>luc</i> knows why those words have a c "
+          "and not a k or an s."], []),
+        ("two", "Two lights",
+         ["English has two words spelled <i>light</i>. One is this root&rsquo;s: brightness, a lamp, to light a fire. The "
+          "other means not heavy, and it comes from another root, <i>*legwh-</i>, which also gave <i>lung</i>, the light "
+          "organ. They met in the same spelling by chance.",
+          "So <i>lighten</i> is two words as well: to make brighter, and to make less heavy. The sentence says which. The "
+          "word sum is the same, light + en, because each <i>light</i> is a base in its own right."], []),
+    ],
+    "students": ["light", "lighten", "lunar", "lucid", "translucent", "illustrate", "illustration", "lynx"],
+    "s_lead": "These words come from one old word that meant <i>light</i>.",
+    "uc": "the word list follows the Indo-European Lexicon, which follows Pokorny, and was checked on 12 November 2026 against "
+          "Etymonline&rsquo;s list for the root, which has every word here or the word it&rsquo;s made from, except "
+          "<i>lynx</i>, whose own Etymonline entry gives the root as probable. Next: check it against Watkins.",
+    "label": "Root family: *leuk-",
+    "desc": "The root *leuk-, light, and its family: illustrate, illuminate, lucid, translucent, lunar, light and lynx, with why illustrate has two l's and lucid has a c.",
+}
+ROOTS = [LEG, HAP, DEUK, SEM, MED, LEUK]
 
 
 def bold_root(word, spelling):

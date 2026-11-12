@@ -40,7 +40,7 @@ MEANS = {
 PREFIXES = {"un", "re", "mis", "be", "a", "out", "per", "dis", "de", "pre"}
 SUFFIXES = {"s", "es", "ed", "ing", "y", "ly", "er", "est", "en", "less", "ness", "ate", "ion", "ic", "ful", "th", "al", "or", "ive", "able"}
 # A prefix written another way before the root's first letter: the spelling, and the prefix it is.
-ASSIM = {"ac-": "ad-", "as-": "ad-", "col-": "com-", "con-": "com-", "e-": "ex-", "intel-": "inter-", "di-": "dis-", "il-": "in-", "tra-": "trans-"}
+ASSIM = {"ac-": "ad-", "as-": "ad-", "col-": "com-", "con-": "com-", "e-": "ex-", "intel-": "inter-", "di-": "dis-", "il-": "in-", "pel-": "per-", "tra-": "trans-"}
 
 JOINS = [
     ("double", "A consonant doubles", "The base ends in one vowel letter and one consonant, and the ending starts with a vowel. The "
@@ -77,6 +77,9 @@ FAMILY_LESSONS = [
     ("An ending can move the stress", "roots/deuk.html#shift-h", "*deuk-: educate, education"),
     ("Duce or duct?", "roots/deuk.html#c-duct", "*deuk-: reduce, reduction"),
     ("A double at the front of a word", "roots/sem.html#front-h", "*sem-: assimilate, collect"),
+    ("Il-: in- before l", "roots/leuk.html#il-h", "*leuk-: illustrate, illuminate"),
+    ("The c inside lux", "roots/leuk.html#lux-h", "*leuk-: lux, lucid"),
+    ("Two lights", "roots/leuk.html#two-h", "*leuk-: light, light"),
     ("Accommodate: two doubles, two joins", "roots/med.html#accommodate-h", "*med-"),
     ("Does the double p show the seam?", "roots/hap.html#double-h", "hap: happy"),
     ("Letter pairs the seam splits", "roots/hap.html#pairs-h", "hap: mishap, haphazard"),

@@ -24,7 +24,7 @@ for _, _, items in WSC.SECTIONS:
     for item in items: codes.setdefault(item[1], item[2])
 LW.W.clear(); LW.W.update(codes)
 STEPS = route["steps"]; N = len(STEPS)
-BUILT = "10 November 2026"
+BUILT = "12 November 2026"
 # The fonts come from the site itself (fonts/fonts.css, copied from build/fonts), so a page asks nothing of anyone but
 # its host. Until 8 November 2026 they came from Google Fonts.
 def FONTS(up=""): return f'<link rel="stylesheet" href="{up}fonts/fonts.css">'

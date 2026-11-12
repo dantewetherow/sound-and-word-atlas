@@ -52,6 +52,7 @@ PAGES = [
     ("roots/deuk.html", "parts", "*deuk-: to lead", "A root family: produce, reduce, conduct, educate, duke and tug, with a lesson on stress."),
     ("roots/sem.html", "parts", "*sem-: one, same", "A root family: similar, simple, assemble and same, with a lesson on doubles at the front of a word."),
     ("roots/med.html", "parts", "*med-: to measure", "A root family: mode, model, modern, medicine, must and accommodate."),
+    ("roots/leuk.html", "parts", "*leuk-: light", "A root family: illustrate, illuminate, lucid, lunar, light and lynx."),
     ("roots/hap.html", "parts", "hap: chance, luck", "A base family: happy, happen, mishap and haphazard, and why happy has two p's and mishap one."),
     ("derivations.html", "parts", "Roots and their sources", "Where words come from, and the sources the roots cite."),
     ("teachers.html", "teachers", "For teachers", "To print and present, connections to programs, and the reasons and sources."),
