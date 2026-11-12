@@ -298,6 +298,8 @@ INKX = {"a": (.285, .246), "b": (.252, .279), "c": (.236, .248), "d": (.286, .26
 BAR = 0.33          # the bond bar sits this far under the baseline, clear of the tails of g and y
 FILL = {"consonant": INK, "vowel": RED, "team": GREEN}
 
+CONE_FIT = False      # True: a cone stretches to a tall letter or one that hangs down (a trial, 12 November 2026)
+
 def slot(word):
     """Letter spacing as a share of the letter size: wider where the word has an m or a w, which are wide letters."""
     return 0.76 if any(ch in word for ch in "mw") else 0.67
@@ -355,8 +357,14 @@ def svg_word(word, F=80.0, x0=0.0, cls=True):
             low = 0.38 if any(abs(d["x"] - x) < 0.15 * F for d in dots) else 0.46     # stop short of a circle under the seam (the ti of notation)
             out.append(f'<line{k(9)} x1="{f(x)}" y1="{f(B - 0.95 * F)}" x2="{f(x)}" y2="{f(B + low * F)}" stroke="{BLUE}" stroke-width="{f(0.03 * F)}" stroke-dasharray="{f(0.057 * F)} {f(0.057 * F)}"/>')
         if m["type"] in ("cone", "vault") and m.get("cone", True):
-            ex = X(m["col"] if m["type"] == "cone" else m["to"])
-            out.append(f'<circle{k(8)} cx="{f(ex)}" cy="{f(B - 0.26 * F)}" r="{f(0.37 * F)}" fill="none" stroke="{QUIET}" stroke-width="{f(0.038 * F)}" stroke-linecap="round" stroke-dasharray="{f(0.012 * F)} {f(0.078 * F)}"/>')
+            col_ = m["col"] if m["type"] == "cone" else m["to"]
+            ex, ch_ = X(col_), p["letters"][col_]["ch"]
+            tall, hangs = CONE_FIT and ch_ in "bdfhklt", CONE_FIT and ch_ in "gjpqy"
+            if tall or hangs:      # a tall letter stretches the cone up to its ascender; one that hangs down stretches it down to its tail
+                cy, ry = (B - 0.40 * F, 0.52 * F) if tall else (B - 0.14 * F, 0.50 * F)
+                out.append(f'<ellipse{k(8)} cx="{f(ex)}" cy="{f(cy)}" rx="{f(0.37 * F)}" ry="{f(ry)}" fill="none" stroke="{QUIET}" stroke-width="{f(0.038 * F)}" stroke-linecap="round" stroke-dasharray="{f(0.012 * F)} {f(0.078 * F)}"/>')
+            else:
+              out.append(f'<circle{k(8)} cx="{f(ex)}" cy="{f(B - 0.26 * F)}" r="{f(0.37 * F)}" fill="none" stroke="{QUIET}" stroke-width="{f(0.038 * F)}" stroke-linecap="round" stroke-dasharray="{f(0.012 * F)} {f(0.078 * F)}"/>')
     out.append(f'<g{k(5)} font-family="Lexend, system-ui, sans-serif" font-size="{f(F)}" font-weight="400" text-anchor="middle">'
                + "".join(f'<text x="{f(X(i))}" y="{f(B)}" fill="{FILL[L["type"]]}">{L["ch"]}</text>' for i, L in enumerate(p["letters"])) + "</g>")
     for m in p["marks"]:
