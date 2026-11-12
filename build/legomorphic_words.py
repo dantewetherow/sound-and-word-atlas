@@ -37,10 +37,12 @@ THE CODE, unit by unit, left to right
     r.ar    an r-controlled unit (vowel red, r black, red bond bar, one red circle)
     le      the final -le unit (both letters red, red bond bar, one red circle)
     e0      a silent e in a cone of silence, with no vault
-    z.g     a silent consonant letter standing alone in a cone of silence: black, no circle. For an inert letter
-            (Carney 1994: 41), one that sounds in other forms of its morpheme, as the g of sign does in signal: rather
-            than join it to either neighbour, it gets no sound of its own, so it keeps the same place in every form
-            (ruled 12 November 2026, following Carney and Venezky)
+    z.g     a silent consonant letter standing alone in a cone of silence: black, no circle. The rule (ruled 12
+            November 2026): a silent consonant is bonded into its unit by default (kn in knife, mb in lamb, wr in
+            write); it takes a cone only when another form of the same word says it, an inert letter in Carney's sense
+            (1994: 41), as the g of sign does in signal. Bonding it would split the unit in the other form; the cone
+            keeps it in the same place in every form. Following Carney and Venezky. The k of know stays bonded,
+            though Carney calls it inert because of acknowledge: there the /k/ is spelled ck across the prefix's seam
     e>      a silent e in a cone, with a vault back to the long vowel before it
     ap      the red apostrophe of a contraction, standing in for the vowel it drops, with no circle (don’t, as the
             marking card draws I’m)

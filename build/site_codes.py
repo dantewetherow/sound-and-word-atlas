@@ -13,6 +13,8 @@ SITE_CODES = {
     # where the spoken word makes sense (ruled that day): closed for a short vowel (cit | y), open for a long one
     # (gi | ant, cy | cling); seams carry the parts (cycl + ing, ceil + ing). Centre, ceiling and giant are open calls
     "cent": "c.c s.e c.nt ; nudge 1>0",
+    # the step 1 spelling list's check, 12 November 2026
+    "sit": "c.s s.i c.t", "win": "c.w s.i c.n", "kid": "c.k s.i c.d",
     "city": "c.c s.i c.t | b.y ; nudge 1>0",
     "cycling": "c.c l.y | c.c c.l + s.i k.ng ; nudge 1>0",
     "gentle": "c.g s.e c.n | c.t le ; nudge 1>0",

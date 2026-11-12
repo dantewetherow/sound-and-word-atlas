@@ -14,6 +14,34 @@ Each page prints as a learner's sheet; the teacher's notes are left off the prin
 import html
 
 LISTS = [{
+    "slug": "open-or-closed", "title": "open or closed: I, it, in, is, if", "kind": "A step&rsquo;s pattern",
+    "principle": "A vowel at the end of a syllable is <b>open</b>: it says its name, as <b>I</b> does. A consonant after it "
+                 "<b>closes</b> it, and it says its short sound: <b>it</b>, <b>in</b>, <b>is</b>, <b>if</b>.",
+    "words": [("I", "", "I can run."), ("hi", "", "Say hi to Sam."), ("it", "", "It is red."), ("in", "", "Come in."),
+              ("is", "", "She is here."), ("if", "", "Ask if you can go."), ("him", "", "Give it to him."), ("his", "", "That is his hat.")],
+    "contrast": ("Open, the i says its name. Close it with a consonant and it goes short.",
+                 [("I", "I", ""), ("it", "it", ""), ("hi", "hi", ""), ("hit", "hit", "")]),
+    "listen": "In <i>is</i> and <i>his</i> the s says /z/. It still closes the syllable.",
+    "build_h": "Close it",
+    "build": ["I, closed with t", "I, closed with n", "I, closed with f", "hi, closed with t", "hi, closed with m", "hi, closed with s"],
+    "use": [("Come", "in or it", "and sit down."), ("Ask", "if or is", "you can play."), ("That is", "him or his", "bike."), ("Say", "hi or him", "to Mom.")],
+    "check": [("s + i + t", "sit"), ("w + i + n", "win"), ("k + i + d", "kid"), ("f + i + nd", "find")],
+    "notes": [
+        "Step 1 has one vowel and one idea. At the end of a syllable the vowel is open and says its name; a consonant after "
+        "it closes it and it says its short sound. <i>I</i> is open; <i>it</i>, <i>in</i>, <i>is</i> and <i>if</i> are closed.",
+        "<i>Hi</i> is the same open i with a consonant in front. Closing it gives <i>hit</i>, <i>him</i> and <i>his</i>: the "
+        "same move as <i>I</i> to <i>it</i>, so the Close it column is the step&rsquo;s whole lesson in six words.",
+        "<i>I</i> is the one word that is always a capital, wherever it falls in a sentence.",
+        "The check uses words that aren&rsquo;t on the list. <i>Sit</i>, <i>win</i> and <i>kid</i> are closed the same way. "
+        "<i>Find</i> is where the idea stops: before <i>nd</i> the i stays long though the syllable is closed. That waits for "
+        "step 18, and a learner who writes it correctly has met it somewhere else.",
+    ],
+    "links": [("Step 1", "steps/01.html", "open or closed, on the route"), ("Step 4", "steps/04.html", "one consonant closes it"),
+              ("Step 18", "steps/18.html", "long before two consonants: <i>find</i>")],
+    "source": "Edward Carney, <i>A Survey of English Spelling</i> (1994): short vowels can&rsquo;t end an open syllable and long "
+              "vowels can, p. 134; short i, p. 135; long i, p. 151; s for /z/, p. 238; <i>find</i> and <i>kind</i>, pp. 332&ndash;333.",
+    "desc": "A spelling list for step 1: I, hi, it, in, is, if, him, his, open against closed, with words to close, sentences and a check.",
+}, {
     "slug": "say-pay-lay", "title": "say, pay, lay", "kind": "One analog, several words",
     "principle": "At the end of a word this sound is spelled <b>ay</b>. Inside a word it is spelled <b>ai</b>. Three verbs add "
                  "a bare <b>d</b> for the past. The d closes the word, so <b>ay</b> turns to <b>ai</b>.",
@@ -252,7 +280,7 @@ def write(OUT, page, header, footer, X):
 <p>{"Have the learner build each word from its sum, not copy it, and say" if any(s for _, s, _ in L["words"]) else "Have the learner say"} each sentence before writing it. Six to eight words is the whole list: the convention is what&rsquo;s being learned.</p>
 <ul>{links}</ul>
 <p class="sub">Source: {L["source"]}</p>
-{X["uc"]("the first four spelling lists are models, one of each kind. Next: a list from each step and each family, made from what the site already holds.")}
+{X["uc"]("the first four spelling lists are models, one of each kind, and since 12 November 2026 step 1 has its own. Next: a list for each step and each family, made from what the site already holds.")}
 </div></section>
 </main>
 {footer(1)}"""

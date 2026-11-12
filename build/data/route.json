@@ -666,8 +666,8 @@
    "n": 25,
    "title": "Silent letters join their unit",
    "band": "More units",
-   "words_md": "*know, knee, knife, write, wrong, lamb, climb, two*; contrast *knot/not, wrap/rap*",
-   "marks": "black bond bar for a consonant unit",
+   "words_md": "*know, knee, knife, write, wrong, lamb, climb, two*; contrast *knot/not, wrap/rap, sign/signal*",
+   "marks": "black bond bar for a consonant unit. A silent letter that another form of its word says aloud stands alone in a cone instead, so it keeps its place in both: the *g* of *sign*, said in *signal*",
    "kernel_md": "none",
    "carney": "*kn* and *mb* as units, p. 41; inert and empty letters, pp. 41–42; the *w* of *wring*, p. 44",
    "words": [
@@ -680,7 +680,7 @@
     "climb",
     "two"
    ],
-   "contrast_md": "*knot/not, wrap/rap*"
+   "contrast_md": "*knot/not, wrap/rap, sign/signal*"
   },
   {
    "n": 26,

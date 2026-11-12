@@ -271,6 +271,12 @@ for i, s in enumerate(STEPS):
     if s.get("research"):
         notes.append(f'<div class="note"><h2>Research</h2><p>{md(s["research"])} '
                      f'<a href="../credits.html#research">The full references</a>.</p></div>')
+    # a spelling list whose home is this step (its first link), since 12 November 2026
+    import lists as _lists
+    homes = [L for L in _lists.LISTS if L.get("links") and L["links"][0][1] in (f"steps/{n}.html", f"steps/{n:02d}.html")]
+    if homes:
+        notes.append('<div class="note"><h2>Spelling list</h2><p>' + "<br>".join(
+            f'<a href="../lists/{L["slug"]}.html">{L["title"]}</a>' for L in homes) + '</p></div>')
     for text in open_items_for(n):
         notes.append(f'<div class="note uc">{uc(md(text))}</div>')
     unmarked = sorted({SC.UNMARKED[w] for g in groups_of(s["words_md"]) for w in g if w in SC.UNMARKED})
@@ -335,7 +341,7 @@ KEY = [("Sound circle", "One circle under each sound: red for a vowel sound, bla
        ("Bond bar", "A bar under letters that work as one unit, most of them spelling one sound: black for consonant units and for doubled letters, boxed or not, green for <em>sh</em>, <em>th</em>, <em>ch</em> and the <em>ti</em> of <em>-tion</em>, red for vowel units. The letters keep their own colours. <em>Qu</em> is the consonant unit with two sounds: the bar ties the <em>q</em> to the <em>u</em> it always comes with, and a circle under each letter counts the <em>k</em> and the <em>w</em>", "teaching", "bond"),
        ("R-controlled unit", "A red bar under a vowel and its <em>r</em>, with the vowel red, the <em>r</em> black and one circle", "car", "r"),
        ("Block box", "A box around the vowel protector at work: a pair or cluster with a vowel after it, which it stops from reaching back. A pair keeps its bond bar when the box comes; a cluster has none", "hopping", "box"),
-       ("Cone of silence", "A dotted ring around a silent letter: the <em>e</em> of <em>have</em>, the <em>g</em> of <em>sign</em>. &ldquo;All letters are &lsquo;silent&rsquo;, but some are more silent than others&rdquo; (Carney 1994: 40): the <em>g</em> of <em>sign</em> speaks up in <em>signal</em>", "have", "cone"),
+       ("Cone of silence", "A dotted ring around a silent letter: the <em>e</em> of <em>have</em>, and a consonant that another form of its word says aloud, the <em>g</em> of <em>sign</em> (<em>signal</em>). Other silent consonants join their unit: the <em>kn</em> of <em>knife</em>. &ldquo;All letters are &lsquo;silent&rsquo;, but some are more silent than others&rdquo; (Carney 1994: 40): the <em>g</em> of <em>sign</em> speaks up in <em>signal</em>", "have", "cone"),
        ("Vowel vault", "An arc from an <em>e</em>, or a vowel after one consonant, back to the vowel it makes long", "make", "vault"),
        ("Nice-nudge", "A small arc under the letters from <em>e</em>, <em>i</em> or <em>y</em> to the <em>c</em> or <em>g</em> it softens", "nice", "nudge"),
        ("Blocked vault", "A half-arc that ends in a red X where a box stops the vault", "getting", "bv"),
