@@ -44,6 +44,7 @@ HEADS = {
 PAGES = [
     ("index.html", None, "Home", "Legomorphic Notation and the three layers of the site."),
     ("progressions.html", "progressions", "Steps", "The route through English spelling: the steps in their bands."),
+    ("letters.html", "progressions", "Letters, names and sounds", "Before step 1: the alphabet in the song's units, as tiles to reveal, with a sound circle under each letter."),
     ("notations.html", "progressions", "The marks", "The marks of Legomorphic Notation, each drawn alone on one word."),
     ("walk.html", "walk", "Words", "Look up a word and walk through it, a move at a time, with its parts."),
     ("explorations.html", "walk", "A family: note", "Note, notate and notation, each built from the one before."),
@@ -255,9 +256,13 @@ def write(OUT, page, header, footer, X):
 <h2 id="route-h" class="t-only">The route at a glance</h2>
 <p class="lead t-only">{X["route_lead"]} Open a step to see its words marked, the marks it brings in, and the pages in Carney's survey that back it.</p>
 <p class="sub t-only">Each word is shown with its letters in colour: red for vowel letters, green for <em>sh</em>, <em>th</em> and <em>ch</em>, black for the rest.</p>
+<p class="sub"><b>Before step 1:</b> <a href="letters.html">Letters, names and sounds</a>, the alphabet in the song&rsquo;s units, with a sound circle under each letter.</p>
 {X["bands_html"]}
 {uc(X["draft_note"])}
 </div></section>""")
+
+    import letters                                        # the alphabet before step 1 (13 November 2026)
+    letters.write(door_page, door_head)
 
     # Notations: the legend, moved from the home page.
     note_word = X["svg_of"]("notation", 58, label="notation, marked")
