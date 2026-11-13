@@ -181,8 +181,8 @@ VARIANTS = {
 CONTRACTION = ("The contractions aren't drawn here yet.", "draw them with the red apostrophe, as the verb-system cards do.")
 FAMILY = ("*Act*, *create* and their families are marked in the family decks, which aren't on the site yet.", "bring their marking over from those decks.")
 GREEK = ("Whether a seam goes between the Greek parts of *telephone* and *photograph* is still being decided.", "decide, then draw them.")
-UNMARKED = {**{w: CONTRACTION for w in ("I'm", "it's", "isn't", "don't", "can't", "won't", "we're")},
-            **{w: FAMILY for w in ("act", "action", "actor", "active", "react", "create", "creation", "creator")},
+# The contractions came off on 13 November 2026, drawn with the red apostrophe (contractions.py).
+UNMARKED = {**{w: FAMILY for w in ("act", "action", "actor", "active", "react", "create", "creation", "creator")},
             "telephone": GREEK, "photograph": GREEK}
 
 # Words whose marking waits on Dante's ruling (the Marking calls in the manual, 11 November 2026). The word walk's Try it

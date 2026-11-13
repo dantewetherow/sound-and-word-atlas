@@ -708,18 +708,18 @@
    "n": 27,
    "title": "Two words join",
    "band": "Families",
-   "words_md": "*I'm, it's, isn't, don't, can't, won't, we're*",
+   "words_md": "*I’m, it’s, isn’t, don’t, can’t, won’t, we’re*",
    "marks": "red apostrophe for the letters left out",
-   "kernel_md": "*I'm, isn't, don't, can't, won't*",
+   "kernel_md": "*I’m, isn’t, don’t, can’t, won’t*",
    "carney": "The apostrophe, p. 50",
    "words": [
-    "I'm",
-    "it's",
-    "isn't",
-    "don't",
-    "can't",
-    "won't",
-    "we're"
+    "I’m",
+    "it’s",
+    "isn’t",
+    "don’t",
+    "can’t",
+    "won’t",
+    "we’re"
    ],
    "contrast_md": ""
   },

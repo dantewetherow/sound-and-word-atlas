@@ -886,3 +886,6 @@ header.site.pinned.open nav.doors { display: flex; padding-block: 6px 4px; }
 .ab-rows { display: grid; gap: 12px; }
 .ab-row { display: flex; flex-wrap: wrap; gap: 6px 34px; align-items: flex-end; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 12px 18px; }
 .ab-row figure { margin: 0; }
+
+.ct-group figcaption .ws { display: block; font-family: var(--display); font-size: 1rem; }
+.ct-group figcaption .t-only { display: block; color: var(--soft); font-size: 0.88rem; }

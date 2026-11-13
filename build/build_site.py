@@ -25,6 +25,8 @@ import apart                                                  # pairs spelled ap
 for w, c in apart.CODES.items(): codes.setdefault(w, c)
 import ablaut                                                 # write, wrote, written and the other ablaut sets (13 November 2026)
 for w, c in ablaut.CODES.items(): codes.setdefault(w, c)
+import contractions                                           # contractions, drawn with the red apostrophe (13 November 2026)
+for w, c in contractions.CODES.items(): codes.setdefault(w, c)
 import word_sum_codes as WSC                                  # the grade 3 word sum cards' markings, for Words and Parts
 for _, _, items in WSC.SECTIONS:
     for item in items: codes.setdefault(item[1], item[2])
@@ -287,6 +289,8 @@ for i, s in enumerate(STEPS):
     pairs = _apart.by_step().get(n, [])
     if pairs:
         notes.append('<div class="note"><h2>Spelled apart</h2><p>' + ", ".join(f'<a href="../lists/apart.html#{pid}">{label}</a>' for pid, label in pairs) + '</p></div>')
+    if n == 27:                                              # the contractions page (13 November 2026)
+        notes.append('<div class="note"><h2>More contractions</h2><p><a href="../contractions.html">Squeezed into oblivion</a>: twenty-four contractions marked, and the apostrophe catastrophes (<i>its</i> and <i>it&rsquo;s</i>, <i>your</i> and <i>you&rsquo;re</i>).</p></div>')
     for text in open_items_for(n):
         notes.append(f'<div class="note uc">{uc(md(text))}</div>')
     unmarked = sorted({SC.UNMARKED[w] for g in groups_of(s["words_md"]) for w in g if w in SC.UNMARKED})

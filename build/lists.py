@@ -265,6 +265,7 @@ def write(OUT, page, header, footer, X):
     (OUT / "lists").mkdir(exist_ok=True)
     LW, SC = X["LW"], X["SC"]
     def drawn(w, F=40):
+        if "&" in w and html.unescape(w) in LW.W: w = html.unescape(w)      # I&rsquo;m: the contractions are coded with ’
         if w in LW.W and w not in SC.UNMARKED: return X["svg_of"](w, F, label=f"{w}, marked")
         return f'<span class="plain" style="font-size:{F}px">{w if "&" in w else html.escape(w)}</span>'
     for L in LISTS:
