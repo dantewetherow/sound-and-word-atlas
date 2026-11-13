@@ -289,6 +289,11 @@ for i, s in enumerate(STEPS):
     pairs = _apart.by_step().get(n, [])
     if pairs:
         notes.append('<div class="note"><h2>Spelled apart</h2><p>' + ", ".join(f'<a href="../lists/apart.html#{pid}">{label}</a>' for pid, label in pairs) + '</p></div>')
+    if n == 9:                                               # where silent e came from (13 November 2026)
+        notes.append('<div class="note"><h2>Where silent e came from</h2><p>In Middle English, <i>make</i> was said in two syllables, <i>ma-ke</i>, and <i>note</i> as <i>no-te</i>. '
+                     'A vowel that ended a syllable was long, as it is in <i>ro-bot</i> today. Later the final e stopped being said: the consonant moved into the first syllable, and the e stayed in the spelling.</p>'
+                     '<p>Writers then read that e as a sign of a long vowel and added it to words that never had a second syllable. <i>Wife</i> was <i>wif</i> in Old English, already said with a long vowel, close to <i>weef</i>; the e came later, to show the length. The sound came first and the spelling followed. Later still, the vowel of <i>weef</i> shifted to the vowel of <i>wife</i>, and the spelling stayed put.</p>'
+                     '<p>So the vault is a reader&rsquo;s shortcut, not the history: the vowel says its name because it once ended a syllable. Upward and Davidson, <i>The History of English Spelling</i> (2011); Carney (1994: 129).</p></div>')
     if n == 27:                                              # the contractions page (13 November 2026)
         notes.append('<div class="note"><h2>More contractions</h2><p><a href="../contractions.html">Squeezed into oblivion</a>: twenty-four contractions, each an apostrophe catastrophe: a vowel squeezed out and an apostrophe in its place.</p></div>')
     for text in open_items_for(n):
