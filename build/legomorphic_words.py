@@ -33,7 +33,9 @@ THE CODE, unit by unit, left to right
     b.o     a bare vowel: it borrows another vowel's sound, or is unstressed (no cup, no bar)
     w.o     a vowel letter that spells two sounds, a consonant sound and then a vowel sound: the o of one
             (two circles under the one letter, black then red; no cup, no bar)
-    t.ee    a vowel unit of two or more letters (red letters, red bond bar, one red circle)
+    t.ee    a vowel unit of two or more letters (red letters, red bond bar, one red circle). A silent h joins the vowel
+            unit after it, black on the red bar (t.ho in honest, t.hou in hour): h is a breath shaped by the vowel that
+            follows it, so where it isn't said it belongs with that vowel (ruled 13 November 2026)
     r.ar    an r-controlled unit (vowel red, r black, red bond bar, one red circle)
     le      the final -le unit (both letters red, red bond bar, one red circle)
     e0      a silent e in a cone of silence, with no vault
@@ -219,7 +221,8 @@ def parse(word):
             marks += [{"type": "dot", "cols": cols, "color": "consonant", "dx": -0.13}, {"type": "dot", "cols": cols, "color": "vowel", "dx": 0.13}]
         elif kind in ("t", "le"):
             assert len(s) >= 2, (word, tok)
-            for ch in s: letters.append({"ch": ch, "type": "vowel"})
+            # a silent h at the head of a vowel unit stays black, as the r of an r-controlled unit does (hour, honest)
+            for k_, ch in enumerate(s): letters.append({"ch": ch, "type": "consonant" if (k_ == 0 and ch == "h" and kind == "t") else "vowel"})
             marks += [{"type": "blendbar", "from": cols[0], "to": cols[-1], "color": "vowel"}, {"type": "dot", "cols": cols, "color": "vowel"}]
         elif kind == "r":
             assert "r" in s and len(s) >= 2, (word, tok)

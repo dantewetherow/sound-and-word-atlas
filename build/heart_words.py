@@ -12,8 +12,8 @@ route, and the words early-reading programs teach as heart words. Codes for the 
 
 Ruled 13 November 2026: gu is a bonded unit (guess, guide), as bu is in buy; the teacher's note says why the u is
 there. two keeps tw bonded and people keeps eo as a team, though twin and popular say the letters: the cone stays for
-forms of the same word. Still to rule: the h of hour, honest and honour has no unit to join and no form that says it,
-so it stands in a cone here, which stretches the cone rule."""
+forms of the same word. The silent h of hour, honest and honour joins the vowel unit after it (ruled 13 November 2026):
+h is a breath shaped by the vowel that follows it, so where it isn't said it belongs with that vowel."""
 import html
 
 CODES = {
@@ -21,9 +21,9 @@ CODES = {
     "move": "c.m b.o c.v e0", "four": "c.f r.our", "fourth": "c.f r.our g.th", "nothing": "c.n b.o + | g.th s.i k.ng",
     "another": "b.a | c.n + b.o g.th | r.er", "above": "b.a | c.b b.o c.v e0", "among": "b.a | c.m b.o k.ng",
     "against": "b.a | c.g t.ai c.nst", "almost": "b.a c.l | c.m l.o c.st", "poor": "c.p r.oor", "won": "c.w b.o c.n",
-    "son": "c.s b.o c.n", "month": "c.m b.o c.n g.th", "hour": "z.h t.ou c.r", "minute": "c.m s.i | c.n b.u c.t e0",
+    "son": "c.s b.o c.n", "month": "c.m b.o c.n g.th", "hour": "t.hou c.r", "minute": "c.m s.i | c.n b.u c.t e0",
     "Monday": "c.M b.o c.n | c.d t.ay", "Wednesday": "c.W s.e k.dn e0 c.s | c.d t.ay", "heart": "c.h r.ear c.t",
-    "about": "b.a | c.b t.ou c.t", "answer": "s.a c.n | k.sw r.er", "honest": "z.h s.o | c.n b.e c.st", "honour": "z.h s.o | c.n r.our",
+    "about": "b.a | c.b t.ou c.t", "answer": "s.a c.n | k.sw r.er", "honest": "t.ho | c.n b.e c.st", "honour": "t.ho | c.n r.our",
     "truth": "c.tr l.u g.th", "truly": "c.tr l.u + | c.l b.y", "busy": "c.b b.u | c.s b.y", "build": "k.bu s.i c.ld",
     "built": "k.bu s.i c.lt", "sure": "c.s r.ur e0", "whom": "k.wh b.o c.m", "whose": "k.wh b.o c.s e0",
     "toward": "c.t b.o + | c.w r.ar c.d", "through": "g.th c.r t.ough", "learn": "c.l r.ear c.n", "earth": "r.ear g.th",
@@ -58,8 +58,8 @@ GROUPS = [
         ("A letter saying another letter&rsquo;s sound", ["of", "busy", "build", "pretty", "any", "many", "women", "woman", "minute", "sure"],
          "<i>Of</i> and <i>off</i> were once one word; the f stayed. <i>Busy</i> is spelled with u and said with short i; in <i>build</i>, as in <i>buy</i>, the u is silent beside the b."),
         ("One and once", ["one", "once"], "<i>Alone</i> and <i>only</i> keep the old sound of <i>one</i>: <i>all one</i>, <i>one-ly</i>."),
-        ("A silent letter with nothing to join", ["hour", "honest", "honour", "answer", "Wednesday"],
-         "The h of <i>hour</i> and <i>honest</i> was silent in the French they came from. <i>Answer</i> is <i>and</i> + <i>swear</i> in Old English. <i>Wednesday</i> is Woden&rsquo;s day."),
+        ("A silent letter", ["hour", "honest", "honour", "answer", "Wednesday"],
+         "The h of <i>hour</i> and <i>honest</i> was silent in the French they came from. It joins the vowel after it under one bar: h is only a breath shaped like the vowel that follows it, and here not even that. <i>Answer</i> is <i>and</i> + <i>swear</i> in Old English. <i>Wednesday</i> is Woden&rsquo;s day."),
         ("ough and augh", ["laugh", "enough", "tough", "rough", "through"], "Learned by family: <i>tough</i>, <i>rough</i>, <i>enough</i> rhyme."),
         ("Others", ["eye", "people", "again", "against", "because", "about", "always"], "<i>Again</i>, <i>about</i> and <i>always</i> start with a weak a; past it, they are regular. <i>People</i> keeps an o that <i>popular</i> says."),
     ]),
@@ -89,7 +89,7 @@ def write(OUT, page, header, footer, X):
 {"".join(secs)}
 <section class="about t-only"><div class="wrap prose">
 <p class="sub">Most of these words are on the Early Literacy Profile (Central Okanagan) and Dolch lists. Programs such as UFLI Foundations teach them as heart words, with a heart over the part to learn by heart; the notation shows the reason where there is one. Carney, <i>A Survey of English Spelling</i> (1994): o for u beside m, n and v, p. 69; the vowel of <i>book</i> in <i>could</i>, p. 146.</p>
-{X["uc"]("ruled 13 November 2026: gu bonded, as bu is in buy. Still to rule: the h of hour, honest and honour, drawn in a cone here though no form of the word says it.")}
+{X["uc"]("ruled 13 November 2026: gu bonded, as bu is in buy; a silent h joins the vowel after it, as in hour and honest.")}
 </div></section>
 </main>
 {footer(1)}"""
