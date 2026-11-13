@@ -859,3 +859,21 @@ header.site.pinned.open nav.doors { display: flex; padding-block: 6px 4px; }
 .ufli-nav a { font-weight: 600; }
 
 .walk-auto { display: inline-block; font-size: 0.85rem; color: var(--soft); border: 1px dashed var(--line); border-radius: 999px; padding: 2px 10px; }
+
+/* the UFLI bands */
+.ubands { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 14px; margin-top: 8px; }
+.uband { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; display: grid; gap: 8px; align-content: start; }
+.uband header h3 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 1.15rem; line-height: 1.25; }
+.uband .ub-l { margin: 0 0 2px; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--soft); }
+.uband p { margin: 0; font-size: 0.93rem; line-height: 1.45; }
+.uband .ub-part { color: var(--soft); }
+.ub-words { display: flex; flex-wrap: wrap; gap: 4px 18px; align-items: flex-end; min-height: 84px; }
+.ub-words figure { margin: 0; }
+.ufli-chart .ch-band { fill: var(--card); }
+.ufli-chart .ch-band.alt { fill: color-mix(in srgb, var(--modal) 9%, var(--card)); }
+.ufli-chart .ch-bn { fill: var(--soft); font-size: 11px; }
+.ufli-more summary { cursor: pointer; list-style: none; }
+.ufli-more summary::-webkit-details-marker { display: none; }
+.ufli-more summary h2 { display: inline; }
+.ufli-more summary::after { content: " +"; color: var(--soft); font-size: 1.4rem; }
+.ufli-more[open] summary::after { content: " \2212"; }

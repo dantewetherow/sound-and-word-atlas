@@ -161,7 +161,7 @@ def write(OUT, page, header, footer, X):
         body = f"""{header(1)}
 <main class="list-page">
 <section class="hero"><div class="wrap">
-<p class="eyebrow t-only"><a href="../ufli.html#lists">UFLI Foundations</a> &middot; Spelling list</p>
+<p class="eyebrow t-only"><a href="../ufli.html#lessons">UFLI Foundations</a> &middot; Spelling list</p>
 <h1>UFLI lesson {e["n"]}</h1>
 <p class="lprinciple">{e["what"]}.</p>
 {f'<p class="lhome noprint">This lesson meets the route at {steps}.</p>' if steps else ""}

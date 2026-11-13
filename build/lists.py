@@ -343,8 +343,8 @@ def write_index(OUT, page, header, footer, X):
 </div></section>
 <section class="about" id="ufli"><div class="wrap">
 <h2>Lined up with UFLI Foundations</h2>
-<p class="sub">For schools that run UFLI: a spelling list for each UFLI lesson that adds a new spelling, by lesson number, with what the notation adds at each one. They live with everything else for UFLI.</p>
-<div class="door-tiles"><a class="dtile" href="../ufli.html#lists"><b>UFLI Foundations</b><span>{len(X["ufli_lists"])} spelling lists by lesson, what the notation adds at each lesson, and where the lessons meet the route.</span></a></div>
+<p class="sub">For schools that run UFLI: where its lessons meet the route, the mark to draw alongside each part of UFLI, and short word lists by lesson number. They live with everything else for UFLI.</p>
+<div class="door-tiles"><a class="dtile" href="../ufli.html"><b>UFLI Foundations</b><span>UFLI&rsquo;s lessons in sixteen bands, each with the mark to add and an example or two marked, and why the two orders differ.</span></a></div>
 </div></section>
 <section class="about" id="families"><div class="wrap">
 <h2>Families</h2>

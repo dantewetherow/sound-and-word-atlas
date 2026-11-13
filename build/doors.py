@@ -63,7 +63,7 @@ PAGES = [
     ("cards.html", "teachers", "Word cards", "Printable cards: the Early Literacy Profile (Central Okanagan) and Dolch words, and grade 3 word sums."),
     ("connections.html", "teachers", "Connections", "How the route lines up with the word lists and programs schools already use."),
     ("word-lists.html", "teachers", "Early Literacy Profile and Dolch", "Where the Early Literacy Profile (Central Okanagan) words come from in Dolch's lists."),
-    ("ufli.html", "teachers", "UFLI Foundations", "Everything for schools that run UFLI: spelling lists by lesson, what the notation adds at each lesson, and where the lessons meet the route."),
+    ("ufli.html", "teachers", "UFLI Foundations", "For schools that run UFLI: where its lessons meet the route, the mark to draw alongside each part of UFLI, and why the two orders differ."),
     ("explanations.html", "teachers", "Reasons and sources", "Definitions, the notation and its name, and credits."),
     ("definitions.html", "teachers", "Definitions", "What the notation's words mean, and where they come from."),
     ("about.html", "teachers", "About the notation", "The notation, its name, and how it came about."),

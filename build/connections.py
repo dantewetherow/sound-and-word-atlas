@@ -41,7 +41,7 @@ def italics(s):
 def _chart(D, has_list, STEPS):
     """The visual crosswalk: UFLI lessons across, route steps down, a dot where a lesson lands on a step."""
     L0, L1, S1 = 1, D["of"], len(STEPS)
-    x0, y0, W, H = 64, 26, 900, 31 * 15
+    x0, y0, W, H = 64, 44, 900, 31 * 15
     X = lambda l: x0 + (l - L0) / (L1 - L0) * W
     Y = lambda s: y0 + (s - 1) / (S1 - 1) * H
     title = {st["n"]: re.sub(r"\*([^*]+)\*", r"\1", st["title"]) for st in STEPS}
@@ -52,13 +52,16 @@ def _chart(D, has_list, STEPS):
         g.append(f'<text class="ch-tx" x="{x0 - 12}" y="{Y(s) + 4:.1f}" text-anchor="end">{s}</text>')
     g.append(f'<text class="ch-ax" x="{x0 + W / 2:.0f}" y="{y0 + H + 44}" text-anchor="middle">UFLI lesson</text>')
     g.append(f'<text class="ch-ax" x="16" y="{y0 + H / 2:.0f}" text-anchor="middle" transform="rotate(-90 16 {y0 + H / 2:.0f})">Step on the route</text>')
+    import ufli_bands
+    band = []
+    for k, (a, b, *_) in enumerate(ufli_bands.BANDS):
+        band.append(f'<rect class="ch-band{" alt" if k % 2 else ""}" x="{X(a - 0.5):.1f}" y="{y0 - 14}" width="{X(b + 0.5) - X(a - 0.5):.1f}" height="{H + 20}"/>'
+                    f'<text class="ch-bn" x="{(X(a - 0.5) + X(b + 0.5)) / 2:.1f}" y="{y0 - 18}" text-anchor="middle">{k + 1}</text>')
+    g[:0] = band
     for s, v in sorted(D["map"].items(), key=lambda kv: int(kv[0])):
         for l in v["lessons"]:
             tip = f"Lesson {l} · step {s}: {title[int(s)]}"
-            if l in has_list:
-                g.append(f'<a href="lists/{has_list[l]}.html"><circle class="ch-dot on" cx="{X(l):.1f}" cy="{Y(int(s)):.1f}" r="5"><title>{html.escape(tip)}. Open its spelling list.</title></circle></a>')
-            else:
-                g.append(f'<circle class="ch-dot" cx="{X(l):.1f}" cy="{Y(int(s)):.1f}" r="4.5"><title>{html.escape(tip)}</title></circle>')
+            g.append(f'<circle class="ch-dot on" cx="{X(l):.1f}" cy="{Y(int(s)):.1f}" r="4.5"><title>{html.escape(tip)}</title></circle>')
     return (f'<div class="tablewrap ch-wrap"><svg class="ufli-chart" viewBox="0 0 {x0 + W + 20} {y0 + H + 56}" role="img" '
             f'aria-label="UFLI lessons across, steps of the route down: each lesson as a dot at the step where it lands.">{"".join(g)}</svg></div>')
 
@@ -122,37 +125,57 @@ def write(OUT, door_page, door_head, uc, X):
                     f'<td>{lessons}{note}</td></tr>')
     parts = "".join(f'<tr><th scope="row">{italics(c["what"])}</th><td>{html.escape(c["route"])}</td><td>{html.escape(c["ufli"])}</td></tr>'
                     for c in D["contrasts"])
+    import ufli_bands
+    STEPS = {st["n"]: st for st in X["STEPS"]}
+    cards = []
+    for a, b, what, mark, ex, part in ufli_bands.BANDS:
+        steps = sorted({k for l in range(a, b + 1) for k in inv.get(l, [])})
+        sl = ", ".join(f'<a href="steps/{k:02d}.html">{k}</a>' for k in steps)
+        from noun_codes import NOUN_CODES
+        def code_for(w, c):
+            """The band's own code, else the site's, else a noun card's, else the rule's (checked by hand for these)."""
+            got = c or (None if w in X["LW"].W else NOUN_CODES.get(w) or X["auto_codes"].get(w))
+            assert got or w in X["LW"].W, w
+            return got
+        words = "".join(f'<figure class="word">{X["svg_of"](w, 34, code=code_for(w, c), label=f"{w}, marked")}</figure>' for w, c in ex)
+        rng = f"Lesson {a}" if a == b else f"Lessons {a}&ndash;{b}"
+        cards.append(f'<article class="uband" id="band-{a}"><header><p class="ub-l">{rng}</p><h3>{what}</h3></header>'
+                     f'<div class="ub-words">{words}</div>'
+                     f'<p><b>The mark.</b> {mark}</p><p><b>On the route:</b> step{"s" if len(steps) > 1 else ""} {sl}</p>'
+                     f'<p class="ub-part"><b>Where they part.</b> {part}</p></article>')
     body = f"""<section class="hero"><div class="wrap">
 <p class="eyebrow t-only">For teachers</p>
 <h1>UFLI Foundations</h1>
-<p class="lead">Everything on this site for schools that run UFLI Foundations, by UFLI&rsquo;s own lesson numbers: spelling lists for each lesson, the mark to draw at each lesson, and where each of its {D["of"]} lessons meets the route.</p>
-<p class="ufli-nav"><a href="#lists">Spelling lists</a> &middot; <a href="#lessons">What the notation adds</a> &middot; <a href="#chart">Lesson by step</a> &middot; <a href="#steps">Step by step</a> &middot; <a href="#part">Where the orders part</a> &middot; <a href="lists/index.html">Legomorphic spelling</a></p>
-<p class="sub">{html.escape(D["made"])} UFLI asks that its materials be linked rather than copied (its <a href="{UFLI_COPYRIGHT}">copyright statement</a> says so), so its lesson names stay on its own site: its scope and sequence is in the <a href="{D["link"]}">UFLI Foundations Toolbox</a>. The spelling lists below follow the same rule: lesson numbers, our descriptions, our words.</p>
+<p class="lead">For schools that run UFLI Foundations: where its lessons meet the route, the mark to draw alongside each part of UFLI, and why the two orders differ.</p>
+<p class="ufli-nav"><a href="#bands">Lesson by lesson, in sixteen bands</a> &middot; <a href="#why">Why the orders part</a> &middot; <a href="#chart">The two orders side by side</a> &middot; <a href="#lessons">Every lesson</a> &middot; <a href="#steps">Every step</a></p>
+<p class="sub">{html.escape(D["made"])} UFLI asks that its materials be linked rather than copied (its <a href="{UFLI_COPYRIGHT}">copyright statement</a> says so), so its lesson names and word lists stay on its own site: its scope and sequence is in the <a href="{D["link"]}">UFLI Foundations Toolbox</a>.</p>
 </div></section>
-<section class="about" id="lists" aria-labelledby="ls-h"><div class="wrap">
-<h2 id="ls-h">Spelling lists by lesson</h2>
-<p class="sub">A list for each lesson that adds a new spelling. Every word uses only what UFLI has taught by that lesson, and none is taken from UFLI&rsquo;s materials. So far the kindergarten and grade 1 lessons, 4 to 110; grade 2 is next. The <a href="lists/index.html">Legomorphic spelling</a> lists follow the route instead.</p>
-<div class="step-btns">{"".join(f'<a class="sbtn" href="lists/{e["slug"]}.html"><b>Lesson {e["n"]}</b><span>{re.sub(r"<[^>]+>", "", e["what"])}</span></a>' for e in ufli_lists.entries())}</div>
+<section class="about" id="bands" aria-labelledby="bd-h"><div class="wrap">
+<h2 id="bd-h">Lesson by lesson</h2>
+<p class="sub">UFLI&rsquo;s lessons in sixteen bands. Each band gives what UFLI teaches there, the mark to add, an example or two marked, the steps where the route meets it, and where the two part. Any word from UFLI&rsquo;s lessons can be looked up in <a href="walk.html">Words</a>.</p>
+<div class="ubands">{"".join(cards)}</div>
+</div></section>
+<section class="about" id="why" aria-labelledby="why-h"><div class="wrap prose">
+<h2 id="why-h">Why the orders part</h2>
+{ufli_bands.WHY}
 </div></section>
 <section class="about" id="chart" aria-labelledby="ch-h"><div class="wrap">
-<h2 id="ch-h">Lesson by step</h2>
-<p class="sub">Each dot is a UFLI lesson (across) at the step of the route where it lands (down). Dots on the grey line come in the same order in both; above it, the route gets there sooner. A filled dot has a spelling list: tap it to open the list.</p>
+<h2 id="ch-h">The two orders side by side</h2>
+<p class="sub">Each dot is a UFLI lesson (across) at the step of the route where it lands (down), with the sixteen bands shaded behind. Dots on the dashed line come in the same order in both programs; dots above it, the route gets to sooner, and dots below it, UFLI does.</p>
 {chart}
-<p class="sub">Some lessons land on more than one step, so they have more than one dot. Lessons with no dot are reviews or have no step of their own.</p>
+<p class="sub">Some lessons land on more than one step, so they have more than one dot. Lessons with no dot are reviews, or have no step of their own.</p>
 </div></section>
 <section class="about" id="lessons" aria-labelledby="ul-h"><div class="wrap">
-<h2 id="ul-h">Lesson by lesson: what the notation adds</h2>
-<p class="sub">For a teacher in the middle of UFLI: the mark to draw on the day&rsquo;s words. Both columns are in our own words; UFLI&rsquo;s lesson titles are in its own materials. A linked lesson number opens its spelling list, and a linked step opens the step.</p>
+<details class="ufli-more"><summary><h2 id="ul-h">Every lesson</h2></summary>
+<p class="sub">Lesson by lesson, the mark to draw on the day&rsquo;s words. Both columns are in our own words. Lessons 13 to 128 were checked against the headings of UFLI&rsquo;s Roll and Read pages; lessons 1 to 12 have none, and are the ones to check. A linked lesson number opens a short spelling list we made for it.</p>
 {by_lesson}
-<p class="sub">Lessons 13 to 128 were checked against the headings of UFLI&rsquo;s Roll and Read pages; lessons 1 to 12 have none, and are the ones to check.</p>
+</details>
 </div></section>
 <section class="about" id="steps" aria-labelledby="cw-h"><div class="wrap">
-<h2 id="cw-h">Step by step</h2>
+<details class="ufli-more"><summary><h2 id="cw-h">Every step</h2></summary>
 <div class="tablewrap"><table class="cw-table"><thead><tr><th scope="col">Step</th><th scope="col">What the route teaches</th><th scope="col">UFLI lessons</th></tr></thead><tbody>{"".join(rows)}</tbody></table></div>
-</div></section>
-<section class="about" id="part" aria-labelledby="pt-h"><div class="wrap">
-<h2 id="pt-h">Where the two orders part</h2>
-<div class="tablewrap"><table class="cw-table"><thead><tr><th scope="col">What</th><th scope="col">The route</th><th scope="col">UFLI</th></tr></thead><tbody>{parts}</tbody></table></div>
 <p class="sub">{html.escape(D["source"])}</p>
-</div></section>"""
-    door_page("ufli", "UFLI Foundations · A Legend for English Words", "For schools that run UFLI Foundations: spelling lists by lesson, what the notation adds at each lesson, and where the lessons meet the route.", body)
+</details>
+</div></section>
+<script>(() => {{ const open = () => {{ const d = document.querySelector(location.hash + ' details'); if (d) d.open = true; }}; open(); addEventListener('hashchange', open); }})();</script>"""
+    door_page("ufli", "UFLI Foundations · A Legend for English Words", "For schools that run UFLI Foundations: where its lessons meet the route, the mark to draw alongside each part, and why the orders differ.", body)
