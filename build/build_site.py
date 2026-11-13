@@ -408,7 +408,7 @@ home_body = f"""{header(0)}
 {footer(0)}"""
 if STANDALONE:
     home = page("A Legend for English Words", home_body, 0,
-                "A route through English spelling for teachers: 32 steps, with every word marked in Legomorphic Notation.")
+                "The legomorphic route through English spelling, for teachers: 32 steps, with every word marked in Legomorphic Notation.")
 else:
     home = home_head + home_body
 (OUT / "index.html").write_text(home, encoding="utf-8")

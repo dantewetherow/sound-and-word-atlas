@@ -1,7 +1,7 @@
  [gap] 
 
 ## The route
-The route has thirty-two steps in eight bands. Each mark enters with the first word that needs it, and the verb kernel runs through every band. The [link: orientation map] shows the same route with each word's letters in colour.
+The legomorphic route has thirty-two steps in eight bands. Each mark enters with the first word that needs it, and the verb kernel runs through every band. The [link: orientation map] shows the same route with each word's letters in colour.
 
 ### Sounds and syllables
 | Step | Words | New marks | Kernel words | | 1. Open or closed | *I* / *it, in, is, if*; contrast *I/it, I/in* | sound circle, syllable swoop, long, short | *is* | | 2. Closed two-letter words | *at, an, am, as, on, up, us* | none | *am* | | 3. Open vowels spell their names | *he, me, we, be, my, by, so, no, go*; contrast *go/do, so/to* | none | *be, go, do* | | 4. One consonant closes it | *be/bed, me/met, we/wet, go/got, no/not, hi/him/hit*; contrast *so/sob* | none | *got* | ### Units
