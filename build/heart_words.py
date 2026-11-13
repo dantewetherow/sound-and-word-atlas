@@ -17,18 +17,18 @@ h is a breath shaped by the vowel that follows it, so where it isn't said it bel
 import html
 
 CODES = {
-    "talk": "c.t t.al c.k", "friend": "c.fr t.ie c.nd", "woman": "c.w b.o | c.m b.a c.n", "women": "c.w b.o | c.m b.e c.n",
+    "talk": "c.t t.al c.k", "friend": "c.fr t.ie c.nd ; cup 3", "woman": "c.w b.o | c.m b.a c.n", "women": "c.w b.o | c.m b.e c.n",
     "move": "c.m b.o c.v e0", "four": "c.f r.our", "fourth": "c.f r.our g.th", "nothing": "c.n b.o + | g.th s.i k.ng",
     "another": "b.a | c.n + b.o g.th | r.er", "above": "b.a | c.b b.o c.v e0", "among": "b.a | c.m b.o k.ng",
     "against": "b.a | c.g t.ai c.nst", "almost": "b.a c.l | c.m l.o c.st", "poor": "c.p r.oor", "won": "c.w b.o c.n",
     "son": "c.s b.o c.n", "month": "c.m b.o c.n g.th", "hour": "t.hou c.r", "minute": "c.m s.i | c.n b.u c.t e0",
     "Monday": "c.M b.o c.n | c.d t.ay", "Wednesday": "c.W s.e k.dn e0 c.s | c.d t.ay", "heart": "c.h r.ear c.t",
-    "about": "b.a | c.b t.ou c.t", "answer": "s.a c.n | k.sw r.er", "honest": "t.ho | c.n b.e c.st", "honour": "t.ho | c.n r.our",
+    "about": "b.a | c.b t.ou c.t", "answer": "s.a c.n | k.sw r.er", "honest": "t.ho | c.n b.e c.st ; cup 1", "honour": "t.ho | c.n r.our ; cup 1",
     "truth": "c.tr l.u g.th", "truly": "c.tr l.u + | c.l b.y", "busy": "c.b b.u | c.s b.y", "build": "k.bu s.i c.ld",
     "built": "k.bu s.i c.lt", "sure": "c.s r.ur e0", "whom": "k.wh b.o c.m", "whose": "k.wh b.o c.s e0",
     "toward": "c.t b.o + | c.w r.ar c.d", "through": "g.th c.r t.ough", "learn": "c.l r.ear c.n", "earth": "r.ear g.th",
     "early": "r.ear | c.l b.y", "guy": "k.gu l.y", "guess": "k.gu s.e k.ss", "guest": "k.gu s.e c.st", "guide": "k.gu l.i c.d e>",
-    "young": "c.y t.ou k.ng", "touch": "c.t t.ou g.ch", "enough": "b.e | c.n t.ou k.gh", "tough": "c.t t.ou k.gh",
+    "young": "c.y t.ou k.ng ; cup 2", "touch": "c.t t.ou g.ch ; cup 2", "enough": "b.e | c.n t.ou k.gh", "tough": "c.t t.ou k.gh",
     "rough": "c.r t.ou k.gh", "love": "c.l b.o c.v e0",
 }
 
@@ -52,7 +52,7 @@ GROUPS = [
          "<i>Two</i> keeps the w that <i>twin</i>, <i>twelve</i> and <i>twenty</i> say."),
         ("gu keeps g hard", ["guess", "guest", "guide", "guy"],
          "Without the u, <i>gide</i> would read as <i>jide</i>: g before e, i or y is often soft (step 10). The bond bar shows the u working with the g. Before a, o or u the g is hard anyway, so <i>guard</i> doesn&rsquo;t need its u; it came with the word from French."),
-        ("A team saying another of its sounds (step 22)", ["friend", "young", "touch"], "The bar stays: the spelling is the unit, not the sound."),
+        ("A team saying another of its sounds (step 22)", ["friend", "young", "touch"], "The bar stays: the spelling is the unit. Where the unit says the short sound of one of its letters, that letter carries the cup: the e of <i>friend</i>, the u of <i>young</i> and <i>touch</i>."),
     ]),
     ("By heart", "The heart is honest here. A story helps the word stick, but it won&rsquo;t help a learner read the next one.", [
         ("A letter saying another letter&rsquo;s sound", ["of", "busy", "build", "pretty", "any", "many", "women", "woman", "minute", "sure"],

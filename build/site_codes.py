@@ -71,7 +71,7 @@ SITE_CODES = {
     # step 21: the long u sound (as too, new, blue)
     "moon": "c.m t.oo c.n", "food": "c.f t.oo c.d", "grew": "c.gr t.ew", "true": "c.tr t.ue", "soup": "c.s t.ou c.p",
     # step 22: a team's second sound, marked alike (as look, head)
-    "book": "c.b t.oo c.k", "bread": "c.br t.ea c.d",
+    "book": "c.b t.oo c.k", "bread": "c.br t.ea c.d ; cup 2",
     # step 23 (as saw)
     "law": "c.l t.aw",
     # step 24 (as the coin card)
@@ -131,6 +131,8 @@ SITE_CODES = {
 # 10 November 2026, step 16: a long first vowel in a one-part word has its long mark and no vault, since no letter
 # causes it (open, even, as tiger and paper above); today and around take the seam their word sum cards give them.
 SITE_RULED = {
+    # a vowel unit saying one of its letters' short sounds carries the cup over that letter (13 November 2026)
+    "head": "c.h t.ea c.d ; cup 1", "bread": "c.br t.ea c.d ; cup 2",
     # ruled 12 November 2026, following Carney and Venezky: the g of sign is an inert letter (Carney 1994: 41, 47, 247),
     # standing alone in a cone, joined to neither the i nor the n, so it keeps its place across the family and sounds in
     # signal; the i is long with no vault, as in find and child (Carney's rules I.11, I.12), its length going with the

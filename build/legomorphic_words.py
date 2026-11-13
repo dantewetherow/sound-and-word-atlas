@@ -59,6 +59,8 @@ After a semicolon, by unit number (counting from 0, skipping | and +; a group su
     box A         a block box around the cluster in unit A (box A-B for units A to B)
     seam N        a morpheme seam after letter N (counting letters from 0), for a seam inside a unit: notat + ion
                   puts the seam between the t and the i of g.ti
+    cup N         the short mark over letter N inside a vowel unit, where the unit says that letter's short sound: the e
+                  of head, bread and friend, the o of honest, the u of young (ruled 13 November 2026)
 
 Run:  python3 legomorphic_words.py            checks every word and prints a summary
       python3 legomorphic_words.py --cards    writes legomorphic_words_cards.json (marking-cards form)
@@ -264,6 +266,10 @@ def parse(word):
         elif op == "seam":
             assert 0 <= int(arg) < col - 1, (word, a)
             marks.append({"type": "seam", "after": int(arg)})
+        elif op == "cup":                                 # a vowel unit saying the short sound of one of its letters: the cup over that letter
+            c = int(arg); u = next(u for u in units if c in u["cols"])
+            assert u["kind"] == "t" and letters[c]["ch"].lower() in "aeiouy", (word, a)
+            marks.append({"type": "breve", "col": c})
         else: raise ValueError((word, a))
     if word not in NO_SWOOP:                              # endings that are a syllable in some words and not in others get none
         for a, b in sylls: marks.append({"type": "swoop", "from": a, "to": b})
