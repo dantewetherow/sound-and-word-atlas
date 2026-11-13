@@ -73,6 +73,7 @@ def facts(LW, word):
                       "v": [[m["to"], m["from"]] for m in p["marks"] if m["type"] == "vault"],     # parse() keeps a vault as from the vowel to its sender
                       "bx": [[m["from"], m["to"]] for m in p["marks"] if m["type"] == "block"],
                       "bv": [[m["from"], m["blockFrom"], m["blockTo"]] for m in p["marks"] if m["type"] == "blockedvault"],
+                      "nd": [[m["from"], m["to"]] for m in p["marks"] if m["type"] == "nudge"],
                       "cn": [m["col"] for m in p["marks"] if m["type"] == "cone"] + [m["to"] for m in p["marks"] if m["type"] == "vault" and m.get("cone", True)]}
     return out
 
@@ -154,7 +155,7 @@ def write(OUT, door_page, X):
 
     body = f"""<section class="hero walk-hero"><div class="wrap">
 <h1><span class="t-only">Words</span><span class="s-only">Pick a word</span></h1>
-<p class="lead t-only">Look up a word, then tap or swipe through it, or try marking it first. <b>Read it</b> starts from the word in plain letters and decodes; <b>Spell it</b> starts from the syllables, then the sounds, then the letters. <b>Try it</b> puts the marks in the learner’s hands: pick sound circles, bond bars, syllable swoops, short or long marks, cones, vowel vaults, block boxes or seams, then tap or swipe them onto the word, or write its word sum. <b>Show ours</b> sets the site’s marks underneath to talk about; nothing is scored. Under the word is its sum: tap a part to see every word that shares it.</p>
+<p class="lead t-only">Look up a word, then tap or swipe through it, or try marking it first. <b>Read it</b> starts from the word in plain letters and decodes; <b>Spell it</b> starts from the syllables, then the sounds, then the letters. <b>Try it</b> puts the marks in the learner’s hands: pick sound circles, bond bars, syllable swoops, short or long marks, cones, vowel vaults, block boxes, nice-nudges or seams, then tap or swipe them onto the word, or write its word sum. <b>Show ours</b> sets the site’s marks underneath to talk about; nothing is scored. Under the word is its sum: tap a part to see every word that shares it.</p>
 </div></section>
 {section(note=X["uc"]("a word is either marked, so it can be walked, or shown as a word sum only. Since 13 November 2026 about 2,800 common words of early reading are marked by rule and say so: their marks are a first pass for teachers to check, and some will be wrong."))}
 <section class="about t-only"><div class="wrap"><p><a href="explorations.html">A family built in three moves: <i>note</i>, <i>notate</i>, <i>notation</i></a>. Every analysed word, by its parts, is in <a href="parts.html">Parts</a>.</p></div></section>"""
@@ -368,6 +369,7 @@ WALK_JS = r"""<script>(() => {
     cone: '<circle cx="11" cy="11" r="7.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="0.4 3.4"/>',
     vault: '<path d="M18 17 C18 4 6 4 5 10" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M8 9.6 L5 10 L6.3 7.3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
     box: '<rect x="4" y="5" width="14" height="12" rx="2.5" fill="none" stroke="currentColor" stroke-width="2.2"/>',
+    nudge: '<text x="3.5" y="12" font-size="10" font-family="var(--body)" fill="var(--ink)">c</text><text x="12" y="12" font-size="10" font-family="var(--body)" fill="var(--verb)">e</text><path d="M15 15 Q11 20.5 7 15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>',
     sum: '<path d="M11 5V17M5 11H17" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>',
     join: '<path d="M4 11H17M12 6l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>'
   };
@@ -380,14 +382,15 @@ WALK_JS = r"""<script>(() => {
     cone: ['Cone', 'Tap a letter that makes no sound of its own to put it in a cone of silence.', 'cone of silence', 'cones of silence'],
     vault: ['Vowel vault', 'Swipe from the letter doing the job back to the vowel it makes long: from the e of <i>hope</i> to the o. A block box in the way blocks the vault.', 'vowel vault', 'vowel vaults'],
     box: ['Block box', 'Swipe across the consonants that stop a vault, to put them in a block box.', 'block box', 'block boxes'],
+    nudge: ['Nice-nudge', 'Swipe from the e, i or y back to the c or g it makes soft: from the e of <i>face</i> to the c, from the y of <i>gym</i> to the g. Tap a letter to take its nudge off.', 'nice-nudge', 'nice-nudges'],
     seam: ['Seams', 'Tap between two letters where one part ends and the next begins.', 'seam', 'seams'],
     sum: ['Word sum', 'Write the word sum. Put + between the parts and brackets round a letter that drops or changes: <i>hop(e) + ing</i>.'],
     join: ['Put together', 'Here are the parts. Write the word they make.']
   };
-  const MARKS = ['circ', 'bond', 'swoop', 'breve', 'macron', 'cone', 'vault', 'box', 'seam'],
-        LAYERS = {circ: [1, 2], bond: [4], swoop: [3], breve: [6], macron: [6], cone: [8], vault: [7, 8], box: [7], seam: [9]};
+  const MARKS = ['circ', 'bond', 'swoop', 'breve', 'macron', 'cone', 'vault', 'box', 'nudge', 'seam'],
+        LAYERS = {circ: [1, 2], bond: [4], swoop: [3], breve: [6], macron: [6], cone: [8], vault: [7, 8], box: [7], nudge: [8], seam: [9]};
   let T = null, G = null, Y = null, tool = 'circ', showing = false, undo = [];
-  const fresh = () => ({circ: [], bond: [], swoop: [], breve: [], macron: [], cone: [], vault: [], box: [], seam: [], sum: '', join: ''});
+  const fresh = () => ({circ: [], bond: [], swoop: [], breve: [], macron: [], cone: [], vault: [], box: [], nudge: [], seam: [], sum: '', join: ''});
   // a learner's vault is blocked when one of their block boxes stands between its sender and the vowel
   const blocker = (m, [s, r]) => m.box.find(([a, b]) => a > Math.min(s, r) && b < Math.max(s, r));
   const plainSum = () => word.sum.map(p => p.s.replace(/\(([^)&]*)&rarr;[^)]*\)/g, '$1').replace(/[()]/g, '')).join(' + ');
@@ -462,6 +465,11 @@ WALK_JS = r"""<script>(() => {
         o += path('M' + (e + 9.6 * k) + ' ' + (y - 1) + ' L' + e + ' ' + y + ' L' + (e + 4.4 * k) + ' ' + (y - 8.6));
       }
     });
+    m.nudge.forEach(([s, r]) => {     // as the site draws it: a small arc under the letters, from the vowel to the c or g
+      const d = x[s] > x[r] ? 1 : -1, low = /[gjpqy]/.test((T && T.L[r]) || ''), y0 = low ? B + 28.8 : B + 16, yd = low ? B + 36.8 : B + 40;
+      const a = x[s] - d * 5.6, b = x[r] + d * 6.4;
+      o += '<path d="M' + a + ' ' + y0 + ' Q' + (a + b) / 2 + ' ' + yd + ' ' + b + ' ' + y0 + '" fill="none" stroke="var(--modal)" stroke-width="3.4" stroke-linecap="round"/>'
+        + '<path d="M' + (b + 1.9 * d) + ' ' + (y0 + 8.6) + ' L' + b + ' ' + y0 + ' L' + (b + 8.2 * d) + ' ' + (y0 + 3.1) + '" fill="none" stroke="var(--modal)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>'; });
     m.swoop.forEach(([a, b]) => { o += '<path d="M' + (x[a] - 8.6) + ' ' + (B + 68) + ' Q' + (x[a] + x[b]) / 2 + ' ' + (B + 84) + ' ' + (x[b] + 8.6) + ' ' + (B + 68) + '" fill="none" stroke="var(--modal)" stroke-width="3.7" stroke-linecap="round"/>'; });
     g.innerHTML = o; g.style.opacity = ghost ? 0.35 : '';
   }
@@ -474,9 +482,9 @@ WALK_JS = r"""<script>(() => {
   function counts() {
     const blocked = Y.vault.filter(v => blocker(Y, v)).length;
     const mine = {circ: Y.circ.length, bond: Y.bond.length, swoop: Y.swoop.length, breve: Y.breve.length, macron: Y.macron.length,
-                  cone: Y.cone.length, vault: Y.vault.length - blocked, bv: blocked, box: Y.box.length, seam: Y.seam.length},
+                  cone: Y.cone.length, vault: Y.vault.length - blocked, bv: blocked, box: Y.box.length, nudge: Y.nudge.length, seam: Y.seam.length},
           site = {circ: T.d.length, bond: T.b.length, swoop: T.sy.length + 1, breve: T.sh.length, macron: T.lg.length,
-                  cone: T.cn.length, vault: T.v.length, bv: T.bv.length, box: T.bx.length, seam: T.sm.length};
+                  cone: T.cn.length, vault: T.v.length, bv: T.bv.length, box: T.bx.length, nudge: (T.nd || []).length, seam: T.sm.length};
     const NAME = Object.assign({bv: [0, 0, 'blocked vault', 'blocked vaults']}, TOOLS);
     let ks = used().filter(k => mine[k] || showing);
     if (ks.includes('vault') || ks.includes('box')) ks.splice(Math.max(ks.indexOf('vault'), ks.indexOf('box')) + 1, 0, 'bv');
@@ -498,6 +506,11 @@ WALK_JS = r"""<script>(() => {
       const s = near(x0), r = near(x1);
       if (tap || s === r) { const keep = m.vault.filter(([p, q]) => p !== s && q !== s); if (keep.length === m.vault.length) return null; m.vault = keep; return m; }
       m.vault = m.vault.filter(([p]) => p !== s); m.vault.push([s, r]); return m;
+    }
+    if (t === 'nudge') {           // from the e, i or y the swipe starts on to the c or g it ends on; a tap takes off a nudge there
+      const s = near(x0), r = near(x1);
+      if (tap || s === r) { const keep = m.nudge.filter(([p, q]) => p !== s && q !== s); if (keep.length === m.nudge.length) return null; m.nudge = keep; return m; }
+      m.nudge = m.nudge.filter(([p]) => p !== s); m.nudge.push([s, r]); return m;
     }
     if (t === 'box') {
       const hit = span(a, b, m.box);

@@ -533,7 +533,7 @@ table.cw-table td:first-of-type { width: 46%; }
 .try-tools button { --tc: var(--ink); }
 .try-tools button[data-tool="swoop"], .try-tools button[data-tool="seam"] { --tc: var(--modal); }
 .try-tools button[data-tool="breve"], .try-tools button[data-tool="macron"] { --tc: var(--verb); }
-.try-tools button[data-tool="vault"], .try-tools button[data-tool="box"] { --tc: var(--modal); }
+.try-tools button[data-tool="vault"], .try-tools button[data-tool="box"], .try-tools button[data-tool="nudge"] { --tc: var(--modal); }
 .try-tools button[data-tool="cone"] { --tc: var(--soft); }
 .try-tools button[data-tool="sum"], .try-tools button[data-tool="join"] { --tc: var(--soft); }
 .try-tools button svg { color: var(--tc); }
