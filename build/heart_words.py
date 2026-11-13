@@ -56,7 +56,7 @@ GROUPS = [
     ]),
     ("By heart", "The heart is honest here. A story helps the word stick, but it won&rsquo;t help a learner read the next one.", [
         ("A letter saying another letter&rsquo;s sound", ["of", "busy", "build", "pretty", "any", "many", "women", "woman", "minute", "sure"],
-         "<i>Of</i> and <i>off</i> were once one word; the f stayed. <i>Busy</i> is spelled with u and said with short i; in <i>build</i>, as in <i>buy</i>, the u is silent beside the b."),
+         "<i>Of</i> and <i>off</i> were once one word; the f stayed. <i>Busy</i> is spelled with u and said with short i; in <i>build</i>, as in <i>buy</i>, the u is silent beside the b. <i>Woman</i> was Old English <i>wifman</i>, wife-man, then <i>wimman</i>; the o didn&rsquo;t come in until the 13th century (Upward and Davidson 2011: 186). <i>Women</i> is still said with the old i, and spelled with the o of <i>woman</i>."),
         ("One and once", ["one", "once"], "<i>Alone</i> and <i>only</i> keep the old sound of <i>one</i>: <i>all one</i>, <i>one-ly</i>."),
         ("A silent letter", ["hour", "honest", "honour", "answer", "Wednesday"],
          "The h of <i>hour</i> and <i>honest</i> was silent in the French they came from. It joins the vowel after it under one bar: h is only a breath shaped like the vowel that follows it, and here not even that. <i>Answer</i> is <i>and</i> + <i>swear</i> in Old English. <i>Wednesday</i> is Woden&rsquo;s day."),
