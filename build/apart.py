@@ -4,6 +4,8 @@ spelled differently, set side by side and marked, sorted by why the spelling kee
      short word rule, 1994: 131-133): be and bee, in and inn;
   2. a letter kept from the family: know keeps the k that knowledge and known show; knew is the past of know;
   3. history: the two were said differently once, and the spelling kept the difference (sea and see, meat and meet).
+  4. the apostrophe catastrophe: a contraction sounds like another word (it's and its), and the apostrophe shows
+     where the vowel was squeezed out (13 November 2026).
 That the third group helps a reader is a result, not a design. Each pair links from the step that can handle it.
 
 (group, [(id, [(word, sentence)], step, why)])"""
@@ -37,6 +39,13 @@ GROUPS = [
         ("sun-son", [("sun", "The sun is hot."), ("son", "Her son is seven.")], 19, "<i>Son</i> has the o that scribes wrote for u beside m, n and v."),
         ("our-hour", [("our", "This is our house."), ("hour", "Wait an hour.")], 25, "The h of <i>hour</i> came from Latin <i>hora</i> and was already silent in the French that brought it. It sits on the vowel&rsquo;s bar."),
     ]),
+    ("The apostrophe catastrophe", "One of the pair is two words with a vowel squeezed out. Say it as the two words: if that makes sense, the apostrophe goes in, where the vowel was. "
+     "See <a href=\"../contractions.html\">Squeezed into oblivion</a>.", [
+        ("its-its", [("it’s", "It&rsquo;s raining."), ("its", "The dog wagged its tail.")], 27, "<i>It&rsquo;s</i> is <i>it is</i>. <i>Its</i> has nothing squeezed out, like <i>his</i>."),
+        ("youre-your", [("you’re", "You&rsquo;re next."), ("your", "Is this your coat?")], 27, "<i>You&rsquo;re</i> is <i>you are</i>."),
+        ("theyre-their-there", [("they’re", "They&rsquo;re late."), ("their", "That&rsquo;s their house."), ("there", "Put it there.")], 27, "<i>They&rsquo;re</i> is <i>they are</i>. <i>There</i> has <i>here</i> inside it, as <i>where</i> does: the place words."),
+        ("whos-whose", [("who’s", "Who&rsquo;s there?"), ("whose", "Whose hat is this?")], 27, "<i>Who&rsquo;s</i> is <i>who is</i>."),
+    ]),
 ]
 
 
@@ -54,7 +63,8 @@ def write(OUT, page, header, footer, X):
     from noun_codes import NOUN_CODES
     def code_for(w):
         if w in LW.W: return None
-        c = CODES.get(w) or NOUN_CODES.get(w) or X["auto_codes"].get(w)
+        import contractions, heart_words
+        c = CODES.get(w) or contractions.CODES.get(w) or heart_words.CODES.get(w) or NOUN_CODES.get(w) or X["auto_codes"].get(w)
         assert c, w
         return c
     secs = []
@@ -63,19 +73,20 @@ def write(OUT, page, header, footer, X):
         for pid, ws, step, why in pairs:
             figs = "".join(f'<figure class="word">{X["svg_of"](w, 40, code=code_for(w), label=f"{w}, marked")}<figcaption>{s}</figcaption></figure>' for w, s in ws)
             cards.append(f'<div class="ap-pair" id="{pid}"><div class="words rrow">{figs}</div><p class="sub">{why} <a class="t-only" href="../steps/{step:02d}.html">Step {step}</a></p></div>')
-        secs.append(f'<section class="about ap-group"><div class="wrap"><h2>{k}. {h}</h2><p class="sub">{sub}</p><div class="ap-pairs">{"".join(cards)}</div></div></section>')
+        gid = ' id="squeeze"' if k == 4 else ""
+        secs.append(f'<section class="about ap-group"{gid}><div class="wrap"><h2>{k}. {h}</h2><p class="sub">{sub}</p><div class="ap-pairs">{"".join(cards)}</div></div></section>')
     body = f"""{header(1)}
 <main class="apart-page">
 <section class="hero"><div class="wrap">
 <p class="eyebrow t-only"><a href="index.html">Legomorphic spelling</a> &middot; Spelled apart</p>
 <h1>Spelled apart</h1>
 <p class="lead">Words that sound the same and are spelled differently. In a sentence, the grammar tells them apart; on the page, the spelling does. Marked side by side, the difference shows: the h on the bar of <i>hour</i>, the second e of <i>bee</i>.</p>
-<p class="sub t-only">Say both sentences, then write the word that fits each. Ask which group the pair is in: a short word and a long one, a letter kept from the family, or history. A spelling list of pairs tests something the other kinds don&rsquo;t: telling two spellings apart, not learning one.</p>
+<p class="sub t-only">Say both sentences, then write the word that fits each. Ask which group the pair is in: a short word and a long one, a letter kept from the family, history, or a squeezed-out vowel. A spelling list of pairs tests something the other kinds don&rsquo;t: telling two spellings apart, not learning one.</p>
 </div></section>
 {"".join(secs)}
 <section class="about t-only"><div class="wrap prose">
 <p class="sub">Edward Carney, <i>A Survey of English Spelling</i> (1994): the short word rule, pp. 131&ndash;133. Every word here can be looked up in <a href="../walk.html">Words</a>.</p>
-{X["uc"]("a first set of pairs, since 13 November 2026. Next: their, there and they&rsquo;re, and pairs from later steps.")}
+{X["uc"]("a first set of pairs, since 13 November 2026. Next: pairs from later steps.")}
 </div></section>
 </main>
 {footer(1)}"""

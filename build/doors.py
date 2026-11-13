@@ -47,7 +47,7 @@ PAGES = [
     ("notations.html", "progressions", "The marks", "The marks of Legomorphic Notation, each drawn alone on one word."),
     ("walk.html", "walk", "Words", "Look up a word and walk through it, a move at a time, with its parts."),
     ("explorations.html", "walk", "A family: note", "Note, notate and notation, each built from the one before."),
-    ("contractions.html", "walk", "Squeezed into oblivion", "Contractions: the vowel squeezed out, the apostrophe in its place, and the apostrophe catastrophes."),
+    ("contractions.html", "walk", "Squeezed into oblivion", "Contractions: the vowel squeezed out, the apostrophe in its place: the apostrophe catastrophe."),
     ("ablaut.html", "walk", "What's that ablaut?", "write, wrote, written: the vowel changes to mark time, and the spelling around it does its usual jobs."),
     ("parts.html", "parts", "Parts", "Prefixes, suffixes, roots and joins, each with every word that has it."),
     ("roots/leg.html", "parts", "*leg-: to gather", "The first root family: Greek and Latin words for gathering, choosing, reading and saying."),
@@ -282,7 +282,7 @@ def write(OUT, page, header, footer, X):
 <section class="about" id="ablaut-link"><div class="wrap">
 <h2>What&rsquo;s that ablaut?</h2>
 <p class="sub t-only"><i>write</i>, <i>wrote</i>, <i>written</i>: the vowel changes to mark time, the silent e vaults, and a block box keeps the i of <i>written</i> short.</p>
-<div class="door-tiles"><a class="dtile" href="contractions.html"><b>Squeezed into oblivion</b><span>Contractions: the vowel squeezed out, the apostrophe in its place, and the apostrophe catastrophes.</span></a>
+<div class="door-tiles"><a class="dtile" href="contractions.html"><b>Squeezed into oblivion</b><span>Contractions: the vowel squeezed out, the apostrophe in its place: the apostrophe catastrophe.</span></a>
 <a class="dtile" href="ablaut.html"><b>write, wrote, written</b><span>Ablaut, the vault and the box in one family, with <i>spoken</i> and <i>driven</i> as the contrasts.</span></a></div>
 </div></section>
 <section class="about" aria-labelledby="next-h"><div class="wrap">

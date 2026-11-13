@@ -290,7 +290,7 @@ for i, s in enumerate(STEPS):
     if pairs:
         notes.append('<div class="note"><h2>Spelled apart</h2><p>' + ", ".join(f'<a href="../lists/apart.html#{pid}">{label}</a>' for pid, label in pairs) + '</p></div>')
     if n == 27:                                              # the contractions page (13 November 2026)
-        notes.append('<div class="note"><h2>More contractions</h2><p><a href="../contractions.html">Squeezed into oblivion</a>: twenty-four contractions marked, and the apostrophe catastrophes (<i>its</i> and <i>it&rsquo;s</i>, <i>your</i> and <i>you&rsquo;re</i>).</p></div>')
+        notes.append('<div class="note"><h2>More contractions</h2><p><a href="../contractions.html">Squeezed into oblivion</a>: twenty-four contractions, each an apostrophe catastrophe: a vowel squeezed out and an apostrophe in its place.</p></div>')
     for text in open_items_for(n):
         notes.append(f'<div class="note uc">{uc(md(text))}</div>')
     unmarked = sorted({SC.UNMARKED[w] for g in groups_of(s["words_md"]) for w in g if w in SC.UNMARKED})

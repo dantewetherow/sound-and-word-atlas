@@ -2,9 +2,10 @@
 
 In a contraction a small, unstressed word loses its vowel, and sometimes more, and the apostrophe stands where the
 letters were (Carney 1994: 50). The notation draws the apostrophe red, in the vowel's colour, with no circle: it holds
-the vowel's place and says nothing. A seam stands between the two words. The page ends with the apostrophe
-catastrophes: its and it's, your and you're, their and they're, whose and who's, and the apostrophe that doesn't
-belong in a plural. These are the first contractions the site draws."""
+the vowel's place and says nothing. A seam stands between the two words. The squeeze itself is the apostrophe
+catastrophe (ruled 13 November 2026). Pairs that sound alike (its and it's, your and you're) live on Spelled apart;
+the possessive 's isn't treated: it isn't a squeeze, and the history it rests on is too fine a point for learners.
+These are the first contractions the site draws."""
 import html
 
 CODES = {
@@ -16,7 +17,7 @@ CODES = {
     "you’re": "c.y t.ou + ap c.r e0", "we’re": "c.w l.e + ap c.r e0", "they’re": "g.th t.ey + ap c.r e0", "let’s": "c.l s.e c.t + ap c.s",
     "I’ll": "l.I + ap k.ll", "I’ve": "l.I + ap c.v e0", "I’d": "l.I + ap c.d", "can’t": "c.c s.a c.n + ap c.t",
     "won’t": "c.w l.o + c.n ap c.t", "don’t": "c.d l.o + c.n ap c.t",
-    "its": "s.i c.t c.s", "who’s": "k.wh b.o + ap c.s", "apples": "s.a x.pp | le + c.s", "dog’s": "c.d s.o c.g + ap c.s",
+    "its": "s.i c.t c.s", "who’s": "k.wh b.o + ap c.s",
 }
 
 # (heading, what happened, [(contraction, the two words, a sentence)])
@@ -37,14 +38,6 @@ GROUPS = [
         ("can’t", "can + not", "I can&rsquo;t see."), ("don’t", "do + not", "Don&rsquo;t run."), ("won’t", "will + not", "I won&rsquo;t go.")]),
 ]
 
-CATASTROPHES = [
-    ([("it’s", "It&rsquo;s raining."), ("its", "The dog wagged its tail.")], "<i>It&rsquo;s</i> is <i>it is</i>: the apostrophe stands for the i. <i>Its</i> means belonging to it, and has no letters missing, so it has no apostrophe."),
-    ([("you’re", "You&rsquo;re next."), ("your", "Is this your coat?")], "<i>You&rsquo;re</i> is <i>you are</i>. Read it back as <i>you are</i>: if that makes sense, it takes the apostrophe."),
-    ([("they’re", "They&rsquo;re late."), ("their", "That&rsquo;s their house."), ("there", "Put it there.")], "<i>They&rsquo;re</i> is <i>they are</i>; <i>their</i> is belonging to them; <i>there</i> goes with <i>here</i> and <i>where</i>, the place words."),
-    ([("who’s", "Who&rsquo;s there?"), ("whose", "Whose hat is this?")], "<i>Who&rsquo;s</i> is <i>who is</i>. <i>Whose</i> asks who something belongs to."),
-    ([("apples", "I ate two apples."), ("dog’s", "The dog&rsquo;s bone.")], "A plural takes no apostrophe: nothing is missing from <i>apples</i>. The apostrophe of <i>dog&rsquo;s</i> is usually explained as standing for the e of an older ending, -es."),
-]
-
 
 def write(OUT, door_page, X):
     LW = X["LW"]
@@ -56,22 +49,16 @@ def write(OUT, door_page, X):
     for h, sub, rows in GROUPS:
         figs = "".join(fig(w, f"<span class=ws>{s}</span><span class=t-only>{sent}</span>", 40) for w, s, sent in rows)
         secs.append(f'<section class="about ct-group"><div class="wrap"><h2>{h}</h2><p class="sub t-only">{sub}</p><div class="words rrow">{figs}</div></div></section>')
-    cats = "".join(f'<div class="ap-pair"><div class="words rrow">{"".join(fig(w, s, 40) for w, s in ws)}</div><p class="sub">{why}</p></div>' for ws, why in CATASTROPHES)
     body = f"""<section class="hero"><div class="wrap">
 <p class="eyebrow t-only">Explorations</p>
 <h1>Squeezed into oblivion</h1>
-<p class="lead">In a contraction, two words join and the second one, small and quick, loses its vowel. The apostrophe stands where the letters were. It&rsquo;s drawn red, in the vowel&rsquo;s colour, with no circle: it holds the vowel&rsquo;s place and says nothing.</p>
+<p class="lead">In a contraction, two words join and the second one, small and quick, loses its vowel. The vowel is squeezed into oblivion, and an apostrophe lands where it was: an apostrophe catastrophe. The apostrophe is drawn red, in the vowel&rsquo;s colour, with no circle: it holds the vowel&rsquo;s place and says nothing.</p>
 </div></section>
 {"".join(secs)}
-<section class="about" id="catastrophes"><div class="wrap">
-<h2>Apostrophe catastrophes</h2>
-<p class="sub t-only">The apostrophe only ever stands for something missing. Ask what&rsquo;s missing; if nothing is, there&rsquo;s no apostrophe.</p>
-<div class="ap-pairs">{cats}</div>
-</div></section>
 <section class="about t-only"><div class="wrap prose">
 <p><i>Won&rsquo;t</i> keeps an old form of <i>will</i>, <i>wol</i>, so it changes more than the others. <i>Don&rsquo;t</i> changes its vowel: <i>do</i> says the vowel of <i>moon</i>, <i>don&rsquo;t</i> the name of o. Both are worth saying aloud beside the two words they come from.</p>
-<p class="sub">Edward Carney, <i>A Survey of English Spelling</i> (1994): the apostrophe, p. 50. These are on the route at <a href="steps/27.html">step 27</a>, and the pairs with a sound in common are also on <a href="lists/apart.html">Spelled apart</a>. Every word here can be looked up in <a href="walk.html">Words</a>.</p>
+<p class="sub">Edward Carney, <i>A Survey of English Spelling</i> (1994): the apostrophe, p. 50. These are on the route at <a href="steps/27.html">step 27</a>, and the ones that sound like another word (<i>it&rsquo;s</i> and <i>its</i>, <i>you&rsquo;re</i> and <i>your</i>) are on <a href="lists/apart.html#squeeze">Spelled apart</a>. Every word here can be looked up in <a href="walk.html">Words</a>.</p>
 {X["uc"]("the first contractions the site draws, since 13 November 2026.")}
 </div></section>"""
     door_page("contractions", "Squeezed into oblivion · A Legend for English Words", "Contractions: the vowel squeezed out, the apostrophe in its place, and the apostrophe catastrophes.", body)
-    return sorted({w for _, _, rows in GROUPS for w, _, _ in rows} | {w for ws, _ in CATASTROPHES for w, _ in ws})
+    return sorted({w for _, _, rows in GROUPS for w, _, _ in rows} | {"its", "who’s"})
