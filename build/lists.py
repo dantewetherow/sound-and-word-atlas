@@ -152,7 +152,8 @@ KINDS = [(1, "One analog, several words", "One word&rsquo;s spelling carries to 
          (4, "A closed set", "A small set of words that work together and change together.")]
 INDEX_DESC = "Spelling lists that follow the route: one for each step and each word family, each with a check, and the four kinds of list they are made from."
 PAGES = [("lists/index.html", "teachers", "Legomorphic spelling", INDEX_DESC),
-         ("lists/hearts.html", "teachers", "Spelling list: Words with a heart", "Heart words sorted by how much of the heart a learner can lose: regular on the route, a reason to use, or by heart.")]
+         ("lists/hearts.html", "teachers", "Spelling list: Words with a heart", "Heart words sorted by how much of the heart a learner can lose: regular on the route, a reason to use, or by heart."),
+         ("lists/apart.html", "teachers", "Spelling list: Spelled apart", "Words that sound the same and are spelled differently, marked side by side and sorted by why the spelling keeps them apart.")]
 PAGES += [(f"lists/{L['slug']}.html", "teachers", f"Spelling list: {L['title']}", L["desc"]) for L in LISTS]
 HAS_CHECK = " It comes with a check to give before and after the lesson."
 
@@ -317,6 +318,8 @@ def write(OUT, page, header, footer, X):
     X["ufli_lists"] = ufli_lists.write(OUT, page, header, footer, X)
     import heart_words
     X["heart_words"] = heart_words.write(OUT, page, header, footer, X)
+    import apart
+    X["heart_words"] = sorted(set(X["heart_words"]) | set(apart.write(OUT, page, header, footer, X)))
     write_index(OUT, page, header, footer, X)
     print(f"wrote {len(LISTS)} spelling list(s), {len(CHECKS)} check(s)")
     return [(p, t) for p, _, t, _ in PAGES]
@@ -350,9 +353,10 @@ def write_index(OUT, page, header, footer, X):
 <div class="door-tiles"><a class="dtile" href="../ufli.html"><b>UFLI Foundations</b><span>UFLI&rsquo;s lessons in sixteen bands, each with the mark to add and an example or two marked, and why the two orders differ.</span></a></div>
 </div></section>
 <section class="about" id="hearts"><div class="wrap">
-<h2>Words with a heart</h2>
-<p class="sub">The words programs teach as heart words, sorted by how much of the heart a learner can lose: most are regular once their step comes, or have a reason to use; only a few have to be learned by heart.</p>
-<div class="door-tiles"><a class="dtile" href="hearts.html"><b>Words with a heart</b><span>Regular on the route, a reason to use, or by heart: each word marked so the reason shows.</span></a></div>
+<h2>Words with a heart, and words spelled apart</h2>
+<p class="sub">The words programs teach as heart words, sorted by how much of the heart a learner can lose; and words that sound the same and are spelled differently, sorted by why.</p>
+<div class="door-tiles"><a class="dtile" href="hearts.html"><b>Words with a heart</b><span>Regular on the route, a reason to use, or by heart: each word marked so the reason shows.</span></a>
+<a class="dtile" href="apart.html"><b>Spelled apart</b><span>Words that sound the same and are spelled differently, side by side: a short word and a long one, a letter kept from the family, or history.</span></a></div>
 </div></section>
 <section class="about" id="families"><div class="wrap">
 <h2>Families</h2>

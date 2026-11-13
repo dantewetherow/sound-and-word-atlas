@@ -21,6 +21,8 @@ for w, c in SC.SITE_CODES.items(): codes.setdefault(w, c)
 codes.update(SC.SITE_RULED)                                   # rulings that change a word the deck tools still mark the old way
 import heart_words                                           # heart words the site hadn't marked (13 November 2026)
 for w, c in heart_words.CODES.items(): codes.setdefault(w, c)
+import apart                                                  # pairs spelled apart (13 November 2026)
+for w, c in apart.CODES.items(): codes.setdefault(w, c)
 import word_sum_codes as WSC                                  # the grade 3 word sum cards' markings, for Words and Parts
 for _, _, items in WSC.SECTIONS:
     for item in items: codes.setdefault(item[1], item[2])
@@ -279,6 +281,10 @@ for i, s in enumerate(STEPS):
     if homes:
         notes.append('<div class="note"><h2>Spelling list</h2><p>' + "<br>".join(
             f'<a href="../lists/{L["slug"]}.html">{L["title"]}</a>' for L in homes) + '</p></div>')
+    import apart as _apart                                   # pairs spelled apart that this step can handle (13 November 2026)
+    pairs = _apart.by_step().get(n, [])
+    if pairs:
+        notes.append('<div class="note"><h2>Spelled apart</h2><p>' + ", ".join(f'<a href="../lists/apart.html#{pid}">{label}</a>' for pid, label in pairs) + '</p></div>')
     for text in open_items_for(n):
         notes.append(f'<div class="note uc">{uc(md(text))}</div>')
     unmarked = sorted({SC.UNMARKED[w] for g in groups_of(s["words_md"]) for w in g if w in SC.UNMARKED})
