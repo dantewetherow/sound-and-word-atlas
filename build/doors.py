@@ -47,6 +47,7 @@ PAGES = [
     ("notations.html", "progressions", "The marks", "The marks of Legomorphic Notation, each drawn alone on one word."),
     ("walk.html", "walk", "Words", "Look up a word and walk through it, a move at a time, with its parts."),
     ("explorations.html", "walk", "A family: note", "Note, notate and notation, each built from the one before."),
+    ("ablaut.html", "walk", "What's that ablaut?", "write, wrote, written: the vowel changes to mark time, and the spelling around it does its usual jobs."),
     ("parts.html", "parts", "Parts", "Prefixes, suffixes, roots and joins, each with every word that has it."),
     ("roots/leg.html", "parts", "*leg-: to gather", "The first root family: Greek and Latin words for gathering, choosing, reading and saying."),
     ("roots/deuk.html", "parts", "*deuk-: to lead", "A root family: produce, reduce, conduct, educate, duke and tug, with a lesson on stress."),
@@ -277,6 +278,11 @@ def write(OUT, page, header, footer, X):
 <p class="sub t-only">Each word is built from the one before it. At each seam the <i>e</i> drops, and its job, making the <i>o</i> spell its name, passes to the next vowel.</p>
 <div class="words fam">{fam}</div>
 </div></section>
+<section class="about" id="ablaut-link"><div class="wrap">
+<h2>What&rsquo;s that ablaut?</h2>
+<p class="sub t-only"><i>write</i>, <i>wrote</i>, <i>written</i>: the vowel changes to mark time, the silent e vaults, and a block box keeps the i of <i>written</i> short.</p>
+<div class="door-tiles"><a class="dtile" href="ablaut.html"><b>write, wrote, written</b><span>Ablaut, the vault and the box in one family, with <i>risen</i> and <i>driven</i> as the contrasts.</span></a></div>
+</div></section>
 <section class="about" aria-labelledby="next-h"><div class="wrap">
 <h2 id="next-h" class="t-only">Coming next</h2>
 {uc("next, the first contrast, <i>hop</i> and <i>hope</i>, built in full: their families marked, cards to print, a presentation for teachers and an exercise for students. Then more families and contrasts, and a page for every word.")}
@@ -284,6 +290,9 @@ def write(OUT, page, header, footer, X):
 <p class="s-only s-soon">More words to take apart are coming soon.</p>
 <p><a href="parts.html">Every word that&rsquo;s taken apart, by its parts</a>.</p>
 </div></section>""")
+
+    import ablaut
+    X["ablaut_words"] = ablaut.write(OUT, door_page, X)
 
     # Constructions: the Dialogue Team and the sentence cards.
     import characters, sessions

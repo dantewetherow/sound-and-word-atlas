@@ -23,6 +23,8 @@ import heart_words                                           # heart words the s
 for w, c in heart_words.CODES.items(): codes.setdefault(w, c)
 import apart                                                  # pairs spelled apart (13 November 2026)
 for w, c in apart.CODES.items(): codes.setdefault(w, c)
+import ablaut                                                 # write, wrote, written and the other ablaut sets (13 November 2026)
+for w, c in ablaut.CODES.items(): codes.setdefault(w, c)
 import word_sum_codes as WSC                                  # the grade 3 word sum cards' markings, for Words and Parts
 for _, _, items in WSC.SECTIONS:
     for item in items: codes.setdefault(item[1], item[2])

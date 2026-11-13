@@ -25,7 +25,7 @@ GROUPS = [
     ]),
     ("A letter kept from the family", "The spelling keeps a letter that another form of the word, or a word in its family, says or uses.", [
         ("no-know", [("no", "No, thank you."), ("know", "I know the way.")], 25, "<i>Know</i> keeps the k it shares with <i>knowledge</i> and <i>known</i>."),
-        ("new-knew", [("new", "I have new shoes."), ("knew", "She knew the answer.")], 25, "<i>Knew</i> is the past of <i>know</i>, so it keeps the k."),
+        ("new-knew", [("new", "I have new shoes."), ("knew", "She knew the answer.")], 25, "<i>Knew</i> is the past of <i>know</i>, so it keeps the k. <a href=\"../ablaut.html\">Ablaut</a>: <i>know, knew, known</i>."),
         ("blue-blew", [("blue", "The sky is blue."), ("blew", "The wind blew.")], 21, "<i>Blew</i> is the past of <i>blow</i>, as <i>grew</i> is of <i>grow</i> and <i>knew</i> of <i>know</i>."),
         ("to-two", [("to", "Go to school."), ("two", "I have two cats.")], 21, "<i>Two</i> keeps the w that <i>twin</i>, <i>twelve</i> and <i>twenty</i> say."),
         ("right-write", [("right", "Turn right."), ("write", "Write your name.")], 25, "<i>Write</i> keeps the w that <i>wrote</i> and <i>written</i> keep. It was once said."),
