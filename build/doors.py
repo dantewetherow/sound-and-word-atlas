@@ -281,7 +281,7 @@ def write(OUT, page, header, footer, X):
 <section class="about" id="ablaut-link"><div class="wrap">
 <h2>What&rsquo;s that ablaut?</h2>
 <p class="sub t-only"><i>write</i>, <i>wrote</i>, <i>written</i>: the vowel changes to mark time, the silent e vaults, and a block box keeps the i of <i>written</i> short.</p>
-<div class="door-tiles"><a class="dtile" href="ablaut.html"><b>write, wrote, written</b><span>Ablaut, the vault and the box in one family, with <i>risen</i> and <i>driven</i> as the contrasts.</span></a></div>
+<div class="door-tiles"><a class="dtile" href="ablaut.html"><b>write, wrote, written</b><span>Ablaut, the vault and the box in one family, with <i>spoken</i> and <i>driven</i> as the contrasts.</span></a></div>
 </div></section>
 <section class="about" aria-labelledby="next-h"><div class="wrap">
 <h2 id="next-h" class="t-only">Coming next</h2>

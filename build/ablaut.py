@@ -3,8 +3,8 @@
 Ablaut is a change of the vowel inside a base to mark time: write, wrote, written. The consonants hold still and the
 vowel moves. It is the oldest way English marks the past, older than -ed. The page sets the core set beside the
 spelling machinery the notation already shows: the silent e's vault in write and wrote, the tt that boxes off the said e
-of -en in written, and the two contrasts that prove the box is doing the work (risen, where one s lets the vault
-through, and driven, where v can't double).
+of -en in written; then spoken, chosen and frozen, where one consonant lets the vault through to a long o, and driven,
+given and risen, where the i is short with one consonant and no box (v can't double; risen just doesn't).
 
 The box tells a reader the i of written is short; it doesn't explain why the vowel changed. Ablaut explains the vowel,
 the box explains the reading. The -en takes a seam, as in been (be + en)."""
@@ -15,7 +15,9 @@ CODES = {
     "ride": "c.r l.i c.d e>", "rode": "c.r l.o c.d e>", "ridden": "c.r s.i x.dd + | b.e c.n ; bv 3>2",
     "bite": "c.b l.i c.t e>", "bit": "c.b s.i c.t", "bitten": "c.b s.i x.tt + | b.e c.n ; bv 3>2",
     "hide": "c.h l.i c.d e>", "hid": "c.h s.i c.d", "hidden": "c.h s.i x.dd + | b.e c.n ; bv 3>2",
-    "rise": "c.r l.i c.s e>", "rose": "c.r l.o c.s e>", "risen": "c.r l.i | c.s + b.e c.n ; vault 3>1",
+    "rise": "c.r l.i c.s e>", "rose": "c.r l.o c.s e>", "risen": "c.r s.i c.s + | b.e c.n",
+    "choose": "g.ch t.oo c.s e0", "chose": "g.ch l.o c.s e>", "chosen": "g.ch l.o | c.s + b.e c.n ; vault 3>1",
+    "freeze": "c.fr t.ee c.z e0", "froze": "c.fr l.o c.z e>", "frozen": "c.fr l.o | c.z + b.e c.n ; vault 3>1",
     "drive": "c.dr l.i c.v e>", "drove": "c.dr l.o c.v e>", "driven": "c.dr s.i c.v + | b.e c.n",
     "given": "c.g s.i c.v + | b.e c.n",
     "sing": "c.s s.i k.ng", "sang": "c.s s.a k.ng", "sung": "c.s s.u k.ng", "song": "c.s s.o k.ng",
@@ -33,14 +35,17 @@ CORE = [("write", "<i>write</i>", "The silent e sends a vault back over the t, s
 SETS = [
     ("The box does it again", "Long in the first two, short behind a box in the third.",
      [[("ride", ""), ("rode", ""), ("ridden", "rid(e) + d + en")], [("bite", ""), ("bit", ""), ("bitten", "bit(e) + t + en")], [("hide", ""), ("hid", ""), ("hidden", "hid(e) + d + en")]]),
-    ("Take the box away", "One s, nothing to stop the vault: the e of -en reaches back, and the i of <i>risen</i> says its name. "
+    ("Take the box away", "One consonant, nothing to stop the vault: the e of -en reaches back, and the o says its name. "
      "This is the contrast that shows the box in <i>written</i> is doing the work.",
-     [[("rise", ""), ("rose", ""), ("risen", "ris(e) + en")]]),
-    ("Where the rule stops", "v never doubles in English (step 8), so there is no box to build. The i of <i>driven</i> and "
-     "<i>given</i> is short anyway, and a reader has to know it: the spelling alone says &ldquo;dryven.&rdquo;",
-     [[("drive", ""), ("drove", ""), ("driven", "driv(e) + en")], [("give", ""), ("gave", ""), ("given", "giv(e) + en")]]),
+     [[("speak", ""), ("spoke", ""), ("spoken", "spok(e) + en")], [("choose", ""), ("chose", ""), ("chosen", "chos(e) + en")],
+      [("freeze", ""), ("froze", ""), ("frozen", "froz(e) + en")]]),
+    ("Where the rule stops", "Short i with one consonant and no box. In <i>driven</i> and <i>given</i>, v can&rsquo;t double "
+     "(step 8), so there is no box to build. In <i>risen</i>, s could double and doesn&rsquo;t. Each reads as a long i "
+     "(&ldquo;dryven&rdquo;, &ldquo;ryzen&rdquo;) until a learner knows the word: the spelling shows the family, not the sound.",
+     [[("drive", ""), ("drove", ""), ("driven", "driv(e) + en")], [("give", ""), ("gave", ""), ("given", "giv(e) + en")],
+      [("rise", ""), ("rose", ""), ("risen", "ris(e) + en")]]),
     ("Other vowels, the same idea", "Ablaut runs through English&rsquo;s oldest verbs, each with its own pattern of vowels.",
-     [[("sing", ""), ("sang", ""), ("sung", ""), ("song", "")], [("speak", ""), ("spoke", ""), ("spoken", "spok(e) + en")],
+     [[("sing", ""), ("sang", ""), ("sung", ""), ("song", "")],
       [("grow", ""), ("grew", ""), ("grown", "grow + n")], [("blow", ""), ("blew", ""), ("blown", "blow + n")], [("know", ""), ("knew", ""), ("known", "know + n")]]),
 ]
 
