@@ -19,6 +19,8 @@ OUT = pathlib.Path(sys.argv[2]); (OUT / "steps").mkdir(parents=True, exist_ok=Tr
 codes, _ = all_codes()
 for w, c in SC.SITE_CODES.items(): codes.setdefault(w, c)
 codes.update(SC.SITE_RULED)                                   # rulings that change a word the deck tools still mark the old way
+import heart_words                                           # heart words the site hadn't marked (13 November 2026)
+for w, c in heart_words.CODES.items(): codes.setdefault(w, c)
 import word_sum_codes as WSC                                  # the grade 3 word sum cards' markings, for Words and Parts
 for _, _, items in WSC.SECTIONS:
     for item in items: codes.setdefault(item[1], item[2])

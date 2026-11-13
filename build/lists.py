@@ -151,7 +151,8 @@ KINDS = [(1, "One analog, several words", "One word&rsquo;s spelling carries to 
          (3, "One join, many bases", "One way that a suffix joins, tried on many bases."),
          (4, "A closed set", "A small set of words that work together and change together.")]
 INDEX_DESC = "Spelling lists that follow the route: one for each step and each word family, each with a check, and the four kinds of list they are made from."
-PAGES = [("lists/index.html", "teachers", "Legomorphic spelling", INDEX_DESC)]
+PAGES = [("lists/index.html", "teachers", "Legomorphic spelling", INDEX_DESC),
+         ("lists/hearts.html", "teachers", "Spelling list: Words with a heart", "Heart words sorted by how much of the heart a learner can lose: regular on the route, a reason to use, or by heart.")]
 PAGES += [(f"lists/{L['slug']}.html", "teachers", f"Spelling list: {L['title']}", L["desc"]) for L in LISTS]
 HAS_CHECK = " It comes with a check to give before and after the lesson."
 
@@ -314,6 +315,8 @@ def write(OUT, page, header, footer, X):
         (OUT / "lists" / f"{L['slug']}.html").write_text(page(f"Spelling list: {L['title']} · A Legend for English Words", body, 1, L["desc"]), encoding="utf-8")
     for slug, C in CHECKS.items(): write_check(OUT, page, header, footer, X, slug, C)
     X["ufli_lists"] = ufli_lists.write(OUT, page, header, footer, X)
+    import heart_words
+    X["heart_words"] = heart_words.write(OUT, page, header, footer, X)
     write_index(OUT, page, header, footer, X)
     print(f"wrote {len(LISTS)} spelling list(s), {len(CHECKS)} check(s)")
     return [(p, t) for p, _, t, _ in PAGES]
@@ -345,6 +348,11 @@ def write_index(OUT, page, header, footer, X):
 <h2>Lined up with UFLI Foundations</h2>
 <p class="sub">For schools that run UFLI: where its lessons meet the route, the mark to draw alongside each part of UFLI, and short word lists by lesson number. They live with everything else for UFLI.</p>
 <div class="door-tiles"><a class="dtile" href="../ufli.html"><b>UFLI Foundations</b><span>UFLI&rsquo;s lessons in sixteen bands, each with the mark to add and an example or two marked, and why the two orders differ.</span></a></div>
+</div></section>
+<section class="about" id="hearts"><div class="wrap">
+<h2>Words with a heart</h2>
+<p class="sub">The words programs teach as heart words, sorted by how much of the heart a learner can lose: most are regular once their step comes, or have a reason to use; only a few have to be learned by heart.</p>
+<div class="door-tiles"><a class="dtile" href="hearts.html"><b>Words with a heart</b><span>Regular on the route, a reason to use, or by heart: each word marked so the reason shows.</span></a></div>
 </div></section>
 <section class="about" id="families"><div class="wrap">
 <h2>Families</h2>

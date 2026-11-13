@@ -296,6 +296,7 @@ INKX = {"a": (.285, .246), "b": (.252, .279), "c": (.236, .248), "d": (.286, .26
         "o": (.276, .271), "p": (.253, .278), "q": (.284, .248), "r": (.139, .205), "s": (.208, .198), "t": (.176, .183), "u": (.240, .244),
         "v": (.271, .276), "w": (.384, .381), "x": (.281, .282), "y": (.290, .288), "z": (.195, .211), "I": (.176, .167),
         "C": (.293, .317), "S": (.265, .266),             # for Christmas and Santa Claus, measured the same way in Lexend 400
+        "M": (.334, .334), "W": (.474, .474), "F": (.203, .251),   # for Monday, Wednesday and February (13 November 2026)
         "’": (.060, .060)}
 BAR = 0.33          # the bond bar sits this far under the baseline, clear of the tails of g and y
 FILL = {"consonant": INK, "vowel": RED, "team": GREEN}
