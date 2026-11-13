@@ -433,6 +433,9 @@ def write_search(OUT, X):
     if P:
         for w, d in P["sums"].items():           # every other analysed word: its walk if it's marked, else its place in Parts
             if P["marked"](w): add("word", w, "walk.html?w=" + w, "Words")
+        seen_words = {r["l"] for r in recs if r["t"] == "word"}
+        for w in X.get("auto_codes", {}):        # words marked by rule (auto_mark.py): their walk
+            if w not in seen_words: add("word", w, "walk.html?w=" + w, "Words, marked by rule")
         for k, u, s in P["search"]: add("part", k, u, s)
     for st in X["STEPS"]:
         words = " ".join(w for g in X["groups_of"](st["words_md"]) for w in g)

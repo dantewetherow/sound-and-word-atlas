@@ -49,7 +49,7 @@
 <div class="pcard walk-pop" hidden aria-live="polite"></div>
 <p class="walk-where"></p>
 <noscript><p>The word walk needs script. Each word is also on its step page.</p></noscript>
-<p class="uc">(Under construction: a word is either marked, so it can be walked, or shown as a word sum only. Next: the word built from left to right, a unit at a swipe; and draft marks for more words, labelled as drafts, for teachers to check.)</p>
+<p class="uc">(Under construction: a word is either marked, so it can be walked, or shown as a word sum only. Since 13 November 2026 about 2,800 common words of early reading are marked by rule and say so: their marks are a first pass for teachers to check, and some will be wrong.)</p>
 </div></section>
 <script>(() => {
   const root = document.querySelector('.walk'); if (!root || !window.fetch) return;
@@ -143,6 +143,7 @@
     if (!hit) { msg.innerHTML = it(w.trim()) + ' isn’t marked on this site yet.<span class="t-only"> The walk takes words from the route, the Early Literacy Profile (Central Okanagan) and Dolch lists and the word families.</span>'; return; }
     fetch('walk/' + hit[1] + '.json').then(r => r.json()).then(j => {
       word = j; form_ = 0; input.value = j.w;
+      msg.innerHTML = j.auto ? '<span class="walk-auto">Marked by rule, not yet checked.</span>' : '';
       formsBox.hidden = j.forms.length < 2;
       formsBox.innerHTML = j.forms.length < 2 ? '' : j.forms.map((f, i) => '<button type="button" data-form="' + i + '" aria-pressed="' + (i === 0) + '">' + esc(f.gloss) + '</button>').join('');
       const allT = j.where.length && j.where.every(l => l.x);   // only teachers' links: student view shows no line at all

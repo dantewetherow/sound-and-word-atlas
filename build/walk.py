@@ -98,6 +98,8 @@ def write(OUT, door_page, X):
     P = X.get("parts") or {"sums": {}}
     words = set(where) | set(X["list_words"]) | {w for w, *_ in X["morph"]} | {"legomorphic"} | {w for w in fam if w in LW.W} | set(P["sums"])
     words |= {"sign"}        # sign, before its walkthrough is built: in the walk now so sign and signal can be set side by side
+    AUTO = X.get("auto_codes", {})                     # marked by rule (auto_mark.py), for the walk only, labelled as such
+    words |= {w for w in AUTO if w not in LW.W}
     elp = {w for L in X["elp"]["lists"].values() for w in L["words"]}
     d220 = {w for l in X["dolch"]["levels"] for w in l["words"]}
     nouns = X["dolch"]["nouns"]
@@ -118,6 +120,8 @@ def write(OUT, door_page, X):
             continue
         forms = SC.VARIANTS.get(w) or [(None, "")]
         undo = []
+        is_auto = w not in LW.W and w in AUTO and not SC.VARIANTS.get(w)
+        if is_auto: undo.append(with_code(w, AUTO[w]))
         try:
             for part in (PAIRS.get(w) or HYPHENED.get(w) or (w,)):          # the nouns' codes, only while they're drawn
                 if part not in LW.W and part in NOUN_CODES: undo.append(with_code(part, NOUN_CODES[part]))
@@ -142,6 +146,7 @@ def write(OUT, door_page, X):
         links += fam.get(w, [])
         rec = {"w": w, "forms": out, "where": links}
         if w in SC.OPEN: rec["open"] = 1
+        if is_auto: rec["auto"] = 1
         if sum_: rec["sum"], rec["mean"] = sum_["parts"], sum_["mean"]
         (OUT / "walk" / f"{wid}.json").write_text(json.dumps(rec, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
         index.append([w, wid])
@@ -151,7 +156,7 @@ def write(OUT, door_page, X):
 <h1><span class="t-only">Words</span><span class="s-only">Pick a word</span></h1>
 <p class="lead t-only">Look up a word, then tap or swipe through it, or try marking it first. <b>Read it</b> starts from the word in plain letters and decodes; <b>Spell it</b> starts from the syllables, then the sounds, then the letters. <b>Try it</b> puts the marks in the learner’s hands: pick sound circles, bond bars, syllable swoops, short or long marks, cones, vowel vaults, block boxes or seams, then tap or swipe them onto the word, or write its word sum. <b>Show ours</b> sets the site’s marks underneath to talk about; nothing is scored. Under the word is its sum: tap a part to see every word that shares it.</p>
 </div></section>
-{section(note=X["uc"]("a word is either marked, so it can be walked, or shown as a word sum only. Next: the word built from left to right, a unit at a swipe; and draft marks for more words, labelled as drafts, for teachers to check."))}
+{section(note=X["uc"]("a word is either marked, so it can be walked, or shown as a word sum only. Since 13 November 2026 about 2,800 common words of early reading are marked by rule and say so: their marks are a first pass for teachers to check, and some will be wrong."))}
 <section class="about t-only"><div class="wrap"><p><a href="explorations.html">A family built in three moves: <i>note</i>, <i>notate</i>, <i>notation</i></a>. Every analysed word, by its parts, is in <a href="parts.html">Parts</a>.</p></div></section>"""
     door_page("walk", "Words · A Legend for English Words", "Look up a word and walk through it: its marks, a move at a time, and its parts.", body)
     return len(index), skipped
@@ -287,6 +292,7 @@ WALK_JS = r"""<script>(() => {
     if (!hit) { msg.innerHTML = it(w.trim()) + ' isn’t marked on this site yet.<span class="t-only"> The walk takes words from the route, the Early Literacy Profile (Central Okanagan) and Dolch lists and the word families.</span>'; return; }
     fetch('walk/' + hit[1] + '.json').then(r => r.json()).then(j => {
       word = j; form_ = 0; input.value = j.w;
+      msg.innerHTML = j.auto ? '<span class="walk-auto">Marked by rule, not yet checked.</span>' : '';
       formsBox.hidden = j.forms.length < 2;
       formsBox.innerHTML = j.forms.length < 2 ? '' : j.forms.map((f, i) => '<button type="button" data-form="' + i + '" aria-pressed="' + (i === 0) + '">' + esc(f.gloss) + '</button>').join('');
       const allT = j.where.length && j.where.every(l => l.x);   // only teachers' links: student view shows no line at all

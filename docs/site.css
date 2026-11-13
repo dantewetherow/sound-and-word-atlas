@@ -857,3 +857,5 @@ header.site.pinned.open nav.doors { display: flex; padding-block: 6px 4px; }
 
 .ufli-nav { font-size: 0.95rem; line-height: 1.8; }
 .ufli-nav a { font-weight: 600; }
+
+.walk-auto { display: inline-block; font-size: 0.85rem; color: var(--soft); border: 1px dashed var(--line); border-radius: 999px; padding: 2px 10px; }

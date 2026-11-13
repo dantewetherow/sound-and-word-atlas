@@ -192,6 +192,7 @@
     if (!hit) { msg.innerHTML = it(w.trim()) + ' isn’t marked on this site yet.<span class="t-only"> The walk takes words from the route, the Early Literacy Profile (Central Okanagan) and Dolch lists and the word families.</span>'; return; }
     fetch('walk/' + hit[1] + '.json').then(r => r.json()).then(j => {
       word = j; form_ = 0; input.value = j.w;
+      msg.innerHTML = j.auto ? '<span class="walk-auto">Marked by rule, not yet checked.</span>' : '';
       formsBox.hidden = j.forms.length < 2;
       formsBox.innerHTML = j.forms.length < 2 ? '' : j.forms.map((f, i) => '<button type="button" data-form="' + i + '" aria-pressed="' + (i === 0) + '">' + esc(f.gloss) + '</button>').join('');
       const allT = j.where.length && j.where.every(l => l.x);   // only teachers' links: student view shows no line at all

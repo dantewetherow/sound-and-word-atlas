@@ -506,6 +506,7 @@ X = dict(uc=uc, md=md, plain=plain, route_lead=ROUTE_LEAD, bands_html="".join(ba
          morph=landing.MORPH, STEPS=STEPS, pages=PAGES, groups_of=groups_of, KEY=KEY, terms=definitions.terms(KEY), list_words=list_words,
          elp=ELP_ALL, dolch=DOLCH_ALL, SC=SC, with_code=with_code)
 X["step_parts"] = {}
+X["auto_codes"] = json.loads((HERE / "data" / "auto_codes.json").read_text(encoding="utf-8"))   # marked by rule: the walk and search only
 for s in STEPS:
     for k in s.get("parts", []): X["step_parts"].setdefault(k, []).append(s["n"])
 doors.write(OUT, page, header, footer, X)
