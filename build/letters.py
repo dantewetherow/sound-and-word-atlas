@@ -38,7 +38,7 @@ def write(door_page, door_head):
                     for c, w, t in [("H", 1, 0), ("I", 1, 1), ("J", 1, 2), ("K", 1, 3), ("L", .5, 4), ("M", .5, 4.5), ("N", .5, 5), ("O", .5, 5.5), ("P", 2, 6)])
     even = "".join(f'<span class="bt" style="--w:1" data-t="{t}">{c}</span>' for t, c in enumerate("HIJKLMNOP"))
     scale = "".join(f'<button type="button" class="sc" style="--s:{k}" aria-label="{c}, hidden. Tap to show."><span class="sc-m" aria-hidden="true"></span><span>{c}</span></button>'
-                    for k, c in enumerate("AEIOU")) + '<button type="button" class="sc sc-y" style="--s:5" aria-label="and sometimes Y, hidden. Tap to show."><span class="sc-m" aria-hidden="true"></span><span><small>and sometimes</small> Y</span></button>'
+                    for k, c in enumerate("AEIOU")) + '<button type="button" class="sc sc-y" style="--s:5" aria-label="and typically Y, hidden. Tap to show."><span class="sc-m" aria-hidden="true"></span><span><small>and typically</small> Y</span></button>'
     inner = f"""<section class="hero"><div class="wrap">
 <p class="eyebrow t-only"><a href="progressions.html">Steps</a> &middot; Before step 1</p>
 <h1>Letters, names and sounds</h1>
@@ -71,8 +71,8 @@ def write(door_page, door_head):
 </div></section>
 
 <section class="about" id="vowels" aria-labelledby="vw-h"><div class="wrap">
-<h2 id="vw-h">A, E, I, O, U, and sometimes Y</h2>
-<p class="sub">The vowels sung up a scale, a note each, with their names: the long sounds. Tap a step to show it.</p>
+<h2 id="vw-h">A, E, I, O, U, and typically Y</h2>
+<p class="sub">The vowels sung up a scale, a note each, with their names: the long sounds. Tap a step to show it. <i>Typically</i>, not <i>sometimes</i>: about four in five y&rsquo;s in running English spell a vowel (<i>my, by, very, day, they</i>), and most of the rest are <i>you</i> and <i>your</i>. The deck <a href="sessions/typically-y.html">A, E, I, O, U and typically Y</a> has the count.</p>
 <div class="sc-stairs">{scale}</div>
 </div></section>
 

@@ -31,11 +31,11 @@ DOOR = {d[0]: d for d in DOORS}
 HEADS = {
     "progressions": ("Steps", DOORS[0][3], "Steps"),
     "notations": ("The marks", "The marks, and what each one shows.", "Marks"),
-    "explorations": ("A family: note, notate, notation", "A word built in three moves, each from the one before.", "Words"),
+    "explorations": ("Explorations", "Words to take apart and build: a family, contractions, and ablaut.", "Words"),
     "constructions": ("Sentences", "How sentences are built: actors, operators and actions, and the flip from claim to question.", "Sentences"),
     "derivations": ("Roots and their sources", "Where words come from, and the sources the roots cite.", "Roots"),
-    "instructions": ("To print and present", "Presentations and word cards.", None),
-    "connections": ("Connections", "How the route lines up with the word lists and programs schools already use.", None),
+    "instructions": ("To print and present", "Presentations, word cards and affix tent cards.", None),
+    "connections": ("Programs and word lists", "How the route lines up with UFLI Foundations and with the word lists schools already use.", None),
     "explanations": ("Reasons and sources", "Definitions, the notation and its name, and credits.", None),
     "teachers": ("For teachers", DOORS[3][3], None),
 }
@@ -47,7 +47,7 @@ PAGES = [
     ("letters.html", "progressions", "Letters, names and sounds", "Before step 1: the alphabet in the song's units, as tiles to reveal, with a sound circle under each letter."),
     ("notations.html", "progressions", "The marks", "The marks of Legomorphic Notation, each drawn alone on one word."),
     ("walk.html", "walk", "Words", "Look up a word and walk through it, a move at a time, with its parts."),
-    ("explorations.html", "walk", "A family: note", "Note, notate and notation, each built from the one before."),
+    ("explorations.html", "walk", "Explorations", "Words to take apart and build: note, notate, notation; contractions; write, wrote, written."),
     ("contractions.html", "walk", "Squeezed into oblivion", "Contractions: the vowel squeezed out, the apostrophe in its place: the apostrophe catastrophe."),
     ("ablaut.html", "walk", "What's that ablaut?", "write, wrote, written: the vowel changes to mark time, and the spelling around it does its usual jobs."),
     ("parts.html", "parts", "Parts", "Prefixes, suffixes, roots and joins, each with every word that has it."),
@@ -59,12 +59,12 @@ PAGES = [
     ("roots/hap.html", "parts", "hap: chance, luck", "A base family: happy, happen, mishap and haphazard, and why happy has two p's and mishap one."),
     ("derivations.html", "parts", "Roots and their sources", "Where words come from, and the sources the roots cite."),
     ("teachers.html", "teachers", "For teachers", "To print and present, connections to programs, and the reasons and sources."),
-    ("constructions.html", "teachers", "Sentences", "How sentences are built, and the flip from claim to question."),
-    ("instructions.html", "teachers", "To print and present", "Presentations and word cards."),
+    ("constructions.html", "walk", "Sentences", "How sentences are built, and the flip from claim to question."),
+    ("instructions.html", "teachers", "To print and present", "Presentations, word cards and affix tent cards."),
     ("presentations.html", "teachers", "Presentations", "The staff series and decks on single concepts, with their handouts."),
     ("tents.html", "teachers", "Affix tent cards", "Prefixes, roots and suffixes on cards that stand up: swap the root, keep the affixes. Extension work with the families."),
     ("cards.html", "teachers", "Word cards", "Printable cards: the Early Literacy Profile (Central Okanagan) and Dolch words, and grade 3 word sums."),
-    ("connections.html", "teachers", "Connections", "How the route lines up with the word lists and programs schools already use."),
+    ("connections.html", "teachers", "Programs and word lists", "How the route lines up with the word lists and programs schools already use."),
     ("word-lists.html", "teachers", "Early Literacy Profile and Dolch", "Where the Early Literacy Profile (Central Okanagan) words come from in Dolch's lists."),
     ("ufli.html", "teachers", "UFLI Foundations", "For schools that run UFLI: where its lessons meet the route, the mark to draw alongside each part of UFLI, and why the two orders differ."),
     ("explanations.html", "teachers", "Reasons and sources", "Definitions, the notation and its name, and credits."),
@@ -75,6 +75,11 @@ PAGES = [
 ]
 import lists as _lists
 PAGES[-1:-1] = _lists.PAGES                 # the spelling lists, on the teachers' shelf
+# The page each shelf page sits behind, for its breadcrumb: the four teachers' doors (13 November 2026).
+SHELF_PARENT = {"ufli.html": "connections.html", "word-lists.html": "connections.html",
+                "presentations.html": "instructions.html", "cards.html": "instructions.html", "tents.html": "instructions.html",
+                "definitions.html": "explanations.html", "about.html": "explanations.html", "credits.html": "explanations.html"}
+WORDS_PARENT = {"contractions.html": "explorations.html", "ablaut.html": "explorations.html"}
 # Pages on the teachers' shelf that the board view still shows.
 BOARD_OK = {"constructions.html"}
 TEACHERS = {s for s, *_, w in DOORS if w is None}
@@ -256,7 +261,7 @@ def write(OUT, page, header, footer, X):
 <h2 id="route-h" class="t-only">The route at a glance</h2>
 <p class="lead t-only">{X["route_lead"]} Open a step to see its words marked, the marks it brings in, and the pages in Carney's survey that back it.</p>
 <p class="sub t-only">Each word is shown with its letters in colour: red for vowel letters, green for <em>sh</em>, <em>th</em> and <em>ch</em>, black for the rest.</p>
-<p class="sub"><b>Before step 1:</b> <a href="letters.html">Letters, names and sounds</a>, the alphabet in the song&rsquo;s units, with a sound circle under each letter.</p>
+<div class="door-tiles route-tiles"><a class="dtile" href="letters.html"><b>Before step 1: letters</b><span class="t-only">Letters, names and sounds: the alphabet in the song&rsquo;s units, with a sound circle under each letter.</span></a><a class="dtile" href="notations.html"><b>The marks</b><span class="t-only">The twelve marks, each drawn alone on one word.</span></a></div>
 {X["bands_html"]}
 {uc(X["draft_note"])}
 </div></section>""")
@@ -279,16 +284,11 @@ def write(OUT, page, header, footer, X):
     fam = "".join(f'<figure class="word" id="{word_id(w)}">{svg_of(w, 58, label=f"{w}, marked")}<figcaption><span class="ws">{s}</span><span class="t-only">{c}</span></figcaption></figure>'
                   for w, s, c in X["morph"])
     door_page("explorations", "Explorations · A Legend for English Words", "Words to take apart and build: families and contrasts.", f"""{door_head("explorations")}
+<section class="about"><div class="wrap"><div class="door-tiles"><a class="dtile" href="#note-family"><b>A family: <i>note</i>, <i>notate</i>, <i>notation</i></b><span class="t-only">A word built in three moves, each from the one before.</span></a><a class="dtile" href="contractions.html"><b>Squeezed into oblivion</b><span class="t-only">Contractions: the vowel squeezed out and the apostrophe in its place.</span></a><a class="dtile" href="ablaut.html"><b>What&rsquo;s that ablaut?</b><span class="t-only"><i>write</i>, <i>wrote</i>, <i>written</i>: the vowel changes to mark time, and the spelling around it does its usual jobs.</span></a></div></div></section>
 <section class="about" id="note-family" aria-labelledby="nf-h"><div class="wrap">
 <h2 id="nf-h">A family: <i>note</i>, <i>notate</i>, <i>notation</i></h2>
 <p class="sub t-only">Each word is built from the one before it. At each seam the <i>e</i> drops, and its job, making the <i>o</i> spell its name, passes to the next vowel.</p>
 <div class="words fam">{fam}</div>
-</div></section>
-<section class="about" id="ablaut-link"><div class="wrap">
-<h2>What&rsquo;s that ablaut?</h2>
-<p class="sub t-only"><i>write</i>, <i>wrote</i>, <i>written</i>: the vowel changes to mark time, the silent e vaults, and a block box keeps the i of <i>written</i> short.</p>
-<div class="door-tiles"><a class="dtile" href="contractions.html"><b>Squeezed into oblivion</b><span>Contractions: the vowel squeezed out, the apostrophe in its place: the apostrophe catastrophe.</span></a>
-<a class="dtile" href="ablaut.html"><b>write, wrote, written</b><span>Ablaut, the vault and the box in one family, with <i>spoken</i> and <i>driven</i> as the contrasts.</span></a></div>
 </div></section>
 <section class="about" aria-labelledby="next-h"><div class="wrap">
 <h2 id="next-h" class="t-only">Coming next</h2>
@@ -340,9 +340,9 @@ def write(OUT, page, header, footer, X):
         return '<div class="door-tiles">' + "".join(
             f'<a class="dtile" href="{p}"><b>{t}</b><span>{s}</span></a>' for p, t, s in items) + "</div>"
     pick = lambda door: [(p, t, s) for p, d, t, s in PAGES if d == door and p != f"{door}.html"]
-    door_page("instructions", "To print and present · A Legend for English Words", "Presentations and word cards.", f"""{door_head("instructions")}
+    door_page("instructions", "To print and present · A Legend for English Words", "Presentations, word cards and affix tent cards.", f"""{door_head("instructions")}
 <section class="about"><div class="wrap">
-{tiles([x for x in pick("teachers") if x[0] in ("presentations.html", "cards.html")])}
+{tiles([x for x in pick("teachers") if x[0] in ("presentations.html", "cards.html", "tents.html")])}
 {uc("next, the routines: the learning loop, marking a word by hand, flips from claim to question, and word sums at the seam.")}
 </div></section>""")
     door_page("explanations", "Reasons and sources · A Legend for English Words", "Definitions, the notation and its name, and credits.", f"""{door_head("explanations")}
@@ -356,11 +356,13 @@ def write(OUT, page, header, footer, X):
     lists.write(OUT, page, header, footer, X)
     import tents
     tents.write(OUT, page, header, footer, X)
-    shelf = [("Spelling", ("lists/index.html", "ufli.html")), ("To print and present", ("presentations.html", "cards.html", "tents.html")), ("Sentences", ("constructions.html",)),
-             ("Connections", ("word-lists.html",)), ("Reasons and sources", ("definitions.html", "about.html", "credits.html"))]
-    by_path = {p: (p, t_, s) for p, d, t_, s in PAGES}
+    # Four doors, never more (ruled 13 November 2026): each opens on a page of three or four.
+    shelf = [("lists/index.html", "Spelling", "Spelling lists by step and by family, words with a heart, words spelled apart, and lists for UFLI lessons."),
+             ("connections.html", "Programs and word lists", "UFLI Foundations lesson by lesson, and the Early Literacy Profile (Central Okanagan) and Dolch lists."),
+             ("instructions.html", "To print and present", "Presentations, word cards and affix tent cards."),
+             ("explanations.html", "Reasons and sources", "About the notation, definitions, and credits.")]
     door_page("teachers", "For teachers · A Legend for English Words", DOOR["teachers"][3], f"""{door_head("teachers")}
-{"".join(f'<section class="about"><div class="wrap"><h2>{h}</h2>{tiles([by_path[p] for p in ps])}</div></section>' for h, ps in shelf)}""")
+<section class="about"><div class="wrap">{tiles(shelf)}</div></section>""")
 
     # The Parts layer (parts.py), then the Words layer (walk.py), which shows each word's sum.
     import parts
@@ -497,8 +499,13 @@ def finish(OUT, pages):
             trail.append(f'<li><a href="{up}index.html">Home</a></li>')
             if d and p != f"{d}.html":
                 trail.append(f'<li><a href="{up}{d}.html">{door_label(d)}</a></li>')
+            if p in SHELF_PARENT:                                  # a page behind one of the four teachers' doors
+                pp = SHELF_PARENT[p]; pt = next(t2 for p2, _, t2, _ in pages if p2 == pp)
+                trail.append(f'<li><a href="{up}{pp}">{html.escape(pt)}</a></li>')
+            elif p in WORDS_PARENT:
+                trail.append(f'<li><a href="{up}{WORDS_PARENT[p]}">Explorations</a></li>')
             if p.startswith("lists/ufli-"):
-                trail.append(f'<li><a href="{up}ufli.html">UFLI Foundations</a></li>')
+                trail.append(f'<li><a href="{up}connections.html">Programs and word lists</a></li><li><a href="{up}ufli.html">UFLI Foundations</a></li>')
             elif p.startswith("lists/") and p != "lists/index.html":
                 trail.append(f'<li><a href="{up}lists/index.html">Legomorphic spelling</a></li>')
             here = door_label(d) if d and p == f"{d}.html" else html.escape(t.split(":")[0] if p.startswith("steps/") else t)
