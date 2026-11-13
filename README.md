@@ -65,3 +65,5 @@ The cards and the site carry no colours for the sentence roles (since 8 November
 To refresh the deck codes from a copy of the atlas folder, run `python3 build/known_codes.py --refresh /path/to/atlas`.
 
 Without `--standalone`, the home page is written with no doctype or head, which is what the claude.ai artifact version of the site needs.
+
+- `build/coverage.py` (13 November 2026): which Early Literacy Profile (Central Okanagan) and Dolch words the route and UFLI Foundations let a learner decode, and when, counted at the points where both have finished the same thing. Drawn on ufli.html as "Which words, how soon". UFLI placements come from the first Roll and Read page that uses a word (`data/ufli_first.json`, lesson numbers only) or from what the word needs.

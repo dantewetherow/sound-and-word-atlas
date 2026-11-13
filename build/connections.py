@@ -143,11 +143,13 @@ def write(OUT, door_page, door_head, uc, X):
                      f'<div class="ub-words">{words}</div>'
                      f'<p><b>The mark.</b> {mark}</p><p><b>On the route:</b> step{"s" if len(steps) > 1 else ""} {sl}</p>'
                      f'<p class="ub-part"><b>Where they part.</b> {part}</p></article>')
+    import coverage                                      # which ELP and Dolch words each order lets a learner decode, and when (13 November 2026)
+    coverage_html = coverage.section(coverage.table(X["LW"], {"steps": X["STEPS"]}))
     body = f"""<section class="hero"><div class="wrap">
 <p class="eyebrow t-only">For teachers</p>
 <h1>UFLI Foundations</h1>
 <p class="lead">For schools that run UFLI Foundations: where its lessons meet the route, the mark to draw alongside each part of UFLI, and why the two orders differ.</p>
-<p class="ufli-nav"><a href="#bands">Lesson by lesson, in sixteen bands</a> &middot; <a href="#why">Why the orders part</a> &middot; <a href="#chart">The two orders side by side</a> &middot; <a href="#lessons">Every lesson</a> &middot; <a href="#steps">Every step</a></p>
+<p class="ufli-nav"><a href="#bands">Lesson by lesson, in sixteen bands</a> &middot; <a href="#why">Why the orders part</a> &middot; <a href="#coverage">Which words, how soon</a> &middot; <a href="#chart">The two orders side by side</a> &middot; <a href="#lessons">Every lesson</a> &middot; <a href="#steps">Every step</a></p>
 <p class="sub">{html.escape(D["made"])} UFLI asks that its materials be linked rather than copied (its <a href="{UFLI_COPYRIGHT}">copyright statement</a> says so), so its lesson names and word lists stay on its own site: its scope and sequence is in the <a href="{D["link"]}">UFLI Foundations Toolbox</a>.</p>
 </div></section>
 <section class="about" id="bands" aria-labelledby="bd-h"><div class="wrap">
@@ -159,6 +161,7 @@ def write(OUT, door_page, door_head, uc, X):
 <h2 id="why-h">Why the orders part</h2>
 {ufli_bands.WHY}
 </div></section>
+{coverage_html}
 <section class="about" id="chart" aria-labelledby="ch-h"><div class="wrap">
 <h2 id="ch-h">The two orders side by side</h2>
 <p class="sub">Each dot is a UFLI lesson (across) at the step of the route where it lands (down), with the sixteen bands shaded behind. Dots on the dashed line come in the same order in both programs; dots above it, the route gets to sooner, and dots below it, UFLI does.</p>

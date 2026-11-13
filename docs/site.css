@@ -889,3 +889,15 @@ header.site.pinned.open nav.doors { display: flex; padding-block: 6px 4px; }
 
 .ct-group figcaption .ws { display: block; font-family: var(--display); font-size: 1rem; }
 .ct-group figcaption .t-only { display: block; color: var(--soft); font-size: 0.88rem; }
+
+.cov-table td { white-space: nowrap; }
+.cov-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+.cov-table th[scope=colgroup] { text-align: center; }
+.cov-sum { display: inline; font-size: 1.15rem; }
+.cov-lists { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 18px 24px; margin-top: 12px; }
+.cov-list h3 { font-size: 1rem; margin: 0 0 6px; }
+.cov-words { width: 100%; border-collapse: collapse; font-size: 0.92rem; font-variant-numeric: tabular-nums; }
+.cov-words th, .cov-words td { padding: 3px 6px; border-bottom: 1px solid var(--line, #e2ddd2); text-align: left; font-weight: normal; }
+.cov-words thead th { color: var(--soft, #6c675e); font-size: 0.8rem; }
+.cov-words .none, .cov-words .cpt { color: var(--soft, #6c675e); }
+.cov-words .none { font-style: italic; }
