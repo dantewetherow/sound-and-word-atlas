@@ -310,7 +310,10 @@ def write(OUT, page, header, footer, X):
             if any(k in name for k in ("operator", "modal", "sentence", "verb", "action", "actor")) and (OUT / "sessions" / "handouts" / f"{name}.pdf").exists():
                 hand.append(f'<li><a href="sessions/handouts/{name}.pdf">{html.escape(title)}</a><span class="what">{what}</span></li>')
     hands = f'<ul class="handouts">{"".join(hand)}</ul>' if hand else ""
+    import builder                                        # build a sentence (13 November 2026)
+    sb = builder.section(X, lambda w: LW.W.get(w) or X["auto_codes"].get(w))
     door_page("constructions", "Constructions · A Legend for English Words", "How sentences are built, and the flip from claim to question.", f"""{door_head("constructions")}
+{sb}
 <section class="about" id="flip" aria-labelledby="flip-h"><div class="wrap">
 <h2 id="flip-h">From a claim to a question</h2>
 <p class="sub t-only">An actor, an operator and an action make a claim. When the operator moves to the front, the claim becomes a question. The Dialogue Team acts it out with their faces: their words with the letters lifted out.</p>

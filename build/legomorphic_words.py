@@ -203,8 +203,9 @@ def parse(word):
             marks.append({"type": "blendbar", "from": cols[0], "to": cols[-1], "color": "consonant"})
             for c in cols: marks.append({"type": "dot", "cols": [c], "color": "consonant"})
         elif kind == "g":
-            assert s in ("sh", "th", "ch", "tch", "ti"), (word, tok)
-            for ch in s: letters.append({"ch": ch, "type": "team" if s in ("sh", "th", "ch") or (s == "tch" and ch != "t") else own(ch)})
+            sl = s.lower()                                    # a capital at the start of a sentence: She, The (13 November 2026)
+            assert sl in ("sh", "th", "ch", "tch", "ti"), (word, tok)
+            for ch in s: letters.append({"ch": ch, "type": "team" if sl in ("sh", "th", "ch") or (sl == "tch" and ch.lower() != "t") else own(ch)})
             marks += [{"type": "blendbar", "from": cols[0], "to": cols[-1], "color": "team"}, {"type": "dot", "cols": cols, "color": "team"}]
         elif kind == "x":                                    # the box adds to the bar, never replaces it: a green digraph gets its bar below
             for ch in s: letters.append({"ch": ch, "type": "consonant"})
@@ -306,6 +307,7 @@ INKX = {"a": (.285, .246), "b": (.252, .279), "c": (.236, .248), "d": (.286, .26
         "v": (.271, .276), "w": (.384, .381), "x": (.281, .282), "y": (.290, .288), "z": (.195, .211), "I": (.176, .167),
         "C": (.293, .317), "S": (.265, .266),             # for Christmas and Santa Claus, measured the same way in Lexend 400
         "M": (.334, .334), "W": (.474, .474), "F": (.203, .251),   # for Monday, Wednesday and February (13 November 2026)
+        "A": (.325, .325), "B": (.242, .292), "D": (.276, .326), "E": (.209, .232), "G": (.335, .340), "H": (.282, .282), "J": (.271, .271), "K": (.268, .331), "L": (.202, .234), "N": (.298, .298), "O": (.343, .343), "P": (.219, .272), "Q": (.343, .343), "R": (.249, .297), "T": (.253, .253), "U": (.282, .282), "V": (.334, .334), "X": (.319, .319), "Y": (.320, .320), "Z": (.270, .275),   # the rest of the capitals, for sentences on the builder (13 November 2026)
         "’": (.060, .060)}
 BAR = 0.33          # the bond bar sits this far under the baseline, clear of the tails of g and y
 FILL = {"consonant": INK, "vowel": RED, "team": GREEN}
