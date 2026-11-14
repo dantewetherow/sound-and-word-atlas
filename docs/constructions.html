@@ -34,7 +34,7 @@
 <div class="t-only prose sb-notes">
 <p><b>What it practises.</b> The small words that carry most sentences, pronouns and operators, read with high-frequency actions and nouns in a sentence, not a list. Every word is marked, and the first word takes a capital.</p>
 <p><b>A routine.</b> Build a claim and read it. Flip it and read the question. Swap one word and read again. Then ask a learner to build one that&rsquo;s true about them. Silly sentences are welcome: <i>A fish could sing.</i> They show a learner is reading, not guessing.</p>
-<p><b>The grammar.</b> An actor, an operator and an action make a claim. A question in English puts the operator in front of the actor. Because the operator carries the tense and the agreement, the action stays bare: <i>she could go</i>, never <i>she could goes</i>. That is why every combination here is a sentence. A claim with no operator (<i>She goes.</i>) borrows <i>do</i> to ask: <i>Does she go?</i> The one agreement to watch is <i>do</i> and <i>does</i>: <i>does</i> goes with one actor that isn&rsquo;t <i>I</i> or <i>you</i>.</p>
+<p><b>The grammar.</b> An actor, an operator and an action make a claim. A question in English puts the operator in front of the actor. Because the operator carries the tense and the agreement, the action stays bare: <i>she could go</i>, never <i>she could goes</i>. That is why every combination here is a sentence. A claim with no operator (<i>She goes.</i>) borrows <i>do</i> to ask: <i>Does she go?</i> The one agreement to watch is <i>do</i> and <i>does</i>: in book English, <i>does</i> goes with one actor that isn&rsquo;t <i>I</i> or <i>you</i>. Many Englishes say <i>she do</i>; the board names the book English form without calling the other wrong.</p>
 <p><b>Prepositions.</b> A preposition places the action: <i>She could go in there. She could go over here.</i> Most want something after them, a place or a thing: <i>in there</i>, <i>under the box</i>. A few can stand alone after the action, where they change what it means: <i>go up</i>, <i>get out</i>, <i>sit down</i>. <i>Home</i> needs no preposition: <i>go home</i>, not <i>go to home</i>. Let learners find that one by ear.</p>
 <p><b><i>Not</i> and <i>n&rsquo;t</i>.</b> <i>Not</i> stays behind the actor when the sentence flips: <i>Could she not go?</i> Squeezed to <i>n&rsquo;t</i>, it joins the operator and travels with it: <i>Couldn&rsquo;t she go?</i> <i>May</i>, <i>might</i> and <i>must</i> stop at <i>not</i> here: <i>mayn&rsquo;t</i> and <i>mightn&rsquo;t</i> are rare now. The squeeze is on <a href="contractions.html">Squeezed into oblivion</a>.</p>
 </div>
@@ -71,8 +71,8 @@
     box.querySelector('.sb-say').textContent = cap(words.join(' ')) + (flip ? '?' : '.');
     const act = pick('actor'), one = D.one.includes(act);
     box.querySelector('.sb-hint').textContent =
-      op === 'does' && !one ? '“Does” goes with one actor: she, he, it, the dog. Try “do”.' :
-      op === 'do' && one ? '“Do” goes with I, you, we and they. Try “does”.' : '';
+      op === 'does' && !one ? 'In book English, “does” goes with one actor: she, he, it, the dog. With this actor, book English says “do”.' :
+      op === 'do' && one ? 'In book English, “do” goes with I, you, we and they. Many Englishes say “she do” too; book English says “does”.' : '';
     box.querySelector('.sb-not').innerHTML = neg === 0 ? 'Add <i>not</i>' : neg === 1 && canNt ? 'Squeeze to <i>n&rsquo;t</i>' : 'Take out <i>not</i>';
     if (before) [...line.children].forEach(e => {
       const a = before.get(e); if (!a || e.hidden) return;
