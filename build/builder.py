@@ -8,7 +8,8 @@ go? Couldn't she go? The words are the high-frequency words of the Early Literac
 grammar words and nouns both, and each is drawn marked, in capitals where it starts the sentence.
 
 The operator frame keeps the action bare (she could go, never she could goes), so every combination is a sentence,
-though not every one is sensible: a silly sentence checks that a learner is reading, not guessing. The one agreement to
+though not every one is sensible. Words that make combinations a class would laugh at for the wrong reason (come, ride,
+get, me) were taken out on 13 November 2026: a silly sentence checks that a learner is reading, not guessing. The one agreement to
 watch is do and does, and the board says so when they don't match.
 
 Everything the builder shows is drawn at build time; the page's script only reorders it."""
@@ -20,9 +21,9 @@ CODES = {"mom": "c.m s.o c.m", "ball": "c.b b.a k.ll", "fish": "c.f s.i g.sh", "
 SLOTS = [
     ("actor", "Actor", ["I", "you", "she", "he", "we", "they", "it", "the dog", "my mom", "a fish"]),
     ("operator", "Operator", ["can", "could", "will", "would", "should", "may", "might", "must", "do", "does", "did"]),
-    ("action", "Action", ["go", "see", "run", "play", "jump", "help", "eat", "come", "look", "find", "get", "sit", "stop", "ride", "swim", "sing"]),
+    ("action", "Action", ["go", "see", "run", "play", "jump", "help", "eat", "look", "find", "sit", "stop", "swim", "sing", "walk", "read"]),
     ("prep", "Preposition", ["", "in", "on", "up", "down", "over", "under", "out", "off", "by", "with", "to", "into"]),
-    ("rest", "Where or what", ["", "here", "there", "home", "it", "me", "the ball", "the box"]),
+    ("rest", "Where or what", ["", "here", "there", "home", "it", "the ball", "the box"]),
 ]
 NT = {"can": "can’t", "could": "couldn’t", "would": "wouldn’t", "should": "shouldn’t", "will": "won’t", "do": "don’t",
       "does": "doesn’t", "did": "didn’t"}
@@ -71,7 +72,7 @@ def section(X, code_of):
 </div>
 <div class="t-only prose sb-notes">
 <p><b>What it practises.</b> The small words that carry most sentences, pronouns and operators, read with high-frequency actions and nouns in a sentence, not a list. Every word is marked, and the first word takes a capital.</p>
-<p><b>A routine.</b> Build a claim and read it. Flip it and read the question. Swap one word and read again. Then ask a learner to build one that&rsquo;s true about them. Silly sentences are welcome: <i>A fish could ride.</i> They show a learner is reading, not guessing.</p>
+<p><b>A routine.</b> Build a claim and read it. Flip it and read the question. Swap one word and read again. Then ask a learner to build one that&rsquo;s true about them. Silly sentences are welcome: <i>A fish could sing.</i> They show a learner is reading, not guessing.</p>
 <p><b>The grammar.</b> An actor, an operator and an action make a claim. A question in English puts the operator in front of the actor. Because the operator carries the tense and the agreement, the action stays bare: <i>she could go</i>, never <i>she could goes</i>. That is why every combination here is a sentence. A claim with no operator (<i>She goes.</i>) borrows <i>do</i> to ask: <i>Does she go?</i> The one agreement to watch is <i>do</i> and <i>does</i>: <i>does</i> goes with one actor that isn&rsquo;t <i>I</i> or <i>you</i>.</p>
 <p><b>Prepositions.</b> A preposition places the action: <i>She could go in there. She could go over here.</i> Most want something after them, a place or a thing: <i>in there</i>, <i>under the box</i>. A few can stand alone after the action, where they change what it means: <i>go up</i>, <i>get out</i>, <i>sit down</i>. <i>Home</i> needs no preposition: <i>go home</i>, not <i>go to home</i>. Let learners find that one by ear.</p>
 <p><b><i>Not</i> and <i>n&rsquo;t</i>.</b> <i>Not</i> stays behind the actor when the sentence flips: <i>Could she not go?</i> Squeezed to <i>n&rsquo;t</i>, it joins the operator and travels with it: <i>Couldn&rsquo;t she go?</i> <i>May</i>, <i>might</i> and <i>must</i> stop at <i>not</i> here: <i>mayn&rsquo;t</i> and <i>mightn&rsquo;t</i> are rare now. The squeeze is on <a href="contractions.html">Squeezed into oblivion</a>.</p>
