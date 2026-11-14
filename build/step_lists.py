@@ -28,7 +28,7 @@ def S(n, principle, words, contrast, build, use, check, notes, build_h="Build it
         "title": f"Step {n}: {title}", "kind": "A step&rsquo;s pattern",
         "principle": principle, "words": words, "contrast": contrast, "listen": listen, "build_h": build_h,
         "build": build, "use": use, "check": check, "notes": notes,
-        "links": [(f"Step {n}", f"steps/{n:02d}.html", _md(st["title"]).lower() + ", on the route")] + list(more_links),
+        "links": [(f"Step {n}", f"steps/{n:02d}.html", _md(st["title"]).lower() + ", on the path")] + list(more_links),
         "source": "Edward Carney, <i>A Survey of English Spelling</i> (1994): " + _md(st.get("carney", "")) + ".",
         "desc": html.unescape(f"A spelling list for step {n}, {title}: {', '.join(ws)}, with a contrast, words to build, sentences and a check."),
     }

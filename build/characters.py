@@ -25,7 +25,7 @@ DROP = 0.62
 MOUTH = 0.25
 TEAM = [("she", "She", "actor"), ("could", "Could", "operator"), ("go", "Go", "action")]
 NUM = r"-?\d+(?:\.\d+)?"
-CODES = {"gno": "k.gn l.o"}     # the characters' words that aren't on the site's route or lists
+CODES = {"gno": "k.gn l.o"}     # the characters' words that aren't on the site's path or lists
 SHORT_BAR = {"gno"}             # bond bars cut to the long mark's length, centred where they were (Gno's short brow)
 LIFT_BAR = {"gno": 0.12}         # bond bars raised this many letter sizes, to give the eye under them room (Gno's brow)
 

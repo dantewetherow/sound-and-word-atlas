@@ -36,7 +36,7 @@ LISTS = [{
         "<i>Find</i> is where the idea stops: before <i>nd</i> the i stays long though the syllable is closed. That waits for "
         "step 18, and a learner who writes it correctly has met it somewhere else.",
     ],
-    "links": [("Step 1", "steps/01.html", "open or closed, on the route"), ("Step 4", "steps/04.html", "one consonant closes it"),
+    "links": [("Step 1", "steps/01.html", "open or closed, on the path"), ("Step 4", "steps/04.html", "one consonant closes it"),
               ("Step 18", "steps/18.html", "long before two consonants: <i>find</i>")],
     "source": "Edward Carney, <i>A Survey of English Spelling</i> (1994): short vowels can&rsquo;t end an open syllable and long "
               "vowels can, p. 134; short i, p. 135; long i, p. 151; s for /z/, p. 238; <i>find</i> and <i>kind</i>, pp. 332&ndash;333.",
@@ -68,7 +68,7 @@ LISTS = [{
         "The check uses words that aren&rsquo;t on the list. A learner who writes <i>repaid</i> and <i>mislaid</i> has the "
         "convention; one who writes <i>prayed</i> and <i>delayed</i> has its limit too.",
     ],
-    "links": [("Step 22", "steps/22.html", "where <i>said</i> sits on the route"), ("Step 13", "steps/13.html", "<i>played</i>, and a suffix at the seam"),
+    "links": [("Step 22", "steps/22.html", "where <i>said</i> sits on the path"), ("Step 13", "steps/13.html", "<i>played</i>, and a suffix at the seam"),
               ("Sentences", "constructions.html", "frames to say the words in")],
     "source": "Greg Brooks, <i>Dictionary of the British English Spelling System</i> (2015), pp. 191, 196 and 230; the "
               "analysis is from the manual, &ldquo;Say, pay, lay&rdquo;.",
@@ -150,9 +150,9 @@ KINDS = [(1, "One analog, several words", "One word&rsquo;s spelling carries to 
          (2, "One base, many joins", "One base and the prefixes and suffixes that join it."),
          (3, "One join, many bases", "One way that a suffix joins, tried on many bases."),
          (4, "A closed set", "A small set of words that work together and change together.")]
-INDEX_DESC = "Spelling lists that follow the route: one for each step and each word family, each with a check, and the four kinds of list they are made from."
+INDEX_DESC = "Spelling lists that follow the path: one for each step and each word family, each with a check, and the four kinds of list they are made from."
 PAGES = [("lists/index.html", "teachers", "Legomorphic spelling", INDEX_DESC),
-         ("lists/hearts.html", "teachers", "Spelling list: Words with a heart", "Heart words sorted by how much of the heart a learner can lose: regular on the route, a reason to use, or by heart."),
+         ("lists/hearts.html", "teachers", "Spelling list: Words with a heart", "Heart words sorted by how much of the heart a learner can lose: regular on the path, a reason to use, or by heart."),
          ("lists/apart.html", "teachers", "Spelling list: Spelled apart", "Words that sound the same and are spelled differently, marked side by side and sorted by why the spelling keeps them apart.")]
 PAGES += [(f"lists/{L['slug']}.html", "teachers", f"Spelling list: {L['title']}", L["desc"]) for L in LISTS]
 HAS_CHECK = " It comes with a check to give before and after the lesson."
@@ -341,22 +341,22 @@ def write_index(OUT, page, header, footer, X):
 <main class="lists-index">
 <section class="hero"><div class="wrap">
 <h1>Legomorphic spelling</h1>
-<p class="lead">Spelling lists that follow the route: one for every step and every word family. Each has six to eight words with sentences, a contrast, words to build, sentences to finish, and a check of words that aren&rsquo;t on the list. Print one and the teacher&rsquo;s notes are left off. Each list also has a generalization check, to give before the lesson, after it and a few weeks later: its list&rsquo;s page leads to it.</p>
+<p class="lead">Spelling lists that follow the path: one for every step and every word family. Each has six to eight words with sentences, a contrast, words to build, sentences to finish, and a check of words that aren&rsquo;t on the list. Print one and the teacher&rsquo;s notes are left off. Each list also has a generalization check, to give before the lesson, after it and a few weeks later: its list&rsquo;s page leads to it.</p>
 </div></section>
 <section class="about"><div class="wrap">
 <h2>Steps</h2>
-<p class="sub">The list for each step on the route, in order.</p>
+<p class="sub">The list for each step on the path, in order.</p>
 <div class="step-btns">{steps}</div>
 </div></section>
 <section class="about" id="ufli"><div class="wrap">
 <h2>Lined up with UFLI Foundations</h2>
-<p class="sub">For schools that run UFLI: where its lessons meet the route, the mark to draw alongside each part of UFLI, and short word lists by lesson number. They live with everything else for UFLI.</p>
+<p class="sub">For schools that run UFLI: where its lessons meet the path, the mark to draw alongside each part of UFLI, and short word lists by lesson number. They live with everything else for UFLI.</p>
 <div class="door-tiles"><a class="dtile" href="../ufli.html"><b>UFLI Foundations</b><span>UFLI&rsquo;s lessons in sixteen bands, each with the mark to add and an example or two marked, and why the two orders differ.</span></a></div>
 </div></section>
 <section class="about" id="hearts"><div class="wrap">
 <h2>Words with a heart, and words spelled apart</h2>
 <p class="sub">The words programs teach as heart words, sorted by how much of the heart a learner can lose; and words that sound the same and are spelled differently, sorted by why.</p>
-<div class="door-tiles"><a class="dtile" href="hearts.html"><b>Words with a heart</b><span>Regular on the route, a reason to use, or by heart: each word marked so the reason shows.</span></a>
+<div class="door-tiles"><a class="dtile" href="hearts.html"><b>Words with a heart</b><span>Regular on the path, a reason to use, or by heart: each word marked so the reason shows.</span></a>
 <a class="dtile" href="apart.html"><b>Spelled apart</b><span>Words that sound the same and are spelled differently, side by side: a short word and a long one, a letter kept from the family, or history.</span></a></div>
 </div></section>
 <section class="about" id="families"><div class="wrap">

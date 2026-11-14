@@ -52,7 +52,7 @@ CALLS = [
      "The t spells ch here. A green circle would follow its sound; the letter stays black."),
     ("robin", "a closed first syllable with no vault", "As lemon and seven."),
     ("squirrel", "qu on a black bond bar with a black circle under each letter, the u red; ir as an r-controlled unit; the second r starting the next syllable",
-     "Ruled 8 November 2026. The u is red, as a vowel letter, with a black circle for the w. The black bar ties q to the u it never comes without, as the manual's cards and appendix already do (equipment), and shows a reader counting red letters that this u isn't the vowel. The two circles count the two sounds, k and w, as the route does at step 4 and as Carney's sound-to-spelling account has it (the u spells w)."),
+     "Ruled 8 November 2026. The u is red, as a vowel letter, with a black circle for the w. The black bar ties q to the u it never comes without, as the manual's cards and appendix already do (equipment), and shows a reader counting red letters that this u isn't the vowel. The two circles count the two sounds, k and w, as the path does at step 4 and as Carney's sound-to-spelling account has it (the u spells w)."),
     ("wind", "a short mark over the i", "The noun. Wind, the verb, would take a long mark, as find does."),
     ("Santa Claus, good-bye", "drawn as two marked words, with a hyphen between good and bye",
      "Christmas and Santa Claus keep their capitals, as I does."),

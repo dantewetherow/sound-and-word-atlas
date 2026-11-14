@@ -1,13 +1,13 @@
 """Coverage (13 November 2026): when each word on the Early Literacy Profile (Central Okanagan) and Dolch lists becomes
-decodable on the route, and in UFLI Foundations' sequence.
+decodable on the path, and in UFLI Foundations' sequence.
 
 The question it answers: if two systematic sequences differ in order, which one lets a learner read more of the words
 they meet most, sooner? It is a count of words, not a measure of learning. Nobody has compared the two sequences in a
 classroom.
 
 How a word gets its place:
-  - On the route: the latest step among the things the word needs (its letters, units and marks), or the step whose
-    word list has it, whichever is earlier. A kernel word the route teaches with a reason (would, could, should) counts
+  - On the path: the latest step among the things the word needs (its letters, units and marks), or the step whose
+    word list has it, whichever is earlier. A kernel word the path teaches with a reason (would, could, should) counts
     from its step.
   - In UFLI: the latest lesson among the things the word needs, or the first lesson whose Roll and Read page uses the
     word, whichever is earlier (UFLI leaves heart words off those pages, so a word there is one UFLI treats as
@@ -18,14 +18,14 @@ How a word gets its place:
 The Roll and Read first appearances were collected from UFLI's Roll and Read pages for lessons 13 to 128 (12 November
 2026) and are kept in data/ufli_first.json for the words this page uses.
 
-Pacing: the route has 32 steps and UFLI 128 lessons, and neither says how long a step or a lesson takes, so the two are
+Pacing: the path has 32 steps and UFLI 128 lessons, and neither says how long a step or a lesson takes, so the two are
 compared at checkpoints where they have taught the same thing (CHECKPOINTS), and across the whole sequence as a share
 of its length."""
 import json, pathlib, re
 
 HERE = pathlib.Path(__file__).resolve().parent
 
-# The single letters. The route uses a letter from the first step whose words have it, and has them all by step 4.
+# The single letters. The path uses a letter from the first step whose words have it, and has them all by step 4.
 UFLI_LETTER = dict(a=1, m=2, s=3, t=4, p=6, f=7, i=8, n=9, o=12, d=13, c=14, u=15, g=16, b=17, e=18, k=22, h=23, r=24,
                    l=26, w=28, j=29, y=30, x=31, v=33, z=34, q=32)
 ROUTE_LETTER = dict(i=1, t=1, n=1, s=1, f=1, a=2, o=2, u=2, m=2, p=2, h=3, e=3, w=3, b=3, y=3, g=3)
@@ -54,11 +54,11 @@ DIPHTHONG_OW = {"how", "now", "down", "brown", "town", "cow", "owl", "clown", "f
 SECOND_OO = {"look", "good", "book", "took", "foot", "stood", "wood", "hook", "cook"}
 SHORT_EA = {"head", "bread", "dead", "read_past", "ready", "breakfast"}
 YOU_OU = {"you", "your", "soup", "group", "could", "would", "should"}
-# a bare (borrowed or weak) vowel: the patterns the route teaches, and where UFLI meets them
+# a bare (borrowed or weak) vowel: the patterns the path teaches, and where UFLI meets them
 O_FOR_U = {"come", "some", "done", "other", "mother", "brother", "love", "from", "month", "son", "won", "nothing",
            "above", "among", "Monday", "another", "front", "none", "money"}
 O_FOR_OO = {"to", "do", "who", "two", "into", "today", "together", "whom", "whose", "move", "lose", "prove"}
-# a vowel spelling another vowel's short sound: the a of many, the e of pretty. The route teaches many and any at step 22.
+# a vowel spelling another vowel's short sound: the a of many, the e of pretty. The path teaches many and any at step 22.
 BORROWS_OTHER = {"any": 22, "many": 22, "pretty": None}
 A_AFTER_W = {"was", "what", "want", "wash", "water", "watch", "wasp", "swan", "swap", "wand", "warm"}
 
@@ -263,9 +263,9 @@ def section(rows):
                  for (n, s, l, a, b, ne), (_, _, _, c, d, nd) in zip(E_, D_))
     ne, nd = E_[0][5], D_[0][5]
     table_ = (f'<div class="tablewrap"><table class="cw-table cov-table"><thead>'
-              f'<tr><th scope="col" rowspan="2">When both have finished</th><th scope="col" rowspan="2">Route</th><th scope="col" rowspan="2">UFLI</th>'
+              f'<tr><th scope="col" rowspan="2">When both have finished</th><th scope="col" rowspan="2">Path</th><th scope="col" rowspan="2">UFLI</th>'
               f'<th scope="colgroup" colspan="2">ELP words (of {ne})</th><th scope="colgroup" colspan="2">Dolch words (of {nd})</th></tr>'
-              f'<tr><th scope="col">route</th><th scope="col">UFLI</th><th scope="col">route</th><th scope="col">UFLI</th></tr></thead>'
+              f'<tr><th scope="col">path</th><th scope="col">UFLI</th><th scope="col">path</th><th scope="col">UFLI</th></tr></thead>'
               f'<tbody>{tr}</tbody></table></div>')
     by = {r["word"]: r for r in rows}
     def i(ws): return ", ".join(f"<i>{H.escape(w)}</i>" for w in ws)
@@ -294,12 +294,12 @@ def section(rows):
 </div><div class="wrap">
 {table_}
 </div><div class="wrap prose">
-<p><b>At the start, the route is ahead on the ELP&rsquo;s first lists.</b> Once the single letters and short vowels are in, the route reads {len(early_r)} words UFLI doesn&rsquo;t yet: {i(early_r)}. UFLI reads {i(early_u)}. These are the pronouns and small words of the kindergarten and CV lists. On Dolch&rsquo;s lists the two are even at that point: his first lists have many closed words (<i>big, can, red, run</i>) that UFLI&rsquo;s letter-by-letter order reaches as fast.</p>
-<p><b>At silent e, the route is a little ahead on the ELP&rsquo;s words, and the two are even on Dolch&rsquo;s.</b></p>
-<p><b>In the middle, UFLI is ahead.</b> By the time it finishes the first r-controlled units, UFLI has also taught open syllables in longer words, endings, consonant + le and long vowels before two consonants. The route teaches those after its r-controlled step (steps 13 to 18), so at that point UFLI reads {len(mid_u)} ELP words the route doesn&rsquo;t yet, among them {i(mid_u[:10])}.</p>
-<p><b>By the end, the route reads more.</b> The difference is no longer order: it is the words the route teaches with a reason and UFLI teaches as heart words: {i(only_r)}. Neither decodes {i(neither)}.</p>
-<p>So the case for the route&rsquo;s order is real but narrow: it is the first few weeks, and the small grammar words. The case for UFLI&rsquo;s order is the middle. The route&rsquo;s bigger difference is that it explains its kernel words, and that would hold in either order.</p>
-<p class="sub"><b>How the counts were made.</b> A word counts on the route from the step whose list has it, or from the latest step among the things it needs (its letters, units and marks), whichever is earlier. In UFLI it counts from the first lesson whose Roll and Read page uses it (UFLI leaves heart words off those pages), or from the latest lesson among the things it needs, whichever is earlier. Lessons 1 to 12 have no Roll and Read page, so those lessons are placed by what they teach. On 1,907 words of five letters or fewer from the Roll and Read pages, placing by what a word needs gave the lesson UFLI first uses it in 88% of words, and within three lessons in 91%. This counts words, not learning: it says what a learner could decode, not what they will.</p>
+<p><b>At the start, the path is ahead on the ELP&rsquo;s first lists.</b> Once the single letters and short vowels are in, the path reads {len(early_r)} words UFLI doesn&rsquo;t yet: {i(early_r)}. UFLI reads {i(early_u)}. These are the pronouns and small words of the kindergarten and CV lists. On Dolch&rsquo;s lists the two are even at that point: his first lists have many closed words (<i>big, can, red, run</i>) that UFLI&rsquo;s letter-by-letter order reaches as fast.</p>
+<p><b>At silent e, the path is a little ahead on the ELP&rsquo;s words, and the two are even on Dolch&rsquo;s.</b></p>
+<p><b>In the middle, UFLI is ahead.</b> By the time it finishes the first r-controlled units, UFLI has also taught open syllables in longer words, endings, consonant + le and long vowels before two consonants. The path teaches those after its r-controlled step (steps 13 to 18), so at that point UFLI reads {len(mid_u)} ELP words the path doesn&rsquo;t yet, among them {i(mid_u[:10])}.</p>
+<p><b>By the end, the path reads more.</b> The difference is no longer order: it is the words the path teaches with a reason and UFLI teaches as heart words: {i(only_r)}. Neither decodes {i(neither)}.</p>
+<p>So the case for the path&rsquo;s order is real but narrow: it is the first few weeks, and the small grammar words. The case for UFLI&rsquo;s order is the middle. The path&rsquo;s bigger difference is that it explains its kernel words, and that would hold in either order.</p>
+<p class="sub"><b>How the counts were made.</b> A word counts on the path from the step whose list has it, or from the latest step among the things it needs (its letters, units and marks), whichever is earlier. In UFLI it counts from the first lesson whose Roll and Read page uses it (UFLI leaves heart words off those pages), or from the latest lesson among the things it needs, whichever is earlier. Lessons 1 to 12 have no Roll and Read page, so those lessons are placed by what they teach. On 1,907 words of five letters or fewer from the Roll and Read pages, placing by what a word needs gave the lesson UFLI first uses it in 88% of words, and within three lessons in 91%. This counts words, not learning: it says what a learner could decode, not what they will.</p>
 </div><div class="wrap">
 <details class="ufli-more"><summary><h3 class="cov-sum">Every ELP word: the step and the lesson</h3></summary>
 <p class="sub">A lesson in grey was placed by what the word needs: no Roll and Read page uses the word. <i>By heart</i>: the sequence teaches it as a heart word, or doesn&rsquo;t teach it.</p>

@@ -1,5 +1,5 @@
 {
- "intro": "The legomorphic route has thirty-two steps in eight bands. Each mark enters with the first word that needs it, and the verb kernel runs through every band. The orientation map shows the same route with each word's letters in colour.",
+ "intro": "The legomorphic path has thirty-two steps in eight bands. Each mark enters with the first word that needs it, and the verb kernel runs through every band. The orientation map shows the same route with each word's letters in colour.",
  "bands": [
   {
    "name": "Sounds and syllables",
@@ -838,14 +838,14 @@
    "contrast_md": ""
   }
  ],
- "carney_intro": "Edward Carney's *A Survey of English Spelling* (Routledge, 1994) describes every unit on the route, and the route leans on it from the first step to the last. The pages are Carney's printed pages; a sound named on its own is the start of his section on that sound. How a phonics program lines up with the route is in a crosswalk, a separate PDF for each program. The first is for UFLI Foundations.",
+ "carney_intro": "Edward Carney's *A Survey of English Spelling* (Routledge, 1994) describes every unit on the path, and the path leans on it from the first step to the last. The pages are Carney's printed pages; a sound named on its own is the start of his section on that sound. How a phonics program lines up with the path is in a crosswalk, a separate PDF for each program. The first is for UFLI Foundations.",
  "moves_intro": "Some steps teach a move: what a learner tries when the marks alone don't settle a word. Each move is listed with the research behind it. Devin M. Kearns, \"Does English Have Useful Syllable Division Patterns?\" *Reading Research Quarterly* 55, no. S1 (2020): S145–S160, counted how the vowels are said in 14,844 words from texts for grades 1 to 8. His figures describe the words, not learners. Added 10 November 2026.",
- "parts_intro": "The commonest prefixes and suffixes, and the roots the families use, each placed at the step whose pattern it shows, so a part met on the route is met again in its families. Each is marked as it is said on its own. Inside a word many are said weakly, as the *con* of the verb *conduct* is, and there the vowel would be bare. Added 10 November 2026.",
+ "parts_intro": "The commonest prefixes and suffixes, and the roots the families use, each placed at the step whose pattern it shows, so a part met on the path is met again in its families. Each is marked as it is said on its own. Inside a word many are said weakly, as the *con* of the verb *conduct* is, and there the vowel would be bare. Added 10 November 2026.",
  "open": [
   "Teams with two sounds (steps 22 and 24). The Orton-Gillingham manual puts a bar or a cup over *oo* (p. 17), and the vicinity pattern page says a team takes no long mark, short mark or vault. The marking calls of 7 October mark both sounds alike for now.",
   "Step 19 could move up to follow step 13. Its words are met in marked text from rung 1, and every unit it uses is in place by step 13, where the seam lets *does* be built as *do* + *es*.",
   "The black bond bar enters the map's key at step 25, but *qu* (step 4), *wh* (step 5) and *ng* (step 13) already take it on the cards and in the appendix. The key could name it at step 5.",
   "The pointer pill at step 28 is a proposed mark, not a decided one."
  ],
- "note_16_32": "Steps 16 to 32 were added as a draft on 15 October 2026, and the orientation map shows them in the same form. The new bands repeat the first four at a larger scale: single vowels, then teams, then the remaining units, then words built from parts.\nWith the same script and assumptions as the table for the Early Literacy Profile (Central Okanagan) (ELP), 144 of the 148 ELP words are readable by step 26. *Of, laugh, pretty* and *people* stay one-offs. In adult text (wordfreq, top 6,000 words), the share of running words readable on the route rises from about 46% at step 15 to about 70% at step 26."
+ "note_16_32": "Steps 16 to 32 were added as a draft on 15 October 2026, and the orientation map shows them in the same form. The new bands repeat the first four at a larger scale: single vowels, then teams, then the remaining units, then words built from parts.\nWith the same script and assumptions as the table for the Early Literacy Profile (Central Okanagan) (ELP), 144 of the 148 ELP words are readable by step 26. *Of, laugh, pretty* and *people* stay one-offs. In adult text (wordfreq, top 6,000 words), the share of running words readable on the path rises from about 46% at step 15 to about 70% at step 26."
 }

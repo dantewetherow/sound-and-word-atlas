@@ -6,7 +6,7 @@ stays where i would be read wrong (slyly, since slily would read as slilly) or w
 usual rule is kept as what it is, a mnemonic, and "English words don't end in i" as a reason without a premise.
 
 Words with codes on the site (happy, happier, happily, carry, carries, try, tried, play, played, pretty) are drawn in the
-notation; the rest are set in type. It sits on step 29 of the route, and its sources are Carney's pages for that step.
+notation; the rest are set in type. It sits on step 29 of the path, and its sources are Carney's pages for that step.
 
 Run:  python3 build/ytoi.py        writes build/sessions/y-to-i.html, which sessions.py copies to the site
 """
@@ -54,7 +54,7 @@ slide("Title", f"""<div class="title">
 </div>""", "mid")
 
 # 2 where it sits
-slide("Where it sits", f"""<h2 class="head">Step 29 of the route: <i>-y</i>, <i>-ly</i> and y turns to i</h2>
+slide("Where it sits", f"""<h2 class="head">Step 29 of the path: <i>-y</i>, <i>-ly</i> and y turns to i</h2>
 <p class="body">The words: {", ".join(i(w) for w in ("sadly", "slowly", "happily", "happier", "tried", "carries"))}. The contrast: {i("try")} and {i("tried")}, {i("play")} and {i("played")}.</p>
 <div class="row" data-s="1">{word("try", 130)}{word("tried", 130)}<span class="gap"></span>{word("play", 130)}{word("played", 130)}</div>
 <p class="q" data-s="2">Why does {i("try")} change and {i("play")} not?</p>""", steps=2)
@@ -139,7 +139,7 @@ slide("To take back", f"""<h2 class="head">To take back to class</h2>
 # 13 sources
 slide("Sources", f"""<h2 class="head">Sources</h2>
 <p class="body">Edward Carney, <i>A Survey of English Spelling</i> (Routledge, 1994): <i>-y</i> and <i>-ies</i> (<i>berry</i>, <i>berries</i>), p. 70; <i>carry</i>, <i>carried</i>, <i>carries</i>, p. 135; <i>i</i> before some endings (<i>happiness</i>), p. 136.</p>
-<p class="body">The words are marked in Legomorphic Notation. The marks are on A Legend for English Words&rsquo;s <a href="../notations.html">Notations</a> page, and this is <a href="../steps/29.html">step 29</a> of its route.</p>
+<p class="body">The words are marked in Legomorphic Notation. The marks are on A Legend for English Words&rsquo;s <a href="../notations.html">Notations</a> page, and this is <a href="../steps/29.html">step 29</a> on its path.</p>
 <p class="source">Shared under CC BY-NC-SA 4.0.</p>""", "mid")
 
 FONTS = """<link rel="preconnect" href="https://fonts.googleapis.com">

@@ -647,7 +647,7 @@ SEM = {
     "uc": "the word list follows the Indo-European Lexicon, which follows Pokorny, and was checked on 10 November 2026 against "
           "Etymonline&rsquo;s list for the root, read in a copy of that dictionary: <i>simulate</i>, <i>simulation</i>, "
           "<i>homophone</i> and <i>homonym</i> are in it. <i>Simile</i> and <i>homograph</i> are in neither list and are here as "
-          "plain kin of <i>similar</i> and <i>homophone</i>. Next: check it against Watkins, and decide whether the route needs a "
+          "plain kin of <i>similar</i> and <i>homophone</i>. Next: check it against Watkins, and decide whether the path needs a "
           "step for prefixes that change to match.",
     "label": "Root family: *sem-",
     "desc": "The root *sem-, one or same, and its family: similar, simple, single, assemble, resemble and same, with a lesson on assimilation: why assimilate, collect and accommodate double at the front.",
@@ -698,7 +698,7 @@ MED_CLUSTERS = [
     },
     {"key": "germanic", "label": "mete, must", "spells": ["mete", "must"], "head": "measure; be allowed: English&rsquo;s own words",
      "road": "Old English <i>metan</i>, to measure, and <i>m&omacr;tan</i>, to be allowed, to have room to",
-     "note": "<i>Must</i> is on the route as an <a href=\"../constructions.html\">operator</a>. It began as the past form of a verb for "
+     "note": "<i>Must</i> is on the path as an <a href=\"../constructions.html\">operator</a>. It began as the past form of a verb for "
              "being allowed, for having the measure of time or room to do a thing.",
      "groups": [[("mete", None, "measure out, as in <i>mete out</i>", "mete"), ("must", None, "have to: at first, was allowed to", "must")]],
     },

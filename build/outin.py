@@ -7,7 +7,7 @@ through stacked suffixes (educate, education, educational; note, notate, notatio
 the same way, and ends with the move for a speller or reader: peel the suffixes back from the end, putting each e back.
 
 Words with codes on the site are drawn in the notation; the rest are set in type as word sums, in the site's
-convention (a letter in brackets drops at the seam). It sits on step 15 of the route, and its sources are Carney's
+convention (a letter in brackets drops at the seam). It sits on step 15 of the path, and its sources are Carney's
 pages for that step.
 
 Run:  python3 build/outin.py        writes build/sessions/out-with-the-old.html, which sessions.py copies to the site
@@ -36,7 +36,7 @@ slide("Title", f"""<div class="title">
 </div>""", "mid")
 
 # 2 where it sits
-slide("Where it sits", f"""<h2 class="head">Step 15 of the route: the {i("e")} drops, its jobs move</h2>
+slide("Where it sits", f"""<h2 class="head">Step 15 of the path: the {i("e")} drops, its jobs move</h2>
 <p class="body">The words: {", ".join(i(w) for w in ("make, making", "have, having", "race, racing", "ice, icy"))}.</p>
 <div class="row" data-s="1">{word("race", 130)}{word("racing", 130)}<span class="gap"></span>{word("ice", 130)}{word("icy", 130)}</div>
 <p class="q" data-s="2">Where did the {i("e")} go, and who is doing its work?</p>""", steps=2)
@@ -119,7 +119,7 @@ slide("A caution", f"""<h2 class="head">A caution: the parts stay, the sounds mo
 # 14 sources
 slide("Sources", f"""<h2 class="head">Sources</h2>
 <p class="body">Edward Carney, <i>A Survey of English Spelling</i> (Routledge, 1994): the <i>e</i> drops before an ending that begins with a vowel, p. 130, and stays where it still nudges <i>c</i> or <i>g</i> (<i>noticeable</i>), p. 131; the <i>e</i> of <i>ee</i> and <i>oe</i> stays before <i>i</i> (<i>seeing</i>, <i>canoeing</i>), so that <i>ei</i> and <i>oi</i> aren&rsquo;t read, p. 131.</p>
-<p class="body">The histories of the words are in Etymonline. The families are on A Legend for English Words: <a href="../roots/deuk.html">*deuk-</a> for <i>educate</i> and <i>produce</i>, <a href="../roots/med.html">*med-</a> for <i>accommodate</i>, and <a href="../parts.html">Parts</a> for every word with each suffix. This is <a href="../steps/15.html">step 15</a> of its route.</p>
+<p class="body">The histories of the words are in Etymonline. The families are on A Legend for English Words: <a href="../roots/deuk.html">*deuk-</a> for <i>educate</i> and <i>produce</i>, <a href="../roots/med.html">*med-</a> for <i>accommodate</i>, and <a href="../parts.html">Parts</a> for every word with each suffix. This is <a href="../steps/15.html">step 15</a> on its path.</p>
 <p class="source">Shared under CC BY-NC-SA 4.0.</p>""", "mid")
 
 

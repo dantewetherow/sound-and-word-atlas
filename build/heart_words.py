@@ -3,7 +3,7 @@
 A heart word is one with a part a learner can't yet decode, or can't ever decode by the usual sounds. A heart over that
 part says "learn this by heart". The notation can usually say why instead, so the words here are sorted by how much
 of the heart a learner can lose:
-  1. none of it once the step comes: the word is regular on the route (could, both, talk, learn, into);
+  1. none of it once the step comes: the word is regular on the path (could, both, talk, learn, into);
   2. some of it, given a reason they can use: a word it comes from (said, say), a pattern with a history (o for the
      vowel of up beside m, n, v and th), or a letter doing a job (the u that keeps g hard in guess);
   3. the rest, by heart, with a story at most (of, eye, women).
@@ -34,7 +34,7 @@ CODES = {
 
 # (group, [(what the heart part has, the words, a note for the teacher)])
 GROUPS = [
-    ("The heart goes away on the route", "These are regular once their step comes. A heart on them would teach that something regular is odd.", [
+    ("The heart goes away on the path", "These are regular once their step comes. A heart on them would teach that something regular is odd.", [
         ("ould, one spelling for three words (step 7)", ["could", "would", "should"], "Learn one and spell three."),
         ("A long vowel before two consonants (step 18)", ["both", "almost"], "Like <i>most</i>, <i>old</i> and <i>find</i>."),
         ("al for the vowel of <i>saw</i> (step 23)", ["talk", "walk"], "The l is silent and joins the vowel."),
@@ -94,5 +94,5 @@ def write(OUT, page, header, footer, X):
 </main>
 {footer(1)}"""
     (OUT / "lists" / "hearts.html").write_text(page("Words with a heart · A Legend for English Words", body, 1,
-        "Heart words sorted by how much of the heart a learner can lose: regular on the route, a reason to use, or by heart."), encoding="utf-8")
+        "Heart words sorted by how much of the heart a learner can lose: regular on the path, a reason to use, or by heart."), encoding="utf-8")
     return sorted({w for _, _, rows in GROUPS for _, ws, _ in rows for w in ws})

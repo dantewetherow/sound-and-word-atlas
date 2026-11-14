@@ -1,7 +1,7 @@
-"""Build A Legend for English Words (the Sound and Word Atlas until 12 November 2026; version 1: the route and its steps) from the manual's route data.
+"""Build A Legend for English Words (the Sound and Word Atlas until 12 November 2026; version 1: the path and its steps) from the manual's route data.
 
 usage: python3 build_site.py <route.json> <out dir> [--standalone]
-The route.json comes from the manual (see ../README.md). Words are drawn with legomorphic_words.py and the
+The path.json comes from the manual (see ../README.md). Words are drawn with legomorphic_words.py and the
 codes the deck tools already use, plus site_codes.py for route words that had none.
 --standalone writes the home page as a full document, for a web host such as GitHub Pages. Without it the home
 page has no doctype or head, because claude.ai adds those when it publishes the page as an artifact."""
@@ -206,12 +206,12 @@ UC_OPEN = {
       "that change."},
  "Step 19 could move up": {
   19: "this step may move up to follow step 13. Its words turn up in reading from the start, and every unit it uses is in "
-      "place by step 13, where the seam lets *does* be built as *do* + *es*. Next: decide where it sits in the route.",
+      "place by step 13, where the seam lets *does* be built as *do* + *es*. Next: decide where it sits in the path.",
   13: "step 19, a vowel that borrows a sound, may move up to follow this step, since every unit it uses is in place by "
-      "here. Next: decide where it sits in the route."},
+      "here. Next: decide where it sits in the path."},
  "The black bond bar": {
   **{n: "the black bond bar, under consonant units such as *qu*, *wh* and *ng*, is used from early "
-        "in the route but isn't named as a new mark until step 25. Next: decide whether to name it at step 5." for n in (4, 5, 13)},
+        "on the path but isn't named as a new mark until step 25. Next: decide whether to name it at step 5." for n in (4, 5, 13)},
   25: "the black bond bar is named as a new mark here, but *qu*, *wh* and *ng* take it from earlier steps. Next: decide "
       "whether to name it at step 5 instead."},
  "The pointer pill": {
@@ -327,7 +327,7 @@ for i, s in enumerate(STEPS):
 </main>
 {footer(1)}"""
     t = f"Step {n}: {plain(s['title'])}"
-    (OUT / "steps" / fname(n)).write_text(page(t, body, 1, f"{t}: a step on the route, a lesson in reading and spelling."), encoding="utf-8")
+    (OUT / "steps" / fname(n)).write_text(page(t, body, 1, f"{t}: a step on the path, a lesson in reading and spelling."), encoding="utf-8")
 
 # ------------------------------------------------------------------ home page (the artifact's own page: no doctype, the host adds it)
 def tile(s):
@@ -384,7 +384,7 @@ home_head = f"""<title>A Legend for English Words</title>
 import landing, walk
 for w in ("legomorphic", "note", "notate", "notation"): assert w in LW.W, w
 ROUTE_LEAD = md(route["intro"].split(" The orientation map")[0])
-# The route and the legend moved behind their doors on 8 November 2026 (Progressions and Notations). An old link to
+# The path and the legend moved behind their doors on 8 November 2026 (Progressions and Notations). An old link to
 # #route, #band-... or #marks lands on the home page, which sends it on.
 OLD_ANCHORS = """<script>(() => { const h = location.hash;
   if (h === '#route' || h.indexOf('#band-') === 0) location.replace('progressions.html' + (h.indexOf('#band-') === 0 ? h : ''));
@@ -398,8 +398,8 @@ home_body = f"""{header(0)}
 <section class="about t-only" id="about" aria-labelledby="about-h"><div class="wrap">
 <h2 id="about-h">What&rsquo;s here</h2>
 <div class="cols">
-<div><h3>The route</h3><p>{N} steps in {len(route["bands"])} bands, with {n_words} different words, {n_marked} of them marked, in <a href="progressions.html">Steps</a>. Each step page has its words, the marks it brings in, and the pages in Carney&rsquo;s survey that back it.</p></div>
-<div><h3>To print and present</h3><p><a href="teachers.html">For teachers</a> has printable cards for the Early Literacy Profile (Central Okanagan) high-frequency words and all of Dolch&rsquo;s sight words, and the first session of the staff series with its handouts. <a href="connections.html">Connections</a>, there too, lines the route up with the ELP and Dolch lists and with UFLI Foundations.</p></div>
+<div><h3>The path</h3><p>{N} steps in {len(route["bands"])} bands, with {n_words} different words, {n_marked} of them marked, in <a href="progressions.html">Steps</a>. Each step page has its words, the marks it brings in, and the pages in Carney&rsquo;s survey that back it.</p></div>
+<div><h3>To print and present</h3><p><a href="teachers.html">For teachers</a> has printable cards for the Early Literacy Profile (Central Okanagan) high-frequency words and all of Dolch&rsquo;s sight words, and the first session of the staff series with its handouts. <a href="connections.html">Connections</a>, there too, lines the path up with the ELP and Dolch lists and with UFLI Foundations.</p></div>
 <div><h3>The notation</h3><p><a href="notations.html">The marks</a> are with the steps. On the teachers&rsquo; shelf, About explains the notation and its name, Definitions has its words, and Credits names the writers it draws on.</p></div>
 </div>
 {uc(f"steps {DRAFT_FROM} to {N} are a first draft, and a few words show in plain letters until their marking is settled. Next: more families in Parts, starting with <i>accommodate</i>, and a word built from left to right in Words.")}
@@ -408,7 +408,7 @@ home_body = f"""{header(0)}
 {footer(0)}"""
 if STANDALONE:
     home = page("A Legend for English Words", home_body, 0,
-                "The legomorphic route through English spelling, for teachers: 32 steps, with every word marked in Legomorphic Notation.")
+                "The legomorphic path through English spelling, for teachers: 32 steps, with every word marked in Legomorphic Notation.")
 else:
     home = home_head + home_body
 (OUT / "index.html").write_text(home, encoding="utf-8")

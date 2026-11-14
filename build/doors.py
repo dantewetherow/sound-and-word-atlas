@@ -1,7 +1,7 @@
 """The site's layers, its tree, breadcrumbs, search and the Teacher/Student view.
 
 Since 10 November 2026 the atlas has three layers and a shelf, so a teacher holds three things in mind, not eight:
-Steps (the route, in order, with the marks), Words (look up a word: its walk and its sum) and Parts (prefixes,
+Steps (the path, in order, with the marks), Words (look up a word: its walk and its sum) and Parts (prefixes,
 suffixes, roots and joins, each with its words; parts.py). Everything a teacher prints, presents or checks is on the
 For teachers shelf. From 8 to 10 November there were eight doors named as one -ion family (Progressions, Notations,
 Explorations, Constructions, Derivations, Instructions, Connections, Explanations); their pages keep their addresses
@@ -19,10 +19,10 @@ page. Nothing typed leaves the device. Without script the box stays hidden, and 
 import html, json, re
 
 DOORS = [   # slug, name, (unused), in plain words, the short word in student view (None: for teachers only)
-    ("progressions", "Steps", "", "Lessons in reading and spelling, in order: the legomorphic route through English spelling. Start here to learn the notation.", "Steps"),
+    ("progressions", "Steps", "", "Lessons in reading and spelling, in order: the legomorphic path through English spelling. Start here to learn the notation.", "Steps"),
     ("walk", "Words", "", "Look up a word and walk through it: its marks, a move at a time, and its parts.", "Words"),
     ("parts", "Parts", "", "Prefixes, suffixes, roots and joins, each with every word that has it.", "Parts"),
-    ("teachers", "For teachers", "", "To print and present, how the route lines up with programs, and the reasons and sources.", None),
+    ("teachers", "For teachers", "", "To print and present, how the path lines up with programs, and the reasons and sources.", None),
 ]
 DOOR = {d[0]: d for d in DOORS}
 
@@ -35,7 +35,7 @@ HEADS = {
     "constructions": ("Sentences", "How sentences are built: actors, operators and actions, and the flip from claim to question.", "Sentences"),
     "derivations": ("Roots and their sources", "Where words come from, and the sources the roots cite.", "Roots"),
     "instructions": ("To print and present", "Presentations, word cards and affix tent cards.", None),
-    "connections": ("Programs and word lists", "How the route lines up with UFLI Foundations and with the word lists schools already use.", None),
+    "connections": ("Programs and word lists", "How the path lines up with UFLI Foundations and with the word lists schools already use.", None),
     "explanations": ("Reasons and sources", "Definitions, the notation and its name, and credits.", None),
     "teachers": ("For teachers", DOORS[3][3], None),
 }
@@ -43,7 +43,7 @@ HEADS = {
 # The tree: (path, layer, title, one-line summary). Steps join it in tree().
 PAGES = [
     ("index.html", None, "Home", "Legomorphic Notation and the three layers of the site."),
-    ("progressions.html", "progressions", "Steps", "The legomorphic route through English spelling: the steps in their bands."),
+    ("progressions.html", "progressions", "Steps", "The legomorphic path through English spelling: the steps in their bands."),
     ("letters.html", "progressions", "Letters, names and sounds", "Before step 1: the alphabet in the song's units, as tiles to reveal, with a sound circle under each letter."),
     ("notations.html", "progressions", "The marks", "The marks of Legomorphic Notation, each drawn alone on one word."),
     ("walk.html", "walk", "Words", "Look up a word and walk through it, a move at a time, with its parts."),
@@ -64,9 +64,9 @@ PAGES = [
     ("presentations.html", "teachers", "Presentations", "The staff series and decks on single concepts, with their handouts."),
     ("tents.html", "teachers", "Affix tent cards", "Prefixes, roots and suffixes on cards that stand up: swap the root, keep the affixes. Extension work with the families."),
     ("cards.html", "teachers", "Word cards", "Printable cards: the Early Literacy Profile (Central Okanagan) and Dolch words, and grade 3 word sums."),
-    ("connections.html", "teachers", "Programs and word lists", "How the route lines up with the word lists and programs schools already use."),
+    ("connections.html", "teachers", "Programs and word lists", "How the path lines up with the word lists and programs schools already use."),
     ("word-lists.html", "teachers", "Early Literacy Profile and Dolch", "Where the Early Literacy Profile (Central Okanagan) words come from in Dolch's lists."),
-    ("ufli.html", "teachers", "UFLI Foundations", "For schools that run UFLI: where its lessons meet the route, the mark to draw alongside each part of UFLI, and why the two orders differ."),
+    ("ufli.html", "teachers", "UFLI Foundations", "For schools that run UFLI: where its lessons meet the path, the mark to draw alongside each part of UFLI, and why the two orders differ."),
     ("explanations.html", "teachers", "Reasons and sources", "Definitions, the notation and its name, and credits."),
     ("definitions.html", "teachers", "Definitions", "What the notation's words mean, and where they come from."),
     ("about.html", "teachers", "About the notation", "The notation, its name, and how it came about."),
@@ -243,7 +243,7 @@ def door_head(slug, extra=""):
 
 
 def write(OUT, page, header, footer, X):
-    """The door pages and the site map. X carries what they need from build_site: the route, the legend, the
+    """The door pages and the site map. X carries what they need from build_site: the path, the legend, the
     drawing tools and the helpers."""
     uc, md = X["uc"], X["md"]
 
@@ -255,10 +255,10 @@ def write(OUT, page, header, footer, X):
 {footer(0)}"""
         (OUT / f"{slug}.html").write_text(page(title, body, 0, desc), encoding="utf-8")
 
-    # Progressions: the route, moved from the home page.
-    door_page("progressions", "Progressions · A Legend for English Words", "The legomorphic route through English spelling, step by step.", f"""{door_head("progressions")}
+    # Progressions: the path, moved from the home page.
+    door_page("progressions", "Progressions · A Legend for English Words", "The legomorphic path through English spelling, step by step.", f"""{door_head("progressions")}
 <section class="route" id="route" aria-labelledby="route-h"><div class="wrap">
-<h2 id="route-h" class="t-only">The legomorphic route at a glance</h2>
+<h2 id="route-h" class="t-only">The legomorphic path at a glance</h2>
 <p class="lead t-only">{X["route_lead"]} Open a step to see its words marked, the marks it brings in, and the pages in Carney's survey that back it.</p>
 <p class="sub t-only">Each word is shown with its letters in colour: red for vowel letters, green for <em>sh</em>, <em>th</em> and <em>ch</em>, black for the rest.</p>
 <div class="door-tiles route-tiles"><a class="dtile" href="letters.html"><b>Before step 1: letters</b><span class="t-only">Letters, names and sounds: the alphabet in the song&rsquo;s units, with a sound circle under each letter.</span></a><a class="dtile" href="notations.html"><b>The marks</b><span class="t-only">The twelve marks, each drawn alone on one word.</span></a></div>
@@ -335,7 +335,7 @@ def write(OUT, page, header, footer, X):
 <h2 id="dv-h">Roots, and the meanings of parts</h2>
 <p>A word can be read as it is used now, or traced back through time: <a href="definitions.html#study">synchronic and diachronic</a>, a snapshot and a time-lapse. This page is for the time-lapse. <i>Before</i> is an example: Old English <i>beforan</i>, from <i>be-</i> &lsquo;by&rsquo; and <i>foran</i> &lsquo;in front&rsquo;, and <i>for</i> and <i>fore</i> grow from the same root.</p>
 <p>The roots will follow Calvert Watkins&rsquo;s <i>American Heritage Dictionary of Indo-European Roots</i> (3rd ed., 2011), which is built root first and lists the English words from each root, with links to the <a href="https://lrc.la.utexas.edu/lex">Indo-European Lexicon</a> of the Linguistics Research Center at the University of Texas at Austin. Not every word has a known root. <i>Hop</i> and <i>hope</i> go back through Old English to early Germanic, and no further that anyone can show, and their pages will say so.</p>
-{uc("next, a root page for every root behind the route's words, each citing its source, and a plain meaning for every part of a word.")}
+{uc("next, a root page for every root behind the path's words, each citing its source, and a plain meaning for every part of a word.")}
 </div></section>""")
 
     # Instructions and Explanations: teachers' doors, leading to the pages that are already here.
@@ -419,7 +419,7 @@ def write_search(OUT, X):
         if teacher: r["x"] = 1
         recs.append(r)
     strip = lambda s: re.sub(r"<[^>]+>", "", html.unescape(s))
-    # words on the route, at the first step that has them
+    # words on the path, at the first step that has them
     where = {}
     for st in X["STEPS"]:
         for g in X["groups_of"](st["words_md"]):
@@ -430,7 +430,7 @@ def write_search(OUT, X):
         for item in (st.get("contrast_md") or "").replace("*", "").split(","):
             for w in (x.strip() for x in item.split("/")):
                 if w and w not in where: add("word", w, f"steps/{st['n']:02d}.html", f"Step {st['n']}, contrast")
-    # Words on the lists but not the route land on their place in the word lists' table, which holds every ELP word and
+    # Words on the lists but not the path land on their place in the word lists' table, which holds every ELP word and
     # Dolch's 220, or, for Dolch's nouns, on the coded side of their card in the noun set: ten cards a sheet, each sheet a
     # plain page and then its coded page (build_dolch_cards.py)
     elp_of, dolch_of = {}, {w: "Dolch " + l["name"].lower() for l in X["dolch"]["levels"] for w in l["words"]}

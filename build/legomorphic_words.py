@@ -11,7 +11,7 @@ THE CODE, unit by unit, left to right
     q.qu    qu, the pair that always comes together: a black bond bar under both letters and a black circle under each,
             since the q spells k and the u spells w (squirrel, equipment). The u stays red, as a vowel letter. The bar ties q to
             the u it never comes without, and tells a reader counting red letters that this u isn't the syllable's vowel;
-            the two circles count its two sounds, as the route does (qu is k and w at step 4, as x is k and s). Where qu
+            the two circles count its two sounds, as the path does (qu is k and w at step 4, as x is k and s). Where qu
             spells k alone (antique, conquer) it is k.qu: the bar and one circle, the u silent, as in buy (8 November 2026)
             The letter x (six, box) stays c.x, with one black circle, though it spells k and s: ruled 8 November 2026, since x
             isn't known to cause common reading or spelling errors. Sound-box guides count it as two sounds

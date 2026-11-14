@@ -4,7 +4,7 @@ and the affixes and roots placed at each step (its "Parts on the steps", added t
 import re, json, sys
 src, out = sys.argv[1], sys.argv[2]
 t = open(src, encoding="utf-8").read()
-intro = re.search(r"## The route\n(.+?)\n", t).group(1).replace("[link: orientation map]", "orientation map")
+intro = re.search(r"## The (?:route|path)\n(.+?)\n", t).group(1).replace("[link: orientation map]", "orientation map")
 bands, steps = [], {}
 for m in re.finditer(r"### ([^\n|]+?)\n\| Step \| Words \| New marks \| Kernel words \|(.+?)(?=### |Steps 16 to 32|$)", t, re.S):
     band = m.group(1).strip(); body = m.group(2)
@@ -23,7 +23,7 @@ def table3(heading, columns):
     if not m: return "", []
     cells = [c.strip() for c in m.group(2).split("|")]; cells = [c for c in cells if c != ""]
     return m.group(1).strip(), [cells[i:i + 3] for i in range(0, len(cells) - len(cells) % 3, 3)]
-carney_intro, rows = table3("Carney's pages for each step", "What the route teaches | Carney (1994)")
+carney_intro, rows = table3("Carney's pages for each step", "What the path teaches | Carney (1994)")
 for n, _, pages in rows:
     steps[int(n)]["carney"] = pages
 moves_intro, rows = table3("Moves and research", "The move | Research")

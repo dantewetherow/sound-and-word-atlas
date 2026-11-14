@@ -60,7 +60,7 @@ DECKS = [{
     "previews": [1, 5, 8, 10],
     "about": ("Why the <i>y</i> of <i>happy</i> becomes <i>i</i> in <i>happier</i>, and why it stays in <i>played</i>, <i>slyly</i> "
               "and <i>carrying</i>: put the <i>y</i> back and read what you&rsquo;ve written. It builds a click at a time, with the words "
-              "marked in the notation, and sits on step 29 of the route."),
+              "marked in the notation, and sits on step 29 of the path."),
 }, {
     "file": "out-with-the-old",
     "title": "Out with the old, in with the new",
@@ -69,7 +69,7 @@ DECKS = [{
     "about": ("When a vowel suffix joins a base that ends in a silent <i>e</i>, the old vowel letter goes and the new one takes "
               "its place, and its jobs: <i>make</i>, <i>making</i>. The deck shows when the <i>e</i> stays instead "
               "(<i>hopeless</i>, <i>noticeable</i>, <i>seeing</i>), then follows the same join through stacked suffixes: "
-              "<i>educate</i>, <i>education</i>, <i>educational</i>. It sits on step 15 of the route."),
+              "<i>educate</i>, <i>education</i>, <i>educational</i>. It sits on step 15 of the path."),
 }, {
     "file": "typically-y",
     "title": "A, E, I, O, U and typically Y",

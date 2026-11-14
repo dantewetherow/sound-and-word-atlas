@@ -12,7 +12,7 @@ import html, re
 
 PRON = '<span class="pron">/ˌlɛɡoʊˈmɔrfɪk/ <span class="say">leg-oh-MOR-fik</span></span>'
 LEGO_PAGE = "https://www.lego.com/en-us/aboutus/lego-history"
-ROUTE = '<a href="progressions.html">route</a>'
+ROUTE = '<a href="progressions.html">path</a>'
 
 SENTENCES = [   # (term, part of speech, definition, source or None)
     ("kernel", "noun",
@@ -65,9 +65,9 @@ TEACHING = [
     ("analog", "noun",
      "A known word used as the model for words that share its spelling: <i>would</i> for <i>could</i> and <i>should</i>. An "
      "analog shares its letters with the words it leads to, which a rhyme doesn't have to do.", None),
-    ("route", "noun",
+    ("path", "noun",
      "This site's scope and sequence: 32 steps through English spelling, with Edward Carney's <i>A Survey of English "
-     "Spelling</i> as its backbone. See <a href=\"progressions.html\">the route</a>.", None),
+     "Spelling</i> as its backbone. Called the route until 14 November 2026. See <a href=\"progressions.html\">the path</a>.", None),
     ("word sum", "noun",
      "A word written as its morphemes joined by plus signs, with an arrow to the word they make: <i>not(e) + ate &rarr; "
      "notate</i>. A letter in brackets drops at the seam.",

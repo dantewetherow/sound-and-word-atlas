@@ -164,7 +164,7 @@ def write(OUT, page, header, footer, X):
 <p class="eyebrow t-only"><a href="../ufli.html#lessons">UFLI Foundations</a> &middot; Spelling list</p>
 <h1>UFLI lesson {e["n"]}</h1>
 <p class="lprinciple">{e["what"]}.</p>
-{f'<p class="lhome noprint">This lesson meets the route at {steps}.</p>' if steps else ""}
+{f'<p class="lhome noprint">This lesson meets the path at {steps}.</p>' if steps else ""}
 {f'<p class="ladds t-only noprint"><b>What the notation adds:</b> {ufli_lessons.L[e["n"]][1]} <a href="../ufli.html#lessons">Every lesson</a>.</p>' if ufli_lessons.L.get(e["n"]) else ""}
 <p class="board t-only noprint"><a href="#" onclick="window.print(); return false;">Print this list</a>: the teacher&rsquo;s notes are left off.</p>
 </div></section>
@@ -179,7 +179,7 @@ def write(OUT, page, header, footer, X):
 <h2>For the teacher</h2>
 <p>Every word here uses only spellings that UFLI Foundations has taught by lesson {e["n"]}, and each uses the one this lesson adds. The words are ours: none is taken from UFLI&rsquo;s materials. Say each word, use it in a sentence, and say it again.</p>
 <p class="ulnav">{prev}{" &middot; " if prev and nxt else ""}{nxt}</p>
-<p class="sub">Lined up with <a href="{UFLI_HOME}">UFLI Foundations</a> by lesson number. UFLI didn&rsquo;t make this list and hasn&rsquo;t endorsed it. Lesson descriptions are ours. See <a href="../ufli.html">UFLI Foundations</a> for every lesson and where each meets the route.</p>
+<p class="sub">Lined up with <a href="{UFLI_HOME}">UFLI Foundations</a> by lesson number. UFLI didn&rsquo;t make this list and hasn&rsquo;t endorsed it. Lesson descriptions are ours. See <a href="../ufli.html">UFLI Foundations</a> for every lesson and where each meets the path.</p>
 {X["uc"]("lists for the kindergarten and grade 1 lessons, 4 to 110, since 12 November 2026. The grade 2 lessons are next.")}
 </div></section>
 </main>

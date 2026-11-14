@@ -101,7 +101,7 @@ def write(OUT, page, header, footer, svg_of, LW):
 <h2 id="use-h">How it&rsquo;s used</h2>
 <p>It isn&rsquo;t a program. It&rsquo;s an exploration of ways to provide access, and an invitation to experiment with our methods and synthesize our understandings. It can sit beside any systematic phonics program, synthetic or analytic, and it aims to be systematic, analytic, synthetic, responsive, diagnostic and agnostic.</p>
 <p>Its teaching cycle is the learning loop. Learners move among seeing, listening, speaking, reading and writing: a clean pass, then back to the start, back to any earlier mode, or between any two. Each pass can swap a part (a sound, its articulation, an actor, an action, an operator, a preposition) to fit the learner&rsquo;s need, interest and skill in the moment.</p>
-<p>The <a href="progressions.html">route</a> through English spelling on this site is its own scope and sequence, with Edward Carney&rsquo;s <i>A Survey of English Spelling</i> as its backbone and his page references on every step.</p>
+<p>The <a href="progressions.html">path</a> through English spelling on this site is its own scope and sequence, with Edward Carney&rsquo;s <i>A Survey of English Spelling</i> as its backbone and his page references on every step.</p>
 </div></section>
 
 <section class="about" aria-labelledby="who-h"><div class="wrap prose">
@@ -125,7 +125,7 @@ def write(OUT, page, header, footer, svg_of, LW):
 <section class="about" aria-labelledby="sp-h"><div class="wrap prose">
 <h2 id="sp-h">Spelling and words</h2>
 <ul class="credits">
-<li><b>Edward Carney</b>, <i>A Survey of English Spelling</i> (Routledge, 1994). The backbone of the route, cited by page on every step.</li>
+<li><b>Edward Carney</b>, <i>A Survey of English Spelling</i> (Routledge, 1994). The backbone of the path, cited by page on every step.</li>
 <li><b>Richard Venezky</b>, &ldquo;English Orthography: Its Graphical Structure and Its Relation to Sound,&rdquo; <i>Reading Research Quarterly</i> 2 (1967), and <i>The Structure of English Orthography</i> (Mouton, 1970). Spelling as a system, including the letters that mark how other letters are read, such as a silent <i>e</i>: the job the vault, the nudge and the cone show. His later book is <i>The American Way of Spelling</i> (Guilford, 1999).</li>
 <li><b>Greg Brooks</b>, <i>Dictionary of the British English Spelling System</i> (Open Book Publishers, 2015), open access (<a href="https://doi.org/10.11647/OBP.0053">doi</a>). Every spelling of every sound, with its frequency and its exceptions. A doubled letter spells one sound, and <i>happy</i> is among his doubled p&rsquo;s, on the <a href="roots/hap.html">hap</a> page.</li>
 <li><b>Noam Chomsky and Morris Halle</b>, <i>The Sound Pattern of English</i> (Harper &amp; Row, 1968). Their argument that English spelling keeps a word&rsquo;s parts the same when their sounds change, as in <i>sign</i> and <i>signature</i>, is the premise word sums rest on.</li>

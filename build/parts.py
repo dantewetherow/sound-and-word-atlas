@@ -282,7 +282,7 @@ def write(OUT, door_page, X):
                 e["words"].append((w, "start" if pos == 0 else "end" if pos == len(d["parts"]) - 1 else "middle"))
         for j in d["joins"]: joined[j].append(w)
 
-    on_steps = X.get("step_parts", {})                    # parts the manual places on the route: each gets a card
+    on_steps = X.get("step_parts", {})                    # parts the manual places on the path: each gets a card
     for k in on_steps:
         index.setdefault(k, {"kind": "root" if k in root_spells else kind_of(k), "words": []})
     marked = lambda w: (w in LW.W or w in X["SC"].VARIANTS) and w not in X["SC"].UNMARKED
@@ -317,7 +317,7 @@ def write(OUT, door_page, X):
         stack = with_it(k) if e["kind"] in ("pre", "suf") else []
         stacks = (f'<p class="pwith t-only">Found beside: ' + ", ".join(f'<a href="#{pid(x)}">{html.escape(x)}</a>' for x in stack) + ".</p>") if stack else ""
         if k in on_steps:
-            stacks += '<p class="pwith">On the route: ' + ", ".join(f'<a href="steps/{n:02d}.html#parts">Step {n}</a>' for n in on_steps[k]) + ".</p>"
+            stacks += '<p class="pwith">On the path: ' + ", ".join(f'<a href="steps/{n:02d}.html#parts">Step {n}</a>' for n in on_steps[k]) + ".</p>"
         src = f'<p class="psrc t-only"><a href="https://www.etymonline.com/search?q={quote(k)}">Its history in Etymonline</a></p>'
         lesson = ""
         if k in LESSONS:
@@ -372,7 +372,7 @@ def write(OUT, door_page, X):
 </div></section>
 {"".join(secs)}
 <section class="about t-only"><div class="wrap">
-{X["uc"]("the parts come from the words analysed so far: the route, the grade 3 word sums and the first families. Next: more families, starting with <i>accommodate</i> and the prefix <i>com-</i>, and a search by where a part sits in the word.")}
+{X["uc"]("the parts come from the words analysed so far: the path, the grade 3 word sums and the first families. Next: more families, starting with <i>accommodate</i> and the prefix <i>com-</i>, and a search by where a part sits in the word.")}
 </div></section>
 {PARTS_JS}{pop_js()}"""
     door_page("parts", "Parts · A Legend for English Words", "Every analysed word, gathered by the parts it is built from.", body)

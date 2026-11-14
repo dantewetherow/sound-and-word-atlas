@@ -6,7 +6,7 @@ Two walks over the same drawing, each bringing in the marks a step at a time:
 - Spell it starts from the syllables (a band stands in for the letters while only sounds show), then the sounds, then the
   graphemes that spell them, then the marks.
 
-The words are every marked word on the route, the ELP and Dolch lists (nouns too) and the word families. Each is drawn
+The words are every marked word on the path, the ELP and Dolch lists (nouns too) and the word families. Each is drawn
 here once with legomorphic_words.py's layer classes (nz1 to nz9, and the wt band) and saved as docs/walk/<id>.json, which
 the page fetches when the word is asked for; docs/walk/index.json lists them. A word with two markings (read, the present
 and the past) carries both. Words the site still shows in plain letters aren't in the walk until they're marked.
@@ -291,7 +291,7 @@ WALK_JS = r"""<script>(() => {
   function show(w) {
     const n = norm(w), hit = index.find(([x]) => norm(x) === n);
     msg.textContent = '';
-    if (!hit) { msg.innerHTML = it(w.trim()) + ' isn’t marked on this site yet.<span class="t-only"> The walk takes words from the route, the Early Literacy Profile (Central Okanagan) and Dolch lists and the word families.</span>'; return; }
+    if (!hit) { msg.innerHTML = it(w.trim()) + ' isn’t marked on this site yet.<span class="t-only"> The walk takes words from the path, the Early Literacy Profile (Central Okanagan) and Dolch lists and the word families.</span>'; return; }
     fetch('walk/' + hit[1] + '.json').then(r => r.json()).then(j => {
       word = j; form_ = 0; input.value = j.w;
       msg.innerHTML = j.auto ? '<span class="walk-auto">Marked by rule, not yet checked.</span>' : '';
