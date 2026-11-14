@@ -1,8 +1,8 @@
 """Build a sentence (13 November 2026): the builder at the top of the Sentences page.
 
-Four slots in a row, each a marked word or two that a learner steps through, as on the word walk: an actor (I, you,
-she, the dog), an operator (can, could, will, do, did), an action (go, see, play) and, if wanted, where or what (here,
-home, the ball). Flip moves the operator in front of the actor, and the claim becomes a question: She could go. Could
+Five slots in a row, each a marked word or two that a learner steps through, as on the word walk: an actor (I, you,
+she, the dog), an operator (can, could, will, do, did), an action (go, see, play) and, if wanted, a preposition (in,
+over, under; 13 November 2026) and where or what (here, there, home, the ball). Flip moves the operator in front of the actor, and the claim becomes a question: She could go. Could
 she go? A second switch adds not, then squeezes it to n't, which travels with the operator when it flips: Could she not
 go? Couldn't she go? The words are the high-frequency words of the Early Literacy Profile (Central Okanagan) and Dolch,
 grammar words and nouns both, and each is drawn marked, in capitals where it starts the sentence.
@@ -15,13 +15,14 @@ Everything the builder shows is drawn at build time; the page's script only reor
 import html, json
 
 # words the site hadn't marked yet
-CODES = {"mom": "c.m s.o c.m", "ball": "c.b b.a k.ll", "fish": "c.f s.i g.sh"}
+CODES = {"mom": "c.m s.o c.m", "ball": "c.b b.a k.ll", "fish": "c.f s.i g.sh", "box": "c.b s.o c.x"}
 
 SLOTS = [
     ("actor", "Actor", ["I", "you", "she", "he", "we", "they", "it", "the dog", "my mom", "a fish"]),
     ("operator", "Operator", ["can", "could", "will", "would", "should", "may", "might", "must", "do", "does", "did"]),
     ("action", "Action", ["go", "see", "run", "play", "jump", "help", "eat", "come", "look", "find", "get", "sit", "stop", "ride", "swim", "sing"]),
-    ("rest", "Where or what", ["", "here", "there", "home", "up", "down", "it", "the ball", "with me"]),
+    ("prep", "Preposition", ["", "in", "on", "up", "down", "over", "under", "out", "off", "by", "with", "to", "into"]),
+    ("rest", "Where or what", ["", "here", "there", "home", "it", "me", "the ball", "the box"]),
 ]
 NT = {"can": "can’t", "could": "couldn’t", "would": "wouldn’t", "should": "shouldn’t", "will": "won’t", "do": "don’t",
       "does": "doesn’t", "did": "didn’t"}
@@ -50,7 +51,7 @@ def section(X, code_of):
         up = lo if w == "I" else X["svg_of"](w[0].upper() + w[1:], 56, code=cap_code(c), label=w[0].upper() + w[1:])
         svg[w] = [lo, up]
     data = {"slots": [{"key": k, "label": lab, "options": opts} for k, lab, opts in SLOTS], "nt": NT, "one": sorted(ONE)}
-    start = {"actor": 2, "operator": 1, "action": 0, "rest": 0}      # she could go
+    start = {"actor": 2, "operator": 1, "action": 0, "prep": 0, "rest": 0}      # she could go
     tiles = "".join(f'<div class="sb-slot" data-slot="{k}" data-i="{start[k]}"><div class="sb-word" aria-live="polite"></div>'
                     f'<div class="sb-step"><button type="button" class="sb-prev" aria-label="Previous {lab.lower()}">&#8249;</button>'
                     f'<span class="sb-role">{lab}</span><button type="button" class="sb-next" aria-label="Next {lab.lower()}">&#8250;</button></div></div>'
@@ -72,6 +73,7 @@ def section(X, code_of):
 <p><b>What it practises.</b> The small words that carry most sentences, pronouns and operators, read with high-frequency actions and nouns in a sentence, not a list. Every word is marked, and the first word takes a capital.</p>
 <p><b>A routine.</b> Build a claim and read it. Flip it and read the question. Swap one word and read again. Then ask a learner to build one that&rsquo;s true about them. Silly sentences are welcome: <i>A fish could ride.</i> They show a learner is reading, not guessing.</p>
 <p><b>The grammar.</b> An actor, an operator and an action make a claim. A question in English puts the operator in front of the actor. Because the operator carries the tense and the agreement, the action stays bare: <i>she could go</i>, never <i>she could goes</i>. That is why every combination here is a sentence. A claim with no operator (<i>She goes.</i>) borrows <i>do</i> to ask: <i>Does she go?</i> The one agreement to watch is <i>do</i> and <i>does</i>: <i>does</i> goes with one actor that isn&rsquo;t <i>I</i> or <i>you</i>.</p>
+<p><b>Prepositions.</b> A preposition places the action: <i>She could go in there. She could go over here.</i> Most want something after them, a place or a thing: <i>in there</i>, <i>under the box</i>. A few can stand alone after the action, where they change what it means: <i>go up</i>, <i>get out</i>, <i>sit down</i>. <i>Home</i> needs no preposition: <i>go home</i>, not <i>go to home</i>. Let learners find that one by ear.</p>
 <p><b><i>Not</i> and <i>n&rsquo;t</i>.</b> <i>Not</i> stays behind the actor when the sentence flips: <i>Could she not go?</i> Squeezed to <i>n&rsquo;t</i>, it joins the operator and travels with it: <i>Couldn&rsquo;t she go?</i> <i>May</i>, <i>might</i> and <i>must</i> stop at <i>not</i> here: <i>mayn&rsquo;t</i> and <i>mightn&rsquo;t</i> are rare now. The squeeze is on <a href="contractions.html">Squeezed into oblivion</a>.</p>
 </div>
 </div></section>
@@ -89,7 +91,7 @@ def section(X, code_of):
     const flip = box.dataset.flip === '1', neg = +box.dataset.neg, op = pick('operator');
     const canNt = op in D.nt;
     const n = neg === 2 && !canNt ? 1 : neg, opWord = n === 2 ? D.nt[op] : op;     // may, might and must keep not
-    const order = flip ? ['operator', 'actor', 'action', 'rest'] : ['actor', 'operator', 'action', 'rest'];
+    const order = flip ? ['operator', 'actor', 'action', 'prep', 'rest'] : ['actor', 'operator', 'action', 'prep', 'rest'];
     order.forEach(k => line.appendChild(slots[k]));
     // not: after the operator in a claim, after the actor in a question; n't rides on the operator
     negEl.hidden = n !== 1;

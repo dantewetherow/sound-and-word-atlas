@@ -960,7 +960,7 @@ header.site.pinned.open nav.doors { display: flex; padding-block: 6px 4px; }
 
 /* Build a sentence (constructions.html, 13 November 2026) */
 .sb { display: grid; gap: 14px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 20px 16px; }
-.sb-line { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px 16px; min-height: 120px; }
+.sb-line { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px 10px; min-height: 120px; }
 .sb-slot { display: grid; justify-items: center; gap: 6px; }
 .sb-word { display: flex; align-items: flex-end; gap: 10px; min-height: 139px; }
 .sb-w svg { height: 139px !important; width: auto !important; display: block; }   /* svg_of sets an inline width */
@@ -970,7 +970,7 @@ header.site.pinned.open nav.doors { display: flex; padding-block: 6px 4px; }
 .sb-slot.blank .sb-word { opacity: 0.6; }
 .sb-step { display: flex; align-items: center; gap: 4px; }
 .sb-step button { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--line); background: var(--paper); color: var(--ink); font-size: 1.2rem; line-height: 1; cursor: pointer; }
-.sb-role { font-size: 0.78rem; color: var(--soft); min-width: 6.5em; text-align: center; }
+.sb-role { font-size: 0.78rem; color: var(--soft); text-align: center; padding: 0 2px; }
 .sb-slot[data-slot="actor"] .sb-role { color: var(--subject); }
 .sb-slot[data-slot="operator"] .sb-role { color: var(--modal); }
 .sb-slot[data-slot="action"] .sb-role { color: var(--verb); }
