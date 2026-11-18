@@ -15,7 +15,7 @@ import json, pathlib
 HERE = pathlib.Path(__file__).resolve().parent
 DATA = json.loads((HERE / "data" / "gym.json").read_text(encoding="utf-8"))
 STEPS, FIT = DATA["STEPS"], DATA["FIT"]
-NT = {"is": "isn’t", "are": "aren’t", "did": "didn’t", "can": "can’t", "will": "won’t"}
+NT = {"is": "isn’t", "are": "aren’t", "did": "didn’t", "can": "can’t", "will": "won’t", "could": "couldn’t", "would": "wouldn’t", "should": "shouldn’t"}
 
 
 def words():
@@ -23,7 +23,7 @@ def words():
     out = set()
     for st in STEPS.values():
         for r in st["levels"]:
-            for k in ("actor", "adet", "op", "act", "where", "what", "wdet"):
+            for k in ("actor", "adet", "op", "act", "rec", "where", "what", "wdet"):
                 out.update(w for w in r.get(k, []) if w and w != "=")
             if "=" in r.get("op", []): out.update(FIT.get(a) or ("are" if a == "men" else "is") for a in r["actor"])
             if r.get("not"):

@@ -876,6 +876,295 @@
      "news": "Nouns with actions: <i>The dog got the stick. Did the men go up the hill?</i>"
     }
    ]
+  },
+  "7": {
+   "name": "would, could, should",
+   "levels": [
+    {
+     "actor": [
+      "I",
+      "she",
+      "dog",
+      "men"
+     ],
+     "adet": [
+      "the"
+     ],
+     "op": [
+      "could",
+      "would",
+      "should"
+     ],
+     "act": [
+      "go",
+      "get",
+      "be"
+     ],
+     "not": true,
+     "where": [
+      "",
+      "in",
+      "up",
+      "by"
+     ],
+     "what": [
+      "",
+      "it",
+      "box",
+      "hill",
+      "bed"
+     ],
+     "wdet": [
+      "the"
+     ],
+     "tip": true,
+     "news": "<i>Could, would, should</i>: each sits on the beam and takes a plain action, like <i>can</i>."
+    },
+    {
+     "actor": [
+      "I",
+      "she",
+      "dog",
+      "men"
+     ],
+     "adet": [
+      "the",
+      "this",
+      "that",
+      "my"
+     ],
+     "op": [
+      "can",
+      "could",
+      "will",
+      "would",
+      "must",
+      "should",
+      "did"
+     ],
+     "act": [
+      "go",
+      "get",
+      "hit",
+      "be",
+      "spell"
+     ],
+     "not": true,
+     "where": [
+      "",
+      "in",
+      "up",
+      "by"
+     ],
+     "what": [
+      "",
+      "it",
+      "box",
+      "stick",
+      "hill",
+      "bed"
+     ],
+     "wdet": [
+      "the",
+      "this",
+      "that",
+      "my"
+     ],
+     "tip": true,
+     "news": "All the beam words that take a plain action, together."
+    }
+   ]
+  },
+  "8": {
+   "name": "have, give, gave, live",
+   "levels": [
+    {
+     "actor": [
+      "I",
+      "she",
+      "we",
+      "dog"
+     ],
+     "adet": [
+      "the",
+      "my"
+     ],
+     "op": [
+      "",
+      "did",
+      "can",
+      "will",
+      "could"
+     ],
+     "act": [
+      "have",
+      "has",
+      "had"
+     ],
+     "not": true,
+     "where": [
+      ""
+     ],
+     "what": [
+      "",
+      "it",
+      "box",
+      "stick",
+      "milk",
+      "bell"
+     ],
+     "wdet": [
+      "the",
+      "this",
+      "that",
+      "my"
+     ],
+     "tip": true,
+     "news": "<i>Have</i>: the plain form <i>has</i> was waiting for. <i>I have it. Did she have it?</i>"
+    },
+    {
+     "actor": [
+      "I",
+      "she",
+      "we"
+     ],
+     "op": [
+      "",
+      "did",
+      "will",
+      "could"
+     ],
+     "act": [
+      "give",
+      "gave"
+     ],
+     "rec": [
+      "",
+      "him",
+      "me",
+      "us"
+     ],
+     "not": true,
+     "where": [
+      ""
+     ],
+     "what": [
+      "",
+      "box",
+      "stick",
+      "milk",
+      "bell"
+     ],
+     "wdet": [
+      "the",
+      "this",
+      "that",
+      "my"
+     ],
+     "tip": true,
+     "news": "<i>Give</i> and <i>gave</i>, with a slot for who gets it: <i>She gave him the box.</i>"
+    },
+    {
+     "actor": [
+      "I",
+      "she",
+      "we",
+      "dog",
+      "men"
+     ],
+     "adet": [
+      "the",
+      "my"
+     ],
+     "op": [
+      "",
+      "did",
+      "can",
+      "will",
+      "could"
+     ],
+     "act": [
+      "live",
+      "go",
+      "went"
+     ],
+     "not": true,
+     "where": [
+      "",
+      "in",
+      "on",
+      "up",
+      "by"
+     ],
+     "what": [
+      "",
+      "it",
+      "box",
+      "hill",
+      "nest",
+      "grass",
+      "bed"
+     ],
+     "wdet": [
+      "the",
+      "this",
+      "that",
+      "my"
+     ],
+     "tip": true,
+     "news": "<i>Live</i> takes a position and a place: <i>I live in it</i>, beside <i>I am in it</i>."
+    },
+    {
+     "actor": [
+      "I",
+      "she",
+      "dog"
+     ],
+     "adet": [
+      "the",
+      "my"
+     ],
+     "op": [
+      "",
+      "is",
+      "did",
+      "could",
+      "will"
+     ],
+     "act": [
+      "",
+      "have",
+      "has",
+      "give",
+      "gave",
+      "live",
+      "went"
+     ],
+     "rec": [
+      "",
+      "him"
+     ],
+     "not": true,
+     "where": [
+      "",
+      "in",
+      "by"
+     ],
+     "what": [
+      "",
+      "it",
+      "box",
+      "stick",
+      "hill"
+     ],
+     "wdet": [
+      "the",
+      "my"
+     ],
+     "tip": true,
+     "news": "Everything comes loose: the beam word, the action, and who gets it."
+    }
+   ]
   }
  },
  "FIT": {

@@ -34,8 +34,8 @@ ELP_LIST = {w: n for n, v in ELP["lists"].items() for w in v["words"]}
 # (file name, set title, level key in dolch.json, columns, rows, card width and height in inches)
 ROUNDS = json.loads((HERE / "data" / "gym.json").read_text(encoding="utf-8"))   # the gym's rounds (gym.py)
 STEPS, FIT = ROUNDS["STEPS"], ROUNDS["FIT"]
-NT = {"is": "isn’t", "are": "aren’t", "did": "didn’t", "can": "can’t", "will": "won’t"}
-ACTIONS = {"go", "went", "get", "got", "hit", "met", "be", "spell", "has", "had"}
+NT = {"is": "isn’t", "are": "aren’t", "did": "didn’t", "can": "can’t", "will": "won’t", "could": "couldn’t", "would": "wouldn’t", "should": "shouldn’t"}
+ACTIONS = {"go", "went", "get", "got", "hit", "met", "be", "spell", "has", "had", "have", "give", "gave", "live"}
 fit = lambda a: FIT.get(a) or ("are" if a == "men" else "is")
 
 def round_words(r):
@@ -48,7 +48,7 @@ def round_words(r):
     if r.get("not"):
         out += [("not", "not")] + [(NT[o], "not, squeezed") for o in beam if o in NT]
         if "am" in beam: out.append(("aren’t", "not, squeezed"))
-    out += [(w, "action") for w in acts] + [(w, "before a noun") for w in r.get("adet", []) + r.get("wdet", [])]
+    out += [(w, "action") for w in acts] + [(w, "who gets it") for w in r.get("rec", []) if w] + [(w, "before a noun") for w in r.get("adet", []) + r.get("wdet", [])]
     out += [(w, "position") for w in r.get("where", []) if w] + [(w, "place or thing") for w in r.get("what", []) if w]
     return out
 

@@ -158,6 +158,8 @@
     <li><b>Not</b> (step 4). <i>Add not</i> puts it at the start of the line below: it doesn’t tip, so it stays put when the beam does (<i>Is he not in it?</i>). <i>Squeeze it</i> joins it to the operator, so it hops up onto the beam and tips with it (<i>Isn’t he in it?</i>). <i>Am</i> has no <i>n’t</i>, so <i>I am not</i> can’t squeeze; the question borrows <i>aren’t</i> (<i>Aren’t I in it?</i>). Squeezing the actor and operator together (<i>I’m, he’s, we’re</i>) is a different squeeze, for later.</li>
     <li><b>Did, can, will</b> (step 6). These sit on the beam and tip, and the action on the line below stays plain: <i>Did she go in it?</i> <i>Went</i> carries its own time, so with <i>went</i> the beam is empty and there’s nothing to tip. <i>Did she went?</i> is a crash: two words both carrying the time.</li>
     <li><b>Nouns</b> (steps 4 to 6). Dolch&rsquo;s nouns come into the gym at the step where they become decodable: <i>dog, cat, pig, bed, leg</i> at step 4, with <i>my</i>; <i>man, men, box, sun</i> at step 5, with <i>the, this</i> and <i>that</i>; <i>bell, grass, hill, milk, nest, stick</i> at step 6. The determiner has its own slot before the noun. Tap either word to walk it.</li>
+    <li><b>Could, would, should</b> (step 7) join <i>can, will, must</i> on the beam, each with a plain action below, and each squeezes: <i>couldn&rsquo;t, wouldn&rsquo;t, shouldn&rsquo;t</i>.</li>
+    <li><b>Have, give, live</b> (step 8). <i>Have</i> is the plain form <i>has</i> was waiting for: <i>I have it, Did she have it?</i> <i>Give</i> and <i>gave</i> bring a second slot for who gets it: <i>She gave him the box.</i> Only things are given, never <i>it</i> or a person. <i>Live</i> takes a position and a place: <i>I live in it</i> beside <i>I am in it</i>.</li>
     <li><b>Which</b> (step 5). When the question word is the actor, it asks the question itself, so the beam doesn’t tip: <i>Which is in it?</i> Questions where <i>which</i> is the place (<i>Which is she in?</i>) come later.</li>
     <li><b>The beam</b> holds the actor and the operator (<i>am, is, are</i>). Tip it to turn a claim into a question. Actions like <i>go</i> and <i>hit</i> sit on the second line and can't tip yet: that needs <i>do</i>, later on the path.</li>
     <li><b>Four verdicts.</b> <b>Works</b>: standard English. <b>Almost</b>: the meaning is clear and one word changes it to standard English. Many people say these at home; the board doesn't call them wrong, it shows the standard English way. <b>Missing a piece</b>: nothing is wrong, something is still to come. <b>Crash</b>: the pieces fight each other, and the board says why.</li>
@@ -192,17 +194,17 @@
 
   // ---- the words ----
   const BE = ['am', 'is', 'are'];                        // operators that take a ground
-  const FRAME = ['did', 'can', 'will', 'must', 'shall']; // operators that take a plain action
-  const ACTIONS = ['go', 'went', 'get', 'got', 'hit', 'met', 'be', 'spell', 'has', 'had'];
-  const TIMED = ['went', 'got', 'met', 'has', 'had'];    // carry their own time, so they can't follow a frame word
-  const PLAIN = { went: 'go', got: 'get', met: 'meet', has: 'have', had: 'have' };
+  const FRAME = ['did', 'can', 'will', 'must', 'shall', 'could', 'would', 'should']; // operators that take a plain action
+  const ACTIONS = ['go', 'went', 'get', 'got', 'hit', 'met', 'be', 'spell', 'has', 'had', 'have', 'give', 'gave', 'live'];
+  const TIMED = ['went', 'got', 'met', 'has', 'had', 'gave'];    // carry their own time, so they can't follow a frame word
+  const PLAIN = { went: 'go', got: 'get', met: 'meet', has: 'have', had: 'have', gave: 'give' };
   const FIT = /*FIT*/;
   const fitOf = a => FIT[a] || (/\bmen\b/.test(a) ? 'are' : 'is');   // a noun phrase takes is, or are when it's more than one
   const third = a => fitOf(a) === 'is';   // he, she, it, this, that, which, the dog: the -s forms (goes, has)
-  const S3 = { go: 'goes', get: 'gets', spell: 'spells' };
+  const S3 = { go: 'goes', get: 'gets', spell: 'spells', have: 'has', give: 'gives', live: 'lives' };
   const ALONE = { be: ['in', 'on', 'up'], go: ['in', 'on', 'up', 'by'], get: ['in', 'on', 'up', 'by'] };
   const SELF = { I: ['me', 'myself'], we: ['us', 'ourselves'] };
-  const NT = { is: 'isn’t', are: 'aren’t', am: 'aren’t', did: 'didn’t', can: 'can’t', will: 'won’t' };   // am borrows aren't, and only in a question
+  const NT = { is: 'isn’t', are: 'aren’t', am: 'aren’t', did: 'didn’t', can: 'can’t', will: 'won’t', could: 'couldn’t', would: 'wouldn’t', should: 'shouldn’t' };   // am borrows aren't, and only in a question
   const PEOPLE = ['me', 'him', 'us'];
   // Nouns come with a determiner in a slot of its own: [the / this / that / my] [dog].
   const NOUNS = ['dog', 'cat', 'pig', 'man', 'men', 'box', 'sun', 'bed', 'leg', 'hand', 'stick', 'bell', 'milk', 'hill', 'nest', 'grass'];
@@ -217,7 +219,7 @@
   const BODY = x => ['leg', 'hand'].includes(noun(x));
   const Cap = x => x === 'I' ? x : x[0].toUpperCase() + x.slice(1);
   const q = x => `“${x}”`;
-  const family = a => ['go', 'went'].includes(a) ? 'go' : ['get', 'got'].includes(a) ? 'get' : a;
+  const family = a => ['go', 'went'].includes(a) ? 'go' : ['get', 'got'].includes(a) ? 'get' : ['give', 'gave'].includes(a) ? 'give' : ['have', 'has', 'had'].includes(a) ? 'have' : a;
 
   // The operator sits on the beam; the action sits on the line below. In steps 3 and 4 an action rides in the operator slot,
   // so norm() moves it down: every sentence is then { actor, op (beam word or none), act (action or none), not, where, what, tip }.
@@ -229,12 +231,13 @@
     const t = !!op && !!tip && actor !== 'which';
     let not = v.not || '';
     if (not === 'nt' && !canNt(op, actor, t)) not = 'not';
-    return { actor, op, act, inOp, linked: v.op === '=', not, where: v.where || '', what, tip: t, an: NOUNS.includes(v.actor), wn: NOUNS.includes(v.what) };
+    const rec = family(act) === 'give' ? (v.rec || '') : '';   // who gets it: gave him the box
+    return { actor, op, act, rec, inOp, linked: v.op === '=', not, where: v.where || '', what, tip: t, an: NOUNS.includes(v.actor), wn: NOUNS.includes(v.what) };
   }
   function canNt(op, a, tip) { return !!NT[op] && (op !== 'am' || (tip && a === 'I')); }
 
   function words(s) {
-    const beam = s.not === 'nt' ? NT[s.op] : s.op, tail = [s.not === 'not' ? 'not' : '', s.act, s.where, s.what];
+    const beam = s.not === 'nt' ? NT[s.op] : s.op, tail = [s.not === 'not' ? 'not' : '', s.act, s.rec, s.where, s.what];
     if (!s.op) return [s.actor, ...tail].filter(Boolean);
     return (s.tip ? [beam, s.actor, ...tail] : [s.actor, beam, ...tail]).filter(Boolean);
   }
@@ -253,9 +256,11 @@
     // people, bodies and animals: only by or with, never in, on, up or at
     if ((PERSON(x) || ANIMAL(x)) && w && !['by', 'with'].includes(w)) return false;
     if (xn && w && PLACE_POS[xn] && !PLACE_POS[xn].includes(w)) return false;
-    if (xn && !w && !a) return false;                                            // the dog is the sun: a noun after is waits
+    if (xn && !w && (!a || a === 'be')) return false;                            // the dog is the sun: a noun after is (or be) waits
+    if (s.rec && !x) return false;                                               // gave him, with nothing given: never left hanging
     if (xn === 'hand' && (PERSON(s.actor) || ANIMAL(s.actor))) return false;     // only things go in my hand
-    if (['hit', 'spell', 'has', 'had'].includes(a) && (PERSON(x) || BODY(x))) return false;
+    if (['hit', 'spell', 'has', 'had', 'have'].includes(a) && (PERSON(x) || BODY(x))) return false;
+    if (family(a) === 'give' && x && (!xn || PERSON(x) || ANIMAL(x) || BODY(x))) return false;   // only things are given: the box, never it or a person
     if (a === 'hit' && (ANIMAL(x) || x === 'that')) return false;                // nobody hits an animal; "hit that" says something else
     if (s.actor === 'she' && x === 'him' && !w) return false;
     if (['get', 'got'].includes(a) && w === 'with') return false;
@@ -303,6 +308,12 @@
         if (w && !x && !ALONE.get.includes(w)) return missingPlace();
       } else if (act === 'be') {
         if (w && !x && !ALONE.be.includes(w)) return missingPlace();
+      } else if (fam === 'give') {
+        if (!x || w) return { kind: 'missing', line: `${Cap(act)}${s.rec ? ' ' + s.rec : ''} what? ${q(Cap(act))} needs the thing that’s given${s.rec ? '' : ', and can say who gets it first'}.`,
+          fills: things.map(v => ['', { where: '', what: v }]) };
+      } else if (act === 'live') {
+        if (x && !w) return { kind: 'missing', line: `Live where? Put a position before ${q(x)}.`, fills: (avail.where || []).filter(Boolean).map(v => ['', { where: v }]) };
+        if (w && !x) return missingPlace();
       } else {
         const who = act === 'met' ? 'who' : 'what';
         if (act === 'met' && a === 'we') { if (w && !x) return missingPlace(); }   // we met (each other), we met in it
@@ -321,8 +332,11 @@
     }
     if (!op && act === 'be') return { kind: 'almost', std: text(s, [a, fitOf(a), w, x].filter(Boolean)), later: fitOf(a),
       fix: has('op', fitOf(a)) ? { op: fitOf(a), act: '' } : has('op', '=') ? { op: '=', act: '' } : null, after: `With ${q(a)}, standard English says ${q(fitOf(a))}.` };
-    if (!op && S3[act] && third(a)) return { kind: 'almost', std: text(s, [a, S3[act], w, x].filter(Boolean)), later: S3[act] };
-    if (!op && act === 'has' && !third(a)) return { kind: 'almost', std: text(s, [a, 'have', w, x].filter(Boolean)), later: 'have' };
+    if (!op && S3[act] && third(a)) return { kind: 'almost', std: text(s, [a, S3[act], s.rec, w, x].filter(Boolean)), later: S3[act],
+      fix: has('act', S3[act]) ? { act: S3[act] } : null, after: `With ${q(a)}, standard English says ${q(S3[act])}.` };
+    if (!op && act === 'has' && !third(a)) return { kind: 'almost', std: text(s, [a, 'have', w, x].filter(Boolean)), later: 'have',
+      fix: has('act', 'have') ? { act: 'have' } : null, after: `With ${q(a)}, standard English says ${q('have')}.` };
+    if (s.rec && SELF[a] && s.rec === SELF[a][0]) return { kind: 'almost', std: text(s, [a, op, act, SELF[a][1], x].filter(Boolean)), later: SELF[a][1] };
     if (act && !w && SELF[a] && x === SELF[a][0] && fam !== 'go' && act !== 'be') return { kind: 'almost', std: text(s, [a, op, act, SELF[a][1]].filter(Boolean)), later: SELF[a][1] };
     if (BE.includes(op) && op !== fitOf(a) && !(s.not === 'nt' && s.tip && a === 'I' && op === 'are'))
       return { kind: 'almost', fix: { op: has('op', fitOf(a)) ? fitOf(a) : '=' }, std: text({ ...s, op: fitOf(a) }), after: `With ${q(a)}, standard English says ${q(fitOf(a))}.` };
@@ -344,7 +358,7 @@
   }
 
   // ---- state ----
-  const st = { step: 1, level: 0, tip: false, v: { actor: 'I', adet: '', op: '=', act: '', not: '', where: '', what: '', wdet: '' }, shown: false };
+  const st = { step: 1, level: 0, tip: false, v: { actor: 'I', adet: '', op: '=', act: '', rec: '', not: '', where: '', what: '', wdet: '' }, shown: false };
   let open = {};
   try { open = JSON.parse(localStorage.getItem('gym-open') || '{}') || {}; } catch (e) { open = {}; }
   const save = () => { try { localStorage.setItem('gym-open', JSON.stringify(open)); } catch (e) {} };
@@ -352,7 +366,7 @@
   const opts = (r, k) => r[k] || [''];
   function fit(moved) {
     const r = L(); if (!r.not) st.v.not = '';
-    for (const k of ['actor', 'adet', 'op', 'act', 'where', 'what', 'wdet']) if (!opts(r, k).includes(st.v[k])) st.v[k] = opts(r, k)[0];
+    for (const k of ['actor', 'adet', 'op', 'act', 'rec', 'where', 'what', 'wdet']) if (!opts(r, k).includes(st.v[k])) st.v[k] = opts(r, k)[0];
     if (!allowed(st.v)) for (const k of moved === 'what' ? ['wdet', 'where', 'what'] : moved === 'wdet' ? ['what', 'where'] : ['wdet', 'what', 'where', 'adet', 'actor']) {
       const w = opts(r, k).find(x => allowed({ ...st.v, [k]: x })); if (w !== undefined) { st.v[k] = w; flashKey = k; break; }
     }
@@ -394,6 +408,7 @@
     // A free not stays on the line below, because it doesn't tip. Squeezed to n't, it joins the operator on the beam.
     if (s.not === 'not') seq.push(['notw', 'not']);
     if (s.inOp) seq.push(['op', s.act]); else if (r.act) seq.push(['act', s.act]);
+    if (family(s.act) === 'give' && opts(r, 'rec').length > 1) seq.push(['rec', s.rec]);
     if (opts(r, 'where').length > 1 || s.where) seq.push(['where', s.where]);
     if (s.wn) seq.push(['wdet', st.v.wdet], ['what', st.v.what]); else if (opts(r, 'what').length > 1 || s.what) seq.push(['what', s.what]);
     for (const [k, v] of seq) flow.append(slot(k, v, false));
@@ -471,9 +486,9 @@
   function listAll() {
     const r = L(), box = $('#every .all'); box.replaceChildren();
     const groups = { works: [], almost: [], missing: [], crash: [] }, seen = new Set();
-    for (const actor of opts(r, 'actor')) for (const adet of NOUNS.includes(actor) ? opts(r, 'adet') : ['']) for (const op of opts(r, 'op')) for (const act of opts(r, 'act')) for (const not of r.not ? ['', 'not', 'nt'] : [''])
+    for (const actor of opts(r, 'actor')) for (const adet of NOUNS.includes(actor) ? opts(r, 'adet') : ['']) for (const op of opts(r, 'op')) for (const act of opts(r, 'act')) for (const rec of family(act) === 'give' ? opts(r, 'rec') : ['']) for (const not of r.not ? ['', 'not', 'nt'] : [''])
       for (const where of opts(r, 'where')) for (const what of opts(r, 'what')) for (const wdet of NOUNS.includes(what) ? opts(r, 'wdet') : ['']) for (const tip of r.tip ? [false, true] : [false]) {
-        const v = { actor, adet, op, act, not, where, what, wdet };
+        const v = { actor, adet, op, act, rec, not, where, what, wdet };
         if (!allowed(v)) continue;
         const s = norm(v, tip);
         if (tip && !s.tip) continue;
