@@ -80,11 +80,21 @@ PAGES[-1:-1] = _lists.PAGES                 # the spelling lists, on the teacher
 SHELF_PARENT = {"gym.html": "constructions.html", "ufli.html": "connections.html", "word-lists.html": "connections.html",
                 "presentations.html": "instructions.html", "cards.html": "instructions.html", "tents.html": "instructions.html",
                 "definitions.html": "explanations.html", "about.html": "explanations.html", "credits.html": "explanations.html"}
+# Pages built and kept at their address, but linked from nowhere: no site map, search, door or step-page link (18 November 2026:
+# the gym, while it needs work). Take a page out of this set to list it again.
+UNLISTED = {"gym.html"}
 WORDS_PARENT = {"contractions.html": "explorations.html", "ablaut.html": "explorations.html"}
 # Pages on the teachers' shelf that the board view still shows.
 BOARD_OK = {"constructions.html"}
 TEACHERS = {s for s, *_, w in DOORS if w is None}
 NUMBER = {2: "Two", 3: "Three", 4: "Four", 5: "Five", 6: "Six", 7: "Seven", 8: "Eight", 9: "Nine", 10: "Ten"}
+
+
+GYM_SEC = '''<section class="about" id="gym" aria-labelledby="gym-h"><div class="wrap">
+<h2 id="gym-h">The gymnasium</h2>
+<p class="sub t-only">A gym for each step on the path, for the board at the front of the room: the step&rsquo;s words on a balance, a round at a time. Tip the beam from a claim to a question, add <i>not</i> and squeeze it to <i>n&rsquo;t</i>, and check each sentence: it works, it&rsquo;s almost standard English, it&rsquo;s missing a piece, or it crashes. Steps 1 to 6 are built, as a trial.</p>
+<p><a href="gym.html">Open the gymnasium</a></p>
+</div></section>\n'''
 
 
 def tree(STEPS, plain):
@@ -315,12 +325,7 @@ def write(OUT, page, header, footer, X):
     sb = builder.section(X, lambda w: LW.W.get(w) or X["auto_codes"].get(w))
     door_page("constructions", "Constructions · Sounds and Words, Assembled", "How sentences are built, and the flip from claim to question.", f"""{door_head("constructions")}
 {sb}
-<section class="about" id="gym" aria-labelledby="gym-h"><div class="wrap">
-<h2 id="gym-h">The gymnasium</h2>
-<p class="sub t-only">A gym for each step on the path, for the board at the front of the room: the step&rsquo;s words on a balance, a round at a time. Tip the beam from a claim to a question, add <i>not</i> and squeeze it to <i>n&rsquo;t</i>, and check each sentence: it works, it&rsquo;s almost standard English, it&rsquo;s missing a piece, or it crashes. Steps 1 to 6 are built, as a trial.</p>
-<p><a href="gym.html">Open the gymnasium</a></p>
-</div></section>
-<section class="about" id="flip" aria-labelledby="flip-h"><div class="wrap">
+{"" if "gym.html" in UNLISTED else GYM_SEC}<section class="about" id="flip" aria-labelledby="flip-h"><div class="wrap">
 <h2 id="flip-h">From a claim to a question</h2>
 <p class="sub t-only">An actor, an operator and an action make a claim. When the operator moves to the front, the claim becomes a question. The Dialogue Team acts it out with their faces: their words with the letters lifted out.</p>
 {team}
@@ -348,7 +353,7 @@ def write(OUT, page, header, footer, X):
     def tiles(items):
         return '<div class="door-tiles">' + "".join(
             f'<a class="dtile" href="{p}"><b>{t}</b><span>{s}</span></a>' for p, t, s in items) + "</div>"
-    pick = lambda door: [(p, t, s) for p, d, t, s in PAGES if d == door and p != f"{door}.html"]
+    pick = lambda door: [(p, t, s) for p, d, t, s in PAGES if d == door and p != f"{door}.html" and p not in UNLISTED]
     door_page("instructions", "To print and present · Sounds and Words, Assembled", "Presentations, word cards and affix tent cards.", f"""{door_head("instructions")}
 <section class="about"><div class="wrap">
 {tiles([x for x in pick("teachers") if x[0] in ("presentations.html", "cards.html", "tents.html")])}
@@ -388,7 +393,7 @@ def write(OUT, page, header, footer, X):
     # The site map: the tree, written out.
     items = []
     for slug, name, _, plain_words, sw in DOORS:
-        sub = [(p, t_, s) for p, d, t_, s in X["pages"] if d == slug and p != f"{slug}.html" and not p.startswith("steps/") and (not p.startswith("lists/") or p == "lists/index.html")]
+        sub = [(p, t_, s) for p, d, t_, s in X["pages"] if d == slug and p != f"{slug}.html" and p not in UNLISTED and not p.startswith("steps/") and (not p.startswith("lists/") or p == "lists/index.html")]
         kids = "".join(f'<li><a href="{p}">{t_}</a> <span>{html.escape(s)}</span></li>' for p, t_, s in sub)
         steps = "".join(f'<li><a href="steps/{s["n"]:02d}.html">Step {s["n"]}: {md(s["title"])}</a></li>' for s in X["STEPS"]) if slug == "progressions" else ""
         items.append(f'<li{" class=t-only" if sw is None else ""}><a href="{slug}.html"><b>{name}</b></a> <span>{plain_words}</span>'
@@ -475,7 +480,7 @@ def write_search(OUT, X):
     for term, anchor in X["terms"]:
         add("term", term, "definitions.html#" + anchor, "Definitions", teacher=True)
     for p, d, t, s in X["pages"]:
-        if p.startswith("steps/"): continue
+        if p.startswith("steps/") or p in UNLISTED: continue
         add("page", t, p, DOOR[d][1] if d and p != f"{d}.html" else "", k=s, teacher=d in TEACHERS and p not in BOARD_OK)
     (OUT / "search.json").write_text(json.dumps(recs, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     return len(recs)

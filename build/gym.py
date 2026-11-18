@@ -78,7 +78,8 @@ def write(OUT, door_page, LW):
         WALK[w] = {k: f[k] for k in ("svg", "W", "H", "units", "bars", "sounds", "sylls", "short", "long", "jobs", "parts")}
     gym = ((HERE / "gym_template.html").read_text(encoding="utf-8")
            .replace("/*SVG*/", json.dumps(SVG, ensure_ascii=False)).replace("/*WALK*/", json.dumps(WALK, ensure_ascii=False))
-           .replace("/*STEPS*/", json.dumps(STEPS, ensure_ascii=False)).replace("/*FIT*/", json.dumps(FIT, ensure_ascii=False)))
+           .replace("/*STEPS*/", json.dumps(STEPS, ensure_ascii=False)).replace("/*FIT*/", json.dumps(FIT, ensure_ascii=False))
+           .replace("<!--GYMCARDS-->", ", ".join(f'<a href="cards/gym-word-cards-step-{n}.pdf">step {n}</a>' for n in STEPS)))
     door_page("gym", "The gymnasium · Sounds and Words, Assembled",
               "A gym for each step on the path: build sentences from the step's words on a balance, tip them into questions, and unlock a round at a time.",
               f"""<section class="hero door-hero"><div class="wrap">
@@ -89,5 +90,9 @@ def write(OUT, door_page, LW):
 <section class="gym-sec"><div class="wrap">
 {gym}
 </div></section>""")
+    from doors import UNLISTED
+    if "gym.html" in UNLISTED:                               # unlisted: keep it out of search engines too
+        f = OUT / "gym.html"; s = f.read_text(encoding="utf-8")
+        f.write_text(s.replace("<head>", '<head>\n<meta name="robots" content="noindex">', 1), encoding="utf-8")
     print(f"wrote gym.html | {len(STEPS)} steps, {sum(len(s['levels']) for s in STEPS.values())} rounds, {len(SVG)} words")
     return list(STEPS)

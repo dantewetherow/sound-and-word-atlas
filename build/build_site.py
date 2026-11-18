@@ -295,7 +295,7 @@ for i, s in enumerate(STEPS):
                      'A vowel that ended a syllable was long, as it is in <i>ro-bot</i> today. Later the final e stopped being said: the consonant moved into the first syllable, and the e stayed in the spelling.</p>'
                      '<p>Writers then read that e as a sign of a long vowel and added it to words that never had a second syllable. <i>Wife</i> was <i>wif</i> in Old English, already said with a long vowel, close to <i>weef</i>; the e came later, to show the length. The sound came first and the spelling followed. Later still, the vowel of <i>weef</i> shifted to the vowel of <i>wife</i>, and the spelling stayed put.</p>'
                      '<p>So the vault is a reader&rsquo;s shortcut, not the history: the vowel says its name because it once ended a syllable. Upward and Davidson, <i>The History of English Spelling</i> (2011); Carney (1994: 129).</p></div>')
-    if str(n) in GYM_STEPS:                                  # the step's gym (17 November 2026)
+    if str(n) in GYM_STEPS and "gym.html" not in doors.UNLISTED:   # the step's gym (17 November 2026; unlisted from 18 November)
         notes.append(f'<div class="note"><h2>Gymnasium</h2><p><a href="../gym.html?step={n}">Practise this step in the gym</a>: build sentences from its words on a balance, a round at a time, tipping claims into questions.</p></div>')
     if n == 27:                                              # the contractions page (13 November 2026)
         notes.append('<div class="note"><h2>More contractions</h2><p><a href="../contractions.html">Squeezed into oblivion</a>: twenty-four contractions, each an apostrophe catastrophe: a vowel squeezed out and an apostrophe in its place.</p></div>')
@@ -481,7 +481,7 @@ if ELP_FILE.exists() and all((OUT / "cards" / f).exists() for f, *_ in CARD_SETS
     # The gym's word cards (build_gym_word_cards.py): every word the gymnasium uses, a set for each step (17 November 2026).
     gym_html = ""
     gym_files = [(n, OUT / "cards" / f"gym-word-cards-step-{n}.pdf") for n in GYM_STEPS]
-    if all(f.exists() for _, f in gym_files):
+    if all(f.exists() for _, f in gym_files) and "gym.html" not in doors.UNLISTED:
         gtiles = []
         for n, f in gym_files:
             kb = round(f.stat().st_size / 1024)
