@@ -154,7 +154,7 @@
   <ul>
     <li><b>Read first.</b> Change a word, have the learner read the whole sentence aloud, then press Check it. The verdict stays hidden until they've read it.</li>
     <li><b>Word cards.</b> Every word the gym uses is on the word cards, plain on one side and coded on the other, in a set for each step: <!--GYMCARDS-->.</li>
-    <li><b>Unlocking.</b> Each step on the path has a gym, and each gym has rounds. When a learner decodes everything in a round, press <i>Decoded!</i> to unlock the next one: a new slot, or a slot coming loose. You can also jump to any round. After the last round, <i>On to step</i> opens the next step’s gym at its first round; steps stay open, so you choose when a learner is ready for the next one. Each round keeps the words from the one before.</li>
+    <li><b>Unlocking.</b> Each step on the path has a gym, and each gym has rounds. When a learner decodes everything in a round, press <i>Decoded!</i> to unlock the next one: a new slot, or a slot coming loose. A round never takes a word away: every slot keeps the words it had in earlier rounds and steps, and the arrows reach the round&rsquo;s new words first. Decoding a round means building and reading sentences with its new words. You can also jump to any round. After the last round, <i>On to step</i> opens the next step’s gym at its first round; steps stay open, so you choose when a learner is ready for the next one. Each round keeps the words from the one before.</li>
     <li><b>Not</b> (step 4). <i>Add not</i> puts it at the start of the line below: it doesn’t tip, so it stays put when the beam does (<i>Is he not in it?</i>). <i>Squeeze it</i> joins it to the operator, so it hops up onto the beam and tips with it (<i>Isn’t he in it?</i>). <i>Am</i> has no <i>n’t</i>, so <i>I am not</i> can’t squeeze; the question borrows <i>aren’t</i> (<i>Aren’t I in it?</i>). Squeezing the actor and operator together (<i>I’m, he’s, we’re</i>) is a different squeeze, for later.</li>
     <li><b>Did, can, will</b> (step 6). These sit on the beam and tip, and the action on the line below stays plain: <i>Did she go in it?</i> <i>Went</i> carries its own time, so with <i>went</i> the beam is empty and there’s nothing to tip. <i>Did she went?</i> is a crash: two words both carrying the time.</li>
     <li><b>Nouns</b> (steps 4 to 6). Dolch&rsquo;s nouns come into the gym at the step where they become decodable: <i>dog, cat, pig, bed, leg</i> at step 4, with <i>my</i>; <i>man, men, box, sun</i> at step 5, with <i>the, this</i> and <i>that</i>; <i>bell, grass, hill, milk, nest, stick</i> at step 6. The determiner has its own slot before the noun. Tap either word to walk it.</li>
@@ -176,7 +176,7 @@
   <div class="nav"><button type="button" class="back">Back</button><span class="dots"></span><button type="button" class="next">Next</button></div>
 </dialog>
 <details class="gmore" id="every">
-  <summary>For teachers: every sentence in this round</summary>
+  <summary>For teachers: every sentence from this round&rsquo;s own words</summary>
   <div class="all"></div>
 </details>
 <p class="gtrial">The gym is a trial. If a sentence gets the wrong verdict, please say so through the <a href="credits.html">contact page</a>, with the step, the round and the sentence.</p>
@@ -216,6 +216,7 @@
   const PLACE_POS = { box: ['in', 'on', 'by', 'with'], sun: ['in'], bed: ['in', 'on', 'by'], hill: ['up', 'on', 'by'], nest: ['in', 'on', 'by'], grass: ['in', 'on', 'by'],
     stick: ['by', 'with'], bell: ['by', 'with'], milk: ['by', 'with'], dog: ['by', 'with'], cat: ['by', 'with'], pig: ['by', 'with'], man: ['by', 'with'], men: ['by', 'with'],
     leg: ['by'], hand: ['in'] };
+  const GIVE_OK = ['box', 'stick', 'milk', 'bell'];   // things you can hand over
   const MY_OK = ['dog', 'cat', 'pig', 'bed', 'leg', 'hand', 'hill', 'nest'];   // my box, my stick, my bell and the like say something else
   const ANIMAL = x => ['dog', 'cat', 'pig', 'fish', 'duck'].includes(noun(x));
   const PERSON = x => ['me', 'him', 'us', 'he', 'she', 'we'].includes(x) || ['man', 'men'].includes(noun(x));
@@ -268,6 +269,16 @@
     if (s.actor === 'she' && x === 'him' && !w) return false;
     if (['get', 'got'].includes(a) && w === 'with') return false;
     if (s.op === 'did' && !a && PERSON(x)) return false;
+    // With the whole kit in every round (18 November 2026), some pairs the hand-picked rounds never met:
+    if (family(a) === 'give' && xn && !GIVE_OK.includes(xn)) return false;      // only what you can hand over: not the hill, the sun or my bed
+    if (a === 'met' && x && !(PERSON(x) || ANIMAL(x) || x === 'it')) return false;   // you meet people and animals, not the box
+    if (BODY(x) && a && a !== 'be') return false;                                // a leg stays with "is by": nobody gets, goes by or lives by it
+    if (w === 'at' && a && a !== 'be') return false;                             // "go at it" and "get at it" say something else
+    if (family(a) === 'go' && ['in', 'on'].includes(w) && ['bed', 'grass', 'box'].includes(xn)) return false;   // "went in the bed" says something else
+    if (family(a) === 'go' && ['in', 'on'].includes(w) && ANIMAL(s.actor)) return false;   // nor does "the dog went in it"
+    if (BODY(x) && PERSON(s.actor)) return false;                                // "I am by my leg": only a thing or an animal is by it
+    if (a === 'be' && !w && (PERSON(x) || ANIMAL(x)) && !PERSON(s.actor)) return false;   // "the dog can be him"
+    if (['have', 'get'].includes(family(a)) && (PERSON(x) || ANIMAL(x)) && (ANIMAL(s.actor) || ['man', 'men'].includes(an))) return false;   // the dog got the pig; the men got me
     if (PERSON(s.actor) && (ANIMAL(x) || PERSON(x)) && !w && !a && s.actor !== x) return false;
     return true;
   }
@@ -328,6 +339,8 @@
       if (w && !x && !ALONE.be.includes(w)) return missingPlace();
     }
     // Almost: one word changes it to standard English, and the meaning was never in doubt.
+    if (op === 'did' && act === 'be') { const was = fitOf(a) === 'is' || a === 'I' ? 'was' : 'were';   // "I did be in it": standard English says "I was in it"
+      return { kind: 'almost', std: text({ ...s, op: was, act: '' }), later: was, after: `With ${q('be')}, standard English says ${q(was)}.` }; }
     if (!op && act && s.not) {
       const plain = PLAIN[act] || act;
       return { kind: 'almost', std: text(s, [a, 'did', 'not', plain, w, x].filter(Boolean)), later: 'did',
@@ -402,7 +415,10 @@
     el.append(up, w, dn, c);
     return el;
   }
+  let shownRound = '';
   function render() {
+    // A new round opens on its own words: every slot goes back to the round's first word (the slots keep the earlier words too).
+    if (shownRound !== st.step + '.' + st.level) { shownRound = st.step + '.' + st.level; for (const k of Object.keys(st.v)) st.v[k] = k === 'not' ? '' : opts(L(), k)[0]; }
     fit();
     const r = L(), s = cur();
     left.replaceChildren(); mid.replaceChildren(); right.replaceChildren(); flow.replaceChildren();
@@ -474,7 +490,7 @@
       };
       const sp = document.createElement('span'); sp.textContent = 'Say it, then'; row.append(sp, b); vbox.append(row);
     }
-    const fills = (v.fills || []).filter(([, pt]) => allowed({ ...st.v, ...pt }) && Object.entries(pt).every(([k, x]) => opts(L(), k).includes(x)));
+    const fills = (v.fills || []).filter(([, pt]) => allowed({ ...st.v, ...pt }) && Object.entries(pt).every(([k, x]) => opts(L(), k).includes(x))).slice(0, 4);   // the round's own words come first
     if (fills.length) {
       const row = document.createElement('div'); row.className = 'btns';
       const sp = document.createElement('span'); sp.textContent = v.kind === 'crash' ? 'Ways out:' : 'Fill it:'; row.append(sp);
@@ -494,7 +510,8 @@
 
   // ---- every sentence at this level ----
   function listAll() {
-    const r = L(), box = $('#every .all'); box.replaceChildren();
+    // Only the round's own words (gym.json), not the whole kit it has built up: that would run to hundreds of thousands.
+    const R = L(), own = R.own || R, r = { ...R, ...Object.fromEntries(['actor', 'adet', 'op', 'act', 'rec', 'where', 'what', 'wdet'].map(k => [k, own[k] || ['']])) }, box = $('#every .all'); box.replaceChildren();
     const groups = { works: [], almost: [], missing: [], crash: [] }, seen = new Set();
     for (const actor of opts(r, 'actor')) for (const adet of NOUNS.includes(actor) ? opts(r, 'adet') : ['']) for (const op of opts(r, 'op')) for (const act of opts(r, 'act')) for (const rec of family(act) === 'give' ? opts(r, 'rec') : ['']) for (const not of r.not ? ['', 'not', 'nt'] : [''])
       for (const where of opts(r, 'where')) for (const what of opts(r, 'what')) for (const wdet of NOUNS.includes(what) ? opts(r, 'wdet') : ['']) for (const tip of r.tip ? [false, true] : [false]) {

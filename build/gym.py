@@ -21,10 +21,57 @@ NT = {"is": "isn’t", "are": "aren’t", "did": "didn’t", "can": "can’t", "
 GYM_CODES = {"hadn’t": "c.h s.a c.d + | c.n ap c.t", "haven’t": "c.h s.a c.v | b.e + c.n ap c.t"}   # haven't as seven: the e is said weakly
 
 
+SLOTS = ("actor", "adet", "op", "act", "rec", "where", "what", "wdet")
+ACTIONS = {"go", "went", "get", "got", "hit", "met", "be", "spell", "has", "had", "have", "give", "gave", "live"}
+PERF, BE = {"have", "has", "had"}, {"am", "is", "are"}
+
+
+def kit(STEPS):
+    """The lexicon builds up (18 November 2026): a round never takes a word away. Each slot holds the round's own words
+    first, in the order gym.json gives them, then every word the slot has had in earlier rounds and steps, the most
+    recent first, so the arrows reach the new words before the old ones. The round's own lists are kept as "own",
+    for the teacher's list of sentences.
+
+    Two things are a round's scaffold rather than its words, and the round keeps its own: "=" (the operator goes with
+    the actor) stays only where the round has it, and then the loose am/is/are wait; and in steps 3 and 4 an action
+    rides in the operator slot, so once a round has an action slot of its own, those actions move down into it."""
+    order = [(n, i) for n in STEPS for i in range(len(STEPS[n]["levels"]))]
+    out = json.loads(json.dumps(STEPS))
+    for k, (n, i) in enumerate(order):
+        own = STEPS[n]["levels"][i]
+        back = [STEPS[m]["levels"][j] for m, j in reversed(order[:k])]
+        lists = {s: list(own.get(s, [])) for s in SLOTS}
+        has_act = "act" in own
+        linked = "=" in lists["op"]
+
+        def add(slot, w):
+            if w not in lists[slot]: lists[slot].append(w)
+        for r in back:
+            for s in SLOTS:
+                for w in r.get(s, []):
+                    if s == "op":
+                        if w == "=": continue
+                        if w in ACTIONS and not (w in PERF and "act" in r):                # an action riding in the operator slot
+                            if has_act: add("act", w); w = ""                          # it moves down, and the beam can be empty
+                        if w in BE and linked: continue
+                        if w == "" and not has_act: continue
+                    add(s, w)
+        if has_act and lists["op"] and any(o in BE for o in lists["op"]) and "" not in lists["act"]: lists["act"].append("")   # am/is/are take no action
+        if has_act and "" in lists["act"] and "" not in lists["op"] and any(a in ACTIONS for a in lists["act"]): lists["op"].append("")
+        lv = out[n]["levels"][i]
+        for s in SLOTS:
+            if lists[s] and lists[s] != [""]: lv[s] = lists[s]
+            elif s in own: lv[s] = own[s]
+        for flag in ("not", "tip"):
+            if own.get(flag) or any(r.get(flag) for r in back): lv[flag] = True
+        lv["own"] = {s: own[s] for s in SLOTS if s in own} | {f: own[f] for f in ("not", "tip") if f in own}
+    return out
+
+
 def words():
     """Every word a round can put on the board."""
     out = set()
-    for st in STEPS.values():
+    for st in kit(STEPS).values():
         for r in st["levels"]:
             for k in ("actor", "adet", "op", "act", "rec", "where", "what", "wdet"):
                 out.update(w for w in r.get(k, []) if w and w != "=")
@@ -78,7 +125,7 @@ def write(OUT, door_page, LW):
         WALK[w] = {k: f[k] for k in ("svg", "W", "H", "units", "bars", "sounds", "sylls", "short", "long", "jobs", "parts")}
     gym = ((HERE / "gym_template.html").read_text(encoding="utf-8")
            .replace("/*SVG*/", json.dumps(SVG, ensure_ascii=False)).replace("/*WALK*/", json.dumps(WALK, ensure_ascii=False))
-           .replace("/*STEPS*/", json.dumps(STEPS, ensure_ascii=False)).replace("/*FIT*/", json.dumps(FIT, ensure_ascii=False))
+           .replace("/*STEPS*/", json.dumps(kit(STEPS), ensure_ascii=False)).replace("/*FIT*/", json.dumps(FIT, ensure_ascii=False))
            .replace("<!--GYMCARDS-->", ", ".join(f'<a href="cards/gym-word-cards-step-{n}.pdf">step {n}</a>' for n in STEPS)))
     door_page("gym", "The gymnasium · Sounds and Words, Assembled",
               "A gym for each step on the path: build sentences from the step's words on a balance, tip them into questions, and unlock a round at a time.",
