@@ -258,7 +258,7 @@ def write_check(OUT, page, header, footer, X, slug, C):
 </div></section>
 </main>
 {footer(1)}"""
-    (OUT / "lists" / f"{slug}-check.html").write_text(page(f"Check: {C['title']} · A Legend for English Words", body, 1, C["desc"]), encoding="utf-8")
+    (OUT / "lists" / f"{slug}-check.html").write_text(page(f"Check: {C['title']} · Sounds and Words, Assembled", body, 1, C["desc"]), encoding="utf-8")
 
 
 def write(OUT, page, header, footer, X):
@@ -314,7 +314,7 @@ def write(OUT, page, header, footer, X):
 </div></section>
 </main>
 {footer(1)}"""
-        (OUT / "lists" / f"{L['slug']}.html").write_text(page(f"Spelling list: {L['title']} · A Legend for English Words", body, 1, L["desc"]), encoding="utf-8")
+        (OUT / "lists" / f"{L['slug']}.html").write_text(page(f"Spelling list: {L['title']} · Sounds and Words, Assembled", body, 1, L["desc"]), encoding="utf-8")
     for slug, C in CHECKS.items(): write_check(OUT, page, header, footer, X, slug, C)
     X["ufli_lists"] = ufli_lists.write(OUT, page, header, footer, X)
     import heart_words
@@ -373,4 +373,4 @@ def write_index(OUT, page, header, footer, X):
 </div></section>
 </main>
 {footer(1)}"""
-    (OUT / "lists" / "index.html").write_text(page("Legomorphic spelling · A Legend for English Words", body, 1, INDEX_DESC), encoding="utf-8")
+    (OUT / "lists" / "index.html").write_text(page("Legomorphic spelling · Sounds and Words, Assembled", body, 1, INDEX_DESC), encoding="utf-8")

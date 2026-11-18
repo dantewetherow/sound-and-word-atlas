@@ -90,6 +90,6 @@ def write(OUT, page, header, footer, X):
 </div></section>
 </main>
 {footer(1)}"""
-    (OUT / "lists" / "apart.html").write_text(page("Spelled apart · A Legend for English Words", body, 1,
+    (OUT / "lists" / "apart.html").write_text(page("Spelled apart · Sounds and Words, Assembled", body, 1,
         "Words that sound the same and are spelled differently, marked side by side and sorted by why the spelling keeps them apart."), encoding="utf-8")
     return sorted({w for _, _, pairs in GROUPS for _, ws, _, _ in pairs for w, _ in ws})

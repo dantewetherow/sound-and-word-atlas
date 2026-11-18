@@ -171,6 +171,6 @@ def write(OUT, page, header, footer, X):
 </div></section>
 </main>
 {footer(0)}"""
-    (OUT / "tents.html").write_text(page("Affix tent cards · A Legend for English Words", body, 0,
+    (OUT / "tents.html").write_text(page("Affix tent cards · Sounds and Words, Assembled", body, 0,
                                          "Printable tent cards for word building: prefixes, roots, suffixes and the joins that change a letter."), encoding="utf-8")
     return len(PREFIXES) + len(ROOTS) + len(SUFFIXES) + len(PROCESSES)

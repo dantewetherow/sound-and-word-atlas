@@ -79,7 +79,7 @@ def write(OUT, door_page, LW):
     gym = ((HERE / "gym_template.html").read_text(encoding="utf-8")
            .replace("/*SVG*/", json.dumps(SVG, ensure_ascii=False)).replace("/*WALK*/", json.dumps(WALK, ensure_ascii=False))
            .replace("/*STEPS*/", json.dumps(STEPS, ensure_ascii=False)).replace("/*FIT*/", json.dumps(FIT, ensure_ascii=False)))
-    door_page("gym", "The gymnasium · A Legend for English Words",
+    door_page("gym", "The gymnasium · Sounds and Words, Assembled",
               "A gym for each step on the path: build sentences from the step's words on a balance, tip them into questions, and unlock a round at a time.",
               f"""<section class="hero door-hero"><div class="wrap">
 <p class="eyebrow t-only"><a href="constructions.html">Sentences</a> · a trial</p>

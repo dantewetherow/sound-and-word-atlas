@@ -81,7 +81,7 @@ def write(OUT, door_page, door_head, uc, X):
 <p>Edward Fry&rsquo;s first 100 Instant Words overlap Dolch&rsquo;s heavily: {F["in_dolch"]} of them are among Dolch&rsquo;s 220 sight words, four more are Dolch nouns (<i>{"</i>, <i>".join(F["dolch_nouns"][:-1])}</i> and <i>{F["dolch_nouns"][-1]}</i>), and {F["neither"]} are on neither of his lists. Of the 100, {F["elp"]} are on the ELP lists, among them the three ELP words Dolch doesn&rsquo;t have: <i>{F["elp_only"][0]}</i>, <i>{F["elp_only"][1]}</i> and <i>{F["elp_only"][2]}</i>.</p>
 <p>Fry&rsquo;s lists are still under copyright, so they aren&rsquo;t reproduced here and the site makes no Fry cards. Teacher Created Resources publishes them: <a href="{FRY_PUBLISHER}">Dr. Edward Fry</a>. The counts come from the first 100 as the <a href="{FRY_COUNTED}">Utah Education Network</a> prints them. Versions in circulation differ by a word or two, so some counts are ranges.</p>
 </div></section>"""
-    door_page("connections", "Connections · A Legend for English Words", "How the path lines up with the word lists and programs schools already use.",
+    door_page("connections", "Connections · Sounds and Words, Assembled", "How the path lines up with the word lists and programs schools already use.",
               f"""{door_head("connections")}
 <section class="about"><div class="wrap">
 {tiles}
@@ -181,4 +181,4 @@ def write(OUT, door_page, door_head, uc, X):
 </details>
 </div></section>
 <script>(() => {{ const open = () => {{ const d = document.querySelector(location.hash + ' details'); if (d) d.open = true; }}; open(); addEventListener('hashchange', open); }})();</script>"""
-    door_page("ufli", "UFLI Foundations · A Legend for English Words", "For schools that run UFLI Foundations: where its lessons meet the path, the mark to draw alongside each part, and why the orders differ.", body)
+    door_page("ufli", "UFLI Foundations · Sounds and Words, Assembled", "For schools that run UFLI Foundations: where its lessons meet the path, the mark to draw alongside each part, and why the orders differ.", body)

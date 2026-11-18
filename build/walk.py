@@ -163,7 +163,7 @@ def write(OUT, door_page, X):
 </div></section>
 {section(note=X["uc"]("a word is either marked, so it can be walked, or shown as a word sum only. Since 13 November 2026 about 2,800 common words of early reading are marked by rule and say so: their marks are a first pass for teachers to check, and some will be wrong."))}
 <section class="about"><div class="wrap"><div class="door-tiles"><a class="dtile" href="explorations.html"><b>Explorations</b><span class="t-only">Words to take apart and build: a family, contractions, and ablaut.</span></a><a class="dtile" href="constructions.html"><b>Sentences</b><span class="t-only">How words make a sentence, and the flip from claim to question.</span></a></div><p class="t-only">Every analysed word, by its parts, is in <a href="parts.html">Parts</a>.</p></div></section>"""
-    door_page("walk", "Words · A Legend for English Words", "Look up a word and walk through it: its marks, a move at a time, and its parts.", body)
+    door_page("walk", "Words · Sounds and Words, Assembled", "Look up a word and walk through it: its marks, a move at a time, and its parts.", body)
     return len(index), skipped
 
 

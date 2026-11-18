@@ -184,5 +184,5 @@ def write(OUT, page, header, footer, X):
 </div></section>
 </main>
 {footer(1)}"""
-        (OUT / "lists" / f"{e['slug']}.html").write_text(page(f"Spelling list: UFLI lesson {e['n']} · A Legend for English Words", body, 1, PAGES[k][3]), encoding="utf-8")
+        (OUT / "lists" / f"{e['slug']}.html").write_text(page(f"Spelling list: UFLI lesson {e['n']} · Sounds and Words, Assembled", body, 1, PAGES[k][3]), encoding="utf-8")
     return E

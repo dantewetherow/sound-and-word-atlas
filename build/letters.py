@@ -119,5 +119,5 @@ def write(door_page, door_head):
     setTimeout(() => {{ play.disabled = false; }}, 19 * beat);
   }});
 }})();</script>"""
-    door_page("letters", "Letters, names and sounds · A Legend for English Words",
+    door_page("letters", "Letters, names and sounds · Sounds and Words, Assembled",
               "The alphabet in the song's units, as tiles to reveal, with a sound circle under each letter; elemeno taken apart; the vowels up a scale.", inner)

@@ -85,7 +85,7 @@ def html_block(LW):
 {JS_ON}
 <section class="landing" aria-labelledby="landing-h"><div class="wrap">
 <p class="eyebrow t-only">Legomorphic Notation</p>
-<h1 id="landing-h">A Legend for English Words</h1>
+<h1 id="landing-h">Sounds and Words, Assembled</h1>
 <p class="sublead">Orthography, morphology, phonology and etymology, brought to light.</p>
 <p class="lead t-only">Legomorphic Notation is a set of marks and colours drawn on ordinary spelling, so that what a reader usually works out alone is there for everyone to see.</p>
 <p class="cta three"><a class="btn" href="progressions.html">Steps</a><a class="btn" href="walk.html">Words</a><a class="btn" href="parts.html">Parts</a></p>

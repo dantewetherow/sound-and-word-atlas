@@ -93,6 +93,6 @@ def write(OUT, page, header, footer, X):
 </div></section>
 </main>
 {footer(1)}"""
-    (OUT / "lists" / "hearts.html").write_text(page("Words with a heart · A Legend for English Words", body, 1,
+    (OUT / "lists" / "hearts.html").write_text(page("Words with a heart · Sounds and Words, Assembled", body, 1,
         "Heart words sorted by how much of the heart a learner can lose: regular on the path, a reason to use, or by heart."), encoding="utf-8")
     return sorted({w for _, _, rows in GROUPS for _, ws, _ in rows for w in ws})

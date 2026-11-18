@@ -60,5 +60,5 @@ def write(OUT, door_page, X):
 <p class="sub">Edward Carney, <i>A Survey of English Spelling</i> (1994): the apostrophe, p. 50. These are on the path at <a href="steps/27.html">step 27</a>, and the ones that sound like another word (<i>it&rsquo;s</i> and <i>its</i>, <i>you&rsquo;re</i> and <i>your</i>) are on <a href="lists/apart.html#squeeze">Spelled apart</a>. Every word here can be looked up in <a href="walk.html">Words</a>.</p>
 {X["uc"]("the first contractions the site draws, since 13 November 2026.")}
 </div></section>"""
-    door_page("contractions", "Squeezed into oblivion · A Legend for English Words", "Contractions: the vowel squeezed out, the apostrophe in its place, and the apostrophe catastrophes.", body)
+    door_page("contractions", "Squeezed into oblivion · Sounds and Words, Assembled", "Contractions: the vowel squeezed out, the apostrophe in its place, and the apostrophe catastrophes.", body)
     return sorted({w for _, _, rows in GROUPS for w, _, _ in rows} | {"its", "who’s"})

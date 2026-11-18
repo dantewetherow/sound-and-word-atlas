@@ -115,5 +115,5 @@ def write(OUT, door_page, X):
 <p>The <i>-en</i> takes a seam, as it does in <i>been</i> (<i>be + en</i>), <i>driven</i> and <i>awaken</i>. Some of these pairs are also on <a href="lists/apart.html#new-knew">Spelled apart</a>: <i>knew</i> and <i>new</i>, <i>blew</i> and <i>blue</i>. Every word here can be looked up in <a href="walk.html">Words</a>.</p>
 {X["uc"]("the first page for the presentation &ldquo;What&rsquo;s that ablaut?&rdquo;, since 13 November 2026. Next: a spelling list on the pattern, and the animated deck once the page reads right.")}
 </div></section>"""
-    door_page("ablaut", "What's that ablaut? · A Legend for English Words", "write, wrote, written: the vowel changes to mark time, and the spelling around it does its usual jobs.", body)
+    door_page("ablaut", "What's that ablaut? · Sounds and Words, Assembled", "write, wrote, written: the vowel changes to mark time, and the spelling around it does its usual jobs.", body)
     return sorted({w for w, *_ in CORE} | {w for _, _, rows in SETS for row in rows for w, _ in row})
