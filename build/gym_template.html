@@ -274,11 +274,9 @@
     if (a === 'met' && x && !(PERSON(x) || ANIMAL(x) || x === 'it')) return false;   // you meet people and animals, not the box
     if (BODY(x) && a && a !== 'be') return false;                                // a leg stays with "is by": nobody gets, goes by or lives by it
     if (w === 'at' && a && a !== 'be') return false;                             // "go at it" and "get at it" say something else
-    if (family(a) === 'go' && ['in', 'on'].includes(w) && ['bed', 'grass', 'box'].includes(xn)) return false;   // "went in the bed" says something else
-    if (family(a) === 'go' && ['in', 'on'].includes(w) && ANIMAL(s.actor)) return false;   // nor does "the dog went in it"
     if (BODY(x) && PERSON(s.actor)) return false;                                // "I am by my leg": only a thing or an animal is by it
     if (a === 'be' && !w && (PERSON(x) || ANIMAL(x)) && !PERSON(s.actor)) return false;   // "the dog can be him"
-    if (['have', 'get'].includes(family(a)) && (PERSON(x) || ANIMAL(x)) && (ANIMAL(s.actor) || ['man', 'men'].includes(an))) return false;   // the dog got the pig; the men got me
+    if (['have', 'get'].includes(family(a)) && PERSON(x) && (ANIMAL(s.actor) || ['man', 'men'].includes(an))) return false;   // the men got me; having an animal is fine (we got the pig)
     if (PERSON(s.actor) && (ANIMAL(x) || PERSON(x)) && !w && !a && s.actor !== x) return false;
     return true;
   }
