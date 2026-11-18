@@ -187,7 +187,7 @@
     <li><b>The beam</b> holds the actor and the operator (<i>am, is, are</i>). Tip it to turn a claim into a question. Actions like <i>go</i> and <i>hit</i> sit on the second line and can't tip yet: that needs <i>do</i>, later on the path.</li>
     <li><b>Four verdicts.</b> <b>Works</b>: standard English. <b>Almost</b>: the meaning is clear and one word changes it to standard English. Many people say these at home; the board doesn't call them wrong, it shows the standard English way. <b>Missing a piece</b>: nothing is wrong, something is still to come. <b>Crash</b>: the pieces fight each other, and the board says why.</li>
     <li><b>Giggle-free.</b> This is a game you play with a learner, not one they sit alone with, so some sentences never come up: nothing goes in or on a person, a body or an animal; people and animals only follow <i>by</i> or <i>with</i>; nobody hits a person or an animal; <i>my</i> only goes with nouns it can&rsquo;t turn into something else; and <i>my bed</i> is only ever yours. Silly is fine (<i>The pig is by the box</i>). When a change would make one of those sentences, the board moves the other word along.</li>
-    <li><b>Marks.</b> The board starts in plain text. Turn the marks on one layer at a time, in the order the word walk brings them in (vowel colours, bars, sound circles, vowel marks, swoops, parts), or press <i>All</i>. The board remembers your choice. Tapping a word still walks it with every mark.</li>
+    <li><b>Marks.</b> The board starts in plain text. Turn the marks on one layer at a time, in the order the word walk brings them in (vowel colours, bars, sound circles, vowel marks, swoops, parts), or press <i>All</i>. Every visit starts plain again. Tapping a word still walks it with every mark.</li>
     <li><b>Walk a word.</b> Tap any word on the board to decode it a step at a time: the letters, a circle for each sound, the vowel marks, then the sounds put together. It&rsquo;s the same walk as the <a href="walk.html">Word walk</a> page. Tap the word, swipe it left, or press Next to go on; swipe right to go back.</li>
     <li><b>Hard to picture.</b> Some sentences work but are hard to picture (<i>I am in me</i>). Ask what it would look like. They're good for talk and drawing.</li>
   </ul>
@@ -517,14 +517,13 @@
   // ---- marks on the board: each layer on or off; the word walk always shows them all ----
   const MARKS = ['colour', 'bars', 'circles', 'vowels', 'swoops', 'parts'];   // the order the word walk brings them in
   let marks = new Set();                                                      // plain text until a teacher turns marks on
-  try { const m = JSON.parse(localStorage.getItem('gym-marks')); if (Array.isArray(m)) marks = new Set(m.filter(x => MARKS.includes(x))); } catch (e) {}
+  try { localStorage.removeItem('gym-marks'); } catch (e) {}   // earlier versions kept the marks between visits; every visit now starts plain
   function showMarks() {
     for (const k of MARKS) board.classList.toggle('no-' + k, !marks.has(k));
     board.classList.toggle('no-jobs', !marks.has('vowels'));
     board.classList.toggle('plaintext', !marks.size);   // jobs (vault, nudge) ride with the vowel marks
     document.querySelectorAll('.gmarks [data-mark]').forEach(b => b.setAttribute('aria-pressed', String(marks.has(b.dataset.mark))));
     document.querySelectorAll('.gmarks [data-all]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.all === '1' ? marks.size === MARKS.length : !marks.size)));
-    try { localStorage.setItem('gym-marks', JSON.stringify([...marks])); } catch (e) {}
   }
   document.querySelector('.gmarks').addEventListener('click', e => {
     const b = e.target.closest('button'); if (!b) return;
