@@ -1,0 +1,891 @@
+{
+ "STEPS": {
+  "1": {
+   "name": "I, it, in, is, if, am",
+   "levels": [
+    {
+     "actor": [
+      "I",
+      "it"
+     ],
+     "op": [
+      "="
+     ],
+     "where": [
+      ""
+     ],
+     "what": [
+      ""
+     ],
+     "tip": true,
+     "news": "Tip the beam: a claim or a question."
+    },
+    {
+     "actor": [
+      "I",
+      "it"
+     ],
+     "op": [
+      "="
+     ],
+     "where": [
+      "",
+      "in"
+     ],
+     "what": [
+      ""
+     ],
+     "tip": true,
+     "news": "A position: <i>in</i>."
+    },
+    {
+     "actor": [
+      "I",
+      "it"
+     ],
+     "op": [
+      "="
+     ],
+     "where": [
+      "",
+      "in"
+     ],
+     "what": [
+      "",
+      "it"
+     ],
+     "tip": true,
+     "news": "A place after the position: <i>in it</i>."
+    },
+    {
+     "actor": [
+      "I",
+      "it"
+     ],
+     "op": [
+      "am",
+      "is"
+     ],
+     "where": [
+      "",
+      "in"
+     ],
+     "what": [
+      "",
+      "it"
+     ],
+     "tip": true,
+     "news": "The operator comes loose from the actor: <i>am</i> or <i>is</i>."
+    }
+   ]
+  },
+  "2": {
+   "name": "at, an, as, on, up, us",
+   "levels": [
+    {
+     "actor": [
+      "I",
+      "it"
+     ],
+     "op": [
+      "="
+     ],
+     "where": [
+      "",
+      "in",
+      "on",
+      "up"
+     ],
+     "what": [
+      ""
+     ],
+     "tip": true,
+     "news": "Three positions: <i>in, on, up</i>."
+    },
+    {
+     "actor": [
+      "I",
+      "it"
+     ],
+     "op": [
+      "="
+     ],
+     "where": [
+      "",
+      "in",
+      "on",
+      "up"
+     ],
+     "what": [
+      "",
+      "it",
+      "us"
+     ],
+     "tip": true,
+     "news": "Places: <i>it</i> or <i>us</i>."
+    },
+    {
+     "actor": [
+      "I",
+      "it"
+     ],
+     "op": [
+      "="
+     ],
+     "where": [
+      "",
+      "in",
+      "on",
+      "up",
+      "at"
+     ],
+     "what": [
+      "",
+      "it",
+      "us"
+     ],
+     "tip": true,
+     "news": "A new position: <i>at</i>. It always needs a place after it."
+    },
+    {
+     "actor": [
+      "I",
+      "it"
+     ],
+     "op": [
+      "am",
+      "is"
+     ],
+     "where": [
+      "",
+      "in",
+      "on",
+      "up",
+      "at"
+     ],
+     "what": [
+      "",
+      "it",
+      "us"
+     ],
+     "tip": true,
+     "news": "The operator comes loose: <i>am</i> or <i>is</i>."
+    }
+   ]
+  },
+  "3": {
+   "name": "he, me, we, by, go, and are",
+   "levels": [
+    {
+     "actor": [
+      "I",
+      "he",
+      "we"
+     ],
+     "op": [
+      "="
+     ],
+     "where": [
+      "",
+      "in",
+      "by"
+     ],
+     "what": [
+      "",
+      "it",
+      "me"
+     ],
+     "tip": true,
+     "news": "New actors: <i>he</i> and <i>we</i>, each with its operator. (<i>Are</i> is borrowed from step 12.)"
+    },
+    {
+     "actor": [
+      "I",
+      "he",
+      "we"
+     ],
+     "op": [
+      "=",
+      "go"
+     ],
+     "where": [
+      "",
+      "in",
+      "by"
+     ],
+     "what": [
+      "",
+      "it",
+      "me"
+     ],
+     "tip": true,
+     "news": "The first action: <i>go</i>. It leaves the beam."
+    },
+    {
+     "actor": [
+      "I",
+      "he",
+      "we"
+     ],
+     "op": [
+      "am",
+      "is",
+      "are",
+      "go"
+     ],
+     "where": [
+      "",
+      "in",
+      "by"
+     ],
+     "what": [
+      "",
+      "it",
+      "me"
+     ],
+     "tip": true,
+     "news": "The operator comes loose: <i>am, is, are</i> or <i>go</i>."
+    }
+   ]
+  },
+  "4": {
+   "name": "not, him, hit, met, got",
+   "levels": [
+    {
+     "actor": [
+      "I",
+      "he",
+      "we"
+     ],
+     "op": [
+      "="
+     ],
+     "not": true,
+     "where": [
+      "in"
+     ],
+     "what": [
+      "it"
+     ],
+     "tip": true,
+     "news": "Add <i>not</i>, then squeeze it to <i>n’t</i>. Watch where it goes when you tip."
+    },
+    {
+     "actor": [
+      "I",
+      "he",
+      "we"
+     ],
+     "op": [
+      "="
+     ],
+     "not": true,
+     "where": [
+      "",
+      "in",
+      "by"
+     ],
+     "what": [
+      "",
+      "it",
+      "him"
+     ],
+     "tip": true,
+     "news": "Positions and places: <i>in, by, it, him</i>."
+    },
+    {
+     "actor": [
+      "I",
+      "he",
+      "we"
+     ],
+     "op": [
+      "=",
+      "hit",
+      "met",
+      "got"
+     ],
+     "not": true,
+     "where": [
+      "",
+      "in",
+      "by"
+     ],
+     "what": [
+      "",
+      "it",
+      "him"
+     ],
+     "tip": true,
+     "news": "Actions that reach something: <i>hit, met, got</i>."
+    },
+    {
+     "actor": [
+      "I",
+      "he",
+      "we"
+     ],
+     "op": [
+      "am",
+      "is",
+      "are",
+      "hit",
+      "met",
+      "got"
+     ],
+     "not": true,
+     "where": [
+      "",
+      "in",
+      "by"
+     ],
+     "what": [
+      "",
+      "it",
+      "him"
+     ],
+     "tip": true,
+     "news": "The operator comes loose."
+    },
+    {
+     "actor": [
+      "I",
+      "he",
+      "dog",
+      "cat"
+     ],
+     "adet": [
+      "my"
+     ],
+     "op": [
+      "="
+     ],
+     "not": true,
+     "where": [
+      "",
+      "in",
+      "on",
+      "by"
+     ],
+     "what": [
+      "",
+      "it",
+      "bed",
+      "leg",
+      "pig"
+     ],
+     "wdet": [
+      "my"
+     ],
+     "tip": true,
+     "news": "The first nouns, with <i>my</i> from step 3: <i>My dog is by my bed.</i>"
+    }
+   ]
+  },
+  "5": {
+   "name": "she, this, that, with, which",
+   "levels": [
+    {
+     "actor": [
+      "I",
+      "he",
+      "she"
+     ],
+     "op": [
+      "="
+     ],
+     "not": true,
+     "where": [
+      "",
+      "in",
+      "by"
+     ],
+     "what": [
+      "",
+      "it"
+     ],
+     "tip": true,
+     "news": "A new actor: <i>she</i>."
+    },
+    {
+     "actor": [
+      "I",
+      "she",
+      "this",
+      "that"
+     ],
+     "op": [
+      "="
+     ],
+     "not": true,
+     "where": [
+      "",
+      "in",
+      "by"
+     ],
+     "what": [
+      "",
+      "it",
+      "this",
+      "that"
+     ],
+     "tip": true,
+     "news": "<i>This</i> and <i>that</i>: each can be the actor, or the place."
+    },
+    {
+     "actor": [
+      "I",
+      "she",
+      "this",
+      "that"
+     ],
+     "op": [
+      "="
+     ],
+     "not": true,
+     "where": [
+      "",
+      "in",
+      "by",
+      "with"
+     ],
+     "what": [
+      "",
+      "it",
+      "this",
+      "that",
+      "him",
+      "me"
+     ],
+     "tip": true,
+     "news": "A new position: <i>with</i>. People can come after it."
+    },
+    {
+     "actor": [
+      "I",
+      "she",
+      "that",
+      "which"
+     ],
+     "op": [
+      "="
+     ],
+     "not": true,
+     "where": [
+      "",
+      "in",
+      "by",
+      "with"
+     ],
+     "what": [
+      "",
+      "it",
+      "this",
+      "that",
+      "him",
+      "me"
+     ],
+     "tip": true,
+     "news": "<i>Which</i> asks a question. When it’s the actor, the beam doesn’t tip."
+    },
+    {
+     "actor": [
+      "I",
+      "she",
+      "that",
+      "which"
+     ],
+     "op": [
+      "am",
+      "is"
+     ],
+     "not": true,
+     "where": [
+      "",
+      "in",
+      "by",
+      "with"
+     ],
+     "what": [
+      "",
+      "it",
+      "this",
+      "that",
+      "him",
+      "me"
+     ],
+     "tip": true,
+     "news": "The operator comes loose: <i>am</i> or <i>is</i>."
+    },
+    {
+     "actor": [
+      "I",
+      "she",
+      "dog",
+      "cat",
+      "men"
+     ],
+     "adet": [
+      "the"
+     ],
+     "op": [
+      "="
+     ],
+     "not": true,
+     "where": [
+      "",
+      "in",
+      "on",
+      "by",
+      "with"
+     ],
+     "what": [
+      "",
+      "it",
+      "box",
+      "sun",
+      "bed",
+      "pig",
+      "man"
+     ],
+     "wdet": [
+      "the"
+     ],
+     "tip": true,
+     "news": "Nouns from Dolch’s list, with <i>the</i>: <i>the dog, the men, the box, the bed</i>. <i>Men</i> is more than one, so it takes <i>are</i>."
+    },
+    {
+     "actor": [
+      "I",
+      "she",
+      "dog",
+      "cat",
+      "men"
+     ],
+     "adet": [
+      "the",
+      "this",
+      "that",
+      "my"
+     ],
+     "op": [
+      "="
+     ],
+     "not": true,
+     "where": [
+      "",
+      "in",
+      "on",
+      "by",
+      "with"
+     ],
+     "what": [
+      "",
+      "it",
+      "box",
+      "sun",
+      "bed",
+      "pig",
+      "man"
+     ],
+     "wdet": [
+      "the",
+      "this",
+      "that",
+      "my"
+     ],
+     "tip": true,
+     "news": "Determiners: <i>the, this, that, my</i>. Each has its own slot before the noun."
+    },
+    {
+     "actor": [
+      "I",
+      "she",
+      "dog",
+      "men"
+     ],
+     "adet": [
+      "the",
+      "this",
+      "that",
+      "my"
+     ],
+     "op": [
+      "am",
+      "is",
+      "are"
+     ],
+     "not": true,
+     "where": [
+      "",
+      "in",
+      "on",
+      "by",
+      "with"
+     ],
+     "what": [
+      "",
+      "it",
+      "box",
+      "sun",
+      "bed",
+      "pig",
+      "man"
+     ],
+     "wdet": [
+      "the",
+      "this",
+      "that",
+      "my"
+     ],
+     "tip": true,
+     "news": "The operator comes loose, with nouns: <i>the men are</i>, <i>the dog is</i>."
+    }
+   ]
+  },
+  "6": {
+   "name": "did, can, will, must, shall, get, went, spell, has, had",
+   "levels": [
+    {
+     "actor": [
+      "I",
+      "he",
+      "she"
+     ],
+     "op": [
+      "did"
+     ],
+     "act": [
+      "go",
+      "get",
+      "hit"
+     ],
+     "not": true,
+     "where": [
+      "",
+      "in",
+      "by"
+     ],
+     "what": [
+      "",
+      "it",
+      "him"
+     ],
+     "tip": true,
+     "news": "<i>Did</i> carries the time, so now actions can tip: <i>Did she go in it?</i>"
+    },
+    {
+     "actor": [
+      "I",
+      "he",
+      "she"
+     ],
+     "op": [
+      "did",
+      "can",
+      "will",
+      "must",
+      "shall"
+     ],
+     "act": [
+      "go",
+      "get",
+      "hit",
+      "be",
+      "spell"
+     ],
+     "not": true,
+     "where": [
+      "",
+      "in",
+      "by"
+     ],
+     "what": [
+      "",
+      "it",
+      "him"
+     ],
+     "tip": true,
+     "news": "<i>Can, will, must, shall</i>: each takes a plain action, like <i>did</i>."
+    },
+    {
+     "actor": [
+      "I",
+      "he",
+      "she"
+     ],
+     "op": [
+      "",
+      "did",
+      "can",
+      "will"
+     ],
+     "act": [
+      "go",
+      "went",
+      "get",
+      "got",
+      "hit"
+     ],
+     "not": true,
+     "where": [
+      "",
+      "in",
+      "by"
+     ],
+     "what": [
+      "",
+      "it",
+      "him"
+     ],
+     "tip": true,
+     "news": "<i>Went</i> carries its own time, so the beam can be empty. Try <i>did</i> with <i>went</i>."
+    },
+    {
+     "actor": [
+      "I",
+      "he",
+      "she",
+      "we"
+     ],
+     "op": [
+      "",
+      "did",
+      "can",
+      "will"
+     ],
+     "act": [
+      "has",
+      "had",
+      "get",
+      "got",
+      "spell"
+     ],
+     "not": true,
+     "where": [
+      "",
+      "in",
+      "by"
+     ],
+     "what": [
+      "",
+      "it",
+      "that",
+      "him"
+     ],
+     "tip": true,
+     "news": "<i>Has</i> and <i>had</i>: having something."
+    },
+    {
+     "actor": [
+      "I",
+      "he",
+      "she",
+      "we"
+     ],
+     "op": [
+      "",
+      "am",
+      "is",
+      "are",
+      "did",
+      "can",
+      "will",
+      "must",
+      "shall"
+     ],
+     "act": [
+      "",
+      "go",
+      "went",
+      "get",
+      "got",
+      "hit",
+      "be",
+      "spell",
+      "has",
+      "had"
+     ],
+     "not": true,
+     "where": [
+      "",
+      "in",
+      "by"
+     ],
+     "what": [
+      "",
+      "it",
+      "that",
+      "him"
+     ],
+     "tip": true,
+     "news": "Everything comes loose: the beam word and the action."
+    },
+    {
+     "actor": [
+      "I",
+      "she",
+      "dog",
+      "men"
+     ],
+     "adet": [
+      "the",
+      "this",
+      "that",
+      "my"
+     ],
+     "op": [
+      "",
+      "did",
+      "can",
+      "will"
+     ],
+     "act": [
+      "go",
+      "went",
+      "get",
+      "got",
+      "hit"
+     ],
+     "not": true,
+     "where": [
+      "",
+      "in",
+      "up",
+      "by",
+      "with"
+     ],
+     "what": [
+      "",
+      "it",
+      "stick",
+      "bell",
+      "milk",
+      "hill",
+      "nest",
+      "grass",
+      "bed"
+     ],
+     "wdet": [
+      "the",
+      "this",
+      "that",
+      "my"
+     ],
+     "tip": true,
+     "news": "Nouns with actions: <i>The dog got the stick. Did the men go up the hill?</i>"
+    }
+   ]
+  }
+ },
+ "FIT": {
+  "I": "am",
+  "it": "is",
+  "he": "is",
+  "we": "are",
+  "she": "is",
+  "this": "is",
+  "that": "is",
+  "which": "is"
+ }
+}

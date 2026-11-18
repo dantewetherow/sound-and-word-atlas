@@ -13,6 +13,7 @@ import legomorphic_words as LW
 from known_codes import all_codes
 import site_codes as SC
 import doors
+GYM_STEPS = json.loads((pathlib.Path(__file__).resolve().parent / "data" / "gym.json").read_text(encoding="utf-8"))["STEPS"]   # the steps with a gym
 
 route = json.load(open(sys.argv[1], encoding="utf-8"))
 OUT = pathlib.Path(sys.argv[2]); (OUT / "steps").mkdir(parents=True, exist_ok=True)
@@ -294,6 +295,8 @@ for i, s in enumerate(STEPS):
                      'A vowel that ended a syllable was long, as it is in <i>ro-bot</i> today. Later the final e stopped being said: the consonant moved into the first syllable, and the e stayed in the spelling.</p>'
                      '<p>Writers then read that e as a sign of a long vowel and added it to words that never had a second syllable. <i>Wife</i> was <i>wif</i> in Old English, already said with a long vowel, close to <i>weef</i>; the e came later, to show the length. The sound came first and the spelling followed. Later still, the vowel of <i>weef</i> shifted to the vowel of <i>wife</i>, and the spelling stayed put.</p>'
                      '<p>So the vault is a reader&rsquo;s shortcut, not the history: the vowel says its name because it once ended a syllable. Upward and Davidson, <i>The History of English Spelling</i> (2011); Carney (1994: 129).</p></div>')
+    if str(n) in GYM_STEPS:                                  # the step's gym (17 November 2026)
+        notes.append(f'<div class="note"><h2>Gymnasium</h2><p><a href="../gym.html?step={n}">Practise this step in the gym</a>: build sentences from its words on a balance, a round at a time, tipping claims into questions.</p></div>')
     if n == 27:                                              # the contractions page (13 November 2026)
         notes.append('<div class="note"><h2>More contractions</h2><p><a href="../contractions.html">Squeezed into oblivion</a>: twenty-four contractions, each an apostrophe catastrophe: a vowel squeezed out and an apostrophe in its place.</p></div>')
     for text in open_items_for(n):
@@ -475,6 +478,20 @@ if ELP_FILE.exists() and all((OUT / "cards" / f).exists() for f, *_ in CARD_SETS
 <p class="sub">All {n_d} of E. W. Dolch&rsquo;s sight words (1936), one set for each of his levels, and a sixth set for his {n_n} nouns, 10 to a page. Each card&rsquo;s tag names its level and the ELP list that teaches the word, if one does, so you can set aside the cards a class has already met. <a href="word-lists.html">Where the ELP words come from</a> shows how the two lists line up.</p>
 <div class="cols">{''.join(dtiles)}</div>
 </div></section>"""
+    # The gym's word cards (build_gym_word_cards.py): every word the gymnasium uses, a set for each step (17 November 2026).
+    gym_html = ""
+    gym_files = [(n, OUT / "cards" / f"gym-word-cards-step-{n}.pdf") for n in GYM_STEPS]
+    if all(f.exists() for _, f in gym_files):
+        gtiles = []
+        for n, f in gym_files:
+            kb = round(f.stat().st_size / 1024)
+            gtiles.append(f'<div><h3>Step {n}</h3><p>{html.escape(GYM_STEPS[n]["name"])}.</p><p><a href="cards/{f.name}" download>Download the PDF</a> ({kb} KB)</p></div>')
+        gym_html = f"""
+<section class="about" id="gym" aria-labelledby="gym-h"><div class="wrap">
+<h2 id="gym-h">The gymnasium</h2>
+<p class="sub">Every word the <a href="gym.html">gymnasium</a> uses, eight to a page, in a set for each step. A word is in the set for the step whose gym first uses it, so the sets add up with no repeats, and each card&rsquo;s tag names the round and the job the word first does there. Print in colour, or in greyscale for learners to colour the marks themselves.</p>
+<div class="cols">{''.join(gtiles)}</div>
+</div></section>"""
     cards_body = f"""{header(0)}
 <main>
 <section class="hero"><div class="wrap">
@@ -486,7 +503,7 @@ if ELP_FILE.exists() and all((OUT / "cards" / f).exists() for f, *_ in CARD_SETS
 <h2 id="elp-h">Early Literacy Profile (Central Okanagan) high-frequency words</h2>
 <div class="cols">{''.join(tiles)}</div>
 {sample}
-</div></section>{dolch_html}{ws_html}
+</div></section>{dolch_html}{gym_html}{ws_html}
 <section class="about" aria-label="Notes"><div class="wrap"><div class="cols">
 <div><h3>Printing</h3><p>Print in colour and double-sided, flipping on the long edge, so each back lands behind its front. Print one sheet first and hold it up to a window to check that the backs line up, then cut on the grey lines. Spaces left over on a sheet are blank cards to write on.</p></div>
 <div><h3>The coding</h3><p>The coded side shows the word in the notation, and <a href="notations.html">The marks</a> page says what each mark means.</p>{uc("a few markings are still being settled, most of the word sums and a few of the Dolch words among them. Next: settle them, then update the cards that change.")}</div>

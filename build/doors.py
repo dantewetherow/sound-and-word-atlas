@@ -60,6 +60,7 @@ PAGES = [
     ("derivations.html", "parts", "Roots and their sources", "Where words come from, and the sources the roots cite."),
     ("teachers.html", "teachers", "For teachers", "To print and present, connections to programs, and the reasons and sources."),
     ("constructions.html", "walk", "Sentences", "How sentences are built, and the flip from claim to question."),
+    ("gym.html", "walk", "The gymnasium", "A gym for each step: build sentences from the step's words on a balance, a round at a time."),
     ("instructions.html", "teachers", "To print and present", "Presentations, word cards and affix tent cards."),
     ("presentations.html", "teachers", "Presentations", "The staff series and decks on single concepts, with their handouts."),
     ("tents.html", "teachers", "Affix tent cards", "Prefixes, roots and suffixes on cards that stand up: swap the root, keep the affixes. Extension work with the families."),
@@ -76,7 +77,7 @@ PAGES = [
 import lists as _lists
 PAGES[-1:-1] = _lists.PAGES                 # the spelling lists, on the teachers' shelf
 # The page each shelf page sits behind, for its breadcrumb: the four teachers' doors (13 November 2026).
-SHELF_PARENT = {"ufli.html": "connections.html", "word-lists.html": "connections.html",
+SHELF_PARENT = {"gym.html": "constructions.html", "ufli.html": "connections.html", "word-lists.html": "connections.html",
                 "presentations.html": "instructions.html", "cards.html": "instructions.html", "tents.html": "instructions.html",
                 "definitions.html": "explanations.html", "about.html": "explanations.html", "credits.html": "explanations.html"}
 WORDS_PARENT = {"contractions.html": "explorations.html", "ablaut.html": "explorations.html"}
@@ -314,6 +315,11 @@ def write(OUT, page, header, footer, X):
     sb = builder.section(X, lambda w: LW.W.get(w) or X["auto_codes"].get(w))
     door_page("constructions", "Constructions · A Legend for English Words", "How sentences are built, and the flip from claim to question.", f"""{door_head("constructions")}
 {sb}
+<section class="about" id="gym" aria-labelledby="gym-h"><div class="wrap">
+<h2 id="gym-h">The gymnasium</h2>
+<p class="sub t-only">A gym for each step on the path, for the board at the front of the room: the step&rsquo;s words on a balance, a round at a time. Tip the beam from a claim to a question, add <i>not</i> and squeeze it to <i>n&rsquo;t</i>, and check each sentence: it works, it&rsquo;s almost standard English, it&rsquo;s missing a piece, or it crashes. Steps 1 to 6 are built, as a trial.</p>
+<p><a href="gym.html">Open the gymnasium</a></p>
+</div></section>
 <section class="about" id="flip" aria-labelledby="flip-h"><div class="wrap">
 <h2 id="flip-h">From a claim to a question</h2>
 <p class="sub t-only">An actor, an operator and an action make a claim. When the operator moves to the front, the claim becomes a question. The Dialogue Team acts it out with their faces: their words with the letters lifted out.</p>
@@ -372,6 +378,8 @@ def write(OUT, page, header, footer, X):
     X["parts"] = parts.write(OUT, door_page, X)
     import walk
     X["walk"] = walk.write(OUT, door_page, X)
+    import gym                                            # the gymnasium, after the walk it borrows from (17 November 2026)
+    X["gym_steps"] = gym.write(OUT, door_page, X["LW"])
 
     # Connections: the crosswalks (connections.py).
     import connections
