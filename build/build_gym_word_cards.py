@@ -23,6 +23,8 @@ codes["live"] = DOLCH_CODES["live"]            # Dolch lists live with the verbs
 for w, c in NOUN_CODES.items(): codes.setdefault(w, c)
 for src in [heart_words.CODES, apart.CODES, ablaut.CODES, contractions.CODES, builder.CODES]:
     for w, c in src.items(): codes.setdefault(w, c)
+from gym import GYM_CODES
+for w, c in GYM_CODES.items(): codes.setdefault(w, c)
 codes.update(__import__('site_codes').SITE_RULED)
 for w, c in json.loads((HERE / 'data' / 'auto_codes.json').read_text()).items(): codes.setdefault(w, c)
 LW.W.clear(); LW.W.update(codes)
@@ -34,15 +36,17 @@ ELP_LIST = {w: n for n, v in ELP["lists"].items() for w in v["words"]}
 # (file name, set title, level key in dolch.json, columns, rows, card width and height in inches)
 ROUNDS = json.loads((HERE / "data" / "gym.json").read_text(encoding="utf-8"))   # the gym's rounds (gym.py)
 STEPS, FIT = ROUNDS["STEPS"], ROUNDS["FIT"]
-NT = {"is": "isn’t", "are": "aren’t", "did": "didn’t", "can": "can’t", "will": "won’t", "could": "couldn’t", "would": "wouldn’t", "should": "shouldn’t"}
+NT = {"is": "isn’t", "are": "aren’t", "did": "didn’t", "can": "can’t", "will": "won’t", "could": "couldn’t", "would": "wouldn’t", "should": "shouldn’t", "have": "haven’t", "has": "hasn’t", "had": "hadn’t"}
+PERF = {"have", "has", "had"}      # on the beam when the round has an action after them: I have had it
 ACTIONS = {"go", "went", "get", "got", "hit", "met", "be", "spell", "has", "had", "have", "give", "gave", "live"}
 fit = lambda a: FIT.get(a) or ("are" if a == "men" else "is")
 
 def round_words(r):
     """(word, slot) for a round, in the order a sentence uses them."""
     ops = r.get("op", [])
-    acts = [o for o in ops if o in ACTIONS] + [a for a in r.get("act", []) if a]
-    beam = [o for o in ops if o and o != "=" and o not in ACTIONS]
+    up = PERF if any(r.get("act", [])) else set()
+    acts = [o for o in ops if o in ACTIONS and o not in up] + [a for a in r.get("act", []) if a]
+    beam = [o for o in ops if o and o != "=" and (o not in ACTIONS or o in up)]
     if "=" in ops: beam += [fit(a) for a in r["actor"]]
     out = [(w, "actor") for w in r["actor"]] + [(w, "on the beam") for w in beam]
     if r.get("not"):

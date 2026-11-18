@@ -1163,6 +1163,42 @@
      ],
      "tip": true,
      "news": "Everything comes loose: the beam word, the action, and who gets it."
+    },
+    {
+     "news": "<i>Have</i> goes up on the beam when an action follows it: <i>I have had it. Have we met?</i> The action after it takes its -en form.",
+     "actor": [
+      "I",
+      "she",
+      "we"
+     ],
+     "op": [
+      "have",
+      "has",
+      "had"
+     ],
+     "act": [
+      "",
+      "had",
+      "hit",
+      "met",
+      "got",
+      "went"
+     ],
+     "not": true,
+     "where": [
+      "",
+      "in"
+     ],
+     "what": [
+      "",
+      "it",
+      "him",
+      "box"
+     ],
+     "wdet": [
+      "the"
+     ],
+     "tip": true
     }
    ]
   }

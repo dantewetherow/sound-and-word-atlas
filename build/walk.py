@@ -100,6 +100,9 @@ def write(OUT, door_page, X):
     words = set(where) | set(X["list_words"]) | {w for w, *_ in X["morph"]} | {"legomorphic"} | {w for w in fam if w in LW.W} | set(P["sums"])
     words |= {"sign"}        # sign, before its walkthrough is built: in the walk now so sign and signal can be set side by side
     words |= set(X.get("heart_words", [])) | set(X.get("ablaut_words", []))             # words with a heart (heart_words.py)
+    from gym import GYM_CODES, words as gym_words     # every word the gymnasium can put on the board walks too
+    for w, c in GYM_CODES.items(): LW.W.setdefault(w, c)
+    words |= set(gym_words())
     AUTO = X.get("auto_codes", {})                     # marked by rule (auto_mark.py), for the walk only, labelled as such
     words |= {w for w in AUTO if w not in LW.W}
     elp = {w for L in X["elp"]["lists"].values() for w in L["words"]}

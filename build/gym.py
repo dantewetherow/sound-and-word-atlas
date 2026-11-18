@@ -15,7 +15,10 @@ import json, pathlib
 HERE = pathlib.Path(__file__).resolve().parent
 DATA = json.loads((HERE / "data" / "gym.json").read_text(encoding="utf-8"))
 STEPS, FIT = DATA["STEPS"], DATA["FIT"]
-NT = {"is": "isn’t", "are": "aren’t", "did": "didn’t", "can": "can’t", "will": "won’t", "could": "couldn’t", "would": "wouldn’t", "should": "shouldn’t"}
+NT = {"is": "isn’t", "are": "aren’t", "did": "didn’t", "can": "can’t", "will": "won’t", "could": "couldn’t", "would": "wouldn’t", "should": "shouldn’t", "have": "haven’t", "has": "hasn’t", "had": "hadn’t"}
+
+# Squeezes the gym needs that contractions.py doesn't draw yet; spelled as build_verb_cards.py has them.
+GYM_CODES = {"hadn’t": "c.h s.a c.d + | c.n ap c.t", "haven’t": "c.h s.a c.v | b.e + c.n ap c.t"}   # haven't as seven: the e is said weakly
 
 
 def words():
@@ -48,6 +51,7 @@ def codes():
     for src in [SC.SITE_CODES, heart_words.CODES, apart.CODES, ablaut.CODES, contractions.CODES, DOLCH_CODES, builder.CODES, NOUN_CODES]:
         for w, x in src.items(): c.setdefault(w, x)
     c.update(SC.SITE_RULED)
+    for w, x in GYM_CODES.items(): c.setdefault(w, x)
     for w, x in json.loads((HERE / "data" / "auto_codes.json").read_text(encoding="utf-8")).items(): c.setdefault(w, x)
     return c
 

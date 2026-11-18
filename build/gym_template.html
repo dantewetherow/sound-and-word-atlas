@@ -159,7 +159,7 @@
     <li><b>Did, can, will</b> (step 6). These sit on the beam and tip, and the action on the line below stays plain: <i>Did she go in it?</i> <i>Went</i> carries its own time, so with <i>went</i> the beam is empty and there’s nothing to tip. <i>Did she went?</i> is a crash: two words both carrying the time.</li>
     <li><b>Nouns</b> (steps 4 to 6). Dolch&rsquo;s nouns come into the gym at the step where they become decodable: <i>dog, cat, pig, bed, leg</i> at step 4, with <i>my</i>; <i>man, men, box, sun</i> at step 5, with <i>the, this</i> and <i>that</i>; <i>bell, grass, hill, milk, nest, stick</i> at step 6. The determiner has its own slot before the noun. Tap either word to walk it.</li>
     <li><b>Could, would, should</b> (step 7) join <i>can, will, must</i> on the beam, each with a plain action below, and each squeezes: <i>couldn&rsquo;t, wouldn&rsquo;t, shouldn&rsquo;t</i>.</li>
-    <li><b>Have, give, live</b> (step 8). <i>Have</i> is the plain form <i>has</i> was waiting for: <i>I have it, Did she have it?</i> <i>Give</i> and <i>gave</i> bring a second slot for who gets it: <i>She gave him the box.</i> Only things are given, never <i>it</i> or a person. <i>Live</i> takes a position and a place: <i>I live in it</i> beside <i>I am in it</i>.</li>
+    <li><b>Have, give, live</b> (step 8). <i>Have</i> is the plain form <i>has</i> was waiting for: <i>I have it, Did she have it?</i> <i>Give</i> and <i>gave</i> bring a second slot for who gets it: <i>She gave him the box.</i> Only things are given, never <i>it</i> or a person. <i>Live</i> takes a position and a place: <i>I live in it</i> beside <i>I am in it</i>. In round 5, <i>have</i> does its second job. With an action after it, it goes up on the beam, tips and takes <i>not</i>: <i>I have had it. Have we met? She hasn’t hit it.</i> The action after it takes its -en form. At this step the -en forms look just like the past (<i>had, hit, met, got</i>), so <i>I have went</i> is the one to catch: standard English says <i>gone</i>, which comes later on the path. With no action after it, <i>have</i> is the action again and can’t tip: we ask <i>Did I have it?</i>, not <i>Have I it?</i> <i>Could have had</i>, with two words on the beam, waits for a later step.</li>
     <li><b>Which</b> (step 5). When the question word is the actor, it asks the question itself, so the beam doesn’t tip: <i>Which is in it?</i> Questions where <i>which</i> is the place (<i>Which is she in?</i>) come later.</li>
     <li><b>The beam</b> holds the actor and the operator (<i>am, is, are</i>). Tip it to turn a claim into a question. Actions like <i>go</i> and <i>hit</i> sit on the second line and can't tip yet: that needs <i>do</i>, later on the path.</li>
     <li><b>Four verdicts.</b> <b>Works</b>: standard English. <b>Almost</b>: the meaning is clear and one word changes it to standard English. Many people say these at home; the board doesn't call them wrong, it shows the standard English way. <b>Missing a piece</b>: nothing is wrong, something is still to come. <b>Crash</b>: the pieces fight each other, and the board says why.</li>
@@ -198,13 +198,16 @@
   const ACTIONS = ['go', 'went', 'get', 'got', 'hit', 'met', 'be', 'spell', 'has', 'had', 'have', 'give', 'gave', 'live'];
   const TIMED = ['went', 'got', 'met', 'has', 'had', 'gave'];    // carry their own time, so they can't follow a frame word
   const PLAIN = { went: 'go', got: 'get', met: 'meet', has: 'have', had: 'have', gave: 'give' };
+  // have, has and had go up on the beam when an action follows them: I have had it, Have we met? The action then takes its -en form.
+  const PERF = ['have', 'has', 'had'];
+  const PART = { had: 'had', hit: 'hit', met: 'met', got: 'got', went: 'gone', gave: 'given', go: 'gone', get: 'got', give: 'given', be: 'been', live: 'lived', spell: 'spelled', has: 'had', have: 'had' };
   const FIT = /*FIT*/;
   const fitOf = a => FIT[a] || (/\bmen\b/.test(a) ? 'are' : 'is');   // a noun phrase takes is, or are when it's more than one
   const third = a => fitOf(a) === 'is';   // he, she, it, this, that, which, the dog: the -s forms (goes, has)
   const S3 = { go: 'goes', get: 'gets', spell: 'spells', have: 'has', give: 'gives', live: 'lives' };
   const ALONE = { be: ['in', 'on', 'up'], go: ['in', 'on', 'up', 'by'], get: ['in', 'on', 'up', 'by'] };
   const SELF = { I: ['me', 'myself'], we: ['us', 'ourselves'] };
-  const NT = { is: 'isn’t', are: 'aren’t', am: 'aren’t', did: 'didn’t', can: 'can’t', will: 'won’t', could: 'couldn’t', would: 'wouldn’t', should: 'shouldn’t' };   // am borrows aren't, and only in a question
+  const NT = { is: 'isn’t', are: 'aren’t', am: 'aren’t', did: 'didn’t', can: 'can’t', will: 'won’t', could: 'couldn’t', would: 'wouldn’t', should: 'shouldn’t', have: 'haven’t', has: 'hasn’t', had: 'hadn’t' };   // am borrows aren't, and only in a question
   const PEOPLE = ['me', 'him', 'us'];
   // Nouns come with a determiner in a slot of its own: [the / this / that / my] [dog].
   const NOUNS = ['dog', 'cat', 'pig', 'man', 'men', 'box', 'sun', 'bed', 'leg', 'hand', 'stick', 'bell', 'milk', 'hill', 'nest', 'grass'];
@@ -227,7 +230,7 @@
     const actor = NOUNS.includes(v.actor) ? `${v.adet || 'the'} ${v.actor}` : v.actor;
     const what = NOUNS.includes(v.what) ? `${v.wdet || 'the'} ${v.what}` : (v.what || '');
     let op = v.op === '=' ? fitOf(actor) : (v.op || ''), act = v.act || '';
-    const inOp = ACTIONS.includes(op); if (inOp) { act = op; op = ''; }
+    const inOp = ACTIONS.includes(op) && !(PERF.includes(op) && act); if (inOp) { act = op; op = ''; }   // have with an action after it stays up
     const t = !!op && !!tip && actor !== 'which';
     let not = v.not || '';
     if (not === 'nt' && !canNt(op, actor, t)) not = 'not';
@@ -333,9 +336,13 @@
     if (!op && act === 'be') return { kind: 'almost', std: text(s, [a, fitOf(a), w, x].filter(Boolean)), later: fitOf(a),
       fix: has('op', fitOf(a)) ? { op: fitOf(a), act: '' } : has('op', '=') ? { op: '=', act: '' } : null, after: `With ${q(a)}, standard English says ${q(fitOf(a))}.` };
     if (!op && S3[act] && third(a)) return { kind: 'almost', std: text(s, [a, S3[act], s.rec, w, x].filter(Boolean)), later: S3[act],
-      fix: has('act', S3[act]) ? { act: S3[act] } : null, after: `With ${q(a)}, standard English says ${q(S3[act])}.` };
+      fix: !s.inOp && has('act', S3[act]) ? { act: S3[act] } : s.inOp && has('op', S3[act]) ? { op: S3[act] } : null, after: `With ${q(a)}, standard English says ${q(S3[act])}.` };
     if (!op && act === 'has' && !third(a)) return { kind: 'almost', std: text(s, [a, 'have', w, x].filter(Boolean)), later: 'have',
-      fix: has('act', 'have') ? { act: 'have' } : null, after: `With ${q(a)}, standard English says ${q('have')}.` };
+      fix: !s.inOp && has('act', 'have') ? { act: 'have' } : s.inOp && has('op', 'have') ? { op: 'have' } : null, after: `With ${q(a)}, standard English says ${q('have')}.` };
+    if (PERF.includes(op) && act && op !== 'had' && (op === 'has') !== third(a)) { const o = third(a) ? 'has' : 'have';
+      return { kind: 'almost', std: text({ ...s, op: o }), later: o, fix: has('op', o) ? { op: o } : null, after: `With ${q(a)}, standard English says ${q(o)}.` }; }
+    if (PERF.includes(op) && act && PART[act] && PART[act] !== act) return { kind: 'almost', std: text({ ...s, act: PART[act] }), later: PART[act],
+      fix: has('act', PART[act]) ? { act: PART[act] } : null, after: `After ${q(op)}, standard English says ${q(PART[act])}.` };
     if (s.rec && SELF[a] && s.rec === SELF[a][0]) return { kind: 'almost', std: text(s, [a, op, act, SELF[a][1], x].filter(Boolean)), later: SELF[a][1] };
     if (act && !w && SELF[a] && x === SELF[a][0] && fam !== 'go' && act !== 'be') return { kind: 'almost', std: text(s, [a, op, act, SELF[a][1]].filter(Boolean)), later: SELF[a][1] };
     if (BE.includes(op) && op !== fitOf(a) && !(s.not === 'nt' && s.tip && a === 'I' && op === 'are'))
@@ -348,11 +355,12 @@
     else if (s.not && s.tip) base = 'That’s a question. “Not” stayed behind when the beam tipped.';
     if (a === 'which') base = op || !act ? 'That’s a question. “Which” is the actor, so the beam doesn’t tip.' : 'That’s a question. “Which” is the actor, so nothing needs to tip.';
     if (op === 'did' && act && !s.not) base += ' “Did” carries the time, so the action stays plain.';
+    if (PERF.includes(op) && act) base += op === 'had' ? ` “Had” on the beam carries the time, and ${q(act)} is the -en form.` : ` ${q(Cap(op))} is on the beam, so the action takes its -en form: ${q(act)}.`;
     if (hard(a, w, x) || (act === 'met' && x === 'it')) return { kind, line: 'It works, but it’s hard to picture. What would it look like?' };
     if (op && !act && !w && !x) return { kind, line: s.tip ? 'That works as a short question.' : `That works as an answer: “Who ${BE.includes(op) ? 'is in' : op === 'did' ? 'did it' : op + ' go'}?” “${text(s)}”` };
     if ((BE.includes(op) || act === 'be') && w && !x) return { kind, line: `${Cap(w)} what? The place is understood, like “I’m in” in a game.` };
     if (fam === 'go' && !w) return { kind, line: `${base} Go where? It can stay open.` };
-    if (act === 'met' && a === 'we' && !x) return { kind, line: 'We met: each other.' };
+    if (act === 'met' && a === 'we' && !x) return { kind, line: op ? `${base} Met who? Each other.` : 'We met: each other.' };
     if (!op && act === 'went') return { kind, line: `${base} “Went” carries its own time, so it needs no “did”.` };
     return { kind, line: base };
   }
@@ -407,7 +415,7 @@
     const seq = [];
     // A free not stays on the line below, because it doesn't tip. Squeezed to n't, it joins the operator on the beam.
     if (s.not === 'not') seq.push(['notw', 'not']);
-    if (s.inOp) seq.push(['op', s.act]); else if (r.act) seq.push(['act', s.act]);
+    if (s.inOp) { seq.push(['op', s.act]); if (r.act && PERF.includes(s.act)) seq.push(['act', '']); } else if (r.act) seq.push(['act', s.act]);
     if (family(s.act) === 'give' && opts(r, 'rec').length > 1) seq.push(['rec', s.rec]);
     if (opts(r, 'where').length > 1 || s.where) seq.push(['where', s.where]);
     if (s.wn) seq.push(['wdet', st.v.wdet], ['what', st.v.what]); else if (opts(r, 'what').length > 1 || s.what) seq.push(['what', s.what]);
@@ -425,6 +433,7 @@
     $('.tipnote').textContent = s.actor === 'which' ? '“Which” is the actor and asks the question itself, so the beam stays as it is.'
       : s.not === 'not' && s.op === 'am' && !s.tip ? '“Am” has no “n’t”, so “I am not” can’t squeeze. Tip it: the question borrows “aren’t”.'
       : s.not === 'not' && ['must', 'shall'].includes(s.op) ? `“${Cap(s.op)}n’t” comes later on the path.`
+      : !s.op && PERF.includes(s.act) && r.act && (r.op || []).some(o => PERF.includes(o)) ? `Here “${s.act}” is the action, so it can’t tip. Put an action after it, and “${s.act}” goes up on the beam.`
       : !s.op && s.act && r.tip ? (frames ? `${Cap(s.act)} carries its own time, so there’s nothing to tip. Put “did” on the beam to ask.` : `${Cap(s.act)} is an action. Actions can’t tip yet: that needs “do”, later on the path.`) : '';
     // pickers
     const sel = $('.gstep select');
@@ -461,7 +470,7 @@
       b.onclick = () => {
         if (v.fix) { apply(v.fix, v.after); return; }
         row.replaceChildren(); const t = document.createElement('p'); t.className = 'std';
-        t.textContent = `Standard English: ${v.std} (${q(v.later)} comes later on the path.)`; row.append(t);
+        t.textContent = `Standard English: ${v.std} (${q(v.later)} ${seen(v.later) ? 'isn’t in this round' : 'comes later on the path'}.)`; row.append(t);
       };
       const sp = document.createElement('span'); sp.textContent = 'Say it, then'; row.append(sp, b); vbox.append(row);
     }
@@ -476,6 +485,7 @@
       vbox.append(row);
     }
   }
+  const seen = w => Object.keys(STEPS).filter(n => +n <= st.step).some(n => STEPS[n].levels.some(r => Object.values(r).some(x => Array.isArray(x) && x.includes(w))));
   function apply(patch, after) {
     for (const [k, v] of Object.entries(patch)) { if (k === 'not' || opts(L(), k).includes(v)) { st.v[k] = v; flashKey = k; } }
     st.shown = false; render();
