@@ -17,6 +17,12 @@
 .gym .gseg button.locked { color: var(--soft); border-style: dashed; }
 .gym .gseg button.locked svg { width: 12px; height: 12px; margin-left: 4px; vertical-align: -1px; }
 .gym .unlock { font: inherit; font-size: 1rem; cursor: pointer; border: 0; background: var(--subject); color: var(--paper); border-radius: 999px; min-height: 44px; padding: 8px 20px; font-weight: 400; }
+.gym .gtally { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px 14px; margin: 6px auto 18px; font-size: 1rem; color: var(--soft); text-align: center; }
+.gym .gtally .pips { display: flex; gap: 7px; }
+.gym .gtally .pips i { width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--subject); }
+.gym .gtally .pips i.got { background: var(--subject); }
+.gym .gtally .say { max-width: 46ch; }
+.gym .gtally button { font: inherit; font-size: 1rem; cursor: pointer; border: 0; background: var(--subject); color: var(--paper); border-radius: 999px; min-height: 44px; padding: 8px 20px; }
 .gym .unlock[disabled] { background: var(--line); color: var(--soft); cursor: default; }
 .gym .news { margin: 0; color: var(--soft); font-size: 1rem; min-height: 1.5em; }
 .gym .news b { color: var(--subject); font-weight: 500; }
@@ -148,13 +154,14 @@
 </div>
 <p class="tipnote"></p>
 <section class="verdict" aria-live="polite"></section>
+<div class="gtally" aria-live="polite"></div>
 
 <details class="gmore">
   <summary>For teachers: how the gym works</summary>
   <ul>
     <li><b>Read first.</b> Change a word, have the learner read the whole sentence aloud, then press Check it. The verdict stays hidden until they've read it.</li>
     <li><b>Word cards.</b> Every word the gym uses is on the word cards, plain on one side and coded on the other, in a set for each step: <!--GYMCARDS-->.</li>
-    <li><b>Unlocking.</b> Each step on the path has a gym, and each gym has rounds. When a learner decodes everything in a round, press <i>Decoded!</i> to unlock the next one: a new slot, or a slot coming loose. A round never takes a word away: every slot keeps the words it had in earlier rounds and steps, and the arrows reach the round&rsquo;s new words first. Decoding a round means building and reading sentences with its new words. You can also jump to any round. After the last round, <i>On to step</i> opens the next step’s gym at its first round; steps stay open, so you choose when a learner is ready for the next one. Each round keeps the words from the one before.</li>
+    <li><b>Unlocking.</b> Each step on the path has a gym, and each gym has rounds. In each round, five sentences open the next one: five different sentences that work on the first <i>Check it</i>, each using one of the round&rsquo;s new words (the dots under the verdict count them, and say which words are new). A sentence reached with <i>Show me</i> or a <i>Fill</i> button doesn&rsquo;t count, and after an Almost, a Missing or a Crash the fix doesn&rsquo;t count either; the next fresh sentence does. The count is kept on this device only. <i>Decoded!</i> is your skip: it opens the next round without the five. A round never takes a word away: every slot keeps the words it had in earlier rounds and steps, and the arrows reach the round&rsquo;s new words first. You can also jump to any round. After the last round, <i>On to step</i> opens the next step’s gym at its first round; steps stay open, so you choose when a learner is ready for the next one. Each round keeps the words from the one before.</li>
     <li><b>Not</b> (step 4). <i>Add not</i> puts it at the start of the line below: it doesn’t tip, so it stays put when the beam does (<i>Is he not in it?</i>). <i>Squeeze it</i> joins it to the operator, so it hops up onto the beam and tips with it (<i>Isn’t he in it?</i>). <i>Am</i> has no <i>n’t</i>, so <i>I am not</i> can’t squeeze; the question borrows <i>aren’t</i> (<i>Aren’t I in it?</i>). Squeezing the actor and operator together (<i>I’m, he’s, we’re</i>) is a different squeeze, for later.</li>
     <li><b>Did, can, will</b> (step 6). These sit on the beam and tip, and the action on the line below stays plain: <i>Did she go in it?</i> <i>Went</i> carries its own time, so with <i>went</i> the beam is empty and there’s nothing to tip. <i>Did she went?</i> is a crash: two words both carrying the time.</li>
     <li><b>Nouns</b> (steps 4 to 6). Dolch&rsquo;s nouns come into the gym at the step where they become decodable: <i>dog, cat, pig, bed, leg</i> at step 4, with <i>my</i>; <i>man, men, box, sun</i> at step 5, with <i>the, this</i> and <i>that</i>; <i>bell, grass, hill, milk, nest, stick</i> at step 6. The determiner has its own slot before the noun. Tap either word to walk it.</li>
@@ -380,7 +387,13 @@
   const st = { step: 1, level: 0, tip: false, v: { actor: 'I', adet: '', op: '=', act: '', rec: '', not: '', where: '', what: '', wdet: '' }, shown: false };
   let open = {};
   try { open = JSON.parse(localStorage.getItem('gym-open') || '{}') || {}; } catch (e) { open = {}; }
-  const save = () => { try { localStorage.setItem('gym-open', JSON.stringify(open)); } catch (e) {} };
+  const save = () => { try { localStorage.setItem('gym-open', JSON.stringify(open)); localStorage.setItem('gym-tally', JSON.stringify(tally)); } catch (e) {} };
+  // Five that work (18 November 2026): five different sentences that work on the first Check, each using one of the round's new
+  // words (gym.kit's "fresh"), open the next round. Show me and Fill don't count, and after a miss the fix doesn't count either:
+  // the next fresh sentence does. Counts stay on this device only.
+  const GOAL = 5;
+  let tally = {}, fixing = false, said = '';
+  try { tally = JSON.parse(localStorage.getItem('gym-tally') || '{}') || {}; } catch (e) { tally = {}; }
   const L = () => STEPS[st.step].levels[st.level];
   const opts = (r, k) => r[k] || [''];
   function fit(moved) {
@@ -391,6 +404,55 @@
     }
   }
   const cur = (v = st.v) => norm(v, st.tip);
+  const roundKey = () => st.step + '.' + st.level;
+  function usesNew(s) {
+    const F = L().fresh || {}, hit = (k, w) => !!w && (F[k] || []).includes(w);
+    if (!Object.keys(F).length) return true;                              // a round that brings nothing new: any sentence counts
+    if (F.not && s.not) return true;
+    return hit('actor', st.v.actor) || (s.an && hit('adet', st.v.adet)) || (!!s.op && hit('op', s.op))
+      || (s.inOp && !PERF.includes(s.act) && hit('op', s.act)) || hit('act', s.act) || hit('rec', s.rec) || hit('where', s.where)
+      || hit('what', st.v.what) || (s.wn && hit('wdet', st.v.wdet));
+  }
+  function newList() {
+    const F = L().fresh || {}, ws = [...new Set(Object.entries(F).flatMap(([k, v]) => k === 'not' ? ['not'] : v))];
+    return ws.map(q).join(', ');
+  }
+  function score(v, s, helped) {
+    const got = tally[roundKey()] || [];
+    if (got.length >= GOAL) { said = ''; return; }
+    if (helped) { fixing = false; said = 'Shown or filled, so it doesn’t count. Now build a new one.'; return; }
+    if (v.kind !== 'works') { fixing = true; said = ''; return; }
+    if (fixing) { fixing = false; said = 'Fixed! A fix doesn’t count, so build a new sentence.'; return; }
+    if (!usesNew(s)) {                                                     // "I have it" in the round where have goes up on the beam
+      const F = L().fresh || {}, there = Object.values(F).flat().find(w => typeof w === 'string' && words(s).includes(w));
+      said = there ? `It works, but ${q(there)} isn’t doing its new job yet. ${(L().news || '').replace(/<[^>]+>/g, '')}` : `It works, but to count it needs a new word: ${newList()}.`; return; }
+    const t = text(s);
+    if (got.includes(t)) { said = 'That one already counts. Build a different one.'; return; }
+    tally[roundKey()] = [...got, t];
+    if (tally[roundKey()].length >= GOAL) {
+      const lastRound = st.level >= STEPS[st.step].levels.length - 1;
+      if (!lastRound) open[st.step] = Math.max(open[st.step] || 0, st.level + 1);
+      said = lastRound ? (STEPS[st.step + 1] ? `Five! Step ${st.step} is done.` : 'Five! That’s every round.') : `Five! Round ${st.level + 2} is open.`;
+    } else said = '';
+    save();
+  }
+  function showTally() {
+    const box = $('.gtally'), got = (tally[roundKey()] || []).length, lastRound = st.level >= STEPS[st.step].levels.length - 1;
+    box.replaceChildren();
+    const pips = document.createElement('span'); pips.className = 'pips'; pips.setAttribute('role', 'img');
+    pips.setAttribute('aria-label', `${Math.min(got, GOAL)} of ${GOAL} sentences`);
+    for (let i = 0; i < GOAL; i++) { const d = document.createElement('i'); if (i < got) d.className = 'got'; pips.append(d); }
+    const say = document.createElement('span'); say.className = 'say';
+    const n = GOAL - got, more = n === 1 ? 'One more that works' : `${n} more that work`;
+    say.textContent = said || (got >= GOAL ? 'Round decoded.' : `${more} on the first try${newList() ? `, ${n === 1 ? '' : 'each '}with a new word: ${newList()}` : ''}.`);
+    box.append(pips, say);
+    if (got >= GOAL && (!lastRound || STEPS[st.step + 1])) {
+      const b = document.createElement('button'); b.type = 'button';
+      if (lastRound) { b.dataset.step = st.step + 1; b.textContent = `On to step ${st.step + 1}`; }
+      else { b.dataset.level = st.level + 1; b.textContent = `On to round ${st.level + 2}`; }
+      box.append(b);
+    }
+  }
 
   // ---- drawing ----
   const $ = s => document.querySelector(s);
@@ -416,7 +478,7 @@
   let shownRound = '';
   function render() {
     // A new round opens on its own words: every slot goes back to the round's first word (the slots keep the earlier words too).
-    if (shownRound !== st.step + '.' + st.level) { shownRound = st.step + '.' + st.level; for (const k of Object.keys(st.v)) st.v[k] = k === 'not' ? '' : opts(L(), k)[0]; }
+    if (shownRound !== st.step + '.' + st.level) { shownRound = st.step + '.' + st.level; fixing = false; said = ''; for (const k of Object.keys(st.v)) st.v[k] = k === 'not' ? '' : opts(L(), k)[0]; }
     fit();
     const r = L(), s = cur();
     left.replaceChildren(); mid.replaceChildren(); right.replaceChildren(); flow.replaceChildren();
@@ -463,6 +525,7 @@
     ub.disabled = last && !nextStep; ub.textContent = !last ? 'Decoded! Unlock the next round' : nextStep ? `Decoded! On to step ${nextStep}` : 'Every round is unlocked';
     flashKey = null;
     if (!st.shown) showWait();
+    showTally();
     if ($('#every').open) listAll();
   }
 
@@ -470,9 +533,10 @@
   const vbox = $('.verdict');
   function showWait() { vbox.className = 'verdict'; vbox.innerHTML = '<p class="wait">Read it aloud, then check it.</p>'; }
   const HEAD = { works: 'Works!', almost: 'Almost.', missing: 'Missing a piece.', crash: 'Crash.' };
-  function show(extra) {
+  function show(extra, helped) {
     const s = cur(), v = verdict(s, L());
     st.shown = true;
+    score(v, s, helped);
     vbox.className = 'verdict ' + v.kind; vbox.replaceChildren();
     const h = document.createElement('div'); h.className = 'head'; h.textContent = HEAD[v.kind]; vbox.append(h);
     const p = document.createElement('p'); p.className = 'line';
@@ -498,12 +562,13 @@
       }
       vbox.append(row);
     }
+    showTally();
   }
   const seen = w => Object.keys(STEPS).filter(n => +n <= st.step).some(n => STEPS[n].levels.some(r => Object.values(r).some(x => Array.isArray(x) && x.includes(w))));
   function apply(patch, after) {
     for (const [k, v] of Object.entries(patch)) { if (k === 'not' || opts(L(), k).includes(v)) { st.v[k] = v; flashKey = k; } }
     st.shown = false; render();
-    setTimeout(() => show(after), 450);
+    setTimeout(() => show(after, true), 450);
   }
 
   // ---- every sentence at this level ----

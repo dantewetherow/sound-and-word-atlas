@@ -65,6 +65,15 @@ def kit(STEPS):
         for flag in ("not", "tip"):
             if own.get(flag) or any(r.get(flag) for r in back): lv[flag] = True
         lv["own"] = {s: own[s] for s in SLOTS if s in own} | {f: own[f] for f in ("not", "tip") if f in own}
+    # What each round brings that the round before it didn't have, slot by slot: the words a sentence must use to count
+    # towards unlocking the next round (gym_template.html, "five that work").
+    for k, (n, i) in enumerate(order):
+        lv, prev = out[n]["levels"][i], (out[order[k - 1][0]]["levels"][order[k - 1][1]] if k else {})
+        had = {s: set(prev.get(s, [])) for s in SLOTS}
+        had["act"] |= {o for o in prev.get("op", []) if o in ACTIONS and o not in PERF}   # go and hit rode in the operator slot: not new as actions
+        fresh = {s: [w for w in lv["own"].get(s, []) if w and w != "=" and w not in had[s]] for s in SLOTS}
+        lv["fresh"] = {s: v for s, v in fresh.items() if v}
+        if lv.get("not") and not prev.get("not"): lv["fresh"]["not"] = True
     return out
 
 
