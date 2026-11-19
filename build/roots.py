@@ -885,6 +885,192 @@ LEUK = {
 ROOTS = [LEG, HAP, DEUK, SEM, MED, LEUK]
 
 
+# ------------------------------------------------------------------ *per-
+# Made 19 November 2026, as a word study of experiment and experience. The word list follows the Indo-European Lexicon's
+# entry (Pokorny's per- 2e, to dare, to risk, to try), fetched that day: fear, experience, experiment, expert, peril,
+# perilous, parlous, empiric, pirate. Etymonline's own pages weren't reachable that day. The Middle English Dictionary's
+# entry for experiment was. The marks (data/family_codes.json) follow very (per, closed: a short e) and here (pe, open: a
+# long e with the vault), and the pair's two syllable breaks are the page's lesson.
+PER_ROADS = [
+    ("Latin <i>exper&imacr;r&imacr;</i>", "to try out, to put to the test", [("peri", "peri"), ("pert", "pert")]),
+    ("Latin <i>per&imacr;culum</i>", "a trial; a danger", [("peril", "peril, parl")]),
+    ("Greek <i>peira</i>, <i>peir&amacr;n</i>", "a trial; to try, to attack", [("pir", "pir")]),
+    ("Old English <i>f&aelig;r</i>", "a danger, a sudden attack: a word English inherited", [("fear", "fear")]),
+]
+PER_CLUSTERS = [
+    {"key": "peri", "label": "peri", "spells": ["peri"], "head": "try, test",
+     "road": "Latin <i>exper&imacr;r&imacr;</i>, to try out: ex- and the verb&rsquo;s stem, <i>per&imacr;-</i>",
+     "note": "The i is the stem&rsquo;s own vowel, and it stays in every word. It also decides how the e before it sounds: see "
+             "<a href=\"#break-h\">Where the syllable breaks</a>.",
+     "groups": [
+         [("experiment", ["ex-", "peri", "-ment"], "a test you set up, to find something out"),
+          ("experimental", ["ex-", "peri", "-ment", "-al"], "done as a test; new and untried"),
+          ("experimentation", ["ex-", "peri", "-ment", "-ation"], "the work of testing")],
+         [("experience", ["ex-", "peri", "-ence"], "what you learn by living through things"),
+          ("experienced", ["ex-", "peri", "-enc(e)", "-ed"], "having lived through it, and learned"),
+          ("experiential", ["ex-", "peri", "-ent", "-ial"], "learned by doing: the c of -ence is a t again")],
+     ]},
+    {"key": "pert", "label": "pert", "spells": ["pert"], "head": "tried, tested",
+     "road": "Latin <i>expertus</i>, tried, tested: the past form of <i>exper&imacr;r&imacr;</i>",
+     "note": "An expert is someone who has been tried: the word is the Latin past form, as <i>collect</i> is from <i>lectus</i>.",
+     "groups": [
+         [("expert", ["ex-", "pert"], "someone tried and found skilled"), ("expertise", ["ex-", "pert", "-ise"], "the skill of an expert")],
+     ]},
+    {"key": "peril", "label": "peril, parl", "spells": ["peril", "parl"], "head": "a trial; a danger",
+     "road": "Latin <i>per&imacr;culum</i>, a trial, a danger, worn down in French",
+     "note": "<i>Parlous</i> is <i>perilous</i> worn down in speech: an old word for risky, still heard in a parlous state of affairs.",
+     "groups": [
+         [("peril", None, "danger", "peril"), ("perilous", ["peril", "-ous"], "full of danger"),
+          ("parlous", None, "risky, dangerous: <i>perilous</i>, worn down", "parl")],
+     ]},
+    {"key": "pir", "label": "pir", "spells": ["pir"], "head": "a trial; to try",
+     "road": "Greek <i>peira</i>, a trial, and <i>peir&amacr;n</i>, to try, to attack, through Latin, which wrote Greek&rsquo;s ei as i",
+     "note": "<i>Pirate</i> and <i>empirical</i> keep the same i, and the path&rsquo;s first idea sorts its sound: <i>pi</i> is "
+             "open and long, <i>pir</i> is closed and short.",
+     "groups": [
+         [("empirical", ["em-", "pir", "-ic", "-al"], "known by trying and looking, not from theory")],
+         [("pirate", None, "one who attacks ships: in Greek, one who tries an attack", "pir")],
+     ]},
+    {"key": "fear", "label": "fear", "spells": ["fear"], "head": "danger, and the feeling it brings",
+     "road": "Old English <i>f&aelig;r</i>, a danger, a sudden attack. English inherited it and never borrowed it",
+     "groups": [
+         [("fear", None, "the feeling that danger is near", "fear"), ("fearful", ["fear", "-ful"], "full of fear")],
+     ]},
+]
+PARTS.update({
+    "ex-": "out, thoroughly: Latin <i>ex</i>",
+    "-ment": "the act, the means or the result of: Latin <i>-mentum</i>",
+    "-ation": "the act or process of",
+    "-ial": "having to do with",
+    "-ise": "the state or skill of: French <i>-ise</i>",
+    "-ed": "a past form; having had",
+    "em-": "in: Greek <i>en</i>, written <i>em-</i> before p",
+})
+ROOT_PARTS.update({
+    "peri": "try, test: Latin <i>exper&imacr;r&imacr;</i>, to try out",
+    "pert": "tried, tested: Latin <i>expertus</i>",
+    "peril": "a trial, a danger: Latin <i>per&imacr;culum</i>, worn down in French",
+    "pir": "a trial; to try: Greek <i>peira</i>",
+    "fear": "a danger; the feeling it brings: Old English <i>f&aelig;r</i>",
+})
+SWALK = [   # the stress walk: (word, [(syllable, 1 main stress | 2 a lighter stress | 0 weak)], what changed)
+    ("experiment", [("ex", 0), ("per", 1), ("i", 0), ("ment", 0)], "the noun: <i>per</i> takes the stress, and its e is short"),
+    ("experimental", [("ex", 0), ("per", 2), ("i", 0), ("men", 1), ("tal", 0)], "the stress walks to <i>men</i>, and its weak e comes back full"),
+    ("experimentation", [("ex", 0), ("per", 2), ("i", 0), ("men", 0), ("ta", 1), ("tion", 0)], "on again, to <i>ta</i>: <i>men</i> goes weak, and the t says sh before <i>-ion</i>"),
+    ("experience", [("ex", 0), ("pe", 1), ("ri", 0), ("ence", 0)], "<i>pe</i> takes the stress, and its e is long"),
+    ("experiential", [("ex", 0), ("pe", 2), ("ri", 0), ("en", 1), ("tial", 0)], "the stress walks to <i>en</i>, the c is a t, and the t says sh"),
+    ("expert", [("ex", 1), ("pert", 0)], "the stress sits on the prefix, and <i>per</i> is an r unit, as in <i>her</i>"),
+    ("expertise", [("ex", 2), ("per", 0), ("tise", 1)], "a French ending takes the stress, and keeps its French sound"),
+]
+SWALK_CSS = """<style>
+.swalk{display:grid;gap:10px;margin:18px 0 6px}
+.swalk .pwr{display:grid;grid-template-columns:minmax(9rem,max-content) 1fr;gap:4px 18px;align-items:end;padding:10px 14px;border:1px solid var(--line);border-radius:12px;background:var(--card)}
+.swalk .pws{display:flex;align-items:flex-end;gap:2px;font-family:var(--display);line-height:1}
+.swalk .pws span{padding:0 1px}
+.swalk .pw0{font-size:1.15rem;color:var(--soft)}
+.swalk .pw2{font-size:1.55rem;color:var(--ink)}
+.swalk .pw1{font-size:2.2rem;color:var(--verb,#b5402f);font-weight:600;transform:translateY(-6px)}
+.swalk .pwr p{grid-column:1/-1;margin:0;color:var(--soft);font-size:.95rem}
+.swalk .pwd{color:var(--line);font-size:1.1rem}
+.pwkey{color:var(--soft);font-size:.92rem;margin:0}
+.ptime{list-style:none;margin:16px 0 4px;padding:0 0 0 18px;border-left:3px solid var(--line);display:grid;gap:14px}
+.ptime li{position:relative}
+.ptime li::before{content:"";position:absolute;left:-26px;top:.45em;width:13px;height:13px;border-radius:50%;background:var(--card);border:3px solid var(--modal,#3f6488)}
+.ptime b{display:block}
+.ptime .now::before{background:var(--modal,#3f6488)}
+@media (max-width:560px){.swalk .pwr{grid-template-columns:1fr}}
+</style>"""
+def _swalk():
+    rows = []
+    for w, sy, why in SWALK:
+        parts = '<span class="pwd">&middot;</span>'.join(f'<span class="pw{k}">{s}</span>' for s, k in sy)
+        aria = "-".join(s.upper() if k == 1 else s for s, k in sy)
+        rows.append(f'<div class="pwr"><span class="pww"><b>{w}</b></span><span class="pws" role="img" aria-label="{aria}">{parts}</span><p>{why}</p></div>')
+    return (SWALK_CSS + '<div class="swalk">' + "".join(rows) + '</div><p class="pwkey">Large and red: the main stress. '
+            'Middle: a lighter stress. Small and grey: weak, where the vowel is said quickly, often as the sound in the a of <i>about</i>.</p>')
+PER_TIME = ('<ol class="ptime">'
+    '<li><b>Proto-Indo-European <i>*per-</i></b>to try, to risk</li>'
+    '<li><b>Latin <i>exper&imacr;r&imacr;</i>, to try out</b>One verb, three words from it: <i>exper&imacr;mentum</i>, a trial or a proof; '
+    '<i>experientia</i>, a trying, and the knowing that comes of it; <i>expertus</i>, tried</li>'
+    '<li><b>French, then English, in the 1300s</b><i>Experiment</i> and <i>experience</i> arrive meaning nearly the same thing: a trial, '
+    'a proof, what trying shows. The Middle English Dictionary&rsquo;s <i>experiment</i> is a test, a proof, even a tried remedy for an illness</li>'
+    '<li><b>English since</b>The two drift apart. An <i>experiment</i> becomes the test you set up; <i>experience</i>, what you have lived through</li>'
+    '<li class="now"><b>French today</b>Still one word. <i>Exp&eacute;rience</i> means both, and a French science class does <i>une exp&eacute;rience</i></li>'
+    '</ol>')
+PER = {
+    "slug": "per", "root": "*per-", "gloss": "to try, to risk", "kind": "a root family: a word study",
+    "h1_s": "*per- means &lsquo;try&rsquo; or &lsquo;risk&rsquo;",
+    "lead": "To try, to risk. From this Proto-Indo-European root Latin made <i>exper&imacr;r&imacr;</i>, to try out, with <i>expertus</i>, "
+            "tried, and <i>per&imacr;culum</i>, a trial or a danger; Greek made <i>peira</i>, a trial; and English kept <i>fear</i>. "
+            "At the centre of the family are two words that began as one, <i>experiment</i> and <i>experience</i>: the same spelling "
+            "up to the i, two different sounds for the e, and a history that explains both.",
+    "drawn": ("experience", "experience, marked: ex + peri + ence, with the vault that makes the e long"),
+    "sources": [("Indo-European Lexicon, per- 2e (Linguistics Research Center, University of Texas at Austin), which follows Pokorny: the list this family is drawn from", "https://lrc.la.utexas.edu/lex/master/1493"),
+                ("Middle English Dictionary, <i>experiment</i> (n.): a test, a proof, a remedy, a feat", "https://quod.lib.umich.edu/m/middle-english-dictionary/dictionary/MED14948"),
+                ("Etymonline: <i>experiment</i>, <i>experience</i>, <i>expert</i>, <i>peril</i>, <i>empirical</i>, <i>pirate</i> and <i>fear</i>, each with its road", "https://www.etymonline.com/search?q=experiment"),
+                ("Noam Chomsky and Morris Halle, <i>The Sound Pattern of English</i> (Harper &amp; Row, 1968), on the vowel shortening three syllables from the end and the lengthening before i and a vowel", "../credits.html"),
+                ("Geoffrey Chaucer, the Wife of Bath&rsquo;s Prologue, which opens on <i>experience</i> against the authority of books", "https://www.etymonline.com/search?q=experience")],
+    "roads": PER_ROADS, "clusters": PER_CLUSTERS, "parts": PARTS, "root_parts": ROOT_PARTS,
+    "extra": [
+        ("one", "Two words that were one",
+         ["Latin had one verb, <i>exper&imacr;r&imacr;</i>, to try out, and made nouns from it that English took twice. Here is the "
+          "time-lapse, the <a href=\"../definitions.html#def-diachronic\">diachronic</a> view:"],
+         [("experiment", "the test you set up"), ("experience", "what trying leaves you with")], PER_TIME),
+        ("break", "Where the syllable breaks",
+         ["Say them slowly: ex-<b>per</b>-i-ment, ex-<b>pe</b>-ri-ence. The letters match up to the i, but the e is short in one and "
+          "says its name in the other. The notation draws the reason with the path&rsquo;s first idea, <a href=\"../steps/01.html\">open "
+          "or closed</a>. In <i>experiment</i> the r closes the syllable, <i>per</i>, as it does in <i>very</i>, and the e is short. "
+          "In <i>experience</i> the syllable is open, <i>pe</i>, and the i reaches back over the r and makes the e long, as the e "
+          "of <i>here</i> is long. That is the snapshot, the synchronic view: what English does now.",
+          "Underneath are two patterns that Chomsky and Halle set out in <i>The Sound Pattern of English</i>. A stressed vowel with "
+          "two syllables after it tends to be short: <i>divine</i> but <i>divinity</i>, <i>serene</i> but <i>serenity</i>, "
+          "<i>nation</i> but <i>national</i>. That is <i>experiment</i>. But a vowel before one consonant, then an i, then another "
+          "vowel tends to be long, even with two syllables after it: <i>Canada</i> but <i>Canadian</i>, <i>comedy</i> but "
+          "<i>comedian</i>, <i>colony</i> but <i>colonial</i>. That is <i>experience</i>, where the i stands before the e of "
+          "<i>-ence</i>.",
+          "They are tendencies, not laws. <i>Obesity</i> keeps the long e of <i>obese</i>, and <i>Italian</i> has a short a where "
+          "<i>Canadian</i> has a long one. Teach the syllable breaks, which the notation shows, and let the family carry the rest."],
+         [("experiment", "per is closed: a short e"), ("experience", "pe is open, and the i makes the e long")]),
+        ("stress", "The stress walks, and the spelling holds",
+         ["Add a suffix and the stress moves. Every vowel it leaves goes weak, and a weak vowel it lands on comes back full. The "
+          "letters hold still while the sounds change, and that is why the spelling is a better guide to the family than the sound.",
+          "<i>Experiential</i> has a t where <i>experience</i> has a c: <i>-ence</i> and <i>-ential</i>, as in <i>essence</i> and "
+          "<i>essential</i>, <i>confidence</i> and <i>confidential</i>. Latin wrote both with a t, <i>experientia</i>; French and "
+          "English wrote the noun with a c and kept the t in <i>-ential</i>, where it says sh before <i>-ial</i>, as it does in "
+          "<i>notation</i>."],
+         [], _swalk()),
+        ("sounds", "One spelling, three sounds",
+         ["In the Latin words the root keeps one spelling, <i>per</i>, and its e says three things. <i>Per</i> is closed and "
+          "short in <i>experiment</i> and <i>peril</i>, open and long in <i>experience</i>, and an r unit in <i>expert</i>, as in "
+          "<i>her</i>. The Greek road does the same with its i: open and long in <i>pirate</i>, closed and short in "
+          "<i>empirical</i>."],
+         [("experiment", "per: short"), ("experience", "pe: long"), ("expert", "per: an r unit"), ("peril", "per: short"),
+          ("pirate", "pi: long"), ("empirical", "pir: short")]),
+        ("speller", "For the speller",
+         ["<b>Per, not pir or pur.</b> The vowel is weak in <i>experiment</i> and hard to hear. <i>Expert</i> and <i>peril</i> say "
+          "the e plainly, and they&rsquo;re the same root.",
+          "<b>-iment, not -ament.</b> The i is the stem&rsquo;s own vowel, and the same i is in <i>experience</i>: "
+          "ex + peri + ment, ex + peri + ence.",
+          "<b>-ience, not -iance.</b> The noun comes from Latin&rsquo;s present form, <i>experient-</i>, with an e, as "
+          "<i>patience</i> goes with <i>patient</i>. And where the stress lands on it, the t comes back: <i>experiential</i>."], []),
+    ],
+    "students": ["experiment", "experience", "expert", "peril", "pirate", "fear"],
+    "s_lead": "These words come from one old word that meant <i>try</i>, or <i>take a risk</i>.",
+    "s_pair": [("experiment", "You try something, to find out."), ("experience", "What you learn by living and trying.")],
+    "s_paras": ["Say them slowly: ex-<b>per</b>-i-ment, ex-<b>pe</b>-ri-ence.",
+                "In <b>per</b>, the r closes the syllable, so the e is short.",
+                "In <b>pe</b>, the syllable is open, so the e says its name.",
+                "A <b>pirate</b> was someone who tried an attack. <b>Fear</b> is what you feel when danger is near. Same old word."],
+    "uc": "the word list follows the Indo-European Lexicon, which follows Pokorny, fetched on 19 November 2026. Etymonline&rsquo;s "
+          "own pages weren&rsquo;t reachable that day, so its links here are searches. Next: check the family against Etymonline "
+          "and Watkins, and the marks of <i>experience</i> and <i>experiential</i> (a vault from the i to the e) against how the "
+          "site marks <i>here</i> and <i>serious</i>.",
+    "label": "Root family: *per-",
+    "desc": "A word study of experiment and experience: the root *per-, to try or risk, and its family (expert, peril, pirate, empirical, fear), with why the e is short in one and long in the other, how the stress walks, and how two words that were one came apart.",
+}
+ROOTS = [LEG, HAP, DEUK, SEM, MED, LEUK, PER]
+
+
 def bold_root(word, spelling):
     i = word.find(spelling)
     return html.escape(word) if i < 0 else html.escape(word[:i]) + "<b>" + html.escape(spelling) + "</b>" + html.escape(word[i + len(spelling):])
@@ -1107,16 +1293,21 @@ def write(OUT, page, header, footer, X):
 """
             spell_of = {w: sp for _, _, words in R["branches"] for w, _, sp, _ in words}
         kids = "".join(f'<li>{bold_root(w, spell_of[w])}</li>' for w in R["students"])
-        dw, dl = R["drawn"]
+        dw, dl = R["drawn"][:2]
         drawn = X["svg_of"](dw, 58, label=dl)
         import landing          # *leg- has legomorphic built up a layer at a time, as the home page had until 12 November 2026
         drawn_hero = landing.lego_block(X["LW"]) if R["slug"] == "leg" else drawn
         extra = "".join(f"""<section class="about t-only" aria-labelledby="{sid}-h"><div class="wrap">
 <h2 id="{sid}-h">{head}</h2>
 {"".join(f'<p class="sub">{t}</p>' for t in paras)}
-{drawn_row(row)}
+{drawn_row(row)}{more[0] if more else ""}
 </div></section>
-""" for sid, head, paras, row in R.get("extra", []))
+""" for sid, head, paras, row, *more in R.get("extra", []))      # a fifth item is an illustration: a timeline, a stress walk
+        # The learner's view can carry a marked pair and a few short lines (the *per- word study, 19 November 2026).
+        s_more = ""
+        if R.get("s_pair"):
+            pair = "".join(f'<figure class="word">{X["svg_of"](w, 72, label=f"{w}, marked")}<figcaption>{c}</figcaption></figure>' for w, c in R["s_pair"])
+            s_more = f'<div class="words rrow s-pair">{pair}</div>' + "".join(f'<p class="s-line">{x}</p>' for x in R.get("s_paras", []))
         srcs = "".join(f'<li><a href="{u}">{t}</a></li>' for t, u in R["sources"])
         body = f"""{header(1)}
 <main class="root-page">
@@ -1129,6 +1320,7 @@ def write(OUT, page, header, footer, X):
 <section class="about s-only"><div class="wrap">
 <p class="s-lead">{R["s_lead"]}</p>
 <ul class="rkids">{kids}</ul>
+{s_more}
 </div></section>
 {middle}{extra}<section class="about t-only" aria-labelledby="src-h"><div class="wrap prose">
 <h2 id="src-h">Sources</h2>

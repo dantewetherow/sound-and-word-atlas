@@ -450,4 +450,15 @@ L.append(F("leuk", "<b>*leuk-</b> means light. Latin made it <b>lustr</b> (<i>il
     ["In <i>illustrate</i> the prefix is <i>in-</i>, in, into, written <i>il-</i> before l; in <i>illegal</i> it means not. Two prefixes, spelled alike.",
      "The check ends with <i>lightening</i>, making lighter. <i>Lightning</i>, the flash, is the same family with no e. The <i>light</i> that means not heavy sounds the same and comes from another root."]))
 
+L.append(F("per", "<b>*per-</b> means to try, to risk. Latin made it <b>peri</b> (<i>experiment</i>, <i>experience</i>), <b>pert</b> (<i>expert</i>) and <b>peril</b>; Greek made it <b>pir</b> (<i>empirical</i>); English kept <b>fear</b>.",
+    [("experiment", "We did an experiment with ice."), ("experimental", "The plane is experimental."), ("experience", "Camp was a good experience."),
+     ("experienced", "He is an experienced pilot."), ("expert", "Ask an expert."), ("expertise", "We need her expertise."),
+     ("perilous", "The path up the hill was perilous."), ("empirical", "Science needs empirical tests.")],
+    ("One spelling, two sounds: <i>per</i> is closed in experiment, <i>pe</i> is open in experience.", ["experiment", "experience"]),
+    ["ex + peri + ment", "ex + peri + ence", "ex + pert", "peril + ous", "ex + peri + ment + al", "em + pir + ic + al"],
+    [("We set up an", "ex + peri + ment", "with magnets."), ("Ask an", "ex + pert", "."), ("Crossing the ice was", "peril + ous", "."), ("Travel is a great", "ex + peri + ence", ".")],
+    [("ex + peri + ment + ation", "experimentation"), ("ex + peri + ent + ial", "experiential"), ("ex + pert + ise", "expertise"), ("fear + ful", "fearful")],
+    ["<i>Experiential</i> has a t where <i>experience</i> has a c: <i>-ence</i> and <i>-ential</i>, as in <i>essence</i> and <i>essential</i>.",
+     "The check ends with <i>fearful</i>: the same root by English&rsquo;s own road."]))
+
 STEP_LISTS = L

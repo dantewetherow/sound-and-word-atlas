@@ -36,6 +36,8 @@ MORE = json.loads((pathlib.Path(__file__).resolve().parent / "data" / "more_word
 # by that step. Their marks come from the site's own codes where it has them; the rest (more_codes.json) were marked by rule
 # or by hand and checked against the step they sit on.
 for w, c in json.loads((pathlib.Path(__file__).resolve().parent / "data" / "more_codes.json").read_text(encoding="utf-8")).items(): codes.setdefault(w, c)
+# The *per- word study's family (19 November 2026): experiment, experience and their kin, marked after very and here.
+for w, c in json.loads((pathlib.Path(__file__).resolve().parent / "data" / "family_codes.json").read_text(encoding="utf-8")).items(): codes.setdefault(w, c)
 LW.W.clear(); LW.W.update(codes)
 STEPS = route["steps"]; N = len(STEPS)
 BUILT = "12 November 2026"
