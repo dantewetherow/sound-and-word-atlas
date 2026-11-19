@@ -1031,6 +1031,19 @@ PER = {
           "They are tendencies, not laws. <i>Obesity</i> keeps the long e of <i>obese</i>, and <i>Italian</i> has a short a where "
           "<i>Canadian</i> has a long one. Teach the syllable breaks, which the notation shows, and let the family carry the rest."],
          [("experiment", "per is closed: a short e"), ("experience", "pe is open, and the i makes the e long")]),
+        ("i", "A note on the i, for the curious",
+         ["Both words have an i after <i>per</i>, and it is the same i: the stem vowel of Latin&rsquo;s verb, <i>exper&imacr;r&imacr;</i>, "
+          "whose stem ends in &imacr; as <i>aud&imacr;re</i>&rsquo;s does. Latin built both nouns on that stem: exper&imacr; + mentum, "
+          "exper&imacr; + ent + ia. <i>Expert</i> shows the root without it. It comes from the past form <i>expertus</i>, built on "
+          "exper- alone. So the root is <i>per</i>, and the i belongs to the verb&rsquo;s stem.",
+          "It carries no meaning. It marks which class of verb Latin&rsquo;s word belonged to, as the a of <i>&emacr;duc&amacr;re</i> "
+          "and the e of <i>doc&emacr;re</i> do; a linguist calls it a theme vowel. It isn&rsquo;t a connecting vowel either, like "
+          "the i of <i>carnivore</i> or the o of <i>photograph</i>, which join two parts and belong to neither. In English its only "
+          "job is in the sound. Before the e of <i>-ence</i> it makes the e of <i>pe</i> long; before the m of <i>-ment</i> it "
+          "doesn&rsquo;t.",
+          "None of this is needed to teach the family. The word sums on this page write the stem as one part, <i>peri</i>, because "
+          "every word in that cluster keeps the i. A learner who knows ex + peri + ment and ex + peri + ence can read, spell and "
+          "connect them. The i is a deeper point, here for anyone who wants it."], []),
         ("stress", "The stress walks, and the spelling holds",
          ["Add a suffix and the stress moves. Every vowel it leaves goes weak, and a weak vowel it lands on comes back full. The "
           "letters hold still while the sounds change, and that is why the spelling is a better guide to the family than the sound.",
@@ -1060,6 +1073,7 @@ PER = {
     "s_paras": ["Say them slowly: ex-<b>per</b>-i-ment, ex-<b>pe</b>-ri-ence.",
                 "In <b>per</b>, the r closes the syllable, so the e is short.",
                 "In <b>pe</b>, the syllable is open, so the e says its name.",
+                "Both words have an <b>i</b> after per. It came with the old Latin word, and it&rsquo;s in both. You don&rsquo;t need to know why it&rsquo;s there to read them.",
                 "A <b>pirate</b> was someone who tried an attack. <b>Fear</b> is what you feel when danger is near. Same old word."],
     "uc": "the word list follows the Indo-European Lexicon, which follows Pokorny, fetched on 19 November 2026. Etymonline&rsquo;s "
           "own pages weren&rsquo;t reachable that day, so its links here are searches. Next: check the family against Etymonline "
