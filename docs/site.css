@@ -952,7 +952,11 @@ header.site.pinned.open nav.doors { display: flex; padding-block: 6px 4px; }
 .sc.on .sc-m { visibility: visible; }
 /* Graph paper beside the alphabet (19 November 2026): a pad to show letter formation on, with a finger, a pen or the mouse. */
 .lt-stage { display: grid; gap: 22px; align-items: start; }
-@media (min-width: 940px) { .lt-stage { grid-template-columns: max-content minmax(320px, 1fr); } }
+@media (min-width: 940px) {
+  .lt-stage { grid-template-columns: max-content minmax(320px, 1fr); align-items: stretch; }
+  .lt-stage .gp { grid-template-rows: auto 1fr; }
+  .lt-stage .gp-sheet { height: auto; min-height: 480px; }   /* the paper runs down to Y and Z */
+}
 .gp { display: grid; gap: 8px; min-width: 0; }
 .gp-tools { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
 .gp-tools .seg { display: inline-flex; flex: 0 0 auto; width: auto; flex-wrap: nowrap; gap: 2px; padding: 2px; border: 1px solid var(--line); border-radius: 999px; }
