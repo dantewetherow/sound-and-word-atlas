@@ -957,6 +957,8 @@ header.site.pinned.open nav.doors { display: flex; padding-block: 6px 4px; }
   .lt-stage .gp { grid-template-rows: auto 1fr; }
   .lt-stage .gp-sheet { height: auto; min-height: 480px; }   /* the paper runs down to Y and Z */
 }
+/* On a wide screen the alphabet section takes the full width, and the paper takes what the tiles don't need. */
+@media (min-width: 940px) { .letters-board > .wrap { max-width: none; padding-left: max(24px, 2.5vw); padding-right: max(24px, 2.5vw); } }
 .gp { display: grid; gap: 8px; min-width: 0; }
 .gp-tools { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
 .gp-tools .seg { display: inline-flex; flex: 0 0 auto; width: auto; flex-wrap: nowrap; gap: 2px; padding: 2px; border: 1px solid var(--line); border-radius: 999px; }

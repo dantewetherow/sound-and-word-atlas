@@ -145,7 +145,7 @@ def write(door_page, door_head):
 PAD_JS = """<script>(() => {
   const gp = document.querySelector('.gp'); if (!gp) return;
   const sheet = gp.querySelector('.gp-sheet'), grid = gp.querySelector('.gp-grid'), ink = gp.querySelector('.gp-ink');
-  const CELL = 36, strokes = []; let pen = 'ink', lines = false, cur = null, W = 0, H = 0, dpr = 1;
+  const CELL = 42, strokes = []; let pen = 'ink', lines = false, cur = null, W = 0, H = 0, dpr = 1;
   const css = n => getComputedStyle(document.documentElement).getPropertyValue('--' + n).trim() || '#888';
   function size() {
     const r = sheet.getBoundingClientRect(); dpr = window.devicePixelRatio || 1; W = r.width; H = r.height;
