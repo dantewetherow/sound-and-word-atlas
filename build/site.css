@@ -950,6 +950,24 @@ header.site.pinned.open nav.doors { display: flex; padding-block: 6px 4px; }
 .sc-y { color: var(--ink); }
 .sc-m { position: absolute; top: 12px; left: 50%; width: 18px; transform: translateX(-50%); border-top: 2.5px solid var(--verb); visibility: hidden; }
 .sc.on .sc-m { visibility: visible; }
+/* Graph paper beside the alphabet (19 November 2026): a pad to show letter formation on, with a finger, a pen or the mouse. */
+.lt-stage { display: grid; gap: 22px; align-items: start; }
+@media (min-width: 940px) { .lt-stage { grid-template-columns: max-content minmax(320px, 1fr); } }
+.gp { display: grid; gap: 8px; min-width: 0; }
+.gp-tools { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.gp-tools .seg { display: inline-flex; flex: 0 0 auto; width: auto; flex-wrap: nowrap; gap: 2px; padding: 2px; border: 1px solid var(--line); border-radius: 999px; }
+.gp-tools button { white-space: nowrap; flex: 0 0 auto; width: auto; display: inline-flex; align-items: center; }
+.gp-tools .seg button, .gp-tools > button { font: inherit; font-size: 0.9rem; border: 0; border-radius: 999px; padding: 6px 12px; min-height: 36px; background: transparent; color: var(--soft); cursor: pointer; }
+.gp-tools > button { border: 1px solid var(--line); background: var(--card); color: var(--ink); }
+.gp-tools .seg button[aria-checked="true"], .gp-tools > button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.gp-tools .sw-i { display: inline-block; width: 12px; height: 12px; border-radius: 50%; vertical-align: -1px; margin-right: 5px; }
+.gp-tools .seg button[aria-checked="true"] .sw-i { box-shadow: 0 0 0 2px var(--paper); }
+.gp-sheet { position: relative; height: clamp(340px, 64vh, 660px); border: 1.5px solid var(--line); border-radius: 10px; background: var(--card); overflow: hidden; }
+.gp-sheet canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.gp-sheet .gp-ink { touch-action: none; cursor: crosshair; }
+.gp:fullscreen, .gp:-webkit-full-screen { background: var(--paper); padding: 14px; grid-template-rows: auto 1fr; }
+.gp:fullscreen .gp-sheet { height: auto; }
+.gp:-webkit-full-screen .gp-sheet { height: auto; }
 @media (max-width: 480px) {
   .lt { width: 50px; } .case-both .lt { width: 70px; }
   .lt-box { height: 62px; font-size: 1.9rem; }
