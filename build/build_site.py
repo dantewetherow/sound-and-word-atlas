@@ -101,7 +101,7 @@ def word_cells(group, F, seen=None):
     """The figures for a group of words. With seen (the page's words so far), a word's first figure on the page gets
     an id, so a search can land on it (doors.word_id)."""
     cells = []
-    for w in group:
+    for w in dict.fromkeys(group):         # once each: a word with two readings (live/live) draws both itself
         tag = ""
         if seen is not None and w not in seen:
             seen.add(w); tag = f' id="{doors.word_id(w)}"'
