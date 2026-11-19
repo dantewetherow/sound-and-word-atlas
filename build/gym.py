@@ -87,6 +87,7 @@ def words():
             if "=" in r.get("op", []): out.update(FIT.get(a) or ("are" if a == "men" else "is") for a in r["actor"])
             if r.get("not"):
                 out.add("not"); out.update(NT[o] for o in out.copy() if o in NT); out.add("aren’t")
+    out |= {"yes", "no", "they", "not"}                         # a ladder's answers: Yes, it is. No, they didn't.
     return sorted(out)
 
 
@@ -141,7 +142,7 @@ def write(OUT, door_page, LW):
               f"""<section class="hero door-hero"><div class="wrap">
 <p class="eyebrow t-only"><a href="constructions.html">Sentences</a> · a trial</p>
 <h1>The gymnasium</h1>
-<p class="lead t-only">A gym for each step on the path. Build sentences from the step&rsquo;s words on a balance, tip them from a claim to a question, and unlock a round at a time as a learner decodes. Tap any word to walk it.</p>
+<p class="lead t-only">A gym for each step on the path. Climb a ladder of sentences built from the step&rsquo;s words, a word at a time, or build your own on a balance. Tip each one from a claim to a question, answer yes or no, and unlock a round at a time. Tap any word to walk it.</p>
 </div></section>
 <section class="gym-sec"><div class="wrap">
 {gym}
