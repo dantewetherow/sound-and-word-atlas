@@ -31,6 +31,11 @@ for w, c in contractions.CODES.items(): codes.setdefault(w, c)
 import word_sum_codes as WSC                                  # the grade 3 word sum cards' markings, for Words and Parts
 for _, _, items in WSC.SECTIONS:
     for item in items: codes.setdefault(item[1], item[2])
+MORE = json.loads((pathlib.Path(__file__).resolve().parent / "data" / "more_words.json").read_text(encoding="utf-8"))
+# More words on the step pages (19 November 2026): extra examples of each step's pattern, using only what the path has taught
+# by that step. Their marks come from the site's own codes where it has them; the rest (more_codes.json) were marked by rule
+# or by hand and checked against the step they sit on.
+for w, c in json.loads((pathlib.Path(__file__).resolve().parent / "data" / "more_codes.json").read_text(encoding="utf-8")).items(): codes.setdefault(w, c)
 LW.W.clear(); LW.W.update(codes)
 STEPS = route["steps"]; N = len(STEPS)
 BUILT = "12 November 2026"
@@ -253,6 +258,16 @@ for i, s in enumerate(STEPS):
         cells.append('<p class="set-label">Contrast</p>')
         for g in cons:
             cells.append('<div class="group pair">' + "".join(word_cells(g, 58)) + "</div>")
+    # More words: the step's pattern in more words, contrasts first, side by side; then singles (since 19 November 2026).
+    more = MORE.get(str(n))
+    if more:
+        own = {w for _, groups in sets_of(s["words_md"]) for g in groups for w in g}
+        cells.append('<p class="set-label" id="more">More words</p>')
+        cells.append('<p class="set-why t-only">More words with this step&rsquo;s pattern, using only what the path has taught so far. Contrasts first: read across each pair for the one difference.</p>')
+        for g in more["pairs"]:
+            cells.append('<div class="group pair">' + "".join(word_cells(g, 58)) + "</div>")
+        singles = [w for w in more["words"] if w not in own]
+        if singles: cells.append('<div class="group more">' + "".join(word_cells(singles, 58, seen)) + "</div>")
     # The affixes and roots placed at this step (the manual's "Parts on the steps"): each marked as the step's words are,
     # with its meaning, and a link to every word that has it.
     if s.get("parts"):
