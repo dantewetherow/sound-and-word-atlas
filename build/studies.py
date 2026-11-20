@@ -152,6 +152,17 @@ body{background:var(--paper);color:var(--ink);font-family:var(--sans);overflow:h
 .fam{display:grid;grid-template-columns:repeat(2,1fr);gap:26px 70px}
 .fam > div{display:flex;align-items:flex-end;gap:28px}
 .fam .g{font-family:var(--serif);font-style:italic;font-size:34px;color:var(--soft);padding-bottom:12px}
+.fork{display:grid;grid-template-columns:1fr 1fr;gap:0 90px;margin:0 60px}
+.fork .top{grid-column:1/-1;text-align:center;padding-bottom:14px;margin-bottom:16px;border-bottom:4px solid var(--line)}
+.fork .lw{font-family:var(--serif);font-size:84px;line-height:1}
+.fork .lw b{color:var(--verb);font-weight:inherit}
+.fork .g{display:block;font-family:var(--serif);font-style:italic;font-size:34px;color:var(--soft);margin-top:4px}
+.fork .g b{font-style:normal;color:var(--verb);font-weight:inherit}
+.fork h3{font-family:var(--serif);font-weight:500;font-size:40px;margin:0 0 8px}
+.fork h3 small{font-family:var(--serif);font-size:36px;color:var(--soft);font-weight:400;margin-left:14px}
+.fork p{font-family:var(--serif);font-size:44px;line-height:1.05;margin:0 0 12px;padding-left:34px;position:relative}
+.fork p::before{content:"↓";position:absolute;left:0;top:2px;font-size:30px;color:var(--soft)}
+.fork p small{display:block;font-family:var(--sans);font-size:23px;color:var(--soft);margin-top:4px}
 .roads3{display:grid;grid-template-columns:repeat(3,1fr);gap:0 46px;margin-top:4px}
 .roads3 > div{border-top:4px solid var(--line);padding-top:16px;display:grid;gap:12px;align-content:start}
 .roads3 h3{font-family:var(--serif);font-weight:500;font-size:46px;margin:0 0 4px}
@@ -523,6 +534,23 @@ def leg_deck():
          "Gathering turns into <b>choosing</b>.",
          "se, apart; e, out (ex before l): select is to gather apart, elect to gather out. Latin used <i>legere</i> for choosing "
          "as well as gathering. <i>Lesson</i> comes up again on the reading road.")
+    # Legō itself, at the fork (20 November 2026): the same word went to reading in Latin and to saying in Greek. The
+    # gentle senses only; the breath and the bones stay on the teacher's page.
+    D.slide("lego: read, say", f"""<h2 class="head">One word, two languages</h2>
+<div class="fork">
+<div class="top"><span class="lw">leg<b>&omacr;</b></span><span class="g">gather + <b>I</b>: I gather</span></div>
+<div><h3 data-s="1">Latin<small>leg&omacr;</small></h3>
+<p data-s="1">I pick out<small>footprints, going back the way you came</small></p>
+<p data-s="2">I <b class="r">read</b><small>letters, gathered with your eyes</small></p></div>
+<div><h3 data-s="3">Greek<small lang="grc">λέγω</small></h3>
+<p data-s="3">I count<small>seals on a beach, one by one</small></p>
+<p data-s="4">I <b class="r">say</b><small>words, laid out in order</small></p></div>
+</div>
+<p class="q" data-s="5">The same word: <b>read</b> in Latin, <b>say</b> in Greek.</p>""",
+            "Greek and Latin both have <i>leg&omacr;</i>; the &omacr; is the ending for I, as in Latin <i>veto</i>, I forbid. "
+            "Virgil uses it for a man picking up his own footprints (<i>Aeneid</i> 9.392&ndash;393); Homer, for the sea god "
+            "Proteus counting his seals (<i>Odyssey</i> 4.451). The next two slides follow each road into English. More lines are "
+            "in <a href='../roots/leg.html#lego-h'>Leg&omacr; in Latin and in Greek</a>, with the poets&rsquo; uses for the dying, for teachers.", steps=5)
     felt("Gather words with your eyes, and you <b class='r'>read</b>", [("lecture", "a reading, a talk"), ("lesson", "something to read and learn"),
                                                                        ("legend", "a story to be read"), ("legible", "clear enough to read")],
          "In Latin, <b>legere</b> came to mean <b>read</b>.",

@@ -48,6 +48,17 @@ body{background:var(--paper);color:var(--ink);font-family:var(--sans);overflow:h
 .fam{display:grid;grid-template-columns:repeat(2,1fr);gap:26px 70px}
 .fam > div{display:flex;align-items:flex-end;gap:28px}
 .fam .g{font-family:var(--serif);font-style:italic;font-size:34px;color:var(--soft);padding-bottom:12px}
+.fork{display:grid;grid-template-columns:1fr 1fr;gap:0 90px;margin:0 60px}
+.fork .top{grid-column:1/-1;text-align:center;padding-bottom:14px;margin-bottom:16px;border-bottom:4px solid var(--line)}
+.fork .lw{font-family:var(--serif);font-size:84px;line-height:1}
+.fork .lw b{color:var(--verb);font-weight:inherit}
+.fork .g{display:block;font-family:var(--serif);font-style:italic;font-size:34px;color:var(--soft);margin-top:4px}
+.fork .g b{font-style:normal;color:var(--verb);font-weight:inherit}
+.fork h3{font-family:var(--serif);font-weight:500;font-size:40px;margin:0 0 8px}
+.fork h3 small{font-family:var(--serif);font-size:36px;color:var(--soft);font-weight:400;margin-left:14px}
+.fork p{font-family:var(--serif);font-size:44px;line-height:1.05;margin:0 0 12px;padding-left:34px;position:relative}
+.fork p::before{content:"↓";position:absolute;left:0;top:2px;font-size:30px;color:var(--soft)}
+.fork p small{display:block;font-family:var(--sans);font-size:23px;color:var(--soft);margin-top:4px}
 .roads3{display:grid;grid-template-columns:repeat(3,1fr);gap:0 46px;margin-top:4px}
 .roads3 > div{border-top:4px solid var(--line);padding-top:16px;display:grid;gap:12px;align-content:start}
 .roads3 h3{font-family:var(--serif);font-weight:500;font-size:46px;margin:0 0 4px}
