@@ -23,19 +23,14 @@ import doors
 
 VOWELS = set("aeiouy")
 
-# English affixes the families' glossary (roots.PARTS) doesn't have, in our own words.
+# English affixes the families' glossary (roots.PARTS) doesn't have, in our own words. One gloss per part (20 November
+# 2026): a part the families gloss is glossed there and only there; gloss_check.py stops the build if one turns up here too.
 MEANS = {
-    "un-": "not, or the reverse of an action", "mis-": "wrongly, badly", "be-": "by, about, around: Old English <i>be-</i>",
-    "a-": "on, in: Old English <i>an</i>, on", "out-": "out, beyond", "per-": "through, by: Latin <i>per</i>",
-    "-s": "more than one; what he, she or it does; or belonging to, in <i>its</i>", "-es": "<i>-s</i> after a hissing sound, or after <i>o</i> and <i>y</i> turned to <i>i</i>",
-    "-ed": "already happened", "-ing": "happening now; or the doing of it", "-y": "having, full of: Old English <i>-ig</i>",
-    "-ly": "in that way; like", "-er": "more; or one who does it", "-est": "most", "-en": "make or become; or a past form",
-    "-less": "without", "-ness": "the state of being", "-ate": "make, do; or a Latin past form", "-ion": "the act or result of",
-    "-ic": "having to do with", "-ful": "full of, given to", "-th": "the number in order; or a state",
+    "un-": "not, or the reverse of an action", "be-": "by, about, around: Old English <i>be-</i>", "a-": "on, in: Old English <i>an</i>, on",
+    "out-": "out, beyond", "per-": "through", "-es": "<i>-s</i> after a hissing sound, or after <i>o</i> and <i>y</i> turned to <i>i</i>",
+    "-ly": "in that way; like", "-est": "most", "-less": "without", "-ness": "the state of being", "-th": "the number in order; or a state",
     "-able": "able to be", "ob-": "against, toward", "im-": "not, or into: Latin <i>in-</i>, written <i>im-</i> before m, b and p",
-    "ex-": "out", "hap": "chance, luck", "note": "a mark", "ad-": "to, toward", "ab-": "away, from", "-ize": "make, do",
-    "-ence": "names it: makes a noun from a describing word in -ent, as patience from patient", "-ance": "the act or state of", "-or": "one who, the thing that", "-ar": "like, having to do with",
-    "per-": "through", "-ible": "able to be", "ple": "fold", "graph": "write", "phone": "sound, voice", "morph": "form", "-d": "<i>-ed</i> without its e, in <i>said</i>, <i>paid</i> and <i>laid</i>",
+    "hap": "chance, luck", "note": "a mark", "-d": "<i>-ed</i> without its e, in <i>said</i>, <i>paid</i> and <i>laid</i>",
 }
 PREFIXES = {"un", "re", "mis", "be", "a", "out", "per", "dis", "de", "pre"}
 SUFFIXES = {"s", "es", "ed", "ing", "y", "ly", "er", "est", "en", "less", "ness", "ate", "ion", "ic", "ful", "th", "al", "or", "ive", "able"}
@@ -158,7 +153,7 @@ def collect(X):
     import roots, word_sum_codes as WSC, walk
     LW = X["LW"]
     words, means = {}, dict(MEANS)
-    for k, v in roots.PARTS.items(): means.setdefault(k, v)
+    means.update(roots.PARTS)                                      # one gloss per part: the families' wins
     root_means = dict(roots.ROOT_PARTS)
     known = {w.lower() for w in LW.W} | {w.lower() for w in X["list_words"]}
 

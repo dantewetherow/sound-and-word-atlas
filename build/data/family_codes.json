@@ -42,5 +42,6 @@
 "designate": "c.d s.e + c.s | b.i c.g | c.n + l.a c.t e>",
 "designation": "c.d s.e + c.s | b.i c.g | c.n + l.a | g.ti b.o c.n ; vault 7>6 ; seam 7",
 "resignation": "c.r s.e + c.s | b.i c.g | c.n + l.a | g.ti b.o c.n ; vault 7>6 ; seam 7",
-"seal": "c.s t.ea c.l"
+"seal": "c.s t.ea c.l",
+"election": "b.e + | c.l s.e c.c | g.ti b.o c.n ; seam 4"
 }

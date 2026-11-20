@@ -572,3 +572,5 @@ for icon in ("favicon-32.png", "apple-touch-icon.png"):      # for browsers that
     shutil.copy(HERE / icon, OUT / icon)
 n_crumbs = doors.finish(OUT, PAGES)
 print("wrote", OUT, "| words", n_words, "marked", n_marked, "| search records", n_search, "| pages with breadcrumbs", n_crumbs)
+import gloss_check                                            # the gloss rules (20 November 2026): stops the build on a broken gloss
+gloss_check.run(OUT)

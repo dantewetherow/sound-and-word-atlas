@@ -519,7 +519,7 @@ def educ_deck():
             "keeps the parts, and the notation has no mark for the blend.", steps=3)
 
     six = [("duct", "a pipe that leads air"), ("product", "what is made"), ("reduce", "make less"),
-           ("conduct", "how you lead yourself"), ("education", "bringing up"), ("team", "English kept its own: pulling together")]
+           ("conduct", "how you lead yourself"), ("education", "the bringing up"), ("team", "English kept its own: a group pulling together")]
     cells = "".join(f'<div data-s="{k + 1}">{word(w, 84)}<span class="g">{g}</span></div>' for k, (w, g) in enumerate(six))
     D.slide("The family", f"""<h2 class="head">One old word for <b class="r">lead</b>, a family of words</h2>
 <div class="fam">{cells}</div>""",
@@ -564,10 +564,11 @@ def leg_deck():
 <div class="fam">{cells}</div>
 <p class="q" data-s="{len(rows) + 1}">{says}</p>""", note, steps=len(rows) + 1)
 
-    felt("Gather the ones you want, and you <b class='r'>choose</b>", [("select", "pick out"), ("elect", "choose by voting"), ("collect", "gather together"), ("lesson", "something chosen to learn")],
+    felt("Gather the ones you want, and you <b class='r'>choose</b>", [("select", "pick out"), ("elect", "choose by voting"), ("collect", "gather together"), ("election", "a choosing by vote")],
          "Gathering turns into <b>choosing</b>.",
          "se, apart; e, out (ex before l): select is to gather apart, elect to gather out. Latin used <i>legere</i> for choosing "
-         "as well as gathering. <i>Lesson</i> comes up again on the reading road.")
+         "as well as gathering. <i>Election</i> is e + lect + ion: <i>elect</i> is the doing, and -ion names it. "
+         "<i>Lesson</i> belongs on the reading road, not here: Latin <i>lectio</i>, a reading.")
     # Legō itself, at the fork (20 November 2026): the same word went to reading in Latin and to saying in Greek. The
     # gentle senses only; the breath and the bones stay on the teacher's page.
     D.slide("lego: read, say", f"""<h2 class="head">One word, two languages</h2>
@@ -590,7 +591,7 @@ def leg_deck():
          "In Latin, <b>legere</b> came to mean <b>read</b>.",
          "Latin <i>legere</i>: gather, choose, read. To read is to gather the letters with your eyes. <i>Lecture</i> is lect + ure; "
          "<i>legend</i> is leg + end, Latin <i>legenda</i>, things to be read; <i>legible</i> is leg + ible. The g says j before e and i.")
-    felt("Gather words in your mouth, and you <b class='r'>say</b>", [("lexicon", "the words of a language"), ("logic", "words that hold together"),
+    felt("Gather words in your mouth, and you <b class='r'>say</b>", [("lexicon", "the words of a language"), ("logic", "reasons that hold together"),
                                                                       ("dialogue", "talk between people"), ("prologue", "words before the story")],
          "In Greek, <b>legein</b> came to mean <b>say</b>.",
          "Greek <i>leg&omacr;</i>: I gather, I count, I say: to lay words in order. Greek gave <i>lexis</i>, a word, and "
@@ -610,7 +611,7 @@ def leg_deck():
 
     D.slide("legend", f"""<h2 class="head">A <b class="r">legend</b> is something to read</h2>
 {join(["leg", "end"], ["read", "to be"], word("legend", 150), 1,
-      "From the end: <b>to be read</b>. On a map, the legend is the key you read to understand the marks.")}""",
+      "From the end: something <b>to be read</b>. On a map, the legend is the key you read to understand the marks.")}""",
             "Medieval Latin <i>legenda</i>, things to be read, first the lives of saints read aloud. Later a legend was also the "
             "words written on a coin or a map, and so the key to a map&rsquo;s marks. This site was called <i>A Legend for "
             "English Words</i> for a week in November 2026.", steps=4)
@@ -699,7 +700,7 @@ def sign_deck():
         "The same part, sign, in every word, and here the g is said. These are the words that keep the g in <i>sign</i>.")
 
     D.slide("Build signal", f"""<h2 class="head">Build <b class="r">signal</b></h2>
-{join(["sign", "al"], ["a mark", "to do with"], word("signal", 150), 1, "From the end: <b>to do with</b> a <b>sign</b>. A signal is a sign that sends a message.")}""",
+{join(["sign", "al"], ["a mark", "to do with"], word("signal", 150), 1, "From the end: something <b>to do with</b> a <b>sign</b>. A signal is a sign that sends a message.")}""",
             "Word sum: sign + al &rarr; <i>signal</i>. Late Latin <i>sign&amacr;le</i>, through French. Say it in syllables: "
             "sig-nal. The g closes the first syllable, so it is said.", steps=4)
 
@@ -744,8 +745,8 @@ def sign_deck():
             "connecting vowel. Saussure&rsquo;s <i>signifier</i> and <i>signified</i> come from this verb: the sound of a word, and "
             "the idea it stands for.", steps=4)
 
-    fam("The g is <b class='r'>said</b> again", [("significant", "it means something: it matters"), ("designation", "a name or a title"),
-                                               ("resignation", "giving up a job"), ("signatory", "someone who signs an agreement")],
+    fam("The g is <b class='r'>said</b> again", [("significant", "full of meaning: it matters"), ("designation", "a name or a title"),
+                                               ("resignation", "the giving up of a job"), ("signatory", "someone who signs an agreement")],
         "A <b>Latin</b> ending after sign, and you hear the g.",
         "sign + i + fic + ant; de + sign + at(e) + ion; re + sign + at(e) + ion; sign + at(e) + ory. In <i>designation</i> "
         "and <i>resignation</i> the s says z and the e is short: des-ig-na-tion.", h=88)
