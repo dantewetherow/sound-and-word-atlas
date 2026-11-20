@@ -17,5 +17,15 @@
 "educate": "s.e + c.d | b.u | c.c + l.a c.t e>",
 "education": "s.e + c.d | b.u | c.c + l.a | g.ti b.o c.n ; vault 5>4 ; seam 5",
 "educational": "s.e + c.d | b.u | c.c + l.a | g.ti b.o c.n + | b.a c.l ; vault 5>4 ; seam 5",
-"miseducation": "c.m s.i c.s + | s.e + c.d | b.u | c.c + l.a | g.ti b.o c.n ; vault 8>7 ; seam 8"
+"miseducation": "c.m s.i c.s + | s.e + c.d | b.u | c.c + l.a | g.ti b.o c.n ; vault 8>7 ; seam 8",
+"collect": "c.c b.o c.l + | c.l s.e c.ct",
+"select": "c.s b.e + | c.l s.e c.ct",
+"elect": "b.e + | c.l s.e c.ct",
+"lecture": "c.l s.e c.c | c.t + r.ur e0",
+"lesson": "c.l s.e x.ss | b.o c.n ; bv 3>2",
+"legend": "c.l s.e c.g + | b.e c.nd ; nudge 3>2",
+"legible": "c.l s.e c.g + | b.i | c.b le ; nudge 3>2",
+"lexicon": "c.l s.e c.x + | b.i | c.c + b.o c.n",
+"logic": "c.l s.o c.g + | s.i c.c ; nudge 3>2",
+"legomorphics": "c.l s.e c.g + | l.o + | c.m r.or | k.ph + s.i c.c + c.s"
 }

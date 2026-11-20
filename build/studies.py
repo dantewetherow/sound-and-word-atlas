@@ -34,6 +34,18 @@ STUDIES = [{
     "blurb": "A duct leads air along, and duce and duct take turns: <i>produce</i>, <i>product</i>. Then <i>ex-</i> shrinks to "
              "<i>e-</i>, and <i>education</i> is built a part at a time, with the e of <i>-ate</i> dropping out and the i of "
              "<i>-ion</i> taking over its job, up to <i>educational</i> and <i>miseducation</i>. Last, where the beat moves.",
+}, {
+    "slug": "leg",
+    "title": "Gather, read, say",
+    "sub": "from *leg- to legomorphics",
+    "root": "*leg-", "root_page": "roots/leg.html", "list": "lists/family-leg.html",
+    "words": ["collect", "collection", "select", "selection", "elect", "election", "lecture", "lesson", "legend", "legendary",
+              "legible", "illegible", "lexicon", "lexical", "logic", "logical", "dialogue", "prologue", "catalogue", "dialect",
+              "intellect", "intelligent", "eligible", "neglect", "recollect", "legomorphic", "legomorphics", "prolegomenon"],
+    "blurb": "One old word for <i>gather</i> and its three roads: gather and choose (<i>collect</i>, <i>select</i>), read in "
+             "Latin (<i>lecture</i>, <i>lesson</i>, <i>legend</i>, <i>legible</i>), and say in Greek (<i>lexicon</i>, "
+             "<i>logic</i>, <i>dialogue</i>). How a lesson was first a reading, what a legend is on a map, and how the "
+             "notation&rsquo;s own name is built. And one look-alike: the bricks.",
 }]
 
 
@@ -57,7 +69,7 @@ LAYER_STEP = {"5": 1, "4": 1, "1": 2, "2": 2, "6": 3, "3": 4, "7": 5, "8": 5, "9
 def word(w, h, steps=None, label=None):
     """A marked word as an svg, h pixels tall; set in type if the site has no checked marks for it."""
     if w not in LW.W:
-        return f'<span class="tw" style="font-size:{h * 0.62:.0f}px">{html.escape(w)}</span>'
+        return f'<span class="tw" style="font-size:{h * 0.44:.0f}px;padding-bottom:{h * 0.3:.0f}px">{html.escape(w)}</span>'   # sized to sit level with a marked word
     g, wd, H = LW.svg_word(w, 100.0, 0.0, cls=steps is not None)
     if steps is not None:
         g = re.sub(r'<rect class="wt"[^>]*/>', "", g)
@@ -140,6 +152,15 @@ body{background:var(--paper);color:var(--ink);font-family:var(--sans);overflow:h
 .fam{display:grid;grid-template-columns:repeat(2,1fr);gap:26px 70px}
 .fam > div{display:flex;align-items:flex-end;gap:28px}
 .fam .g{font-family:var(--serif);font-style:italic;font-size:34px;color:var(--soft);padding-bottom:12px}
+.roads3{display:grid;grid-template-columns:repeat(3,1fr);gap:0 46px;margin-top:4px}
+.roads3 > div{border-top:4px solid var(--line);padding-top:16px;display:grid;gap:12px;align-content:start}
+.roads3 h3{font-family:var(--serif);font-weight:500;font-size:46px;margin:0 0 4px}
+.roads3 h3 small{display:block;font-family:var(--sans);font-size:22px;color:var(--soft);font-weight:400;margin-top:4px}
+.roads3 .tw2{font-size:44px;line-height:1.1}
+.roads3 .tw2 b{color:var(--verb);font-weight:500}
+.chain{display:grid;gap:22px;margin-top:6px}
+.chain p{margin:0;font-size:72px;line-height:1}
+.chain p small{font-family:var(--serif);font-style:italic;font-size:36px;color:var(--soft);margin-left:24px}
 .fam6{display:grid;grid-template-columns:repeat(3,1fr);gap:34px 50px;align-items:end;margin-top:10px}
 .syl{display:flex;gap:16px;font-size:96px;line-height:1.1;margin:0 0 10px}
 .syl span{color:var(--soft)}
@@ -477,7 +498,116 @@ def educ_deck():
     return D
 
 
-DECKS = {"per": per_deck, "education": educ_deck}
+# ------------------------------------------------------------------ *leg-: From *leg- to legomorphics
+def leg_deck():
+    D = Deck()
+    D.slide("Title", f"""<p class="kicker">A word study &middot; <i>*leg-</i></p>
+<h1 class="display">Gather, read, say</h1>
+<p class="subtitle">from an old word for gather to legomorphics</p>
+<div class="pair">{word("legomorphic", 120)}</div>""",
+            "A word study for learners. Click, tap, or press the right arrow for each next piece; N shows and hides these notes. "
+            "The page for teachers is <a href='../roots/leg.html'>*leg-</a>, with its <a href='../lists/family-leg.html'>spelling list</a>.", "mid")
+
+    D.slide("gather", f"""<h2 class="head"><b class="r">leg</b>: the oldest meaning is <b>gather</b></h2>
+{join(["col", "lect"], ["together", "gathered"], word("collect", 150), 1, "To <b>collect</b> is to gather things <b>together</b>.")}""",
+            "The root <i>*leg-</i> meant to gather, to collect. Latin made it <i>legere</i>, and after a prefix its past form "
+            "is <i>-lectus</i>, which gives English lect: col + lect, where col is con, together, made like the l after it.", steps=4)
+
+    def felt(head, rows, says, note):
+        cells = "".join(f'<div data-s="{k + 1}">{word(w, 96)}<span class="g">{g}</span></div>' for k, (w, g) in enumerate(rows))
+        D.slide(head, f"""<h2 class="head">{head}</h2>
+<div class="fam">{cells}</div>
+<p class="q" data-s="{len(rows) + 1}">{says}</p>""", note, steps=len(rows) + 1)
+
+    felt("Gather the ones you want, and you <b class='r'>choose</b>", [("select", "pick out"), ("elect", "choose by voting"), ("collect", "gather together"), ("lesson", "something chosen to learn")],
+         "Gathering turns into <b>choosing</b>.",
+         "se, apart; e, out (ex before l): select is to gather apart, elect to gather out. Latin used <i>legere</i> for choosing "
+         "as well as gathering. <i>Lesson</i> comes up again on the reading road.")
+    felt("Gather words with your eyes, and you <b class='r'>read</b>", [("lecture", "a reading, a talk"), ("lesson", "something to read and learn"),
+                                                                       ("legend", "a story to be read"), ("legible", "clear enough to read")],
+         "In Latin, <b>legere</b> came to mean <b>read</b>.",
+         "Latin <i>legere</i>: gather, choose, read. To read is to gather the letters with your eyes. <i>Lecture</i> is lect + ure; "
+         "<i>legend</i> is leg + end, Latin <i>legenda</i>, things to be read; <i>legible</i> is leg + ible. The g says j before e and i.")
+    felt("Gather words in your mouth, and you <b class='r'>say</b>", [("lexicon", "the words of a language"), ("logic", "words that hold together"),
+                                                                      ("dialogue", "talk between people"), ("prologue", "words before the story")],
+         "In Greek, <b>legein</b> came to mean <b>say</b>.",
+         "Greek <i>leg&omacr;</i>: I gather, I count, I say: to lay words in order. Greek gave <i>lexis</i>, a word, and "
+         "<i>logos</i>, a word, an account, reason: lex, log, logue. <i>Dialogue</i> and <i>prologue</i> are set in type: the "
+         "site has no checked marks for -logue yet.")
+
+    roads = [("gather, choose", "the root", ["col<b>lect</b>", "se<b>lect</b>", "e<b>lect</b>"]),
+             ("read", "Latin <i>legere</i>", ["<b>lect</b>ure", "<b>les</b>son", "<b>leg</b>end", "<b>leg</b>ible"]),
+             ("say", "Greek <i>legein</i>", ["<b>lex</b>icon", "<b>log</b>ic", "dia<b>logue</b>", "pro<b>logue</b>"])]
+    cols = "".join(f'<div data-s="{k + 1}"><h3>{h}<small>{s}</small></h3>' + "".join(f'<span class="tw2">{w}</span>' for w in ws) + "</div>"
+                   for k, (h, s, ws) in enumerate(roads))
+    D.slide("Three roads", f"""<h2 class="head">One old word, three roads</h2>
+<div class="roads3">{cols}</div>
+<p class="q" data-s="4">Gather, choose, read, say: all <b>leg</b>.</p>""",
+            "Speakers of Greek and Latin carried the root into words about words: gathering words is choosing them, reading them "
+            "and saying them. English borrowed the family again and again, by many roads.", steps=4)
+
+    D.slide("legend", f"""<h2 class="head">A <b class="r">legend</b> is something to read</h2>
+{join(["leg", "end"], ["read", "to be"], word("legend", 150), 1,
+      "From the end: <b>to be read</b>. On a map, the legend is the key you read to understand the marks.")}""",
+            "Medieval Latin <i>legenda</i>, things to be read, first the lives of saints read aloud. Later a legend was also the "
+            "words written on a coin or a map, and so the key to a map&rsquo;s marks. This site was called <i>A Legend for "
+            "English Words</i> for a week in November 2026.", steps=4)
+
+    D.slide("lesson", f"""<h2 class="head">Words wear down as they travel</h2>
+<div class="chain">
+<p data-s="1">lectio<small>Latin: a reading</small></p>
+<p data-s="2">le&ccedil;on<small>French: the c and t worn away</small></p>
+<p data-s="3">{word("lesson", 110)}</p>
+</div>
+<p class="q" data-s="4">A <b>lesson</b> was first a reading.</p>""",
+            "Latin <i>lectio</i>, a reading (lect + ion), became Old French <i>le&ccedil;on</i>, and English <i>lesson</i>. "
+            "The spelling no longer shows lect, but the family still holds it: a lesson, a lecture, a lectern to read from.", steps=4)
+
+    D.slide("Build legomorphic", f"""<h2 class="head">Build the notation&rsquo;s name</h2>
+{join(["leg", "o", "morph", "ic"], ["gather", "I", "form", "to do with"], word("legomorphic", 140), 1,
+      "From the end: <b>to do with</b> the <b>forms I gather</b>. Legomorphic: how sounds and letters gather into words.")}""",
+            "Word sum: leg + o + morph + ic &rarr; <i>legomorphic</i>. The o is the ending for I in Greek and Latin alike, so "
+            "<i>leg&omacr;</i> is I gather, as Latin <i>veto</i> is I forbid; morph is Greek <i>morph&emacr;</i>, form.", steps=4)
+
+    D.slide("legomorphics", f"""<h2 class="head">Sounds and words, assembled</h2>
+<div class="pair" style="margin-top:0">{word("legomorphics", 140)}</div>
+<p class="lede" data-s="1">With <b>-s</b>, the name of the study, as in <i>phonics</i> and <i>mathematics</i>.</p>
+<p class="q" data-s="2">Gathering sounds into words, and words into sentences: <b>assembling</b> them.</p>""",
+            "-ics names a field of study (phonics, mathematics, linguistics). The site&rsquo;s name, <i>Sounds and Words, "
+            "Assembled</i>, says the same thing in other words: assemble is another root, <i>*sem-</i>, together.", steps=2)
+
+    D.slide("Not every leg", f"""<h2 class="head">A word that only looks like it</h2>
+<p class="typed" style="font-size:90px">LEGO</p>
+<p class="lede" data-s="1">The name of the bricks is Danish: <b>leg godt</b>, <b>play well</b>. A different word, from a different place.</p>
+<p class="q" data-s="2">But a good picture: pieces that click together to make something new.</p>""",
+            "The toy company took its name from Danish <i>leg godt</i>, play well, in the 1930s. Danish <i>lege</i>, to play, "
+            "is not from <i>*leg-</i>. Look-alikes are worth naming, so learners test a family by meaning as well as by letters.", steps=2)
+
+    six = ["collect", "select", "lesson", "legend", "lexicon", "legomorphic"]
+    D.slide("The family", f"""<h2 class="head">One old word for <b class="r">gather</b>, a family of words</h2>
+<div class="fam6">{"".join(f'<div data-s="{k + 1}">{word(w, 84)}</div>' for k, w in enumerate(six))}</div>
+<p class="q" data-s="7">Gather, choose, read, say.</p>""",
+            "The whole family, with lig and lect taking turns (<i>eligible</i>, <i>elect</i>; <i>intelligent</i>, <i>intellect</i>), "
+            "the words the sources hedge (<i>legal</i>, <i>loyal</i>), and <i>prolegomenon</i>, is on the "
+            "<a href='../roots/leg.html'>*leg- page</a>.", steps=7)
+
+    D.slide("Your turn", f"""<h2 class="head">Your turn</h2>
+<ol class="blanks">
+<li>Write so that it is <span class="gap"><span class="ans" data-s="1">legible</span></span>.</li>
+<li>We will <span class="gap"><span class="ans" data-s="2">elect</span></span> a class leader.</li>
+<li>Today&rsquo;s <span class="gap"><span class="ans" data-s="3">lesson</span></span> is about maps.</li>
+</ol>""",
+            "Say each sentence with the blank first, and let the class choose before the click shows the word. The "
+            "<a href='../lists/family-leg.html'>spelling list</a> has more to build and use.", steps=3)
+
+    D.slide("For teachers", f"""<h2 class="head">For teachers</h2>
+<p class="lede">Word sums: col + lect &rarr; <i>collect</i>; se + lect &rarr; <i>select</i>; lect + ure &rarr; <i>lecture</i>; leg + end &rarr; <i>legend</i>; leg + ible &rarr; <i>legible</i>; lex + ic + on &rarr; <i>lexicon</i>; log + ic &rarr; <i>logic</i>; leg + o + morph + ic &rarr; <i>legomorphic</i>.</p>
+<p class="lede">The family follows Etymonline and the Indo-European Lexicon on <i>*leg-</i>, with Wiktionary on Greek <i>l&eacute;g&omacr;</i> and Latin <i>leg&omacr;</i>. The teacher&rsquo;s page is <a href="../roots/leg.html">*leg-</a>; the list to print is the <a href="../lists/family-leg.html">*leg- spelling list</a>.</p>
+<p class="lede">The words with marks are drawn in Legomorphic Notation; the marks are on the <a href="../notations.html">Notations</a> page.</p>""", cls="mid")
+    return D
+
+
+DECKS = {"per": per_deck, "education": educ_deck, "leg": leg_deck}
 
 
 def write(OUT, door_page):
