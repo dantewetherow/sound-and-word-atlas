@@ -124,8 +124,8 @@
   }
   function line(g, x1, y1, x2, y2) { g.beginPath(); g.moveTo(x1, y1); g.lineTo(x2, y2); g.stroke(); }
   function drawGrid() {
-    const g = grid.getContext('2d'), c = css('line'), s = css('soft'); g.clearRect(0, 0, W, H);
-    g.lineWidth = 1; g.strokeStyle = c; g.globalAlpha = 0.75;
+    const g = grid.getContext('2d'), c = css('grid'), s = css('soft'); g.clearRect(0, 0, W, H);
+    g.lineWidth = 1; g.strokeStyle = c; g.globalAlpha = 0.9;
     for (let x = CELL; x < W; x += CELL) line(g, Math.round(x) + 0.5, 0, Math.round(x) + 0.5, H);
     for (let y = CELL; y < H; y += CELL) line(g, 0, Math.round(y) + 0.5, W, Math.round(y) + 0.5);
     g.globalAlpha = 1;

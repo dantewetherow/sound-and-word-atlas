@@ -193,7 +193,7 @@ WEIGHT, BROW, SLOT, CONE = 1.5, 0.33, 0.67, 0.30
 from characters import MOUTH                                 # the faces' mouths sit lower than a word's swoop (8 November 2026)
 CHOSEN = "gno"                                             # a character's word (lifted_mark), or a name in MARKS (mark); go until 10 November 2026
 ICON_WEIGHT = 2.2                                          # how much heavier the icon's marks are than the header's lifted face
-PAPER = "#f4efe6"                                          # the site's --paper, behind the PNG icons
+PAPER = "#ede5d3"                                          # the site's --paper, behind the PNG icons
 CLASSES = {"ink": "k", "verb": "r", "modal": "b", "soft": "q"}
 
 

@@ -1,11 +1,13 @@
-/* Layout: the route drawn as eight bands of step tiles; each step page is a plate of marked words beside its notes.
+/* Light theme: ivory, the colour of a good graph book, since 20 November 2026 (was #f4efe6 / #fbf8f2).
+   Layout: the route drawn as eight bands of step tiles; each step page is a plate of marked words beside its notes.
    Colours are the session decks' own, so the marks read the same here as on the slides. */
 :root {
-  --paper: #f4efe6;
-  --card: #fbf8f2;
+  --paper: #ede5d3;
+  --card: #f4eddd;
   --ink: #2b2b2b;
   --soft: #6b6256;
-  --line: #e2d8c8;
+  --line: #dacdb5;
+  --grid: #b4c8dc;                 /* a graph book's pale blue grid */
   --modal: #3f6488;
   --verb: #b5402f;
   --subject: #3a7d44;
@@ -14,12 +16,12 @@
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --paper: #1d1b18; --card: #25221e; --ink: #ece5d8; --soft: #a89e8f; --line: #3a352e;
+    --paper: #1d1b18; --card: #25221e; --ink: #ece5d8; --soft: #a89e8f; --line: #3a352e; --grid: #3a4654;
     --modal: #95b6db; --verb: #e2836e; --subject: #7dbb87; color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --paper: #1d1b18; --card: #25221e; --ink: #ece5d8; --soft: #a89e8f; --line: #3a352e;
+  --paper: #1d1b18; --card: #25221e; --ink: #ece5d8; --soft: #a89e8f; --line: #3a352e; --grid: #3a4654;
   --modal: #95b6db; --verb: #e2836e; --subject: #7dbb87; color-scheme: dark;
 }
 

@@ -148,7 +148,7 @@ FONTS = """<link rel="preconnect" href="https://fonts.googleapis.com">
 """
 
 CSS = """
-:root{--paper:#f4efe6;--panel:#fbf8f1;--line:#e0d8c7;--ink:#2b2b2b;--soft:#6b6256;--subject:#3a7d44;--verb:#b5402f;--modal:#3f6488;
+:root{--paper:#ede5d3;--panel:#f4eddd;--line:#dacdb5;--ink:#2b2b2b;--soft:#6b6256;--subject:#3a7d44;--verb:#b5402f;--modal:#3f6488;
   --serif:"Fraunces",Georgia,serif;--sans:"Lexend",system-ui,sans-serif;}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#1d1b18;--panel:#26231f;--line:#3b362f;--ink:#ece5d8;--soft:#a89e8f;--subject:#7dbb87;--verb:#e2836e;--modal:#95b6db;}}
 :root[data-theme="dark"]{--paper:#1d1b18;--panel:#26231f;--line:#3b362f;--ink:#ece5d8;--soft:#a89e8f;--subject:#7dbb87;--verb:#e2836e;--modal:#95b6db;}
