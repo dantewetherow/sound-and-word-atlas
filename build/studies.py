@@ -384,9 +384,10 @@ def per_deck():
             "Word sum: ex + peri + ment &rarr; <i>experiment</i>. Read from the last part back, the parts give the meaning in "
             "order: the suffix says what kind of word it is (a thing, an act), and the rest says what of.", steps=4)
     D.slide("Build experience", f"""<h2 class="head">And the other one</h2>
-{join(["ex", "peri", "ence"], ["out", "try", "being that way"], word("experience", 150), 1,
-      "From the end: <b>being</b> one who has <b>tried</b> things <b>out</b>. Experience is what trying leaves you with.")}""",
-            "Word sum: ex + peri + ence &rarr; <i>experience</i>. In Latin, <i>experientia</i> was the trying and the knowing "
+{join(["ex", "peri", "ence"], ["out", "try", "a thing you have"], word("experience", 150), 1,
+      "From the end: <b>what you have</b> from <b>trying</b> things <b>out</b>. Experience is what trying leaves you with.")}""",
+            "Word sum: ex + peri + ence &rarr; <i>experience</i>. -ence names, as on the -ence slide: she <i>has</i> experience; "
+            "the word that describes her is <i>experienced</i>. In Latin, <i>experientia</i> was the trying and the knowing "
             "that comes of it. English once used the two words almost the same way; French still uses one, <i>exp&eacute;rience</i>, for both.", steps=4)
 
     D.slide("Listen to the e", f"""<h2 class="head">Listen to the e</h2>
