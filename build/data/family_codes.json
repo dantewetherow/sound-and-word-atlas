@@ -7,5 +7,15 @@
 "peril": "c.p s.e c.r | b.i c.l",
 "pirate": "c.p l.i | c.r b.a c.t e0 ; vault 3>1",
 "empirical": "s.e c.m + | c.p s.i c.r + | b.i | c.c + b.a c.l",
-"fearful": "c.f r.ear + | c.f b.u c.l"
+"fearful": "c.f r.ear + | c.f b.u c.l",
+"product": "c.pr s.o + | c.d s.u c.ct",
+"produce": "c.pr b.o + | c.d l.u c.c e> ; nudge 5>4",
+"reduce": "c.r b.e + | c.d l.u c.c e> ; nudge 5>4",
+"reduction": "c.r b.e + | c.d s.u c.c | g.ti b.o c.n ; seam 5",
+"production": "c.pr b.o + | c.d s.u c.c | g.ti b.o c.n ; seam 6",
+"conduct": "c.c s.o c.n + | c.d s.u c.ct",
+"educate": "s.e + c.d | b.u | c.c + l.a c.t e>",
+"education": "s.e + c.d | b.u | c.c + l.a | g.ti b.o c.n ; vault 5>4 ; seam 5",
+"educational": "s.e + c.d | b.u | c.c + l.a | g.ti b.o c.n + | b.a c.l ; vault 5>4 ; seam 5",
+"miseducation": "c.m s.i c.s + | s.e + c.d | b.u | c.c + l.a | g.ti b.o c.n ; vault 8>7 ; seam 8"
 }

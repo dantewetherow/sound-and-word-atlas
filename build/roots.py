@@ -506,8 +506,8 @@ DEUK = {
         ("shift", "An ending can move the stress",
          ["Some suffixes decide where the stress falls. Before <i>-ion</i> it lands on the syllable just ahead of the suffix: "
           "<b>ED</b>ucate becomes edu<b>CA</b>tion, and pro<b>DUCE</b> becomes pro<b>DUC</b>tion. <i>-ity</i> does the same: "
-          "pro<b>DUC</b>tive becomes produc<b>TIV</b>ity. When the stress moves, vowels change with it: the long a of educ<b>A</b>tion "
-          "is weak in <b>ED</b>ucate&rsquo;s cousin <i>educator</i>, and the spelling stays the same throughout.",
+          "pro<b>DUC</b>tive becomes produc<b>TIV</b>ity. The vowels don&rsquo;t always change with it: the a is "
+          "long in <b>ED</b>ucate, edu<b>CA</b>tion and <b>ED</b>ucator alike, and only the beat moves. The spelling stays the same throughout.",
           "This is where spelling by parts earns its keep. The sounds shift from word to word, and the parts don&rsquo;t: "
           "e + duc + ate, e + duc + at(e) + ion, e + duc + at(e) + or."], []),
     ],

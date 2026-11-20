@@ -24,6 +24,16 @@ STUDIES = [{
     "blurb": "Two long words, built from parts a learner can feel: <i>ex-</i> (out), <i>per</i> (try), <i>-ment</i> and "
              "<i>-ence</i>. Read from the end, the parts give the meaning: an experiment is a trying-out. Then why the e is "
              "short in one and long in the other, and the family the root keeps: <i>expert</i>, <i>peril</i>, <i>pirate</i>, <i>fear</i>.",
+}, {
+    "slug": "education",
+    "title": "From duct to education",
+    "sub": "duct, duce, and the words built on them",
+    "root": "*deuk-", "root_page": "roots/deuk.html", "list": "lists/family-deuk.html",
+    "words": ["duct", "produce", "product", "production", "reduce", "reduction", "conduct", "educate", "education",
+              "educational", "educator", "miseducation", "introduce", "introduction", "aqueduct"],
+    "blurb": "A duct leads air along, and duce and duct take turns: <i>produce</i>, <i>product</i>. Then <i>ex-</i> shrinks to "
+             "<i>e-</i>, and <i>education</i> is built a part at a time, with the e of <i>-ate</i> dropping out and the i of "
+             "<i>-ion</i> taking over its job, up to <i>educational</i> and <i>miseducation</i>. Last, where the beat moves.",
 }]
 
 
@@ -68,11 +78,16 @@ class Deck:
                            + f">\n{body}\n{n}\n</section>")
 
 
+def drop(p):
+    """at(e) shows its e until the parts close up, then the e drops out."""
+    return re.sub(r"\((\w+)\)", r'<span class="xx">\1</span>', p)
+
+
 def join(parts, meanings, word_svg, start, read_end=None):
     """Parts that join into a word: the parts (with plus signs), then what each means, then they close up, then the
     marked word, then (if given) the meaning read from the end. Uses start, start+1, ... start+3 of the slide's clicks."""
     tiles = '<span class="plus">+</span>'.join(
-        f'<span class="pc"><b>{p}</b><em data-s="{start}">{m}</em></span>' for p, m in zip(parts, meanings))
+        f'<span class="pc"><b>{drop(p)}</b><em data-s="{start}">{m}</em></span>' for p, m in zip(parts, meanings))
     out = (f'<i class="trig" data-s="{start + 1}"></i><div class="pieces">{tiles}</div>'
            f'<div class="joined" data-s="{start + 2}">{word_svg}</div>')
     if read_end:
@@ -134,14 +149,17 @@ body{background:var(--paper);color:var(--ink);font-family:var(--sans);overflow:h
 .blanks .gap{display:inline-block;min-width:330px;border-bottom:3px solid var(--soft);text-align:center;margin:0 10px}
 .blanks .ans{font-family:var(--serif);font-style:italic;color:var(--verb)}
 /* parts joining: the tiles, what each means, then they close up, then the word */
-.pieces{display:flex;align-items:flex-start;gap:26px;transition:gap .6s ease}
-.pc{display:grid;justify-items:center;gap:12px}
+.pieces{display:flex;align-items:flex-start;gap:26px;padding-bottom:66px;transition:gap .6s ease}
+.pc{position:relative;display:block}
 .pc b{font-weight:500;font-size:110px;line-height:1;padding:10px 26px 18px;border:2px solid var(--line);border-radius:22px;background:var(--panel);transition:border-color .6s ease,background .6s ease,padding .6s ease,border-radius .6s ease}
-.pc em{font-family:var(--serif);font-size:36px;color:var(--soft)}
+.pc em{position:absolute;top:calc(100% + 16px);left:-240px;right:-240px;text-align:center;white-space:nowrap;font-family:var(--serif);font-size:36px;color:var(--soft)}
+.trig.in ~ .pieces .pc em{opacity:0}   /* the parts have joined: their meanings come back in the line read from the end */
 .plus{font-size:80px;line-height:1;color:var(--soft);padding-top:20px;max-width:80px;overflow:hidden;transition:max-width .6s ease,opacity .4s ease}
 .trig{display:none}
 .trig.in ~ .pieces{gap:0}
 .trig.in ~ .pieces .plus{max-width:0;opacity:0}
+.xx{display:inline-block;max-width:1.2em;overflow:hidden;vertical-align:bottom;color:var(--verb);transition:max-width .7s ease .2s,opacity .5s ease .2s}
+.trig.in ~ .pieces .xx{max-width:0;opacity:0}
 .trig.in ~ .pieces .pc b{border-color:transparent;background:transparent;padding-left:0;padding-right:0}
 .joined{margin-top:26px}
 /* the teacher's notes: a strip along the bottom, hidden until N or the Notes button */
@@ -347,7 +365,119 @@ def per_deck():
     return D
 
 
-DECKS = {"per": per_deck}
+# ------------------------------------------------------------------ *deuk-: From duct to education
+def educ_deck():
+    D = Deck()
+    D.slide("Title", f"""<p class="kicker">A word study &middot; <i>*deuk-</i></p>
+<h1 class="display">From duct to education</h1>
+<p class="subtitle">a word that leads, and the words built on it</p>
+<div class="pair">{word("duct", 120)}{word("education", 120)}</div>""",
+            "A word study for learners. Click, tap, or press the right arrow for each next piece; N shows and hides these notes. "
+            "The page for teachers is <a href=\"../roots/deuk.html\">*deuk-</a>, with its <a href=\"../lists/family-deuk.html\">spelling list</a>.", "mid")
+
+    D.slide("duct", f"""<h2 class="head">A <b class="r">duct</b> leads something along</h2>
+<div class="pair" style="margin-top:0">{word("duct", 150)}</div>
+<p class="lede" data-s="1">A duct leads air through a building. An aqueduct leads water.</p>
+<p class="q" data-s="2"><b>duct</b>, and its partner <b>duce</b>: <b>lead</b>.</p>""",
+            "Latin <i>d&umacr;cere</i>, to lead, and <i>ductus</i>, led. English borrowed the verbs with duce and their "
+            "nouns with duct. The root is <i>*deuk-</i>, to lead, to pull: English kept its own words from it too, <i>tug</i> "
+            "and <i>tow</i>.", steps=2)
+
+    def felt(head, rows, says, note):
+        cells = "".join(f'<div data-s="{k + 1}"><span class="w">{w}</span><span class="g">{g}</span></div>' for k, (w, g) in enumerate(rows))
+        D.slide(head, f"""<h2 class="head">{head}</h2>
+<div class="felt">{cells}</div>
+<p class="q" data-s="{len(rows) + 1}">{says}</p>""", note, steps=len(rows) + 1)
+
+    felt("duce and duct take turns", [("pro<b>duce</b>", "lead forward: make"), ("pro<b>duct</b>", "what is made"),
+                                      ("re<b>duce</b>", "lead back: make less"), ("re<b>duct</b>ion", "the making less")],
+         "The verb says <b>duce</b>. Add an ending, and it says <b>duct</b>.",
+         "duce is Latin&rsquo;s present form, duct its past form: <i>produce</i>, <i>product</i>, <i>production</i>; "
+         "<i>reduce</i>, <i>reduction</i>. The front part says which way the leading goes: pro, forward; re, back; "
+         "intro, inside; con, together.")
+
+    D.slide("ex becomes e", f"""<h2 class="head"><b class="r">ex-</b> means out. Before d, it gets shorter.</h2>
+<i class="trig" data-s="2"></i><div class="pieces"><span class="pc"><b>e<span class="xx">x</span></b><em data-s="1">out</em></span><span class="plus">+</span><span class="pc"><b>duc</b><em data-s="1">lead</em></span></div>
+<p class="lede" data-s="3">Try saying <b>ex-duc</b>. Now <b>e-duc</b>. The x drops out: it&rsquo;s easier to say.</p>
+<p class="q" data-s="4">Same part, shorter spelling: <b>e-</b> means <b>out</b>.</p>""",
+            "Latin <i>ex-</i> is written <i>e-</i> before d, l, m, n, r and v: <i>educate</i>, <i>emerge</i>, <i>elect</i>, "
+            "<i>evict</i>. The same thing happens inside Latin itself: it said <i>&emacr;d&umacr;cere</i>, to lead out, "
+            "not <i>exd&umacr;cere</i>.", steps=4)
+
+    felt("-ate and -ion", [("decor<b>ate</b>", "to make it pretty"), ("decor<b>ation</b>", "what you make"),
+                           ("celebr<b>ate</b>", "to have a party"), ("celebr<b>ation</b>", "the party")],
+         "<b>-ate</b> makes a doing word. <b>-ion</b> names the doing.",
+         "Both are Latin. -ate is the past form of a verb, made into an English verb; -ion makes a noun of an act. "
+         "When -ion joins -ate, the e drops and the t says sh: <i>decorate</i>, <i>decoration</i>.")
+
+    D.slide("The i takes over", f"""<h2 class="head">The e drops out. The i takes over its job.</h2>
+<div class="fam" style="grid-template-columns:1fr">
+<div data-s="1">{word("notate", 120)}<span class="g">the e at the end makes the a say its name</span></div>
+<div data-s="2">{word("notation", 120)}<span class="g">no e now: the i of <b class="r">-ion</b> does the same job</span></div>
+</div>
+<p class="q" data-s="3">Letters can drop out, and others do their jobs.</p>""",
+            "The notation draws it: in <i>notate</i> the vault comes from the final e; in <i>notation</i> the e is gone and the "
+            "vault comes from the i of -ion, which stands before another vowel (the pattern on the "
+            "<a href=\"../roots/per.html#break-h\">*per- page</a>). The t says sh before i and a vowel: the green bar under ti.", steps=3)
+
+    D.slide("Build educate", f"""<h2 class="head">Build it</h2>
+{join(["e", "duc", "ate"], ["out", "lead, bring up", "do it"], word("educate", 150), 1,
+      "Read it from the end: <b>do</b> the <b>bringing up</b>, the leading <b>out</b>. To educate is to bring someone up and on.")}""",
+            "Word sum: e + duc + ate &rarr; <i>educate</i>. Latin <i>&emacr;duc&amacr;re</i>, to bring up, to rear, a verb "
+            "beside <i>&emacr;d&umacr;cere</i>, to lead out. To educate was first to raise a child; leading out what is in a "
+            "learner is a later reading of the word, and a fair one (the <a href=\"../roots/deuk.html\">*deuk- page</a>).", steps=4)
+    D.slide("Build education", f"""<h2 class="head">Name the doing</h2>
+{join(["e", "duc", "at(e)", "ion"], ["out", "lead", "do it", "the doing"], word("education", 150), 1,
+      "From the end: <b>the doing</b> of <b>bringing up</b> and leading <b>out</b>.")}""",
+            "Word sum: e + duc + at(e) + ion &rarr; <i>education</i>. The e of -ate drops before -ion, and the i of -ion takes over "
+            "its job, making the a long. The t says sh.", steps=4)
+    D.slide("Build educational", f"""<h2 class="head">One more part</h2>
+{join(["education", "al"], ["the bringing up", "having to do with"], word("educational", 140), 1,
+      "From the end: <b>having to do with</b> the <b>bringing up</b>. An educational game helps you learn.")}""",
+            "Word sum: e + duc + at(e) + ion + al &rarr; <i>educational</i>. Each ending turns the word into a new kind: "
+            "a doing word (-ate), a thing (-ion), a describing word (-al). Read from the last part back, they come in order.", steps=4)
+    D.slide("Build miseducation", f"""<h2 class="head">And one at the front</h2>
+<p class="lede" data-s="1" style="margin:0 0 26px"><b class="r">mis</b>take, <b class="r">mis</b>spell: done <b>wrongly</b>.</p>
+{join(["mis", "education"], ["wrongly", "the bringing up"], word("miseducation", 120), 2,
+      "<b>mis-</b> means <b>wrongly</b>: miseducation is teaching that leads you wrong.")}""",
+            "Word sum: mis + e + duc + at(e) + ion &rarr; <i>miseducation</i>. A prefix joins at the front with no change: mis + "
+            "spell keeps both s&rsquo;s, <i>misspell</i>.", steps=5)
+
+    D.slide("The beat moves", f"""<h2 class="head">Say them. The beat moves.</h2>
+<p class="syl"><span class="hit">ED</span><span class="dot">&middot;</span><span>u</span><span class="dot">&middot;</span><span>cate</span></p>
+<p class="syl" data-s="1"><span>ed</span><span class="dot">&middot;</span><span>u</span><span class="dot">&middot;</span><span class="hit">CA</span><span class="dot">&middot;</span><span>tion</span></p>
+<p class="syl" data-s="2"><span>ed</span><span class="dot">&middot;</span><span>u</span><span class="dot">&middot;</span><span class="hit">CA</span><span class="dot">&middot;</span><span>tion</span><span class="dot">&middot;</span><span>al</span></p>
+<p class="lede" data-s="3">The beat moves, and the spelling stays the same. Listen to the d, too: many people say <b>ED-ju-cate</b>, and the spelling keeps the d of <b class="r">duc</b>.</p>""",
+            "-ion pulls the stress to the syllable just before it: EDucate, eduCAtion, eduCAtional. The a is long in all three. "
+            "The d and the u blend into the sound of j in most speech (as in <i>gradual</i> and <i>procedure</i>); the spelling "
+            "keeps the parts, and the notation has no mark for the blend.", steps=3)
+
+    six = [("duct", "a pipe that leads air"), ("product", "what is made"), ("reduce", "make less"),
+           ("conduct", "how you lead yourself"), ("education", "bringing up"), ("team", "English kept its own: pulling together")]
+    cells = "".join(f'<div data-s="{k + 1}">{word(w, 84)}<span class="g">{g}</span></div>' for k, (w, g) in enumerate(six))
+    D.slide("The family", f"""<h2 class="head">One old word for <b class="r">lead</b>, a family of words</h2>
+<div class="fam">{cells}</div>""",
+            "<i>Team</i> is English&rsquo;s own: in the Germanic languages the root&rsquo;s d became t, so <i>tug</i>, <i>tow</i>, "
+            "<i>tie</i> and <i>team</i> start with t where Latin&rsquo;s words start with d. The whole family is on the "
+            "<a href=\"../roots/deuk.html\">*deuk- page</a>.", steps=6)
+
+    D.slide("Your turn", f"""<h2 class="head">Your turn</h2>
+<ol class="blanks">
+<li>Air comes in through the <span class="gap"><span class="ans" data-s="1">duct</span></span>.</li>
+<li>Farms <span class="gap"><span class="ans" data-s="2">produce</span></span> food.</li>
+<li>Reading is a big part of your <span class="gap"><span class="ans" data-s="3">education</span></span>.</li>
+</ol>""",
+            "Say each sentence with the blank first, and let the class choose before the click shows the word. The "
+            "<a href=\"../lists/family-deuk.html\">spelling list</a> has more to build and use.", steps=3)
+
+    D.slide("For teachers", f"""<h2 class="head">For teachers</h2>
+<p class="lede">Word sums: e + duc + ate &rarr; <i>educate</i>; e + duc + at(e) + ion &rarr; <i>education</i>; e + duc + at(e) + ion + al &rarr; <i>educational</i>; mis + e + duc + at(e) + ion &rarr; <i>miseducation</i>; pro + duce, pro + duct, re + duct + ion.</p>
+<p class="lede">The family follows the Indo-European Lexicon (deuk-), checked against Etymonline; <i>educate</i> is from Latin <i>&emacr;duc&amacr;re</i>, to bring up. The teacher&rsquo;s page is <a href="../roots/deuk.html">*deuk-</a>; the list to print is the <a href="../lists/family-deuk.html">*deuk- spelling list</a>.</p>
+<p class="lede">The words with marks are drawn in Legomorphic Notation; the marks are on the <a href="../notations.html">Notations</a> page.</p>""", cls="mid")
+    return D
+
+
+DECKS = {"per": per_deck, "education": educ_deck}
 
 
 def write(OUT, door_page):
