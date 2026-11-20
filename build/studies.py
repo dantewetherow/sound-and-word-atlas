@@ -567,7 +567,7 @@ def leg_deck():
 {join(["leg", "o", "morph", "ic"], ["gather", "I", "form", "to do with"], word("legomorphic", 140), 1,
       "From the end: <b>to do with</b> the <b>forms I gather</b>. Legomorphic: how sounds and letters gather into words.")}""",
             "Word sum: leg + o + morph + ic &rarr; <i>legomorphic</i>. The o is the ending for I in Greek and Latin alike, so "
-            "<i>leg&omacr;</i> is I gather, as Latin <i>veto</i> is I forbid; morph is Greek <i>morph&emacr;</i>, form.", steps=4)
+            "<i>leg&omacr;</i> is I gather, as Latin <i>veto</i> is I forbid; morph is Greek <i>morph&emacr;</i>, form. The verb in both languages, with the poets&rsquo; lines, is in <a href='../roots/leg.html#lego-h'>Leg&omacr; in Latin and in Greek</a>.", steps=4)
 
     D.slide("legomorphics", f"""<h2 class="head">Sounds and words, assembled</h2>
 <div class="pair" style="margin-top:0">{word("legomorphics", 140)}</div>
@@ -602,7 +602,7 @@ def leg_deck():
 
     D.slide("For teachers", f"""<h2 class="head">For teachers</h2>
 <p class="lede">Word sums: col + lect &rarr; <i>collect</i>; se + lect &rarr; <i>select</i>; lect + ure &rarr; <i>lecture</i>; leg + end &rarr; <i>legend</i>; leg + ible &rarr; <i>legible</i>; lex + ic + on &rarr; <i>lexicon</i>; log + ic &rarr; <i>logic</i>; leg + o + morph + ic &rarr; <i>legomorphic</i>.</p>
-<p class="lede">The family follows Etymonline and the Indo-European Lexicon on <i>*leg-</i>, with Wiktionary on Greek <i>l&eacute;g&omacr;</i> and Latin <i>leg&omacr;</i>. The teacher&rsquo;s page is <a href="../roots/leg.html">*leg-</a>; the list to print is the <a href="../lists/family-leg.html">*leg- spelling list</a>.</p>
+<p class="lede">The family follows Etymonline and the Indo-European Lexicon on <i>*leg-</i>, with Wiktionary on Greek <i>l&eacute;g&omacr;</i> and Latin <i>leg&omacr;</i>. The teacher&rsquo;s page is <a href="../roots/leg.html">*leg-</a>, where <a href="../roots/leg.html#lego-h">Leg&omacr; in Latin and in Greek</a> follows the verb through the poets, from a last breath to a name read on a tomb; the list to print is the <a href="../lists/family-leg.html">*leg- spelling list</a>.</p>
 <p class="lede">The words with marks are drawn in Legomorphic Notation; the marks are on the <a href="../notations.html">Notations</a> page.</p>""", cls="mid")
     return D
 

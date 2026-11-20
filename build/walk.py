@@ -151,6 +151,7 @@ def write(OUT, door_page, X):
         links += fam.get(w, [])
         import studies
         links += [{"t": f"Word study: {s['title']}", "u": studies.link(s)} for s in studies.for_word(w)]
+        if any(s["slug"] == "leg" for s in studies.for_word(w)): links.append({"t": "Legō in Latin and in Greek", "u": "roots/leg.html#lego-h", "x": 1})
         rec = {"w": w, "forms": out, "where": links}
         if w in SC.OPEN: rec["open"] = 1
         if is_auto: rec["auto"] = 1

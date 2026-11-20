@@ -483,6 +483,8 @@ def write_search(OUT, X):
         add("mark", name, "notations.html#" + mark_id(name), f"drawn on {w}", k=strip(what))
     for term, anchor in X["terms"]:
         add("term", term, "definitions.html#" + anchor, "Definitions", teacher=True)
+    import roots
+    for t, u, s, k in roots.SECTIONS: add("page", t, u, s, k=k, teacher=True)   # sections worth finding by name
     for p, d, t, s in X["pages"]:
         if p.startswith("steps/") or p in UNLISTED: continue
         add("page", t, p, DOOR[d][1] if d and p != f"{d}.html" else "", k=s, teacher=d in TEACHERS and p not in BOARD_OK)

@@ -243,6 +243,8 @@ ROOT_PARTS = {
 # Legō in Latin and in Greek, a usage definition (20 November 2026). The Latin senses follow the Oxford Latin Dictionary's
 # legō² (1968, p. 1014), strung from the hand to the eye; the lines are the poets' own, checked against their texts, and
 # the translations are ours. The Greek road follows Homer.
+SECTIONS = [("Legō in Latin and in Greek", "roots/leg.html#lego-h", "Parts, *leg-",
+             "lego legō legere legein λέγω lectum logos gather choose read count say usage poets Virgil Homer Ovid Oxford Latin Dictionary")]
 LEGO_CSS = """<style>
 .lusage{display:grid;grid-template-columns:3fr 2fr;gap:22px;margin:18px 0 6px;align-items:start}
 .lusage h3{margin:0 0 4px;font-size:1.2rem}
@@ -315,7 +317,7 @@ LEG = {
     "h1_s": "*leg- means &lsquo;gather&rsquo;",
     "lead": "To gather, to collect. Speakers of Greek and Latin carried this Proto-Indo-European root into words about "
             "words: gathering words is choosing them, reading them and saying them. English borrowed the family back again "
-            "and again, and the notation&rsquo;s own name is one of them.",
+            "and again, and the notation&rsquo;s own name is one of them. <a href=\"#lego-h\">How the poets used leg&omacr;</a>, in Latin and in Greek.",
     "drawn": ("legomorphic", "legomorphic, marked: leg + o + morph + ic"),
     "sources": [("Etymonline, *leg-", "https://www.etymonline.com/word/%2Aleg-"),
                 ("Indo-European Lexicon, leg̑- (Linguistics Research Center, University of Texas at Austin), with Latin&rsquo;s "
