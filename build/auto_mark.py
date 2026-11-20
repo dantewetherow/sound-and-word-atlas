@@ -9,7 +9,9 @@ How it marks: letters are matched to sounds (consonant units, sh/th/ch, vowel te
 a vowel is short, long (its name) or bare by its sound; syllables break before one consonant after a long or weak vowel
 and after it otherwise, between two consonants, and at a seam; a doubled pair, ck, tch or dge after a short vowel is
 boxed when a vowel follows, with the blocked vault; a silent e after one consonant and a long vowel sends the vault, and
-so does a vowel one consonant after a long vowel (making, table); e, i or y after a c or g said soft gets the nudge.
+so does a vowel one consonant after a long vowel when the spelling gives it the job: across a seam where an e dropped
+(making), a y (baby), or an i before a vowel (radio); not the next vowel alone (table, open), since 20 November 2026.
+e, i or y after a c or g said soft gets the nudge.
 Words whose letters it can't match to their sounds (silent t, ough, borrowed spellings) are left unmarked.
 
 Checked against the 366 hand-marked words it overlaps: 343 come out the same (94%). Most of the rest are seams the hand
@@ -312,7 +314,11 @@ def code(word, heads=(), lexicon=frozenset()):
         if k != "l" or i + 2 >= len(kinds): continue
         if seam_after_unit.get(i): continue
         if kinds[i + 1] in ("c", "k", "g") and (len(text[i + 1]) == 1 or kinds[i + 1] in ("k", "g")) and kinds[i + 2] in ("s", "l", "b", "r", "le"):
-            ann.append(f"vault {i + 2}>{i}")
+            # a vault needs a sender the spelling gives (20 November 2026): a vowel across a seam taking a dropped e's job
+            # (making), a y (baby), or an i before a vowel (radio). The next vowel alone (table, open) sends nothing.
+            civ = text[i + 2] == "i" and i + 3 < len(kinds) and kinds[i + 3] in ("s", "l", "b", "r", "e0", "le")
+            if seam_after_unit.get(i + 1) or text[i + 2].endswith("y") or civ:
+                ann.append(f"vault {i + 2}>{i}")
         elif kinds[i + 1] == "g" and text[i + 1] == "ti":
             ann.append(f"vault {i + 1}>{i}")
     # nudges: a c or g said soft (/s/, /j/) by the vowel letter after it

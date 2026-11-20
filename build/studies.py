@@ -390,14 +390,19 @@ def per_deck():
             "the word that describes her is <i>experienced</i>. In Latin, <i>experientia</i> was the trying and the knowing "
             "that comes of it. English once used the two words almost the same way; French still uses one, <i>exp&eacute;rience</i>, for both.", steps=4)
 
+    # 20 November 2026: the e is long or short by what comes after the i, not by where the syllable breaks (that was
+    # circular: the break is chosen from the sound). Some say exPEERiment, as Merriam-Webster allows.
     D.slide("Listen to the e", f"""<h2 class="head">Listen to the e</h2>
-<p class="syl"><span>ex</span><span class="dot">&middot;</span><span class="hit">per</span><span class="dot">&middot;</span><span>i</span><span class="dot">&middot;</span><span>ment</span></p>
-<p class="lede" data-s="1">In <b class="r">per</b>, the r closes the syllable. The e is short.</p>
-<p class="syl" data-s="2" style="margin-top:40px"><span>ex</span><span class="dot">&middot;</span><span class="hit">pe</span><span class="dot">&middot;</span><span>ri</span><span class="dot">&middot;</span><span>ence</span></p>
-<p class="lede" data-s="3">In <b class="r">pe</b>, the syllable is open. The e says its name.</p>""",
-            "The notation draws this as closed and open: <i>per</i> in <i>experiment</i>, as in <i>very</i>; <i>pe</i> in "
-            "<i>experience</i>, with the vault from the i, as in <i>here</i>. The patterns underneath (Chomsky and Halle) are "
-            "on the <a href=\"../roots/per.html#break-h\">teacher&rsquo;s page</a>, with their exceptions.", steps=3)
+<div class="ishas"><h3>i, then a consonant</h3><h3>i, then a vowel</h3>
+<p class="typed" style="font-size:80px">exp<b class="r">e</b>r<span class="diff">i</span><b style="color:var(--ink);text-decoration:underline">m</b>ent</p>
+<p class="typed" data-s="2" style="font-size:80px">exp<b class="r">e</b>r<span class="diff">i</span><b style="text-decoration:underline">e</b>nce</p>
+<p data-s="1" style="font-size:34px;color:var(--soft)">The e is short:<br>ex-<b>PAIR</b>-i-ment</p>
+<p data-s="3" style="font-size:34px;color:var(--soft)">The i reaches back, and the e says its name: ex-<b>PEER</b>-i-ence</p>
+</div>
+<p class="q" data-s="4">Some say ex-<b>PEER</b>-i-ment too: same parts, same spelling.</p>""",
+            "An i before a vowel makes the vowel before it long (<i>period</i>, <i>serious</i>); before a consonant it doesn&rsquo;t "
+            "(<i>peril</i>, <i>merit</i>). The vault in <i>experience</i> draws it. Merriam-Webster gives ik-SPER-i-ment, also "
+            "ik-SPIR-i-ment: mark what the learner says. More on the <a href=\"../roots/per.html#break-h\">teacher&rsquo;s page</a>.", steps=4)
 
     D.slide("And the i", f"""<h2 class="head">And the i?</h2>
 <div class="stack"><p class="typed">exper<span class="diff">i</span>ment</p><p class="typed">exper<span class="diff">i</span>ence</p></div>

@@ -990,7 +990,7 @@ PER_CLUSTERS = [
     {"key": "peri", "label": "peri", "spells": ["peri"], "head": "try, test",
      "road": "Latin <i>exper&imacr;r&imacr;</i>, to try out: ex- and the verb&rsquo;s stem, <i>per&imacr;-</i>",
      "note": "The i is the stem&rsquo;s own vowel, and it stays in every word. It also decides how the e before it sounds: see "
-             "<a href=\"#break-h\">Where the syllable breaks</a>.",
+             "<a href=\"#break-h\">Short e, long e</a>.",
      "groups": [
          [("experiment", ["ex-", "peri", "-ment"], "a test you set up, to find something out"),
           ("experimental", ["ex-", "peri", "-ment", "-al"], "done as a test; new and untried"),
@@ -1105,12 +1105,13 @@ PER = {
          ["Latin had one verb, <i>exper&imacr;r&imacr;</i>, to try out, and made nouns from it that English took twice. Here is the "
           "time-lapse, the <a href=\"../definitions.html#def-diachronic\">diachronic</a> view:"],
          [("experiment", "the test you set up"), ("experience", "what trying leaves you with")], PER_TIME),
-        ("break", "Where the syllable breaks",
+        ("break", "Short e, long e: the letter after the i",
          ["Say them slowly: ex-<b>per</b>-i-ment, ex-<b>pe</b>-ri-ence. The letters match up to the i, but the e is short in one and "
-          "says its name in the other. The notation draws the reason with the path&rsquo;s first idea, <a href=\"../steps/01.html\">open "
-          "or closed</a>. In <i>experiment</i> the r closes the syllable, <i>per</i>, as it does in <i>very</i>, and the e is short. "
-          "In <i>experience</i> the syllable is open, <i>pe</i>, and the i reaches back over the r and makes the e long, as the e "
-          "of <i>here</i> is long. That is the snapshot, the synchronic view: what English does now.",
+          "says its name in the other. The letter that decides it is the one after the i. In <i>experience</i> the i stands before "
+          "a vowel, the e of <i>-ence</i>, and reaches back over the r to make the e long: the notation draws that vault. In "
+          "<i>experiment</i> the i stands before the m of <i>-ment</i>, and nothing reaches back. Where the syllables break, "
+          "ex-per-i-ment and ex-pe-ri-ence, follows from the sound, so it describes the difference rather than causing it. That is "
+          "the snapshot, the synchronic view: what English does now.",
           "Underneath are two patterns that Chomsky and Halle set out in <i>The Sound Pattern of English</i>. A stressed vowel with "
           "two syllables after it tends to be short: <i>divine</i> but <i>divinity</i>, <i>serene</i> but <i>serenity</i>, "
           "<i>nation</i> but <i>national</i>. That is <i>experiment</i>. But a vowel before one consonant, then an i, then another "
@@ -1118,8 +1119,10 @@ PER = {
           "<i>comedian</i>, <i>colony</i> but <i>colonial</i>. That is <i>experience</i>, where the i stands before the e of "
           "<i>-ence</i>.",
           "They are tendencies, not laws. <i>Obesity</i> keeps the long e of <i>obese</i>, and <i>Italian</i> has a short a where "
-          "<i>Canadian</i> has a long one. Teach the syllable breaks, which the notation shows, and let the family carry the rest."],
-         [("experiment", "per is closed: a short e"), ("experience", "pe is open, and the i makes the e long")]),
+          "<i>Canadian</i> has a long one. Teach the i before a vowel, which the vault shows, and let the family carry the rest.",
+          "Expect speech to vary here, too. Before an r is where it varies most: Merriam-Webster gives ik-SPER-i-ment, also "
+          "ik-SPIR-i-ment. A learner who says the second has the same parts and the same spelling; mark what the learner says."],
+         [("experiment", "the i before the m of -ment: a short e"), ("experience", "the i before a vowel makes the e long")]),
         ("i", "A note on the i, for the curious",
          ["Both words have an i after <i>per</i>, and it is the same i: the stem vowel of Latin&rsquo;s verb, <i>exper&imacr;r&imacr;</i>, "
           "whose stem ends in &imacr; as <i>aud&imacr;re</i>&rsquo;s does. Latin built both nouns on that stem: exper&imacr; + mentum, "

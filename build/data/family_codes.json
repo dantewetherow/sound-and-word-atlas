@@ -5,7 +5,7 @@
 "experiential": "b.e c.x + | c.p l.e | c.r b.i + | s.e c.n | g.ti b.a c.l ; vault 5>3 ; seam 8",
 "expert": "s.e c.x + | c.p r.er c.t",
 "peril": "c.p s.e c.r | b.i c.l",
-"pirate": "c.p l.i | c.r b.a c.t e0 ; vault 3>1",
+"pirate": "c.p l.i | c.r b.a c.t e0",
 "empirical": "s.e c.m + | c.p s.i c.r + | b.i | c.c + b.a c.l",
 "fearful": "c.f r.ear + | c.f b.u c.l",
 "product": "c.pr s.o + | c.d s.u c.ct",

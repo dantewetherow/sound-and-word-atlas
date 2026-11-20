@@ -106,8 +106,10 @@ STUDY = [   # words for studying language, each with an everyday word to stand i
 ]
 
 EXTRA_MARKS = [   # marks the legend doesn't list on its own
-    ("Sender", "The letter a vowel vault comes from: a silent <em>e</em>, or a vowel after one consonant, like the <em>a</em> "
-     "of <em class=\"nw\">-ate</em>, which sends the <em>o</em> of <em>notate</em> its vault", "notate", "vault"),
+    ("Sender", "The letter a vowel vault comes from: a silent <em>e</em>; a <em>y</em>; a vowel that takes a dropped "
+     "<em>e</em>&rsquo;s place, like the <em>a</em> of <em class=\"nw\">-ate</em>, which sends the <em>o</em> of <em>notate</em> "
+     "its vault; or an <em>i</em> before another vowel, as in <em>experience</em>. A long vowel no letter causes (<em>over</em>, "
+     "<em>tiger</em>) has no sender, and no vault", "notate", "vault"),
     ("Red apostrophe", "A red apostrophe in a contraction, in place of the vowel it drops", "contraction", "apostrophe"),
 ]
 

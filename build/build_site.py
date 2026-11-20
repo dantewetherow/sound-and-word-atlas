@@ -381,7 +381,7 @@ KEY = [("Sound circle", "One circle under each sound: red for a vowel sound, bla
        ("R-controlled unit", "A red bar under a vowel and its <em>r</em>, with the vowel red, the <em>r</em> black and one circle", "car", "r"),
        ("Block box", "A box around the vowel protector at work: a pair or cluster with a vowel after it, which it stops from reaching back. A pair keeps its bond bar when the box comes; a cluster has none", "hopping", "box"),
        ("Cone of silence", "A dotted ring around a silent letter: the <em>e</em> of <em>have</em>, and a consonant that another form of its word says aloud, the <em>g</em> of <em>sign</em> (<em>signal</em>). Other silent consonants join their unit: the <em>kn</em> of <em>knife</em>. &ldquo;All letters are &lsquo;silent&rsquo;, but some are more silent than others&rdquo; (Carney 1994: 40): the <em>g</em> of <em>sign</em> speaks up in <em>signal</em>", "have", "cone"),
-       ("Vowel vault", "An arc from an <em>e</em>, or a vowel after one consonant, back to the vowel it makes long", "make", "vault"),
+       ("Vowel vault", "An arc from the letter that makes a vowel long back to it: a silent <em>e</em>, a <em>y</em>, a vowel in a dropped <em>e</em>&rsquo;s place, or an <em>i</em> before a vowel", "make", "vault"),
        ("Nice-nudge", "A small arc under the letters from <em>e</em>, <em>i</em> or <em>y</em> to the <em>c</em> or <em>g</em> it softens", "nice", "nudge"),
        ("Blocked vault", "A half-arc that ends in a red X where a box stops the vault", "getting", "bv"),
        ("Morpheme seam", "A dotted line between morphemes", "going", "seam")]

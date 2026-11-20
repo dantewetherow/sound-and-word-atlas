@@ -53,8 +53,11 @@ THE CODE, unit by unit, left to right
 After a semicolon, by unit number (counting from 0, skipping | and +; a group such as c.nt is one unit):
     vault A>B     a vault from the sounded vowel in unit A back to the vowel in unit B. A may be a consonant unit that
                   holds a vowel letter, which sends the vault: the i of g.ti in notation, as the create family deck
-                  draws creation (the t and i spell sh together, and the i still makes the a long)
-    bv A>B        a vault from unit A that the box at unit B stops (bv A>B-C for a box over units B to C)
+                  draws creation (the t and i spell sh together, and the i still makes the a long). Only a letter
+                  the spelling gives the job sends one (20 November 2026): a y, a vowel that takes a dropped e's place
+                  across a seam (making, notate), or an i before another vowel (experience, notation). A long vowel
+                  in an open syllable of one part (over, tiger, table) takes its long mark and no vault
+    bv A>B       a vault from unit A that the box at unit B stops (bv A>B-C for a box over units B to C)
     nudge A>B     a nice-nudge from the vowel in unit A to the c or g in unit B (B may be a box, as the dg of nudge)
     box A         a block box around the cluster in unit A (box A-B for units A to B)
     seam N        a morpheme seam after letter N (counting letters from 0), for a seam inside a unit: notat + ion
@@ -92,7 +95,7 @@ W = {
  "from": "c.fr b.o c.m", "give": "c.g s.i c.v e0", "once": "w.o c.n c.c e0 ; nudge 3>2", "walk": "c.w t.al c.k", "were": "c.w r.er e0",
  "good": "c.g t.oo c.d", "her": "c.h r.er",
  # ---- list 8, r-controlled
- "over": "l.o | c.v r.er ; vault 2>0", "before": "c.b l.e + | c.f r.or e0", "first": "c.f r.ir c.st", "hurt": "c.h r.ur c.t",
+ "over": "l.o | c.v r.er", "before": "c.b l.e + | c.f r.or e0", "first": "c.f r.ir c.st", "hurt": "c.h r.ur c.t",
  "for": "c.f r.or", "under": "s.u c.n | c.d r.er", "start": "c.st r.ar c.t",
  # ---- list 9
  "because": "c.b l.e | c.c t.au c.s e0", "been": "c.b t.ee c.n ; seam 1", "both": "c.b l.o g.th", "buy": "k.bu l.y", "old": "l.o c.ld",
@@ -109,7 +112,7 @@ W = {
  "done": "c.d b.o c.n e0", "eight": "t.eigh c.t", "find": "c.f l.i c.nd", "kind": "c.k l.i c.nd", "laugh": "c.l t.au k.gh",
  "only": "l.o c.n | c.l b.y", "pretty": "c.pr b.e x.tt | b.y ; bv 3>2", "together": "c.t b.o | c.g s.e x.th | r.er ; bv 5>4", "warm": "c.w r.ar c.m",
  # ---- list 13, multisyllabic
- "every": "s.e c.v | r.er | b.y", "going": "c.g l.o + | s.i k.ng", "open": "l.o | c.p b.e c.n ; vault 2>0", "always": "b.a c.l | c.w t.ay c.s",
+ "every": "s.e c.v | r.er | b.y", "going": "c.g l.o + | s.i k.ng", "open": "l.o | c.p b.e c.n", "always": "b.a c.l | c.w t.ay c.s",
  "better": "c.b s.e x.tt | r.er ; bv 3>2", "carry": "c.c b.a x.rr | b.y ; bv 3>2", "funny": "c.f s.u x.nn + | b.y ; bv 3>2",
  "yellow": "c.y s.e x.ll | t.ow", "today": "c.t b.o | c.d t.ay", "myself": "c.m l.y + | c.s s.e c.lf", "never": "c.n s.e c.v | r.er",
  "seven": "c.s s.e c.v | b.e c.n", "other": "b.o g.th | r.er", "water": "c.w b.a c.t | r.er", "people": "c.p t.eo | c.p le",
@@ -139,7 +142,7 @@ CHOICES = [
  ("want, myself", "no box around nt or lf", "A cluster takes the box only where a vowel comes after it in the word and the box stops that vowel's reach (wanted, selfish). Nothing follows nt in want or lf in myself, so they stay plain, as and and must do."),
  ("under", "no box and no blocked vault", "The n closes the first syllable and the d opens the second, as the p and k of napkin do on your card, which has no box. If nd is boxed, a blocked vault from the e follows."),
  ("better, pretty, funny, carry", "a blocked vault from the last vowel to the box", "As in getting and happy. Little has none, following its own marking card, and yellow has none because a vowel unit does not send."),
- ("over, open", "a vault from the next vowel back to the long vowel, with no cone", "As in tiger and silent on the cards."),
+ ("over, open", "a long mark and no vault", "Ruled for step 16 on 10 November 2026 and held for every word on 20 November: no letter causes a long first vowel in a one-part word, so nothing sends a vault (tiger, silent, table, bacon). A vault needs a sender the spelling gives: a silent e, a y, a vowel that takes a dropped e's place (making), or an i before another vowel (experience, notation)."),
  ("here", "h, long e, r, and a silent e with a vault", "It follows the ELP's own long-vowel list. The alternative is an r-controlled unit with a cone, like there and where. Your r-controlled card marks hear as h + ear with two circles, so the two spellings of that word differ by a circle here."),
  ("there, where", "an er unit, then e in a cone", "By analogy with were in the manual. The unit spells the air sound, and no mark shows that."),
  ("our, your, their", "our and eir as r-controlled units of three letters", "As the cards do for air and ear."),

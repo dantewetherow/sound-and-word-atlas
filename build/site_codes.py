@@ -62,8 +62,8 @@ SITE_CODES = {
     "robin": "c.r s.o c.b | s.i c.n", "robot": "c.r l.o | c.b s.o c.t",
     "river": "c.r s.i c.v | r.er", "silly": "c.s s.i x.ll | b.y ; bv 3>2",
     # step 17: consonant + le (as the table and bugle card, and little)
-    "table": "c.t l.a | c.b le ; vault 3>1", "bugle": "c.b l.u | c.g le ; vault 3>1",
-    "title": "c.t l.i | c.t le ; vault 3>1", "apple": "s.a x.pp | le", "middle": "c.m s.i x.dd | le",
+    "table": "c.t l.a | c.b le", "bugle": "c.b l.u | c.g le",
+    "title": "c.t l.i | c.t le", "apple": "s.a x.pp | le", "middle": "c.m s.i x.dd | le",
     # step 18: long before two consonants (as old, find)
     "cold": "c.c l.o c.ld", "most": "c.m l.o c.st", "child": "g.ch l.i c.ld", "wild": "c.w l.i c.ld",
     # step 20: teams for the long vowels (as eat, say)
@@ -90,7 +90,7 @@ SITE_CODES = {
     "redo": "c.r l.e + | c.d b.o", "replay": "c.r l.e + | c.pl t.ay",
     "refill": "c.r l.e + | c.f s.i k.ll", "reread": "c.r l.e + | c.r t.ea c.d",
     # step 32: ph as a black bond bar (as kn); photo as pony
-    "photo": "k.ph l.o | c.t l.o ; vault 3>1", "phone": "k.ph l.o c.n e>", "graph": "c.gr s.a k.ph",
+    "photo": "k.ph l.o | c.t l.o", "phone": "k.ph l.o c.n e>", "graph": "c.gr s.a k.ph",
     "alphabet": "s.a c.l | k.ph b.a | c.b s.e c.t",
     # the steps' contrasts, drawn on the step pages since 10 November 2026, each as the word named beside it
     "cost": "c.c s.o c.st", "mint": "c.m s.i c.nt",              # as must and went: short before two consonants
