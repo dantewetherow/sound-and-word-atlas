@@ -240,6 +240,76 @@ ROOT_PARTS = {
     "lex": "word, speech: Greek <i>lexis</i>",
 }
 
+# Legō in Latin and in Greek, a usage definition (20 November 2026). The Latin senses follow the Oxford Latin Dictionary's
+# legō² (1968, p. 1014), strung from the hand to the eye; the lines are the poets' own, checked against their texts, and
+# the translations are ours. The Greek road follows Homer.
+LEGO_CSS = """<style>
+.lusage{display:grid;grid-template-columns:3fr 2fr;gap:22px;margin:18px 0 6px;align-items:start}
+.lusage h3{margin:0 0 4px;font-size:1.2rem}
+.lusage .lform{margin:0 0 12px;color:var(--soft)}
+.lusage ol{list-style:none;margin:0;padding:0 0 0 18px;border-left:3px solid var(--line);display:grid;gap:14px}
+.lusage li{position:relative}
+.lusage li::before{content:"";position:absolute;left:-26px;top:.45em;width:13px;height:13px;border-radius:50%;background:var(--card);border:3px solid var(--modal,#3f6488)}
+.lusage li.lnow::before{background:var(--modal,#3f6488)}
+.lusage b{display:block}
+.lusage q{display:block;quotes:none;font-style:italic;font-family:var(--display);font-size:1.08rem;margin:4px 0 0}
+.lusage .tr{display:block;margin:2px 0 0}
+.lusage cite{display:block;font-style:normal;color:var(--soft);font-size:.9rem}
+.lusage .lnote{color:var(--soft);font-size:.95rem;margin:4px 0 0}
+@media (max-width:760px){.lusage{grid-template-columns:1fr}}
+</style>"""
+def _lq(lang, line, tr, cite):
+    return f'<q lang="{lang}">{line}</q><span class="tr">{tr}</span><cite>{cite}</cite>'
+LEGO_USE = LEGO_CSS + '<div class="lusage">' + (
+    '<section><h3>Latin <i>leg&omacr;</i>: I gather, I choose, I read</h3>'
+    '<p class="lform"><i>leg&omacr;, legere, l&emacr;g&imacr;, lectum</i>. The <i>lect</i> of <i>collect</i> and <i>lecture</i> is the last of these.</p><ol>'
+    '<li><b>with the hand: to pick, to pluck</b>'
+    + _lq("la", "legit flōrēs", "she gathers flowers", "Ovid, <i>Metamorphoses</i> 4.315") + '</li>'
+    '<li><b>with the mouth</b>'
+    + _lq("la", "ē foliīs nātōs, ē suāvibus herbīs / ōre legunt", "the bees gather their young from the leaves and the sweet grasses with their mouths",
+          "Virgil, <i>Georgics</i> 4.200&ndash;201. Virgil had the bees wrong, but the verb is right") + '</li>'
+    '<li><b>the last breath</b>'
+    + _lq("la", "extrēmus sī quis super hālitus errat, / ōre legam", "if any last breath still wanders over you, I will gather it with my mouth",
+          "Virgil, <i>Aeneid</i> 4.684&ndash;685: Anna to her sister Dido, dying")
+    + _lq("la", "spīritus fugiēns meō legātur ōre", "let your fleeing breath be gathered by my mouth",
+          "Seneca, <i>Hercules Oetaeus</i> 1342: Alcmena to her son Hercules")
+    + '<p class="lnote">Commentators call it a last kindness, like closing the eyes of the dying.</p></li>'
+    '<li><b>the bones, after the fire</b>'
+    + _lq("la", "quae legat in maestōs ossa perusta sinūs", "a mother to gather my burnt bones into her grieving lap",
+          "Tibullus 1.3.6, sick and far from home, with no mother there to do it")
+    + _lq("la", "extrēmō quī legat ossa diē", "someone to gather my bones on the last day", "Propertius 2.24.50") + '</li>'
+    '<li><b>in a line: sails, ropes, thread</b>'
+    + _lq("la", "nauita &hellip; ūmida vēla legit", "the sailor gathers in his wet sails", "Virgil, <i>Georgics</i> 1.373")
+    + _lq("la", "extrēmaque Lausō / Parcae fīla legunt", "and the Fates gather in the last threads for Lausus", "Virgil, <i>Aeneid</i> 10.814&ndash;815") + '</li>'
+    '<li><b>a path: to follow tracks, to trace a shore</b>'
+    + _lq("la", "vestīgia retrō / observāta legit", "he picks up his own footprints, going back the way he came", "Virgil, <i>Aeneid</i> 9.392&ndash;393: Nisus, looking for his friend")
+    + _lq("la", "crebrīs legimus freta consita terrīs", "we thread the straits, sown thick with islands", "Virgil, <i>Aeneid</i> 3.127") + '</li>'
+    '<li><b>with the eyes and the ears: to pick out</b>'
+    + _lq("la", "unde omnīs longō ōrdine posset / adversōs legere", "from where he could pick them all out, face to face, in their long line",
+          "Virgil, <i>Aeneid</i> 6.754&ndash;755: Anchises, watching the souls go by")
+    + _lq("la", "unde hōrum sermōnem legam", "where I can pick up what they say", "Plautus, <i>Pseudolus</i> 414: listening in") + '</li>'
+    '<li><b>to choose</b>Picked out from the rest: <i>select</i>, <i>elect</i>, soldiers enlisted, a senate chosen</li>'
+    '<li class="lnow"><b>to read</b>'
+    + _lq("la", "nōmen &hellip; in marmore lectum / perfūdit lacrimīs", "she drenched with her tears the name she read on the marble",
+          "Ovid, <i>Metamorphoses</i> 2.338: Clymene at her son Phaethon&rsquo;s tomb")
+    + _lq("la", "in tōtō plūrimus orbe legor", "all over the world, I am read more than anyone", "Ovid, <i>Tristia</i> 4.10.128, from exile") + '</li>'
+    '</ol></section>'
+    '<section><h3>Greek <i>leg&omacr;</i>: I gather, I count, I say</h3>'
+    '<p class="lform"><i lang="grc">λέγω</i>. Its noun is <i lang="grc">λόγος</i>, <i>logos</i>: a gathering of words, an account, a reason.</p><ol>'
+    '<li><b>to gather</b>'
+    + _lq("grc", "ὀστέα Πατρόκλοιο Μενοιτιάδαο λέγωμεν", "let us gather the bones of Patroclus, son of Menoetius", "Homer, <i>Iliad</i> 23.239: Achilles")
+    + _lq("grc", "ὀστέα λευκὰ λέγοντο", "they gathered the white bones", "Homer, <i>Iliad</i> 24.793: Hector&rsquo;s brothers and friends") + '</li>'
+    '<li><b>to count: to gather one by one</b>'
+    + _lq("grc", "λέκτο δ’ ἀριθμόν", "he counted their number", "Homer, <i>Odyssey</i> 4.451: Proteus, counting his seals")
+    + _lq("grc", "ἐν δ’ ἡμέας πρώτους λέγε κήτεσιν", "he counted us first among the beasts", "<i>Odyssey</i> 4.452: Menelaus and his men, hidden in sealskins") + '</li>'
+    '<li><b>to tell over: to lay out a story piece by piece</b>'
+    + _lq("grc", "ἴσκε ψεύδεα πολλὰ λέγων ἐτύμοισιν ὁμοῖα", "he told many lies, and made them like the truth", "Homer, <i>Odyssey</i> 19.203: Odysseus, in disguise, to his wife") + '</li>'
+    '<li class="lnow"><b>to say</b>In later Greek the everyday word for speaking, and the root of <i>lexicon</i>, <i>logic</i>, <i>dialogue</i> and <i>prologue</i></li>'
+    '</ol>'
+    '<p class="lnote">One more line in the Odyssey looks the same and isn&rsquo;t: <i lang="grc">ἔπειτα δὲ λέκτο καὶ αὐτός</i>, &ldquo;then he lay down himself&rdquo; '
+    '(4.453). That <i>lekto</i> comes from another verb, to lie down, kin to <i>λέχος</i>, a bed. Two lines apart, one form counts the seals and the other goes to sleep among them.</p>'
+    '</section>') + '</div>'
+
 LEG = {
     "slug": "leg", "root": "*leg-", "gloss": "to gather, to collect", "kind": "a root family",
     "h1_s": "*leg- means &lsquo;gather&rsquo;",
@@ -258,7 +328,24 @@ LEG = {
                 ("Wiktionary, Latin <i>leg&omacr;</i>: choose, gather, read; its I form", "https://en.wiktionary.org/wiki/lego#Latin"),
                 ("Etymonline, <i>veto</i>: Latin, I forbid", "https://www.etymonline.com/word/veto"),
                 ("Calvert Watkins, <i>The American Heritage Dictionary of Indo-European Roots</i>, leg-: the law branch given as possible (a copy of the appendix)", "https://www.proto-indo-european.ru/dic-watkins/ier-l.htm"),
-                ("Etymonline, <i>legume</i>: Latin <i>leg&umacr;men</i>, of unknown origin", "https://www.etymonline.com/search?q=legume")],
+                ("Etymonline, <i>legume</i>: Latin <i>leg&umacr;men</i>, of unknown origin", "https://www.etymonline.com/search?q=legume"),
+                ("<i>Oxford Latin Dictionary</i>, ed. P. G. W. Glare (Clarendon Press, 1968&ndash;1982), <i>leg&omacr;</i>&sup2;, p. 1014: the nine senses and the lines for the Latin usage", "../credits.html"),
+                ("Dickinson College Commentaries, Virgil&rsquo;s <i>Aeneid</i> 4.642&ndash;705, on <i>&omacr;re legam</i>: catching the last breath", "https://dcc.dickinson.edu/node/4801"),
+                ("Dickinson College Commentaries, Homer&rsquo;s <i>Odyssey</i> 4.435&ndash;461: <i>lekto</i>, counted, and <i>lekto</i>, lay down", "https://dcc.dickinson.edu/node/31956"),
+                ("Perseus Scaife Viewer, Homer&rsquo;s <i>Iliad</i> 24.793", "https://atlas.perseus.tufts.edu/library/passage/urn:cts:greekLit:tlg0012.tlg001.perseus-grc2:24.793/")],
+    "extra": [
+        ("lego", "Legō in Latin and in Greek",
+         ["Latin and Greek share the form <i>leg&omacr;</i>, I gather, and each took it somewhere different. In Latin, gathering "
+          "turned to picking out, then to choosing and reading; in Greek, to counting, telling over and saying. So in "
+          "<i>legomorphic</i> the Greek says &lsquo;I gather forms&rsquo;, and an English reader who knows Latin hears &lsquo;I read forms&rsquo; too.",
+          "The Latin column follows the nine senses of <i>leg&omacr;</i> in the <i>Oxford Latin Dictionary</i> (1968), strung from "
+          "the hand to the eye, each with a line where a poet used it. The two languages meet at the funeral pyre: Achilles and "
+          "Tibullus use the same verb for gathering the bones of the dead. The translations are ours.",
+          "The weak point: a dictionary orders senses by meaning, not by date. Reading is already in Plautus, among the oldest "
+          "Latin we have, and saying is already in Homer, so the roads from gathering to reading and to saying ran before our "
+          "texts begin. The order here is a reconstruction, not something the texts let us watch happen."],
+         [], LEGO_USE),
+    ],
     "roads": ROADS, "clusters": CLUSTERS, "debated": LEG_DEBATED, "parts": PARTS, "root_parts": ROOT_PARTS,
     "students": ["collect", "select", "elect", "lesson", "legend", "logic", "dialogue"],
     "s_lead": "These words come from one old word that meant <i>gather</i>.",
