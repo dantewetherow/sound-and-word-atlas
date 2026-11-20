@@ -1323,13 +1323,16 @@ def write(OUT, page, header, footer, X):
             pair = "".join(f'<figure class="word">{X["svg_of"](w, 72, label=f"{w}, marked")}<figcaption>{c}</figcaption></figure>' for w, c in R["s_pair"])
             s_more = f'<div class="words rrow s-pair">{pair}</div>' + "".join(f'<p class="s-line">{x}</p>' for x in R.get("s_paras", []))
         srcs = "".join(f'<li><a href="{u}">{t}</a></li>' for t, u in R["sources"])
+        import studies                                    # a word study for this family links from here (20 November 2026)
+        study_line = "".join(f'<p class="rstudy"><a class="btn" href="../{studies.link(s)}">Word study: {s["title"]}</a> <span class="t-only">a presentation for learners, built a piece at a time</span></p>\n'
+                             for s in studies.for_page(f'roots/{R["slug"]}.html'))
         body = f"""{header(1)}
 <main class="root-page">
 <section class="hero"><div class="wrap">
 <p class="eyebrow t-only">Parts &middot; {R["kind"]}</p>
 <h1><span class="t-only">{R["root"]}</span><span class="s-only">{R["h1_s"]}</span></h1>
 <p class="lead t-only">{R["lead"]}</p>
-<div class="door-word t-only">{drawn_hero}</div>
+{study_line}<div class="door-word t-only">{drawn_hero}</div>
 </div></section>
 <section class="about s-only"><div class="wrap">
 <p class="s-lead">{R["s_lead"]}</p>

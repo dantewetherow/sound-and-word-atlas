@@ -262,6 +262,7 @@ def write_check(OUT, page, header, footer, X, slug, C):
 
 
 def write(OUT, page, header, footer, X):
+    import studies
     (OUT / "lists").mkdir(exist_ok=True)
     LW, SC = X["LW"], X["SC"]
     def drawn(w, F=40):
@@ -283,7 +284,7 @@ def write(OUT, page, header, footer, X):
 <p class="eyebrow t-only"><a href="index.html">Legomorphic spelling</a> &middot; {L["kind"]}</p>
 <h1>{L["title"]}</h1>
 <p class="lprinciple">{L["principle"]}</p>
-<p class="lhome noprint">{home_link(L)}</p>
+<p class="lhome noprint">{home_link(L)}</p>{"".join(f'<p class="lhome noprint">Word study: <a href="../{studies.link(s)}">{s["title"]}</a>, a presentation for learners.</p>' for s in studies.for_page(f"lists/{L['slug']}.html"))}
 <p class="board t-only noprint"><a href="#" onclick="window.print(); return false;">Print this list</a>: the teacher&rsquo;s notes are left off.</p>
 </div></section>
 <section class="about"><div class="wrap">

@@ -149,6 +149,8 @@ def write(OUT, door_page, X):
         if w in nouns: links.append({"t": "Noun cards", "u": f"cards/dolch-word-cards-nouns.pdf#page={2 * (nouns.index(w) // 10) + 2}", "x": 1})
         if w in {m for m, *_ in X["morph"]}: links.append({"t": "Explorations", "u": f"explorations.html#{doors.word_id(w)}"})
         links += fam.get(w, [])
+        import studies
+        links += [{"t": f"Word study: {s['title']}", "u": studies.link(s)} for s in studies.for_word(w)]
         rec = {"w": w, "forms": out, "where": links}
         if w in SC.OPEN: rec["open"] = 1
         if is_auto: rec["auto"] = 1
@@ -162,7 +164,7 @@ def write(OUT, door_page, X):
 <p class="lead t-only">Look up a word, then tap or swipe through it, or try marking it first. <b>Read it</b> starts from the word in plain letters and decodes; <b>Spell it</b> starts from the syllables, then the sounds, then the letters. <b>Try it</b> puts the marks in the learner’s hands: pick sound circles, bond bars, syllable swoops, short or long marks, cones, vowel vaults, block boxes, nice-nudges or seams, then tap or swipe them onto the word, or write its word sum. <b>Show ours</b> sets the site’s marks underneath to talk about; nothing is scored. Under the word is its sum: tap a part to see every word that shares it.</p>
 </div></section>
 {section(note=X["uc"]("a word is either marked, so it can be walked, or shown as a word sum only. Since 13 November 2026 about 2,800 common words of early reading are marked by rule and say so: their marks are a first pass for teachers to check, and some will be wrong."))}
-<section class="about"><div class="wrap"><div class="door-tiles"><a class="dtile" href="explorations.html"><b>Explorations</b><span class="t-only">Words to take apart and build: a family, contractions, and ablaut.</span></a><a class="dtile" href="constructions.html"><b>Sentences</b><span class="t-only">How words make a sentence, and the flip from claim to question.</span></a></div><p class="t-only">Every analysed word, by its parts, is in <a href="parts.html">Parts</a>.</p></div></section>"""
+<section class="about"><div class="wrap"><div class="door-tiles"><a class="dtile" href="studies.html"><b>Word studies</b><span class="t-only">Presentations for learners: a family of words built a piece at a time.</span></a><a class="dtile" href="explorations.html"><b>Explorations</b><span class="t-only">Words to take apart and build: a family, contractions, and ablaut.</span></a><a class="dtile" href="constructions.html"><b>Sentences</b><span class="t-only">How words make a sentence, and the flip from claim to question.</span></a></div><p class="t-only">Every analysed word, by its parts, is in <a href="parts.html">Parts</a>.</p></div></section>"""
     door_page("walk", "Words · Sounds and Words, Assembled", "Look up a word and walk through it: its marks, a move at a time, and its parts.", body)
     return len(index), skipped
 

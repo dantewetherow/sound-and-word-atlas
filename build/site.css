@@ -1018,3 +1018,9 @@ header.site.pinned.open nav.doors { display: flex; padding-block: 6px 4px; }
 }
 body.board .sb-w svg { height: 190px !important; }
 body.board .sb-word { min-height: 190px; }
+
+/* Word studies (20 November 2026): the shelf, and the line that links a root page to its study. */
+.study { border-top: 1px solid var(--line); padding: 24px 0 26px; max-width: 860px; }
+.study h2 { margin: 6px 0 10px; }
+.study h2 a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 5px; }
+.rstudy { margin: 16px 0 6px; display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; color: var(--soft); }
