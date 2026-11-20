@@ -1174,6 +1174,131 @@ PER = {
 ROOTS = [LEG, HAP, DEUK, SEM, MED, LEUK, PER]
 
 
+# ------------------------------------------------------------------ sign
+# Made 20 November 2026: the classic word of structured word inquiry, why sign keeps a g it doesn't say. A base family,
+# since the root under Latin signum is debated (the Indo-European Lexicon and Watkins: *sekw-, to follow; de Vaan: *sek-,
+# to cut; a 2025 study in the Journal of Latin Linguistics argues for follow). Clustered by what the g does. The marks
+# follow the 12 November ruling (site_codes.py): the g in a cone where it is silent, said and closing the syllable where
+# a Latin ending follows.
+SIGN_ROADS = [
+    ("Latin <i>signum</i>", "a mark, a token; a soldiers&rsquo; standard; a seal", [("silent", "sign")]),
+    ("Latin <i>sign&amacr;re</i>, with a prefix", "to mark: <i>d&emacr;sign&amacr;re</i>, mark out; <i>assign&amacr;re</i>, mark to someone; "
+     "<i>resign&amacr;re</i>, unseal", [("silent", "design, assign, resign"), ("said", "designate")]),
+    ("Latin <i>sign&amacr;lis</i>, <i>sign&amacr;t&umacr;ra</i>, <i>signific&amacr;re</i>", "of a sign; a signing; to make a sign", [("said", "signal, signature, signify")]),
+    ("Latin <i>sigillum</i>, through French <i>seel</i>", "a little sign: a seal", [("seal", "seal")]),
+]
+SIGN_CLUSTERS = [
+    {"key": "silent", "label": "sign, g silent", "spells": ["sign"], "head": "the g kept but not said",
+     "road": "<i>sign</i> at the end of a word, or with an English ending after it",
+     "note": "The g sits in its cone: not said, but kept, because <i>signal</i> and <i>signature</i> say it. With the g silent, the i "
+             "says its name, as it does in <i>find</i> and <i>child</i>. English endings don&rsquo;t wake the g: <i>signs</i>, "
+             "<i>signing</i>, <i>designer</i>, <i>assignment</i>.",
+     "groups": [
+         [("sign", ["sign"], "a mark that tells you something; to write your name"), ("signs", ["sign", "-s"], "more than one sign"),
+          ("signing", ["sign", "-ing"], "writing your name; talking with your hands")],
+         [("design", ["de-", "sign"], "mark out: a plan or a pattern, or to make one"), ("designer", ["de-", "sign", "-er"], "someone who designs")],
+         [("assign", ["as-", "sign"], "mark to someone: give out a job"), ("assignment", ["as-", "sign", "-ment"], "a job given out")],
+         [("resign", ["re-", "sign"], "unseal, sign back: give up a job"), ("consign", ["con-", "sign"], "seal with: hand over to be kept or sent")],
+     ]},
+    {"key": "said", "label": "sign, g said", "spells": ["sign"], "head": "the g said",
+     "road": "<i>sign</i> with a Latin ending after it: the g closes the syllable, sig, and the i is short",
+     "note": "Here the g is heard: sig-nal, sig-na-ture, sig-ni-fy. These are the words that keep the g in <i>sign</i>. Take it out of "
+             "<i>sign</i> and the family no longer looks like one.",
+     "groups": [
+         [("signal", ["sign", "-al"], "a sign that sends a message: a light, a sound, a wave")],
+         [("signature", ["sign", "-at(e)", "-ure"], "your name, written by you"), ("signatory", ["sign", "-at(e)", "-ory"], "someone who signs an agreement")],
+         [("signify", ["sign", "-i", "-fy"], "make a sign: show, mean"), ("significant", ["sign", "-i", "-fic", "-ant"], "making a sign: meaningful, important"),
+          ("significance", ["sign", "-i", "-fic", "-ance"], "meaning, importance")],
+         [("designate", ["de-", "sign", "-ate"], "mark out: name or choose for a job"), ("designation", ["de-", "sign", "-at(e)", "-ion"], "a name or a title given")],
+         [("resignation", ["re-", "sign", "-at(e)", "-ion"], "giving up a job; accepting what can&rsquo;t be changed")],
+         [("signet", ["sign", "-et"], "a small seal, often on a ring"), ("insignia", ["in-", "sign", "-ia"], "badges and marks of rank")],
+     ]},
+    {"key": "seal", "label": "seal, sig", "spells": ["seal", "sig"], "head": "a little sign",
+     "road": "Latin <i>sigillum</i>, a little sign, a seal",
+     "note": "<i>Seal</i> lost the g on its way through French, where <i>sigillum</i> wore down to <i>seel</i>; English took the word "
+             "without it. <i>Sigil</i> came straight from Latin and kept the g, soft before the i.",
+     "groups": [
+         [("seal", ["seal"], "a little sign pressed into wax; to close tight")],
+         [("sigil", None, "a seal or a sign said to have power, in old books and stories", "sig")],
+     ]},
+]
+PARTS.update({
+    "-s": "more than one; or, on a verb, he, she or it does it",
+    "-ing": "doing it, or the doing of it",
+    "-ory": "having to do with; or a person or place that does it",
+    "-et": "small: a French ending",
+    "-ia": "things of a kind: a Latin plural",
+    "-fic": "making: Latin <i>-ficus</i>, from <i>facere</i>, to make",
+    "-fy": "make: Latin <i>-fic&amacr;re</i>, through French <i>-fier</i>",
+    "-i": "a connecting vowel, joining a base to an ending that starts with a consonant",
+})
+ROOT_PARTS.update({
+    "sign": "a mark: Latin <i>signum</i>; in verbs, <i>sign&amacr;re</i>, to mark",
+    "seal": "a little sign: Latin <i>sigillum</i>, worn down in French to <i>seel</i>",
+    "sig": "a little sign: Latin <i>sigillum</i>",
+})
+SIGN = {
+    "slug": "sign", "root": "sign", "gloss": "a mark", "kind": "a base family",
+    "h1_s": "sign means &lsquo;a mark&rsquo;",
+    "lead": "A mark, a token. Latin <i>signum</i> was a mark, a sign, a seal, and the standard soldiers followed into battle. English "
+            "borrowed it again and again, and its spelling keeps a letter most of the family doesn&rsquo;t say: the g of <i>sign</i>, "
+            "heard in <i>signal</i> and <i>signature</i>. It&rsquo;s the classic word for showing that English spelling keeps "
+            "meaning in view when the sound goes quiet.",
+    "drawn": ("sign", "sign, marked: the g in its cone"),
+    "sources": [("Indo-European Lexicon, seku̯- (Linguistics Research Center, University of Texas at Austin), which follows Pokorny: Latin <i>signum</i> under to follow", "https://lrc.la.utexas.edu/lex/master/1673"),
+                ("Wiktionary, Proto-Italic *seknom, after Michiel de Vaan, <i>Etymological Dictionary of Latin and the other Italic Languages</i> (Brill, 2008), p. 563: from *sek-, to cut", "https://en.wiktionary.com/wiki/Reconstruction:Proto-Italic/seknom"),
+                ("&ldquo;On the etymology of Latin <i>signum</i> and its Sabellic counterparts,&rdquo; <i>Journal of Latin Linguistics</i> (2025): for to follow, against to cut", "https://www.degruyterbrill.com/document/doi/10.1515/joll-2025-2004/html"),
+                ("Etymonline: <i>sign</i>, <i>signal</i>, <i>signature</i>, <i>design</i>, <i>seal</i> and the rest", "https://www.etymonline.com/search?q=sign"),
+                ("Edward Carney, <i>A Survey of English Spelling</i> (Routledge, 1994): the g of <i>sign</i> as an inert letter, pp. 41, 47, 247", "../credits.html"),
+                ("Noam Chomsky and Morris Halle, <i>The Sound Pattern of English</i> (Harper &amp; Row, 1968), on <i>sign</i> and <i>signify</i>, <i>malign</i> and <i>malignant</i>", "../credits.html"),
+                ("Melvyn Ramsden&rsquo;s Real Spelling and Pete Bowers&rsquo;s structured word inquiry, where <i>sign</i> is the classic first matrix", "../credits.html"),
+                ("Ferdinand de Saussure, <i>Course in General Linguistics</i> (1916): the sign, the signifier and the signified", "../credits.html")],
+    "roads": SIGN_ROADS, "clusters": SIGN_CLUSTERS, "parts": PARTS, "root_parts": ROOT_PARTS,
+    "extra": [
+        ("g", "Why sign keeps its g",
+         ["Say <i>sign</i> and you don&rsquo;t hear a g. Say <i>signal</i> and you do. The spelling keeps the g in both, so the "
+          "family looks like a family: sign, signal, signature, design, designate. Carney calls a letter like this inert: silent in "
+          "one word, said in another (1994: 41). The notation draws it in a cone of silence, alone, joined to neither the i nor the "
+          "n, so it sits in the same place in every word of the family.",
+          "The g also changes the i. When the g is silent, the i says its name, as in <i>find</i> and <i>child</i>. When the g is "
+          "said, it closes the syllable, sig, and the i is short. Venezky calls this kind of trade, a long vowel where a consonant "
+          "goes quiet, a compensatory alternation.",
+          "Chomsky and Halle used <i>sign</i> and <i>signify</i>, with <i>malign</i> and <i>malignant</i> and <i>paradigm</i> and "
+          "<i>paradigmatic</i>, to argue that English spelling writes the part, not the sound. Melvyn Ramsden and Pete Bowers made "
+          "<i>sign</i> the first word a class takes apart in structured word inquiry. This page follows that tradition."],
+         [("sign", "the g in its cone, and a long i"), ("signal", "the g said: sig | nal"), ("design", "de + sign"), ("designate", "des | ig | nate: the g said")]),
+        ("root", "Follow or cut?",
+         ["Under Latin <i>signum</i> sits a root that scholars still argue about. Pokorny, and the Indo-European Lexicon after him, "
+          "put it with <i>*sekw-</i>, to follow: a sign as the standard soldiers followed. Michiel de Vaan&rsquo;s Latin dictionary "
+          "(2008) puts it with <i>*sek-</i>, to cut: a sign as a mark cut into something. A study in the <i>Journal of Latin "
+          "Linguistics</i> (2025) argues for follow again, on the sounds of <i>signum</i>&rsquo;s cousins in Oscan.",
+          "The family on this page doesn&rsquo;t depend on the answer: every word in it is built on <i>sign</i>, a mark. That&rsquo;s "
+          "why it is a base family here and not a root family. If follow is right, <i>sign</i> is a cousin of <i>sequence</i>, "
+          "<i>second</i> and <i>pursue</i>."], []),
+        ("saussure", "Signifier and signified",
+         ["Ferdinand de Saussure built modern linguistics on this word. A linguistic sign, he said, has two sides joined like the "
+          "two sides of a sheet of paper: the <i>signifier</i>, the sound pattern, and the <i>signified</i>, the idea. His French "
+          "words were <i>signifiant</i> and <i>signifi&eacute;</i>, the present and past forms of <i>signifier</i>, to signify.",
+          "The notation marks the signifier: the sounds and the letters that spell them. The parts and the seams are where the "
+          "signified shows through: <i>design</i> is de + sign, to mark out, whatever the g is doing."], []),
+    ],
+    "students": ["sign", "signal", "signature", "design", "assign", "seal"],
+    "s_lead": "These words come from <b>sign</b>. It means a mark.",
+    "s_pair": [("sign", "The g is quiet."), ("signal", "The g is heard.")],
+    "s_paras": ["Say them: <b>sign</b>, <b>sig</b>-nal.",
+                "In <b>signal</b> you hear the g. In <b>sign</b> you don&rsquo;t, but it is still there.",
+                "It stays so the words look like one family: sign, signal, signature, design.",
+                "When the g is quiet, the i says its name: s<b>i</b>gn, like f<b>i</b>nd.",
+                "A <b>seal</b> was a little sign pressed into wax. It lost its g long ago."],
+    "uc": "the family follows the Indo-European Lexicon and Etymonline&rsquo;s entries; Etymonline&rsquo;s own pages weren&rsquo;t "
+          "reachable on 20 November 2026, so its link here is a search. The root is debated (see Follow or cut?). Next: check each "
+          "word against Etymonline, and the marks of <i>significant</i> and <i>signatory</i>.",
+    "label": "Base family: sign",
+    "desc": "The base sign, a mark, and its family: why sign keeps a g that signal and signature say, with design, assign, resign, designate, signify, significant and seal.",
+}
+ROOTS = [LEG, HAP, DEUK, SEM, MED, LEUK, PER, SIGN]
+
+
 def bold_root(word, spelling):
     i = word.find(spelling)
     return html.escape(word) if i < 0 else html.escape(word[:i]) + "<b>" + html.escape(spelling) + "</b>" + html.escape(word[i + len(spelling):])
@@ -1287,7 +1412,7 @@ def clusters_html(R):
 {debated}<section class="about t-only" aria-labelledby="pt-h"><div class="wrap">
 <h2 id="pt-h">The parts, and what they mean</h2>
 <p class="sub">Every part in the word sums above, with the words that carry it.</p>
-<div class="pgcols">{gloss(roots, "The root&rsquo;s spellings")}{gloss(pre, "Before the root")}{gloss(suf, "After the root")}{gloss(base, "Other roots")}</div>
+<div class="pgcols">{gloss(roots, "The root&rsquo;s spellings")}{gloss(pre, "Before the root")}{gloss(suf, "After the root")}{gloss(base, "Other roots") if base else ""}</div>
 </div></section>
 <script>{CX_JS}</script>
 """

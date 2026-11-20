@@ -58,6 +58,7 @@ PAGES = [
     ("roots/med.html", "parts", "*med-: to measure", "A root family: mode, model, modern, medicine, must and accommodate."),
     ("roots/leuk.html", "parts", "*leuk-: light", "A root family: illustrate, illuminate, lucid, lunar, light and lynx."),
     ("roots/per.html", "parts", "*per-: to try, to risk", "A word study: experiment and experience, two words that were one, with expert, peril, pirate, empirical and fear."),
+    ("roots/sign.html", "parts", "sign: a mark", "A base family: why sign keeps a g that signal says, with design, assign, signature, signify and seal."),
     ("roots/hap.html", "parts", "hap: chance, luck", "A base family: happy, happen, mishap and haphazard, and why happy has two p's and mishap one."),
     ("derivations.html", "parts", "Roots and their sources", "Where words come from, and the sources the roots cite."),
     ("teachers.html", "teachers", "For teachers", "To print and present, connections to programs, and the reasons and sources."),

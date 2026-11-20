@@ -48,6 +48,17 @@ body{background:var(--paper);color:var(--ink);font-family:var(--sans);overflow:h
 .fam{display:grid;grid-template-columns:repeat(2,1fr);gap:26px 70px}
 .fam > div{display:flex;align-items:flex-end;gap:28px}
 .fam .g{font-family:var(--serif);font-style:italic;font-size:34px;color:var(--soft);padding-bottom:12px}
+.duo{display:flex;gap:120px;align-items:flex-end;margin-top:40px}
+.duo figure{margin:0;display:grid;justify-items:start;gap:14px}
+.duo figcaption{font-family:var(--serif);font-style:italic;font-size:38px;color:var(--soft)}
+.matrix{display:flex;align-items:center;gap:0;margin:10px 0 0;font-family:var(--sans)}
+.matrix .mbox{border:3px solid var(--ink);padding:12px 26px;display:grid;gap:0;font-size:31px;line-height:1.12;background:var(--panel)}
+.matrix .mbase{font-size:80px;line-height:1;font-family:var(--serif);color:var(--verb);padding:20px 40px;border-width:4px;margin:0 -3px}
+.matrix .mcols{display:flex;border:3px solid var(--ink);background:var(--panel)}
+.matrix .mcols .mbox{border:0;border-left:3px solid var(--line)}
+.matrix .mcols .mbox:first-child{border-left:0}
+.paths{display:flex;gap:40px;flex-wrap:wrap;margin-top:18px;font-size:30px;color:var(--soft)}
+.paths b{color:var(--ink);font-weight:500}
 .fork{display:grid;grid-template-columns:1fr 1fr;gap:0 90px;margin:0 60px}
 .fork .top{grid-column:1/-1;text-align:center;padding-bottom:14px;margin-bottom:16px;border-bottom:4px solid var(--line)}
 .fork .lw{font-family:var(--serif);font-size:84px;line-height:1}

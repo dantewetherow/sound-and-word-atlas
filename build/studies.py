@@ -46,6 +46,17 @@ STUDIES = [{
              "Latin (<i>lecture</i>, <i>lesson</i>, <i>legend</i>, <i>legible</i>), and say in Greek (<i>lexicon</i>, "
              "<i>logic</i>, <i>dialogue</i>). How a lesson was first a reading, what a legend is on a map, and how the "
              "notation&rsquo;s own name is built. And one look-alike: the bricks.",
+}, {
+    "slug": "sign",
+    "title": "The g in sign",
+    "sub": "sign, signal, signature, design, and the family",
+    "root": "sign", "root_page": "roots/sign.html", "list": "lists/family-sign.html",
+    "words": ["sign", "signs", "signing", "signal", "signature", "signatory", "signet", "signify", "significant", "significance",
+              "design", "designer", "designate", "designation", "assign", "assignment", "resign", "resignation", "consign",
+              "insignia", "seal", "sigil"],
+    "blurb": "The classic question: why is there a g in <i>sign</i> when you can&rsquo;t hear it? <i>Signal</i>, <i>signature</i> "
+             "and <i>signify</i> say it, and the spelling keeps the family together. How the quiet g makes the i say its name, "
+             "how <i>design</i> marks out a plan, the sign matrix, and the little sign that lost its g: <i>seal</i>.",
 }]
 
 
@@ -152,6 +163,17 @@ body{background:var(--paper);color:var(--ink);font-family:var(--sans);overflow:h
 .fam{display:grid;grid-template-columns:repeat(2,1fr);gap:26px 70px}
 .fam > div{display:flex;align-items:flex-end;gap:28px}
 .fam .g{font-family:var(--serif);font-style:italic;font-size:34px;color:var(--soft);padding-bottom:12px}
+.duo{display:flex;gap:120px;align-items:flex-end;margin-top:40px}
+.duo figure{margin:0;display:grid;justify-items:start;gap:14px}
+.duo figcaption{font-family:var(--serif);font-style:italic;font-size:38px;color:var(--soft)}
+.matrix{display:flex;align-items:center;gap:0;margin:10px 0 0;font-family:var(--sans)}
+.matrix .mbox{border:3px solid var(--ink);padding:12px 26px;display:grid;gap:0;font-size:31px;line-height:1.12;background:var(--panel)}
+.matrix .mbase{font-size:80px;line-height:1;font-family:var(--serif);color:var(--verb);padding:20px 40px;border-width:4px;margin:0 -3px}
+.matrix .mcols{display:flex;border:3px solid var(--ink);background:var(--panel)}
+.matrix .mcols .mbox{border:0;border-left:3px solid var(--line)}
+.matrix .mcols .mbox:first-child{border-left:0}
+.paths{display:flex;gap:40px;flex-wrap:wrap;margin-top:18px;font-size:30px;color:var(--soft)}
+.paths b{color:var(--ink);font-weight:500}
 .fork{display:grid;grid-template-columns:1fr 1fr;gap:0 90px;margin:0 60px}
 .fork .top{grid-column:1/-1;text-align:center;padding-bottom:14px;margin-bottom:16px;border-bottom:4px solid var(--line)}
 .fork .lw{font-family:var(--serif);font-size:84px;line-height:1}
@@ -635,7 +657,127 @@ def leg_deck():
     return D
 
 
-DECKS = {"per": per_deck, "education": educ_deck, "leg": leg_deck}
+def sign_deck():
+    """The g in sign (20 November 2026): the classic word of structured word inquiry. The g is silent in sign and said in
+    signal; the spelling keeps it, so the family stays visible. Marks follow the ruling of 12 November 2026."""
+    D = Deck()
+    D.slide("Title", f"""<p class="kicker">A word study &middot; <i>sign</i></p>
+<h1 class="display">The g in sign</h1>
+<p class="subtitle">sign, signal, signature, design, and the family</p>
+<div class="pair">{word("sign", 130)}</div>""",
+            "A word study for learners. Click, tap, or press the right arrow for each next piece; N shows and hides these notes. "
+            "The page for teachers is <a href='../roots/sign.html'>sign</a>, with its <a href='../lists/family-sign.html'>spelling list</a>.", "mid")
+
+    D.slide("Where's the g?", f"""<h2 class="head">Say it: <b class="r">sign</b></h2>
+<div class="pair" style="margin-top:10px">{word("sign", 200)}</div>
+<p class="lede" data-s="1">There&rsquo;s a <b>g</b> in it. Can you hear it?</p>
+<p class="q" data-s="2">No. So why is it there?</p>""",
+            "Let learners say <i>sign</i> slowly and listen for a g. The dotted ring is the cone of silence: a letter that is "
+            "there but not said. Hold the question open; the next slides answer it.", steps=2)
+
+    def fam(head, rows, says, note, h=96):
+        cells = "".join(f'<div data-s="{k + 1}">{word(w, h)}<span class="g">{g}</span></div>' for k, (w, g) in enumerate(rows))
+        D.slide(re.sub(r"<[^>]+>", "", head), f"""<h2 class="head">{head}</h2>
+<div class="fam">{cells}</div>
+<p class="q" data-s="{len(rows) + 1}">{says}</p>""", note, steps=len(rows) + 1)
+
+    fam("Listen for the <b class='r'>g</b>", [("signal", "a light or a sound that tells you something"), ("signature", "your name, written by you"),
+                                             ("signify", "to show, to mean"), ("designate", "to name, to choose")],
+        "In these words, you <b>hear</b> the g.",
+        "The same part, sign, in every word, and here the g is said. These are the words that keep the g in <i>sign</i>.")
+
+    D.slide("Build signal", f"""<h2 class="head">Build <b class="r">signal</b></h2>
+{join(["sign", "al"], ["a mark", "to do with"], word("signal", 150), 1, "From the end: <b>to do with</b> a <b>sign</b>. A signal is a sign that sends a message.")}""",
+            "Word sum: sign + al &rarr; <i>signal</i>. Late Latin <i>sign&amacr;le</i>, through French. Say it in syllables: "
+            "sig-nal. The g closes the first syllable, so it is said.", steps=4)
+
+    D.slide("Build signature", f"""<h2 class="head">Build <b class="r">signature</b></h2>
+{join(["sign", "at(e)", "ure"], ["a mark", "do, make", "what comes of it"], word("signature", 140), 1, "From the end: <b>what comes of making</b> a <b>mark</b>. Your signature is the mark your name makes.")}""",
+            "Word sum: sign + at(e) + ure &rarr; <i>signature</i>, from Medieval Latin <i>sign&amacr;t&umacr;ra</i>. The e of -ate "
+            "drops before the vowel of -ure, and the t and ure join as they do in <i>picture</i> and <i>nature</i>.", steps=4)
+
+    D.slide("The g keeps the family", f"""<h2 class="head">One part, one spelling</h2>
+<div class="duo">
+<figure data-s="1">{word("sign", 150)}<figcaption>the g is quiet</figcaption></figure>
+<figure data-s="2">{word("signal", 150)}<figcaption>the g is said</figcaption></figure>
+</div>
+<p class="q" data-s="3">Keep the g, and you can <b>see</b> the family.</p>""",
+            "This is the answer to the first question. Written <i>sine</i>, the word would lose its family. Carney calls a letter "
+            "like this inert: silent in one word, said in another (<i>A Survey of English Spelling</i>, 1994: 41). The cone keeps "
+            "the g in the same place in every word of the family.", steps=3)
+
+    D.slide("Quiet g, long i", f"""<h2 class="head">When the g is quiet, the <b class="r">i</b> says its name</h2>
+<div class="pair" style="margin-top:20px" data-s="1">{word("sign", 120)}{word("find", 120)}{word("child", 120)}</div>
+<p class="syl" data-s="2" style="margin-top:40px"><span class="hit">sig</span><span class="dot">&middot;</span><span>nal</span></p>
+<p class="q" data-s="3">When the g is said, it closes the syllable: <b>sig</b>. The i is short.</p>""",
+            "Sign, find, child: the i says its name with no e after it to make it long (Carney&rsquo;s rules I.11 and I.12). In "
+            "<i>signal</i> the g closes the syllable and the i is short. Venezky calls this a compensatory alternation: the vowel "
+            "is long where the consonant goes quiet.", steps=3)
+
+    D.slide("Build design", f"""<h2 class="head">Build <b class="r">design</b></h2>
+{join(["de", "sign"], ["out", "mark"], word("design", 150), 1, "From the end: <b>mark</b> it <b>out</b>. A design is a plan, marked out.")}""",
+            "Word sum: de + sign &rarr; <i>design</i>, from Latin <i>d&emacr;sign&amacr;re</i>, to mark out. The g is quiet again: "
+            "sign ends the word.", steps=4)
+
+    fam("The g stays <b class='r'>quiet</b>", [("designer", "someone who designs"), ("assign", "to give someone a job"),
+                                              ("assignment", "a job you are given"), ("resign", "to give up a job")],
+        "The endings <b>-er</b> and <b>-ment</b> don&rsquo;t wake the g up.",
+        "English endings after sign leave the g silent: <i>signs</i>, <i>signing</i>, <i>designer</i>, <i>assignment</i>. "
+        "<i>Assign</i> is as + sign: Latin <i>ad-</i>, to, written <i>as-</i> before the s, so each part brings its own s. "
+        "<i>Resign</i> is re + sign: to sign back, to give up.")
+
+    D.slide("Build signify", f"""<h2 class="head">Build <b class="r">signify</b></h2>
+{join(["sign", "i", "fy"], ["a mark", "joins", "make"], word("signify", 140), 1, "From the end: <b>make</b> a <b>sign</b>. To signify is to show, to mean.")}""",
+            "Word sum: sign + i + fy &rarr; <i>signify</i>, from Latin <i>signific&amacr;re</i>, to make a sign. The i is a "
+            "connecting vowel. Saussure&rsquo;s <i>signifier</i> and <i>signified</i> come from this verb: the sound of a word, and "
+            "the idea it stands for.", steps=4)
+
+    fam("The g is <b class='r'>said</b> again", [("significant", "it means something: it matters"), ("designation", "a name or a title"),
+                                               ("resignation", "giving up a job"), ("signatory", "someone who signs an agreement")],
+        "A <b>Latin</b> ending after sign, and you hear the g.",
+        "sign + i + fic + ant; de + sign + at(e) + ion; re + sign + at(e) + ion; sign + at(e) + ory. In <i>designation</i> "
+        "and <i>resignation</i> the s says z and the e is short: des-ig-na-tion.", h=88)
+
+    D.slide("The sign matrix", f"""<h2 class="head">The <b class="r">sign</b> matrix</h2>
+<div class="matrix">
+<div class="mbox" data-s="1"><span>as</span><span>con</span><span>de</span><span>re</span></div>
+<div class="mbox mbase">sign</div>
+<div class="mcols" data-s="2"><div class="mbox"><span>al</span><span>ate</span><span>er</span><span>ify</span><span>ing</span><span>ment</span><span>s</span></div>
+<div class="mbox"><span>ion</span><span>ure</span><span>ory</span></div></div>
+</div>
+<div class="paths" data-s="3"><span><b>de + sign + er</b></span><span><b>as + sign + ment</b></span><span><b>sign + at(e) + ure</b></span><span><b>re + sign + at(e) + ion</b></span></div>
+<p class="q" data-s="4">Read across. Which paths make words?</p>""",
+            "The word matrix is Melvyn Ramsden&rsquo;s (Real Spelling); <i>sign</i> is a classic first matrix in Pete Bowers&rsquo;s "
+            "structured word inquiry. Read left to right, skipping any box. Not every path is a word (<i>con + sign + al</i>): check "
+            "a path by saying it and using it. The last column follows <i>ate</i>.", steps=4)
+
+    D.slide("seal", f"""<h2 class="head">A little sign that lost its g</h2>
+<div class="chain">
+<p data-s="1">sigillum<small>Latin: a little sign</small></p>
+<p data-s="2">seel<small>French: the g worn away</small></p>
+<p data-s="3">{word("seal", 110)}</p>
+</div>
+<p class="q" data-s="4">A <b>seal</b> was a little sign, pressed into wax.</p>""",
+            "Latin <i>sigillum</i>, a little sign, wore down in Old French to <i>seel</i>, and English took it without the g. "
+            "<i>Sigil</i>, a seal or a sign of power, came straight from Latin and kept it. The sea animal is a different word "
+            "altogether, from Old English <i>seolh</i>.", steps=4)
+
+    D.slide("Your turn", f"""<h2 class="head">Your turn</h2>
+<ol class="blanks">
+<li>Stop at the red <span class="gap"><span class="ans" data-s="1">sign</span></span>.</li>
+<li>Write your <span class="gap"><span class="ans" data-s="2">signature</span></span> here.</li>
+<li>Wait for the green <span class="gap"><span class="ans" data-s="3">signal</span></span>.</li>
+</ol>""",
+            "Say each sentence with the blank first, and let the class choose before the click shows the word. Then ask: in "
+            "which word is the g quiet? The <a href='../lists/family-sign.html'>spelling list</a> has more to build and use.", steps=3)
+
+    D.slide("For teachers", f"""<h2 class="head">For teachers</h2>
+<p class="lede">Word sums: sign + al &rarr; <i>signal</i>; sign + at(e) + ure &rarr; <i>signature</i>; de + sign &rarr; <i>design</i>; de + sign + er &rarr; <i>designer</i>; as + sign + ment &rarr; <i>assignment</i>; sign + i + fy &rarr; <i>signify</i>; sign + i + fic + ant &rarr; <i>significant</i>.</p>
+<p class="lede">The g follows Carney and Venezky, as the site ruled on 12 November 2026; Chomsky and Halle used <i>sign</i> and <i>signify</i> for the same point. The root under Latin <i>signum</i> is debated, follow or cut. The teacher&rsquo;s page is <a href="../roots/sign.html">sign</a>, with the root, Saussure&rsquo;s signifier, and the sources; the list to print is the <a href="../lists/family-sign.html">sign spelling list</a>.</p>""", cls="mid")
+    return D
+
+
+DECKS = {"per": per_deck, "education": educ_deck, "leg": leg_deck, "sign": sign_deck}
 
 
 def write(OUT, door_page):

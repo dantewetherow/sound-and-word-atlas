@@ -27,5 +27,20 @@
 "legible": "c.l s.e c.g + | b.i | c.b le ; nudge 3>2",
 "lexicon": "c.l s.e c.x + | b.i | c.c + b.o c.n",
 "logic": "c.l s.o c.g + | s.i c.c ; nudge 3>2",
-"legomorphics": "c.l s.e c.g + | l.o + | c.m r.or | k.ph + s.i c.c + c.s"
+"legomorphics": "c.l s.e c.g + | l.o + | c.m r.or | k.ph + s.i c.c + c.s",
+"signs": "c.s l.i z.g c.n + c.s",
+"designer": "c.d b.e + | c.s l.i z.g c.n + | r.er",
+"resign": "c.r b.e + | c.s l.i z.g c.n",
+"assign": "b.a c.s + | c.s l.i z.g c.n",
+"assignment": "b.a c.s + | c.s l.i z.g c.n + | c.m b.e c.nt",
+"consign": "c.c b.o c.n + | c.s l.i z.g c.n",
+"signature": "c.s s.i c.g | c.n + b.a | c.t + r.ur e0",
+"signatory": "c.s s.i c.g | c.n + b.a | c.t + r.or | b.y",
+"signet": "c.s s.i c.g | c.n + b.e c.t",
+"signify": "c.s s.i c.g | c.n + b.i + | c.f l.y",
+"significant": "c.s b.i c.g | c.n + s.i + c.f | b.i | c.c + b.a c.nt",
+"designate": "c.d s.e + c.s | b.i c.g | c.n + l.a c.t e>",
+"designation": "c.d s.e + c.s | b.i c.g | c.n + l.a | g.ti b.o c.n ; vault 7>6 ; seam 7",
+"resignation": "c.r s.e + c.s | b.i c.g | c.n + l.a | g.ti b.o c.n ; vault 7>6 ; seam 7",
+"seal": "c.s t.ea c.l"
 }
