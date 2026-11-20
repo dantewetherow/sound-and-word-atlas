@@ -200,7 +200,7 @@ PARTS = {
     "-ic": "having to do with",
     "-al": "having to do with",
     "-ent": "being, doing: from Latin&rsquo;s present form of the verb",
-    "-ence": "the state of being",
+    "-ence": "names it: makes a noun from a describing word in -ent, as patience from patient",
     "-ible": "able to be",
     "-end": "to be: Latin <i>legendus</i>, to be read",
     "-ary": "having to do with",

@@ -34,7 +34,7 @@ MEANS = {
     "-ic": "having to do with", "-ful": "full of, given to", "-th": "the number in order; or a state",
     "-able": "able to be", "ob-": "against, toward", "im-": "not, or into: Latin <i>in-</i>, written <i>im-</i> before m, b and p",
     "ex-": "out", "hap": "chance, luck", "note": "a mark", "ad-": "to, toward", "ab-": "away, from", "-ize": "make, do",
-    "-ence": "the state of being", "-ance": "the act or state of", "-or": "one who, the thing that", "-ar": "like, having to do with",
+    "-ence": "names it: makes a noun from a describing word in -ent, as patience from patient", "-ance": "the act or state of", "-or": "one who, the thing that", "-ar": "like, having to do with",
     "per-": "through", "-ible": "able to be", "ple": "fold", "graph": "write", "phone": "sound, voice", "morph": "form", "-d": "<i>-ed</i> without its e, in <i>said</i>, <i>paid</i> and <i>laid</i>",
 }
 PREFIXES = {"un", "re", "mis", "be", "a", "out", "per", "dis", "de", "pre"}

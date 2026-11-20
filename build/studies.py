@@ -163,6 +163,11 @@ body{background:var(--paper);color:var(--ink);font-family:var(--sans);overflow:h
 .fam{display:grid;grid-template-columns:repeat(2,1fr);gap:26px 70px}
 .fam > div{display:flex;align-items:flex-end;gap:28px}
 .fam .g{font-family:var(--serif);font-style:italic;font-size:34px;color:var(--soft);padding-bottom:12px}
+.ishas{display:grid;grid-template-columns:1fr 1fr;gap:10px 80px;margin-top:4px}
+.ishas h3{margin:0 0 8px;font-family:var(--sans);font-weight:400;font-size:28px;color:var(--soft);border-bottom:1.5px solid var(--line);padding-bottom:10px}
+.ishas h3 b{color:var(--verb);font-weight:500}
+.ishas p{margin:0;font-size:50px;line-height:1.25}
+.ishas p b{color:var(--verb);font-weight:inherit}
 .duo{display:flex;gap:120px;align-items:flex-end;margin-top:40px}
 .duo figure{margin:0;display:grid;justify-items:start;gap:14px}
 .duo figcaption{font-family:var(--serif);font-style:italic;font-size:38px;color:var(--soft)}
@@ -352,12 +357,16 @@ def per_deck():
                    ("agree &rarr; agree<b>ment</b>", "what you agree"), ("enjoy &rarr; enjoy<b>ment</b>", "what you get from it")],
          "<b>-ment</b>: the doing of it, or what comes of it.",
          "Latin <i>-mentum</i>: the act, the means or the result. It makes a noun from a verb.")
-    felt("-ence", [("silent &rarr; sil<b>ence</b>", "the state of being silent"), ("patient &rarr; pati<b>ence</b>", "the state of being patient"),
-                   ("absent &rarr; abs<b>ence</b>", "the state of being away"), ("different &rarr; differ<b>ence</b>", "the state of being different")],
-         "<b>-ent</b>: being that way. <b>-ence</b>: the <b>state</b> of being that way.",
-         "-ent is Latin&rsquo;s present form, <i>-ens</i>, <i>-entis</i>: <i>silens</i>, being silent; <i>absens</i>, being away. "
-         "-ence, from Latin <i>-entia</i>, makes a noun of that: the state of being silent, a silence. So <i>silent</i> describes, "
-         "and <i>silence</i> names. Ask learners which word fits: The room was ___ (silent). We sat in ___ (silence).")
+    # -ent describes, -ence names (20 November 2026): shown in pairs of sentences, not defined.
+    rows = [("she is pati<b>ent</b>", "she has pati<b>ence</b>"), ("they are differ<b>ent</b>", "there is a differ<b>ence</b>"),
+            ("he is abs<b>ent</b>", "we noticed his abs<b>ence</b>"), ("the room is sil<b>ent</b>", "we sat in sil<b>ence</b>")]
+    cells = "".join(f'<p data-s="{k + 1}">{x}</p><p data-s="{k + 1}">{y}</p>' for k, (x, y) in enumerate(rows))
+    D.slide("-ence", f"""<h2 class="head">-ence</h2>
+<div class="ishas"><h3><b>-ent</b> describes</h3><h3><b>-ence</b> names</h3>{cells}</div>
+<p class="q" data-s="5"><b>-ent</b> tells what something is like. <b>-ence</b> turns it into a thing you can have.</p>""",
+            "Show the job, not a definition: -ent describes, -ence names. Latin&rsquo;s present form, <i>-ens</i> "
+            "(<i>patiens</i>, enduring; <i>absens</i>, being away), and its noun, <i>-entia</i>. &lsquo;Have&rsquo; is a handle, not "
+            "a rule: we sat in silence, we noticed his absence. Check by ear: The room was ___ (silent). We sat in ___ (silence).", steps=5)
 
     fam = [("expert", "someone who has tried, and knows"), ("peril", "a risk, a danger"),
            ("pirate", "someone who tries an attack"), ("fear", "what a risk makes you feel")]
