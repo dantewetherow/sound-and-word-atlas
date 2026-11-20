@@ -352,10 +352,12 @@ def per_deck():
                    ("agree &rarr; agree<b>ment</b>", "what you agree"), ("enjoy &rarr; enjoy<b>ment</b>", "what you get from it")],
          "<b>-ment</b>: the doing of it, or what comes of it.",
          "Latin <i>-mentum</i>: the act, the means or the result. It makes a noun from a verb.")
-    felt("-ence", [("silent &rarr; sil<b>ence</b>", "being silent"), ("patient &rarr; pati<b>ence</b>", "being patient"),
-                   ("absent &rarr; abs<b>ence</b>", "being away"), ("different &rarr; differ<b>ence</b>", "being different")],
-         "<b>-ence</b>: being that way.",
-         "-ence goes with -ent, from Latin <i>-entia</i>: <i>silent</i>, <i>silence</i>. It makes a noun of a state.")
+    felt("-ence", [("silent &rarr; sil<b>ence</b>", "the state of being silent"), ("patient &rarr; pati<b>ence</b>", "the state of being patient"),
+                   ("absent &rarr; abs<b>ence</b>", "the state of being away"), ("different &rarr; differ<b>ence</b>", "the state of being different")],
+         "<b>-ent</b>: being that way. <b>-ence</b>: the <b>state</b> of being that way.",
+         "-ent is Latin&rsquo;s present form, <i>-ens</i>, <i>-entis</i>: <i>silens</i>, being silent; <i>absens</i>, being away. "
+         "-ence, from Latin <i>-entia</i>, makes a noun of that: the state of being silent, a silence. So <i>silent</i> describes, "
+         "and <i>silence</i> names. Ask learners which word fits: The room was ___ (silent). We sat in ___ (silence).")
 
     fam = [("expert", "someone who has tried, and knows"), ("peril", "a risk, a danger"),
            ("pirate", "someone who tries an attack"), ("fear", "what a risk makes you feel")]
