@@ -288,7 +288,7 @@ def code(word, heads=(), lexicon=frozenset()):
             if later:
                 U[i] = "x." + g; kinds[i] = "x"
                 v = later[0]
-                if kinds[v] in ("s", "l", "b", "r", "e0"): ann.append(f"bv {v}>{i}")
+                if kinds[v] in ("s", "l", "b", "r", "e0", "le"): ann.append(f"bv {v}>{i}")   # le: its e would reach back (bubble, 21 November)
         if k == "g" and g in ("tch", "sh", "th") and i > 0 and kinds[i - 1] == "s":
             later = [j for j in range(i + 1, len(kinds)) if kinds[j] in ("s", "l", "b", "t", "r", "le", "e0", "e>")]
             if later and (g == "tch" or kinds[later[0]] in ("s", "l", "r")):
@@ -317,7 +317,8 @@ def code(word, heads=(), lexicon=frozenset()):
             # a vault needs a sender the spelling gives (20 November 2026): a vowel across a seam taking a dropped e's job
             # (making), a y (baby), or an i before a vowel (radio). The next vowel alone (table, open) sends nothing.
             civ = text[i + 2] == "i" and i + 3 < len(kinds) and kinds[i + 3] in ("s", "l", "b", "r", "e0", "le")
-            if seam_after_unit.get(i + 1) or text[i + 2].endswith("y") or civ:
+            le = kinds[i + 2] == "le" and not seam_after_unit.get(i + 1)   # the silent e of -le (table), 21 November 2026
+            if seam_after_unit.get(i + 1) or text[i + 2].endswith("y") or civ or le:
                 ann.append(f"vault {i + 2}>{i}")
         elif kinds[i + 1] == "g" and text[i + 1] == "ti":
             ann.append(f"vault {i + 1}>{i}")

@@ -116,7 +116,7 @@ EXTRA_MARKS = [   # marks the legend doesn't list on its own
      "<em>the apple</em> or <em>THE place to be</em>; <em>a</em>, <em>to</em> and <em>of</em> work the same way. The weak "
      "form takes the ə; the strong form, used for emphasis, at the end of a phrase, or before a vowel sound, takes its "
      "full vowel. The word walk shows both side by side", "the", "schwa"),
-    ("Sender", "The letter a vowel vault comes from: a silent <em>e</em>; a <em>y</em>; a vowel that takes a dropped "
+    ("Sender", "The letter a vowel vault comes from: a silent <em>e</em>, including the <em>e</em> of <em>-le</em> (<em>table</em>, blocked by the double in <em>bubble</em>); a <em>y</em>; a vowel that takes a dropped "
      "<em>e</em>&rsquo;s place, like the <em>a</em> of <em class=\"nw\">-ate</em>, which sends the <em>o</em> of <em>notate</em> "
      "its vault; or an <em>i</em> before another vowel, as in <em>experience</em>. A long vowel no letter causes (<em>over</em>, "
      "<em>tiger</em>) has no sender, and no vault", "notate", "vault"),

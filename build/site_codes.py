@@ -62,8 +62,8 @@ SITE_CODES = {
     "robin": "c.r s.o c.b | s.i c.n", "robot": "c.r l.o | c.b s.o c.t",
     "river": "c.r s.i c.v | r.er", "silly": "c.s s.i x.ll | b.y ; bv 3>2 ; says 3 ee",
     # step 17: consonant + le (as the table and bugle card, and little)
-    "table": "c.t l.a | c.b le", "bugle": "c.b l.u | c.g le",
-    "title": "c.t l.i | c.t le", "apple": "s.a x.pp | le", "middle": "c.m s.i x.dd | le",
+    "table": "c.t l.a | c.b le ; vault 3>1", "bugle": "c.b l.u | c.g le ; vault 3>1",
+    "title": "c.t l.i | c.t le ; vault 3>1", "apple": "s.a x.pp | le ; bv 2>1", "middle": "c.m s.i x.dd | le ; bv 3>2",
     # step 18: long before two consonants (as old, find)
     "cold": "c.c l.o c.ld", "most": "c.m l.o c.st", "child": "g.ch l.i c.ld", "wild": "c.w l.i c.ld",
     # step 20: teams for the long vowels (as eat, say)
@@ -103,7 +103,7 @@ SITE_CODES = {
     # contrasts added to steps 4, 5, 9, 10 and 17 on 10 November 2026: closed words as not and bed, vaulted ones as make and page
     "sob": "c.s s.o c.b", "shed": "g.sh s.e c.d", "mad": "c.m s.a c.d", "dim": "c.d s.i c.m", "dime": "c.d l.i c.m e>",
     "cub": "c.c s.u c.b", "cube": "c.c l.u c.b e>", "cap": "c.c s.a c.p", "cape": "c.c l.a c.p e>",
-    "rag": "c.r s.a c.g", "rage": "c.r l.a c.g e> ; nudge 3>2", "bubble": "c.b s.u x.bb | le",   # bubble as apple and middle
+    "rag": "c.r s.a c.g", "rage": "c.r l.a c.g e> ; nudge 3>2", "bubble": "c.b s.u x.bb | le ; bv 3>2",   # bubble as apple and middle
     "mode": "c.m l.o c.d e>",                                     # the *med- page's word, as home
     # the first spelling list (lists.py), 10 November 2026: says as gets, with the team marked alike though its sound
     # shifts; pay and lay as say; laid as paid; stay and stayed as play and played

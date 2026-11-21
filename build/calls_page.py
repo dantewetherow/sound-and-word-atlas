@@ -84,7 +84,7 @@ RULED = {
 # Older calls: status by the call's first field. Default "open".
 STATUS = {
     "silent": ("settled", "21 November: the weak e takes ə."),
-    "table, bugle, title": ("settled", "20 November: a long mark and no vault; no letter makes the vowel long."),
+    "table, bugle, title": ("ruled", "21 November, reversing 20 November: the silent e of -le sends the vault across one consonant to a stressed vowel, and a double before -le blocks it (bubble)."),
     "photo": ("settled", "20 November: no vault."),
     "happen": ("settled", "21 November: the e of -en takes ə."),
     "hapless": ("settled", "21 November: the e of -less takes ə."),

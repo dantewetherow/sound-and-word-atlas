@@ -40,7 +40,10 @@ Vowels
 Vaults (ruled 10 and 20 November)
  13. A vault needs a sender the spelling gives: a silent e; a y; a vowel that takes a dropped e's place across a seam
      (making, producer); an i before another vowel (experience, notation, legion), or an e doing the same (simultaneous).
-     A long vowel no letter causes (over, tiger, lunar) has its bar and no vault.
+     The silent e of -le is a silent e: across one consonant it sends a vault to a stressed vowel in the same part
+     (table, able, cycle), and a double before -le blocks it (bubble, tickle). A weak vowel takes none (fixable, bicycle),
+     and a seam keeps it from the base (fix + able). Ruled 21 November, reversing the 20 November ruling on table,
+     bugle and title. A long vowel no letter causes (over, tiger, lunar) has its bar and no vault.
  17. Word sums follow structured word inquiry (Melvyn Ramsden's Real Spelling, and Pete Bowers, who brought it into
      classrooms): a sum holds when its words share meaning and history, and it shows how the modern family is built,
      whatever road a word took into English. So a vowel suffix that replaces the family's final e sends the vault:
@@ -115,7 +118,11 @@ def sum_seams(word, sum_parts):
     return out
 
 
-def check(word, code, sum_parts=None):
+def _upto(us, a):
+    return "".join(letters(t) for t in us[:a + 1]).lower()
+
+
+def check(word, code, sum_parts=None, known=None):
     bad = []
     us, main = units(code)
     spelt = "".join(letters(t) for t in us)
@@ -139,10 +146,10 @@ def check(word, code, sum_parts=None):
         after = main[pos[a] + 1] if pos[a] + 1 < len(main) else ""
         seam = "+" in main[pos[lo]:pos[hi]] or any(k2 == "seam" for k2, _, _ in A)
         glide = (L[-1] in "ie" and kind(nxt) in VOWEL_KINDS) or any(letters(u)[-1] == "i" for u in us[lo + 1:hi]) or kind(snd) in ("g", "k") and L[-1] == "i"
-        y = L.endswith("y") or (L == "i" and after == "+")
+        y = L.endswith("y") or (L == "i" and after == "+" and (known is None or _upto(us, a)[:-1] + "y" in known))   # a y turned i: only if the y word exists (happi+ness: happy)
         r_drop = kind(snd) == "r" or kind(snd) in ("s", "l", "b") and False
         base_e = L == "e" and after == "+"
-        if not (seam or glide or y or base_e or kind(snd) == "r"):
+        if not (seam or glide or y or base_e or kind(snd) in ("r", "le")):
             bad.append(f"rule 13: the vault from {L} to {letters(us[b])} has no sender the spelling gives")
     # rule 14: c before e, i, y
     nudged = {b for k, a, b in A if k == "nudge"}
@@ -174,9 +181,13 @@ def run(OUT):
                 for e in g:
                     if e[1]: sums[e[0]] = e[1]
     hand_bad, auto_bad = {}, {}
+    known = {w.lower() for w in codes}
+    try:
+        import cmudict; known |= set(cmudict.words())          # a y word nobody has marked yet (lazy, for laziness)
+    except ImportError: pass
     for w, c in sorted(codes.items()):
         if not re.fullmatch(r"[A-Za-z’']+", w): continue
-        b = check(w, c, sums.get(w))
+        b = check(w, c, sums.get(w), known)
         if b: (auto_bad if auto.get(w) == c else hand_bad)[w] = b
     n_auto = sum(1 for w, c in codes.items() if auto.get(w) == c)
     (OUT / "mark-audit.json").write_text(json.dumps({"hand": hand_bad, "rule_made": auto_bad}, ensure_ascii=False, indent=1), encoding="utf-8")

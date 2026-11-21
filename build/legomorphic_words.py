@@ -59,8 +59,9 @@ After a semicolon, by unit number (counting from 0, skipping | and +; a group su
                   draws creation (the t and i spell sh together, and the i still makes the a long). Only a letter
                   the spelling gives the job sends one (20 November 2026): a y, a vowel that takes a dropped e's place
                   across a seam (making, notate), or an i before another vowel (experience, notation), or an e doing the
-                  same (simultaneous). A long vowel
-                  in an open syllable of one part (over, tiger, table) takes its long mark and no vault
+                  same (simultaneous), or the silent e of -le across one consonant to a stressed vowel (table, cycle;
+                  21 November 2026). A long vowel in an open syllable of one part with no such letter after it (over,
+                  tiger) takes its long mark and no vault
     bv A>B       a vault from unit A that the box at unit B stops (bv A>B-C for a box over units B to C)
     nudge A>B     a nice-nudge from the vowel in unit A to the c or g in unit B (B may be a box, as the dg of nudge)
     box A         a block box around the cluster in unit A (box A-B for units A to B)
@@ -94,7 +95,7 @@ W = {
  # ---- list 5
  "where": "k.wh r.er e0", "small": "c.sm b.a k.ll ; says 1 ah", "are": "r.ar e0", "have": "c.h s.a c.v e0", "into": "s.i c.n + | c.t b.o ; says 3 oo",
  "there": "g.th r.er e0", "they": "g.th t.ey", "want": "c.w b.a c.nt ; says 1 ah", "what": "k.wh b.a c.t ; says 1 u", "like": "c.l l.i c.k e>",
- "little": "c.l s.i x.tt | le", "play": "c.pl t.ay",
+ "little": "c.l s.i x.tt | le ; bv 3>2", "play": "c.pl t.ay",
  # ---- list 6, long vowel with silent e
  "take": "c.t l.a c.k e>", "five": "c.f l.i c.v e>", "gave": "c.g l.a c.v e>", "made": "c.m l.a c.d e>", "these": "g.th l.e c.s e>",
  "those": "g.th l.o c.s e>", "use": "l.u c.s e>", "white": "k.wh l.i c.t e>", "write": "k.wr l.i c.t e>", "here": "c.h l.e c.r e>",
@@ -267,13 +268,14 @@ def parse(word):
         rng = lambda x: (units[int(x.split("-")[0])]["cols"][0], units[int(x.split("-")[-1])]["cols"][-1])
         if op == "vault":
             u = units[int(src)]
-            send = u["cols"][0] if u["kind"] in VOWEL_KINDS else next(
+            send = u["cols"][-1] if u["kind"] == "le" else u["cols"][0] if u["kind"] in VOWEL_KINDS else next(   # le: from its e (table)
                 (c for c, ch in zip(u["cols"], u["text"]) if u["kind"] in ("k", "g") and ch.lower() in "aeiouy"), None)
             assert send is not None and units[int(dst)]["kind"] == "l", (word, a)
             marks.append({"type": "vault", "from": units[int(dst)]["cols"][0], "to": send, "cone": False})
         elif op == "bv":                                  # a vowel, or a silent e in a cone, whose vault a box stops (funny, edge)
             assert units[int(src)]["kind"] in VOWEL_KINDS | {"e0"}, (word, a)
-            f, t = rng(dst); marks.append({"type": "blockedvault", "from": units[int(src)]["cols"][0], "blockFrom": f, "blockTo": t})
+            su = units[int(src)]; f, t = rng(dst)
+            marks.append({"type": "blockedvault", "from": su["cols"][-1] if su["kind"] == "le" else su["cols"][0], "blockFrom": f, "blockTo": t})
         elif op == "nudge":                               # to the c or g, which may sit inside a boxed unit (the dg of nudge)
             u = units[int(dst)]; cg = [c for c, ch in zip(u["cols"], u["text"]) if ch in "cg"]
             assert cg, (word, a)
