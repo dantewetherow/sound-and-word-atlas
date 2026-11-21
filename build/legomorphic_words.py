@@ -426,12 +426,13 @@ def svg_word(word, F=80.0, x0=0.0, cls=True):
             out.append(f'<path{k(8)} d="M{f(xs)} {f(ys)} C{f(c1[0])} {f(c1[1])} {f(c2[0])} {f(c2[1])} {f(ex)} {f(ey)}" fill="none" stroke="{BLUE}" stroke-width="{f(0.043 * F)}" stroke-linecap="round"/>')
             out.append(arrow(ex, ey, ex - c2[0], ey - c2[1], 0.12 * F, 0.043 * F, BLUE, 8))
         elif t == "blockedvault":
+            kb = ' class="nz8 bvx"' if cls else ""          # bvx: the blocked vault can be hidden site-wide (the switch on the Notations page)
             xv, bx = X(m["from"]), (X(m["blockFrom"]) + X(m["blockTo"])) / 2
             ys = B - leaves(m["from"]) * F
             yx = B - 1.07 * F
-            out.append(f'<path{k(8)} d="M{f(xv)} {f(ys)} Q{f((xv + bx) / 2 + 0.10 * F)} {f(B - 1.52 * F)} {f(bx + 0.07 * F)} {f(yx)}" fill="none" stroke="{BLUE}" stroke-width="{f(0.043 * F)}" stroke-linecap="round"/>')
+            out.append(f'<path{kb} d="M{f(xv)} {f(ys)} Q{f((xv + bx) / 2 + 0.10 * F)} {f(B - 1.52 * F)} {f(bx + 0.07 * F)} {f(yx)}" fill="none" stroke="{BLUE}" stroke-width="{f(0.043 * F)}" stroke-linecap="round"/>')
             d = 0.08 * F
-            out.append(f'<path{k(8)} d="M{f(bx - d)} {f(yx - d)} L{f(bx + d)} {f(yx + d)} M{f(bx + d)} {f(yx - d)} L{f(bx - d)} {f(yx + d)}" fill="none" stroke="{RED}" stroke-width="{f(0.05 * F)}" stroke-linecap="round"/>')
+            out.append(f'<path{kb} d="M{f(bx - d)} {f(yx - d)} L{f(bx + d)} {f(yx + d)} M{f(bx + d)} {f(yx - d)} L{f(bx - d)} {f(yx + d)}" fill="none" stroke="{RED}" stroke-width="{f(0.05 * F)}" stroke-linecap="round"/>')
         elif t == "nudge":
             sx, tx = X(m["from"]), X(m["to"]); d = 1 if sx > tx else -1
             low = p["letters"][m["to"]]["ch"] in "gypqj"
@@ -487,7 +488,7 @@ def svg_one_mark(word, mark, F=58.0, label=None, css_height=None):
     elif mark != "r":
         letters = re.sub(r'fill="var\(--(?:verb|subject)\)"', 'fill="var(--ink)"', letters)
     els = [e for e in re.findall(r"<[^>]+/>", g) if 'class="wt"' not in e]
-    layer = lambda e: (re.search(r'class="(nz\d)"', e) or [None, None])[1]
+    layer = lambda e: (re.search(r'class="(nz\d)\b', e) or [None, None])[1]
     ys = lambda e: [float(v) for v in re.findall(r"(?:y1|y2|cy)=\"(" + num + r")\"", e)] or \
                    [float(v) for v in re.findall(num + r"\s+(" + num + r")", (re.search(r' d="([^"]+)"', e) or [0, ""])[1])]
     above = lambda e: max(ys(e)) < B

@@ -1026,3 +1026,10 @@ body.board .sb-word { min-height: 190px; }
 .study h2 { margin: 6px 0 10px; }
 .study h2 a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 5px; }
 .rstudy { margin: 16px 0 6px; display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; color: var(--soft); }
+
+/* the blocked vault switch (21 November 2026): on the Notations page, it hides the blocked vault on every word of the
+   site; the drawing in the legend keeps it, so the switch always shows what it hides */
+[data-bv="off"] .bvx { display: none; }
+[data-bv="off"] .mark .bvx { display: inline; }
+.bv-switch { display: flex; gap: 8px; align-items: center; margin-top: 8px; font-size: 0.9rem; color: var(--soft); cursor: pointer; }
+.bv-switch input { width: 1.1em; height: 1.1em; accent-color: var(--verb, #b23a2a); }

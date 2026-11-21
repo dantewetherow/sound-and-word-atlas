@@ -113,7 +113,8 @@ def tree(STEPS, plain):
 VIEW_HEAD = ("<script>(() => { const r = document.documentElement; let v = null;"
              " try { v = new URLSearchParams(location.search).get('view'); if (v === 'board') v = 'student'; if (v === 'details') v = 'teacher'; } catch (e) {}"
              " try { if (v === 'student' || v === 'teacher') localStorage.setItem('view', v); else v = localStorage.getItem('view'); } catch (e) {}"
-             " if (v === 'student') r.dataset.view = 'student'; })();</script>")
+             " if (v === 'student') r.dataset.view = 'student';"
+             " try { if (localStorage.getItem('bv') === 'off') r.dataset.bv = 'off'; } catch (e) {} })();</script>")
 
 VIEW_SWITCH = ('<div class="view" role="group" aria-label="View" hidden>'
                '<button type="button" data-v="teacher">Details</button><button type="button" data-v="student">Board</button></div>')
@@ -134,6 +135,13 @@ def header_parts(up):
 
 VIEW_JS = """<script>(() => {
   const root = document.documentElement, sw = document.querySelector('.view');
+  document.querySelectorAll('.bv-switch input').forEach(i => {        // blocked vaults on every word, or not
+    i.checked = root.dataset.bv !== 'off';
+    i.addEventListener('change', () => {
+      if (i.checked) delete root.dataset.bv; else root.dataset.bv = 'off';
+      try { localStorage.setItem('bv', i.checked ? 'on' : 'off'); } catch (err) {}
+    });
+  });
   if (!sw) return;
   const now = () => root.dataset.view === 'student' ? 'student' : 'teacher';
   const show = () => sw.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === now())));
