@@ -73,7 +73,7 @@ def _play_js(after_lego):
 JS_ON = "<script>if (!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) document.documentElement.classList.add('js');</script>"
 
 
-def html_block(LW):
+def html_block(LW, doors_html=""):
     """The home page's top: the name, the subtitle, the three layers as buttons, then note to notate to notation.
     Since 12 November 2026; legomorphic, built up, is on the *leg- page (lego_block)."""
     widths = [LW.svg_word(w, 80, 0.0, cls=False)[1] for w, _, _ in MORPH]
@@ -84,15 +84,14 @@ def html_block(LW):
     return f"""<style>{css()}</style>
 {JS_ON}
 <section class="landing" aria-labelledby="landing-h"><div class="wrap">
-<p class="eyebrow t-only">Legomorphic Notation</p>
 <h1 id="landing-h">Sounds and Words, Assembled</h1>
 <p class="sublead">Orthography, morphology, phonology and etymology, brought to light.</p>
 <p class="lead t-only">Legomorphic Notation is a set of marks and colours drawn on ordinary spelling, so that what a reader usually works out alone is there for everyone to see.</p>
-<p class="cta three"><a class="btn" href="progressions.html">Steps</a><a class="btn" href="walk.html">Words</a><a class="btn" href="parts.html">Parts</a></p>
-<p class="ctasub t-only">Learn the notation in order, look up a word, or see what words share. <a href="about.html">About the notation</a>.</p>
+{doors_html}
+<p class="ctasub t-only"><a href="about.html">About the notation</a> · <a href="notations.html">The marks</a></p>
 </div></section>
 <section class="morph" aria-labelledby="morph-h"><div class="wrap">
-<h2 id="morph-h">From <i>note</i> to <i>notation</i></h2>
+<h2 id="morph-h">See it work: from <i>note</i> to <i>notation</i></h2>
 <div class="stage stage-morph" id="morph">
 <p class="sums">{sums}</p>
 <div class="mstack">{words}</div>

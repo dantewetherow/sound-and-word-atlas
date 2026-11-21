@@ -179,13 +179,13 @@ LOGO = characters.lifted(LW, "gno", px_height=54, weight=1.7)
 THEME_SWITCH = ('<div class="theme" role="group" aria-label="Page colours" hidden>'
                 '<button type="button" data-pick="light">Bright</button><button type="button" data-pick="dark">Night</button></div>')
 
-def header(depth):
+def header(depth, home=False):
     """The brand, then search, the site map link and the two switches, then the doors (doors.py). The page's
     breadcrumb goes where <!--crumbs--> is, inside the header, once every page is written (doors.finish). Scrolled past,
     the header pins to the top in a compact form (doors.PIN_JS); head-hold keeps its place so the page doesn't jump."""
     up = "../" * depth
     search, smap, view, menu, door_nav = doors.header_parts(up)
-    return (f'<div class="head-hold"><header class="site"><div class="wrap"><div class="masthead"><a class="brand" href="{up}index.html"><span class="logo">{LOGO}</span><span class="name"><small>Legomorphic Notation</small>Sounds and Words, Assembled</span></a>'
+    return (f'<div class="head-hold"><header class="site{" is-home" if home else ""}"><div class="wrap"><div class="masthead"><a class="brand" href="{up}index.html"><span class="logo">{LOGO}</span><span class="name"><small>Legomorphic Notation</small><span class="nm">Sounds and Words, Assembled</span></span></a>'
             f'<div class="tools">{search}{smap}{view}{THEME_SWITCH}{menu}</div></div>{door_nav}<!--crumbs--></div></header></div><!--after-head-->')
 
 def footer(depth):
@@ -414,12 +414,11 @@ ROUTE_LEAD = md(route["intro"].split(" The orientation map")[0])
 OLD_ANCHORS = """<script>(() => { const h = location.hash;
   if (h === '#route' || h.indexOf('#band-') === 0) location.replace('progressions.html' + (h.indexOf('#band-') === 0 ? h : ''));
   else if (h === '#marks') location.replace('notations.html'); })();</script>"""
-home_body = f"""{header(0)}
+home_body = f"""{header(0, home=True)}
 {OLD_ANCHORS}
 <main>
-{landing.html_block(LW)}
+{landing.html_block(LW, doors.door_grid())}
 {walk.section(head='<h2 class="walk-h"><span class="t-only">Mark a word</span><span class="s-only">Pick a word</span></h2><p class="sub t-only">Type a word that&rsquo;s on the site, then tap through it, reading from its letters or spelling from its sounds. The <a href="walk.html">Word walk</a> page has it on its own.</p>', lazy=True, url=False)}
-{doors.doors_section()}
 <section class="about t-only" id="about" aria-labelledby="about-h"><div class="wrap">
 <h2 id="about-h">What&rsquo;s here</h2>
 <div class="cols">

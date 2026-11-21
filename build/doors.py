@@ -422,8 +422,17 @@ def write(OUT, page, header, footer, X):
 <section class="about"><div class="wrap"><ul class="smap-tree"><li><a href="index.html"><b>Home</b></a></li>{"".join(items)}</ul></div></section>""")
 
 
+def door_grid():
+    """The four primary buttons for the top of the home page (21 November 2026): the three layers and For teachers, alike.
+    Every other page has them in the bar above (header_parts)."""
+    return '<nav class="door-grid home-doors" aria-label="Doors">' + "".join(
+        f'<a class="door-tile{" t-only" if sw is None else ""}" href="{slug}.html"><span class="dn">{name}</span>'
+        f'{f"<span class=sn>{sw}</span>" if sw else ""}<span class="pw t-only">{plain}</span></a>'
+        for slug, name, _, plain, sw in DOORS) + '</nav>'
+
+
 def doors_section():
-    """The way in on the home page: the three layers, then the teachers' shelf."""
+    """The way in on the home page until 21 November 2026: the three layers, then the teachers' shelf."""
     out = []
     for n, (slug, name, _, plain_words, sw) in enumerate(DOORS, 1):
         num = f'<span class="ln">{n}</span>' if sw else ""

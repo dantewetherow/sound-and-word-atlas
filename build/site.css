@@ -1033,3 +1033,19 @@ body.board .sb-word { min-height: 190px; }
 [data-bv="off"] .mark .bvx { display: inline; }
 .bv-switch { display: flex; gap: 8px; align-items: center; margin-top: 8px; font-size: 0.9rem; color: var(--soft); cursor: pointer; }
 .bv-switch input { width: 1.1em; height: 1.1em; accent-color: var(--verb, #b23a2a); }
+
+
+/* the home page (21 November 2026): the four primary buttons sit under the title, so the bar above leaves out the
+   doors and the site's name until it pins on scrolling; every other page keeps them in the bar */
+header.site.is-home:not(.pinned) :is(nav.doors, .brand .nm, .menu) { display: none; }
+header.site.is-home:not(.pinned) .brand small { font-size: 0.8rem; }
+.landing .home-doors { margin: 22px 0 6px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+.landing .home-doors .door-tile { padding: 18px 20px; }
+.landing .home-doors .door-tile .dn { font-size: 1.5rem; }
+.landing .ctasub a { color: var(--soft); }
+@media (max-width: 560px) {
+  .landing .home-doors { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .landing .home-doors .door-tile { padding: 14px 14px; text-align: center; }
+  .landing .home-doors .door-tile .dn { font-size: 1.3rem; }
+  .landing .home-doors .door-tile .pw { display: none; }
+}
