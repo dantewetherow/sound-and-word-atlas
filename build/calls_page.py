@@ -76,7 +76,9 @@ RULES = [
 RULED = {
     "A2": ("21 November", "u. It reads most cleanly."),
     "A5": ("21 November", "A short o, as in got."),
-    "A6": ("21 November", "A short mark: legible and illegible take a cup over the i. Whether every -ible does is still open."),
+    "A6": ("21 November", "A short mark, in every -ible word: legible, eligible, reducible, intelligible."),
+    "A3": ("21 November", "ʊ, the International Phonetic Alphabet's letter for the vowel of book, over the u of put and the oo of book; do keeps oo."),
+    "A7": ("21 November", "The final e makes the i long and sends a vault, which lands beside the ee: elite, police, expertise."),
 }
 # Older calls: status by the call's first field. Default "open".
 STATUS = {

@@ -17,7 +17,7 @@ h is a breath shaped by the vowel that follows it, so where it isn't said it bel
 import html
 
 CODES = {
-    "talk": "c.t t.al c.k", "friend": "c.fr t.ie c.nd ; cup 3", "woman": "c.w b.o | c.m b.a c.n ; says 1 oo ; schwa 3", "women": "c.w b.o | c.m b.e c.n ; says 1 i ; schwa 3",
+    "talk": "c.t t.al c.k", "friend": "c.fr t.ie c.nd ; cup 3", "woman": "c.w b.o | c.m b.a c.n ; says 1 ʊ ; schwa 3", "women": "c.w b.o | c.m b.e c.n ; says 1 i ; schwa 3",
     "move": "c.m b.o c.v e0 ; says 1 oo", "four": "c.f r.our", "fourth": "c.f r.our g.th", "nothing": "c.n b.o + | g.th s.i k.ng ; says 1 u",
     "another": "b.a | c.n + b.o g.th | r.er ; schwa 0 ; says 2 u", "above": "b.a | c.b b.o c.v e0 ; schwa 0 ; says 2 u", "among": "b.a | c.m b.o k.ng ; schwa 0 ; says 2 u",
     "against": "b.a | c.g t.ai c.nst ; schwa 0", "almost": "b.a c.l | c.m l.o c.st ; says 0 ah", "poor": "c.p r.oor", "won": "c.w b.o c.n ; says 1 u",

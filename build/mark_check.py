@@ -22,14 +22,18 @@ Vowels
      new marks split what bare used to hold. The ə is Johann Andreas Schmeller's symbol (1820s); writing a vowel's
      other sound over it follows Romalda Spalding's numbered markings (The Writing Road to Reading, 1957). A vowel
      left bare is one not yet decided (carry, where Canadian speech varies). Gone takes a short o: ruled 21 November.
+     The oo of book (put, full, could, woman) is written ʊ, the International Phonetic Alphabet's letter for it, so it
+     isn't read as the oo of moon (do, to). A vowel team that says it takes the ʊ too (book, good). Ruled 21 November.
   8. An unstressed i is weak in the middle of a word, with a ə (similar, commodity), and keeps its cup in a
      last, closed syllable (logic, visit, lucid, active). The ə stands for the weak vowel whether a speaker says it
      as uh or as a quick i: in much Canadian and American speech the two have merged, and the mark doesn't take sides.
-     21 November: Dante ruled that legible (and illegible) read better with a short mark; whether that holds for every
-     -ible, and for the other mid-word i's, is open.
+     The i of -ible takes a cup in every -ible word (legible, eligible, reducible): ruled 21 November.
   9. So -ic at the end of a word is s.i c.c (logic), and -ic before another ending is a weak i | c.c + (logical, medical).
  10. An i that says e's name, in words from French (elite, expertise, machine), takes a small ee over it; its final e
-     sits in a cone with no vault, since a vault is for a vowel that says its own name.
+     sits in a cone with no vault, since a vault is for a vowel that says its own name. Changed 21 November: the final e
+     makes the i long, as in like, and a long i in a word from French says ee; so the i takes a bar, the ee sits over
+     the bar, and the e sends its vault, landing beside the ee (elite, police, expertise). With no final e (ski, taxi)
+     the ee has no vault.
  11. A final e that is said says its name: l.e (simile).
  12. A family keeps its parts and lets the vowel marks move with the beat: product, produce, productivity.
 

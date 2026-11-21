@@ -86,8 +86,8 @@ W = {
  # ---- list 2, CV
  "go": "c.g l.o", "me": "c.m l.e", "my": "c.m l.y", "we": "c.w l.e", "be": "c.b l.e", "no": "c.n l.o", "by": "c.b l.y",
  # ---- list 3
- "come": "c.c b.o c.m e0 ; says 1 u", "some": "c.s b.o c.m e0 ; says 1 u", "one": "w.o c.n e0", "put": "c.p b.u c.t ; says 1 oo", "said": "c.s t.ai c.d",
- "two": "k.tw b.o ; says 1 oo", "see": "c.s t.ee", "look": "c.l t.oo c.k", "why": "k.wh l.y", "try": "c.tr l.y",
+ "come": "c.c b.o c.m e0 ; says 1 u", "some": "c.s b.o c.m e0 ; says 1 u", "one": "w.o c.n e0", "put": "c.p b.u c.t ; says 1 ʊ", "said": "c.s t.ai c.d",
+ "two": "k.tw b.o ; says 1 oo", "see": "c.s t.ee", "look": "c.l t.oo c.k ; says 1 ʊ", "why": "k.wh l.y", "try": "c.tr l.y",
  # ---- list 4, digraphs
  "that": "g.th s.a c.t", "this": "g.th s.i c.s", "with": "c.w s.i g.th", "then": "g.th s.e c.n", "when": "k.wh s.e c.n",
  "much": "c.m s.u g.ch", "wish": "c.w s.i g.sh", "pick": "c.p s.i k.ck", "which": "k.wh s.i g.ch",
@@ -100,15 +100,15 @@ W = {
  "those": "g.th l.o c.s e>", "use": "l.u c.s e>", "white": "k.wh l.i c.t e>", "write": "k.wr l.i c.t e>", "here": "c.h l.e c.r e>",
  "make": "c.m l.a c.k e>", "ate": "l.a c.t e>", "came": "c.c l.a c.m e>", "ride": "c.r l.i c.d e>",
  # ---- list 7
- "who": "k.wh b.o ; says 1 oo", "again": "b.a | c.g t.ai c.n ; schwa 0", "any": "b.a c.n | b.y ; says 0 e ; says 2 ee", "could": "c.c t.oul c.d", "would": "c.w t.oul c.d",
+ "who": "k.wh b.o ; says 1 oo", "again": "b.a | c.g t.ai c.n ; schwa 0", "any": "b.a c.n | b.y ; says 0 e ; says 2 ee", "could": "c.c t.oul c.d ; says 1 ʊ", "would": "c.w t.oul c.d ; says 1 ʊ",
  "from": "c.fr b.o c.m ; says 1 u", "give": "c.g s.i c.v e0", "once": "w.o c.n c.c e0 ; nudge 3>2", "walk": "c.w t.al c.k", "were": "c.w r.er e0",
- "good": "c.g t.oo c.d", "her": "c.h r.er",
+ "good": "c.g t.oo c.d ; says 1 ʊ", "her": "c.h r.er",
  # ---- list 8, r-controlled
  "over": "l.o | c.v r.er", "before": "c.b l.e + | c.f r.or e0", "first": "c.f r.ir c.st", "hurt": "c.h r.ur c.t",
  "for": "c.f r.or", "under": "s.u c.n | c.d r.er", "start": "c.st r.ar c.t",
  # ---- list 9
  "because": "c.b l.e | c.c t.au c.s e0", "been": "c.b t.ee c.n ; seam 1", "both": "c.b l.o g.th", "buy": "k.bu l.y", "old": "l.o c.ld",
- "does": "c.d b.o + e0 c.s ; says 1 u", "goes": "c.g l.o + e0 c.s", "many": "c.m b.a c.n | b.y ; says 1 e ; says 3 ee", "pull": "c.p b.u k.ll ; says 1 oo", "their": "g.th r.eir",
+ "does": "c.d b.o + e0 c.s ; says 1 u", "goes": "c.g l.o + e0 c.s", "many": "c.m b.a c.n | b.y ; says 1 e ; says 3 ee", "pull": "c.p b.u k.ll ; says 1 ʊ", "their": "g.th r.eir",
  # ---- list 10, vowel teams
  "please": "c.pl t.ea c.s e0", "each": "t.ea g.ch", "eat": "t.ea c.t", "say": "c.s t.ay", "green": "c.gr t.ee c.n", "read": "c.r t.ea c.d",
  "right": "c.r t.igh c.t", "too": "c.t t.oo", "keep": "c.k t.ee c.p", "away": "b.a | c.w t.ay ; schwa 0", "blue": "c.bl t.ue",
@@ -127,7 +127,7 @@ W = {
  "seven": "c.s s.e c.v | b.e c.n ; schwa 3", "other": "b.o g.th | r.er ; says 0 u", "water": "c.w b.a c.t | r.er ; says 1 ah", "people": "c.p t.eo | c.p le",
  # ---- the operator forms that are not on the ELP lists, and not
  "am": "s.a c.m", "has": "c.h s.a c.s", "had": "c.h s.a c.d", "do": "c.d b.o ; says 1 oo", "did": "c.d s.i c.d", "can": "c.c s.a c.n",
- "will": "c.w s.i k.ll", "shall": "g.sh s.a k.ll", "should": "g.sh t.oul c.d", "may": "c.m t.ay", "might": "c.m t.igh c.t", "must": "c.m s.u c.st",
+ "will": "c.w s.i k.ll", "shall": "g.sh s.a k.ll", "should": "g.sh t.oul c.d ; says 1 ʊ", "may": "c.m t.ay", "might": "c.m t.igh c.t", "must": "c.m s.u c.st",
  "not": "c.n s.o c.t",
 }
 
@@ -401,6 +401,8 @@ def svg_word(word, F=80.0, x0=0.0, cls=True):
               out.append(f'<circle{k(8)} cx="{f(ex)}" cy="{f(B - 0.26 * F)}" r="{f(0.37 * F)}" fill="none" stroke="{QUIET}" stroke-width="{f(0.038 * F)}" stroke-linecap="round" stroke-dasharray="{f(0.012 * F)} {f(0.078 * F)}"/>')
     out.append(f'<g{k(5)} font-family="Lexend, system-ui, sans-serif" font-size="{f(F)}" font-weight="400" text-anchor="middle">'
                + "".join(f'<text x="{f(X(i))}" y="{f(B)}" fill="{FILL[L["type"]]}">{L["ch"]}</text>' for i, L in enumerate(p["letters"])) + "</g>")
+    over_cols = {c for m in p["marks"] if m["type"] == "over" for c in m["cols"]}
+    bar_cols = {m["col"] for m in p["marks"] if m["type"] == "macron"}
     for m in p["marks"]:
         t = m["type"]
         if t == "blendbar":
@@ -410,6 +412,7 @@ def svg_word(word, F=80.0, x0=0.0, cls=True):
         elif t == "over":                                   # ə or a borrowed sound, small and red, over the unit
             x = mid(m["cols"]); fs = 0.50 if m["text"] == "ə" else 0.40
             yy = 0.98 if any(p["letters"][c]["ch"] in "ijl" for c in m["cols"]) else 0.80   # clear the dot of an i, the top of an l
+            if bar_cols & set(m["cols"]): yy = 1.16                    # a long vowel borrowing a sound (elite): the sound sits over its bar
             out.append(f'<text{k(6)} x="{f(x)}" y="{f(B - yy * F)}" font-family="Lexend, system-ui, sans-serif" font-size="{f(fs * F)}" text-anchor="middle" fill="{RED}">{m["text"]}</text>')
         elif t == "breve":
             x = X(m["col"]); out.append(f'<path{k(6)} d="M{f(x - 0.257 * F)} {f(B - 0.975 * F)} Q{f(x)} {f(B - 0.775 * F)} {f(x + 0.257 * F)} {f(B - 0.975 * F)}" fill="none" stroke="{RED}" stroke-width="{f(0.05 * F)}" stroke-linecap="round"/>')
@@ -418,6 +421,7 @@ def svg_word(word, F=80.0, x0=0.0, cls=True):
             if m["to"] in takes: xs -= 0.08 * F               # a vowel that takes a vault and sends one (the a of notation): the two ends part
             ys = B - 0.63 * F if m.get("cone", True) else B - leaves(m["to"]) * F
             ex, ey = xt + (0.16 if m["from"] in sends else 0.05) * F, B - 1.12 * F
+            if m["from"] in over_cols: ex, ey = xt + 0.40 * F, B - 1.00 * F   # the vault lands beside the borrowed sound, not through it (elite)
             c1 = (xs - 0.04 * F, B - 1.40 * F); c2 = (ex + 0.41 * F, B - 1.40 * F)
             out.append(f'<path{k(8)} d="M{f(xs)} {f(ys)} C{f(c1[0])} {f(c1[1])} {f(c2[0])} {f(c2[1])} {f(ex)} {f(ey)}" fill="none" stroke="{BLUE}" stroke-width="{f(0.043 * F)}" stroke-linecap="round"/>')
             out.append(arrow(ex, ey, ex - c2[0], ey - c2[1], 0.12 * F, 0.043 * F, BLUE, 8))

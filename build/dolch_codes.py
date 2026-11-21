@@ -21,7 +21,7 @@ DOLCH_CODES = {
     "upon": "b.u | c.p s.o c.n ; schwa 0",
     # third grade: the bases the word sum cards already mark (clean, cut, full, hold, hot, light, long) kept as they are there
     "about": "b.a | c.b t.ou c.t ; schwa 0", "bring": "c.br s.i k.ng", "clean": "c.cl t.ea c.n", "cut": "c.c s.u c.t",
-    "drink": "c.dr s.i c.nk", "fall": "c.f b.a k.ll ; says 1 ah", "far": "c.f r.ar", "full": "c.f b.u k.ll ; says 1 oo", "hold": "c.h l.o c.ld",
+    "drink": "c.dr s.i c.nk", "fall": "c.f b.a k.ll ; says 1 ah", "far": "c.f r.ar", "full": "c.f b.u k.ll ; says 1 ʊ", "hold": "c.h l.o c.ld",
     "hot": "c.h s.o c.t", "light": "c.l t.igh c.t", "long": "c.l s.o k.ng", "six": "c.s s.i c.x", "ten": "c.t s.e c.n",
 }
 

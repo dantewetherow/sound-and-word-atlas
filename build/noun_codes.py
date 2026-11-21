@@ -75,5 +75,5 @@ NOUN_CODES = {
     "way": "c.w t.ay",                                       # as day
     "wind": "c.w s.i c.nd",                                  # the noun, with a short i, unlike find
     "window": "c.w s.i c.n | c.d t.ow",                      # as yellow
-    "wood": "c.w t.oo c.d",                                  # as good
+    "wood": "c.w t.oo c.d ; says 1 ʊ",                                  # as good
 }

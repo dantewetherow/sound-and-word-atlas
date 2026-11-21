@@ -392,11 +392,11 @@
   "from": "flsz_family.py"
  },
  "wolf": {
-  "code": "c.w b.o c.lf ; says 1 oo",
+  "code": "c.w b.o c.lf ; says 1 ʊ",
   "from": "flsz_family.py"
  },
  "wolves": {
-  "code": "c.w b.o c.lv e0 + c.s ; says 1 oo",
+  "code": "c.w b.o c.lv e0 + c.s ; says 1 ʊ",
   "from": "flsz_family.py"
  }
 }

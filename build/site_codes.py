@@ -71,7 +71,7 @@ SITE_CODES = {
     # step 21: the long u sound (as too, new, blue)
     "moon": "c.m t.oo c.n", "food": "c.f t.oo c.d", "grew": "c.gr t.ew", "true": "c.tr t.ue", "soup": "c.s t.ou c.p",
     # step 22: a team's second sound, marked alike (as look, head)
-    "book": "c.b t.oo c.k", "bread": "c.br t.ea c.d ; cup 2",
+    "book": "c.b t.oo c.k ; says 1 ʊ", "bread": "c.br t.ea c.d ; cup 2",
     # step 23 (as saw)
     "law": "c.l t.aw",
     # step 24 (as the coin card)

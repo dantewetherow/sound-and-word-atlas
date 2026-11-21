@@ -357,7 +357,7 @@ def sheet_page(first=False):
 # Words the set adds to the notation. Each follows the rules and passes check_marks.py, except page, whose nudged g spells /j/.
 LW.KEY_ONLY.update({
  "run": "c.r s.u c.n", "hop": "c.h s.o c.p", "hear": "c.h r.ear", "speak": "c.sp t.ea c.k", "spell": "c.sp s.e k.ll",
- "mark": "c.m r.ar c.k", "book": "c.b t.oo c.k", "word": "c.w r.or c.d", "page": "c.p l.a c.g e> ; nudge 3>2",
+ "mark": "c.m r.ar c.k", "book": "c.b t.oo c.k ; says 1 ʊ", "word": "c.w r.or c.d", "page": "c.p l.a c.g e> ; nudge 3>2",
  "note": "c.n l.o c.t e>", "his": "c.h s.i c.s", "ing": "s.i k.ng"})
 
 SENTENCE_ROWS = [   # the list page: each row holds one or more (group, words) pairs; · separates subgroups
