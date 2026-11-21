@@ -756,7 +756,7 @@ MED_CLUSTERS = [
     {"key": "mod", "label": "mod, mode", "spells": ["mod", "mode"], "head": "a measure, a manner",
      "road": "Latin <i>modus</i>, a measure, a limit, a way of doing something",
      "groups": [
-         [("mode", ["mode"], "a way of doing something"), ("modal", ["mod", "-al"], "having to do with manner; in grammar, a verb such as <i>can</i> or <i>must</i>", "mod")],
+         [("mode", ["mode"], "a way of doing something"), ("modal", ["mod(e)", "-al"], "having to do with manner; in grammar, a verb such as <i>can</i> or <i>must</i>", "mod")],
          [("model", None, "a small measure: a pattern to copy", "mod"), ("module", ["mod", "-ule"], "a small measure: a unit that fits with others"),
           ("modulate", ["mod", "-ul(e)", "-ate"], "adjust to a measure")],
          [("moderate", None, "kept within measure", "mod"), ("immoderate", None, "beyond measure", "mod")],
@@ -884,9 +884,9 @@ LEUK_CLUSTERS = [
          [("pellucid", ["pel-", "luc", "-id"], "clear right through")],
          [("lux", ["lux"], "a measure of the light falling on a surface")],
      ]},
-    {"key": "lun", "label": "lun", "spells": ["lun"], "head": "the moon",
+    {"key": "lun", "label": "lun, lune", "spells": ["lun", "lune", "lun(e)"], "head": "the moon",
      "road": "Latin <i>l&umacr;na</i>, the moon, from an older <i>*leuksn&amacr;</i>: the bright one",
-     "groups": [[("lunar", ["lun", "-ar"], "having to do with the moon")]]},
+     "groups": [[("lune", ["lune"], "a crescent, the shape of a new moon"), ("lunar", ["lun(e)", "-ar"], "having to do with the moon")]]},
     {"key": "greek", "label": "leuk", "spells": ["leuk", "leuko"], "head": "white, bright",
      "road": "Greek <i>leukos</i>, white, bright",
      "groups": [
@@ -918,6 +918,7 @@ ROOT_PARTS.update({
     "luc": "light, shine: Latin <i>l&umacr;x</i>, <i>l&umacr;cis</i>, <i>l&umacr;c&emacr;re</i>",
     "lux": "light: Latin <i>l&umacr;x</i>",
     "lun": "the moon: Latin <i>l&umacr;na</i>",
+    "lune": "the moon: Latin <i>l&umacr;na</i>, through French <i>lune</i>",
     "leuk": "white: Greek <i>leukos</i>",
     "leuko": "white: Greek <i>leukos</i>",
     "light": "light: Old English <i>l&emacr;oht</i>",

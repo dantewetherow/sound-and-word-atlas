@@ -29,11 +29,13 @@ Vaults (ruled 10 and 20 November)
  13. A vault needs a sender the spelling gives: a silent e; a y; a vowel that takes a dropped e's place across a seam
      (making, producer); an i before another vowel (experience, notation, legion), or an e doing the same (simultaneous).
      A long vowel no letter causes (over, tiger, lunar) has its bar and no vault.
- 17. A vault from a dropped e needs the e-word as the base the word was made on in English: produce + er, conduce
-     + ive. A word borrowed whole from Latin takes its base from the Latin, with no e and no vault, even where English
-     has a look-alike with an e: modal (Latin modalis, beside mode) is mod + al, as lunar, solar and polar are. Ruled 21
-     November. Open: reducible (Latin reducibilis) and educator (Latin educator) still carry a vault, and structured word
-     inquiry would write all of these by today's structure (mode/+al, reduce/+ible).
+ 17. Word sums follow structured word inquiry (Melvyn Ramsden's Real Spelling, and Pete Bowers, who brought it into
+     classrooms): a sum holds when its words share meaning and history, and it shows how the modern family is built,
+     whatever road a word took into English. So a vowel suffix that replaces the family's final e sends the vault:
+     mode/+al is modal, lune/+ar is lunar, pole/+ar is polar, reduce/+ible is reducible, as produce/+er is producer.
+     Where no e-word is in the family, there is no e to replace and no vault: sol + ar is solar (sole is another
+     word). How a word came into English goes in its note: modal was borrowed whole from Latin modalis. Ruled 21
+     November, replacing the same morning's ruling by history.
 
 Nudges
  14. A c before e, i or y is soft and takes a nudge from that letter (lucid, medicine, produce). A g takes one where

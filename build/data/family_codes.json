@@ -158,7 +158,7 @@
 "homonym": "c.h s.o c.m | b.o + | c.n s.y c.m",
 "seem": "c.s t.ee c.m",
 "single": "c.s s.i c.n | c.g le",
-"modal": "c.m l.o | c.d + b.a c.l",
+"modal": "c.m l.o | c.d + b.a c.l ; vault 3>1",
 "model": "c.m s.o c.d | b.e c.l",
 "module": "c.m s.o c.d + | l.u c.l e>",
 "modulate": "c.m s.o c.d + | b.u | c.l + l.a c.t e>",
@@ -196,7 +196,7 @@
 "translucent": "c.tr s.a c.ns + | c.l l.u | c.c + b.e c.nt ; nudge 6>5",
 "pellucid": "c.p b.e c.l + | c.l l.u | c.c + s.i c.d ; nudge 6>5",
 "lux": "c.l s.u c.x",
-"lunar": "c.l l.u | c.n + r.ar",
+"lunar": "c.l l.u | c.n + r.ar ; vault 3>1",
 "leukemia": "c.l t.eu | c.k + l.e | c.m b.i | b.a ; vault 5>3",
 "leukocyte": "c.l t.eu | c.k b.o + | c.c l.y c.t e> ; nudge 5>4",
 "lighten": "c.l t.igh c.t + | b.e c.n",
@@ -231,5 +231,8 @@
 "loyalty": "c.l t.oy | b.a c.l + | c.t b.y",
 "privilege": "c.pr s.i c.v | b.i | c.l b.e c.g e0 ; nudge 7>6",
 "act": "s.a c.ct",
-"create": "c.cr l.e + | l.a c.t e>"
+"create": "c.cr l.e + | l.a c.t e>",
+"lune": "c.l l.u c.n e>",
+"polar": "c.p l.o | c.l + r.ar ; vault 3>1",
+"pole": "c.p l.o c.l e>"
 }
