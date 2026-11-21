@@ -82,7 +82,7 @@ import math, json, sys, pathlib
 W = {
  # ---- ELP list 1, Kindergarten
  "a": "b.a ; schwa 0", "and": "s.a c.nd", "I": "l.I", "is": "s.i c.s", "it": "s.i c.t", "the": "g.th b.e ; schwa 1", "to": "c.t b.o ; says 1 oo",
- "you": "c.y t.ou", "he": "c.h l.e", "she": "g.sh l.e", "was": "c.w b.a c.s ; says 1 ah", "of": "b.o c.f ; says 0 u",
+ "you": "c.y t.ou", "he": "c.h l.e", "she": "g.sh l.e", "was": "c.w b.a c.s ; says 1 u", "of": "b.o c.f ; says 0 u",
  # ---- list 2, CV
  "go": "c.g l.o", "me": "c.m l.e", "my": "c.m l.y", "we": "c.w l.e", "be": "c.b l.e", "no": "c.n l.o", "by": "c.b l.y",
  # ---- list 3
@@ -260,7 +260,7 @@ def parse(word):
     for a in ann:
         if a.startswith("says "):                           # a vowel saying another vowel's sound: that sound, small, over it
             _, n_, snd = a.split(); u = units[int(n_)]
-            assert u["kind"] in ("b", "t") and snd.isalpha() and len(snd) <= 3, (word, a)
+            assert u["kind"] in ("b", "t", "l") and snd.isalpha() and len(snd) <= 3, (word, a)   # l: a long vowel whose name is borrowed (elite, a call open 21 November)
             marks.append({"type": "over", "cols": u["cols"], "text": snd}); continue
         op, arg = a.split()
         src, _, dst = arg.partition(">")

@@ -96,7 +96,7 @@ SITE_CODES = {
     "cost": "c.c s.o c.st", "mint": "c.m s.i c.nt",              # as must and went: short before two consonants
     "mind": "c.m l.i c.nd",                                       # as find and kind
     "bone": "c.b l.o c.n e>",                                     # as home
-    "gone": "c.g b.o c.n e0",                                     # as done: a borrowing vowel, bare, and an e in a cone
+    "gone": "c.g s.o c.n e0",                                     # a short o, as got, and an e in a cone: ruled 21 November
     "due": "c.d t.ue", "dew": "c.d t.ew",                         # as blue and new
     "snow": "c.sn t.ow",                                          # as the noun cards draw it
     "knot": "k.kn s.o c.t", "wrap": "k.wr s.a c.p", "rap": "c.r s.a c.p",   # as know and write; rap as not
@@ -196,7 +196,7 @@ UNMARKED = {"telephone": GREEK, "photograph": GREEK}
 # it's ruled.
 # robin, robot and river came off on 12 November 2026: their syllables go where the spoken word makes sense, and seams
 # carry the parts. Centre (-tre), ceiling (a nudge from the team ei) and giant (gi | ant) went on.
-OPEN = {"silly", "gone", "produce", "conduct", "over", "pony", "photo", "said", "paid", "centre", "ceiling", "giant"}
+OPEN = {"silly", "produce", "conduct", "over", "pony", "photo", "said", "paid", "centre", "ceiling", "giant"}
 
 # Choices these codes make that the manual and the cards do not settle outright.
 CALLS = [

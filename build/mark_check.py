@@ -21,10 +21,12 @@ Vowels
      over the o of do, u over the o of come, ah over the a of want, ee over the y of happy). 21 November 2026: the two
      new marks split what bare used to hold. The ə is Johann Andreas Schmeller's symbol (1820s); writing a vowel's
      other sound over it follows Romalda Spalding's numbered markings (The Writing Road to Reading, 1957). A vowel
-     left bare is one not yet decided (carry, where Canadian speech varies; gone).
-  8. An unstressed i is weak in the middle of a word, with a ə (legible, similar, commodity), and keeps its cup in a
+     left bare is one not yet decided (carry, where Canadian speech varies). Gone takes a short o: ruled 21 November.
+  8. An unstressed i is weak in the middle of a word, with a ə (similar, commodity), and keeps its cup in a
      last, closed syllable (logic, visit, lucid, active). The ə stands for the weak vowel whether a speaker says it
      as uh or as a quick i: in much Canadian and American speech the two have merged, and the mark doesn't take sides.
+     21 November: Dante ruled that legible (and illegible) read better with a short mark; whether that holds for every
+     -ible, and for the other mid-word i's, is open.
   9. So -ic at the end of a word is s.i c.c (logic), and -ic before another ending is a weak i | c.c + (logical, medical).
  10. An i that says e's name, in words from French (elite, expertise, machine), takes a small ee over it; its final e
      sits in a cone with no vault, since a vault is for a vowel that says its own name.
@@ -62,7 +64,7 @@ import json, re, pathlib
 
 HERE = pathlib.Path(__file__).resolve().parent
 VOWEL_KINDS = ("s", "l", "b", "t", "r", "w")
-STILL_BARE = {"carry", "carries", "carried", "gone", "en"}            # not yet decided: carry varies most in Canadian speech
+STILL_BARE = {"carry", "carries", "carried", "en"}            # not yet decided: carry varies most in Canadian speech
 
 
 def units(code):

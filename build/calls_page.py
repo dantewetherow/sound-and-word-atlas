@@ -72,6 +72,12 @@ RULES = [
      "Both are still shown in plain letters, so neither side is the site's marking yet. Rule 17 points to the seam: structured word inquiry writes tele + phone and "
      "photo + graph, and the family pages already seam homo + phone and techno + log.", ("With a seam", "No seam")),
 ]
+# Calls in A and B that Dante has ruled on: (id, date, ruling). They move to "Ruled" at the foot of the page.
+RULED = {
+    "A2": ("21 November", "u. It reads most cleanly."),
+    "A5": ("21 November", "A short o, as in got."),
+    "A6": ("21 November", "A short mark: legible and illegible take a cup over the i. Whether every -ible does is still open."),
+}
 # Older calls: status by the call's first field. Default "open".
 STATUS = {
     "silent": ("settled", "21 November: the weak e takes ə."),
@@ -79,7 +85,7 @@ STATUS = {
     "photo": ("settled", "20 November: no vault."),
     "happen": ("settled", "21 November: the e of -en takes ə."),
     "hapless": ("settled", "21 November: the e of -less takes ə."),
-    "gone": ("open", "Now A5 above."),
+    "gone": ("settled", "21 November: a short o (A5)."),
     "produce, conduct (the *deuk- page), drafts": ("settled", "21 November: the verb's weak first vowel takes ə."),
     "hopeful, hopeless, hopelessness": ("settled", "21 November: the endings' weak vowels take ə."),
     "wanted, started, wishes, washes": ("settled", "21 November: the e of -ed and -es takes ə where it adds a syllable."),
@@ -169,8 +175,18 @@ CSS = """<style>
 </style>"""
 
 
+def _ruled(LW, c):
+    cid, title = c[0], c[1]
+    date, text = RULED[cid]
+    w = (c[3] or c[4])[0][0]
+    return f"""<tr class="cl-ruled"><td class="cl-st">ruled</td><td class="cl-w">{_draw(LW, w, None, F=38)}<div><b>{cid}</b></div></td>
+<td>{title}<div class="cl-now">{date}: {text}</div></td></tr>"""
+
+
 def write(OUT, door_page, LW):
     n, rows = older(LW)
+    ruled = [c for c in NEW + RULES if c[0] in RULED]
+    still = lambda L: [c for c in L if c[0] not in RULED]
     inner = f"""{CSS}<section class="hero door-hero"><div class="wrap">
 <p class="eyebrow"><a href="explanations.html">Reasons and sources</a></p>
 <h1>Marking calls</h1>
@@ -179,15 +195,18 @@ def write(OUT, door_page, LW):
 <section class="calls"><div class="wrap">
 <h2>A. Calls made with the new marks</h2>
 <p>The &#601; for a weak vowel and the borrowed sound written over a vowel came in on 21 November 2026. These are the choices they made that need a yes or a change.</p>
-{''.join(_call(LW, c) for c in NEW)}
+{''.join(_call(LW, c) for c in still(NEW))}
 <h2>B. Rules still to decide</h2>
-{''.join(_call(LW, c) for c in RULES)}
+{''.join(_call(LW, c) for c in still(RULES))}
 <h2>C. Earlier calls</h2>
 <p>Gathered from the code files, where they waited for a ruling: {n['open']} open, {n['ruled']} ruled, {n['settled']} settled by a later ruling. Each word is drawn as it is marked now.</p>
 <table class="cl-table">{rows}</table>
+<h2>Ruled from A and B</h2>
+<p>Each is drawn as it is marked now.</p>
+<table class="cl-table">{''.join(_ruled(LW, c) for c in ruled)}</table>
 <p class="cl-note">The word walk&rsquo;s Try it has no &#601; or borrowed-sound tool yet, so a learner can&rsquo;t place these two marks there.</p>
 </div></section>"""
     door_page("calls", "Marking calls · Sounds and Words, Assembled",
               "Every place the marks rest on a choice: each drawn as marked now, with the other reading beside it, and the rules still to decide.",
               inner)
-    print(f"wrote calls.html | {len(NEW)} new calls, {len(RULES)} rules to decide, {sum(n.values())} earlier calls ({n['open']} open)")
+    print(f"wrote calls.html | {len(still(NEW))} new calls, {len(still(RULES))} rules to decide, {len(ruled)} ruled, {sum(n.values())} earlier calls ({n['open']} open)")
