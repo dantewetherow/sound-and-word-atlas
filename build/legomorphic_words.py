@@ -38,6 +38,9 @@ THE CODE, unit by unit, left to right
             follows it, so where it isn't said it belongs with that vowel (ruled 13 November 2026)
     r.ar    an r-controlled unit (vowel red, r black, red bond bar, one red circle)
     le      the final -le unit (both letters red, red bond bar, one red circle)
+    k.gu    gu where the u only keeps the g hard (guess, guide; dialogue is k.gu and a silent e), and k.gi, gi said j
+            before a vowel (legion), whose i sends the vault as the i of g.ti does. The marking rules are gathered in
+            mark_check.py (20 November 2026), which tests every code against them
     e0      a silent e in a cone of silence, with no vault
     z.g     a silent consonant letter standing alone in a cone of silence: black, no circle. The rule (ruled 12
             November 2026): a silent consonant is bonded into its unit by default (kn in knife, mb in lamb, wr in
@@ -55,7 +58,8 @@ After a semicolon, by unit number (counting from 0, skipping | and +; a group su
                   holds a vowel letter, which sends the vault: the i of g.ti in notation, as the create family deck
                   draws creation (the t and i spell sh together, and the i still makes the a long). Only a letter
                   the spelling gives the job sends one (20 November 2026): a y, a vowel that takes a dropped e's place
-                  across a seam (making, notate), or an i before another vowel (experience, notation). A long vowel
+                  across a seam (making, notate), or an i before another vowel (experience, notation), or an e doing the
+                  same (simultaneous). A long vowel
                   in an open syllable of one part (over, tiger, table) takes its long mark and no vault
     bv A>B       a vault from unit A that the box at unit B stops (bv A>B-C for a box over units B to C)
     nudge A>B     a nice-nudge from the vowel in unit A to the c or g in unit B (B may be a box, as the dg of nudge)

@@ -182,8 +182,9 @@ CONTRACTION = ("The contractions aren't drawn here yet.", "draw them with the re
 FAMILY = ("*Act*, *create* and their families are marked in the family decks, which aren't on the site yet.", "bring their marking over from those decks.")
 GREEK = ("Whether a seam goes between the Greek parts of *telephone* and *photograph* is still being decided.", "decide, then draw them.")
 # The contractions came off on 13 November 2026, drawn with the red apostrophe (contractions.py).
-UNMARKED = {**{w: FAMILY for w in ("act", "action", "actor", "active", "react", "create", "creation", "creator")},
-            "telephone": GREEK, "photograph": GREEK}
+# Act, create and their families came off on 20 November 2026, marked by the rules in mark_check.py (creation as nation
+# and education: the i of g.ti sends the vault). Check them against the family decks when those come onto the site.
+UNMARKED = {"telephone": GREEK, "photograph": GREEK}
 
 # Words whose marking waits on Dante's ruling (the Marking calls in the manual, 11 November 2026). The word walk's Try it
 # says so under Ours, so a learner's defensible mark isn't shown up by a call that isn't made yet. Take a word off once

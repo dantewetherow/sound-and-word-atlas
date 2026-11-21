@@ -574,3 +574,6 @@ n_crumbs = doors.finish(OUT, PAGES)
 print("wrote", OUT, "| words", n_words, "marked", n_marked, "| search records", n_search, "| pages with breadcrumbs", n_crumbs)
 import gloss_check                                            # the gloss rules (20 November 2026): stops the build on a broken gloss
 gloss_check.run(OUT)
+import mark_check                                             # the marking rules (20 November 2026): every code against them
+_hand_bad, _ = mark_check.run(OUT)
+if _hand_bad: raise SystemExit("mark check failed (mark_check.py has the rules):\n  " + "\n  ".join(f"{w}: {'; '.join(v)}" for w, v in _hand_bad.items()))

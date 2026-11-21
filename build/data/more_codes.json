@@ -435,5 +435,13 @@
 "yell": "c.y s.e k.ll",
 "youth": "c.y t.ou g.th",
 "zero": "c.z l.e | c.r l.o",
-"zoo": "c.z t.oo"
+"zoo": "c.z t.oo",
+"bravest": "c.br l.a | c.v + b.e c.st ; vault 3>1",
+"closest": "c.cl l.o | c.s + b.e c.st ; vault 3>1",
+"safest": "c.s l.a | c.f + b.e c.st ; vault 3>1",
+"nicest": "c.n l.i | c.c + b.e c.st ; vault 3>1 ; nudge 3>2",
+"nicer": "c.n l.i | c.c + r.er ; vault 3>1 ; nudge 3>2",
+"circle": "c.c r.ir | c.c le ; nudge 1>0",
+"circus": "c.c r.ir | c.c b.u c.s ; nudge 1>0",
+"unrecognizable": "s.u c.n + | c.r s.e | c.c b.o c.g | c.n l.i | c.z + b.a | c.b le ; vault 10>8"
 }
