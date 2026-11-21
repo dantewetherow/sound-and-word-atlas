@@ -22,7 +22,7 @@ GROUPS = [
         ("in-inn", [("in", "Come in."), ("inn", "We slept at an inn.")], 2, "<i>Inn</i> doubles its n."),
         ("I-eye", [("I", "I can see."), ("eye", "Close one eye.")], 1, "<i>I</i> is one letter, and always a capital."),
         ("or-oar", [("or", "Tea or milk?"), ("oar", "Row with an oar.")], 12, "<i>Oar</i> adds an a to the r-controlled unit."),
-        ("so-sew", [("so", "I am so glad."), ("sew", "Sew on the button.")], 21, "<i>Sew</i> spells its vowel with ew, which usually says the vowel of <i>new</i>."),
+        ("so-sew", [("so", "I am so glad."), ("sew", "Sew on the button.")], 21, "<i>Sew</i> spells its vowel with ew, which usually spells the vowel of <i>new</i>."),
         ("to-too", [("to", "Go to bed."), ("too", "Me too!")], 21, "<i>Too</i> doubles its o. For <i>two</i>, see below."),
     ]),
     ("A letter kept from the family", "The spelling keeps a letter that another form of the word, or a word in its family, says or uses.", [

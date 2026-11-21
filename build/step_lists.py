@@ -39,21 +39,21 @@ L = []
 L.append(S(2, "A short vowel needs a consonant after it. In a two-letter word that one consonant closes it: <b>at</b>, <b>on</b>, <b>up</b>.",
     [("at", "", "Look at me."), ("an", "", "I have an apple."), ("am", "", "I am six."), ("as", "", "Run as fast as you can."),
      ("on", "", "Turn on the light."), ("up", "", "Get up."), ("us", "", "Come with us.")],
-    ("The same two letters, open and closed: <i>no</i> says o&rsquo;s name, <i>on</i> is short.", [("no", "no", ""), ("on", "on", "")]),
+    ("The same two letters, open and closed: the o of <i>no</i> spells its name; in <i>on</i> it is short.", [("no", "no", ""), ("on", "on", "")]),
     ["a, closed with t", "a, closed with n", "a, closed with m", "o, closed with n", "u, closed with p", "u, closed with s"],
     [("Look", "at or an", "the dog."), ("I", "am or an", "seven."), ("Get", "up or us", "now."), ("Put it", "on or an", "the box.")],
     [("o + x", "ox"), ("i + f", "if"), ("i + t", "it"), ("o + f", "of")],
     ["These are almost all small words. Carney&rsquo;s short word rule: words that carry meaning have at least three "
      "letters, and small words like these can have two (pp. 131&ndash;133). A content word with the same sounds adds a "
      "letter: <i>inn</i> beside <i>in</i>, <i>add</i> beside <i>ad</i>.",
-     "The check ends with <i>of</i>, where the idea stops: its o borrows the sound of <i>up</i> and its f says /v/."],
-    build_h="Close it", listen="The s of <i>as</i> says /z/; the s of <i>us</i> says /s/. Either way it closes the word.",
+     "The check ends with <i>of</i>, where the idea stops: its o borrows the sound of <i>up</i> and its f spells /v/."],
+    build_h="Close it", listen="The s of <i>as</i> spells /z/; the s of <i>us</i> spells /s/. Either way it closes the word.",
     more_links=[("Step 6", "steps/06.html", "closed words in the kernel")]))
 
-L.append(S(3, "At the end of a short word the vowel is open and says its name: <b>he</b>, <b>so</b>. At the end, <b>y</b> says the name of i: <b>my</b>.",
+L.append(S(3, "At the end of a short word the vowel is open and spells its name: <b>he</b>, <b>so</b>. At the end, <b>y</b> spells the name of i: <b>my</b>.",
     [("he", "", "He can swim."), ("me", "", "Look at me."), ("we", "", "We are here."), ("my", "", "My cat is black."),
      ("by", "", "Sit by me."), ("so", "", "I am so glad."), ("no", "", "No, thank you."), ("go", "", "Go to bed.")],
-    ("Some open vowels borrow another sound: <i>do</i> and <i>to</i> don&rsquo;t say o&rsquo;s name.", [("go", "go", ""), ("do", "do", ""), ("so", "so", ""), ("to", "to", "")]),
+    ("Some open vowels borrow another sound: the o of <i>do</i> and <i>to</i> doesn&rsquo;t spell its name.", [("go", "go", ""), ("do", "do", ""), ("so", "so", ""), ("to", "to", "")]),
     ["h + e", "m + y", "s + o", "w + e", "b + y", "n + o"],
     [("Can", "he or me", "come too?"), ("This is", "my or by", "hat."), ("I said", "no or so", "."), ("Let&rsquo;s", "go or so", "!")],
     [("sh + e", "she"), ("fl + y", "fly"), ("b + e", "be"), ("d + o", "do")],
@@ -65,7 +65,7 @@ L.append(S(3, "At the end of a short word the vowel is open and says its name: <
 L.append(S(4, "Add one consonant to an open word and it closes: the vowel goes short. <b>be</b>, <b>bed</b>; <b>go</b>, <b>got</b>.",
     [("bed", "", "Go to bed."), ("met", "", "We met at the park."), ("wet", "", "My socks are wet."), ("got", "", "I got a new hat."),
      ("not", "", "It is not hot."), ("him", "", "Give it to him."), ("hit", "", "She hit the ball.")],
-    ("Open, then closed: the vowel says its name, then goes short.", [("be", "be", ""), ("bed", "bed", ""), ("no", "no", ""), ("not", "not", "")]),
+    ("Open, then closed: the vowel spells its name, then goes short.", [("be", "be", ""), ("bed", "bed", ""), ("no", "no", ""), ("not", "not", "")]),
     ["be, closed with d", "we, closed with t", "go, closed with t", "no, closed with t", "hi, closed with m", "me, closed with t"],
     [("Is your hair", "wet or met", "?"), ("Time for", "bed or be", "."), ("I am", "not or got", "sleepy."), ("Throw it to", "him or hit", ".")],
     [("so + b", "sob"), ("he + n", "hen"), ("pi + n", "pin"), ("no + t + e", "note")],
@@ -81,7 +81,7 @@ L.append(S(5, "Some sounds are spelled with two letters: <b>th</b>, <b>sh</b>, <
     ["th + e", "sh + e", "th + i + s", "w + i + th", "m + u + ch", "wh + i + ch"],
     [("Can I come", "with or which", "you?"), ("Thank you very", "much or such", "!"), ("", "She or The", "is my sister."), ("", "Which or With", "way is home?")],
     [("sh + i + p", "ship"), ("ch + i + n", "chin"), ("th + i + n", "thin"), ("mis + hap", "mishap")],
-    ["The h in th, sh and ch is a helper: it changes the letter before it instead of saying its own sound (Carney, p. 39).",
+    ["The h in th, sh and ch is a helper: it changes the letter before it instead of spelling its own sound (Carney, p. 39).",
      "The th of <i>the</i>, <i>this</i> and <i>that</i> buzzes; the th of <i>thin</i> doesn&rsquo;t. Same spelling, two sounds.",
      "The check ends with <i>mishap</i>, where s and h meet across a seam and don&rsquo;t spell sh."],
     more_links=[("The hap family", "roots/hap.html", "why <i>mishap</i> has no sh")]))
@@ -89,7 +89,7 @@ L.append(S(5, "Some sounds are spelled with two letters: <b>th</b>, <b>sh</b>, <
 L.append(S(6, "Most short words are closed: a short vowel with a consonant after it. At the end of a word, <b>l</b>, <b>s</b> and <b>f</b> often double after a short vowel: <b>will</b>, <b>spell</b>.",
     [("has", "", "She has a cat."), ("had", "", "We had fun."), ("did", "", "Did you see it?"), ("can", "", "I can swim."),
      ("will", "", "I will help."), ("must", "", "You must stop."), ("went", "", "He went home."), ("spell", "", "Can you spell it?")],
-    ("After a short vowel at the end, l doubles: <i>will</i>, <i>spell</i>, <i>shall</i>. <i>Has</i> keeps one s, which says /z/.", [("will", "will", ""), ("spell", "spell", ""), ("shall", "shall", ""), ("has", "has", "")]),
+    ("After a short vowel at the end, l doubles: <i>will</i>, <i>spell</i>, <i>shall</i>. <i>Has</i> keeps one s, which spells /z/.", [("will", "will", ""), ("spell", "spell", ""), ("shall", "shall", ""), ("has", "has", "")]),
     ["w + i + ll", "sp + e + ll", "m + u + st", "w + e + nt", "c + a + n", "d + i + d"],
     [("We", "had or has", "lunch at noon."), ("You", "must or much", "wash your hands."), ("She", "went or want", "to the park."), ("I", "will or well", "be there.")],
     [("b + e + ll", "bell"), ("m + e + ss", "mess"), ("o + ff", "off"), ("b + u + s", "bus")],
@@ -97,7 +97,7 @@ L.append(S(6, "Most short words are closed: a short vowel with a consonant after
      "The check ends with <i>bus</i>, a short vowel with one s. A few words keep one: <i>bus</i>, <i>gas</i>, <i>yes</i>."],
     more_links=[("Step 14", "steps/14.html", "the box blocks the vault")]))
 
-L.append(S(7, "Learn one, spell three. <b>would</b>, <b>could</b> and <b>should</b> share <b>ould</b>: the ou says the vowel of <i>book</i> and the l is silent.",
+L.append(S(7, "Learn one, spell three. <b>would</b>, <b>could</b> and <b>should</b> share <b>ould</b>: the ou spells the vowel of <i>book</i> and the l is silent.",
     [("would", "", "Would you like a snack?"), ("could", "", "I could see the moon."), ("should", "", "You should rest.")],
     ("The analog is the spelling, not the sound: <i>wood</i> sounds like <i>would</i> and is spelled another way.", [("would", "would", ""), ("wood", "wood", "")]),
     ["w + ould", "c + ould", "sh + ould", "would + n&rsquo;t", "could + n&rsquo;t", "should + n&rsquo;t"],
@@ -105,7 +105,7 @@ L.append(S(7, "Learn one, spell three. <b>would</b>, <b>could</b> and <b>should<
     [("would + n&rsquo;t", "wouldn&rsquo;t"), ("could + n&rsquo;t", "couldn&rsquo;t"), ("should + n&rsquo;t", "shouldn&rsquo;t"), ("sh + oulder", "shoulder")],
     ["Three words, one spelling to learn. The l in ould is empty: it has no sound (Carney, p. 249), and nothing in the "
      "family brings it back, so it stays in the unit.",
-     "The check ends with <i>shoulder</i>, where ould says its letters&rsquo; own sounds: the analog stops there."],
+     "The check ends with <i>shoulder</i>, where ould spells its letters&rsquo; own sounds: the analog stops there."],
     build_h="Build it", more_links=[("Step 27", "steps/27.html", "two words join: <i>wouldn&rsquo;t</i>")]))
 
 L.append(S(8, "English words don&rsquo;t end in v. A silent <b>e</b> comes after it: <b>have</b>, <b>give</b>, <b>live</b>. In <b>gave</b> the e also makes the a long.",
@@ -120,10 +120,10 @@ L.append(S(8, "English words don&rsquo;t end in v. A silent <b>e</b> comes after
      "The check ends with <i>rev</i>: short forms and slang can end in v (<i>rev</i>, <i>gov</i>; Carney, p. 231)."],
     build_h="Add the e", more_links=[("Step 9", "steps/09.html", "the vault")]))
 
-L.append(S(9, "A silent <b>e</b> at the end reaches back over one consonant and makes the vowel say its name: <b>mad</b>, <b>made</b>.",
+L.append(S(9, "A silent <b>e</b> at the end reaches back over one consonant and makes the vowel spell its name: <b>mad</b>, <b>made</b>.",
     [("make", "", "Let&rsquo;s make a cake."), ("like", "", "I like apples."), ("time", "", "What time is it?"), ("home", "", "Go home."),
      ("name", "", "What is your name?"), ("made", "", "I made it myself."), ("hope", "", "I hope it snows."), ("note", "", "Read the note.")],
-    ("Add the e and the vowel says its name.", [("mad", "mad", ""), ("made", "made", ""), ("hop", "hop", ""), ("hope", "hope", ""), ("cub", "cub", ""), ("cube", "cube", "")]),
+    ("Add the e and the vowel spells its name.", [("mad", "mad", ""), ("made", "made", ""), ("hop", "hop", ""), ("hope", "hope", ""), ("cub", "cub", ""), ("cube", "cube", "")]),
     ["mad, add e", "dim, add e", "hop, add e", "not, add e", "cub, add e", "pin, add e"],
     [("I", "hope or hop", "you can come."), ("Write me a", "note or not", "."), ("Cut the cheese into a", "cube or cub", "."), ("I", "made or mad", "a card.")],
     [("t + a + p + e", "tape"), ("k + i + t + e", "kite"), ("r + o + b + e", "robe"), ("h + a + v + e", "have")],
@@ -131,7 +131,7 @@ L.append(S(9, "A silent <b>e</b> at the end reaches back over one consonant and 
      "The check ends with <i>have</i>: its e keeps v off the end and sends no vault, so the a stays short (step 8)."],
     build_h="Add the e", more_links=[("Step 14", "steps/14.html", "the box blocks the vault")]))
 
-L.append(S(10, "An <b>e</b>, <b>i</b> or <b>y</b> right after a <b>c</b> or <b>g</b> nudges it soft: c says /s/, g says /j/. <i>The gentle giant went to the gym by cycling to the city centre.</i>",
+L.append(S(10, "An <b>e</b>, <b>i</b> or <b>y</b> right after a <b>c</b> or <b>g</b> nudges it soft: c spells /s/, g spells /j/. <i>The gentle giant went to the gym by cycling to the city centre.</i>",
     [("nice", "", "That is nice."), ("face", "", "Wash your face."), ("age", "", "What is your age?"), ("page", "", "Turn the page."),
      ("city", "", "We live in a city."), ("gym", "", "We play in the gym."), ("giant", "", "The giant was tall."), ("cent", "", "It costs one cent.")],
     ("Hard before a, o and u; soft before e, i and y.", [("cat", "cat", ""), ("cent", "cent", ""), ("got", "got", ""), ("gym", "gym", "")]),
@@ -145,12 +145,12 @@ L.append(S(10, "An <b>e</b>, <b>i</b> or <b>y</b> right after a <b>c</b> or <b>g
 L.append(S(11, "Two vowel letters can spell one vowel sound together, as a team: <b>ay</b> in <b>day</b>, <b>ee</b> in <b>see</b>, <b>igh</b> in <b>night</b>.",
     [("may", "", "May I go?"), ("day", "", "It is a sunny day."), ("play", "", "Let&rsquo;s play."), ("see", "", "I see a bird."),
      ("tree", "", "Climb the tree."), ("been", "", "Where have you been?"), ("might", "", "It might rain."), ("night", "", "Good night.")],
-    ("A team says the vowel&rsquo;s name; one vowel with a consonant after it is short.", [("may", "may", ""), ("man", "man", ""), ("see", "see", ""), ("set", "set", "")]),
+    ("A team spells the vowel&rsquo;s name; one vowel with a consonant after it is short.", [("may", "may", ""), ("man", "man", ""), ("see", "see", ""), ("set", "set", "")]),
     ["d + ay", "s + ee", "n + igh + t", "pl + ay", "tr + ee", "l + igh + t"],
     [("It is a sunny", "day or did", "."), ("Climb the", "tree or try", "."), ("Turn on the", "light or lit", "."), ("It", "might or night", "snow.")],
     [("w + ay", "way"), ("f + ee + t", "feet"), ("r + igh + t", "right"), ("s + ai + d", "said")],
     ["<i>Been</i> is said with the vowel of <i>bin</i> in many places, and with the vowel of <i>bean</i> in others.",
-     "The check ends with <i>said</i>, where a team says another sound. That is step 22."],
+     "The check ends with <i>said</i>, where a team spells another sound. That is step 22."],
     more_links=[("Step 20", "steps/20.html", "teams for the long vowels")]))
 
 L.append(S(12, "When <b>r</b> follows a vowel it changes the vowel&rsquo;s sound. The vowel and the r work as one unit: <b>ar</b>, <b>or</b>, <b>er</b>, <b>ir</b>, <b>ur</b>.",
@@ -161,14 +161,14 @@ L.append(S(12, "When <b>r</b> follows a vowel it changes the vowel&rsquo;s sound
     [("A", "bird or bed", "sat on the fence."), ("It&rsquo;s my", "turn or ten", "."), ("Is this", "for or far", "me?"), ("They", "were or where", "here.")],
     [("st + ar", "star"), ("sh + or + t", "short"), ("g + ir + l", "girl"), ("w + or + d", "word")],
     ["Three spellings for one sound (er, ir, ur) means these are learned word by word, by their families.",
-     "The check ends with <i>word</i>: after a w, or says the sound of <i>her</i>."],
+     "The check ends with <i>word</i>: after a w, or spells the sound of <i>her</i>."],
     more_links=[("Step 26", "steps/26.html", "more r-controlled units")]))
 
 L.append(S(13, "A suffix joins at the seam and the base keeps its spelling: <b>go + ing</b>, <b>play + ed</b>. <b>-ed</b> and <b>-s</b> keep one spelling whatever they sound like.",
     [("gets", "get + s", "He gets up early."), ("sees", "see + s", "She sees the bus."), ("going", "go + ing", "We are going home."),
      ("doing", "do + ing", "What are you doing?"), ("being", "be + ing", "Thank you for being kind."), ("played", "play + ed", "We played tag."),
      ("jumped", "jump + ed", "The frog jumped."), ("wanted", "want + ed", "I wanted a turn.")],
-    ("<i>-ed</i> says three things and is spelled one way.", [("played", "play + ed", ""), ("jumped", "jump + ed", ""), ("wanted", "want + ed", "")]),
+    ("<i>-ed</i> spells three sounds and is spelled one way.", [("played", "play + ed", ""), ("jumped", "jump + ed", ""), ("wanted", "want + ed", "")]),
     ["jump + ed", "play + s", "go + ing", "see + ing", "want + ed", "look + ing"],
     [("Yesterday we", "play", "outside."), ("She", "see", "the moon every night."), ("We are", "go", "to school."), ("He", "get", "the mail every day.")],
     [("look + ed", "looked"), ("fix + ed", "fixed"), ("rain + ing", "raining"), ("hop + ing", "hopping")],
@@ -212,7 +212,7 @@ L.append(S(17, "A final <b>le</b> is a syllable of its own. A short vowel before
      "The check ends with <i>handle</i>: n and d already make two consonants, so nothing doubles."],
     build_h="Say it in syllables"))
 
-L.append(S(18, "Before <b>ld</b>, <b>nd</b> and a few other pairs, i and o often say their names though nothing sends a vault: <b>find</b>, <b>old</b>.",
+L.append(S(18, "Before <b>ld</b>, <b>nd</b> and a few other pairs, i and o often spell their names though nothing sends a vault: <b>find</b>, <b>old</b>.",
     [("old", "", "My dog is old."), ("cold", "", "It is cold outside."), ("both", "", "Both of us came."), ("most", "", "Most cats like milk."),
      ("find", "", "I can&rsquo;t find my shoe."), ("kind", "", "Be kind."), ("child", "", "The child is happy."), ("wild", "", "A wild horse ran.")],
     ("The same shape, a different sound: i is long before nd, short before nt.", [("mind", "mind", ""), ("mint", "mint", ""), ("most", "most", ""), ("cost", "cost", "")]),
@@ -223,7 +223,7 @@ L.append(S(18, "Before <b>ld</b>, <b>nd</b> and a few other pairs, i and o often
      "tendency, not a rule: <i>cost</i> and <i>mint</i> are short.",
      "The check ends with <i>wind</i>, which is long in <i>wind the clock</i> and short in <i>the wind blows</i>."]))
 
-L.append(S(19, "Some vowels borrow another vowel&rsquo;s sound: the o of <b>come</b> says the u of <i>up</i>, the a of <b>was</b> says the o of <i>on</i>. Spell them by the word, not the sound.",
+L.append(S(19, "Some vowels borrow another vowel&rsquo;s sound: the o of <b>come</b> spells the u of <i>up</i>, and so does the a of <b>was</b>. Spell them by the word, not the sound.",
     [("come", "", "Come here."), ("some", "", "Have some juice."), ("done", "", "I am done."), ("from", "", "A card from Gran."),
      ("was", "", "It was fun."), ("what", "", "What is that?"), ("do", "", "Do you want it?"), ("who", "", "Who is there?")],
     ("The same letters, a borrowed sound.", [("home", "home", ""), ("come", "come", ""), ("bone", "bone", ""), ("done", "done", "")]),
@@ -254,23 +254,23 @@ L.append(S(21, "The long u sound has many spellings: <b>oo</b>, <b>ew</b>, <b>ue
     [("The sky is", "blue or blew", "."), ("The wind", "blew or blue", "hard."), ("I want", "two or too", "cookies."), ("Can I come", "too or two", "?")],
     [("sp + oo + n", "spoon"), ("fl + ew", "flew"), ("gl + ue", "glue"), ("b + oo + k", "book")],
     ["<i>Blue</i> and <i>blew</i>, <i>too</i> and <i>two</i>: the sentence chooses the spelling.",
-     "The check ends with <i>book</i>, where oo says its other sound. That is step 22."]))
+     "The check ends with <i>book</i>, where oo spells its other sound. That is step 22."]))
 
-L.append(S(22, "A team can say a second sound: <b>oo</b> in <b>book</b>, not <i>moon</i>; <b>ea</b> in <b>head</b>, not <i>eat</i>.",
+L.append(S(22, "A team can spell a second sound: <b>oo</b> in <b>book</b>, not <i>moon</i>; <b>ea</b> in <b>head</b>, not <i>eat</i>.",
     [("look", "", "Look up."), ("good", "", "That was good."), ("book", "", "Read a book."), ("head", "", "My head hurts."),
      ("bread", "", "Bread and butter."), ("put", "", "Put it here."), ("pull", "", "Pull the rope."), ("said", "", "She said yes.")],
-    ("A team can say two sounds.", [("moon", "moon", ""), ("book", "book", ""), ("eat", "eat", ""), ("head", "head", "")]),
+    ("A team can spell two sounds.", [("moon", "moon", ""), ("book", "book", ""), ("eat", "eat", ""), ("head", "head", "")]),
     ["l + oo + k", "h + ea + d", "br + ea + d", "p + u + t", "p + u + ll", "g + oo + d"],
     [("Wear a hat on your", "head or heed", "."), ("Can you", "pull or pool", "the wagon?"), ("Please", "put or putt", "it away."), ("What a good", "book or boot", "!")],
     [("f + oo + t", "foot"), ("br + ea + th", "breath"), ("p + u + sh", "push"), ("f + oo + d", "food")],
     ["<i>Said</i> keeps the spelling of <i>say</i> and shifts its vowel. The list <a href=\"say-pay-lay.html\">say, pay, lay</a> explains it.",
-     "The check ends with <i>food</i>, where oo says its first sound."],
+     "The check ends with <i>food</i>, where oo spells its first sound."],
     more_links=[("say, pay, lay", "lists/say-pay-lay.html", "why <i>said</i> has ai")]))
 
-L.append(S(23, "The sound in <b>saw</b> is spelled <b>aw</b>, <b>au</b>, or <b>a</b> before l (<b>all</b>, <b>walk</b>). After a w, a often says it too (<b>want</b>, <b>wash</b>).",
+L.append(S(23, "The sound in <b>saw</b> is spelled <b>aw</b>, <b>au</b>, or <b>a</b> before l (<b>all</b>, <b>walk</b>). After a w, a often spells it too (<b>want</b>, <b>wash</b>).",
     [("saw", "", "I saw a fox."), ("draw", "", "Draw a cat."), ("all", "", "That&rsquo;s all."), ("small", "", "A small mouse."),
      ("walk", "", "Let&rsquo;s walk."), ("want", "", "I want a turn."), ("wash", "", "Wash your hands."), ("because", "", "I&rsquo;m late because I slept in.")],
-    ("Before ll, a says the sound of <i>saw</i>.", [("call", "call", ""), ("cat", "cat", ""), ("all", "all", ""), ("at", "at", "")]),
+    ("Before ll, a spells the sound of <i>saw</i>.", [("call", "call", ""), ("cat", "cat", ""), ("all", "all", ""), ("at", "at", "")]),
     ["s + aw", "dr + aw", "b + all", "t + alk", "w + a + nt", "sm + all"],
     [("I", "saw or sew", "a rainbow."), ("Let&rsquo;s", "walk or wake", "to school."), ("Can I", "draw or drew", "you a picture?"), ("The bug is very", "small or smell", ".")],
     [("cr + aw + l", "crawl"), ("t + all", "tall"), ("t + alk", "talk"), ("sh + all", "shall")],
@@ -280,12 +280,12 @@ L.append(S(23, "The sound in <b>saw</b> is spelled <b>aw</b>, <b>au</b>, or <b>a
 L.append(S(24, "The sound of <b>ouch</b> is spelled <b>ou</b> or <b>ow</b>; the sound of <b>oil</b> is <b>oi</b> or <b>oy</b>. Inside a word, usually ou and oi; at the end, ow and oy.",
     [("out", "", "Go out."), ("round", "", "The ball is round."), ("found", "", "I found it!"), ("how", "", "How are you?"),
      ("down", "", "Sit down."), ("coin", "", "A shiny coin."), ("boy", "", "The boy ran."), ("toy", "", "My toy car.")],
-    ("<i>ow</i> can say two sounds.", [("now", "now", ""), ("snow", "snow", "")]),
+    ("<i>ow</i> can spell two sounds.", [("now", "now", ""), ("snow", "snow", "")]),
     ["r + ou + nd", "d + ow + n", "c + oi + n", "b + oy", "p + oi + nt", "c + ow"],
     [("I", "found or fond", "my hat!"), ("Sit", "down or done", "."), ("Flip a", "coin or corn", "."), ("Which", "toy or tie", "do you want?")],
     [("cl + ou + d", "cloud"), ("c + ow", "cow"), ("j + oi + n", "join"), ("gr + ow", "grow")],
     ["<i>Down</i> and <i>town</i> have ow inside a word; the inside-and-end tendency is a help, not a rule (Carney, pp. 169, 202).",
-     "The check ends with <i>grow</i>, where ow says the long o."]))
+     "The check ends with <i>grow</i>, where ow spells the long o."]))
 
 L.append(S(25, "Some letters are silent and join their unit: <b>kn</b> in <b>knee</b>, <b>wr</b> in <b>write</b>, <b>mb</b> in <b>lamb</b>. A silent letter that another form of the word says stands in a cone: the g of <b>sign</b>.",
     [("know", "", "I know the way."), ("knee", "", "I hurt my knee."), ("knife", "", "Use a knife and fork."), ("write", "", "Write your name."),
@@ -306,7 +306,7 @@ L.append(S(26, "More vowels change before <b>r</b>: <b>air</b>, <b>ear</b>, <b>o
     [("I can", "hear or here", "a bird."), ("Put it over", "there or their", "."), ("I want", "more or mare", "."), ("Is that", "your or you", "dog?")],
     [("ch + air", "chair"), ("st + ore", "store"), ("n + ear", "near"), ("b + ear", "bear")],
     ["<i>Here</i> goes with <i>there</i> and <i>where</i>, the place words. <i>Hear</i> has <i>ear</i> in it: a "
-     "reminder, not a reason, since the two words aren&rsquo;t related.", "The check ends with <i>bear</i>, where ear says the sound of <i>air</i>."]))
+     "reminder, not a reason, since the two words aren&rsquo;t related.", "The check ends with <i>bear</i>, where ear spells the sound of <i>air</i>."]))
 
 L.append(S(27, "Two words can join into one, with an apostrophe where letters are left out: <b>I + am</b> is <b>I&rsquo;m</b>, <b>do + not</b> is <b>don&rsquo;t</b>.",
     [("I&rsquo;m", "I + am", "I&rsquo;m here."), ("it&rsquo;s", "it + is", "It&rsquo;s late."), ("isn&rsquo;t", "is + not", "It isn&rsquo;t fair."),
@@ -354,7 +354,7 @@ L.append(S(31, "A Latin base keeps its spelling through its family: <b>act</b>, 
     [("direct + ion", "direction"), ("invent + or", "inventor"), ("educate + ion", "education"), ("act + ual", "actual")],
     ["Spelling <i>-tion</i> as one suffix hides the base. With <i>-ion</i>, <i>action</i> is <i>act</i> + <i>ion</i> and "
      "the t was there all along.",
-     "The check ends with <i>actual</i>, where the t of act says /ch/: the base keeps its spelling, not its sound."],
+     "The check ends with <i>actual</i>, where the t of act spells /ch/: the base keeps its spelling, not its sound."],
     more_links=[("Parts", "parts.html#lessons", "it&rsquo;s -ion, not -tion"), ("The *deuk- family", "roots/deuk.html", "produce, production")]))
 
 L.append(S(32, "Words from Greek spell /f/ with <b>ph</b>, and are built from Greek parts: <b>photo</b> (light), <b>phone</b> (sound), <b>graph</b> (writing).",

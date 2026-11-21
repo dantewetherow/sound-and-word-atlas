@@ -52,10 +52,10 @@ GROUPS = [
          "<i>Two</i> keeps the w that <i>twin</i>, <i>twelve</i> and <i>twenty</i> say."),
         ("gu keeps g hard", ["guess", "guest", "guide", "guy"],
          "Without the u, <i>gide</i> would read as <i>jide</i>: g before e, i or y is often soft (step 10). The bond bar shows the u working with the g. Before a, o or u the g is hard anyway, so <i>guard</i> doesn&rsquo;t need its u; it came with the word from French."),
-        ("A team saying another of its sounds (step 22)", ["friend", "young", "touch"], "The bar stays: the spelling is the unit. Where the unit says the short sound of one of its letters, that letter carries the cup: the e of <i>friend</i>, the u of <i>young</i> and <i>touch</i>."),
+        ("A team spelling another of its sounds (step 22)", ["friend", "young", "touch"], "The bar stays: the spelling is the unit. Where the unit spells the short sound of one of its letters, that letter carries the cup: the e of <i>friend</i>, the u of <i>young</i> and <i>touch</i>."),
     ]),
     ("By heart", "The heart is honest here. A story helps the word stick, but it won&rsquo;t help a learner read the next one.", [
-        ("A letter saying another letter&rsquo;s sound", ["of", "busy", "build", "pretty", "any", "many", "women", "woman", "minute", "sure"],
+        ("A letter spelling another letter&rsquo;s sound", ["of", "busy", "build", "pretty", "any", "many", "women", "woman", "minute", "sure"],
          "<i>Of</i> and <i>off</i> were once one word; the f stayed. <i>Busy</i> is spelled with u and said with short i; in <i>build</i>, as in <i>buy</i>, the u is silent beside the b. <i>Woman</i> was Old English <i>wifman</i>, wife-man, then <i>wimman</i>; the o didn&rsquo;t come in until the 13th century (Upward and Davidson 2011: 186). <i>Women</i> is still said with the old i, and spelled with the o of <i>woman</i>."),
         ("One and once", ["one", "once"], "<i>Alone</i> and <i>only</i> keep the old sound of <i>one</i>: <i>all one</i>, <i>one-ly</i>."),
         ("A silent letter", ["hour", "honest", "honour", "answer", "Wednesday"],
@@ -84,7 +84,7 @@ def write(OUT, page, header, footer, X):
 <p class="eyebrow t-only"><a href="index.html">Legomorphic spelling</a> &middot; Words with a heart</p>
 <h1>Words with a heart</h1>
 <p class="lead">A heart word has a part a learner can&rsquo;t decode yet, or can&rsquo;t decode by the usual sounds at all. A heart over that part says <i>learn this by heart</i>. The notation can usually say why instead. Most heart words are regular once their step comes, or have a reason a learner can use; only a few have to be learned by heart.</p>
-<p class="sub t-only">Map every heart word sound by sound, as with any word: a circle for each sound, then find the part that doesn&rsquo;t say what the letters usually say. Then ask which group it&rsquo;s in. Every word here can be looked up in <a href="../walk.html">Words</a>.</p>
+<p class="sub t-only">Map every heart word sound by sound, as with any word: a circle for each sound, then find the part that doesn&rsquo;t spell what the letters usually spell. Then ask which group it&rsquo;s in. Every word here can be looked up in <a href="../walk.html">Words</a>.</p>
 </div></section>
 {"".join(secs)}
 <section class="about t-only"><div class="wrap prose">

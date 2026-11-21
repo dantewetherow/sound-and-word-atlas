@@ -55,7 +55,7 @@ STUDIES = [{
               "design", "designer", "designate", "designation", "assign", "assignment", "resign", "resignation", "consign",
               "insignia", "seal", "sigil"],
     "blurb": "The classic question: why is there a g in <i>sign</i> when you can&rsquo;t hear it? <i>Signal</i>, <i>signature</i> "
-             "and <i>signify</i> say it, and the spelling keeps the family together. How the quiet g makes the i say its name, "
+             "and <i>signify</i> say it, and the spelling keeps the family together. How the quiet g makes the i spell its name, "
              "how <i>design</i> marks out a plan, the sign matrix, and the little sign that lost its g: <i>seal</i>.",
 }]
 
@@ -397,7 +397,7 @@ def per_deck():
 <p class="typed" style="font-size:80px">exp<b class="r">e</b>r<span class="diff">i</span><b style="color:var(--ink);text-decoration:underline">m</b>ent</p>
 <p class="typed" data-s="2" style="font-size:80px">exp<b class="r">e</b>r<span class="diff">i</span><b style="text-decoration:underline">e</b>nce</p>
 <p data-s="1" style="font-size:34px;color:var(--soft)">The e is short:<br>ex-<b>PAIR</b>-i-ment</p>
-<p data-s="3" style="font-size:34px;color:var(--soft)">The i reaches back, and the e says its name: ex-<b>PEER</b>-i-ence</p>
+<p data-s="3" style="font-size:34px;color:var(--soft)">The i reaches back, and the e spells its name: ex-<b>PEER</b>-i-ence</p>
 </div>
 <p class="q" data-s="4">Some say ex-<b>PEER</b>-i-ment too: same parts, same spelling.</p>""",
             "An i before a vowel makes the vowel before it long (<i>period</i>, <i>serious</i>); before a consonant it doesn&rsquo;t "
@@ -479,17 +479,17 @@ def educ_deck():
                            ("celebr<b>ate</b>", "to have a party"), ("celebr<b>ation</b>", "the party")],
          "<b>-ate</b> makes a doing word. <b>-ion</b> names the doing.",
          "Both are Latin. -ate is the past form of a verb, made into an English verb; -ion makes a noun of an act. "
-         "When -ion joins -ate, the e drops and the t says sh: <i>decorate</i>, <i>decoration</i>.")
+         "When -ion joins -ate, the e drops and the t spells sh: <i>decorate</i>, <i>decoration</i>.")
 
     D.slide("The i takes over", f"""<h2 class="head">The e drops out. The i takes over its job.</h2>
 <div class="fam" style="grid-template-columns:1fr">
-<div data-s="1">{word("notate", 120)}<span class="g">the e at the end makes the a say its name</span></div>
+<div data-s="1">{word("notate", 120)}<span class="g">the e at the end makes the a spell its name</span></div>
 <div data-s="2">{word("notation", 120)}<span class="g">no e now: the i of <b class="r">-ion</b> does the same job</span></div>
 </div>
 <p class="q" data-s="3">Letters can drop out, and others do their jobs.</p>""",
             "The notation draws it: in <i>notate</i> the vault comes from the final e; in <i>notation</i> the e is gone and the "
             "vault comes from the i of -ion, which stands before another vowel (the pattern on the "
-            "<a href=\"../roots/per.html#break-h\">*per- page</a>). The t says sh before i and a vowel: the green bar under ti.", steps=3)
+            "<a href=\"../roots/per.html#break-h\">*per- page</a>). The t spells sh before i and a vowel: the green bar under ti.", steps=3)
 
     D.slide("Build educate", f"""<h2 class="head">Build it</h2>
 {join(["e", "duc", "ate"], ["out", "lead, bring up", "do it"], word("educate", 150), 1,
@@ -501,7 +501,7 @@ def educ_deck():
 {join(["e", "duc", "at(e)", "ion"], ["out", "lead", "do it", "the doing"], word("education", 150), 1,
       "From the end: <b>the doing</b> of <b>bringing up</b> and leading <b>out</b>.")}""",
             "Word sum: e + duc + at(e) + ion &rarr; <i>education</i>. The e of -ate drops before -ion, and the i of -ion takes over "
-            "its job, making the a long. The t says sh.", steps=4)
+            "its job, making the a long. The t spells sh.", steps=4)
     D.slide("Build educational", f"""<h2 class="head">One more part</h2>
 {join(["education", "al"], ["the bringing up", "having to do with"], word("educational", 140), 1,
       "From the end: <b>having to do with</b> the <b>bringing up</b>. An educational game helps you learn.")}""",
@@ -595,7 +595,7 @@ def leg_deck():
                                                                        ("legend", "a story to be read"), ("legible", "clear enough to read")],
          "In Latin, <b>legere</b> came to mean <b>read</b>.",
          "Latin <i>legere</i>: gather, choose, read. To read is to gather the letters with your eyes. <i>Lecture</i> is lect + ure; "
-         "<i>legend</i> is leg + end, Latin <i>legenda</i>, things to be read; <i>legible</i> is leg + ible. The g says j before e and i.")
+         "<i>legend</i> is leg + end, Latin <i>legenda</i>, things to be read; <i>legible</i> is leg + ible. The g spells j before e and i.")
     felt("Gather words in your mouth, and you <b class='r'>say</b>", [("lexicon", "the words of a language"), ("logic", "reasons that hold together"),
                                                                       ("dialogue", "talk between people"), ("prologue", "words before the story")],
          "In Greek, <b>legein</b> came to mean <b>say</b>.",
@@ -724,11 +724,11 @@ def sign_deck():
             "like this inert: silent in one word, said in another (<i>A Survey of English Spelling</i>, 1994: 41). The cone keeps "
             "the g in the same place in every word of the family.", steps=3)
 
-    D.slide("Quiet g, long i", f"""<h2 class="head">When the g is quiet, the <b class="r">i</b> says its name</h2>
+    D.slide("Quiet g, long i", f"""<h2 class="head">When the g is quiet, the <b class="r">i</b> spells its name</h2>
 <div class="pair" style="margin-top:20px" data-s="1">{word("sign", 120)}{word("find", 120)}{word("child", 120)}</div>
 <p class="syl" data-s="2" style="margin-top:40px"><span class="hit">sig</span><span class="dot">&middot;</span><span>nal</span></p>
 <p class="q" data-s="3">When the g is said, it closes the syllable: <b>sig</b>. The i is short.</p>""",
-            "Sign, find, child: the i says its name with no e after it to make it long (Carney&rsquo;s rules I.11 and I.12). In "
+            "Sign, find, child: the i spells its name with no e after it to make it long (Carney&rsquo;s rules I.11 and I.12). In "
             "<i>signal</i> the g closes the syllable and the i is short. Venezky calls this a compensatory alternation: the vowel "
             "is long where the consonant goes quiet.", steps=3)
 
@@ -754,7 +754,7 @@ def sign_deck():
                                                ("resignation", "the giving up of a job"), ("signatory", "someone who signs an agreement")],
         "A <b>Latin</b> ending after sign, and you hear the g.",
         "sign + i + fic + ant; de + sign + at(e) + ion; re + sign + at(e) + ion; sign + at(e) + ory. In <i>designation</i> "
-        "and <i>resignation</i> the s says z and the e is short: des-ig-na-tion.", h=88)
+        "and <i>resignation</i> the s spells z and the e is short: des-ig-na-tion.", h=88)
 
     D.slide("The sign matrix", f"""<h2 class="head">The <b class="r">sign</b> matrix</h2>
 <div class="matrix">

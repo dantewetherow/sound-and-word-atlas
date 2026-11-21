@@ -10,11 +10,11 @@ import html, re
 
 # (id, title, question, [(word, code or None for the site's own, caption)], [(word, code, caption)], note)
 NEW = [
-    ("A1", "ee over every final y", "Keep the small ee over a y that says e's name at the end of a word?",
+    ("A1", "ee over every final y", "Keep the small ee over a y that spells ee at the end of a word?",
      [("happy", None, "the y borrows e's name"), ("city", None, "")],
      [("happy", "c.h s.a x.pp + | b.y ; bv 3>2", "the y bare, as before")],
-     "It follows the rule (a vowel saying another vowel's sound shows that sound), and it is the biggest visible change: "
-     "every <i>happy</i>, <i>city</i>, <i>very</i> and <i>funny</i> carries it. The other reading treats y saying ee at the "
+     "It follows the rule (a vowel spelling another vowel's sound shows that sound), and it is the biggest visible change: "
+     "every <i>happy</i>, <i>city</i>, <i>very</i> and <i>funny</i> carries it. The other reading treats y spelling ee at the "
      "end of a word as y's own sound, which most programs teach as a rule of its own."),
     ("A2", "was: ah, u, or weak and strong", "Which sound does the a of was borrow, and does was need a weak form beside it, as the, a and to have?",
      [("was", None, "ah, from the pronouncing dictionary")],
@@ -29,7 +29,7 @@ NEW = [
      [("put", None, "oo"), ("do", None, "oo, the same mark")],
      [("put", "c.p b.u c.t ; says 1 ŏŏ", "ŏŏ, the oo of book")],
      "One label is simpler to read; two tell a learner which oo to say. Spalding numbers them as different sounds."),
-    ("A4", "carry: still bare", "What does the a of carry say?",
+    ("A4", "carry: still bare", "What sound does the a of carry spell?",
      [("carry", None, "bare, not yet decided")],
      [("carry", "c.c s.a x.rr | b.y ; bv 3>2 ; says 3 ee", "a short a, as in cat"),
       ("carry", "c.c b.a x.rr | b.y ; bv 3>2 ; says 1 e ; says 3 ee", "e, as many Canadians say it (merry, marry, Mary alike)")],
@@ -74,6 +74,7 @@ RULES = [
 ]
 # Calls in A and B that Dante has ruled on: (id, date, ruling). They move to "Ruled" at the foot of the page.
 RULED = {
+    "A1": ("21 November", "Keep the ee over a final y that spells ee (happy, city, very), with the box and blocked vault where a double stands before it."),
     "A2": ("21 November", "u. It reads most cleanly."),
     "A5": ("21 November", "A short o, as in got."),
     "A6": ("21 November", "A short mark, in every -ible word: legible, eligible, reducible, intelligible."),

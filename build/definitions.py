@@ -103,6 +103,12 @@ STUDY = [   # words for studying language, each with an everyday word to stand i
      "and bases that have stopped being said alone, like <i>hap</i> in <i>happy</i> and <i>mishap</i>. A family of words "
      "is what shows a bound base. See <a href=\"roots/hap.html\">hap</a>. In everyday words, it <b>needs a partner</b>.",
      "Adopted from Leonard Bloomfield, as free is."),
+    ("spells its name", "phrase",
+     "Said of a vowel letter spelling the long sound that is also its letter name: the <i>a</i> of <i>cake</i>, the "
+     "<i>i</i> of <i>like</i>. Many phonics programs say the vowel &ldquo;says its name&rdquo;. On this site letters "
+     "spell sounds and people say them, so a vowel spells its name, a team spells its second sound, and a <i>c</i> "
+     "before <i>e</i> spells /s/.",
+     "Adapted from the classroom phrase &ldquo;says its name&rdquo;. Changed across the site 21 November 2026."),
 ]
 
 EXTRA_MARKS = [   # marks the legend doesn't list on its own

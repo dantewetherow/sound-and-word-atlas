@@ -30,11 +30,11 @@ Vowels
      The i of -ible takes a cup in every -ible word (legible, eligible, reducible): ruled 21 November.
   9. So -ic at the end of a word is s.i c.c (logic), and -ic before another ending is a weak i | c.c + (logical, medical).
  10. An i that says e's name, in words from French (elite, expertise, machine), takes a small ee over it; its final e
-     sits in a cone with no vault, since a vault is for a vowel that says its own name. Changed 21 November: the final e
+     sits in a cone with no vault, since a vault is for a vowel that spells its own name. Changed 21 November: the final e
      makes the i long, as in like, and a long i in a word from French says ee; so the i takes a bar, the ee sits over
      the bar, and the e sends its vault, landing beside the ee (elite, police, expertise). With no final e (ski, taxi)
      the ee has no vault.
- 11. A final e that is said says its name: l.e (simile).
+ 11. A final e that is said spells its name: l.e (simile).
  12. A family keeps its parts and lets the vowel marks move with the beat: product, produce, productivity.
 
 Vaults (ruled 10 and 20 November)

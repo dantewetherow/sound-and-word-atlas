@@ -1046,9 +1046,9 @@ ROOT_PARTS.update({
 SWALK = [   # the stress walk: (word, [(syllable, 1 main stress | 2 a lighter stress | 0 weak)], what changed)
     ("experiment", [("ex", 0), ("per", 1), ("i", 0), ("ment", 0)], "the noun: <i>per</i> takes the stress, and its e is short"),
     ("experimental", [("ex", 0), ("per", 2), ("i", 0), ("men", 1), ("tal", 0)], "the stress walks to <i>men</i>, and its weak e comes back full"),
-    ("experimentation", [("ex", 0), ("per", 2), ("i", 0), ("men", 0), ("ta", 1), ("tion", 0)], "on again, to <i>ta</i>: <i>men</i> goes weak, and the t says sh before <i>-ion</i>"),
+    ("experimentation", [("ex", 0), ("per", 2), ("i", 0), ("men", 0), ("ta", 1), ("tion", 0)], "on again, to <i>ta</i>: <i>men</i> goes weak, and the t spells sh before <i>-ion</i>"),
     ("experience", [("ex", 0), ("pe", 1), ("ri", 0), ("ence", 0)], "<i>pe</i> takes the stress, and its e is long"),
-    ("experiential", [("ex", 0), ("pe", 2), ("ri", 0), ("en", 1), ("tial", 0)], "the stress walks to <i>en</i>, the c is a t, and the t says sh"),
+    ("experiential", [("ex", 0), ("pe", 2), ("ri", 0), ("en", 1), ("tial", 0)], "the stress walks to <i>en</i>, the c is a t, and the t spells sh"),
     ("expert", [("ex", 1), ("pert", 0)], "the stress sits on the prefix, and <i>per</i> is an r unit, as in <i>her</i>"),
     ("expertise", [("ex", 2), ("per", 0), ("tise", 1)], "a French ending takes the stress, and keeps its French sound"),
 ]
@@ -1108,7 +1108,7 @@ PER = {
          [("experiment", "the test you set up"), ("experience", "what trying leaves you with")], PER_TIME),
         ("break", "Short e, long e: the letter after the i",
          ["Say them slowly: ex-<b>per</b>-i-ment, ex-<b>pe</b>-ri-ence. The letters match up to the i, but the e is short in one and "
-          "says its name in the other. The letter that decides it is the one after the i. In <i>experience</i> the i stands before "
+          "spells its name in the other. The letter that decides it is the one after the i. In <i>experience</i> the i stands before "
           "a vowel, the e of <i>-ence</i>, and reaches back over the r to make the e long: the notation draws that vault. In "
           "<i>experiment</i> the i stands before the m of <i>-ment</i>, and nothing reaches back. Where the syllables break, "
           "ex-per-i-ment and ex-pe-ri-ence, follows from the sound, so it describes the difference rather than causing it. That is "
@@ -1142,11 +1142,11 @@ PER = {
           "letters hold still while the sounds change, and that is why the spelling is a better guide to the family than the sound.",
           "<i>Experiential</i> has a t where <i>experience</i> has a c: <i>-ence</i> and <i>-ential</i>, as in <i>essence</i> and "
           "<i>essential</i>, <i>confidence</i> and <i>confidential</i>. Latin wrote both with a t, <i>experientia</i>; French and "
-          "English wrote the noun with a c and kept the t in <i>-ential</i>, where it says sh before <i>-ial</i>, as it does in "
+          "English wrote the noun with a c and kept the t in <i>-ential</i>, where it spells sh before <i>-ial</i>, as it does in "
           "<i>notation</i>."],
          [], _swalk()),
         ("sounds", "One spelling, three sounds",
-         ["In the Latin words the root keeps one spelling, <i>per</i>, and its e says three things. <i>Per</i> is closed and "
+         ["In the Latin words the root keeps one spelling, <i>per</i>, and its e spells three sounds. <i>Per</i> is closed and "
           "short in <i>experiment</i> and <i>peril</i>, open and long in <i>experience</i>, and an r unit in <i>expert</i>, as in "
           "<i>her</i>. The Greek road does the same with its i: open and long in <i>pirate</i>, closed and short in "
           "<i>empirical</i>."],
@@ -1165,7 +1165,7 @@ PER = {
     "s_pair": [("experiment", "You try something, to find out."), ("experience", "What you learn by living and trying.")],
     "s_paras": ["Say them slowly: ex-<b>per</b>-i-ment, ex-<b>pe</b>-ri-ence.",
                 "In <b>per</b>, the r closes the syllable, so the e is short.",
-                "In <b>pe</b>, the syllable is open, so the e says its name.",
+                "In <b>pe</b>, the syllable is open, so the e spells its name.",
                 "Both words have an <b>i</b> after per. It came with the old Latin word, and it&rsquo;s in both. You don&rsquo;t need to know why it&rsquo;s there to read them.",
                 "A <b>pirate</b> was someone who tried an attack. <b>Fear</b> is what you feel when danger is near. Same old word."],
     "uc": "the word list follows the Indo-European Lexicon, which follows Pokorny, fetched on 19 November 2026. Etymonline&rsquo;s "
@@ -1195,7 +1195,7 @@ SIGN_CLUSTERS = [
     {"key": "silent", "label": "sign, g silent", "spells": ["sign"], "head": "the g kept but not said",
      "road": "<i>sign</i> at the end of a word, or with an English ending after it",
      "note": "The g sits in its cone: not said, but kept, because <i>signal</i> and <i>signature</i> say it. With the g silent, the i "
-             "says its name, as it does in <i>find</i> and <i>child</i>. English endings don&rsquo;t wake the g: <i>signs</i>, "
+             "spells its name, as it does in <i>find</i> and <i>child</i>. English endings don&rsquo;t wake the g: <i>signs</i>, "
              "<i>signing</i>, <i>designer</i>, <i>assignment</i>.",
      "groups": [
          [("sign", ["sign"], "a mark that tells you something; to write your name"), ("signs", ["sign", "-s"], "more than one sign"),
@@ -1264,7 +1264,7 @@ SIGN = {
           "family looks like a family: sign, signal, signature, design, designate. Carney calls a letter like this inert: silent in "
           "one word, said in another (1994: 41). The notation draws it in a cone of silence, alone, joined to neither the i nor the "
           "n, so it sits in the same place in every word of the family.",
-          "The g also changes the i. When the g is silent, the i says its name, as in <i>find</i> and <i>child</i>. When the g is "
+          "The g also changes the i. When the g is silent, the i spells its name, as in <i>find</i> and <i>child</i>. When the g is "
           "said, it closes the syllable, sig, and the i is short. Venezky calls this kind of trade, a long vowel where a consonant "
           "goes quiet, a compensatory alternation.",
           "Chomsky and Halle used <i>sign</i> and <i>signify</i>, with <i>malign</i> and <i>malignant</i> and <i>paradigm</i> and "
@@ -1292,7 +1292,7 @@ SIGN = {
     "s_paras": ["Say them: <b>sign</b>, <b>sig</b>-nal.",
                 "In <b>signal</b> you hear the g. In <b>sign</b> you don&rsquo;t, but it is still there.",
                 "It stays so the words look like one family: sign, signal, signature, design.",
-                "When the g is quiet, the i says its name: s<b>i</b>gn, like f<b>i</b>nd.",
+                "When the g is quiet, the i spells its name: s<b>i</b>gn, like f<b>i</b>nd.",
                 "A <b>seal</b> was a little sign pressed into wax. It lost its g long ago."],
     "uc": "the family follows the Indo-European Lexicon and Etymonline&rsquo;s entries; Etymonline&rsquo;s own pages weren&rsquo;t "
           "reachable on 20 November 2026, so its link here is a search. The root is debated (see Follow or cut?). Next: check each "

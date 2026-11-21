@@ -42,7 +42,7 @@ CODES = {
     "forget": "c.f r.or + | c.g s.e c.t", "forgot": "c.f r.or + | c.g s.o c.t", "forgotten": "c.f r.or + | c.g s.o x.tt + | b.e c.n ; bv 5>4 ; schwa 5",
 }
 
-CORE = [("write", "<i>write</i>", "The silent e sends a vault back over the t, so the i says its name."),
+CORE = [("write", "<i>write</i>", "The silent e sends a vault back over the t, so the i spells its name."),
         ("wrote", "<i>wrote</i>", "The vowel changes; the w, r and t hold still. The same silent e, the same vault, now to the o."),
         ("written", "<i>writ(e) + t + en</i> &rarr; <i>written</i>",
          "The e of -en is said, and on its own it would reach back and make the i long: <i>writen</i> would read &ldquo;wright-en.&rdquo; "
@@ -52,7 +52,7 @@ SETS = [
     ("The box does it again", "Long in the first two, short behind a box in the third.",
      [[("ride", ""), ("rode", ""), ("ridden", "rid(e) + d + en")], [("bite", ""), ("bit", ""), ("bitten", "bit(e) + t + en")],
       [("hide", ""), ("hid", ""), ("hidden", "hid(e) + d + en")]]),
-    ("Take the box away: the long o", "One consonant, nothing to stop the vault: the e of -en reaches back, and the o says its "
+    ("Take the box away: the long o", "One consonant, nothing to stop the vault: the e of -en reaches back, and the o spells its "
      "name. This is the contrast that shows the box in <i>written</i> is doing the work.",
      [[("speak", ""), ("spoke", ""), ("spoken", "spok(e) + en")], [("break", ""), ("broke", ""), ("broken", "brok(e) + en")],
       [("steal", ""), ("stole", ""), ("stolen", "stol(e) + en")], [("wake", ""), ("woke", ""), ("woken", "wok(e) + en")],

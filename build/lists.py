@@ -15,20 +15,20 @@ import html, re
 
 LISTS = [{
     "slug": "open-or-closed", "group": "step", "n": 1, "title": "open or closed: I, it, in, is, if", "kind": "A step&rsquo;s pattern",
-    "principle": "A vowel at the end of a syllable is <b>open</b>: it says its name, as <b>I</b> does. A consonant after it "
-                 "<b>closes</b> it, and it says its short sound: <b>it</b>, <b>in</b>, <b>is</b>, <b>if</b>.",
+    "principle": "A vowel at the end of a syllable is <b>open</b>: it spells its name, as <b>I</b> does. A consonant after it "
+                 "<b>closes</b> it, and it spells its short sound: <b>it</b>, <b>in</b>, <b>is</b>, <b>if</b>.",
     "words": [("I", "", "I can run."), ("hi", "", "Say hi to Sam."), ("it", "", "It is red."), ("in", "", "Come in."),
               ("is", "", "She is here."), ("if", "", "Ask if you can go."), ("him", "", "Give it to him."), ("his", "", "That is his hat.")],
-    "contrast": ("Open, the i says its name. Close it with a consonant and it goes short.",
+    "contrast": ("Open, the i spells its name. Close it with a consonant and it goes short.",
                  [("I", "I", ""), ("it", "it", ""), ("hi", "hi", ""), ("hit", "hit", "")]),
-    "listen": "In <i>is</i> and <i>his</i> the s says /z/. It still closes the syllable.",
+    "listen": "In <i>is</i> and <i>his</i> the s spells /z/. It still closes the syllable.",
     "build_h": "Close it",
     "build": ["I, closed with t", "I, closed with n", "I, closed with f", "hi, closed with t", "hi, closed with m", "hi, closed with s"],
     "use": [("Come", "in or it", "and sit down."), ("Ask", "if or is", "you can play."), ("That is", "him or his", "bike."), ("Say", "hi or him", "to Mom.")],
     "check": [("s + i + t", "sit"), ("w + i + n", "win"), ("k + i + d", "kid"), ("f + i + nd", "find")],
     "notes": [
-        "Step 1 has one vowel and one idea. At the end of a syllable the vowel is open and says its name; a consonant after "
-        "it closes it and it says its short sound. <i>I</i> is open; <i>it</i>, <i>in</i>, <i>is</i> and <i>if</i> are closed.",
+        "Step 1 has one vowel and one idea. At the end of a syllable the vowel is open and spells its name; a consonant after "
+        "it closes it and it spells its short sound. <i>I</i> is open; <i>it</i>, <i>in</i>, <i>is</i> and <i>if</i> are closed.",
         "<i>Hi</i> is the same open i with a consonant in front. Closing it gives <i>hit</i>, <i>him</i> and <i>his</i>: the "
         "same move as <i>I</i> to <i>it</i>, so the Close it column is the step&rsquo;s whole lesson in six words.",
         "<i>I</i> is the one word that is always a capital, wherever it falls in a sentence.",

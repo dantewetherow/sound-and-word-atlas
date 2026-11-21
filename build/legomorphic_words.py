@@ -68,7 +68,7 @@ After a semicolon, by unit number (counting from 0, skipping | and +; a group su
                   puts the seam between the t and the i of g.ti
     schwa N       a weak vowel (21 November 2026): a small ə over unit N, one per unit, so over a team as a whole (the a
                   of about, the ou of famous). The symbol is Johann Andreas Schmeller's (1820s), now the IPA's
-    says N oo     a vowel saying another vowel's sound (21 November 2026): the sound, small, over unit N: oo over the o
+    says N oo     a vowel spelling another vowel's sound (21 November 2026): the sound, small, over unit N: oo over the o
                   of do, u over the o of come, o over the a of was, ee over the y of happy. After Romalda Spalding's
                   marking (The Writing Road to Reading, 1957), which numbers a phonogram's sounds; ours writes the sound
     cup N         the short mark over letter N inside a vowel unit, where the unit says that letter's short sound: the e
@@ -258,7 +258,7 @@ def parse(word):
         col += len(s)
     sylls.append((start, col - 1))
     for a in ann:
-        if a.startswith("says "):                           # a vowel saying another vowel's sound: that sound, small, over it
+        if a.startswith("says "):                           # a vowel spelling another vowel's sound: that sound, small, over it
             _, n_, snd = a.split(); u = units[int(n_)]
             assert u["kind"] in ("b", "t", "l") and snd.isalpha() and len(snd) <= 3, (word, a)   # l: a long vowel whose name is borrowed (elite, a call open 21 November)
             marks.append({"type": "over", "cols": u["cols"], "text": snd}); continue
@@ -287,7 +287,7 @@ def parse(word):
             u = units[int(arg)]
             assert u["kind"] in ("b", "t", "s", "l"), (word, a)
             marks.append({"type": "over", "cols": u["cols"], "text": "ə"})
-        elif op == "cup":                                 # a vowel unit saying the short sound of one of its letters: the cup over that letter
+        elif op == "cup":                                 # a vowel unit spelling the short sound of one of its letters: the cup over that letter
             c = int(arg); u = next(u for u in units if c in u["cols"])
             assert u["kind"] == "t" and letters[c]["ch"].lower() in "aeiouy", (word, a)
             marks.append({"type": "breve", "col": c})

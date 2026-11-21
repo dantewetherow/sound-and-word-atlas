@@ -339,7 +339,7 @@ def code(word, heads=(), lexicon=frozenset()):
         if tk in ("|", "+"): U2.append(tk); continue
         ui += 1; U2.append(U[ui])
     s = " ".join(U2)
-    # a vowel unit saying the short sound of one of its letters: the cup over that letter (head, thread, young)
+    # a vowel unit spelling the short sound of one of its letters: the cup over that letter (head, thread, young)
     p0 = 0
     for g, k, p in align_units:
         if k == "t" and p:
