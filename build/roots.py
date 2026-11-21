@@ -756,7 +756,7 @@ MED_CLUSTERS = [
     {"key": "mod", "label": "mod, mode", "spells": ["mod", "mode"], "head": "a measure, a manner",
      "road": "Latin <i>modus</i>, a measure, a limit, a way of doing something",
      "groups": [
-         [("mode", ["mode"], "a way of doing something"), ("modal", ["mod(e)", "-al"], "having to do with manner; in grammar, a verb such as <i>can</i> or <i>must</i>", "mod")],
+         [("mode", ["mode"], "a way of doing something"), ("modal", ["mod", "-al"], "having to do with manner; in grammar, a verb such as <i>can</i> or <i>must</i>", "mod")],
          [("model", None, "a small measure: a pattern to copy", "mod"), ("module", ["mod", "-ule"], "a small measure: a unit that fits with others"),
           ("modulate", ["mod", "-ul(e)", "-ate"], "adjust to a measure")],
          [("moderate", None, "kept within measure", "mod"), ("immoderate", None, "beyond measure", "mod")],

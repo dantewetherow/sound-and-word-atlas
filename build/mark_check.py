@@ -29,6 +29,11 @@ Vaults (ruled 10 and 20 November)
  13. A vault needs a sender the spelling gives: a silent e; a y; a vowel that takes a dropped e's place across a seam
      (making, producer); an i before another vowel (experience, notation, legion), or an e doing the same (simultaneous).
      A long vowel no letter causes (over, tiger, lunar) has its bar and no vault.
+ 17. A vault from a dropped e needs the e-word as the base the word was made on in English: produce + er, conduce
+     + ive. A word borrowed whole from Latin takes its base from the Latin, with no e and no vault, even where English
+     has a look-alike with an e: modal (Latin modalis, beside mode) is mod + al, as lunar, solar and polar are. Ruled 21
+     November. Open: reducible (Latin reducibilis) and educator (Latin educator) still carry a vault, and structured word
+     inquiry would write all of these by today's structure (mode/+al, reduce/+ible).
 
 Nudges
  14. A c before e, i or y is soft and takes a nudge from that letter (lucid, medicine, produce). A g takes one where
