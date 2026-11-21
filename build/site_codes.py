@@ -183,7 +183,7 @@ FAMILY = ("*Act*, *create* and their families are marked in the family decks, wh
 GREEK = ("Whether a seam goes between the Greek parts of *telephone* and *photograph* is still being decided.", "decide, then draw them.")
 # The contractions came off on 13 November 2026, drawn with the red apostrophe (contractions.py).
 # Act, create and their families came off on 20 November 2026, marked by the rules in mark_check.py (creation as nation
-# and education: the i of g.ti sends the vault). Check them against the family decks when those come onto the site.
+# and education: the i of g.ti sends the vault). Dante confirmed the marks of action, creation and creator on 21 November.
 UNMARKED = {"telephone": GREEK, "photograph": GREEK}
 
 # Words whose marking waits on Dante's ruling (the Marking calls in the manual, 11 November 2026). The word walk's Try it

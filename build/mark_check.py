@@ -1,14 +1,15 @@
 """The marking rules, in one place, and a check that holds every code on the site to them (20 November 2026).
 
 Written while marking the 153 family words that had no marks. Each rule was either already ruled (the date says when)
-or had to be settled to mark those words; the settled ones are Dante's to confirm.
+or had to be settled to mark those words; Dante confirmed rules 3 and 16 and the act and create marks on 21 November;
+rules 4, 5, 8, 10, 13 (the e sender) and the long u with no vault in lunar and ducal wait on him.
 
 Units
   1. The units spell the word, letter for letter, in order.
   2. A silent consonant bonds into its unit (kn, wr, mb; ps in psychology; ch said k is k.ch) and takes a cone only
      when another form of the word says it (sign, signal). Ruled 12 November.
   3. gu before e, i or y, where the u only keeps the g hard, is one consonant unit, k.gu (guess, guide). So -logue is
-     k.gu and a silent e in its cone (dialogue, catalogue): the u guards the g, and the e finishes the word.
+     k.gu and a silent e in its cone (dialogue, catalogue): the u guards the g, and the e finishes the word. Confirmed 21 November.
   4. gi before a vowel, said j, is one consonant unit, k.gi (legion), as ti said sh is g.ti (nation). The seam falls
      inside it (leg + ion), and its i sends the vault.
   5. -ous is a vowel unit and s, with the cup over the u (t.ou c.s ; cup), as in young. Ruled 13 November for young.
@@ -38,7 +39,7 @@ Parts
      and the seam after the letter (lec | t + ure, collec | t + ive).
  16. A prefix that changes its last letter to match the base keeps that letter: the double is two units with the seam
      between them, never a boxed double (col + lect, il + legible, as + sign, ac + com + modate). A doubled letter
-     inside one part is a box (happen, lesson).
+     inside one part is a box (happen, lesson). Confirmed 21 November.
 
 What the check does. Rules 1, 5, 13 and 14 (for c) are tested on every code. Rules 15 and 16 are tested wherever a
 family page gives the word sum. A hand-checked code that breaks one stops the build. Rule-made codes (auto_codes.json)
