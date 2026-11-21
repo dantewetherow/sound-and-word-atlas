@@ -16,11 +16,15 @@ NEW = [
      "It follows the rule (a vowel saying another vowel's sound shows that sound), and it is the biggest visible change: "
      "every <i>happy</i>, <i>city</i>, <i>very</i> and <i>funny</i> carries it. The other reading treats y saying ee at the "
      "end of a word as y's own sound, which most programs teach as a rule of its own."),
-    ("A2", "was: ah or u", "Which sound does the a of was borrow?",
+    ("A2", "was: ah, u, or weak and strong", "Which sound does the a of was borrow, and does was need a weak form beside it, as the, a and to have?",
      [("was", None, "ah, from the pronouncing dictionary")],
-     [("was", "c.w b.a c.s ; says 1 u", "u, as in wuz")],
-     "Merriam-Webster gives both. Ah pairs <i>was</i> with <i>want</i>, <i>wash</i> and <i>watch</i>, the wa pattern; u "
-     "is what many Canadians say when the word is stressed. <i>What</i> is marked u already."),
+     [("was", "c.w b.a c.s ; says 1 u", "u, as in wuz"),
+      ("was", "c.w b.a c.s ; schwa 1", "weak: it was raining"),
+      ("was", "c.w b.a c.s ; says 1 ah", "strong: yes, it WAS")],
+     "Merriam-Webster gives both full sounds. Ah pairs <i>was</i> with <i>want</i>, <i>wash</i> and <i>watch</i>, the wa "
+     "pattern; u is what many Canadians say when the word is stressed. <i>What</i> is marked u already. Most of the time "
+     "<i>was</i> is said weakly, with a &#601;, and takes a full vowel only when it ends a phrase or is stressed to make a "
+     "point. The last two readings show it as a weak and strong pair, the way the word walk shows <i>the</i>, <i>a</i> and <i>to</i>.", ("As marked now", "Other readings")),
     ("A3", "put and do: one oo for two sounds", "Should the oo of book (put, push, full) look different from the oo of moon (do, to)?",
      [("put", None, "oo"), ("do", None, "oo, the same mark")],
      [("put", "c.p b.u c.t ; says 1 ŏŏ", "ŏŏ, the oo of book")],
