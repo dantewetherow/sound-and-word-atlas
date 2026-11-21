@@ -75,6 +75,7 @@ PAGES = [
     ("definitions.html", "teachers", "Definitions", "What the notation's words mean, and where they come from."),
     ("about.html", "teachers", "About the notation", "The notation, its name, and how it came about."),
     ("credits.html", "teachers", "Credits and contact", "The writers the notation draws on, and how to get in touch."),
+    ("calls.html", "teachers", "Marking calls", "Every place the marks rest on a choice: each drawn as marked now, with the other reading beside it."),
     ("sitemap.html", None, "Site map", "Every page, layer by layer."),
 ]
 import lists as _lists
@@ -82,7 +83,8 @@ PAGES[-1:-1] = _lists.PAGES                 # the spelling lists, on the teacher
 # The page each shelf page sits behind, for its breadcrumb: the four teachers' doors (13 November 2026).
 SHELF_PARENT = {"gym.html": "constructions.html", "ufli.html": "connections.html", "word-lists.html": "connections.html",
                 "presentations.html": "instructions.html", "cards.html": "instructions.html", "tents.html": "instructions.html",
-                "definitions.html": "explanations.html", "about.html": "explanations.html", "credits.html": "explanations.html"}
+                "definitions.html": "explanations.html", "about.html": "explanations.html", "credits.html": "explanations.html",
+                "calls.html": "explanations.html"}
 # Pages built and kept at their address, but linked from nowhere: no site map, search, door or step-page link (18 November 2026:
 # the gym, while it needs work). Take a page out of this set to list it again.
 UNLISTED = {"gym.html"}
@@ -364,7 +366,7 @@ def write(OUT, page, header, footer, X):
 </div></section>""")
     door_page("explanations", "Reasons and sources · Sounds and Words, Assembled", "Definitions, the notation and its name, and credits.", f"""{door_head("explanations")}
 <section class="about"><div class="wrap">
-{tiles([x for x in pick("teachers") if x[0] in ("definitions.html", "about.html", "credits.html")])}
+{tiles([x for x in pick("teachers") if x[0] in ("definitions.html", "about.html", "credits.html", "calls.html")])}
 {uc("next, pages of ideas: the primary terms from phone to sememe, grapheme two ways, why English spells the way it does, and what the name claims.")}
 </div></section>""")
 
@@ -390,6 +392,8 @@ def write(OUT, page, header, footer, X):
     X["gym_steps"] = gym.write(OUT, door_page, X["LW"])
     import studies                                        # word studies: presentations for learners (20 November 2026)
     studies.write(OUT, door_page)
+    import calls_page                                     # marking calls, drawn both ways (21 November 2026)
+    calls_page.write(OUT, door_page, LW)
 
     # Connections: the crosswalks (connections.py).
     import connections
