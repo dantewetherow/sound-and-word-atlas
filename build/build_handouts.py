@@ -31,12 +31,12 @@ esc = html.escape
 
 # Two exemplar words that are in no line and no list. Both follow the author's own pages:
 # napkin (two closed syllables, no box) and pony (the y reaches back over one consonant; the y-sender page).
-LW.KEY_ONLY.update({"napkin": "c.n s.a c.p | c.k s.i c.n", "pony": "c.p l.o | c.n b.y ; vault 3>1", "ship": "g.sh s.i c.p",
+LW.KEY_ONLY.update({"napkin": "c.n s.a c.p | c.k s.i c.n", "pony": "c.p l.o | c.n b.y ; vault 3>1 ; says 3 ee", "ship": "g.sh s.i c.p",
                     # block and blocking: block has a bond bar (nothing reaches); the box comes with -ing and keeps the o short. nudge: the dg is boxed, so the e's vault is stopped,
                     # the u stays short, and the e still softens the g.
                     "block": "c.bl s.o k.ck", "blocking": "c.bl s.o x.ck + | s.i k.ng ; bv 3>2", "nudge": "c.n s.u x.dg e0 ; bv 3>2 ; nudge 3>2",
                     # blocked: the e of -ed looks like a silent e that could send a long-vowel signal; the box stops it. puny: the y reaches back.
-                    "blocked": "c.bl s.o x.ck + e0 c.d ; bv 3>2", "puny": "c.p l.u | c.n b.y ; vault 3>1"})
+                    "blocked": "c.bl s.o x.ck + e0 c.d ; bv 3>2", "puny": "c.p l.u | c.n b.y ; vault 3>1 ; says 3 ee"})
 
 def mark(word, f_in):
     """A marked word as inline SVG, with letters f_in inches high (font size)."""

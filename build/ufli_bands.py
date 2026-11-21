@@ -20,7 +20,7 @@ BANDS = [
      "UFLI is ahead here: -s comes at lesson 20, and on the path at step 13. The seam is the one mark to bring in early."),
     (22, 41, "The rest of the consonants, blends, x and qu",
      "Two circles under a blend and no bar; the bond bar ties q to u, with a circle under each.",
-     [("six", "c.s s.i c.x"), ("squirrel", "c.s q.qu r.ir | c.r b.e c.l")],
+     [("six", "c.s s.i c.x"), ("squirrel", "c.s q.qu r.ir | c.r b.e c.l ; schwa 4")],
      "The notation draws x with one circle (ruled 8 November 2026), where UFLI counts two sounds. Say both: one letter, two sounds."),
     (42, 44, "ff, ll, ss and zz at the end; all, oll, ull; ck",
      "A bond bar under the doubled letters. They are the doubled spellings that become a block box when an ending comes.",
@@ -68,7 +68,7 @@ BANDS = [
      "UFLI teaches these late and one rule at a time. The path reads common prefixes early and builds the joins at steps 14, 15, 29 and 30."),
     (119, 128, "-sion, -tion, -ture, -er, -or, -ist, -ness, -ment, -able, -ible; uni-, bi-, tri-",
      "The seam before the suffix, with the base whole: <i>act + ion</i>, <i>pict + ure</i>. The green bar of <i>ti</i> runs across the seam for the sound.",
-     [("action", "s.a c.c | g.ti b.o c.n ; seam 2"), ("picture", None)],
+     [("action", "s.a c.c | g.ti b.o c.n ; seam 2 ; schwa 3"), ("picture", None)],
      "UFLI teaches -tion and -ture as units for the sound. Split at the meaning, the t belongs to the base, which is why it comes back in <i>act</i>, <i>actor</i> and <i>active</i>. The notation shows both at once."),
 ]
 

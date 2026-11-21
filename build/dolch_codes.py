@@ -18,10 +18,10 @@ DOLCH_CODES = {
     # second grade: ff and ll as will has its ll; ng as going; upon as away; don’t with the red apostrophe of the I’m card
     "best": "c.b s.e c.st", "don’t": "c.d l.o c.n ap c.t", "fast": "c.f s.a c.st", "its": "s.i c.t + c.s",
     "off": "s.o k.ff", "sing": "c.s s.i k.ng", "sit": "c.s s.i c.t", "sleep": "c.sl t.ee c.p", "tell": "c.t s.e k.ll",
-    "upon": "b.u | c.p s.o c.n",
+    "upon": "b.u | c.p s.o c.n ; schwa 0",
     # third grade: the bases the word sum cards already mark (clean, cut, full, hold, hot, light, long) kept as they are there
-    "about": "b.a | c.b t.ou c.t", "bring": "c.br s.i k.ng", "clean": "c.cl t.ea c.n", "cut": "c.c s.u c.t",
-    "drink": "c.dr s.i c.nk", "fall": "c.f b.a k.ll", "far": "c.f r.ar", "full": "c.f b.u k.ll", "hold": "c.h l.o c.ld",
+    "about": "b.a | c.b t.ou c.t ; schwa 0", "bring": "c.br s.i k.ng", "clean": "c.cl t.ea c.n", "cut": "c.c s.u c.t",
+    "drink": "c.dr s.i c.nk", "fall": "c.f b.a k.ll ; says 1 ah", "far": "c.f r.ar", "full": "c.f b.u k.ll ; says 1 oo", "hold": "c.h l.o c.ld",
     "hot": "c.h s.o c.t", "light": "c.l t.igh c.t", "long": "c.l s.o k.ng", "six": "c.s s.i c.x", "ten": "c.t s.e c.n",
 }
 

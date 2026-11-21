@@ -18,7 +18,7 @@ STEPS, FIT = DATA["STEPS"], DATA["FIT"]
 NT = {"is": "isn’t", "are": "aren’t", "did": "didn’t", "can": "can’t", "will": "won’t", "could": "couldn’t", "would": "wouldn’t", "should": "shouldn’t", "have": "haven’t", "has": "hasn’t", "had": "hadn’t"}
 
 # Squeezes the gym needs that contractions.py doesn't draw yet; spelled as build_verb_cards.py has them.
-GYM_CODES = {"hadn’t": "c.h s.a c.d + | c.n ap c.t", "haven’t": "c.h s.a c.v | b.e + c.n ap c.t"}   # haven't as seven: the e is said weakly
+GYM_CODES = {"hadn’t": "c.h s.a c.d + | c.n ap c.t", "haven’t": "c.h s.a c.v | b.e + c.n ap c.t ; schwa 3"}   # haven't as seven: the e is said weakly
 
 
 SLOTS = ("actor", "adet", "op", "act", "rec", "where", "what", "wdet")

@@ -17,19 +17,19 @@ h is a breath shaped by the vowel that follows it, so where it isn't said it bel
 import html
 
 CODES = {
-    "talk": "c.t t.al c.k", "friend": "c.fr t.ie c.nd ; cup 3", "woman": "c.w b.o | c.m b.a c.n", "women": "c.w b.o | c.m b.e c.n",
-    "move": "c.m b.o c.v e0", "four": "c.f r.our", "fourth": "c.f r.our g.th", "nothing": "c.n b.o + | g.th s.i k.ng",
-    "another": "b.a | c.n + b.o g.th | r.er", "above": "b.a | c.b b.o c.v e0", "among": "b.a | c.m b.o k.ng",
-    "against": "b.a | c.g t.ai c.nst", "almost": "b.a c.l | c.m l.o c.st", "poor": "c.p r.oor", "won": "c.w b.o c.n",
-    "son": "c.s b.o c.n", "month": "c.m b.o c.n g.th", "hour": "t.hou c.r", "minute": "c.m s.i | c.n b.u c.t e0",
-    "Monday": "c.M b.o c.n | c.d t.ay", "Wednesday": "c.W s.e k.dn e0 c.s | c.d t.ay", "heart": "c.h r.ear c.t",
-    "about": "b.a | c.b t.ou c.t", "answer": "s.a c.n | k.sw r.er", "honest": "t.ho | c.n b.e c.st ; cup 1", "honour": "t.ho | c.n r.our ; cup 1",
-    "truth": "c.tr l.u g.th", "truly": "c.tr l.u + | c.l b.y", "busy": "c.b b.u | c.s b.y", "build": "k.bu s.i c.ld",
-    "built": "k.bu s.i c.lt", "sure": "c.s r.ur e0", "whom": "k.wh b.o c.m", "whose": "k.wh b.o c.s e0",
-    "toward": "c.t b.o + | c.w r.ar c.d", "through": "g.th c.r t.ough", "learn": "c.l r.ear c.n", "earth": "r.ear g.th",
-    "early": "r.ear | c.l b.y", "guy": "k.gu l.y", "guess": "k.gu s.e k.ss", "guest": "k.gu s.e c.st", "guide": "k.gu l.i c.d e>",
-    "young": "c.y t.ou k.ng ; cup 2", "touch": "c.t t.ou g.ch ; cup 2", "enough": "b.e | c.n t.ou k.gh", "tough": "c.t t.ou k.gh",
-    "rough": "c.r t.ou k.gh", "love": "c.l b.o c.v e0",
+    "talk": "c.t t.al c.k", "friend": "c.fr t.ie c.nd ; cup 3", "woman": "c.w b.o | c.m b.a c.n ; says 1 oo ; schwa 3", "women": "c.w b.o | c.m b.e c.n ; says 1 i ; schwa 3",
+    "move": "c.m b.o c.v e0 ; says 1 oo", "four": "c.f r.our", "fourth": "c.f r.our g.th", "nothing": "c.n b.o + | g.th s.i k.ng ; says 1 u",
+    "another": "b.a | c.n + b.o g.th | r.er ; schwa 0 ; says 2 u", "above": "b.a | c.b b.o c.v e0 ; schwa 0 ; says 2 u", "among": "b.a | c.m b.o k.ng ; schwa 0 ; says 2 u",
+    "against": "b.a | c.g t.ai c.nst ; schwa 0", "almost": "b.a c.l | c.m l.o c.st ; says 0 ah", "poor": "c.p r.oor", "won": "c.w b.o c.n ; says 1 u",
+    "son": "c.s b.o c.n ; says 1 u", "month": "c.m b.o c.n g.th ; says 1 u", "hour": "t.hou c.r", "minute": "c.m s.i | c.n b.u c.t e0 ; schwa 3",
+    "Monday": "c.M b.o c.n | c.d t.ay ; says 1 u", "Wednesday": "c.W s.e k.dn e0 c.s | c.d t.ay", "heart": "c.h r.ear c.t",
+    "about": "b.a | c.b t.ou c.t ; schwa 0", "answer": "s.a c.n | k.sw r.er", "honest": "t.ho | c.n b.e c.st ; cup 1 ; schwa 2", "honour": "t.ho | c.n r.our ; cup 1",
+    "truth": "c.tr l.u g.th", "truly": "c.tr l.u + | c.l b.y ; says 3 ee", "busy": "c.b b.u | c.s b.y ; says 1 i ; says 3 ee", "build": "k.bu s.i c.ld",
+    "built": "k.bu s.i c.lt", "sure": "c.s r.ur e0", "whom": "k.wh b.o c.m ; says 1 oo", "whose": "k.wh b.o c.s e0 ; says 1 oo",
+    "toward": "c.t b.o + | c.w r.ar c.d ; schwa 1", "through": "g.th c.r t.ough", "learn": "c.l r.ear c.n", "earth": "r.ear g.th",
+    "early": "r.ear | c.l b.y ; says 2 ee", "guy": "k.gu l.y", "guess": "k.gu s.e k.ss", "guest": "k.gu s.e c.st", "guide": "k.gu l.i c.d e>",
+    "young": "c.y t.ou k.ng ; cup 2", "touch": "c.t t.ou g.ch ; cup 2", "enough": "b.e | c.n t.ou k.gh ; schwa 0", "tough": "c.t t.ou k.gh",
+    "rough": "c.r t.ou k.gh", "love": "c.l b.o c.v e0 ; says 1 u",
 }
 
 # (group, [(what the heart part has, the words, a note for the teacher)])

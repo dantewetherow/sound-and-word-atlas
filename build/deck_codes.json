@@ -1,6 +1,6 @@
 {
  "all": {
-  "code": "b.a k.ll",
+  "code": "b.a k.ll ; says 0 ah",
   "from": "flsz_family.py"
  },
  "as": {
@@ -56,7 +56,7 @@
   "from": "flsz_family.py"
  },
  "call": {
-  "code": "c.c b.a k.ll",
+  "code": "c.c b.a k.ll ; says 1 ah",
   "from": "legend_rules.py"
  },
  "cash": {
@@ -108,7 +108,7 @@
   "from": "flsz_family.py"
  },
  "even": {
-  "code": "l.e | c.v b.e c.n ; vault 2>0",
+  "code": "l.e | c.v b.e c.n ; schwa 2",
   "from": "flsz_family.py"
  },
  "file": {
@@ -148,7 +148,7 @@
   "from": "flsz_family.py"
  },
  "hall": {
-  "code": "c.h b.a k.ll",
+  "code": "c.h b.a k.ll ; says 1 ah",
   "from": "flsz_family.py"
  },
  "head": {
@@ -192,11 +192,11 @@
   "from": "flsz_family.py"
  },
  "jazy": {
-  "code": "c.j l.a | c.z + b.y ; vault 3>1",
+  "code": "c.j l.a | c.z + b.y ; vault 3>1 ; says 3 ee",
   "from": "flsz_family.py"
  },
  "jazzy": {
-  "code": "c.j s.a x.zz + | b.y ; bv 3>2",
+  "code": "c.j s.a x.zz + | b.y ; bv 3>2 ; says 3 ee",
   "from": "flsz_family.py"
  },
  "kising": {
@@ -232,7 +232,7 @@
   "from": "flsz_family.py"
  },
  "lemon": {
-  "code": "c.l s.e c.m | b.o c.n",
+  "code": "c.l s.e c.m | b.o c.n ; schwa 3",
   "from": "legend_rules.py"
  },
  "life": {
@@ -276,7 +276,7 @@
   "from": "flsz_family.py"
  },
  "pony": {
-  "code": "c.p l.o | c.n b.y ; vault 3>1",
+  "code": "c.p l.o | c.n b.y ; vault 3>1 ; says 3 ee",
   "from": "legend_rules.py"
  },
  "rol": {
@@ -392,11 +392,11 @@
   "from": "flsz_family.py"
  },
  "wolf": {
-  "code": "c.w b.o c.lf",
+  "code": "c.w b.o c.lf ; says 1 oo",
   "from": "flsz_family.py"
  },
  "wolves": {
-  "code": "c.w b.o c.lv e0 + c.s",
+  "code": "c.w b.o c.lv e0 + c.s ; says 1 oo",
   "from": "flsz_family.py"
  }
 }

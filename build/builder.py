@@ -16,7 +16,7 @@ Everything the builder shows is drawn at build time; the page's script only reor
 import html, json
 
 # words the site hadn't marked yet
-CODES = {"mom": "c.m s.o c.m", "ball": "c.b b.a k.ll", "fish": "c.f s.i g.sh", "box": "c.b s.o c.x"}
+CODES = {"mom": "c.m s.o c.m", "ball": "c.b b.a k.ll ; says 1 ah", "fish": "c.f s.i g.sh", "box": "c.b s.o c.x"}
 
 SLOTS = [
     ("actor", "Actor", ["I", "you", "she", "he", "we", "they", "it", "the dog", "my mom", "a fish"]),

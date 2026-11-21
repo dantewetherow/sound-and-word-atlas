@@ -24,14 +24,14 @@ LW, esc = H.LW, H.esc
 VERB_CODES = {
     "being": "c.b l.e + | s.i k.ng",                 # be + ing, as going
     "having": "c.h s.a | c.v + s.i k.ng",            # the e of have drops, as in making; the a stays short, so no vault
-    "doing": "c.d b.o + | s.i k.ng",                 # do + ing, as going
+    "doing": "c.d b.o + | s.i k.ng ; says 1 oo",                 # do + ing, as going
     "n’t": "c.n ap c.t",                             # the red apostrophe stands in for the o of not
-    "isn’t": "s.i c.s | c.n ap c.t", "wasn’t": "c.w b.a c.s | c.n ap c.t",
+    "isn’t": "s.i c.s | c.n ap c.t", "wasn’t": "c.w b.a c.s | c.n ap c.t ; says 1 u",
     "aren’t": "r.ar e0 c.n ap c.t", "weren’t": "c.w r.er e0 c.n ap c.t",
     "hasn’t": "c.h s.a c.s | c.n ap c.t", "hadn’t": "c.h s.a c.d | c.n ap c.t",
-    "haven’t": "c.h s.a c.v | b.e c.n ap c.t",        # as seven: the v closes the first syllable, and the e is said weakly
+    "haven’t": "c.h s.a c.v | b.e c.n ap c.t ; schwa 3",        # as seven: the v closes the first syllable, and the e is said weakly
     "don’t": "c.d l.o c.n ap c.t",                   # as on the Dolch cards
-    "doesn’t": "c.d b.o + e0 c.s | c.n ap c.t", "didn’t": "c.d s.i c.d | c.n ap c.t",
+    "doesn’t": "c.d b.o + e0 c.s | c.n ap c.t ; says 1 u", "didn’t": "c.d s.i c.d | c.n ap c.t",
     "can’t": "c.c s.a c.n ap c.t",                   # can and n't share one n
     "couldn’t": "c.c t.oul c.d | c.n ap c.t", "wouldn’t": "c.w t.oul c.d | c.n ap c.t",
     "shouldn’t": "g.sh t.oul c.d | c.n ap c.t",

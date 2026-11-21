@@ -11,10 +11,10 @@ HOP_HOPE = {
     "hopper": "c.h s.o x.pp + | r.er ; bv 3>2",                    # as hopping, with er as in better
     "hopes": "c.h l.o c.p e> + c.s",                               # as lives
     "hoped": "c.h l.o c.p + e> c.d",                               # as liked
-    "hopeful": "c.h l.o c.p e> + | c.f b.u c.l",                   # as useful
-    "hopeless": "c.h l.o c.p e> + | c.l b.e k.ss",                 # as useful, with the e of -less weak
-    "hopefully": "c.h l.o c.p e> + | c.f b.u x.ll | b.y ; bv 7>6 ; seam 6",   # as fully, with the seam between the l's
-    "hopelessness": "c.h l.o c.p e> + | c.l b.e k.ss + | c.n b.e k.ss",       # as hopeless, twice over
+    "hopeful": "c.h l.o c.p e> + | c.f b.u c.l ; schwa 5",                   # as useful
+    "hopeless": "c.h l.o c.p e> + | c.l b.e k.ss ; schwa 5",                 # as useful, with the e of -less weak
+    "hopefully": "c.h l.o c.p e> + | c.f b.u x.ll | b.y ; bv 7>6 ; seam 6 ; schwa 5 ; says 7 ee",   # as fully, with the seam between the l's
+    "hopelessness": "c.h l.o c.p e> + | c.l b.e k.ss + | c.n b.e k.ss ; schwa 5 ; schwa 8",       # as hopeless, twice over
 }
 
 CALLS = [

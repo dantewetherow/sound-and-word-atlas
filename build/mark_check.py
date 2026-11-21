@@ -12,16 +12,22 @@ Units
      k.gu and a silent e in its cone (dialogue, catalogue): the u guards the g, and the e finishes the word. Confirmed 21 November.
   4. gi before a vowel, said j, is one consonant unit, k.gi (legion), as ti said sh is g.ti (nation). The seam falls
      inside it (leg + ion), and its i sends the vault.
-  5. -ous is a vowel unit and s, with the cup over the u (t.ou c.s ; cup), as in young. Ruled 13 November for young.
+  5. -ous is a vowel unit and s, said weakly: a ə over the ou (famous, luminous). 21 November: the ə replaces the cup
+     these took from young, whose ou is stressed and keeps its cup.
   6. -re said er is an r unit (centre, lustre).
 
 Vowels
-  7. A vowel is short (cup), long (bar) or bare. Bare means it borrows another vowel's sound or is said weakly.
-  8. An unstressed i is bare in the middle of a word (legible, similar, commodity) and keeps its cup in a last,
-     closed syllable (logic, visit, lucid, active).
-  9. So -ic at the end of a word is s.i c.c (logic), and -ic before another ending is b.i | c.c + (logical, medical).
- 10. An i that says e's name, in words from French (elite, expertise, machine), is bare; its final e sits in a cone
-     with no vault, since a vault is for a vowel that says its own name.
+  7. A vowel is short (cup), long (bar), weak (a small ə over it) or borrowed (the sound it borrows, small over it: oo
+     over the o of do, u over the o of come, ah over the a of want, ee over the y of happy). 21 November 2026: the two
+     new marks split what bare used to hold. The ə is Johann Andreas Schmeller's symbol (1820s); writing a vowel's
+     other sound over it follows Romalda Spalding's numbered markings (The Writing Road to Reading, 1957). A vowel
+     left bare is one not yet decided (carry, where Canadian speech varies; gone).
+  8. An unstressed i is weak in the middle of a word, with a ə (legible, similar, commodity), and keeps its cup in a
+     last, closed syllable (logic, visit, lucid, active). The ə stands for the weak vowel whether a speaker says it
+     as uh or as a quick i: in much Canadian and American speech the two have merged, and the mark doesn't take sides.
+  9. So -ic at the end of a word is s.i c.c (logic), and -ic before another ending is a weak i | c.c + (logical, medical).
+ 10. An i that says e's name, in words from French (elite, expertise, machine), takes a small ee over it; its final e
+     sits in a cone with no vault, since a vault is for a vowel that says its own name.
  11. A final e that is said says its name: l.e (simile).
  12. A family keeps its parts and lets the vowel marks move with the beat: product, produce, productivity.
 
@@ -56,6 +62,7 @@ import json, re, pathlib
 
 HERE = pathlib.Path(__file__).resolve().parent
 VOWEL_KINDS = ("s", "l", "b", "t", "r", "w")
+STILL_BARE = {"carry", "carries", "carried", "gone", "en"}            # not yet decided: carry varies most in Canadian speech
 
 
 def units(code):
@@ -110,8 +117,13 @@ def check(word, code, sum_parts=None):
     A = anns(code)
     pos = [i for i, t in enumerate(main) if t not in ("|", "+")]
     # rule 5: -ous
-    if word.endswith("ous") and len(us) >= 2 and us[-2] == "t.ou" and not any(k == "cup" for k, _, _ in A):
-        bad.append("rule 5: -ous without its cup")
+    weak = {int(a.split()[1]) for a in [p.strip() for p in code.split(";")[1:]] if a.startswith(("schwa ", "says "))}
+    if word.endswith("ous") and len(us) >= 2 and us[-2] == "t.ou" and (len(us) - 2) not in weak:
+        bad.append("rule 5: -ous without its ə")
+    # rule 7: a bare vowel is weak or borrowed, and says which; the few left bare are listed
+    for i, t in enumerate(us):
+        if kind(t) == "b" and i not in weak and word not in STILL_BARE:
+            bad.append(f"rule 7: the {letters(t)} is bare: give it a ə or the sound it borrows")
     # rule 13: a vault's sender
     for k, a, b in A:
         if k != "vault" or b is None or a >= len(us) or b >= len(us): continue

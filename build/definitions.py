@@ -106,6 +106,10 @@ STUDY = [   # words for studying language, each with an everyday word to stand i
 ]
 
 EXTRA_MARKS = [   # marks the legend doesn't list on its own
+    ("Weak and strong forms", "One spelling, two ways of saying it: <em>the</em> is weak in <em>the cat</em> and strong in "
+     "<em>the apple</em> or <em>THE place to be</em>; <em>a</em>, <em>to</em> and <em>of</em> work the same way. The weak "
+     "form takes the ə; the strong form, used for emphasis, at the end of a phrase, or before a vowel sound, takes its "
+     "full vowel. The word walk shows both side by side", "the", "schwa"),
     ("Sender", "The letter a vowel vault comes from: a silent <em>e</em>; a <em>y</em>; a vowel that takes a dropped "
      "<em>e</em>&rsquo;s place, like the <em>a</em> of <em class=\"nw\">-ate</em>, which sends the <em>o</em> of <em>notate</em> "
      "its vault; or an <em>i</em> before another vowel, as in <em>experience</em>. A long vowel no letter causes (<em>over</em>, "

@@ -15,10 +15,10 @@ SITE_CODES = {
     "cent": "c.c s.e c.nt ; nudge 1>0",
     # the step 1 spelling list's check, 12 November 2026
     "sit": "c.s s.i c.t", "win": "c.w s.i c.n", "kid": "c.k s.i c.d",
-    "city": "c.c s.i c.t | b.y ; nudge 1>0",
+    "city": "c.c s.i c.t | b.y ; nudge 1>0 ; says 3 ee",
     "cycling": "c.c l.y | c.c c.l + s.i k.ng ; nudge 1>0",
     "gentle": "c.g s.e c.n | c.t le ; nudge 1>0",
-    "giant": "c.g l.i | b.a c.nt ; nudge 1>0",
+    "giant": "c.g l.i | b.a c.nt ; nudge 1>0 ; schwa 2",
     "gym": "c.g s.y c.m ; nudge 1>0",
     "centre": "c.c s.e c.n | c.t r.re ; nudge 1>0",
     "ceiling": "c.c t.ei | c.l + s.i k.ng ; nudge 1>0",
@@ -44,23 +44,23 @@ SITE_CODES = {
     "or": "r.or", "car": "c.c r.ar", "bird": "c.b r.ir c.d", "turn": "c.t r.ur c.n",
     # step 13: a suffix at the seam (as dogs, going, goes)
     "gets": "c.g s.e c.t + c.s", "sees": "c.s t.ee + c.s",
-    "doing": "c.d b.o + | s.i k.ng", "being": "c.b l.e + | s.i k.ng", "played": "c.pl t.ay + e0 c.d",
+    "doing": "c.d b.o + | s.i k.ng ; says 1 oo", "being": "c.b l.e + | s.i k.ng", "played": "c.pl t.ay + e0 c.d",
     # step 14: the box (as funny, pretty; a cluster box as the manual's helped)
     "help": "c.h s.e c.lp", "helped": "c.h s.e c.lp + e0 c.d ; box 2 ; bv 3>2",
-    "sun": "c.s s.u c.n", "sunny": "c.s s.u x.nn + | b.y ; bv 3>2", "happy": "c.h s.a x.pp + | b.y ; bv 3>2",   # hap + y, as sunny
+    "sun": "c.s s.u c.n", "sunny": "c.s s.u x.nn + | b.y ; bv 3>2 ; says 3 ee", "happy": "c.h s.a x.pp + | b.y ; bv 3>2 ; says 3 ee",   # hap + y, as sunny
     # step 15: the e drops, its jobs move (as hoping, giving, jazy)
     "making": "c.m l.a | c.k + s.i k.ng ; vault 3>1", "having": "c.h s.a c.v + | s.i k.ng",
     "race": "c.r l.a c.c e> ; nudge 3>2", "racing": "c.r l.a | c.c + s.i k.ng ; vault 3>1 ; nudge 3>2",
-    "ice": "l.i c.c e> ; nudge 2>1", "icy": "l.i | c.c + b.y ; vault 2>0 ; nudge 2>1",
+    "ice": "l.i c.c e> ; nudge 2>1", "icy": "l.i | c.c + b.y ; vault 2>0 ; nudge 2>1 ; says 2 ee",
     # step 16: open and closed in longer words (as over, open, pony; seven and lemon for a short first vowel)
-    "silent": "c.s l.i | c.l b.e c.nt", "tiger": "c.t l.i | c.g r.er",
+    "silent": "c.s l.i | c.l b.e c.nt ; schwa 3", "tiger": "c.t l.i | c.g r.er",
     "paper": "c.p l.a | c.p r.er",
     # music and basic are two parts, muse + ic and base + ic: the i took the dropped e's place, so it sends the vault (as making)
     "music": "c.m l.u | c.s + s.i c.c ; vault 3>1", "basic": "c.b l.a | c.s + s.i c.c ; vault 3>1",
     # its contrasts, 10 November 2026: robin as the role cards draw it (noun_codes.py), robot as music, river as never
     # and tiger, silly as middle and sunny without the seam
     "robin": "c.r s.o c.b | s.i c.n", "robot": "c.r l.o | c.b s.o c.t",
-    "river": "c.r s.i c.v | r.er", "silly": "c.s s.i x.ll | b.y ; bv 3>2",
+    "river": "c.r s.i c.v | r.er", "silly": "c.s s.i x.ll | b.y ; bv 3>2 ; says 3 ee",
     # step 17: consonant + le (as the table and bugle card, and little)
     "table": "c.t l.a | c.b le", "bugle": "c.b l.u | c.g le",
     "title": "c.t l.i | c.t le", "apple": "s.a x.pp | le", "middle": "c.m s.i x.dd | le",
@@ -81,17 +81,17 @@ SITE_CODES = {
     # step 26: more r-controlled units (as the hair and hear card, before, are)
     "hair": "c.h r.air", "hear": "c.h r.ear", "more": "c.m r.or e0", "care": "c.c r.ar e0",
     # step 29: -y, -ly and y turns to i (as going's seam, funny, goes)
-    "sadly": "c.s s.a c.d + | c.l b.y", "slowly": "c.sl t.ow + | c.l b.y",
-    "happily": "c.h s.a x.pp + | b.i + | c.l b.y ; bv 3>2", "happier": "c.h s.a x.pp + | b.i + | r.er ; bv 3>2",
-    "tried": "c.tr l.i + e0 c.d", "carries": "c.c b.a x.rr | b.i + e0 c.s ; bv 3>2",
+    "sadly": "c.s s.a c.d + | c.l b.y ; says 4 ee", "slowly": "c.sl t.ow + | c.l b.y ; says 3 ee",
+    "happily": "c.h s.a x.pp + | b.i + | c.l b.y ; bv 3>2 ; schwa 3 ; says 5 ee", "happier": "c.h s.a x.pp + | b.i + | r.er ; bv 3>2 ; says 3 ee",
+    "tried": "c.tr l.i + e0 c.d", "carries": "c.c b.a x.rr | b.i + e0 c.s ; bv 3>2 ; says 3 ee",
     # step 30: un- and re-, the seam before the root (as into; re- marked as be is)
-    "undo": "s.u c.n + | c.d b.o", "untie": "s.u c.n + | c.t t.ie",
-    "unhappy": "s.u c.n + | c.h s.a x.pp + | b.y ; bv 5>4", "unlock": "s.u c.n + | c.l s.o k.ck",
-    "redo": "c.r l.e + | c.d b.o", "replay": "c.r l.e + | c.pl t.ay",
+    "undo": "s.u c.n + | c.d b.o ; says 3 oo", "untie": "s.u c.n + | c.t t.ie",
+    "unhappy": "s.u c.n + | c.h s.a x.pp + | b.y ; bv 5>4 ; says 5 ee", "unlock": "s.u c.n + | c.l s.o k.ck",
+    "redo": "c.r l.e + | c.d b.o ; says 3 oo", "replay": "c.r l.e + | c.pl t.ay",
     "refill": "c.r l.e + | c.f s.i k.ll", "reread": "c.r l.e + | c.r t.ea c.d",
     # step 32: ph as a black bond bar (as kn); photo as pony
     "photo": "k.ph l.o | c.t l.o", "phone": "k.ph l.o c.n e>", "graph": "c.gr s.a k.ph",
-    "alphabet": "s.a c.l | k.ph b.a | c.b s.e c.t",
+    "alphabet": "s.a c.l | k.ph b.a | c.b s.e c.t ; schwa 3",
     # the steps' contrasts, drawn on the step pages since 10 November 2026, each as the word named beside it
     "cost": "c.c s.o c.st", "mint": "c.m s.i c.nt",              # as must and went: short before two consonants
     "mind": "c.m l.i c.nd",                                       # as find and kind
@@ -111,17 +111,17 @@ SITE_CODES = {
     "stay": "c.st t.ay", "stayed": "c.st t.ay + e0 c.d",
     # the deck "A, E, I, O, U and typically Y" (aeiouy.py), 10 November 2026: y as a vowel takes the vowel's marks, so myth
     # as him, type as time, sky as my, key as they, baby as pony without the vault
-    "myth": "c.m s.y g.th", "type": "c.t l.y c.p e>", "sky": "c.sk l.y", "key": "c.k t.ey", "baby": "c.b l.a | c.b b.y",
+    "myth": "c.m s.y g.th", "type": "c.t l.y c.p e>", "sky": "c.sk l.y", "key": "c.k t.ey", "baby": "c.b l.a | c.b b.y ; says 3 ee",
     "same": "c.s l.a c.m e>",                                     # the *sem- page's word, as name
     "duct": "c.d s.u c.ct",                                       # the *deuk- page's word; ct as the nt of went
     # the landing page: the notation's own name, and note to notation (as making and photo; creation as the create family deck)
     "legomorphic": "c.l s.e c.g + | l.o + | c.m r.or | k.ph + s.i c.c",   # leg + o + morph + ic since 10 November 2026
     "note": "c.n l.o c.t e>",                                    # as the sentence cards mark it
     "notate": "c.n l.o | c.t + l.a c.t e> ; vault 3>1",
-    "notation": "c.n l.o | c.t + l.a | g.ti b.o c.n ; vault 3>1 ; vault 4>3 ; seam 4",
+    "notation": "c.n l.o | c.t + l.a | g.ti b.o c.n ; vault 3>1 ; vault 4>3 ; seam 4 ; schwa 5",
     # the hap family (roots/hap.html), 9 November 2026: hap doubles its p only before a vowel
-    "happen": "c.h s.a x.pp + | b.e c.n ; bv 3>2",                  # as happy, with -en as the en of seven
-    "hapless": "c.h s.a c.p + | c.l b.e k.ss",                      # as hopeless, with no box: l can't reach back
+    "happen": "c.h s.a x.pp + | b.e c.n ; bv 3>2 ; schwa 3",                  # as happy, with -en as the en of seven
+    "hapless": "c.h s.a c.p + | c.l b.e k.ss ; schwa 4",                      # as hopeless, with no box: l can't reach back
     "mishap": "c.m s.i c.s + | c.h s.a c.p",                        # as unlock: s and h on either side of the seam
     "haphazard": "c.h s.a c.p + | c.h s.a c.z | r.ar c.d",          # p and h on either side of the seam; ar as in car
 }
@@ -139,13 +139,13 @@ SITE_RULED = {
     # g's silence (Venezky's compensatory alternation, quoted by Carney 1994: 22). In signal the g is said and closes
     # the syllable, and the i is short. Signature and designate wait on -ture and on des | ig | nate
     "sign": "c.s l.i z.g c.n",
-    "signal": "c.s s.i c.g | c.n + b.a c.l",
-    "design": "c.d b.e + | c.s l.i z.g c.n",
+    "signal": "c.s s.i c.g | c.n + b.a c.l ; schwa 4",
+    "design": "c.d b.e + | c.s l.i z.g c.n ; schwa 1",
     # ruled 12 November 2026: seams at the joins of the parts (il + lustr + ate), syllables crossing them (il | lus | trate);
     # the u is weak, the stress being on il
-    "illustrate": "s.i c.l + | c.l b.u c.s | c.tr + l.a c.t e>",
-    "open": "l.o | c.p b.e c.n", "even": "l.e | c.v b.e c.n",
-    "today": "c.t b.o + | c.d t.ay", "around": "b.a + | c.r t.ou c.nd",
+    "illustrate": "s.i c.l + | c.l b.u c.s | c.tr + l.a c.t e> ; schwa 3",
+    "open": "l.o | c.p b.e c.n ; schwa 2", "even": "l.e | c.v b.e c.n ; schwa 2",
+    "today": "c.t b.o + | c.d t.ay ; schwa 1", "around": "b.a + | c.r t.ou c.nd ; schwa 0",
 }
 
 # The affixes and roots placed on the steps (the manual's "Parts on the steps", 10 November 2026), each marked as it is
@@ -171,8 +171,13 @@ PART_WORD = {"-ion": "action"}
 # A spelling that is two words, each with its own marking (from flsz_family.py; produce and conduct are drafts of
 # 10 November 2026 for the *deuk- family: the verb's first vowel is weak, so bare, and the noun's is said in full).
 VARIANTS = {
-    "produce": [("c.pr b.o | c.d l.u c.c e> ; nudge 5>4", "to produce: the verb"), ("c.pr l.o | c.d l.u c.c e> ; nudge 5>4", "produce: the noun")],
-    "conduct": [("c.c b.o c.n | c.d s.u c.ct", "to conduct: the verb"), ("c.c s.o c.n | c.d s.u c.ct", "conduct: the noun")],
+    "produce": [("c.pr b.o | c.d l.u c.c e> ; nudge 5>4 ; schwa 1", "to produce: the verb"), ("c.pr l.o | c.d l.u c.c e> ; nudge 5>4", "produce: the noun")],
+    "conduct": [("c.c b.o c.n | c.d s.u c.ct ; schwa 1", "to conduct: the verb"), ("c.c s.o c.n | c.d s.u c.ct", "conduct: the noun")],
+    # Weak and strong forms (21 November 2026): one spelling, said weakly in the flow of a sentence and fully when stressed
+    # for emphasis, at the end of a phrase, or (the) before a vowel sound.
+    "the": [("g.th b.e ; schwa 1", "the cat: said weakly, as most of the time"), ("g.th l.e", "the apple, or THE place to be: before a vowel sound, or stressed")],
+    "a": [("b.a ; schwa 0", "a cat: said weakly"), ("l.a", "not A cat, the cat: stressed to make a point")],
+    "to": [("c.t b.o ; schwa 1", "go to school: said weakly"), ("c.t b.o ; says 1 oo", "who is it to? at the end, or stressed")],
     "live": [("c.l l.i c.v e>", "a live show"), ("c.l s.i c.v e0", "we live here")],
 }
 

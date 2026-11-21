@@ -9,15 +9,15 @@ These are the first contractions the site draws."""
 import html
 
 CODES = {
-    "isn’t": "s.i c.s + | c.n ap c.t", "wasn’t": "c.w b.a c.s + | c.n ap c.t", "aren’t": "r.ar e0 + c.n ap c.t",
-    "weren’t": "c.w r.er e0 + c.n ap c.t", "doesn’t": "c.d b.o + e0 c.s + | c.n ap c.t", "didn’t": "c.d s.i c.d + | c.n ap c.t",
+    "isn’t": "s.i c.s + | c.n ap c.t", "wasn’t": "c.w b.a c.s + | c.n ap c.t ; says 1 u", "aren’t": "r.ar e0 + c.n ap c.t",
+    "weren’t": "c.w r.er e0 + c.n ap c.t", "doesn’t": "c.d b.o + e0 c.s + | c.n ap c.t ; says 1 u", "didn’t": "c.d s.i c.d + | c.n ap c.t",
     "hasn’t": "c.h s.a c.s + | c.n ap c.t", "couldn’t": "c.c t.oul c.d + | c.n ap c.t", "wouldn’t": "c.w t.oul c.d + | c.n ap c.t",
     "shouldn’t": "g.sh t.oul c.d + | c.n ap c.t",
     "I’m": "l.I + ap c.m", "it’s": "s.i c.t + ap c.s", "he’s": "c.h l.e + ap c.s", "she’s": "g.sh l.e + ap c.s",
     "you’re": "c.y t.ou + ap c.r e0", "we’re": "c.w l.e + ap c.r e0", "they’re": "g.th t.ey + ap c.r e0", "let’s": "c.l s.e c.t + ap c.s",
     "I’ll": "l.I + ap k.ll", "I’ve": "l.I + ap c.v e0", "I’d": "l.I + ap c.d", "can’t": "c.c s.a c.n + ap c.t",
     "won’t": "c.w l.o + c.n ap c.t", "don’t": "c.d l.o + c.n ap c.t",
-    "its": "s.i c.t c.s", "who’s": "k.wh b.o + ap c.s",
+    "its": "s.i c.t c.s", "who’s": "k.wh b.o + ap c.s ; says 1 oo",
 }
 
 # (heading, what happened, [(contraction, the two words, a sentence)])

@@ -66,6 +66,11 @@ After a semicolon, by unit number (counting from 0, skipping | and +; a group su
     box A         a block box around the cluster in unit A (box A-B for units A to B)
     seam N        a morpheme seam after letter N (counting letters from 0), for a seam inside a unit: notat + ion
                   puts the seam between the t and the i of g.ti
+    schwa N       a weak vowel (21 November 2026): a small ə over unit N, one per unit, so over a team as a whole (the a
+                  of about, the ou of famous). The symbol is Johann Andreas Schmeller's (1820s), now the IPA's
+    says N oo     a vowel saying another vowel's sound (21 November 2026): the sound, small, over unit N: oo over the o
+                  of do, u over the o of come, o over the a of was, ee over the y of happy. After Romalda Spalding's
+                  marking (The Writing Road to Reading, 1957), which numbers a phonogram's sounds; ours writes the sound
     cup N         the short mark over letter N inside a vowel unit, where the unit says that letter's short sound: the e
                   of head, bread and friend, the o of honest, the u of young (ruled 13 November 2026)
 
@@ -76,52 +81,52 @@ import math, json, sys, pathlib
 
 W = {
  # ---- ELP list 1, Kindergarten
- "a": "b.a", "and": "s.a c.nd", "I": "l.I", "is": "s.i c.s", "it": "s.i c.t", "the": "g.th b.e", "to": "c.t b.o",
- "you": "c.y t.ou", "he": "c.h l.e", "she": "g.sh l.e", "was": "c.w b.a c.s", "of": "b.o c.f",
+ "a": "b.a ; schwa 0", "and": "s.a c.nd", "I": "l.I", "is": "s.i c.s", "it": "s.i c.t", "the": "g.th b.e ; schwa 1", "to": "c.t b.o ; says 1 oo",
+ "you": "c.y t.ou", "he": "c.h l.e", "she": "g.sh l.e", "was": "c.w b.a c.s ; says 1 ah", "of": "b.o c.f ; says 0 u",
  # ---- list 2, CV
  "go": "c.g l.o", "me": "c.m l.e", "my": "c.m l.y", "we": "c.w l.e", "be": "c.b l.e", "no": "c.n l.o", "by": "c.b l.y",
  # ---- list 3
- "come": "c.c b.o c.m e0", "some": "c.s b.o c.m e0", "one": "w.o c.n e0", "put": "c.p b.u c.t", "said": "c.s t.ai c.d",
- "two": "k.tw b.o", "see": "c.s t.ee", "look": "c.l t.oo c.k", "why": "k.wh l.y", "try": "c.tr l.y",
+ "come": "c.c b.o c.m e0 ; says 1 u", "some": "c.s b.o c.m e0 ; says 1 u", "one": "w.o c.n e0", "put": "c.p b.u c.t ; says 1 oo", "said": "c.s t.ai c.d",
+ "two": "k.tw b.o ; says 1 oo", "see": "c.s t.ee", "look": "c.l t.oo c.k", "why": "k.wh l.y", "try": "c.tr l.y",
  # ---- list 4, digraphs
  "that": "g.th s.a c.t", "this": "g.th s.i c.s", "with": "c.w s.i g.th", "then": "g.th s.e c.n", "when": "k.wh s.e c.n",
  "much": "c.m s.u g.ch", "wish": "c.w s.i g.sh", "pick": "c.p s.i k.ck", "which": "k.wh s.i g.ch",
  # ---- list 5
- "where": "k.wh r.er e0", "small": "c.sm b.a k.ll", "are": "r.ar e0", "have": "c.h s.a c.v e0", "into": "s.i c.n + | c.t b.o",
- "there": "g.th r.er e0", "they": "g.th t.ey", "want": "c.w b.a c.nt", "what": "k.wh b.a c.t", "like": "c.l l.i c.k e>",
+ "where": "k.wh r.er e0", "small": "c.sm b.a k.ll ; says 1 ah", "are": "r.ar e0", "have": "c.h s.a c.v e0", "into": "s.i c.n + | c.t b.o ; says 3 oo",
+ "there": "g.th r.er e0", "they": "g.th t.ey", "want": "c.w b.a c.nt ; says 1 ah", "what": "k.wh b.a c.t ; says 1 u", "like": "c.l l.i c.k e>",
  "little": "c.l s.i x.tt | le", "play": "c.pl t.ay",
  # ---- list 6, long vowel with silent e
  "take": "c.t l.a c.k e>", "five": "c.f l.i c.v e>", "gave": "c.g l.a c.v e>", "made": "c.m l.a c.d e>", "these": "g.th l.e c.s e>",
  "those": "g.th l.o c.s e>", "use": "l.u c.s e>", "white": "k.wh l.i c.t e>", "write": "k.wr l.i c.t e>", "here": "c.h l.e c.r e>",
  "make": "c.m l.a c.k e>", "ate": "l.a c.t e>", "came": "c.c l.a c.m e>", "ride": "c.r l.i c.d e>",
  # ---- list 7
- "who": "k.wh b.o", "again": "b.a | c.g t.ai c.n", "any": "b.a c.n | b.y", "could": "c.c t.oul c.d", "would": "c.w t.oul c.d",
- "from": "c.fr b.o c.m", "give": "c.g s.i c.v e0", "once": "w.o c.n c.c e0 ; nudge 3>2", "walk": "c.w t.al c.k", "were": "c.w r.er e0",
+ "who": "k.wh b.o ; says 1 oo", "again": "b.a | c.g t.ai c.n ; schwa 0", "any": "b.a c.n | b.y ; says 0 e ; says 2 ee", "could": "c.c t.oul c.d", "would": "c.w t.oul c.d",
+ "from": "c.fr b.o c.m ; says 1 u", "give": "c.g s.i c.v e0", "once": "w.o c.n c.c e0 ; nudge 3>2", "walk": "c.w t.al c.k", "were": "c.w r.er e0",
  "good": "c.g t.oo c.d", "her": "c.h r.er",
  # ---- list 8, r-controlled
  "over": "l.o | c.v r.er", "before": "c.b l.e + | c.f r.or e0", "first": "c.f r.ir c.st", "hurt": "c.h r.ur c.t",
  "for": "c.f r.or", "under": "s.u c.n | c.d r.er", "start": "c.st r.ar c.t",
  # ---- list 9
  "because": "c.b l.e | c.c t.au c.s e0", "been": "c.b t.ee c.n ; seam 1", "both": "c.b l.o g.th", "buy": "k.bu l.y", "old": "l.o c.ld",
- "does": "c.d b.o + e0 c.s", "goes": "c.g l.o + e0 c.s", "many": "c.m b.a c.n | b.y", "pull": "c.p b.u k.ll", "their": "g.th r.eir",
+ "does": "c.d b.o + e0 c.s ; says 1 u", "goes": "c.g l.o + e0 c.s", "many": "c.m b.a c.n | b.y ; says 1 e ; says 3 ee", "pull": "c.p b.u k.ll ; says 1 oo", "their": "g.th r.eir",
  # ---- list 10, vowel teams
  "please": "c.pl t.ea c.s e0", "each": "t.ea g.ch", "eat": "t.ea c.t", "say": "c.s t.ay", "green": "c.gr t.ee c.n", "read": "c.r t.ea c.d",
- "right": "c.r t.igh c.t", "too": "c.t t.oo", "keep": "c.k t.ee c.p", "away": "b.a | c.w t.ay", "blue": "c.bl t.ue",
+ "right": "c.r t.igh c.t", "too": "c.t t.oo", "keep": "c.k t.ee c.p", "away": "b.a | c.w t.ay ; schwa 0", "blue": "c.bl t.ue",
  # ---- list 11, diphthongs
  "how": "c.h t.ow", "round": "c.r t.ou c.nd", "found": "c.f t.ou c.nd", "draw": "c.dr t.aw", "down": "c.d t.ow c.n", "brown": "c.br t.ow c.n",
  "new": "c.n t.ew", "now": "c.n t.ow", "our": "t.ou c.r", "out": "t.ou c.t", "saw": "c.s t.aw", "grow": "c.gr t.ow", "own": "t.ow c.n",
  "show": "g.sh t.ow", "know": "k.kn t.ow",
  # ---- list 12
- "around": "b.a | c.r t.ou c.nd", "very": "c.v s.e c.r | b.y", "wash": "c.w b.a g.sh", "work": "c.w r.or c.k", "your": "c.y r.our",
- "done": "c.d b.o c.n e0", "eight": "t.eigh c.t", "find": "c.f l.i c.nd", "kind": "c.k l.i c.nd", "laugh": "c.l t.au k.gh",
- "only": "l.o c.n | c.l b.y", "pretty": "c.pr b.e x.tt | b.y ; bv 3>2", "together": "c.t b.o | c.g s.e x.th | r.er ; bv 5>4", "warm": "c.w r.ar c.m",
+ "around": "b.a | c.r t.ou c.nd ; schwa 0", "very": "c.v s.e c.r | b.y ; says 3 ee", "wash": "c.w b.a g.sh ; says 1 ah", "work": "c.w r.or c.k", "your": "c.y r.our",
+ "done": "c.d b.o c.n e0 ; says 1 u", "eight": "t.eigh c.t", "find": "c.f l.i c.nd", "kind": "c.k l.i c.nd", "laugh": "c.l t.au k.gh",
+ "only": "l.o c.n | c.l b.y ; says 3 ee", "pretty": "c.pr b.e x.tt | b.y ; bv 3>2 ; says 1 i ; says 3 ee", "together": "c.t b.o | c.g s.e x.th | r.er ; bv 5>4 ; schwa 1", "warm": "c.w r.ar c.m",
  # ---- list 13, multisyllabic
- "every": "s.e c.v | r.er | b.y", "going": "c.g l.o + | s.i k.ng", "open": "l.o | c.p b.e c.n", "always": "b.a c.l | c.w t.ay c.s",
- "better": "c.b s.e x.tt | r.er ; bv 3>2", "carry": "c.c b.a x.rr | b.y ; bv 3>2", "funny": "c.f s.u x.nn + | b.y ; bv 3>2",
- "yellow": "c.y s.e x.ll | t.ow", "today": "c.t b.o | c.d t.ay", "myself": "c.m l.y + | c.s s.e c.lf", "never": "c.n s.e c.v | r.er",
- "seven": "c.s s.e c.v | b.e c.n", "other": "b.o g.th | r.er", "water": "c.w b.a c.t | r.er", "people": "c.p t.eo | c.p le",
+ "every": "s.e c.v | r.er | b.y ; says 3 ee", "going": "c.g l.o + | s.i k.ng", "open": "l.o | c.p b.e c.n ; schwa 2", "always": "b.a c.l | c.w t.ay c.s ; says 0 ah",
+ "better": "c.b s.e x.tt | r.er ; bv 3>2", "carry": "c.c b.a x.rr | b.y ; bv 3>2 ; says 3 ee", "funny": "c.f s.u x.nn + | b.y ; bv 3>2 ; says 3 ee",
+ "yellow": "c.y s.e x.ll | t.ow", "today": "c.t b.o | c.d t.ay ; schwa 1", "myself": "c.m l.y + | c.s s.e c.lf", "never": "c.n s.e c.v | r.er",
+ "seven": "c.s s.e c.v | b.e c.n ; schwa 3", "other": "b.o g.th | r.er ; says 0 u", "water": "c.w b.a c.t | r.er ; says 1 ah", "people": "c.p t.eo | c.p le",
  # ---- the operator forms that are not on the ELP lists, and not
- "am": "s.a c.m", "has": "c.h s.a c.s", "had": "c.h s.a c.d", "do": "c.d b.o", "did": "c.d s.i c.d", "can": "c.c s.a c.n",
+ "am": "s.a c.m", "has": "c.h s.a c.s", "had": "c.h s.a c.d", "do": "c.d b.o ; says 1 oo", "did": "c.d s.i c.d", "can": "c.c s.a c.n",
  "will": "c.w s.i k.ll", "shall": "g.sh s.a k.ll", "should": "g.sh t.oul c.d", "may": "c.m t.ay", "might": "c.m t.igh c.t", "must": "c.m s.u c.st",
  "not": "c.n s.o c.t",
 }
@@ -253,6 +258,10 @@ def parse(word):
         col += len(s)
     sylls.append((start, col - 1))
     for a in ann:
+        if a.startswith("says "):                           # a vowel saying another vowel's sound: that sound, small, over it
+            _, n_, snd = a.split(); u = units[int(n_)]
+            assert u["kind"] in ("b", "t") and snd.isalpha() and len(snd) <= 3, (word, a)
+            marks.append({"type": "over", "cols": u["cols"], "text": snd}); continue
         op, arg = a.split()
         src, _, dst = arg.partition(">")
         rng = lambda x: (units[int(x.split("-")[0])]["cols"][0], units[int(x.split("-")[-1])]["cols"][-1])
@@ -274,6 +283,10 @@ def parse(word):
         elif op == "seam":
             assert 0 <= int(arg) < col - 1, (word, a)
             marks.append({"type": "seam", "after": int(arg)})
+        elif op == "schwa":                               # a weak vowel: ə over the whole unit
+            u = units[int(arg)]
+            assert u["kind"] in ("b", "t", "s", "l"), (word, a)
+            marks.append({"type": "over", "cols": u["cols"], "text": "ə"})
         elif op == "cup":                                 # a vowel unit saying the short sound of one of its letters: the cup over that letter
             c = int(arg); u = next(u for u in units if c in u["cols"])
             assert u["kind"] == "t" and letters[c]["ch"].lower() in "aeiouy", (word, a)
@@ -357,7 +370,7 @@ def svg_word(word, F=80.0, x0=0.0, cls=True):
         x1 = X(0) - (INKX[p["letters"][0]["ch"]][0] + 0.05) * F
         x2 = X(n - 1) + (INKX[p["letters"][n - 1]["ch"]][1] + 0.05) * F
         out.append(f'<rect class="wt" x="{f(x1)}" y="{f(B - 0.56 * F)}" width="{f(x2 - x1)}" height="{f(0.56 * F)}" rx="{f(0.12 * F)}" fill="var(--line)"/>')
-    has_top = {m["col"] for m in p["marks"] if m["type"] in ("breve", "macron")}
+    has_top = {m["col"] for m in p["marks"] if m["type"] in ("breve", "macron")} | {c for m in p["marks"] if m["type"] == "over" for c in m["cols"]}
     def leaves(col):                                         # how far above the baseline a vault leaves its sender: over its cup or bar, over the dot of an i or j, or over the letter
         if col in has_top: return 1.10
         return 0.97 if p["letters"][col]["ch"] in "ij" else 0.74
@@ -394,6 +407,10 @@ def svg_word(word, F=80.0, x0=0.0, cls=True):
             out.append(f'<line{k(4)} x1="{f(X(m["from"]) - 0.257 * F)}" y1="{f(B + BAR * F)}" x2="{f(X(m["to"]) + 0.257 * F)}" y2="{f(B + BAR * F)}" stroke="{FILL[m["color"]]}" stroke-width="{f(0.05 * F)}" stroke-linecap="round"/>')
         elif t == "macron":
             x = X(m["col"]); out.append(f'<line{k(6)} x1="{f(x - 0.279 * F)}" y1="{f(B - 0.91 * F)}" x2="{f(x + 0.279 * F)}" y2="{f(B - 0.91 * F)}" stroke="{RED}" stroke-width="{f(0.05 * F)}" stroke-linecap="round"/>')
+        elif t == "over":                                   # ə or a borrowed sound, small and red, over the unit
+            x = mid(m["cols"]); fs = 0.50 if m["text"] == "ə" else 0.40
+            yy = 0.98 if any(p["letters"][c]["ch"] in "ijl" for c in m["cols"]) else 0.80   # clear the dot of an i, the top of an l
+            out.append(f'<text{k(6)} x="{f(x)}" y="{f(B - yy * F)}" font-family="Lexend, system-ui, sans-serif" font-size="{f(fs * F)}" text-anchor="middle" fill="{RED}">{m["text"]}</text>')
         elif t == "breve":
             x = X(m["col"]); out.append(f'<path{k(6)} d="M{f(x - 0.257 * F)} {f(B - 0.975 * F)} Q{f(x)} {f(B - 0.775 * F)} {f(x + 0.257 * F)} {f(B - 0.975 * F)}" fill="none" stroke="{RED}" stroke-width="{f(0.05 * F)}" stroke-linecap="round"/>')
         elif t == "vault":
@@ -447,7 +464,7 @@ def svg_strip(words, F=80.0, gap=None, label=None, cls=True, extra_class="", css
     klass = ("nz " + extra_class).strip()
     return f'<svg class="{klass}" viewBox="0 0 {width:.0f} {H:.0f}" role="img" aria-label="{label}"{style}>' + "".join(parts) + "</svg>", width, H
 
-ONE_MARK = ("circle", "swoop", "short", "long", "bond", "r", "box", "cone", "vault", "nudge", "bv", "seam", "apostrophe")
+ONE_MARK = ("circle", "swoop", "short", "long", "bond", "r", "box", "cone", "vault", "nudge", "bv", "seam", "schwa", "says", "apostrophe")
 
 def svg_one_mark(word, mark, F=58.0, label=None, css_height=None):
     """A word with one mark drawn and nothing else, for the legend: the letters in ink and only that mark's lines. The
@@ -485,6 +502,12 @@ def svg_one_mark(word, mark, F=58.0, label=None, css_height=None):
         "seam": lambda e: layer(e) == "nz9",
         "apostrophe": lambda e: False,
     }
+    if mark in ("schwa", "says"):                     # the small text over a vowel: the ə, or the sound it borrows
+        tx = re.findall(r'<text class="nz6"[^>]*>[^<]+</text>', g)
+        keep = [t for t in tx if (t.endswith(">ə</text>")) == (mark == "schwa")]
+        body = "".join(re.sub(r' class="nz\d"', "", e) for e in keep) + re.sub(r' class="nz5"', "", letters)
+        style = f' style="width:{wd:.0f}px;max-width:100%;height:auto"' if css_height is None else f' style="height:{css_height}px;width:auto;max-width:100%"'
+        return f'<svg class="nz one-mark" viewBox="0 0 {wd:.0f} {H:.0f}" role="img" aria-label="{label or word}"{style}>' + body + "</svg>"
     if mark == "r":                                   # the red bar, and the one circle under it
         bars = [e for e in els if layer(e) == "nz4"]
         spans = [tuple(sorted(float(v) for v in re.findall(r'x[12]="(' + num + r')"', e))) for e in bars]
