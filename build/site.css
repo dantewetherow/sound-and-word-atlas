@@ -1058,3 +1058,21 @@ header.site.is-home:not(.pinned) .brand small { font-size: 0.8rem; }
 .ph-cluster h3 { margin: 16px 0 0; font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--soft); font-weight: 500; }
 .ph-odd { opacity: 0.72; }
 .ph-count { color: var(--soft); }
+
+
+/* trial, 22 November 2026: the home page as buttons only, centred in the window */
+.landing.solo { min-height: calc(100svh - 140px); display: flex; align-items: center; }
+.landing.solo .wrap { width: 100%; }
+.home-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 26px 0 6px; }
+.home-grid .door-tile { padding: 16px 18px; display: grid; align-content: start; gap: 4px; }
+.home-grid .door-tile .dn { font-size: 1.25rem; }
+.home-grid .door-tile .pw { font-size: 0.92rem; }
+.home-grid .hg-first { grid-column: 1 / -1; border-color: var(--verb, #b23a2a); padding: 20px 22px; }
+.home-grid .hg-first .dn { font-size: 1.7rem; }
+@media (max-width: 900px) { .home-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) {
+  .home-grid { gap: 8px; }
+  .home-grid .door-tile { padding: 12px 14px; }
+  .home-grid .door-tile:not(.hg-first) .pw { display: none; }
+  .home-grid .door-tile .dn { font-size: 1.05rem; }
+}

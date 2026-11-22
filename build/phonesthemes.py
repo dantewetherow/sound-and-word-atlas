@@ -19,8 +19,8 @@ CLUSTERS = [
     ("gl", "gl-", "light and seeing",
      ["glow", "gleam", "glint", "glitter", "glisten", "glimmer", "glare", "glance", "glimpse", "glass", "gloss", "glaze"],
      None, ["glove", "glue", "globe", "glum"],
-     "Most of these share an old root, <i>*ghel-</i>, to shine, with <i>gold</i> and <i>yellow</i>. So gl- is partly a "
-     "family that stopped looking like one, and its sound kept the meaning together. In one count of written English, about "
+     "Most of these share an old root, <i>*ghel-</i>, to shine, with <i>gold</i> and <i>yellow</i>. So the gl- light words "
+     "are partly one word family and partly words that joined the group later. In one count of written English, about "
      "4 in 10 different gl- words, and 6 in 10 of their uses, had to do with light or seeing (Bergen 2004).", "held"),
     ("sn", "sn-", "the nose and mouth",
      ["sniff", "snout", "sneeze", "snore", "snort", "sniffle", "snuffle", "snarl", "sneer", "snicker"],
@@ -31,7 +31,7 @@ CLUSTERS = [
      ["slide", "slip", "slick", "slither", "slope", "slush", "slime", "sled", "sleek", "slant"],
      None, ["sleep", "slim", "slam"],
      "Firth&rsquo;s own first example (1930). The dictionary count didn&rsquo;t back it up: plenty of sl- words don&rsquo;t "
-     "slide. A cluster can feel strong and still be a lean, not a rule.", "not"),
+     "slide. Many readers notice the pattern; the numbers do not support it.", "not"),
     ("sw", "sw-", "swinging and sweeping",
      ["swing", "sway", "sweep", "swirl", "swoop", "swish", "swivel", "swerve"],
      None, ["sweet", "swan", "swamp"],
@@ -41,29 +41,29 @@ CLUSTERS = [
      ("The family of two", ["two", "twin", "twelve", "twenty", "twice", "between", "twig"]), [],
      "The second row is a real family: all from the old word for two (Indo-European <i>*dwo-</i>). <i>Twist</i> and "
      "<i>twine</i> are in it too, as thread of two strands, and a twig is where a branch splits in two. <i>Twirl</i>, "
-     "<i>tweak</i> and <i>twitch</i> joined by sound. Same letters, two reasons.", "held"),
+     "<i>tweak</i> and <i>twitch</i> share only the sound and a related meaning.", "held"),
     ("str", "str-", "long and thin",
      ["string", "strand", "strap", "straw", "stream", "stripe", "stretch", "straight"],
      None, ["strong", "strange"],
-     "Lines, bands and things pulled out long.", "held"),
+     "Each names something long and narrow, or the act of making something longer.", "held"),
     ("ash", "-ash", "a hard, fast hit",
      ["bash", "crash", "smash", "splash", "clash", "dash", "slash", "flash"],
      None, ["cash", "ash", "wash"],
-     "In <i>wash</i>, the w changes the sound of the a, so it doesn&rsquo;t echo the others. A phonestheme is a sound: the "
-     "same letters with a different sound carry nothing.", "held"),
+     "In <i>wash</i>, the w changes the sound of the a, so it does not belong to the group. A "
+     "phonestheme is a shared sound; the same letters with a different sound do not count.", "held"),
     ("ump", "-ump", "a rounded lump",
      ["bump", "lump", "clump", "stump", "plump", "dump"],
      None, ["jump", "pump"],
-     "A heap, the stump of a tree, a bump in the road: something round that rises.", "held"),
-    ("owl", "-owl", "growls and dark looks",
+     "Each names a small, rounded mass or a raised shape.", "held"),
+    ("owl", "-owl", "angry sounds and looks, and stealthy movement",
      ["growl", "howl", "yowl", "scowl", "prowl", "owl"],
      None, ["bowl"],
-     "<i>Bowl</i> has the letters and not the sound: its ow spells the o of <i>snow</i>. A dog&rsquo;s growl needs no "
-     "translation: the sound alone carries the meaning.", "held"),
+     "<i>Bowl</i> has the letters but not the sound: its ow spells the o of <i>snow</i>, so it does not belong "
+     "to the group.", "held"),
     ("fl", "fl-", "quick, light movement",
      ["flap", "flick", "flutter", "flit", "fling", "flicker", "flip", "fly"],
      None, ["flat", "flag"],
-     "Just short of the bar in the dictionary count, so a weaker lean than gl- or sn-.", "close"),
+     "Just short of significance in the dictionary count, so the evidence is weaker than for gl- or sn-.", "close"),
 ]
 COUNT = {"held": "held up in a count of the whole dictionary", "close": "close, in a count of the whole dictionary",
          "not": "didn&rsquo;t hold up in a count of the whole dictionary"}
@@ -105,9 +105,9 @@ def write(OUT, page, header, footer, X):
 <section class="hero"><div class="wrap">
 <p class="eyebrow t-only"><a href="index.html">Legomorphic spelling</a> &middot; Sound and meaning</p>
 <h1>Sound and meaning: phonesthemes</h1>
-<p class="lead">Some sounds lean toward a meaning. <i>Glow</i>, <i>gleam</i> and <i>glitter</i> all start with gl- and all have to do with light; <i>sniff</i>, <i>snout</i> and <i>sneeze</i> start with sn- and all have to do with the nose. A sound shared like this is a phonestheme.</p>
+<p class="lead">Some groups of words share both a sound and a meaning. <i>Glow</i>, <i>gleam</i> and <i>glitter</i> all start with gl- and all have to do with light; <i>sniff</i>, <i>snout</i> and <i>sneeze</i> start with sn- and all have to do with the nose. A sound shared like this is a phonestheme.</p>
 <p class="sub">It isn&rsquo;t a morpheme. Take gl- away and <i>-ow</i>, <i>-eam</i> and <i>-itter</i> mean nothing, so there&rsquo;s no word sum. And it isn&rsquo;t a rule: every list here ends with words that have the letters and not the meaning. The word is J. R. Firth&rsquo;s (1930), from Greek <i>ph&omacr;n&emacr;</i>, sound, and <i>aisth&emacr;ma</i>, what is felt.</p>
-<p class="sub t-only">To teach: mix the words up and have learners sort them by meaning first, then look at how they start or end. Keep the odd ones in the pile; finding them is half the lesson. The <a href="../studies/phonesthemes.html">word study</a> walks a class through it.</p>
+<p class="sub t-only">To teach: mix the words up and have learners sort them by meaning first, then look at how they start or end. Include the words that don&rsquo;t fit, so learners see that the pattern has exceptions. The <a href="../studies/phonesthemes.html">word study</a> walks a class through it.</p>
 <nav class="ph-toc" aria-label="Clusters">{"".join(toc)}</nav>
 </div></section>
 {"".join(secs)}

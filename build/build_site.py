@@ -417,17 +417,7 @@ OLD_ANCHORS = """<script>(() => { const h = location.hash;
 home_body = f"""{header(0, home=True)}
 {OLD_ANCHORS}
 <main>
-{landing.html_block(LW, doors.door_grid())}
-{walk.section(head='<h2 class="walk-h"><span class="t-only">Mark a word</span><span class="s-only">Pick a word</span></h2><p class="sub t-only">Type a word that&rsquo;s on the site, then tap through it, reading from its letters or spelling from its sounds. The <a href="walk.html">Word walk</a> page has it on its own.</p>', lazy=True, url=False)}
-<section class="about t-only" id="about" aria-labelledby="about-h"><div class="wrap">
-<h2 id="about-h">What&rsquo;s here</h2>
-<div class="cols">
-<div><h3>The path</h3><p>{N} steps in {len(route["bands"])} bands, with {n_words} different words, {n_marked} of them marked, in <a href="progressions.html">Steps</a>. Each step page has its words, the marks it brings in, and the pages in Carney&rsquo;s survey that back it.</p></div>
-<div><h3>To print and present</h3><p><a href="teachers.html">For teachers</a> has printable cards for the Early Literacy Profile (Central Okanagan) high-frequency words and all of Dolch&rsquo;s sight words, and the first session of the staff series with its handouts. <a href="connections.html">Connections</a>, there too, lines the path up with the ELP and Dolch lists and with UFLI Foundations.</p></div>
-<div><h3>The notation</h3><p><a href="notations.html">The marks</a> are with the steps. On the teachers&rsquo; shelf, About explains the notation and its name, Definitions has its words, and Credits names the writers it draws on.</p></div>
-</div>
-{uc(f"steps {DRAFT_FROM} to {N} are a first draft, and a few words show in plain letters until their marking is settled. Next: more families in Parts, starting with <i>accommodate</i>, and a word built from left to right in Words.")}
-</div></section>
+{landing.hero_only(doors.home_grid())}
 </main>
 {footer(0)}"""
 if STANDALONE:

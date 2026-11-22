@@ -422,13 +422,39 @@ def write(OUT, page, header, footer, X):
 <section class="about"><div class="wrap"><ul class="smap-tree"><li><a href="index.html"><b>Home</b></a></li>{"".join(items)}</ul></div></section>""")
 
 
-def door_grid():
+# Every major button on the home page (22 November 2026, Dante's list): the word walk first, then the rest.
+# (href, name, one line, for teachers only)
+HOME_TILES = [   # (href, name for teachers, name in Board view or None, one line, for teachers only)
+    ("walk.html", "Word walk", None, "Look up any word and step through its marks one at a time, then its parts.", False),
+    ("progressions.html", "Scope and sequence", "The path", "The reading and spelling steps in teaching order.", False),
+    ("lists/index.html", "Spelling lists", None, "A list for each step and word family, each with a check.", True),
+    ("parts.html", "Morphemes", "Parts", "Prefixes, suffixes, roots and joins, each with the words on the site that use it.", False),
+    ("studies.html", "Word studies", None, "Presentations for learners: one word family per deck.", False),
+    ("presentations.html", "Teacher presentations", None, "The staff series and single-concept decks, with handouts.", True),
+    ("notations.html", "The marks", None, "Each mark in the notation, shown on one word.", False),
+    ("gym.html", "Sentence gym", "Gym", "Build sentences from each step&rsquo;s words.", False),
+    ("explorations.html", "Explorations", None, "Contractions, ablaut (write, wrote, written), and words to take apart.", False),
+    ("instructions.html", "Print resources", None, "Word cards and affix tent cards.", True),
+    ("connections.html", "Programs", None, "How the steps line up with UFLI, Dolch and the Early Literacy Profile.", True),
+    ("explanations.html", "Reasons and sources", None, "Definitions, the notation&rsquo;s name, credits, and open marking decisions.", True),
+]
+
+
+def home_grid():
+    def tile(i, h, n, board, line, t):
+        name = f'<span class="t-only">{n}</span><span class="s-only">{board}</span>' if board else n
+        return (f'<a class="door-tile{" hg-first" if i == 0 else ""}{" t-only" if t else ""}" href="{h}">'
+                f'<span class="dn">{name}</span><span class="pw">{line}</span></a>')
+    return '<nav class="home-grid" aria-label="The site">' + "".join(tile(i, *x) for i, x in enumerate(HOME_TILES)) + "</nav>"
+
+
+def door_grid(order=None):
     """The four primary buttons for the top of the home page (21 November 2026): the three layers and For teachers, alike.
     Every other page has them in the bar above (header_parts)."""
     return '<nav class="door-grid home-doors" aria-label="Doors">' + "".join(
         f'<a class="door-tile{" t-only" if sw is None else ""}" href="{slug}.html"><span class="dn">{name}</span>'
         f'{f"<span class=sn>{sw}</span>" if sw else ""}<span class="pw t-only">{plain}</span></a>'
-        for slug, name, _, plain, sw in DOORS) + '</nav>'
+        for slug, name, _, plain, sw in ([DOOR[k] for k in order] if order else DOORS)) + '</nav>'
 
 
 def doors_section():
