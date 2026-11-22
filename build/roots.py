@@ -344,7 +344,7 @@ LEG = {
     "students": ["collect", "select", "elect", "lesson", "legend", "logic", "dialogue"],
     "s_lead": "These words come from one old word that meant <i>gather</i>.",
     "uc": "the family follows Etymonline, which draws on Calvert Watkins, and the Indo-European Lexicon, which follows "
-          "Pokorny. On 12 November 2026 it was checked against Watkins&rsquo;s entry, and the words he and Etymonline mark as uncertain (the law branch, and <i>legume</i>) moved to Marginal or debated. Next: draw each word in the notation once its "
+          "Pokorny. On 12 November 2026 it was checked against Watkins&rsquo;s entry. The words he and Etymonline mark as uncertain (the law branch, and <i>legume</i>) moved to Marginal or debated. Next: draw each word in the notation once its "
           "marking is ruled.",
     "label": "Root family: *leg-",
     "desc": "The root *leg-, to gather, to collect, and its family of English words, spelling by spelling, with what each part means.",
