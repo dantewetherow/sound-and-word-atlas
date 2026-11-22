@@ -47,7 +47,7 @@ PAGES = [
     ("letters.html", "progressions", "Letters, names and sounds", "Before step 1: the alphabet in the song's units, as tiles to reveal, with a sound circle under each letter."),
     ("notations.html", "progressions", "The marks", "The marks of Legomorphic Notation, each drawn alone on one word."),
     ("walk.html", "walk", "Words", "Look up a word and walk through it, a move at a time, with its parts."),
-    ("studies.html", "walk", "Word studies", "Presentations for learners: a family of words built a piece at a time, from parts you can feel."),
+    ("studies.html", "walk", "Word studies", "Presentations for learners: one family of words per deck, built a part at a time."),
     ("explorations.html", "walk", "Explorations", "Words to take apart and build: note, notate, notation; contractions; write, wrote, written."),
     ("contractions.html", "walk", "Squeezed into oblivion", "Contractions: the vowel squeezed out, the apostrophe in its place: the apostrophe catastrophe."),
     ("ablaut.html", "walk", "What's that ablaut?", "write, wrote, written: the vowel changes to mark time, and the spelling around it does its usual jobs."),

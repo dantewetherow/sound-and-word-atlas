@@ -61,7 +61,7 @@ def check_text(text, where, learner=False, out=None):
             if m: out.append(("W", where, s, f"“{m.group(0)}”: {note}"))
         for pat, note in FRAGMENT:
             if re.match(pat, s): out.append(("F", where, s, note + ": replace with a full sentence that states the result"))
-        n = words(s)
+        n = 0 if s.count("→") >= 3 or s.count("+") >= 4 else words(s)   # a run of word sums is a list, not a sentence
         if learner and n > 12: out.append(("L", where, s, f"{n} words on a learner line (12 or fewer)"))
         if not learner and n > 25: out.append(("L", where, s, f"{n} words (25 or fewer)"))
         if "—" in s: out.append(("C", where, s, "em dash"))
@@ -114,7 +114,8 @@ def run(OUT, paths=None):
     return res
 
 
-CLEAN = ["studies/phonesthemes.html", "lists/phonesthemes.html"]   # reviewed against the reference, 22 November 2026
+CLEAN = ["studies/phonesthemes.html", "lists/phonesthemes.html",   # reviewed against the reference, 22 November 2026
+         "studies/per.html", "studies/education.html", "studies/leg.html", "studies/sign.html", "studies.html", "about.html"]
 
 
 if __name__ == "__main__":

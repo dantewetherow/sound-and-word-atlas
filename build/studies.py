@@ -21,9 +21,9 @@ STUDIES = [{
     "root": "*per-", "root_page": "roots/per.html", "list": "lists/family-per.html",
     "words": ["experiment", "experience", "expert", "peril", "pirate", "fear", "experimental", "experienced", "expertise",
               "perilous", "empirical", "experiential", "experimentation", "fearful"],
-    "blurb": "Two long words, built from parts a learner can feel: <i>ex-</i> (out), <i>per</i> (try), <i>-ment</i> and "
-             "<i>-ence</i>. Read from the end, the parts give the meaning: an experiment is a trying-out. Then why the e is "
-             "short in one and long in the other, and the family the root keeps: <i>expert</i>, <i>peril</i>, <i>pirate</i>, <i>fear</i>.",
+    "blurb": "Two long words built from the same parts: <i>ex-</i> (out), <i>per</i> (try), and <i>-ment</i> or <i>-ence</i>. "
+             "Read from the end, the parts give the meaning: an experiment is a trying-out. Then why the e is short in one "
+             "word and long in the other. Last, other words from the root: <i>expert</i>, <i>peril</i>, <i>pirate</i>, <i>fear</i>.",
 }, {
     "slug": "education",
     "title": "From duct to education",
@@ -31,9 +31,9 @@ STUDIES = [{
     "root": "*deuk-", "root_page": "roots/deuk.html", "list": "lists/family-deuk.html",
     "words": ["duct", "produce", "product", "production", "reduce", "reduction", "conduct", "educate", "education",
               "educational", "educator", "miseducation", "introduce", "introduction", "aqueduct"],
-    "blurb": "A duct leads air along, and duce and duct take turns: <i>produce</i>, <i>product</i>. Then <i>ex-</i> shrinks to "
-             "<i>e-</i>, and <i>education</i> is built a part at a time, with the e of <i>-ate</i> dropping out and the i of "
-             "<i>-ion</i> taking over its job, up to <i>educational</i> and <i>miseducation</i>. Last, where the beat moves.",
+    "blurb": "A duct leads air along, and duce and duct take turns: <i>produce</i>, <i>product</i>. Then <i>ex-</i> becomes "
+             "<i>e-</i>, and <i>education</i> is built a part at a time. The e of <i>-ate</i> drops out, and the i of <i>-ion</i> "
+             "makes the a long. The study ends with <i>educational</i>, <i>miseducation</i> and where the stress falls.",
 }, {
     "slug": "leg",
     "title": "Gather, read, say",
@@ -42,10 +42,10 @@ STUDIES = [{
     "words": ["collect", "collection", "select", "selection", "elect", "election", "lecture", "lesson", "legend", "legendary",
               "legible", "illegible", "lexicon", "lexical", "logic", "logical", "dialogue", "prologue", "catalogue", "dialect",
               "intellect", "intelligent", "eligible", "neglect", "recollect", "legomorphic", "legomorphics", "prolegomenon"],
-    "blurb": "One old word for <i>gather</i> and its three roads: gather and choose (<i>collect</i>, <i>select</i>), read in "
-             "Latin (<i>lecture</i>, <i>lesson</i>, <i>legend</i>, <i>legible</i>), and say in Greek (<i>lexicon</i>, "
-             "<i>logic</i>, <i>dialogue</i>). How a lesson was first a reading, what a legend is on a map, and how the "
-             "notation&rsquo;s own name is built. And one look-alike: the bricks.",
+    "blurb": "One old word for <i>gather</i>, and three meanings: choose (<i>collect</i>, <i>select</i>), read in "
+             "Latin (<i>lecture</i>, <i>legend</i>), and say in Greek (<i>lexicon</i>, <i>logic</i>). A lesson "
+             "was first a reading. A legend on a map is the key you read. The study builds the notation&rsquo;s own name, "
+             "and ends with a look-alike: LEGO, from Danish.",
 }, {
     "slug": "sign",
     "title": "The g in sign",
@@ -55,8 +55,8 @@ STUDIES = [{
               "design", "designer", "designate", "designation", "assign", "assignment", "resign", "resignation", "consign",
               "insignia", "seal", "sigil"],
     "blurb": "The classic question: why is there a g in <i>sign</i> when you can&rsquo;t hear it? <i>Signal</i>, <i>signature</i> "
-             "and <i>signify</i> say it, and the spelling keeps the family together. How the quiet g makes the i spell its name, "
-             "how <i>design</i> marks out a plan, the sign matrix, and the little sign that lost its g: <i>seal</i>.",
+             "and <i>signify</i> sound it, and the spelling keeps the same part in all of them. Then: how the silent g makes the i "
+             "long, <i>design</i> as marking out, and the sign matrix. Last, <i>seal</i>: a sign that lost its g.",
 }, {
     "slug": "phonesthemes",
     "title": "Glow, gleam, glitter",
@@ -66,9 +66,9 @@ STUDIES = [{
               "slither", "swing", "swirl", "twist", "twirl", "twin", "twelve", "growl", "howl", "scowl", "bash", "crash", "smash",
               "bump", "lump", "clump"],
     "blurb": "Why do <i>glow</i>, <i>gleam</i> and <i>glitter</i> all start with gl-, and <i>sniff</i>, <i>snout</i> and "
-             "<i>sneeze</i> with sn-? Learners sort words before anything is explained, take gl- away to see that it has no "
-             "meaning of its own, find the words that don&rsquo;t fit, and learn that many gl- and tw- words share an old root. "
-             "Then they re-sort and make up words of their own.",
+             "<i>sneeze</i> with sn-? Learners sort words before anything is explained. They take gl- away to see that it "
+             "means nothing alone, and find the words that don&rsquo;t fit. Then they learn that many gl- and tw- words share "
+             "an old root. Then they sort again and make up words of their own.",
 }]
 
 
@@ -396,15 +396,15 @@ def per_deck():
     D.slide("per", f"""<h2 class="head"><b class="r">per</b>: try, take a risk</h2>
 <div class="fam">{cells}</div>
 <p class="q" data-s="5">A very old word for <b>try</b>, in many words.</p>""",
-            "All four come from the root *per-, to try, to risk: <i>expert</i> from Latin <i>expertus</i>, tried; <i>peril</i> from "
-            "<i>per&imacr;culum</i>, a trial, a danger; <i>pirate</i> from Greek <i>peira</i>, a trial; <i>fear</i> from Old English "
-            "<i>f&aelig;r</i>, a danger, a word English kept from the start.", steps=5)
+            "All four come from the root *per-, to try, to risk. <i>Expert</i> is from Latin <i>expertus</i>, tried, and <i>peril</i> "
+            "from <i>per&imacr;culum</i>, a trial, a danger. <i>Pirate</i> is from Greek <i>peira</i>, a trial. <i>Fear</i> is "
+            "from Old English <i>f&aelig;r</i>, a danger: English has had it from the start.", steps=5)
 
     D.slide("Build experiment", f"""<h2 class="head">Build it</h2>
 {join(["ex", "peri", "ment"], ["out", "try", "the doing"], word("experiment", 150), 1,
       "Read it from the end: <b>the doing</b> of <b>trying</b> it <b>out</b>. An experiment is a trying-out.")}""",
             "Word sum: ex + peri + ment &rarr; <i>experiment</i>. Read from the last part back, the parts give the meaning in "
-            "order: the suffix says what kind of word it is (a thing, an act), and the rest says what of.", steps=4)
+            "order. The suffix tells you what kind of word it is (a thing, an act). The rest tells you what it is about.", steps=4)
     D.slide("Build experience", f"""<h2 class="head">And the other one</h2>
 {join(["ex", "peri", "ence"], ["out", "try", "a thing you have"], word("experience", 150), 1,
       "From the end: <b>what you have</b> from <b>trying</b> things <b>out</b>. Experience is what trying leaves you with.")}""",
@@ -414,12 +414,12 @@ def per_deck():
 
     # 20 November 2026: the e is long or short by what comes after the i, not by where the syllable breaks (that was
     # circular: the break is chosen from the sound). Some say exPEERiment, as Merriam-Webster allows.
-    D.slide("Listen to the e", f"""<h2 class="head">Listen to the e</h2>
+    D.slide("Listen to the e", f"""<h2 class="head">The e is short in one word and long in the other</h2>
 <div class="ishas"><h3>i, then a consonant</h3><h3>i, then a vowel</h3>
 <p class="typed" style="font-size:80px">exp<b class="r">e</b>r<span class="diff">i</span><b style="color:var(--ink);text-decoration:underline">m</b>ent</p>
 <p class="typed" data-s="2" style="font-size:80px">exp<b class="r">e</b>r<span class="diff">i</span><b style="text-decoration:underline">e</b>nce</p>
 <p data-s="1" style="font-size:34px;color:var(--soft)">The e is short:<br>ex-<b>PAIR</b>-i-ment</p>
-<p data-s="3" style="font-size:34px;color:var(--soft)">The i reaches back, and the e spells its name: ex-<b>PEER</b>-i-ence</p>
+<p data-s="3" style="font-size:34px;color:var(--soft)">The i makes the e long:<br>ex-<b>PEER</b>-i-ence</p>
 </div>
 <p class="q" data-s="4">Some say ex-<b>PEER</b>-i-ment too: same parts, same spelling.</p>""",
             "An i before a vowel makes the vowel before it long (<i>period</i>, <i>serious</i>); before a consonant it doesn&rsquo;t "
@@ -429,7 +429,7 @@ def per_deck():
     D.slide("And the i", f"""<h2 class="head">And the i?</h2>
 <div class="stack"><p class="typed">exper<span class="diff">i</span>ment</p><p class="typed">exper<span class="diff">i</span>ence</p></div>
 <p class="lede" data-s="1">Both words have an i after <b class="r">per</b>. It&rsquo;s left over from the old Latin word.</p>
-<p class="q" data-s="2">You don&rsquo;t need to know why it&rsquo;s there to read them. The family is what matters.</p>""",
+<p class="q" data-s="2">You can read both words without knowing why the i is there.</p>""",
             "The i is Latin&rsquo;s theme vowel: <i>exper&imacr;r&imacr;</i> is a verb of the class whose stems end in &imacr; "
             "(<i>aud&imacr;re</i>: <i>audience</i>, <i>auditor</i>). It marks the verb&rsquo;s class and carries no meaning. "
             "<i>Expert</i>, from <i>expertus</i>, has none: the root is per. In <i>experience</i> it also does a job in sound, "
@@ -438,9 +438,9 @@ def per_deck():
     six = ["experiment", "experience", "expert", "peril", "pirate", "fear"]
     D.slide("The family", f"""<h2 class="head">One old word, a family of words</h2>
 <div class="fam6">{"".join(f'<div data-s="{k + 1}">{word(w, 92)}</div>' for k, w in enumerate(six))}</div>
-<p class="q" data-s="7">Try, risk, test: one family.</p>""",
-            "The whole family, with <i>empirical</i>, <i>perilous</i>, <i>parlous</i> and <i>fearful</i>, and the roads each word "
-            "came by, is on the <a href=\"../roots/per.html\">*per- page</a>.", steps=7)
+<p class="q" data-s="7">All six come from one old word meaning try, risk or test.</p>""",
+            "The whole family, with <i>empirical</i>, <i>perilous</i>, <i>parlous</i> and <i>fearful</i>, and how each word "
+            "came into English, is on the <a href=\"../roots/per.html\">*per- page</a>.", steps=7)
 
     D.slide("Your turn", f"""<h2 class="head">Your turn</h2>
 <ol class="blanks">
@@ -484,9 +484,9 @@ def educ_deck():
 
     felt("duce and duct take turns", [("pro<b>duce</b>", "lead forward: make"), ("pro<b>duct</b>", "what is made"),
                                       ("re<b>duce</b>", "lead back: make less"), ("re<b>duct</b>ion", "the making less")],
-         "The verb says <b>duce</b>. Add an ending, and it says <b>duct</b>.",
+         "The verb is spelled with <b>duce</b>. Add an ending, and it is spelled with <b>duct</b>.",
          "duce is Latin&rsquo;s present form, duct its past form: <i>produce</i>, <i>product</i>, <i>production</i>; "
-         "<i>reduce</i>, <i>reduction</i>. The front part says which way the leading goes: pro, forward; re, back; "
+         "<i>reduce</i>, <i>reduction</i>. The front part tells you which way the leading goes: pro, forward; re, back; "
          "intro, inside; con, together.")
 
     D.slide("ex becomes e", f"""<h2 class="head"><b class="r">ex-</b> means out. Before d, it gets shorter.</h2>
@@ -509,16 +509,16 @@ def educ_deck():
 <div data-s="2">{word("notation", 120)}<span class="g">no e now: the i of <b class="r">-ion</b> does the same job</span></div>
 </div>
 <p class="q" data-s="3">Letters can drop out, and others do their jobs.</p>""",
-            "The notation draws it: in <i>notate</i> the vault comes from the final e; in <i>notation</i> the e is gone and the "
+            "The notation draws it. In <i>notate</i> the vault comes from the final e. In <i>notation</i> the e is gone. The "
             "vault comes from the i of -ion, which stands before another vowel (the pattern on the "
             "<a href=\"../roots/per.html#break-h\">*per- page</a>). The t spells sh before i and a vowel: the green bar under ti.", steps=3)
 
     D.slide("Build educate", f"""<h2 class="head">Build it</h2>
 {join(["e", "duc", "ate"], ["out", "lead, bring up", "do it"], word("educate", 150), 1,
-      "Read it from the end: <b>do</b> the <b>bringing up</b>, the leading <b>out</b>. To educate is to bring someone up and on.")}""",
+      "Read it from the end: <b>do</b> the <b>bringing up</b>, the leading <b>out</b>. To educate is to bring someone up: to raise and teach them.")}""",
             "Word sum: e + duc + ate &rarr; <i>educate</i>. Latin <i>&emacr;duc&amacr;re</i>, to bring up, to rear, a verb "
-            "beside <i>&emacr;d&umacr;cere</i>, to lead out. To educate was first to raise a child; leading out what is in a "
-            "learner is a later reading of the word, and a fair one (the <a href=\"../roots/deuk.html\">*deuk- page</a>).", steps=4)
+            "beside <i>&emacr;d&umacr;cere</i>, to lead out. To educate was first to raise a child. Reading it as leading "
+            "out what is in a learner came later, and it fits the parts (the <a href=\"../roots/deuk.html\">*deuk- page</a>).", steps=4)
     D.slide("Build education", f"""<h2 class="head">Name the doing</h2>
 {join(["e", "duc", "at(e)", "ion"], ["out", "lead", "do it", "the doing"], word("education", 150), 1,
       "From the end: <b>the doing</b> of <b>bringing up</b> and leading <b>out</b>.")}""",
@@ -540,18 +540,19 @@ def educ_deck():
 <p class="syl"><span class="hit">ED</span><span class="dot">&middot;</span><span>u</span><span class="dot">&middot;</span><span>cate</span></p>
 <p class="syl" data-s="1"><span>ed</span><span class="dot">&middot;</span><span>u</span><span class="dot">&middot;</span><span class="hit">CA</span><span class="dot">&middot;</span><span>tion</span></p>
 <p class="syl" data-s="2"><span>ed</span><span class="dot">&middot;</span><span>u</span><span class="dot">&middot;</span><span class="hit">CA</span><span class="dot">&middot;</span><span>tion</span><span class="dot">&middot;</span><span>al</span></p>
-<p class="lede" data-s="3">The beat moves, and the spelling stays the same. Listen to the d, too: many people say <b>ED-ju-cate</b>, and the spelling keeps the d of <b class="r">duc</b>.</p>""",
+<p class="lede" data-s="3">The beat moves, and the spelling stays the same.</p>
+<p class="lede" data-s="4">Many people say <b>ED-ju-cate</b>. The spelling keeps the d of <b class="r">duc</b>.</p>""",
             "-ion pulls the stress to the syllable just before it: EDucate, eduCAtion, eduCAtional. The a is long in all three. "
-            "The d and the u blend into the sound of j in most speech (as in <i>gradual</i> and <i>procedure</i>); the spelling "
-            "keeps the parts, and the notation has no mark for the blend.", steps=3)
+            "In most speech the d and the u blend into the sound of j, as in <i>gradual</i> and <i>procedure</i>. The spelling "
+            "keeps the parts, and the notation has no mark for the blend.", steps=4)
 
     six = [("duct", "a pipe that leads air"), ("product", "what is made"), ("reduce", "make less"),
            ("conduct", "how you lead yourself"), ("education", "the bringing up"), ("team", "English kept its own: a group pulling together")]
     cells = "".join(f'<div data-s="{k + 1}">{word(w, 84)}<span class="g">{g}</span></div>' for k, (w, g) in enumerate(six))
     D.slide("The family", f"""<h2 class="head">One old word for <b class="r">lead</b>, a family of words</h2>
 <div class="fam">{cells}</div>""",
-            "<i>Team</i> is English&rsquo;s own: in the Germanic languages the root&rsquo;s d became t, so <i>tug</i>, <i>tow</i>, "
-            "<i>tie</i> and <i>team</i> start with t where Latin&rsquo;s words start with d. The whole family is on the "
+            "<i>Team</i> came down through English, not Latin. In the Germanic languages the root&rsquo;s d became t. "
+            "So <i>tug</i>, <i>tow</i>, <i>tie</i> and <i>team</i> start with t where Latin&rsquo;s words start with d. The whole family is on the "
             "<a href=\"../roots/deuk.html\">*deuk- page</a>.", steps=6)
 
     D.slide("Your turn", f"""<h2 class="head">Your turn</h2>
@@ -582,8 +583,8 @@ def leg_deck():
 
     D.slide("gather", f"""<h2 class="head"><b class="r">leg</b>: the oldest meaning is <b>gather</b></h2>
 {join(["col", "lect"], ["together", "gathered"], word("collect", 150), 1, "To <b>collect</b> is to gather things <b>together</b>.")}""",
-            "The root <i>*leg-</i> meant to gather, to collect. Latin made it <i>legere</i>, and after a prefix its past form "
-            "is <i>-lectus</i>, which gives English lect: col + lect, where col is con, together, made like the l after it.", steps=4)
+            "The root <i>*leg-</i> meant to gather, to collect. Latin made it <i>legere</i>. After a prefix its past form is "
+            "<i>-lectus</i>, which gives English lect. In col + lect, col is con, together, changed to match the l after it.", steps=4)
 
     def felt(head, rows, says, note):
         cells = "".join(f'<div data-s="{k + 1}">{word(w, 96)}<span class="g">{g}</span></div>' for k, (w, g) in enumerate(rows))
@@ -630,34 +631,34 @@ def leg_deck():
              ("say", "Greek <i>legein</i>", ["<b>lex</b>icon", "<b>log</b>ic", "dia<b>logue</b>", "pro<b>logue</b>"])]
     cols = "".join(f'<div data-s="{k + 1}"><h3>{h}<small>{s}</small></h3>' + "".join(f'<span class="tw2">{w}</span>' for w in ws) + "</div>"
                    for k, (h, s, ws) in enumerate(roads))
-    D.slide("Three roads", f"""<h2 class="head">One old word, three roads</h2>
+    D.slide("Three roads", f"""<h2 class="head">One old word, three meanings</h2>
 <div class="roads3">{cols}</div>
 <p class="q" data-s="4">Gather, choose, read, say: all <b>leg</b>.</p>""",
-            "Speakers of Greek and Latin carried the root into words about words: gathering words is choosing them, reading them "
-            "and saying them. English borrowed the family again and again, by many roads.", steps=4)
+            "Greek and Latin used the root for words about words: gathering words, choosing them, reading them and saying them. "
+            "English borrowed from this family many times, from Latin, Greek and French.", steps=4)
 
     D.slide("legend", f"""<h2 class="head">A <b class="r">legend</b> is something to read</h2>
 {join(["leg", "end"], ["read", "to be"], word("legend", 150), 1,
-      "From the end: something <b>to be read</b>. On a map, the legend is the key you read to understand the marks.")}""",
+      "From the end: something <b>to be read</b>. On a map, the legend is the key to the marks.")}""",
             "Medieval Latin <i>legenda</i>, things to be read, first the lives of saints read aloud. Later a legend was also the "
             "words written on a coin or a map, and so the key to a map&rsquo;s marks. This site was called <i>A Legend for "
             "English Words</i> for a week in November 2026.", steps=4)
 
-    D.slide("lesson", f"""<h2 class="head">Words wear down as they travel</h2>
+    D.slide("lesson", f"""<h2 class="head">Spellings change when words are borrowed</h2>
 <div class="chain">
 <p data-s="1">lectio<small>Latin: a reading</small></p>
-<p data-s="2">le&ccedil;on<small>French: the c and t worn away</small></p>
+<p data-s="2">le&ccedil;on<small>French: the c and t dropped out</small></p>
 <p data-s="3">{word("lesson", 110)}</p>
 </div>
 <p class="q" data-s="4">A <b>lesson</b> was first a reading.</p>""",
             "Latin <i>lectio</i>, a reading (lect + ion), became Old French <i>le&ccedil;on</i>, and English <i>lesson</i>. "
-            "The spelling no longer shows lect, but the family still holds it: a lesson, a lecture, a lectern to read from.", steps=4)
+            "The spelling no longer shows lect. The meaning still links it to <i>lecture</i> and <i>lectern</i>, a stand to read from.", steps=4)
 
     D.slide("Build legomorphic", f"""<h2 class="head">Build the notation&rsquo;s name</h2>
 {join(["leg", "o", "morph", "ic"], ["gather", "I", "form", "to do with"], word("legomorphic", 140), 1,
       "From the end: <b>to do with</b> the <b>forms I gather</b>. Legomorphic: how sounds and letters gather into words.")}""",
-            "Word sum: leg + o + morph + ic &rarr; <i>legomorphic</i>. The o is the ending for I in Greek and Latin alike, so "
-            "<i>leg&omacr;</i> is I gather, as Latin <i>veto</i> is I forbid; morph is Greek <i>morph&emacr;</i>, form. The verb in both languages, with the poets&rsquo; lines, is in <a href='../roots/leg.html#lego-h'>Leg&omacr; in Latin and in Greek</a>.", steps=4)
+            "Word sum: leg + o + morph + ic &rarr; <i>legomorphic</i>. The o is the ending for I in Greek and Latin alike. So "
+            "<i>leg&omacr;</i> is I gather, as Latin <i>veto</i> is I forbid. Morph is Greek <i>morph&emacr;</i>, form. The verb in both languages, with the poets&rsquo; lines, is in <a href='../roots/leg.html#lego-h'>Leg&omacr; in Latin and in Greek</a>.", steps=4)
 
     D.slide("legomorphics", f"""<h2 class="head">Sounds and words, assembled</h2>
 <div class="pair" style="margin-top:0">{word("legomorphics", 140)}</div>
@@ -677,9 +678,9 @@ def leg_deck():
     D.slide("The family", f"""<h2 class="head">One old word for <b class="r">gather</b>, a family of words</h2>
 <div class="fam6">{"".join(f'<div data-s="{k + 1}">{word(w, 84)}</div>' for k, w in enumerate(six))}</div>
 <p class="q" data-s="7">Gather, choose, read, say.</p>""",
-            "The whole family, with lig and lect taking turns (<i>eligible</i>, <i>elect</i>; <i>intelligent</i>, <i>intellect</i>), "
-            "the words the sources hedge (<i>legal</i>, <i>loyal</i>), and <i>prolegomenon</i>, is on the "
-            "<a href='../roots/leg.html'>*leg- page</a>.", steps=7)
+            "The whole family is on the <a href='../roots/leg.html'>*leg- page</a>. It shows lig and lect taking turns "
+            "(<i>eligible</i>, <i>elect</i>; <i>intelligent</i>, <i>intellect</i>), the words the sources disagree about "
+            "(<i>legal</i>, <i>loyal</i>), and <i>prolegomenon</i>.", steps=7)
 
     D.slide("Your turn", f"""<h2 class="head">Your turn</h2>
 <ol class="blanks">
@@ -692,7 +693,7 @@ def leg_deck():
 
     D.slide("For teachers", f"""<h2 class="head">For teachers</h2>
 <p class="lede">Word sums: col + lect &rarr; <i>collect</i>; se + lect &rarr; <i>select</i>; lect + ure &rarr; <i>lecture</i>; leg + end &rarr; <i>legend</i>; leg + ible &rarr; <i>legible</i>; lex + ic + on &rarr; <i>lexicon</i>; log + ic &rarr; <i>logic</i>; leg + o + morph + ic &rarr; <i>legomorphic</i>.</p>
-<p class="lede">The family follows Etymonline and the Indo-European Lexicon on <i>*leg-</i>, with Wiktionary on Greek <i>l&eacute;g&omacr;</i> and Latin <i>leg&omacr;</i>. The teacher&rsquo;s page is <a href="../roots/leg.html">*leg-</a>, where <a href="../roots/leg.html#lego-h">Leg&omacr; in Latin and in Greek</a> follows the verb through the poets, from a last breath to a name read on a tomb; the list to print is the <a href="../lists/family-leg.html">*leg- spelling list</a>.</p>
+<p class="lede">The family follows Etymonline and the Indo-European Lexicon on <i>*leg-</i>, with Wiktionary on Greek <i>l&eacute;g&omacr;</i> and Latin <i>leg&omacr;</i>. The teacher&rsquo;s page is <a href="../roots/leg.html">*leg-</a>. Its section <a href="../roots/leg.html#lego-h">Leg&omacr; in Latin and in Greek</a> follows the verb through the poets, from a last breath to a name read on a tomb. The list to print is the <a href="../lists/family-leg.html">*leg- spelling list</a>.</p>
 <p class="lede">The words with marks are drawn in Legomorphic Notation; the marks are on the <a href="../notations.html">Notations</a> page.</p>""", cls="mid")
     return D
 
@@ -738,7 +739,7 @@ def sign_deck():
 
     D.slide("The g keeps the family", f"""<h2 class="head">One part, one spelling</h2>
 <div class="duo">
-<figure data-s="1">{word("sign", 150)}<figcaption>the g is quiet</figcaption></figure>
+<figure data-s="1">{word("sign", 150)}<figcaption>the g is silent</figcaption></figure>
 <figure data-s="2">{word("signal", 150)}<figcaption>the g is said</figcaption></figure>
 </div>
 <p class="q" data-s="3">Keep the g, and you can <b>see</b> the family.</p>""",
@@ -746,22 +747,22 @@ def sign_deck():
             "like this inert: silent in one word, said in another (<i>A Survey of English Spelling</i>, 1994: 41). The cone keeps "
             "the g in the same place in every word of the family.", steps=3)
 
-    D.slide("Quiet g, long i", f"""<h2 class="head">When the g is quiet, the <b class="r">i</b> spells its name</h2>
+    D.slide("Silent g, long i", f"""<h2 class="head">When the g is silent, the <b class="r">i</b> spells its name</h2>
 <div class="pair" style="margin-top:20px" data-s="1">{word("sign", 120)}{word("find", 120)}{word("child", 120)}</div>
 <p class="syl" data-s="2" style="margin-top:40px"><span class="hit">sig</span><span class="dot">&middot;</span><span>nal</span></p>
 <p class="q" data-s="3">When the g is said, it closes the syllable: <b>sig</b>. The i is short.</p>""",
             "Sign, find, child: the i spells its name with no e after it to make it long (Carney&rsquo;s rules I.11 and I.12). In "
             "<i>signal</i> the g closes the syllable and the i is short. Venezky calls this a compensatory alternation: the vowel "
-            "is long where the consonant goes quiet.", steps=3)
+            "is long where the consonant is silent.", steps=3)
 
     D.slide("Build design", f"""<h2 class="head">Build <b class="r">design</b></h2>
 {join(["de", "sign"], ["out", "mark"], word("design", 150), 1, "From the end: <b>mark</b> it <b>out</b>. A design is a plan, marked out.")}""",
-            "Word sum: de + sign &rarr; <i>design</i>, from Latin <i>d&emacr;sign&amacr;re</i>, to mark out. The g is quiet again: "
+            "Word sum: de + sign &rarr; <i>design</i>, from Latin <i>d&emacr;sign&amacr;re</i>, to mark out. The g is silent again: "
             "sign ends the word.", steps=4)
 
-    fam("The g stays <b class='r'>quiet</b>", [("designer", "someone who designs"), ("assign", "to give someone a job"),
+    fam("The g stays <b class='r'>silent</b>", [("designer", "someone who designs"), ("assign", "to give someone a job"),
                                               ("assignment", "a job you are given"), ("resign", "to give up a job")],
-        "The endings <b>-er</b> and <b>-ment</b> don&rsquo;t wake the g up.",
+        "With <b>-er</b> and <b>-ment</b>, the g is still silent.",
         "English endings after sign leave the g silent: <i>signs</i>, <i>signing</i>, <i>designer</i>, <i>assignment</i>. "
         "<i>Assign</i> is as + sign: Latin <i>ad-</i>, to, written <i>as-</i> before the s, so each part brings its own s. "
         "<i>Resign</i> is re + sign: to sign back, to give up.")
@@ -794,7 +795,7 @@ def sign_deck():
     D.slide("seal", f"""<h2 class="head">A little sign that lost its g</h2>
 <div class="chain">
 <p data-s="1">sigillum<small>Latin: a little sign</small></p>
-<p data-s="2">seel<small>French: the g worn away</small></p>
+<p data-s="2">seel<small>French: the g dropped out</small></p>
 <p data-s="3">{word("seal", 110)}</p>
 </div>
 <p class="q" data-s="4">A <b>seal</b> was a little sign, pressed into wax.</p>""",
@@ -809,11 +810,11 @@ def sign_deck():
 <li>Wait for the green <span class="gap"><span class="ans" data-s="3">signal</span></span>.</li>
 </ol>""",
             "Say each sentence with the blank first, and let the class choose before the click shows the word. Then ask: in "
-            "which word is the g quiet? The <a href='../lists/family-sign.html'>spelling list</a> has more to build and use.", steps=3)
+            "which word is the g silent? The <a href='../lists/family-sign.html'>spelling list</a> has more to build and use.", steps=3)
 
     D.slide("For teachers", f"""<h2 class="head">For teachers</h2>
 <p class="lede">Word sums: sign + al &rarr; <i>signal</i>; sign + at(e) + ure &rarr; <i>signature</i>; de + sign &rarr; <i>design</i>; de + sign + er &rarr; <i>designer</i>; as + sign + ment &rarr; <i>assignment</i>; sign + i + fy &rarr; <i>signify</i>; sign + i + fic + ant &rarr; <i>significant</i>.</p>
-<p class="lede">The g follows Carney and Venezky, as the site ruled on 12 November 2026; Chomsky and Halle used <i>sign</i> and <i>signify</i> for the same point. The root under Latin <i>signum</i> is debated, follow or cut. The teacher&rsquo;s page is <a href="../roots/sign.html">sign</a>, with the root, Saussure&rsquo;s signifier, and the sources; the list to print is the <a href="../lists/family-sign.html">sign spelling list</a>.</p>""", cls="mid")
+<p class="lede">The g follows Carney and Venezky, as the site ruled on 12 November 2026. Chomsky and Halle used <i>sign</i> and <i>signify</i> for the same point. Where Latin <i>signum</i> comes from is debated: a root meaning follow, or one meaning cut. The teacher&rsquo;s page is <a href="../roots/sign.html">sign</a>, with the root, Saussure&rsquo;s signifier, and the sources. The list to print is the <a href="../lists/family-sign.html">sign spelling list</a>.</p>""", cls="mid")
     return D
 
 
@@ -987,12 +988,12 @@ def write(OUT, door_page):
 <p class="deck-links"><a class="btn" href="studies/{s['slug']}.html">Open the word study</a> <span class="t-only">&middot; for teachers: {f'<a href="{s["list"]}">the {s["root"]} page</a>' if s["root_page"] == s["list"] else f'<a href="{s["root_page"]}">the {s["root"]} page</a> and <a href="{s["list"]}">its spelling list</a>'}</span></p>
 </article>""")
     door_page("studies", "Word studies · Sounds and Words, Assembled",
-              "Presentations for learners: a family of words built a piece at a time, from parts you can feel.",
+              "Presentations for learners: one family of words per deck, built a part at a time.",
               f"""<section class="hero door-hero"><div class="wrap">
 <p class="eyebrow t-only">Words &middot; for learners</p>
 <h1>Word studies</h1>
-<p class="lead">Presentations for learners. Each takes one family of words and builds it a piece at a time: what each part means, how the parts join, and how to read the word they make.</p>
-<p class="sub t-only">Click, tap, or press the right arrow for each next piece; the left third of a slide goes back. N, or the Notes button that shows when you move the mouse, opens a strip of teacher&rsquo;s notes along the bottom: word sums, the history and sources. Each study is linked from its words in the word walk, its root page and its spelling list.</p>
+<p class="lead">Presentations for learners, one family of words each. A study builds the words a part at a time: what each part means, how the parts join, and how to read the result.</p>
+<p class="sub t-only">Click, tap, or press the right arrow for each next piece; the left third of a slide goes back. N, or the Notes button, opens teacher&rsquo;s notes along the bottom: word sums, history and sources. The button shows when you move the mouse. Each study is linked from its words in the word walk, its root page and its spelling list.</p>
 </div></section>
 <section class="about"><div class="wrap">
 {"".join(cards)}
