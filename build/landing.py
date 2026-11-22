@@ -83,6 +83,28 @@ def hero_only(doors_html):
 </div></section>"""
 
 
+def morph_block(LW):
+    """note to notate to notation, played once when it scrolls into view. On the About page since 22 November 2026,
+    when the home page became buttons only."""
+    widths = [LW.svg_word(w, 80, 0.0, cls=False)[1] for w, _, _ in MORPH]
+    W = max(widths)
+    words = "".join(svg(LW, w, 80, width=W, label=f"{w}, marked", klass=f"w{i + 1}")[0] for i, (w, _, _) in enumerate(MORPH))
+    sums = "".join(f'<span class="s{i + 1}">{s}</span>' for i, (_, s, _) in enumerate(MORPH))
+    caps = "".join(f'<span class="c{i + 1}">{c}</span>' for i, (_, _, c) in enumerate(MORPH))
+    return f"""<style>{css()}</style>
+{JS_ON}
+<section class="morph" aria-labelledby="morph-h"><div class="wrap">
+<h2 id="morph-h">See it work: from <i>note</i> to <i>notation</i></h2>
+<div class="stage stage-morph" id="morph">
+<p class="sums">{sums}</p>
+<div class="mstack">{words}</div>
+<p class="cap">{caps}</p>
+</div>
+<p><button class="replay" type="button" data-replay="morph">Play again</button></p>
+</div></section>
+{_play_js(False)}"""
+
+
 def html_block(LW, doors_html=""):
     """The home page's top: the name, the subtitle, the three layers as buttons, then note to notate to notation.
     Since 12 November 2026; legomorphic, built up, is on the *leg- page (lego_block)."""

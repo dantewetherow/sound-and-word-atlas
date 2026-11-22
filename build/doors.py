@@ -129,12 +129,23 @@ def header_parts(up):
     menu = '<button class="menu" type="button" aria-expanded="false" aria-controls="doors" hidden>Menu</button>'
     links = "".join(f'<a class="door{" t-only" if sw is None else ""}" href="{up}{slug}.html" data-door="{slug}">'
                     f'<span class="dn">{name}</span>{f"<span class=sn>{sw}</span>" if sw else ""}</a>' for slug, name, _, _, sw in DOORS)
-    doors = f'<nav class="doors" id="doors" aria-label="Doors">{links}</nav>'
+    # All pages (22 November 2026): the home page's twelve buttons, one click from every page
+    def ap(h, n, board, line, t):
+        name = f'<span class="t-only">{n}</span><span class="s-only">{board}</span>' if board else n
+        return f'<a class="{"t-only" if t else ""}" href="{up}{h}"><b>{name}</b><span class="ap-line t-only">{line}</span></a>'
+    allp = (f'<details class="allpages"><summary>All pages</summary><div class="ap-panel">'
+            + "".join(ap(*x) for x in HOME_TILES) + '</div></details>')
+    doors = f'<nav class="doors" id="doors" aria-label="Doors">{links}{allp}</nav>'
     return search, smap, VIEW_SWITCH, menu, doors
 
 
 VIEW_JS = """<script>(() => {
   const root = document.documentElement, sw = document.querySelector('.view');
+  const ap = document.querySelector('details.allpages');              // All pages closes on Escape or a click outside
+  if (ap) {
+    document.addEventListener('click', e => { if (ap.open && !ap.contains(e.target)) ap.open = false; });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && ap.open) { ap.open = false; ap.querySelector('summary').focus(); } });
+  }
   document.querySelectorAll('.bv-switch input').forEach(i => {        // blocked vaults on every word, or not
     i.checked = root.dataset.bv !== 'off';
     i.addEventListener('change', () => {

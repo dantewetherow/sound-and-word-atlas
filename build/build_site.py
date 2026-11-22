@@ -207,11 +207,11 @@ def uc(text):
 # changed item in the manual stops the build until its notes here are written.
 UC_OPEN = {
  "Teams with two sounds": {
-  22: "whether a team with two sounds, like the *oo* of *moon* and *book*, takes a mark to tell its sounds apart is still "
-      "being decided. For now both sounds are marked alike. Next: decide, then redraw the words that change.",
-  24: "*ow* joins the teams with two sounds here, as in *now* and *snow*. Whether those teams take a mark to tell their "
-      "sounds apart is still being decided, and for now both sounds are marked alike. Next: decide, then redraw the words "
-      "that change."},
+  22: "decided 21 November 2026 for *oo*: the *oo* of *book* takes a small *ʊ* over it, and the *oo* of *moon* takes "
+      "none. Still open: the other teams with two sounds, such as *ow* at step 24.",
+  24: "*ow* joins the teams with two sounds here, as in *now* and *snow*. The *oo* of *book* now takes *ʊ* (ruled 21 "
+      "November 2026); whether *ow* takes a mark to tell its two sounds apart is still open. Next: decide, then redraw "
+      "the words that change."},
  "Step 19 could move up": {
   19: "this step may move up to follow step 13. Its words turn up in reading from the start, and every unit it uses is in "
       "place by step 13, where the seam lets *does* be built as *do* + *es*. Next: decide where it sits in the path.",

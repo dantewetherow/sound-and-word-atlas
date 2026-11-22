@@ -1076,3 +1076,20 @@ header.site.is-home:not(.pinned) .brand small { font-size: 0.8rem; }
   .home-grid .door-tile:not(.hg-first) .pw { display: none; }
   .home-grid .door-tile .dn { font-size: 1.05rem; }
 }
+
+
+/* All pages (22 November 2026): the home page's twelve buttons in a panel from the bar */
+details.allpages { position: relative; }
+details.allpages summary { list-style: none; cursor: pointer; padding: 5px 12px; border: 1px solid var(--line); border-radius: 999px; font-size: 0.95rem; color: var(--ink); }
+details.allpages summary::-webkit-details-marker { display: none; }
+details.allpages summary::after { content: " \25BE"; font-size: 0.8em; }
+details.allpages[open] summary { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+details.allpages .ap-panel { position: absolute; z-index: 50; top: calc(100% + 8px); left: 0; width: min(640px, 92vw); display: grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 10px; background: var(--paper); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 12px 30px rgba(0,0,0,.12); }
+details.allpages .ap-panel a { display: grid; gap: 2px; padding: 8px 10px; border-radius: 8px; color: var(--ink); text-decoration: none; }
+details.allpages .ap-panel a:hover { background: var(--card); }
+details.allpages .ap-panel a b { font-weight: 500; }
+details.allpages .ap-panel a .ap-line { font-size: 0.82rem; color: var(--soft); }
+@media (max-width: 760px) {
+  details.allpages .ap-panel { position: static; width: auto; grid-template-columns: 1fr; box-shadow: none; margin-top: 6px; }
+  details.allpages .ap-panel a .ap-line { display: none; }
+}

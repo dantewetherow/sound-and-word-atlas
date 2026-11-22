@@ -58,6 +58,8 @@ def write(OUT, page, header, footer, svg_of, LW):
     import characters
     mark = wordmark()
     gno = characters.lifted(LW, "gno", label="Gno, the notation's mascot: gno with its letters lifted out", scale=1.2)
+    import landing
+    morph = landing.morph_block(LW)                       # the note-to-notation animation, from the home page (22 November 2026)
     examples ="".join(f'<figure class="ex">{svg_of(w, 56)}<figcaption>{cap}</figcaption></figure>' for w, cap in EXAMPLES)
     about = f"""{header(0)}
 <main>
@@ -69,6 +71,7 @@ def write(OUT, page, header, footer, svg_of, LW):
 </div>
 <figure class="mascot-hero"><a href="definitions.html#def-legomorph">{gno}</a><figcaption>Gno, the notation&rsquo;s mascot: <i>gno</i> with its letters lifted out, gn under one black bar and o spelling its name. His bar is cut short, for a brow.</figcaption></figure>
 </div></section>
+{morph}
 
 <section class="about" aria-labelledby="word-h"><div class="wrap prose">
 <h2 id="word-h">The word</h2>
