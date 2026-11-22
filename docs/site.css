@@ -1049,3 +1049,12 @@ header.site.is-home:not(.pinned) .brand small { font-size: 0.8rem; }
   .landing .home-doors .door-tile .dn { font-size: 1.3rem; }
   .landing .home-doors .door-tile .pw { display: none; }
 }
+
+
+/* sound and meaning: phonestheme clusters (21 November 2026) */
+.ph-toc { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.ph-toc a { padding: 4px 12px; border: 1px solid var(--line); border-radius: 999px; text-decoration: none; font-weight: 500; }
+.ph-cluster h2 .ph-l { font-family: var(--body); color: var(--verb, #b23a2a); margin-right: 6px; }
+.ph-cluster h3 { margin: 16px 0 0; font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--soft); font-weight: 500; }
+.ph-odd { opacity: 0.72; }
+.ph-count { color: var(--soft); }

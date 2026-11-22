@@ -109,6 +109,12 @@ STUDY = [   # words for studying language, each with an everyday word to stand i
      "spell sounds and people say them, so a vowel spells its name, a team spells its second sound, and a <i>c</i> "
      "before <i>e</i> spells /s/.",
      "Adapted from the classroom phrase &ldquo;says its name&rdquo;. Changed across the site 21 November 2026."),
+    ("phonestheme", "noun",
+     "A sound many words with a shared meaning have in common: gl- in <i>glow</i>, <i>gleam</i> and <i>glitter</i> (light), "
+     "sn- in <i>sniff</i>, <i>snout</i> and <i>sneeze</i> (the nose). It isn&rsquo;t a morpheme, since the rest of the "
+     "word means nothing on its own, and it isn&rsquo;t a rule: <i>glove</i> and <i>snow</i> have the letters and not the "
+     "meaning. See <a href=\"lists/phonesthemes.html\">Sound and meaning</a> and the <a href=\"studies/phonesthemes.html\">word study</a>.",
+     "Coined by J. R. Firth (<i>Speech</i>, 1930), from Greek <i>ph&omacr;n&emacr;</i>, sound, and <i>aisth&emacr;ma</i>, what is felt."),
 ]
 
 EXTRA_MARKS = [   # marks the legend doesn't list on its own
