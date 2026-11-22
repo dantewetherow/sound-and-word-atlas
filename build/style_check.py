@@ -40,7 +40,7 @@ FRAGMENT = [
     (r"^(And )?that changes everything\.?$", "a dramatic close"),
 ]
 LISTEN = re.compile(r"^(listen|look)( again| closely| to the \w+)?$", re.I)
-SAYS = re.compile(r"\b(?:the |its |an? )?(?:[a-z]{1,4}|vowel|letter|team|unit)\s+says\b(?! (?:its name&rdquo;|its name”))", re.I)
+SAYS = re.compile(r"\b(?:the|its|an?)\s+(?:[a-z]{1,4}|vowel|letter|team|unit|consonant|prefix|suffix|ending|part)\s+says\b(?! (?:its name&rdquo;|its name”))", re.I)
 EXPLAIN_SAYS = re.compile(r"says its name(&rdquo;|”|\")|classroom phrase", re.I)
 
 
@@ -53,12 +53,15 @@ def words(s):
     return len(re.findall(r"[A-Za-z][\w’'-]*", s))
 
 
-def check_text(text, where, learner=False, out=None):
+def check_text(text, where, learner=False, out=None, wtext=None):
+    """wtext: the same text with words under discussion (in italics) masked, for the word flags: a page may talk
+    about the word elegant without calling anything elegant."""
     out = [] if out is None else out
-    for s in sentences(text):
+    for s in sentences(wtext if wtext is not None else text):
         for pat, note in WORDS.items():
             m = re.search(pat, s, re.I)
             if m: out.append(("W", where, s, f"“{m.group(0)}”: {note}"))
+    for s in sentences(text):
         for pat, note in FRAGMENT:
             if re.match(pat, s): out.append(("F", where, s, note + ": replace with a full sentence that states the result"))
         n = 0 if s.count("→") >= 3 or s.count("+") >= 4 else words(s)   # a run of word sums is a list, not a sentence
@@ -68,6 +71,14 @@ def check_text(text, where, learner=False, out=None):
         if SAYS.search(s) and not EXPLAIN_SAYS.search(s): out.append(("C", where, s, "a letter 'says': letters spell sounds"))
         if re.search(r"\bstudents?\b", s, re.I): out.append(("C", where, s, "'students': we write 'learners'"))
     return out
+
+
+def masked(el):
+    """The element's text with each italic word or phrase replaced by a placeholder (a word being discussed)."""
+    import copy
+    c = copy.copy(el)
+    for t in c.find_all(["i", "em"]): t.string = "‹w›"
+    return c.get_text(" ", strip=True)
 
 
 def check_page(path):
@@ -92,7 +103,8 @@ def check_page(path):
     else:
         main = soup.find("main") or soup
         for el in main.find_all(["p", "li", "td", "figcaption"]):
-            check_text(el.get_text(" ", strip=True), "page", False, out)
+            if el.find(attrs={"lang": re.compile(r"^(la|grc|el)")}): continue   # a quoted line of Latin or Greek, with its translation and source
+            check_text(el.get_text(" ", strip=True), "page", False, out, masked(el))
     seen, uniq = set(), []
     for r in out:
         if r not in seen: seen.add(r); uniq.append(r)
@@ -115,7 +127,9 @@ def run(OUT, paths=None):
 
 
 CLEAN = ["studies/phonesthemes.html", "lists/phonesthemes.html",   # reviewed against the reference, 22 November 2026
-         "studies/per.html", "studies/education.html", "studies/leg.html", "studies/sign.html", "studies.html", "about.html"]
+         "studies/per.html", "studies/education.html", "studies/leg.html", "studies/sign.html", "studies.html", "about.html",
+         "roots/deuk.html", "roots/hap.html", "roots/leg.html", "roots/leuk.html", "roots/med.html", "roots/per.html",
+         "roots/sem.html", "roots/sign.html"]
 
 
 if __name__ == "__main__":

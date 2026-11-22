@@ -394,7 +394,7 @@ def F(slug, principle, words, contrast, build, use, check, notes):
         "title": f"The {R['root']} family: " + ", ".join(w for w, _ in words[:4]), "kind": "One root, many words",
         "principle": principle, "words": rows, "contrast": (contrast[0], cw), "listen": None, "build_h": "Build it",
         "build": build, "use": use, "check": check, "notes": notes,
-        "links": [(f"The {R['root']} family", f"roots/{slug}.html", "every word, the roads in, and the lessons")],
+        "links": [(f"The {R['root']} family", f"roots/{slug}.html", "every word, how they came into English, and the lessons")],
         "source": "; ".join(f'<a href="{u}">{t}</a>' for t, u in R["sources"][:3]) + ".",
         "desc": f"A spelling list for the {R['root']} family: " + ", ".join(w for w, _ in words) + ".",
     }

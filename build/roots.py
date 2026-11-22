@@ -81,8 +81,7 @@ CLUSTERS = [
          [("diligent", ["di-", "lig", "-ent"], "careful and hard-working"), ("diligence", ["di-", "lig", "-ence"], "careful, steady work")],
      ]},
     {"key": "french", "label": "les, lite", "spells": ["les", "lite"], "head": "worn down in French",
-     "road": "Latin words that reached English through French and lost letters on the way: <i>lectio</i>, a reading, became "
-             "<i>le&ccedil;on</i>; and <i>eligere</i>, to pick out, gave <i>eslite</i>, chosen",
+     "road": "Latin words that came into English through French and lost letters on the way. <i>Lectio</i>, a reading, became <i>le&ccedil;on</i>, and <i>eligere</i>, to pick out, gave <i>eslite</i>, chosen",
      "groups": [
          [("lesson", None, "something to read or learn", "les")],
          [("elite", None, "the chosen few", "lite")],
@@ -115,10 +114,8 @@ CLUSTERS = [
           ("dyslexia", ["dys-", "lex", "-ia"], "a lasting difficulty with reading and spelling words")],
      ]},
     {"key": "lego", "label": "lego", "spells": ["leg"], "head": "I gather",
-     "road": "Greek <i>l&eacute;g&omacr;</i> and Latin <i>leg&omacr;</i>, the verb itself, which both languages inherited from "
-             "the root: in Greek, I gather, I count, I say; in Latin, I gather, I choose, I read",
-     "note": "The <i>&omacr;</i> is the ending for I in both languages, so <i>lego</i> is leg + o, gather + I, as Latin "
-             "<i>veto</i> is I forbid and <i>credo</i> I believe.",
+     "road": "Greek <i>l&eacute;g&omacr;</i> and Latin <i>leg&omacr;</i>, the verb itself, which both languages inherited from the root. In Greek, I gather, I count, I say; in Latin, I gather, I choose, I read",
+     "note": "The <i>&omacr;</i> is the ending for I in both languages. So <i>lego</i> is leg + o, gather + I, as Latin <i>veto</i> is I forbid and <i>credo</i> I believe.",
      "groups": [
          [("legomorphic", ["leg", "-o", "morph", "-ic"], "this notation&rsquo;s name: <i>leg&omacr;</i>, I gather, in Greek "
            "and Latin alike, and <i>morph</i>, form")],
@@ -133,14 +130,12 @@ CLUSTERS = [
 # and the board. Watkins (AHD, leg-) gives the law branch as "possibly", with a question mark on Latin lex as a
 # "collection of rules", and a link to *legh- as possible but uncertain; Etymonline gives lex only as "perhaps";
 # legare is built on lex. Latin legumen is of unknown origin (Etymonline).
-DEBATED_LEAD = ("Some words are often listed with the root, but the sources hedge the road back to it. They keep their word "
-                "sums here, since the parts hold whatever the history. What&rsquo;s in doubt is only where the root came from.")
+DEBATED_LEAD = ("Some words are often listed with the root, but the sources call the link uncertain. They keep their word sums here, since the parts are the same whatever the history. Only the link to the root is in doubt.")
 LEG_DEBATED = {"lead": DEBATED_LEAD, "clusters": [
     {"key": "law", "label": "leg, legis, loy, lege", "spells": ["leg", "legis", "loy", "lege"], "head": "law",
      "road": "Latin <i>l&emacr;x</i>, law; <i>l&emacr;gis</i>, of law, as in <i>l&emacr;gis l&amacr;tor</i>, a proposer of law",
      "why": "Watkins gives this branch as possible only, with a question mark on law as a &lsquo;collection of rules&rsquo;. "
-            "He also names a link to another root, <i>*legh-</i>, to lie, to lay, as possible but uncertain: law as what is "
-            "laid down, which is where English <i>law</i> comes from. Etymonline gives <i>l&emacr;x</i> only as perhaps from "
+            "He also names a possible but uncertain link to another root, <i>*legh-</i>, to lie, to lay. On that reading, law is what is laid down, the source of English <i>law</i>. Etymonline gives <i>l&emacr;x</i> only as perhaps from "
             "<i>*leg-</i>.",
      "groups": [
          [("legal", ["leg", "-al"], "to do with the law"), ("illegal", ["il-", "leg", "-al"], "against the law"),
@@ -337,23 +332,19 @@ LEG = {
                 ("Perseus Scaife Viewer, Homer&rsquo;s <i>Iliad</i> 24.793", "https://atlas.perseus.tufts.edu/library/passage/urn:cts:greekLit:tlg0012.tlg001.perseus-grc2:24.793/")],
     "extra": [
         ("lego", "Legō in Latin and in Greek",
-         ["Latin and Greek share the form <i>leg&omacr;</i>, I gather, and each took it somewhere different. In Latin, gathering "
+         ["Latin and Greek share the form <i>leg&omacr;</i>, I gather, and each gave it a different meaning. In Latin, gathering "
           "turned to picking out, then to choosing and reading; in Greek, to counting, telling over and saying. So in "
           "<i>legomorphic</i> the Greek says &lsquo;I gather forms&rsquo;, and an English reader who knows Latin hears &lsquo;I read forms&rsquo; too.",
-          "The Latin column follows the nine senses of <i>leg&omacr;</i> in the <i>Oxford Latin Dictionary</i> (1968), strung from "
-          "the hand to the eye, each with a line where a poet used it. The two languages meet at the funeral pyre: Achilles and "
+          "The Latin column follows the nine senses of <i>leg&omacr;</i> in the <i>Oxford Latin Dictionary</i> (1968), from the hand to the eye. Each has a line where a poet used it. The two languages meet at the funeral pyre: Achilles and "
           "Tibullus use the same verb for gathering the bones of the dead. The translations are ours.",
-          "The weak point: a dictionary orders senses by meaning, not by date. Reading is already in Plautus, among the oldest "
-          "Latin we have, and saying is already in Homer, so the roads from gathering to reading and to saying ran before our "
-          "texts begin. The order here is a reconstruction, not something the texts let us watch happen."],
+          "The weak point: a dictionary orders senses by meaning, not by date. Reading is already in Plautus, among the oldest Latin we have, and saying is already in Homer. So the change from gathering to reading and to saying happened before our earliest texts. The order here is a reconstruction, not something the texts let us watch happen."],
          [], LEGO_USE),
     ],
     "roads": ROADS, "clusters": CLUSTERS, "debated": LEG_DEBATED, "parts": PARTS, "root_parts": ROOT_PARTS,
     "students": ["collect", "select", "elect", "lesson", "legend", "logic", "dialogue"],
     "s_lead": "These words come from one old word that meant <i>gather</i>.",
     "uc": "the family follows Etymonline, which draws on Calvert Watkins, and the Indo-European Lexicon, which follows "
-          "Pokorny. On 12 November 2026 it was checked against Watkins&rsquo;s entry, and the words he and Etymonline hedge "
-          "(the law branch, and <i>legume</i>) moved to Marginal or debated. Next: draw each word in the notation once its "
+          "Pokorny. On 12 November 2026 it was checked against Watkins&rsquo;s entry, and the words he and Etymonline mark as uncertain (the law branch, and <i>legume</i>) moved to Marginal or debated. Next: draw each word in the notation once its "
           "marking is ruled.",
     "label": "Root family: *leg-",
     "desc": "The root *leg-, to gather, to collect, and its family of English words, spelling by spelling, with what each part means.",
@@ -364,9 +355,7 @@ LEG = {
 HAP = {
     "slug": "hap", "root": "hap", "gloss": "chance, luck", "kind": "a base family",
     "h1_s": "hap means &lsquo;luck&rsquo;",
-    "lead": "Chance, luck. English took <i>hap</i> from Old Norse <i>happ</i> around 1200. It&rsquo;s rarely said on its "
-            "own now, but it lives on in <i>happy</i>, <i>happen</i> and <i>mishap</i>, and the Indo-European Lexicon "
-            "traces it back to a root <i>*kob-</i>, to fit, to fare well. Its spelling shows how it joins: <b>happ</b> "
+    "lead": "Chance, luck. English took <i>hap</i> from Old Norse <i>happ</i> around 1200. It&rsquo;s rarely said on its own now, but it is still in <i>happy</i>, <i>happen</i> and <i>mishap</i>. The Indo-European Lexicon traces it back to a root <i>*kob-</i>, to fit, to fare well. Its spelling shows how it joins: <b>happ</b> "
             "before a vowel, <b>hap</b> everywhere else.",
     "drawn": ("happy", "happy, marked: happ + y"),
     "sources": [("Etymonline: <i>hap</i>, <i>happy</i>, <i>happen</i>, <i>mishap</i>, <i>haphazard</i>, <i>perhaps</i> and the rest", "https://www.etymonline.com/search?q=hap"),
@@ -384,8 +373,7 @@ HAP = {
                 ("Sonia Ben Hedia, <i>Gemination and Degemination in English Affixation</i> (Language Science Press, 2019)",
                  "https://langsci-press.org/catalog/book/221")],
     "spell_h": "One base, two spellings",
-    "spell_sub": "The p doubles only when a vowel comes next, as the n of <i>fun</i> does in <i>funny</i>, so the box can "
-                 "keep the a short (<a href=\"../steps/14.html\">step 14</a>). Before a consonant nothing reaches back, and "
+    "spell_sub": "The p doubles only when a vowel comes next, as the n of <i>fun</i> does in <i>funny</i>. The box keeps the a short (<a href=\"../steps/14.html\">step 14</a>). Before a consonant nothing reaches back, and "
                  "English doesn&rsquo;t end a word in pp (<a href=\"../steps/06.html\">step 6</a>), so one p does the job.",
     "spell_drawn": [("happen", "happ + en: a vowel comes next"), ("hapless", "hap + less: a consonant comes next"),
                     ("mishap", "mis + hap: hap ends the word")],
@@ -427,19 +415,11 @@ HAP = {
           "having luck."], []),
         ("double", "Does the double p show the seam?",
          ["Not on its own. A double keeps a short vowel short whether or not there&rsquo;s a join: <i>rabbit</i> and "
-          "<a href=\"leg.html#w-lesson\"><i>lesson</i></a> double with nothing to join. Carney counts <i>happy</i> among the "
-          "ordinary doubles, with <i>hobby</i>, <i>silly</i> and <i>merry</i>, and says the hidden boundary in <i>chubby</i> "
-          "and <i>shabby</i> needn&rsquo;t be known to explain theirs. What shows the seam is the family: the same hap, with "
+          "<a href=\"leg.html#w-lesson\"><i>lesson</i></a> double with nothing to join. Carney counts <i>happy</i> among the ordinary doubles, with <i>hobby</i>, <i>silly</i> and <i>merry</i>. He notes that <i>chubby</i> and <i>shabby</i> have a seam inside, but you needn&rsquo;t know it to explain their doubles. What shows the seam is the family: the same hap, with "
           "the same meaning, in <i>hapless</i> and <i>mishap</i>, where nothing doubles. <i>Fun</i> is "
-          "<a href=\"../definitions.html#def-free\">free</a>, a word on its own, so the seam in <i>funny</i> is easy to see; "
-          "<i>hap</i> is <a href=\"../definitions.html#def-bound\">bound</a> now, so the family does the showing.",
-          "Nor does the double p spell two sounds. Carney lists pp among the spellings of the single sound /p/ (p. 16). The "
-          "lips close once, at the end of <i>ha</i>, and open once, into the y, and the break between the syllables falls "
-          "inside that one sound, so it seems to belong to both. Daniel Kahn called such a consonant <i>ambisyllabic</i>; "
-          "Elisabeth Selkirk put it in the first syllable, as the swoops here do. The puff of breath in <i>pen</i> isn&rsquo;t "
-          "a second p: English adds it where a p starts a stressed syllable, so <i>appear</i> has it and <i>happy</i> "
-          "doesn&rsquo;t. Two p sounds meet only where two parts each bring one, as in <i>top pick</i>, and the lips stay "
-          "shut longer; joins inside words, such as <i>unnamed</i>, work the same way."], []),
+          "<a href=\"../definitions.html#def-free\">free</a>, a word on its own, so the seam in <i>funny</i> is easy to see. <i>Hap</i> is <a href=\"../definitions.html#def-bound\">bound</a> now, so its relatives show the seam: <i>hapless</i> and <i>mishap</i>.",
+          "Nor does the double p spell two sounds. Carney lists pp among the spellings of the single sound /p/ (p. 16). The lips close once, at the end of <i>ha</i>, and open once, into the y. The break between the syllables falls inside that one sound, so it seems to belong to both. Daniel Kahn called such a consonant <i>ambisyllabic</i>; "
+          "Elisabeth Selkirk put it in the first syllable, as the swoops here do. The puff of breath in <i>pen</i> isn&rsquo;t a second p. English adds it where a p starts a stressed syllable, so <i>appear</i> has it and <i>happy</i> doesn&rsquo;t. Two p sounds meet only where two parts each bring one, as in <i>top pick</i>, and the lips stay shut longer. Joins inside words, such as <i>unnamed</i>, work the same way."], []),
     ],
     "students": ["happy", "happen", "mishap", "perhaps"],
     "s_lead": "These words come from <b>hap</b>. It is an old word for luck.",
@@ -510,8 +490,7 @@ DEUK_CLUSTERS = [
      ]},
     {"key": "duc", "label": "duc", "spells": ["duc"], "head": "bring up",
      "road": "Latin <i>&emacr;duc&amacr;re</i>, to bring up, to rear, a verb that stands beside <i>&emacr;d&umacr;cere</i>, to lead out",
-     "note": "<i>Educate</i> and <i>educe</i> are near twins: e + duc + ate and e + duce. To educate was first to rear a child; the "
-             "sense of leading out what is in the learner is a later reading of the word, and a fair one.",
+     "note": "<i>Educate</i> and <i>educe</i> are closely related: e + duc + ate and e + duce. To educate was first to rear a child. Reading it as leading out what is in the learner came later, and it fits the parts.",
      "groups": [
          [("educate", ["e-", "duc", "-ate"], "bring up, teach"), ("education", ["e-", "duc", "-at(e)", "-ion"], "the bringing up and teaching of the young"),
           ("educator", ["e-", "duc", "-at(e)", "-or"], "one who teaches"),
@@ -574,7 +553,7 @@ DEUK = {
                 ("Etymonline: <i>produce</i>, verb and noun", "https://www.etymonline.com/search?q=produce"),
                 ("Etymonline: <i>educate</i>, from Latin <i>educare</i>", "https://www.etymonline.com/search?q=educate"),
                 ("Etymonline: <i>subdue</i>", "https://www.etymonline.com/search?q=subdue"),
-                ("Edward Carney, <i>A Survey of English Spelling</i> (Routledge, 1994), for the long vowel before a final e and the soft c before e: his pages are listed with steps 9 and 10", "../progressions.html")],
+                ("Edward Carney, <i>A Survey of English Spelling</i> (Routledge, 1994): the long vowel before a final e, and the soft c before e. His pages are listed with steps 9 and 10", "../progressions.html")],
     "roads": DEUK_ROADS, "clusters": DEUK_CLUSTERS, "parts": PARTS, "root_parts": ROOT_PARTS,
     "extra": [
         ("stress", "Stress tells the verb from the noun",
@@ -583,11 +562,9 @@ DEUK = {
           "The verb keeps the stress where Latin had it, on the root. The noun pulls it to the front.",
           "The marks show this only through the first vowel. In the verb the first syllable is said weakly, so its o stays bare. "
           "In the noun it is said in full, so the o takes a long mark. Nothing sends that o a vault: stress makes it long, and "
-          "stress isn&rsquo;t a letter. The notation has no mark for stress itself, so the captions use capitals for it, and the "
-          "weak vowel is the only sign among the marks.",
+          "stress isn&rsquo;t a letter. The notation has no mark for stress itself, so the captions use capitals for it. Among the marks, only the &#601; of a weak vowel shows it.",
           "The pattern runs well beyond this family: <i>record</i>, <i>permit</i>, <i>object</i>, <i>present</i>, <i>contract</i>, "
-          "<i>rebel</i>. A learner who knows it can hear which word is meant, and a speller can see why two words that sound "
-          "different are written alike: the spelling keeps the parts, pro + duce, and leaves the stress to the speaker."],
+          "<i>rebel</i>. A learner who knows it can hear which word is meant. A speller can see why two words that sound different are written alike. The spelling keeps the parts, pro + duce, and leaves the stress to the speaker."],
          [("produce", "verb: pro<b>DUCE</b>", "c.pr b.o | c.d l.u c.c e> ; nudge 5>4"),
           ("produce", "noun: <b>PRO</b>duce", "c.pr l.o | c.d l.u c.c e> ; nudge 5>4"),
           ("conduct", "verb: con<b>DUCT</b>", "c.c b.o c.n | c.d s.u c.ct"),
@@ -595,18 +572,15 @@ DEUK = {
         ("shift", "An ending can move the stress",
          ["Some suffixes decide where the stress falls. Before <i>-ion</i> it lands on the syllable just ahead of the suffix: "
           "<b>ED</b>ucate becomes edu<b>CA</b>tion, and pro<b>DUCE</b> becomes pro<b>DUC</b>tion. <i>-ity</i> does the same: "
-          "pro<b>DUC</b>tive becomes produc<b>TIV</b>ity. The vowels don&rsquo;t always change with it: the a is "
-          "long in <b>ED</b>ucate, edu<b>CA</b>tion and <b>ED</b>ucator alike, and only the beat moves. The spelling stays the same throughout.",
+          "pro<b>DUC</b>tive becomes produc<b>TIV</b>ity. The vowels don&rsquo;t always change with it. The a is long in <b>ED</b>ucate, edu<b>CA</b>tion and <b>ED</b>ucator alike; only the beat moves. The spelling stays the same throughout.",
           "This is where spelling by parts earns its keep. The sounds shift from word to word, and the parts don&rsquo;t: "
           "e + duc + ate, e + duc + at(e) + ion, e + duc + at(e) + or."], []),
     ],
     "students": ["produce", "product", "reduce", "conduct", "educate", "duct", "tug"],
     "s_lead": "These words come from one old word that meant <i>lead</i> or <i>pull</i>.",
-    "uc": "the word list follows the Indo-European Lexicon, which follows Pokorny, and was checked on 10 November 2026 against "
-          "Etymonline&rsquo;s list for the root, read in a copy of that dictionary. Etymonline doesn&rsquo;t list <i>subdue</i> "
+    "uc": "the word list follows the Indo-European Lexicon, which follows Pokorny. It was checked on 10 November 2026 against Etymonline&rsquo;s list for the root, read in a copy of that dictionary. Etymonline doesn&rsquo;t list <i>subdue</i> "
           "or <i>educe</i>; the Lexicon does. <i>Product</i>, <i>induct</i> and <i>reproduce</i> are in neither list and are here "
-          "as plain kin of <i>produce</i> and <i>induction</i>. Next: check it against Watkins, and decide whether the notation "
-          "needs a mark for a weak vowel or for stress.",
+          "as plain kin of <i>produce</i> and <i>induction</i>. The weak vowel took its mark, &#601;, on 21 November 2026. Next: check the list against Watkins, and decide whether stress needs a mark.",
     "label": "Root family: *deuk-",
     "desc": "The root *deuk-, to lead, and its family: produce, reduce, conduct, educate, duke and tug, with why reduce makes reduction and how stress tells proDUCE from PROduce.",
 }
@@ -695,8 +669,7 @@ SEM = {
     "slug": "sem", "root": "*sem-", "gloss": "one; as one, together", "kind": "a root family",
     "h1_s": "*sem- means &lsquo;one&rsquo; or &lsquo;same&rsquo;",
     "lead": "One; as one, together. From this Proto-Indo-European root Latin made <i>similis</i>, like, and <i>simul</i>, at the "
-            "same time; Greek made <i>homos</i>, same; and English kept <i>same</i> and <i>some</i>. The family carries a lesson "
-            "in its own spelling. <i>Assimilate</i> means to make like, and its double s is a prefix made like its neighbour.",
+            "same time; Greek made <i>homos</i>, same; and English kept <i>same</i> and <i>some</i>. The family shows a spelling pattern of its own. <i>Assimilate</i> means to make like, and its double s is a prefix made like its neighbour.",
     "drawn": ("same", "same, marked"),
     "sources": [("Indo-European Lexicon, sem- (Linguistics Research Center, University of Texas at Austin), which follows Pokorny: the list this family is drawn from", "https://lrc.la.utexas.edu/lex/master/1686"),
                 ("Etymonline, *sem- (1)", "https://www.etymonline.com/search?q=*sem-"),
@@ -708,7 +681,7 @@ SEM = {
          ["A double near the end of a word usually marks a suffix joining a short vowel: get + t + ing "
           "(<a href=\"../steps/14.html\">step 14</a>). A double near the front usually marks something else: a Latin prefix whose "
           "last letter changed to match the first letter of the root. Two different consonants in a row take two movements of "
-          "the mouth; one held a little longer takes one. Speakers took the easier path, and the spelling recorded it.",
+          "the mouth; one held a little longer takes one. Speakers changed the prefix to match the next sound, which is easier to say, and the spelling shows the change.",
           "<b>ad-</b>, to, toward: <i>ac</i>cept, <i>af</i>fix, <i>al</i>lot, <i>ap</i>pear, <i>as</i>semble, <i>at</i>tract. "
           "<b>com-</b>, with: <i>col</i>lect, <i>cor</i>rect, <i>con</i>duct. "
           "<b>in-</b>, not, or into: <i>il</i>legal, <i>im</i>mature, <i>ir</i>regular. "
@@ -733,9 +706,8 @@ SEM = {
     ],
     "students": ["same", "some", "similar", "simple", "single", "assemble", "resemble"],
     "s_lead": "These words come from one old word that meant <i>one</i> or <i>same</i>.",
-    "uc": "the word list follows the Indo-European Lexicon, which follows Pokorny, and was checked on 10 November 2026 against "
-          "Etymonline&rsquo;s list for the root, read in a copy of that dictionary: <i>simulate</i>, <i>simulation</i>, "
-          "<i>homophone</i> and <i>homonym</i> are in it. <i>Simile</i> and <i>homograph</i> are in neither list and are here as "
+    "uc": "the word list follows the Indo-European Lexicon, which follows Pokorny. It was checked on 10 November 2026 against Etymonline&rsquo;s list for the root, read in a copy of that dictionary. That list has <i>simulate</i>, <i>simulation</i>, "
+          "<i>homophone</i> and <i>homonym</i>. <i>Simile</i> and <i>homograph</i> are in neither list and are here as "
           "plain kin of <i>similar</i> and <i>homophone</i>. Next: check it against Watkins, and decide whether the path needs a "
           "step for prefixes that change to match.",
     "label": "Root family: *sem-",
@@ -806,10 +778,8 @@ ROOT_PARTS.update({
 MED = {
     "slug": "med", "root": "*med-", "gloss": "to take the right measure", "kind": "a root family",
     "h1_s": "*med- means &lsquo;measure&rsquo;",
-    "lead": "To take the right measure. Latin made this Proto-Indo-European root into <i>modus</i>, a measure or a manner, and "
-            "into verbs for healing and thinking over, which are measures of another kind. English kept <i>mete</i> and "
-            "<i>must</i> from the same root. The family is the home of a word people find hard to spell, <i>accommodate</i>, "
-            "which is easy once its parts are seen.",
+    "lead": "To take the right measure. Latin made this Proto-Indo-European root into <i>modus</i>, a measure or a manner. It also made verbs for healing and for thinking something over: measures of another kind. English kept <i>mete</i> and "
+            "<i>must</i> from the same root. <i>Accommodate</i>, a word people find hard to spell, is in this family. Its parts explain its spelling.",
     "drawn": ("mode", "mode, marked"),
     "sources": [("Indo-European Lexicon, med- (Linguistics Research Center, University of Texas at Austin), which follows Pokorny: the list this family is drawn from", "https://lrc.la.utexas.edu/lex/master/1238"),
                 ("Etymonline, *med-, read on its page for <i>modus</i>", "https://www.etymonline.com/word/modus"),
@@ -828,8 +798,7 @@ MED = {
     ],
     "students": ["mode", "model", "modern", "medicine", "remedy", "must", "accommodate"],
     "s_lead": "These words come from one old word that meant <i>measure</i>.",
-    "uc": "the word list follows the Indo-European Lexicon, which follows Pokorny, and was checked on 10 November 2026 against "
-          "Etymonline&rsquo;s list for the root, which has every word here. Next: check it against Watkins.",
+    "uc": "the word list follows the Indo-European Lexicon, which follows Pokorny. It was checked on 10 November 2026 against Etymonline&rsquo;s list for the root, which has every word here. Next: check it against Watkins.",
     "label": "Root family: *med-",
     "desc": "The root *med-, to take the right measure, and its family: mode, model, modern, medicine, must and accommodate, with why accommodate has two c's and two m's.",
 }
@@ -853,8 +822,7 @@ LEUK_ROADS = [
 LEUK_CLUSTERS = [
     {"key": "lustr", "label": "lustr, lustre", "spells": ["lustr", "lustre"], "head": "make bright; a shine",
      "road": "Latin <i>l&umacr;str&amacr;re</i>, to make bright, to light up, joined in <i>ill&umacr;str&amacr;re</i> to <i>in-</i>, in, on",
-     "note": "To illustrate is to throw light on a thing. It meant that before it meant pictures: first to make bright or "
-             "famous, then to make clear by examples, and only later to add pictures to a book.",
+     "note": "To illustrate is to throw light on a thing. It meant that before it meant pictures. First it meant to make bright or famous, then to make clear by examples, and only later to add pictures to a book.",
      "groups": [
          [("illustrate", ["il-", "lustr", "-ate"], "throw light on: make clear, by an example or a picture"),
           ("illustration", ["il-", "lustr", "-at(e)", "-ion"], "an example or a picture that makes something clear"),
@@ -875,7 +843,7 @@ LEUK_CLUSTERS = [
      ]},
     {"key": "luc", "label": "luc, lux", "spells": ["luc", "lux"], "head": "light; shine",
      "road": "Latin <i>l&umacr;x</i>, light, <i>l&umacr;cis</i>, of light, and <i>l&umacr;c&emacr;re</i>, to shine",
-     "note": "<i>Lux</i> is luc + s. The x spells the c and the s together, so the c is hidden. Take the s away and the c "
+     "note": "<i>Lux</i> is luc + s. The x spells the c and the s together, so the c doesn&rsquo;t show. Take the s away and the c "
              "comes back: <i>lucid</i>, <i>lucent</i>.",
      "groups": [
          [("lucid", ["luc", "-id"], "clear: easy to understand"),
@@ -925,20 +893,17 @@ ROOT_PARTS.update({
 })
 LEUK_DEBATED = {"lead": DEBATED_LEAD, "clusters": [
     {"key": "lynx", "label": "lynx", "spells": ["lynx"], "head": "a wild cat", "road": "Greek <i>lynx</i>, through Latin",
-     "why": "The Indo-European Lexicon lists <i>lynx</i> with the root. Etymonline leaves it off its list for the root, and its "
-            "entry for the word gives the link only as probable: the cat named for its sharp sight.",
+     "why": "The Indo-European Lexicon lists <i>lynx</i> with the root. Etymonline leaves it off its list for the root. Its entry for the word gives the link only as probable: the cat named for its sharp sight.",
      "groups": [[("lynx", None, "a wild cat with sharp eyes", "lynx")]]},
 ]}
 LEUK = {
     "slug": "leuk", "root": "*leuk-", "gloss": "light, brightness", "kind": "a root family",
     "h1_s": "*leuk- means &lsquo;light&rsquo;",
-    "lead": "Light, brightness: to shine. Latin made this Proto-Indo-European root into <i>l&umacr;x</i>, light, and "
-            "<i>l&umacr;c&emacr;re</i>, to shine; into <i>l&umacr;men</i>, a light; into <i>l&umacr;str&amacr;re</i>, to make "
-            "bright; and into <i>l&umacr;na</i>, the moon, the bright one. Greek made it <i>leukos</i>, white. English kept "
-            "<i>light</i>. The family is the home of <i>illustrate</i>: to throw light on a thing, by an example or a picture.",
+    "lead": "Light, brightness: to shine. Latin made this Proto-Indo-European root into <i>l&umacr;x</i>, light, and <i>l&umacr;c&emacr;re</i>, to shine. It also made <i>l&umacr;men</i>, a light; <i>l&umacr;str&amacr;re</i>, to make bright; and <i>l&umacr;na</i>, the moon, the bright one. Greek made it <i>leukos</i>, white. English kept "
+            "<i>light</i>. <i>Illustrate</i> is in this family: to throw light on a thing, by an example or a picture.",
     "drawn": ("illustrate", "illustrate, marked: il + lustr + ate"),
     "sources": [("Indo-European Lexicon, leuk- (Linguistics Research Center, University of Texas at Austin), which follows Pokorny: the list this family is drawn from", "https://lrc.la.utexas.edu/lex/master/1197"),
-                ("Etymonline, *leuk-: the root&rsquo;s list, which has illustration, illumination and every Latin, Greek and English road here", "https://www.etymonline.com/word/*leuk-"),
+                ("Etymonline, *leuk-: the root&rsquo;s list, which has illustration, illumination and every word here", "https://www.etymonline.com/word/*leuk-"),
                 ("Etymonline: <i>illustrate</i>, from Latin <i>ill&umacr;str&amacr;re</i>, in- + <i>l&umacr;str&amacr;re</i>", "https://www.etymonline.com/search?q=illustrate"),
                 ("Etymonline: <i>illuminate</i>, from Latin in- + <i>l&umacr;men</i>", "https://www.etymonline.com/word/Illuminate"),
                 ("Etymonline, *legwh-: the root of <i>light</i>, not heavy, and of <i>lung</i>", "https://www.etymonline.com/word/*legwh-")],
@@ -966,8 +931,7 @@ LEUK = {
     ],
     "students": ["light", "lighten", "lunar", "lucid", "translucent", "illuminate", "illustrate", "illustration"],
     "s_lead": "These words come from one old word that meant <i>light</i>.",
-    "uc": "the word list follows the Indo-European Lexicon, which follows Pokorny, and was checked on 12 November 2026 against "
-          "Etymonline&rsquo;s list for the root, which has every word here or the word it&rsquo;s made from. <i>Lynx</i>, "
+    "uc": "the word list follows the Indo-European Lexicon, which follows Pokorny. It was checked on 12 November 2026 against Etymonline&rsquo;s list for the root, which has every word here or the word it&rsquo;s made from. <i>Lynx</i>, "
           "which Etymonline gives only as probable, is under Marginal or debated. Next: check it against Watkins.",
     "label": "Root family: *leuk-",
     "desc": "The root *leuk-, light, and its family: illustrate, illuminate, lucid, translucent, lunar and light, with why illustrate has two l's and lucid has a c.",
@@ -1080,7 +1044,7 @@ def _swalk():
             'Middle: a lighter stress. Small and grey: weak, where the vowel is said quickly, often as the sound in the a of <i>about</i>.</p>')
 PER_TIME = ('<ol class="ptime">'
     '<li><b>Proto-Indo-European <i>*per-</i></b>to try, to risk</li>'
-    '<li><b>Latin <i>exper&imacr;r&imacr;</i>, to try out</b>One verb, three words from it: <i>exper&imacr;mentum</i>, a trial or a proof; '
+    '<li><b>Latin <i>exper&imacr;r&imacr;</i>, to try out</b>One verb, three words from it. <i>Exper&imacr;mentum</i>, a trial or a proof; '
     '<i>experientia</i>, a trying, and the knowing that comes of it; <i>expertus</i>, tried</li>'
     '<li><b>French, then English, in the 1300s</b><i>Experiment</i> and <i>experience</i> arrive meaning nearly the same thing: a trial, '
     'a proof, what trying shows. The Middle English Dictionary&rsquo;s <i>experiment</i> is a test, a proof, even a tried remedy for an illness</li>'
@@ -1090,15 +1054,13 @@ PER_TIME = ('<ol class="ptime">'
 PER = {
     "slug": "per", "root": "*per-", "gloss": "to try, to risk", "kind": "a root family: a word study",
     "h1_s": "*per- means &lsquo;try&rsquo; or &lsquo;risk&rsquo;",
-    "lead": "To try, to risk. From this Proto-Indo-European root Latin made <i>exper&imacr;r&imacr;</i>, to try out, with <i>expertus</i>, "
-            "tried, and <i>per&imacr;culum</i>, a trial or a danger; Greek made <i>peira</i>, a trial; and English kept <i>fear</i>. "
-            "At the centre of the family are two words that began as one, <i>experiment</i> and <i>experience</i>: the same spelling "
-            "up to the i, two different sounds for the e, and a history that explains both.",
+    "lead": "To try, to risk. From this Proto-Indo-European root Latin made <i>exper&imacr;r&imacr;</i>, to try out, with <i>expertus</i>, tried, and <i>per&imacr;culum</i>, a trial or a danger. Greek made <i>peira</i>, a trial, and English kept <i>fear</i>. "
+            "At the centre of the family are two words that began as one, <i>experiment</i> and <i>experience</i>. They have the same spelling up to the i and two different sounds for the e; the history explains both.",
     "drawn": ("experience", "experience, marked: ex + peri + ence, with the vault that makes the e long"),
     "sources": [("Indo-European Lexicon, per- 2e (Linguistics Research Center, University of Texas at Austin), which follows Pokorny: the list this family is drawn from", "https://lrc.la.utexas.edu/lex/master/1493"),
                 ("Middle English Dictionary, <i>experiment</i> (n.): a test, a proof, a remedy, a feat", "https://quod.lib.umich.edu/m/middle-english-dictionary/dictionary/MED14948"),
-                ("Etymonline: <i>experiment</i>, <i>experience</i>, <i>expert</i>, <i>peril</i>, <i>empirical</i>, <i>pirate</i> and <i>fear</i>, each with its road", "https://www.etymonline.com/search?q=experiment"),
-                ("Noam Chomsky and Morris Halle, <i>The Sound Pattern of English</i> (Harper &amp; Row, 1968), on the vowel shortening three syllables from the end and the lengthening before i and a vowel", "../credits.html"),
+                ("Etymonline: <i>experiment</i>, <i>experience</i>, <i>expert</i>, <i>peril</i>, <i>empirical</i>, <i>pirate</i> and <i>fear</i>, each with its history", "https://www.etymonline.com/search?q=experiment"),
+                ("Noam Chomsky and Morris Halle, <i>The Sound Pattern of English</i> (Harper &amp; Row, 1968). On vowels shortening three syllables from the end, and lengthening before i and a vowel", "../credits.html"),
                 ("Geoffrey Chaucer, the Wife of Bath&rsquo;s Prologue, which opens on <i>experience</i> against the authority of books", "https://www.etymonline.com/search?q=experience")],
     "roads": PER_ROADS, "clusters": PER_CLUSTERS, "parts": PARTS, "root_parts": ROOT_PARTS,
     "extra": [
@@ -1108,15 +1070,13 @@ PER = {
          [("experiment", "the test you set up"), ("experience", "what trying leaves you with")], PER_TIME),
         ("break", "Short e, long e: the letter after the i",
          ["Say them slowly: ex-<b>per</b>-i-ment, ex-<b>pe</b>-ri-ence. The letters match up to the i, but the e is short in one and "
-          "spells its name in the other. The letter that decides it is the one after the i. In <i>experience</i> the i stands before "
-          "a vowel, the e of <i>-ence</i>, and reaches back over the r to make the e long: the notation draws that vault. In "
+          "spells its name in the other. The letter that decides it is the one after the i. In <i>experience</i> the i stands before a vowel, the e of <i>-ence</i>, and makes the e long across the r. The notation draws that vault. In "
           "<i>experiment</i> the i stands before the m of <i>-ment</i>, and nothing reaches back. Where the syllables break, "
           "ex-per-i-ment and ex-pe-ri-ence, follows from the sound, so it describes the difference rather than causing it. That is "
           "the snapshot, the synchronic view: what English does now.",
           "Underneath are two patterns that Chomsky and Halle set out in <i>The Sound Pattern of English</i>. A stressed vowel with "
           "two syllables after it tends to be short: <i>divine</i> but <i>divinity</i>, <i>serene</i> but <i>serenity</i>, "
-          "<i>nation</i> but <i>national</i>. That is <i>experiment</i>. But a vowel before one consonant, then an i, then another "
-          "vowel tends to be long, even with two syllables after it: <i>Canada</i> but <i>Canadian</i>, <i>comedy</i> but "
+          "<i>nation</i> but <i>national</i>. That is <i>experiment</i>. But a vowel before one consonant, then an i, then another vowel is usually long, even with two syllables after it. <i>Canada</i> but <i>Canadian</i>, <i>comedy</i> but "
           "<i>comedian</i>, <i>colony</i> but <i>colonial</i>. That is <i>experience</i>, where the i stands before the e of "
           "<i>-ence</i>.",
           "They are tendencies, not laws. <i>Obesity</i> keeps the long e of <i>obese</i>, and <i>Italian</i> has a short a where "
@@ -1125,12 +1085,11 @@ PER = {
           "ik-SPIR-i-ment. A learner who says the second has the same parts and the same spelling; mark what the learner says."],
          [("experiment", "the i before the m of -ment: a short e"), ("experience", "the i before a vowel makes the e long")]),
         ("i", "A note on the i, for the curious",
-         ["Both words have an i after <i>per</i>, and it is the same i: the stem vowel of Latin&rsquo;s verb, <i>exper&imacr;r&imacr;</i>, "
+         ["Both words have an i after <i>per</i>, and it is the same i. It is the stem vowel of Latin&rsquo;s verb, <i>exper&imacr;r&imacr;</i>, "
           "whose stem ends in &imacr; as <i>aud&imacr;re</i>&rsquo;s does. Latin built both nouns on that stem: exper&imacr; + mentum, "
           "exper&imacr; + ent + ia. <i>Expert</i> shows the root without it. It comes from the past form <i>expertus</i>, built on "
           "exper- alone. So the root is <i>per</i>, and the i belongs to the verb&rsquo;s stem.",
-          "It carries no meaning. It marks which class of verb Latin&rsquo;s word belonged to, as the a of <i>&emacr;duc&amacr;re</i> "
-          "and the e of <i>doc&emacr;re</i> do; a linguist calls it a theme vowel. It isn&rsquo;t a connecting vowel either, like "
+          "It has no meaning of its own. It marks which class of verb Latin&rsquo;s word belonged to, as the a of <i>&emacr;duc&amacr;re</i> and the e of <i>doc&emacr;re</i> do. A linguist calls it a theme vowel. It isn&rsquo;t a connecting vowel either, like "
           "the i of <i>carnivore</i> or the o of <i>photograph</i>, which join two parts and belong to neither. In English its only "
           "job is in the sound. Before the e of <i>-ence</i> it makes the e of <i>pe</i> long; before the m of <i>-ment</i> it "
           "doesn&rsquo;t.",
@@ -1141,14 +1100,12 @@ PER = {
          ["Add a suffix and the stress moves. Every vowel it leaves goes weak, and a weak vowel it lands on comes back full. The "
           "letters hold still while the sounds change, and that is why the spelling is a better guide to the family than the sound.",
           "<i>Experiential</i> has a t where <i>experience</i> has a c: <i>-ence</i> and <i>-ential</i>, as in <i>essence</i> and "
-          "<i>essential</i>, <i>confidence</i> and <i>confidential</i>. Latin wrote both with a t, <i>experientia</i>; French and "
-          "English wrote the noun with a c and kept the t in <i>-ential</i>, where it spells sh before <i>-ial</i>, as it does in "
-          "<i>notation</i>."],
+          "<i>essential</i>, <i>confidence</i> and <i>confidential</i>. Latin wrote both with a t, <i>experientia</i>. French and English wrote the noun with a c and kept the t in <i>-ential</i>. There the t spells sh before <i>-ial</i>, as it does in <i>notation</i>."],
          [], _swalk()),
         ("sounds", "One spelling, three sounds",
          ["In the Latin words the root keeps one spelling, <i>per</i>, and its e spells three sounds. <i>Per</i> is closed and "
           "short in <i>experiment</i> and <i>peril</i>, open and long in <i>experience</i>, and an r unit in <i>expert</i>, as in "
-          "<i>her</i>. The Greek road does the same with its i: open and long in <i>pirate</i>, closed and short in "
+          "<i>her</i>. The Greek words do the same with their i: open and long in <i>pirate</i>, closed and short in "
           "<i>empirical</i>."],
          [("experiment", "per: short"), ("experience", "pe: long"), ("expert", "per: an r unit"), ("peril", "per: short"),
           ("pirate", "pi: long"), ("empirical", "pir: short")]),
@@ -1169,9 +1126,7 @@ PER = {
                 "Both words have an <b>i</b> after per. It came with the old Latin word, and it&rsquo;s in both. You don&rsquo;t need to know why it&rsquo;s there to read them.",
                 "A <b>pirate</b> was someone who tried an attack. <b>Fear</b> is what you feel when danger is near. Same old word."],
     "uc": "the word list follows the Indo-European Lexicon, which follows Pokorny, fetched on 19 November 2026. Etymonline&rsquo;s "
-          "own pages weren&rsquo;t reachable that day, so its links here are searches. Next: check the family against Etymonline "
-          "and Watkins, and the marks of <i>experience</i> and <i>experiential</i> (a vault from the i to the e) against how the "
-          "site marks <i>here</i> and <i>serious</i>.",
+          "own pages weren&rsquo;t reachable that day, so its links here are searches. Next: check the family against Etymonline and Watkins. Then check the vault from the i to the e in <i>experience</i> and <i>experiential</i> against <i>here</i> and <i>serious</i>.",
     "label": "Root family: *per-",
     "desc": "A word study of experiment and experience: the root *per-, to try or risk, and its family (expert, peril, pirate, empirical, fear), with why the e is short in one and long in the other, how the stress walks, and how two words that were one came apart.",
 }
@@ -1219,7 +1174,7 @@ SIGN_CLUSTERS = [
      ]},
     {"key": "seal", "label": "seal, sig", "spells": ["seal", "sig"], "head": "a little sign",
      "road": "Latin <i>sigillum</i>, a little sign, a seal",
-     "note": "<i>Seal</i> lost the g on its way through French, where <i>sigillum</i> wore down to <i>seel</i>; English took the word "
+     "note": "<i>Seal</i> lost the g in French, where <i>sigillum</i> became <i>seel</i>; English took the word "
              "without it. <i>Sigil</i> came straight from Latin and kept the g, soft before the i.",
      "groups": [
          [("seal", ["seal"], "a little sign pressed into wax; to close tight")],
@@ -1244,10 +1199,7 @@ ROOT_PARTS.update({
 SIGN = {
     "slug": "sign", "root": "sign", "gloss": "a mark", "kind": "a base family",
     "h1_s": "sign means &lsquo;a mark&rsquo;",
-    "lead": "A mark, a token. Latin <i>signum</i> was a mark, a sign, a seal, and the standard soldiers followed into battle. English "
-            "borrowed it again and again, and its spelling keeps a letter most of the family doesn&rsquo;t say: the g of <i>sign</i>, "
-            "heard in <i>signal</i> and <i>signature</i>. It&rsquo;s the classic word for showing that English spelling keeps "
-            "meaning in view when the sound goes quiet.",
+    "lead": "A mark, a token. Latin <i>signum</i> was a mark, a sign, a seal, and the standard soldiers followed into battle. English borrowed it again and again. Its spelling keeps a letter that <i>sign</i> doesn&rsquo;t sound: the g, heard in <i>signal</i> and <i>signature</i>. It&rsquo;s the classic example of English spelling keeping a part the same when its sound changes.",
     "drawn": ("sign", "sign, marked: the g in its cone"),
     "sources": [("Indo-European Lexicon, seku̯- (Linguistics Research Center, University of Texas at Austin), which follows Pokorny: Latin <i>signum</i> under to follow", "https://lrc.la.utexas.edu/lex/master/1673"),
                 ("Wiktionary, Proto-Italic *seknom, after Michiel de Vaan, <i>Etymological Dictionary of Latin and the other Italic Languages</i> (Brill, 2008), p. 563: from *sek-, to cut", "https://en.wiktionary.com/wiki/Reconstruction:Proto-Italic/seknom"),
@@ -1262,13 +1214,10 @@ SIGN = {
         ("g", "Why sign keeps its g",
          ["Say <i>sign</i> and you don&rsquo;t hear a g. Say <i>signal</i> and you do. The spelling keeps the g in both, so the "
           "family looks like a family: sign, signal, signature, design, designate. Carney calls a letter like this inert: silent in "
-          "one word, said in another (1994: 41). The notation draws it in a cone of silence, alone, joined to neither the i nor the "
-          "n, so it sits in the same place in every word of the family.",
+          "one word, said in another (1994: 41). The notation draws it in a cone of silence, joined to neither the i nor the n. So it sits in the same place in every word of the family.",
           "The g also changes the i. When the g is silent, the i spells its name, as in <i>find</i> and <i>child</i>. When the g is "
-          "said, it closes the syllable, sig, and the i is short. Venezky calls this kind of trade, a long vowel where a consonant "
-          "goes quiet, a compensatory alternation.",
-          "Chomsky and Halle used <i>sign</i> and <i>signify</i>, with <i>malign</i> and <i>malignant</i> and <i>paradigm</i> and "
-          "<i>paradigmatic</i>, to argue that English spelling writes the part, not the sound. Melvyn Ramsden and Pete Bowers made "
+          "said, it closes the syllable, sig, and the i is short. Venezky calls this kind of trade, a long vowel where a consonant is silent, a compensatory alternation.",
+          "Chomsky and Halle used <i>sign</i> and <i>signify</i>, <i>malign</i> and <i>malignant</i>, and <i>paradigm</i> and <i>paradigmatic</i>. Their point: English spelling writes the part, not the sound. Melvyn Ramsden and Pete Bowers made "
           "<i>sign</i> the first word a class takes apart in structured word inquiry. This page follows that tradition."],
          [("sign", "the g in its cone, and a long i"), ("signal", "the g said: sig | nal"), ("design", "de + sign"), ("designate", "des | ig | nate: the g said")]),
         ("root", "Follow or cut?",
@@ -1280,19 +1229,18 @@ SIGN = {
           "why it is a base family here and not a root family. If follow is right, <i>sign</i> is a cousin of <i>sequence</i>, "
           "<i>second</i> and <i>pursue</i>."], []),
         ("saussure", "Signifier and signified",
-         ["Ferdinand de Saussure built modern linguistics on this word. A linguistic sign, he said, has two sides joined like the "
-          "two sides of a sheet of paper: the <i>signifier</i>, the sound pattern, and the <i>signified</i>, the idea. His French "
+         ["Ferdinand de Saussure built modern linguistics on this word. A linguistic sign, he said, has two sides, joined like the two sides of a sheet of paper. One is the <i>signifier</i>, the sound pattern; the other is the <i>signified</i>, the idea. His French "
           "words were <i>signifiant</i> and <i>signifi&eacute;</i>, the present and past forms of <i>signifier</i>, to signify.",
           "The notation marks the signifier: the sounds and the letters that spell them. The parts and the seams are where the "
           "signified shows through: <i>design</i> is de + sign, to mark out, whatever the g is doing."], []),
     ],
     "students": ["sign", "signal", "signature", "design", "assign", "seal"],
     "s_lead": "These words come from <b>sign</b>. It means a mark.",
-    "s_pair": [("sign", "The g is quiet."), ("signal", "The g is heard.")],
+    "s_pair": [("sign", "The g is silent."), ("signal", "The g is heard.")],
     "s_paras": ["Say them: <b>sign</b>, <b>sig</b>-nal.",
                 "In <b>signal</b> you hear the g. In <b>sign</b> you don&rsquo;t, but it is still there.",
                 "It stays so the words look like one family: sign, signal, signature, design.",
-                "When the g is quiet, the i spells its name: s<b>i</b>gn, like f<b>i</b>nd.",
+                "When the g is silent, the i spells its name: s<b>i</b>gn, like f<b>i</b>nd.",
                 "A <b>seal</b> was a little sign pressed into wax. It lost its g long ago."],
     "uc": "the family follows the Indo-European Lexicon and Etymonline&rsquo;s entries; Etymonline&rsquo;s own pages weren&rsquo;t "
           "reachable on 20 November 2026, so its link here is a search. The root is debated (see Follow or cut?). Next: check each "
@@ -1401,8 +1349,8 @@ def clusters_html(R):
             "ids": {w: doors.word_id(w) for c, w, *_ in words}}
     script_data = json.dumps(data, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
     return f"""<section class="about t-only" aria-labelledby="rd-h"><div class="wrap">
-<h2 id="rd-h">{doors.NUMBER[len(R["roads"])]} roads in</h2>
-<p class="sub">The root reached English by {doors.NUMBER[len(R["roads"])].lower()} roads, each with its own spellings: a time-lapse, or a <a href="../definitions.html#def-diachronic">diachronic</a> view. Pick a spelling to see its words.</p>
+<h2 id="rd-h">How the words came into English</h2>
+<p class="sub">The root came into English {doors.NUMBER[len(R["roads"])].lower()} ways, each with its own spellings. This is the time-lapse, or <a href="../definitions.html#def-diachronic">diachronic</a>, view. Pick a spelling to see its words.</p>
 <div class="roads-wrap"><table class="roads"><thead><tr><th>From</th><th>Meaning</th><th>Spellings in English</th></tr></thead><tbody>{roads}</tbody></table></div>
 </div></section>
 <section class="about t-only cx" aria-labelledby="fam-h"><div class="wrap">
