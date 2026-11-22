@@ -80,7 +80,6 @@ def hero_only(doors_html):
 <h1 id="landing-h">Sounds and Words, Assembled</h1>
 <p class="sublead">Orthography, morphology, phonology and etymology, brought to light.</p>
 {doors_html}
-<p class="ctasub t-only"><a href="about.html">About the notation</a> · <a href="notations.html">The marks</a></p>
 </div></section>"""
 
 

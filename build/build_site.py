@@ -417,7 +417,7 @@ OLD_ANCHORS = """<script>(() => { const h = location.hash;
 home_body = f"""{header(0, home=True)}
 {OLD_ANCHORS}
 <main>
-{landing.hero_only(doors.door_grid(["walk", "progressions", "parts", "teachers"]))}
+{landing.hero_only(doors.home_grid())}
 </main>
 {footer(0)}"""
 if STANDALONE:
