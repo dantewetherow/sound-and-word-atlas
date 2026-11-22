@@ -60,15 +60,15 @@ STUDIES = [{
 }, {
     "slug": "phonesthemes",
     "title": "Glow, gleam, glitter",
-    "sub": "sounds that lean toward a meaning",
+    "sub": "sounds shared by words with related meanings",
     "root": "phonesthemes", "root_page": "lists/phonesthemes.html", "list": "lists/phonesthemes.html",
     "words": ["glow", "gleam", "glitter", "glimmer", "glint", "glisten", "sniff", "snout", "sneeze", "snore", "slide", "slip",
               "slither", "swing", "swirl", "twist", "twirl", "twin", "twelve", "growl", "howl", "scowl", "bash", "crash", "smash",
               "bump", "lump", "clump"],
     "blurb": "Why do <i>glow</i>, <i>gleam</i> and <i>glitter</i> all start with gl-, and <i>sniff</i>, <i>snout</i> and "
-             "<i>sneeze</i> with sn-? Some sounds lean toward a meaning. Learners hear the clusters, take gl- away to see it "
-             "isn&rsquo;t a part with a meaning of its own, find the words that don&rsquo;t fit, and meet an old family hiding "
-             "in gl- and tw-. Then they sort, and make up words of their own.",
+             "<i>sneeze</i> with sn-? Learners sort words before anything is explained, take gl- away to see that it has no "
+             "meaning of its own, find the words that don&rsquo;t fit, and learn that many gl- and tw- words share an old root. "
+             "Then they re-sort and make up words of their own.",
 }]
 
 
@@ -826,7 +826,7 @@ def phon_deck():
         f'<div data-s="{start + k}">{word(w, h)}</div>' if start else f'<div>{word(w, h)}</div>' for k, w in enumerate(ws)) + "</div>")
     D.slide("Title", f"""<p class="kicker">A word study &middot; phonesthemes</p>
 <h1 class="display">Glow, gleam, glitter</h1>
-<p class="subtitle">sounds that lean toward a meaning</p>
+<p class="subtitle">sounds shared by words with related meanings</p>
 {row(["glow", "gleam", "glitter"], 120, 0)}""",
             "A word study for learners. Click, tap, or press the right arrow for each next piece; N shows and hides these notes. "
             "The teacher&rsquo;s page is <a href='../lists/phonesthemes.html'>Sound and meaning</a>, with ten clusters to sort and the sources.", "mid")
@@ -841,20 +841,20 @@ def phon_deck():
 
     D.slide("grr", f"""<h2 class="head">Growl like a dog: <b class="r">grr</b></h2>
 <p class="lede" data-s="1">What does it mean?</p>
-<p class="q" data-s="2">You knew without a dictionary. The sound carries the meaning.</p>""",
-            "Let the class growl. A growl means something because of what it sounds like: low, rough, loud. <i>Grr</i> is a word "
-            "of its own, like <i>shh</i> and <i>ouch</i>. This study is about a quieter version: sounds inside ordinary words "
-            "that lean toward a meaning.", steps=2)
+<p class="q" data-s="2">Most people say anger, or a warning. You can tell from the sound.</p>""",
+            "Let the class growl. <i>Grr</i> is an interjection, like <i>shh</i> and <i>ouch</i>: its sound suggests its "
+            "meaning. This study is about a related pattern inside ordinary words: groups of words that share a sound and a "
+            "meaning.", steps=2)
 
-    D.slide("-owl", f"""<h2 class="head">Listen to the ends</h2>
+    D.slide("-owl", f"""<h2 class="head">Words that end in -owl</h2>
 {row(["growl", "howl", "yowl", "scowl", "prowl"], 96)}
-<p class="q" data-s="6">They end the same, and they&rsquo;re all a bit dark.</p>
-<div class="wrow dim" data-s="7"><div>{word("bowl", 96)}</div><p class="aside">same letters, a different sound: no echo</p></div>""",
+<p class="q" data-s="6">All five are angry sounds or looks, or moving quietly to hunt.</p>
+<div class="wrow dim" data-s="7"><div>{word("bowl", 96)}</div><p class="aside">same letters, a different sound: not in the group</p></div>""",
             "-owl: growl, howl, yowl, scowl, prowl, and the owl that hunts at night. <i>Bowl</i> spells the o of <i>snow</i> with "
-            "its ow, so it doesn&rsquo;t sound like the others and doesn&rsquo;t share the feeling. The echo is in the sound, "
-            "and the spelling usually shows it.", steps=7)
+            "its ow, so it doesn&rsquo;t sound like the others and isn&rsquo;t in the group. A phonestheme is a shared sound; "
+            "the spelling usually shows it.", steps=7)
 
-    D.slide("gl-", f"""<h2 class="head">Listen to the starts</h2>
+    D.slide("gl-", f"""<h2 class="head">Words that start with gl-</h2>
 {row(["glow", "gleam", "glint", "glitter", "glimmer", "glisten"], 92)}
 <p class="q" data-s="7">What do they share? <span data-s="8"><b>Light</b>, and seeing.</span></p>""",
             "Every one of these is about light: glow, gleam, glint, glitter, glimmer, glisten. Add glare, glance and glimpse for "
@@ -867,45 +867,45 @@ def phon_deck():
 <p data-s="2">gl + eam<small>eam?</small></p>
 <p data-s="3">gl + itter<small>itter?</small></p>
 </div>
-<p class="q" data-s="4">What&rsquo;s left means nothing. So gl- isn&rsquo;t a part with a meaning: it&rsquo;s a <b>lean</b>.</p>""",
+<p class="q" data-s="4">What&rsquo;s left means nothing, so gl- is not a morpheme. A shared sound like this is a <b>phonestheme</b>.</p>""",
             "Here is the line between a phonestheme and a morpheme. A word sum needs every part to carry meaning: re + play, "
             "sign + al. With gl-, the rest of the word means nothing, so there is no sum. J. R. Firth named this in 1930: a "
             "<i>phonestheme</i>, from Greek <i>ph&omacr;n&emacr;</i>, sound, and <i>aisth&emacr;ma</i>, what is felt.", steps=4)
 
     D.slide("Not every gl-", f"""<h2 class="head">Not every <b class="r">gl</b> word</h2>
 {row(["glove", "glue", "globe", "glum"], 100)}
-<p class="q" data-s="5">A lean, not a rule.</p>""",
-            "A glove, glue and a globe don&rsquo;t shine. Every cluster has words like these. Finding them is part of the lesson: "
-            "it keeps learners from turning a pattern into a rule.", steps=5)
+<p class="q" data-s="5">Many gl- words are about light. Not all of them are.</p>""",
+            "A glove, glue and a globe don&rsquo;t shine. Every cluster has words like these. Showing them keeps learners from treating "
+            "the pattern as a rule.", steps=5)
 
-    D.slide("An old family", f"""<h2 class="head">An old secret in gl-</h2>
+    D.slide("An old family", f"""<h2 class="head">Many gl- light words share a root</h2>
 <div class="chain"><p data-s="1">*ghel-<small>a very old word: to shine</small></p></div>
 {row(["gleam", "glow", "glass", "gold", "yellow"], 90, 2)}
-<p class="q" data-s="7">Many gl- light words were one family, long ago.</p>""",
+<p class="q" data-s="7">These words all come from one old root meaning <b>to shine</b>.</p>""",
             "The Indo-European root <i>*ghel-</i>, to shine, is behind gleam, glow, glass, glare, glimmer, glitter and glisten, "
-            "and also gold and yellow (Indo-European Lexicon, University of Texas, after Pokorny). So part of the gl- cluster "
-            "is a family that stopped looking like one, and the shared sound kept the meaning together.", steps=7)
+            "and also gold and yellow (Indo-European Lexicon, University of Texas, after Pokorny). So the gl- light words are "
+            "partly one word family and partly words that joined the group later.", steps=7)
 
-    D.slide("sn-", f"""<h2 class="head">Listen again</h2>
+    D.slide("sn-", f"""<h2 class="head">Words that start with sn-</h2>
 {row(["sniff", "snout", "sneeze", "snore", "snort"], 96)}
 <p class="q" data-s="6">The <b>nose</b>.</p>
-<div class="wrow" data-s="7"><p class="aside old">fnese &rarr;</p><div>{word("sneeze", 90)}</div><p class="aside">the old word changed to fit</p></div>""",
+<div class="wrow" data-s="7"><p class="aside old">fnese &rarr;</p><div>{word("sneeze", 90)}</div><p class="aside">the Old English word changed its first sound</p></div>""",
             "<i>Sneeze</i> was <i>fn&emacr;san</i> in Old English, and should have come down as <i>fnese</i>. The fn- dropped "
-            "out and sn- took its place, perhaps because sn- suited the nose (Anatoly Liberman, OUPblog, 2019). A cluster can "
-            "pull a word in. Snail, snake and snow don&rsquo;t fit.", steps=7)
+            "out and sn- took its place, perhaps because sn- suited the nose (Anatoly Liberman, OUPblog, 2019). So a group can "
+            "change the spelling of a word that joins it. Snail, snake and snow don&rsquo;t fit.", steps=7)
 
-    D.slide("sl-", f"""<h2 class="head">And again</h2>
+    D.slide("sl-", f"""<h2 class="head">Words that start with sl-</h2>
 {row(["slide", "slip", "slick", "slither", "slush", "slime"], 92)}
-<p class="q" data-s="7">Slippery. <span data-s="8">But you can <b>sleep</b> without sliding.</span></p>""",
+<p class="q" data-s="7">Sliding and slipping. <span data-s="8">But <b>sleep</b> and <b>slim</b> are not.</span></p>""",
             "sl- was Firth&rsquo;s own first example. A count of the whole dictionary didn&rsquo;t back it up (Otis and Sagi "
-            "2008): there are plenty of sl- words that don&rsquo;t slide. A cluster can feel strong and still be a lean.", steps=8)
+            "2008): there are plenty of sl- words that don&rsquo;t slide. Many readers notice the pattern; the numbers do not support it.", steps=8)
 
-    D.slide("sw- and tw-", f"""<h2 class="head">Two that move</h2>
+    D.slide("sw- and tw-", f"""<h2 class="head">Words that start with sw- and tw-</h2>
 <div class="cols2">
-<div><p class="lede" data-s="1"><b>sw-</b>: swing out and back</p>{row(["swing", "sway", "swirl", "swoop"], 84, 2)}</div>
-<div><p class="lede" data-s="6"><b>tw-</b>: twist</p>{row(["twist", "twirl", "twitch", "tweak"], 84, 7)}</div>
+<div><p class="lede" data-s="1"><b>sw-</b>: swinging and sweeping</p>{row(["swing", "sway", "swirl", "swoop"], 84, 2)}</div>
+<div><p class="lede" data-s="6"><b>tw-</b>: twisting</p>{row(["twist", "twirl", "twitch", "tweak"], 84, 7)}</div>
 </div>""",
-            "sw- moves like a pendulum or a broom: swing, sway, sweep, swirl, swoop, swish. tw- twists: twist, twirl, twine, "
+            "sw- words name swinging, sweeping or circling movements: swing, sway, sweep, swirl, swoop, swish. tw- words name twisting: twist, twirl, twine, "
             "twitch, tweak. Sweet, swan and swamp don&rsquo;t swing.", steps=10)
 
     D.slide("tw- and two", f"""<h2 class="head">tw- and <b class="r">two</b></h2>
@@ -913,25 +913,25 @@ def phon_deck():
 <p class="q" data-s="8">These come from the old word for <b>two</b>. <span data-s="9">So does <b>twist</b>: two strands.</span></p>""",
             "Indo-European <i>*dwo-</i>, two, gives two, twin, twelve, twenty, twice, between, and twig (where a branch splits). "
             "<i>Twist</i> and <i>twine</i> are in the family too, as thread of two strands. <i>Twirl</i>, <i>tweak</i> and "
-            "<i>twitch</i> joined by sound. Same letters, two reasons: a family, and a lean. <i>Between</i> is be + tween, &ldquo;by two&rdquo;, marked with its seam like <i>before</i> and <i>behind</i>.", steps=9)
+            "<i>twitch</i> share only the sound and a related meaning. <i>Between</i> is be + tween, &ldquo;by two&rdquo;, marked with its seam like <i>before</i> and <i>behind</i>.", steps=9)
 
-    D.slide("-ash and -ump", f"""<h2 class="head">Two ends</h2>
+    D.slide("-ash and -ump", f"""<h2 class="head">Words that end in -ash and -ump</h2>
 <div class="cols2">
 <div><p class="lede" data-s="1"><b>-ash</b>: a hard, fast hit</p>{row(["bash", "crash", "smash", "splash"], 84, 2)}</div>
 <div><p class="lede" data-s="6"><b>-ump</b>: a rounded lump</p>{row(["bump", "lump", "clump", "stump"], 84, 7)}</div>
 </div>
-<p class="q" data-s="11">And <b>wash</b>? The w changes the a. No echo.</p>""",
+<p class="q" data-s="11">And <b>wash</b>? The w changes the sound of the a, so it is not in the group.</p>""",
             "-ash: bash, crash, smash, splash, clash, dash, flash. -ump: bump, lump, clump, stump, plump. Cash and ash don&rsquo;t "
             "hit; jump and pump aren&rsquo;t lumps. In <i>wash</i> the a spells a different sound after w, so it falls out of "
             "the cluster altogether.", steps=11)
 
-    D.slide("In your head?", f"""<h2 class="head">Does your brain notice?</h2>
+    D.slide("In your head?", f"""<h2 class="head">What an experiment found</h2>
 <p class="lede" data-s="1">People saw pairs like <b>glitter</b> and <b>glow</b>, then read the second word.</p>
 <p class="lede" data-s="2">They read it faster than for pairs that shared only letters, or only meaning.</p>
-<p class="q" data-s="3">Your brain keeps the lean.</p>""",
+<p class="q" data-s="3">Readers connect words that share both a sound and a meaning.</p>""",
             "Benjamin Bergen, &ldquo;The psychological reality of phonaesthemes,&rdquo; <i>Language</i> 80 (2004): a priming "
-            "test with gl- and sn- pairs. The phonestheme pairs sped reading by about 60 milliseconds, more than form alone "
-            "and meaning alone added together. Otis and Sagi (2008) then counted the whole dictionary: gl-, sn-, sw-, tw-, "
+            "test with gl- and sn- pairs. Pairs that shared a phonestheme were read faster than pairs that "
+            "shared only letters or only meaning. Otis and Sagi (2008) then counted the whole dictionary: gl-, sn-, sw-, tw-, "
             "str-, -ash and -ump held up; sl- didn&rsquo;t.", steps=3)
 
     D.slide("Sorted", f"""<h2 class="head">Back to the sort</h2>
@@ -949,11 +949,11 @@ def phon_deck():
 <p class="lede" data-s="1">A <b>glimp</b> is probably&hellip; <span data-s="2"><i>a tiny flash of light</i></span></p>
 <p class="lede" data-s="3">A <b>snoffle</b> is probably&hellip; <span data-s="4"><i>a small, quick sniff</i></span></p>
 <p class="q" data-s="5">Your turn: a gl- word, an sn- word, an -ash word. What do they mean?</p>""",
-            "Made-up words show the lean best: learners agree on what a <i>glimp</i> might be without being told. People coining "
+            "Made-up words test the pattern: learners often agree on what a <i>glimp</i> might be without being told. People coining "
             "new words follow these clusters too. Keep the words silly, not awkward.", steps=5)
 
     D.slide("For teachers", f"""<h2 class="head">For teachers</h2>
-<p class="lede">A phonestheme is a sound many words with a shared meaning have in common. It isn&rsquo;t a morpheme (the rest of the word means nothing alone, so there is no word sum), and it isn&rsquo;t a rule (every cluster has words with the letters and not the meaning). Some clusters are partly old families (gl- from <i>*ghel-</i>, to shine; tw- from <i>*dwo-</i>, two).</p>
+<p class="lede">A phonestheme is a sound many words with a shared meaning have in common. It isn&rsquo;t a morpheme (the rest of the word means nothing alone, so there is no word sum), and it isn&rsquo;t a rule (every cluster has words with the letters but not the meaning). Some clusters are partly old families (gl- from <i>*ghel-</i>, to shine; tw- from <i>*dwo-</i>, two).</p>
 <p class="lede">Sources: J. R. Firth, <i>Speech</i> (1930); Bolinger (1949); Marchand (1959); Bergen, <i>Language</i> 80 (2004); Otis and Sagi (2008); Liberman, OUPblog (2019). The ten clusters, each word marked, are on <a href="../lists/phonesthemes.html">Sound and meaning</a>.</p>""", cls="mid")
     return D
 

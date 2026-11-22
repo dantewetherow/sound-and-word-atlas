@@ -424,25 +424,27 @@ def write(OUT, page, header, footer, X):
 
 # Every major button on the home page (22 November 2026, Dante's list): the word walk first, then the rest.
 # (href, name, one line, for teachers only)
-HOME_TILES = [
-    ("walk.html", "Word walk", "Look up any word and walk through it: its marks, a move at a time, and its parts.", False),
-    ("progressions.html", "The path", "Reading and spelling in order, a step at a time.", False),
-    ("lists/index.html", "Spelling", "A spelling list for every step and family, with a check and the words that don&rsquo;t fit.", True),
-    ("parts.html", "Parts", "Prefixes, suffixes, roots and joins, each with every word that has it.", False),
-    ("studies.html", "Student presentations", "Word studies: a family of words built a piece at a time.", False),
-    ("presentations.html", "Teacher presentations", "The staff series and decks on single concepts, with their handouts.", True),
-    ("notations.html", "The marks", "Each mark of the notation, drawn alone on one word.", False),
-    ("gym.html", "The gym", "Build sentences from each step&rsquo;s words, a round at a time.", False),
-    ("explorations.html", "Explorations", "Contractions, ablaut, and words to take apart and build.", False),
-    ("instructions.html", "To print", "Word cards and affix tent cards.", True),
-    ("connections.html", "Programs", "Where the path meets UFLI, Dolch and the Early Literacy Profile.", True),
-    ("explanations.html", "Reasons and sources", "Definitions, the notation and its name, credits, and the marking calls.", True),
+HOME_TILES = [   # (href, name for teachers, name in Board view or None, one line, for teachers only)
+    ("walk.html", "Word walk", None, "Look up any word and step through its marks one at a time, then its parts.", False),
+    ("progressions.html", "Scope and sequence", "The path", "The reading and spelling steps in teaching order.", False),
+    ("lists/index.html", "Spelling lists", None, "A list for each step and word family, each with a check.", True),
+    ("parts.html", "Morphemes", "Parts", "Prefixes, suffixes, roots and joins, each with the words on the site that use it.", False),
+    ("studies.html", "Word studies", None, "Presentations for learners: one word family per deck.", False),
+    ("presentations.html", "Teacher presentations", None, "The staff series and single-concept decks, with handouts.", True),
+    ("notations.html", "The marks", None, "Each mark in the notation, shown on one word.", False),
+    ("gym.html", "Sentence gym", "Gym", "Build sentences from each step&rsquo;s words.", False),
+    ("explorations.html", "Explorations", None, "Contractions, ablaut (write, wrote, written), and words to take apart.", False),
+    ("instructions.html", "Print resources", None, "Word cards and affix tent cards.", True),
+    ("connections.html", "Programs", None, "How the steps line up with UFLI, Dolch and the Early Literacy Profile.", True),
+    ("explanations.html", "Reasons and sources", None, "Definitions, the notation&rsquo;s name, credits, and open marking decisions.", True),
 ]
 
 
 def home_grid():
-    tile = lambda i, h, n, line, t: (f'<a class="door-tile{" hg-first" if i == 0 else ""}{" t-only" if t else ""}" href="{h}">'
-                                     f'<span class="dn">{n}</span><span class="pw">{line}</span></a>')
+    def tile(i, h, n, board, line, t):
+        name = f'<span class="t-only">{n}</span><span class="s-only">{board}</span>' if board else n
+        return (f'<a class="door-tile{" hg-first" if i == 0 else ""}{" t-only" if t else ""}" href="{h}">'
+                f'<span class="dn">{name}</span><span class="pw">{line}</span></a>')
     return '<nav class="home-grid" aria-label="The site">' + "".join(tile(i, *x) for i, x in enumerate(HOME_TILES)) + "</nav>"
 
 
