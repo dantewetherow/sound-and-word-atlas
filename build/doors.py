@@ -422,13 +422,13 @@ def write(OUT, page, header, footer, X):
 <section class="about"><div class="wrap"><ul class="smap-tree"><li><a href="index.html"><b>Home</b></a></li>{"".join(items)}</ul></div></section>""")
 
 
-def door_grid():
+def door_grid(order=None):
     """The four primary buttons for the top of the home page (21 November 2026): the three layers and For teachers, alike.
     Every other page has them in the bar above (header_parts)."""
     return '<nav class="door-grid home-doors" aria-label="Doors">' + "".join(
         f'<a class="door-tile{" t-only" if sw is None else ""}" href="{slug}.html"><span class="dn">{name}</span>'
         f'{f"<span class=sn>{sw}</span>" if sw else ""}<span class="pw t-only">{plain}</span></a>'
-        for slug, name, _, plain, sw in DOORS) + '</nav>'
+        for slug, name, _, plain, sw in ([DOOR[k] for k in order] if order else DOORS)) + '</nav>'
 
 
 def doors_section():

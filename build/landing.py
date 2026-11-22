@@ -73,6 +73,17 @@ def _play_js(after_lego):
 JS_ON = "<script>if (!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) document.documentElement.classList.add('js');</script>"
 
 
+def hero_only(doors_html):
+    """The home page as a clean place to land (22 November 2026, a trial): the name, one line, and the buttons."""
+    return f"""<style>{css()}</style>
+<section class="landing solo" aria-labelledby="landing-h"><div class="wrap">
+<h1 id="landing-h">Sounds and Words, Assembled</h1>
+<p class="sublead">Orthography, morphology, phonology and etymology, brought to light.</p>
+{doors_html}
+<p class="ctasub t-only"><a href="about.html">About the notation</a> · <a href="notations.html">The marks</a></p>
+</div></section>"""
+
+
 def html_block(LW, doors_html=""):
     """The home page's top: the name, the subtitle, the three layers as buttons, then note to notate to notation.
     Since 12 November 2026; legomorphic, built up, is on the *leg- page (lego_block)."""
