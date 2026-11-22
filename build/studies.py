@@ -848,7 +848,7 @@ def phon_deck():
 
     D.slide("-owl", f"""<h2 class="head">Words that end in -owl</h2>
 {row(["growl", "howl", "yowl", "scowl", "prowl"], 96)}
-<p class="q" data-s="6">All five are angry sounds or looks, or moving quietly to hunt.</p>
+<p class="q" data-s="6">All five are angry sounds or looks, or creeping up to hunt.</p>
 <div class="wrow dim" data-s="7"><div>{word("bowl", 96)}</div><p class="aside">same letters, a different sound: not in the group</p></div>""",
             "-owl: growl, howl, yowl, scowl, prowl, and the owl that hunts at night. <i>Bowl</i> spells the o of <i>snow</i> with "
             "its ow, so it doesn&rsquo;t sound like the others and isn&rsquo;t in the group. A phonestheme is a shared sound; "
@@ -882,8 +882,8 @@ def phon_deck():
 <div class="chain"><p data-s="1">*ghel-<small>a very old word: to shine</small></p></div>
 {row(["gleam", "glow", "glass", "gold", "yellow"], 90, 2)}
 <p class="q" data-s="7">These words all come from one old root meaning <b>to shine</b>.</p>""",
-            "The Indo-European root <i>*ghel-</i>, to shine, is behind gleam, glow, glass, glare, glimmer, glitter and glisten, "
-            "and also gold and yellow (Indo-European Lexicon, University of Texas, after Pokorny). So the gl- light words are "
+            "The Indo-European root <i>*ghel-</i>, to shine, is behind gleam, glow, glass, glare, glimmer, glitter and glisten. "
+            "It is also behind gold and yellow (Indo-European Lexicon, University of Texas, after Pokorny). So the gl- light words are "
             "partly one word family and partly words that joined the group later.", steps=7)
 
     D.slide("sn-", f"""<h2 class="head">Words that start with sn-</h2>
@@ -920,14 +920,14 @@ def phon_deck():
 <div><p class="lede" data-s="1"><b>-ash</b>: a hard, fast hit</p>{row(["bash", "crash", "smash", "splash"], 84, 2)}</div>
 <div><p class="lede" data-s="6"><b>-ump</b>: a rounded lump</p>{row(["bump", "lump", "clump", "stump"], 84, 7)}</div>
 </div>
-<p class="q" data-s="11">And <b>wash</b>? The w changes the sound of the a, so it is not in the group.</p>""",
+<p class="q" data-s="11">And <b>wash</b>? The w changes the a&rsquo;s sound. It isn&rsquo;t in the group.</p>""",
             "-ash: bash, crash, smash, splash, clash, dash, flash. -ump: bump, lump, clump, stump, plump. Cash and ash don&rsquo;t "
             "hit; jump and pump aren&rsquo;t lumps. In <i>wash</i> the a spells a different sound after w, so it falls out of "
             "the cluster altogether.", steps=11)
 
     D.slide("In your head?", f"""<h2 class="head">What an experiment found</h2>
 <p class="lede" data-s="1">People saw pairs like <b>glitter</b> and <b>glow</b>, then read the second word.</p>
-<p class="lede" data-s="2">They read it faster than for pairs that shared only letters, or only meaning.</p>
+<p class="lede" data-s="2">This was faster than for pairs sharing only letters or meaning.</p>
 <p class="q" data-s="3">Readers connect words that share both a sound and a meaning.</p>""",
             "Benjamin Bergen, &ldquo;The psychological reality of phonaesthemes,&rdquo; <i>Language</i> 80 (2004): a priming "
             "test with gl- and sn- pairs. Pairs that shared a phonestheme were read faster than pairs that "
@@ -953,7 +953,7 @@ def phon_deck():
             "new words follow these clusters too. Keep the words silly, not awkward.", steps=5)
 
     D.slide("For teachers", f"""<h2 class="head">For teachers</h2>
-<p class="lede">A phonestheme is a sound many words with a shared meaning have in common. It isn&rsquo;t a morpheme (the rest of the word means nothing alone, so there is no word sum), and it isn&rsquo;t a rule (every cluster has words with the letters but not the meaning). Some clusters are partly old families (gl- from <i>*ghel-</i>, to shine; tw- from <i>*dwo-</i>, two).</p>
+<p class="lede">A phonestheme is a sound many words with a shared meaning have in common. It isn&rsquo;t a morpheme: the rest of the word means nothing alone, so there is no word sum. It isn&rsquo;t a rule either: every cluster has words with the letters but not the meaning. Some clusters are partly old families (gl- from <i>*ghel-</i>, to shine; tw- from <i>*dwo-</i>, two).</p>
 <p class="lede">Sources: J. R. Firth, <i>Speech</i> (1930); Bolinger (1949); Marchand (1959); Bergen, <i>Language</i> 80 (2004); Otis and Sagi (2008); Liberman, OUPblog (2019). The ten clusters, each word marked, are on <a href="../lists/phonesthemes.html">Sound and meaning</a>.</p>""", cls="mid")
     return D
 

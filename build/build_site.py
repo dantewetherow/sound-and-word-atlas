@@ -571,3 +571,5 @@ gloss_check.run(OUT)
 import mark_check                                             # the marking rules (20 November 2026): every code against them
 _hand_bad, _ = mark_check.run(OUT)
 if _hand_bad: raise SystemExit("mark check failed (mark_check.py has the rules):\n  " + "\n  ".join(f"{w}: {'; '.join(v)}" for w, v in _hand_bad.items()))
+import style_check                                            # the prose style check (22 November 2026): flags for review, site-wide
+style_check.run(OUT)

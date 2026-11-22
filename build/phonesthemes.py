@@ -20,8 +20,8 @@ CLUSTERS = [
      ["glow", "gleam", "glint", "glitter", "glisten", "glimmer", "glare", "glance", "glimpse", "glass", "gloss", "glaze"],
      None, ["glove", "glue", "globe", "glum"],
      "Most of these share an old root, <i>*ghel-</i>, to shine, with <i>gold</i> and <i>yellow</i>. So the gl- light words "
-     "are partly one word family and partly words that joined the group later. In one count of written English, about "
-     "4 in 10 different gl- words, and 6 in 10 of their uses, had to do with light or seeing (Bergen 2004).", "held"),
+     "are partly one word family and partly words that joined the group later. One count of written English found "
+     "that about 4 in 10 different gl- words had to do with light or seeing. So did 6 in 10 of their uses (Bergen 2004).", "held"),
     ("sn", "sn-", "the nose and mouth",
      ["sniff", "snout", "sneeze", "snore", "snort", "sniffle", "snuffle", "snarl", "sneer", "snicker"],
      None, ["snow", "snail", "snake", "snap"],
@@ -65,7 +65,7 @@ CLUSTERS = [
      None, ["flat", "flag"],
      "Just short of significance in the dictionary count, so the evidence is weaker than for gl- or sn-.", "close"),
 ]
-COUNT = {"held": "held up in a count of the whole dictionary", "close": "close, in a count of the whole dictionary",
+COUNT = {"held": "held up in a count of the whole dictionary", "close": "came close to holding up in a count of the whole dictionary",
          "not": "didn&rsquo;t hold up in a count of the whole dictionary"}
 
 
@@ -105,7 +105,7 @@ def write(OUT, page, header, footer, X):
 <section class="hero"><div class="wrap">
 <p class="eyebrow t-only"><a href="index.html">Legomorphic spelling</a> &middot; Sound and meaning</p>
 <h1>Sound and meaning: phonesthemes</h1>
-<p class="lead">Some groups of words share both a sound and a meaning. <i>Glow</i>, <i>gleam</i> and <i>glitter</i> all start with gl- and all have to do with light; <i>sniff</i>, <i>snout</i> and <i>sneeze</i> start with sn- and all have to do with the nose. A sound shared like this is a phonestheme.</p>
+<p class="lead">Some groups of words share both a sound and a meaning. <i>Glow</i>, <i>gleam</i> and <i>glitter</i> all start with gl- and all have to do with light. <i>Sniff</i>, <i>snout</i> and <i>sneeze</i> start with sn- and all have to do with the nose. A sound shared like this is a phonestheme.</p>
 <p class="sub">It isn&rsquo;t a morpheme. Take gl- away and <i>-ow</i>, <i>-eam</i> and <i>-itter</i> mean nothing, so there&rsquo;s no word sum. And it isn&rsquo;t a rule: every list here ends with words that have the letters and not the meaning. The word is J. R. Firth&rsquo;s (1930), from Greek <i>ph&omacr;n&emacr;</i>, sound, and <i>aisth&emacr;ma</i>, what is felt.</p>
 <p class="sub t-only">To teach: mix the words up and have learners sort them by meaning first, then look at how they start or end. Include the words that don&rsquo;t fit, so learners see that the pattern has exceptions. The <a href="../studies/phonesthemes.html">word study</a> walks a class through it.</p>
 <nav class="ph-toc" aria-label="Clusters">{"".join(toc)}</nav>
