@@ -831,6 +831,14 @@ def phon_deck():
             "A word study for learners. Click, tap, or press the right arrow for each next piece; N shows and hides these notes. "
             "The teacher&rsquo;s page is <a href='../lists/phonesthemes.html'>Sound and meaning</a>, with ten clusters to sort and the sources.", "mid")
 
+    mixed = ["glimmer", "sniff", "crash", "swirl", "glint", "snout", "lump", "swoop", "smash", "glow", "sneeze", "bump"]
+    D.slide("Sort", f"""<h2 class="head">Sort these into groups</h2>
+{row(mixed, 74, 0)}
+<p class="q" data-s="1">Any groups you like. <span data-s="2">How did you decide?</span></p>""",
+            "Before anything is explained (22 November 2026: the sort comes first, to start the wondering). Say each word and "
+            "let learners group them however they like: by sound, by letters, by meaning. Don&rsquo;t confirm or correct yet; "
+            "collect their reasons on the board. The class comes back to this pile near the end, with names for what they found.", steps=2)
+
     D.slide("grr", f"""<h2 class="head">Growl like a dog: <b class="r">grr</b></h2>
 <p class="lede" data-s="1">What does it mean?</p>
 <p class="q" data-s="2">You knew without a dictionary. The sound carries the meaning.</p>""",
@@ -901,11 +909,11 @@ def phon_deck():
             "twitch, tweak. Sweet, swan and swamp don&rsquo;t swing.", steps=10)
 
     D.slide("tw- and two", f"""<h2 class="head">tw- and <b class="r">two</b></h2>
-{row(["two", "twin", "twelve", "twenty", "twice", "twig"], 90)}
-<p class="q" data-s="7">These come from the old word for <b>two</b>. <span data-s="8">So does <b>twist</b>: two strands.</span></p>""",
+{row(["two", "twin", "twelve", "twenty", "twice", "twig", "between"], 84)}
+<p class="q" data-s="8">These come from the old word for <b>two</b>. <span data-s="9">So does <b>twist</b>: two strands.</span></p>""",
             "Indo-European <i>*dwo-</i>, two, gives two, twin, twelve, twenty, twice, between, and twig (where a branch splits). "
             "<i>Twist</i> and <i>twine</i> are in the family too, as thread of two strands. <i>Twirl</i>, <i>tweak</i> and "
-            "<i>twitch</i> joined by sound. Same letters, two reasons: a family, and a lean.", steps=8)
+            "<i>twitch</i> joined by sound. Same letters, two reasons: a family, and a lean. <i>Between</i> is be + tween, &ldquo;by two&rdquo;, marked with its seam like <i>before</i> and <i>behind</i>.", steps=9)
 
     D.slide("-ash and -ump", f"""<h2 class="head">Two ends</h2>
 <div class="cols2">
@@ -926,14 +934,7 @@ def phon_deck():
             "and meaning alone added together. Otis and Sagi (2008) then counted the whole dictionary: gl-, sn-, sw-, tw-, "
             "str-, -ash and -ump held up; sl- didn&rsquo;t.", steps=3)
 
-    mixed = ["glimmer", "sniff", "crash", "swirl", "glint", "snout", "lump", "swoop", "smash", "glow", "sneeze", "bump"]
-    D.slide("Sort", f"""<h2 class="head">Sort them</h2>
-{row(mixed, 74, 0)}
-<p class="q" data-s="1">Light, the nose, a hit, a swing, a lump. Which is which?</p>""",
-            "Say each word, then let learners sort by meaning before they look at the letters. gl-: glimmer, glint, glow. sn-: "
-            "sniff, snout, sneeze. -ash: crash, smash. sw-: swirl, swoop. -ump: lump, bump. The next slide has the answer.", steps=1)
-
-    D.slide("Sorted", f"""<h2 class="head">Sorted</h2>
+    D.slide("Sorted", f"""<h2 class="head">Back to the sort</h2>
 <div class="sorted">
 <div data-s="1"><b>gl-</b>{row(["glimmer", "glint", "glow"], 64, 0)}</div>
 <div data-s="2"><b>sn-</b>{row(["sniff", "snout", "sneeze"], 64, 0)}</div>
@@ -941,7 +942,8 @@ def phon_deck():
 <div data-s="4"><b>sw-</b>{row(["swirl", "swoop"], 64, 0)}</div>
 <div data-s="5"><b>-ump</b>{row(["lump", "bump"], 64, 0)}</div>
 </div>""",
-            "Ask which group was easiest and why. Then go back to the odd ones: glove, snail, sleep, cash.", steps=5)
+            "The pile from the start, sorted by phonestheme. Compare it with the groups learners made: who sorted by meaning, who "
+            "by letters, and where the two agreed. Then go back to the odd ones: glove, snail, sleep, cash.", steps=5)
 
     D.slide("Make one up", f"""<h2 class="head">Make one up</h2>
 <p class="lede" data-s="1">A <b>glimp</b> is probably&hellip; <span data-s="2"><i>a tiny flash of light</i></span></p>

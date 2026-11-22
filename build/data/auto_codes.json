@@ -142,7 +142,6 @@
 "best": "c.b s.e c.st",
 "bet": "c.b s.e c.t",
 "bets": "c.b s.e c.t + c.s",
-"between": "c.b l.e c.t | c.w t.ee c.n",
 "biannual": "c.b l.i + | s.a x.nn | l.u | b.a c.l ; bv 4>3 ; schwa 5",
 "bib": "c.b s.i c.b",
 "bibs": "c.b s.i c.b + c.s",

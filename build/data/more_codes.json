@@ -21,6 +21,7 @@
 "bell": "c.b s.e k.ll",
 "bench": "c.b s.e c.n g.ch",
 "bet": "c.b s.e c.t",
+"between": "c.b l.e + | c.tw t.ee c.n",
 "big": "c.b s.i c.g",
 "bigger": "c.b s.i x.gg + | r.er ; bv 3>2",
 "bill": "c.b s.i k.ll",
