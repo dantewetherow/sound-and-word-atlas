@@ -1093,3 +1093,15 @@ details.allpages .ap-panel a .ap-line { font-size: 0.82rem; color: var(--soft); 
   details.allpages .ap-panel { position: static; width: auto; grid-template-columns: 1fr; box-shadow: none; margin-top: 6px; }
   details.allpages .ap-panel a .ap-line { display: none; }
 }
+
+
+/* the weak and borrowed sounds (ə, ee, ʊ ...) are hidden for now (23 November 2026); the switch on the Notations page
+   shows them, and the legend's own drawing always does */
+:root:not([data-ov="on"]) .ovr { display: none; }
+.mark .ovr { display: inline !important; }
+.ov-note { margin: 8px 0 0; font-size: 0.85rem; color: var(--verb, #b23a2a); }
+.calls .ovr { display: inline !important; }   /* the Marking calls page is where these marks are judged, so it always shows them */
+
+/* Surprising connections (23 November 2026) */
+.sc-road{display:block;font-size:.82rem;line-height:1.35;color:var(--soft,#6b6256);max-width:15em;margin:.3rem auto 0}
+.sc-src{font-size:.9rem}

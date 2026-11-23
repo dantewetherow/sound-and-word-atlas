@@ -19,11 +19,12 @@ STUDIES = [{
     "title": "Try it out",
     "sub": "experiment and experience",
     "root": "*per-", "root_page": "roots/per.html", "list": "lists/family-per.html",
-    "words": ["experiment", "experience", "expert", "peril", "pirate", "fear", "experimental", "experienced", "expertise",
-              "perilous", "empirical", "experiential", "experimentation", "fearful"],
+    "words": ["experiment", "experience", "experimental", "experimentation", "experimenter", "experienced", "inexperienced",
+              "experiential"],
     "blurb": "Two long words built from the same parts: <i>ex-</i> (out), <i>per</i> (try), and <i>-ment</i> or <i>-ence</i>. "
-             "Read from the end, the parts give the meaning: an experiment is a trying-out. Then why the e is short in one "
-             "word and long in the other. Last, other words from the root: <i>expert</i>, <i>peril</i>, <i>pirate</i>, <i>fear</i>.",
+             "Read from the end, the parts give the meaning: an experiment is a trying-out. Then a test: is -ment just -ent with "
+             "an m? Then the words built on the pair: <i>experimental</i>, <i>experimentation</i>, <i>inexperienced</i>, "
+             "<i>experiential</i>. The beat moves and the vowels change; the spelling of each part stays the same.",
 }, {
     "slug": "education",
     "title": "From duct to education",
@@ -190,6 +191,9 @@ body{background:var(--paper);color:var(--ink);font-family:var(--sans);overflow:h
 .ishas h3 b{color:var(--verb);font-weight:500}
 .ishas p{margin:0;font-size:50px;line-height:1.25}
 .ishas p b{color:var(--verb);font-weight:inherit}
+.tri{grid-template-columns:repeat(3,1fr);gap:10px 50px}
+.tri p{font-size:46px}
+.ladder{grid-template-columns:1fr;gap:22px}
 .duo{display:flex;gap:120px;align-items:flex-end;margin-top:40px}
 .duo figure{margin:0;display:grid;justify-items:start;gap:14px}
 .duo figcaption{font-family:var(--serif);font-style:italic;font-size:38px;color:var(--soft)}
@@ -390,15 +394,19 @@ def per_deck():
             "(<i>patiens</i>, enduring; <i>absens</i>, being away), and its noun, <i>-entia</i>. &lsquo;Have&rsquo; is a handle, not "
             "a rule: we sat in silence, we noticed his absence. Check by ear: The room was ___ (silent). We sat in ___ (silence).", steps=5)
 
-    fam = [("expert", "someone who has tried, and knows"), ("peril", "a risk, a danger"),
-           ("pirate", "someone who tries an attack"), ("fear", "what a risk makes you feel")]
-    cells = "".join(f'<div data-s="{k + 1}">{word(w, 96)}<span class="g">{g}</span></div>' for k, (w, g) in enumerate(fam))
-    D.slide("per", f"""<h2 class="head"><b class="r">per</b>: try, take a risk</h2>
-<div class="fam">{cells}</div>
-<p class="q" data-s="5">A very old word for <b>try</b>, in many words.</p>""",
-            "All four come from the root *per-, to try, to risk. <i>Expert</i> is from Latin <i>expertus</i>, tried, and <i>peril</i> "
-            "from <i>per&imacr;culum</i>, a trial, a danger. <i>Pirate</i> is from Greek <i>peira</i>, a trial. <i>Fear</i> is "
-            "from Old English <i>f&aelig;r</i>, a danger: English has had it from the start.", steps=5)
+    # -ment and -ent (23 November 2026): two suffixes, not one with an m added. Tested on the slide, not told.
+    D.slide("m or no m", f"""<h2 class="head">Is <b>-ment</b> just <b>-ent</b> with an m?</h2>
+<p class="lede" data-s="1" style="margin:0 0 22px">An idea to test: the m keeps two vowels apart.</p>
+<div class="ishas"><h3>a vowel before it</h3><h3>a consonant before it</h3>
+<p data-s="2">agree<b>ment</b></p><p data-s="3">govern<b>ment</b></p>
+<p data-s="4">flu<b>ent</b></p><p data-s="5">differ<b>ent</b></p></div>
+<p class="lede" data-s="6">-ment comes after both. So does -ent, with no m.</p>
+<p class="q" data-s="7"><b>-ment</b> and <b>-ent</b> are two suffixes with two jobs.</p>""",
+            "If the m kept two vowels apart, -ment would come only after vowels, and -ent never would. Both come after both. "
+            "<i>Experiment</i> and <i>experience</i> settle it: both endings follow the same i. "
+            "Latin <i>-mentum</i> made nouns for the means or the result of a verb: <i>mon&emacr;re</i>, to warn, <i>monumentum</i>. "
+            "Latin <i>-&emacr;ns</i>, <i>-entis</i> was the present form of a verb, and <i>-entia</i> its noun. "
+            "The two look alike in Latin too; their histories are separate.", steps=7)
 
     D.slide("Build experiment", f"""<h2 class="head">Build it</h2>
 {join(["ex", "peri", "ment"], ["out", "try", "the doing"], word("experiment", 150), 1,
@@ -435,27 +443,89 @@ def per_deck():
             "<i>Expert</i>, from <i>expertus</i>, has none: the root is per. In <i>experience</i> it also does a job in sound, "
             "making the e long. None of this is needed to teach the morphology, phonology, spelling or history here.", steps=2)
 
-    six = ["experiment", "experience", "expert", "peril", "pirate", "fear"]
-    D.slide("The family", f"""<h2 class="head">One old word, a family of words</h2>
-<div class="fam6">{"".join(f'<div data-s="{k + 1}">{word(w, 92)}</div>' for k, w in enumerate(six))}</div>
-<p class="q" data-s="7">All six come from one old word meaning try, risk or test.</p>""",
-            "The whole family, with <i>empirical</i>, <i>perilous</i>, <i>parlous</i> and <i>fearful</i>, and how each word "
-            "came into English, is on the <a href=\"../roots/per.html\">*per- page</a>.", steps=7)
+    def ladder(head, rows, q, note):
+        cells = "".join(f'<div data-s="{k + 1}">{word(w, 92)}<span class="g">{g}</span></div>' for k, (w, g) in enumerate(rows))
+        D.slide(head, f"""<h2 class="head">{head}</h2>
+<div class="fam ladder">{cells}</div>
+<p class="q" data-s="{len(rows) + 1}">{q}</p>""", note, steps=len(rows) + 1)
+
+    ladder("Keep building", [("experimental", "<b>+ al</b>: to do with experiments"),
+                             ("experimentation", "<b>+ at(e) + ion</b>: the doing of experiments"),
+                             ("experimenter", "<b>+ er</b>: one who does the experiment")],
+           "Each ending makes a new kind of word.",
+           "Word sums: experiment + al &rarr; <i>experimental</i>; experiment + at(e) + ion &rarr; <i>experimentation</i>; "
+           "experiment + er &rarr; <i>experimenter</i>. The e of -ate drops before -ion. "
+           "Read from the end: -al describes, -ion names a doing, -er names the one who does it.")
+
+    D.slide("The beat moves", f"""<h2 class="head">Say them. The beat moves.</h2>
+<p class="syl" style="font-size:64px;margin:0 0 4px"><span>ex</span><span class="dot">&middot;</span><span class="hit">PER</span><span class="dot">&middot;</span><span>i</span><span class="dot">&middot;</span><span>ment</span></p>
+<p class="syl" style="font-size:64px;margin:0 0 4px" data-s="1"><span>ex</span><span class="dot">&middot;</span><span>per</span><span class="dot">&middot;</span><span>i</span><span class="dot">&middot;</span><span class="hit">MEN</span><span class="dot">&middot;</span><span>tal</span></p>
+<p class="syl" style="font-size:64px;margin:0 0 4px" data-s="2"><span>ex</span><span class="dot">&middot;</span><span>per</span><span class="dot">&middot;</span><span>i</span><span class="dot">&middot;</span><span>men</span><span class="dot">&middot;</span><span class="hit">TA</span><span class="dot">&middot;</span><span>tion</span></p>
+<p class="lede" data-s="3">In <b>experiment</b>, the e of <b class="r">ment</b> is hard to hear.</p>
+<p class="lede" data-s="4">In <b>experimental</b>, it&rsquo;s a clear short e.</p>
+<p class="q" data-s="5">Not sure of a vowel? Say a longer word in the family.</p>""",
+            "-al and -ion pull the stress to the syllable just before them: exPERiment, experiMENtal, experimenTAtion. "
+            "The e of ment is weak (a schwa) in <i>experiment</i>. In <i>experimental</i> it is stressed, a short e. "
+            "In <i>experimentation</i> people say it both ways (Merriam-Webster). "
+            "The spelling is ment in all three, so the word with the stress on that syllable tells you which vowel to write. "
+            "The same test works for -ence: <i>experience</i>, <i>experiential</i>.", steps=5)
+
+    ladder("Build on experience", [("experienced", "<b>+ ed</b>: has experience"),
+                                   ("inexperienced", "<b>in + &hellip; + ed</b>: not experienced"),
+                                   ("experiential", "learned by doing")],
+           "experien<b>c</b>e, experien<b>t</b>ial: where does the t come from?",
+           "Word sums: experienc(e) + ed &rarr; <i>experienced</i>; in + experienc(e) + ed &rarr; <i>inexperienced</i>; "
+           "ex + peri + ent + ial &rarr; <i>experiential</i>. The e at the end of <i>experience</i> drops before -ed. "
+           "In <i>experiential</i> the stress lands on en, and the e is a clear short e.")
+
+    rows = [("confid<b>ent</b>", "confid<b>ence</b>", "confid<b>ential</b>"), ("resid<b>ent</b>", "resid<b>ence</b>", "resid<b>ential</b>"),
+            ("", "experi<b>ence</b>", "experi<b>ential</b>")]
+    cells = "".join("".join(f'<p data-s="{k + 1}">{x}</p>' for x in r) for k, r in enumerate(rows))
+    D.slide("c or t", f"""<h2 class="head">A c in one word, a t in the other</h2>
+<div class="ishas tri"><h3><b>-ent</b> describes</h3><h3><b>-ence</b> names</h3><h3><b>-ential</b> describes</h3>{cells}</div>
+<p class="lede" data-s="4">In <b>-ence</b>, the c spells /s/. In <b>-ential</b>, ti spells /sh/.</p>
+<p class="q" data-s="5"><b>-ence</b> and <b>-ential</b> both grow from <b>-ent</b>.</p>""",
+            "Latin&rsquo;s present form ended in -ent- (<i>confidens</i>, <i>confidentis</i>). Its noun added -ia "
+            "(<i>confidentia</i>), and the describing word -ialis. English spells the noun&rsquo;s end -ence, with c for /s/, and "
+            "keeps the t before -ial. English has no <i>experient</i>, but Latin had <i>experiens</i>, so the t is in "
+            "<i>experiential</i> all the same. Word sums: confid + ent + ial, resid + ent + ial, ex + peri + ent + ial.", steps=5)
 
     D.slide("Your turn", f"""<h2 class="head">Your turn</h2>
 <ol class="blanks">
 <li>We did an <span class="gap"><span class="ans" data-s="1">experiment</span></span> with ice.</li>
 <li>Camp was a good <span class="gap"><span class="ans" data-s="2">experience</span></span>.</li>
-<li>Ask an <span class="gap"><span class="ans" data-s="3">expert</span></span>.</li>
+<li>This plane has an <span class="gap"><span class="ans" data-s="3">experimental</span></span> engine.</li>
+<li>The plan was made by an <span class="gap"><span class="ans" data-s="4">inexperienced</span></span> crew.</li>
 </ol>""",
             "Say each sentence with the blank first, and let the class choose before the click shows the word. The "
-            "<a href=\"../lists/family-per.html\">spelling list</a> has more to build and use.", steps=3)
+            "<a href=\"../lists/family-per.html\">spelling list</a> has more to build and use.", steps=4)
 
     D.slide("For teachers", f"""<h2 class="head">For teachers</h2>
-<p class="lede">Word sums: ex + peri + ment &rarr; <i>experiment</i>; ex + peri + ence &rarr; <i>experience</i>; ex + pert &rarr; <i>expert</i>; peril + ous &rarr; <i>perilous</i>; em + pir + ic + al &rarr; <i>empirical</i>.</p>
-<p class="lede">The family follows the Indo-European Lexicon (per- 2e), with the Middle English Dictionary on <i>experiment</i>. The teacher&rsquo;s page is <a href="../roots/per.html">*per-</a>; the list to print is the <a href="../lists/family-per.html">*per- spelling list</a>.</p>
-<p class="lede">The words with marks are drawn in Legomorphic Notation; the marks are on the <a href="../notations.html">Notations</a> page.</p>""", cls="mid")
+<p class="lede">Word sums: ex + peri + ment &rarr; <i>experiment</i>; ex + peri + ence &rarr; <i>experience</i>; experiment + al &rarr; <i>experimental</i>; experiment + at(e) + ion &rarr; <i>experimentation</i>; experiment + er &rarr; <i>experimenter</i>; in + experienc(e) + ed &rarr; <i>inexperienced</i>; ex + peri + ent + ial &rarr; <i>experiential</i>.</p>
+<p class="lede">-ment and -ent are two suffixes: Latin <i>-mentum</i> (<a href="https://kaikki.org/dictionary/Latin/meaning/-/-m/-mentum.html">Wiktionary</a>), and the present form <i>-&emacr;ns</i>, <i>-entis</i>, with its noun <i>-entia</i> (Peter Smith, <a href="https://ecampusontario.pressbooks.pub/greeklatinroots/chapter/%C2%A782-english-derivatives-from-latin-present-participles/"><i>Greek and Latin Roots</i>, &sect;82</a>).</p>
+<p class="lede">The wider family, with <i>expert</i>, <i>peril</i> and <i>empirical</i>, is on the <a href="../roots/per.html">*per- page</a>, after the Indo-European Lexicon (per- 2e). Words from the root that no longer look related, such as <i>pirate</i> and <i>fear</i>, are on <a href="../surprising.html">Surprising connections</a>.</p>""", cls="mid")
     return D
+
+
+def per_deck_marked():
+    """The words built on experiment and experience have checked codes in the data files; lent to LW.W for this deck."""
+    return with_codes(per_deck, ["experimental", "experimentation", "experimenter", "experienced", "inexperienced", "experiential"])
+
+
+def with_codes(make, words, strict=True):
+    """Lend LW.W the codes of words it lacks while make() builds a deck. strict: every word must have a code."""
+    import json, gym, pathlib
+    from noun_codes import NOUN_CODES
+    here = pathlib.Path(__file__).resolve().parent
+    pool = json.loads((here / "data" / "auto_codes.json").read_text(encoding="utf-8")); pool.update(NOUN_CODES); pool.update(gym.codes())
+    for fn in ("more_codes.json", "family_codes.json"): pool.update(json.loads((here / "data" / fn).read_text(encoding="utf-8")))
+    lent = [w for w in set(words) if w not in LW.W and (strict or w in pool)]
+    for w in lent:
+        assert w in pool, w
+        LW.W[w] = pool[w]
+    try: return make()
+    finally:
+        for w in lent: LW.W.pop(w, None)
 
 
 # ------------------------------------------------------------------ *deuk-: From duct to education
@@ -960,19 +1030,11 @@ def phon_deck():
 
 def phon_deck_marked():
     """The clusters' words come from every code source (gym, nouns, rule-made), lent to LW.W for this deck only."""
-    import json, gym, pathlib, phonesthemes
-    from noun_codes import NOUN_CODES
-    here = pathlib.Path(__file__).resolve().parent
-    pool = json.loads((here / "data" / "auto_codes.json").read_text(encoding="utf-8")); pool.update(NOUN_CODES); pool.update(gym.codes())
-    for fn in ("more_codes.json", "family_codes.json"): pool.update(json.loads((here / "data" / fn).read_text(encoding="utf-8")))
-    lent = [w for w in set(phonesthemes.words()) | {"gold", "yellow", "two"} if w not in LW.W and w in pool]
-    for w in lent: LW.W[w] = pool[w]
-    try: return phon_deck()
-    finally:
-        for w in lent: LW.W.pop(w, None)
+    import phonesthemes
+    return with_codes(phon_deck, set(phonesthemes.words()) | {"gold", "yellow", "two"}, strict=False)
 
 
-DECKS = {"per": per_deck, "education": educ_deck, "leg": leg_deck, "sign": sign_deck, "phonesthemes": phon_deck_marked}
+DECKS = {"per": per_deck_marked, "education": educ_deck, "leg": leg_deck, "sign": sign_deck, "phonesthemes": phon_deck_marked}
 
 
 def write(OUT, door_page):

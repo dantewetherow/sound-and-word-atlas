@@ -78,6 +78,9 @@ After a semicolon, by unit number (counting from 0, skipping | and +; a group su
 Run:  python3 legomorphic_words.py            checks every word and prints a summary
       python3 legomorphic_words.py --cards    writes legomorphic_words_cards.json (marking-cards form)
 """
+# The ə and the borrowed sounds (21 November 2026) are hidden for now while they are checked (Dante, 23 November 2026):
+# on the site a switch on the Notations page shows them; drawings without classes (cards, prints) leave them out.
+SHOW_OVER = False
 import math, json, sys, pathlib
 
 W = {
@@ -412,10 +415,12 @@ def svg_word(word, F=80.0, x0=0.0, cls=True):
         elif t == "macron":
             x = X(m["col"]); out.append(f'<line{k(6)} x1="{f(x - 0.279 * F)}" y1="{f(B - 0.91 * F)}" x2="{f(x + 0.279 * F)}" y2="{f(B - 0.91 * F)}" stroke="{RED}" stroke-width="{f(0.05 * F)}" stroke-linecap="round"/>')
         elif t == "over":                                   # ə or a borrowed sound, small and red, over the unit
+            if not cls and not SHOW_OVER: continue          # hidden for now (23 November 2026): printed cards and plain drawings leave it out
             x = mid(m["cols"]); fs = 0.50 if m["text"] == "ə" else 0.40
             yy = 0.98 if any(p["letters"][c]["ch"] in "ijl" for c in m["cols"]) else 0.80   # clear the dot of an i, the top of an l
             if bar_cols & set(m["cols"]): yy = 1.16                    # a long vowel borrowing a sound (elite): the sound sits over its bar
-            out.append(f'<text{k(6)} x="{f(x)}" y="{f(B - yy * F)}" font-family="Lexend, system-ui, sans-serif" font-size="{f(fs * F)}" text-anchor="middle" fill="{RED}">{m["text"]}</text>')
+            ko = ' class="nz6 ovr"' if cls else ""          # ovr: hidden on the site unless the reader switches it on
+            out.append(f'<text{ko} x="{f(x)}" y="{f(B - yy * F)}" font-family="Lexend, system-ui, sans-serif" font-size="{f(fs * F)}" text-anchor="middle" fill="{RED}">{m["text"]}</text>')
         elif t == "breve":
             x = X(m["col"]); out.append(f'<path{k(6)} d="M{f(x - 0.257 * F)} {f(B - 0.975 * F)} Q{f(x)} {f(B - 0.775 * F)} {f(x + 0.257 * F)} {f(B - 0.975 * F)}" fill="none" stroke="{RED}" stroke-width="{f(0.05 * F)}" stroke-linecap="round"/>')
         elif t == "vault":
@@ -510,7 +515,7 @@ def svg_one_mark(word, mark, F=58.0, label=None, css_height=None):
         "apostrophe": lambda e: False,
     }
     if mark in ("schwa", "says"):                     # the small text over a vowel: the ə, or the sound it borrows
-        tx = re.findall(r'<text class="nz6"[^>]*>[^<]+</text>', g)
+        tx = re.findall(r'<text class="nz6(?: ovr)?"[^>]*>[^<]+</text>', g)
         keep = [t for t in tx if (t.endswith(">ə</text>")) == (mark == "schwa")]
         body = "".join(re.sub(r' class="nz\d"', "", e) for e in keep) + re.sub(r' class="nz5"', "", letters)
         style = f' style="width:{wd:.0f}px;max-width:100%;height:auto"' if css_height is None else f' style="height:{css_height}px;width:auto;max-width:100%"'

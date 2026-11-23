@@ -392,10 +392,13 @@ KEY = [("Sound circle", "One circle under each sound: red for a vowel sound, bla
 # The blocked vault is accurate and busy: a switch shows or hides it on every word of the site (ruled 21 November 2026).
 # The choice is kept in the browser; the drawing above the switch always shows it.
 BV_SWITCH = ('<label class="bv-switch"><input type="checkbox" checked> Show blocked vaults on every word</label>')
+# The weak and borrowed sounds are hidden for now (23 November 2026): this switch shows them on every word.
+OV_SWITCH = ('<p class="ov-note">Hidden on the site for now while the markings are checked.</p>'
+             '<label class="bv-switch ov-switch"><input type="checkbox"> Show weak and borrowed sounds on every word</label>')
 def one_mark(word, mark, name):
     return LW.svg_one_mark(word, mark, F=34.0, label=f"{word}, with only its {name.lower()} drawn")
 key_html = "".join(f'<figure class="mark" id="{doors.mark_id(name)}"><figcaption><b>{name}</b></figcaption><div class="mw">{one_mark(w, m, name)}</div>'
-                   f'<p class="t-only">{what}</p>{BV_SWITCH if m == "bv" else ""}</figure>' for name, what, w, m in KEY)
+                   f'<p class="t-only">{what}</p>{BV_SWITCH if m == "bv" else OV_SWITCH if m == "schwa" else ""}</figure>' for name, what, w, m in KEY)
 
 uniq = {w for s in STEPS for g in groups_of(s["words_md"]) for w in g}
 n_words = len(uniq) + sum(len(v) - 1 for w, v in SC.VARIANTS.items() if w in uniq)

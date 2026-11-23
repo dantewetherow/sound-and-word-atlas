@@ -57,6 +57,7 @@ PAGES = [
     ("roots/sem.html", "parts", "*sem-: one, same", "A root family: similar, simple, assemble and same, with a lesson on doubles at the front of a word."),
     ("roots/med.html", "parts", "*med-: to measure", "A root family: mode, model, modern, medicine, must and accommodate."),
     ("roots/leuk.html", "parts", "*leuk-: light", "A root family: illustrate, illuminate, lucid, lunar, light and lynx."),
+    ("surprising.html", "parts", "Surprising connections", "Words from one root that no longer look related: experiment, pirate and fear; gold and yellow; two and twig; educate, tug and team; sign and seal."),
     ("roots/per.html", "parts", "*per-: to try, to risk", "A word study: experiment and experience, two words that were one, with expert, peril, pirate, empirical and fear."),
     ("roots/sign.html", "parts", "sign: a mark", "A base family: why sign keeps a g that signal says, with design, assign, signature, signify and seal."),
     ("roots/hap.html", "parts", "hap: chance, luck", "A base family: happy, happen, mishap and haphazard, and why happy has two p's and mishap one."),
@@ -114,7 +115,7 @@ VIEW_HEAD = ("<script>(() => { const r = document.documentElement; let v = null;
              " try { v = new URLSearchParams(location.search).get('view'); if (v === 'board') v = 'student'; if (v === 'details') v = 'teacher'; } catch (e) {}"
              " try { if (v === 'student' || v === 'teacher') localStorage.setItem('view', v); else v = localStorage.getItem('view'); } catch (e) {}"
              " if (v === 'student') r.dataset.view = 'student';"
-             " try { if (localStorage.getItem('bv') === 'off') r.dataset.bv = 'off'; } catch (e) {} })();</script>")
+             " try { if (localStorage.getItem('bv') === 'off') r.dataset.bv = 'off'; if (localStorage.getItem('ov') === 'on') r.dataset.ov = 'on'; } catch (e) {} })();</script>")
 
 VIEW_SWITCH = ('<div class="view" role="group" aria-label="View" hidden>'
                '<button type="button" data-v="teacher">Details</button><button type="button" data-v="student">Board</button></div>')
@@ -146,7 +147,14 @@ VIEW_JS = """<script>(() => {
     document.addEventListener('click', e => { if (ap.open && !ap.contains(e.target)) ap.open = false; });
     document.addEventListener('keydown', e => { if (e.key === 'Escape' && ap.open) { ap.open = false; ap.querySelector('summary').focus(); } });
   }
-  document.querySelectorAll('.bv-switch input').forEach(i => {        // blocked vaults on every word, or not
+  document.querySelectorAll('.ov-switch input').forEach(i => {        // weak and borrowed sounds: hidden unless switched on
+    i.checked = root.dataset.ov === 'on';
+    i.addEventListener('change', () => {
+      if (i.checked) root.dataset.ov = 'on'; else delete root.dataset.ov;
+      try { localStorage.setItem('ov', i.checked ? 'on' : 'off'); } catch (err) {}
+    });
+  });
+  document.querySelectorAll('.bv-switch:not(.ov-switch) input').forEach(i => {        // blocked vaults on every word, or not
     i.checked = root.dataset.bv !== 'off';
     i.addEventListener('change', () => {
       if (i.checked) delete root.dataset.bv; else root.dataset.bv = 'off';
@@ -364,8 +372,10 @@ def write(OUT, page, header, footer, X):
     # Derivations: the plan for the roots, and what's here now.
     import roots
     X["roots"] = roots.write(OUT, page, header, footer, X)
+    import surprising                                     # words from one root that no longer look related (23 November 2026)
+    X["surprising_words"] = surprising.write(OUT, door_page, X)
     door_page("derivations", "Derivations · Sounds and Words, Assembled", "Where words come from, and the sources the roots will cite.", f"""{door_head("derivations")}
-<section class="about"><div class="wrap"><div class="door-tiles"><a class="dtile" href="roots/leg.html"><b>*leg-<span class="t-only">: to gather</span></b><span class="t-only">The first root family: <i>logic</i>, <i>collect</i>, <i>legend</i>, <i>lesson</i>, <i>loyal</i>, and the notation&rsquo;s own name.</span><span class="s-only">gather</span></a><a class="dtile" href="roots/hap.html"><b>hap<span class="t-only">: chance, luck</span></b><span class="t-only">A base family: <i>happy</i>, <i>happen</i>, <i>mishap</i>, <i>hapless</i>, <i>haphazard</i>, <i>perhaps</i>, and why <i>happy</i> has two p&rsquo;s.</span><span class="s-only">luck</span></a></div></div></section>
+<section class="about"><div class="wrap"><div class="door-tiles"><a class="dtile" href="roots/leg.html"><b>*leg-<span class="t-only">: to gather</span></b><span class="t-only">The first root family: <i>logic</i>, <i>collect</i>, <i>legend</i>, <i>lesson</i>, <i>loyal</i>, and the notation&rsquo;s own name.</span><span class="s-only">gather</span></a><a class="dtile" href="roots/hap.html"><b>hap<span class="t-only">: chance, luck</span></b><span class="t-only">A base family: <i>happy</i>, <i>happen</i>, <i>mishap</i>, <i>hapless</i>, <i>haphazard</i>, <i>perhaps</i>, and why <i>happy</i> has two p&rsquo;s.</span><span class="s-only">luck</span></a><a class="dtile" href="surprising.html"><b>Surprising connections</b><span class="t-only">Words from one root that no longer look related: <i>experiment</i>, <i>pirate</i> and <i>fear</i>; <i>gold</i> and <i>yellow</i>; <i>educate</i> and <i>tug</i>.</span><span class="s-only">related?</span></a></div></div></section>
 <section class="about t-only" aria-labelledby="dv-h"><div class="wrap prose">
 <h2 id="dv-h">Roots, and the meanings of parts</h2>
 <p>A word can be read as it is used now, or traced back through time: <a href="definitions.html#study">synchronic and diachronic</a>, a snapshot and a time-lapse. This page is for the time-lapse. <i>Before</i> is an example: Old English <i>beforan</i>, from <i>be-</i> &lsquo;by&rsquo; and <i>foran</i> &lsquo;in front&rsquo;, and <i>for</i> and <i>fore</i> grow from the same root.</p>

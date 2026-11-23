@@ -10,7 +10,7 @@
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <script>try { const t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; } catch (e) {}</script>
-<script>(() => { const r = document.documentElement; let v = null; try { v = new URLSearchParams(location.search).get('view'); if (v === 'board') v = 'student'; if (v === 'details') v = 'teacher'; } catch (e) {} try { if (v === 'student' || v === 'teacher') localStorage.setItem('view', v); else v = localStorage.getItem('view'); } catch (e) {} if (v === 'student') r.dataset.view = 'student'; try { if (localStorage.getItem('bv') === 'off') r.dataset.bv = 'off'; } catch (e) {} })();</script>
+<script>(() => { const r = document.documentElement; let v = null; try { v = new URLSearchParams(location.search).get('view'); if (v === 'board') v = 'student'; if (v === 'details') v = 'teacher'; } catch (e) {} try { if (v === 'student' || v === 'teacher') localStorage.setItem('view', v); else v = localStorage.getItem('view'); } catch (e) {} if (v === 'student') r.dataset.view = 'student'; try { if (localStorage.getItem('bv') === 'off') r.dataset.bv = 'off'; if (localStorage.getItem('ov') === 'on') r.dataset.ov = 'on'; } catch (e) {} })();</script>
 <link rel="stylesheet" href="../fonts/fonts.css">
 <link rel="stylesheet" href="../site.css">
 </head>
@@ -62,7 +62,14 @@
     document.addEventListener('click', e => { if (ap.open && !ap.contains(e.target)) ap.open = false; });
     document.addEventListener('keydown', e => { if (e.key === 'Escape' && ap.open) { ap.open = false; ap.querySelector('summary').focus(); } });
   }
-  document.querySelectorAll('.bv-switch input').forEach(i => {        // blocked vaults on every word, or not
+  document.querySelectorAll('.ov-switch input').forEach(i => {        // weak and borrowed sounds: hidden unless switched on
+    i.checked = root.dataset.ov === 'on';
+    i.addEventListener('change', () => {
+      if (i.checked) root.dataset.ov = 'on'; else delete root.dataset.ov;
+      try { localStorage.setItem('ov', i.checked ? 'on' : 'off'); } catch (err) {}
+    });
+  });
+  document.querySelectorAll('.bv-switch:not(.ov-switch) input').forEach(i => {        // blocked vaults on every word, or not
     i.checked = root.dataset.bv !== 'off';
     i.addEventListener('change', () => {
       if (i.checked) delete root.dataset.bv; else root.dataset.bv = 'off';
