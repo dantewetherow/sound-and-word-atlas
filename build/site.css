@@ -1105,3 +1105,7 @@ details.allpages .ap-panel a .ap-line { font-size: 0.82rem; color: var(--soft); 
 /* Surprising connections (23 November 2026) */
 .sc-road{display:block;font-size:.82rem;line-height:1.35;color:var(--soft,#6b6256);max-width:15em;margin:.3rem auto 0}
 .sc-src{font-size:.9rem}
+
+/* graph paper eraser (24 November 2026): an outlined swatch, and a cell cursor while erasing */
+.gp-tools .sw-i.sw-erase,.gp-tools .seg button[aria-checked="true"] .sw-i.sw-erase{background:var(--paper);border-radius:2px;box-shadow:inset 0 0 0 2px var(--soft)}
+.gp-ink.erasing{cursor:cell}
