@@ -448,28 +448,43 @@ def write(OUT, page, header, footer, X):
 
 # Every major button on the home page (22 November 2026, Dante's list): the word walk first, then the rest.
 # (href, name, one line, for teachers only)
-HOME_TILES = [   # (href, name for teachers, name in Board view or None, one line, for teachers only)
-    ("walk.html", "Word walk", None, "Look up any word and step through its marks one at a time, then its parts.", False),
-    ("progressions.html", "Scope and sequence", "The path", "The reading and spelling steps in teaching order.", False),
-    ("lists/index.html", "Spelling lists", None, "A list for each step and word family, each with a check.", True),
-    ("parts.html", "Morphemes", "Parts", "Prefixes, suffixes, roots and joins, each with the words on the site that use it.", False),
-    ("studies.html", "Word studies", None, "Presentations for learners: one word family per deck.", False),
-    ("presentations.html", "Teacher presentations", None, "The staff series and single-concept decks, with handouts.", True),
-    ("notations.html", "The marks", None, "Each mark in the notation, shown on one word.", False),
-    ("gym.html", "Sentence gym", "Gym", "Build sentences from each step&rsquo;s words.", False),
-    ("explorations.html", "Explorations", None, "Contractions, ablaut (write, wrote, written), and words to take apart.", False),
-    ("instructions.html", "Print resources", None, "Word cards and morpheme cards.", True),
-    ("connections.html", "Programs", None, "How the steps line up with UFLI, Dolch and the Early Literacy Profile.", True),
-    ("explanations.html", "Reasons and sources", None, "Definitions, the notation&rsquo;s name, credits, and open marking decisions.", True),
+HOME_BANDS = [   # (band, what it holds, [(href, name for teachers, name in Board view or None, one line, for teachers only)])
+    # Least complex to most (25 November 2026, Dante): letters, then words, then the parts inside them, then sentences,
+    # then the teachers' shelf. Each band carries its theme on the side, as the steps do.
+    ("Letters and sounds", "one letter, then letters in teams", [
+        ("letters.html", "The alphabet", None, "Letters, names and sounds, with a sound circle under each letter.", False),
+        ("teams.html", "Letter teams", None, "Digraphs and trigraphs in their colours, each with a key word, and a drill.", False),
+        ("notations.html", "The marks", None, "Each mark in the notation, shown on one word.", False)]),
+    ("Words", "reading and spelling, a step at a time", [
+        ("progressions.html", "The steps", None, "Scope and sequence: the reading and spelling steps in teaching order.", False),
+        ("walk.html", "Word walk", None, "Look up any word and step through its marks one at a time, then its parts.", False),
+        ("lists/index.html", "Spelling lists", None, "A list for each step and word family, each with a check.", True)]),
+    ("Parts", "the morphemes inside words", [
+        ("parts.html", "Morphemes", "Parts", "Prefixes, suffixes, roots and joins, each with the words on the site that use it.", False),
+        ("derivations.html", "Word families", None, "Families built on one root or base, with word sums and a matrix for each.", False),
+        ("studies.html", "Word studies", None, "Presentations for learners: one word family per deck.", False)]),
+    ("Sentences", "words working together", [
+        ("gym.html", "Sentence gym", "Gym", "Build sentences from each step&rsquo;s words.", False),
+        ("explorations.html", "Explorations", None, "Contractions, ablaut (write, wrote, written), and words to take apart.", False)]),
+    ("For teachers", "to print, present and look up", [
+        ("presentations.html", "Teacher presentations", None, "The staff series and single-concept decks, with handouts.", True),
+        ("instructions.html", "Print resources", None, "Word cards and morpheme cards.", True),
+        ("connections.html", "Programs", None, "How the steps line up with UFLI, Dolch and the Early Literacy Profile.", True),
+        ("explanations.html", "Reasons and sources", None, "Definitions, the notation&rsquo;s name, credits, and open marking decisions.", True)]),
 ]
+HOME_TILES = [t for _, _, ts in HOME_BANDS for t in ts]   # the All pages menu reads them in the same order
 
 
 def home_grid():
-    def tile(i, h, n, board, line, t):
+    """The home page's buttons in bands, least complex to most, each band's theme on its left (25 November 2026)."""
+    def tile(h, n, board, line, t):
         name = f'<span class="t-only">{n}</span><span class="s-only">{board}</span>' if board else n
-        return (f'<a class="door-tile{" hg-first" if i == 0 else ""}{" t-only" if t else ""}" href="{h}">'
+        return (f'<a class="door-tile{" t-only" if t else ""}" href="{h}">'
                 f'<span class="dn">{name}</span><span class="pw">{line}</span></a>')
-    return '<nav class="home-grid" aria-label="The site">' + "".join(tile(i, *x) for i, x in enumerate(HOME_TILES)) + "</nav>"
+    bands = "".join(
+        f'<section class="hb{" t-only" if all(x[4] for x in ts) else ""}" aria-label="{band}"><div class="hb-side"><b>{band}</b><span class="t-only">{what}</span></div>'
+        f'<div class="hb-tiles">{"".join(tile(*x) for x in ts)}</div></section>' for band, what, ts in HOME_BANDS)
+    return f'<nav class="home-grid" aria-label="The site">{bands}</nav>'
 
 
 def door_grid(order=None):
