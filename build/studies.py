@@ -219,6 +219,8 @@ body{background:var(--paper);color:var(--ink);font-family:var(--sans);overflow:h
 .tri{grid-template-columns:repeat(3,1fr);gap:10px 50px}
 .tri p{font-size:46px}
 .ladder{grid-template-columns:1fr;gap:22px}
+.edgrid{gap:4px 50px}
+.edgrid > div{min-height:96px}
 /* one word turning into the next (grow): stacked in one cell; a later word fading in fades the earlier ones out */
 .ovr{display:none}   /* weak and borrowed sounds stay hidden in the decks too, while they are checked (23 November 2026) */
 .grow{display:grid;justify-items:start;margin-top:6px}
@@ -1129,13 +1131,15 @@ def protect_deck():
             "only the new ending and its marks change. Ask which ending adds a syllable.", steps=4)
 
     D.slide("-ed, three sounds", f"""<h2 class="head"><b class="r">-ed</b>: one spelling, three sounds</h2>
-<div class="ishas tri"><h3>/t/: no new syllable</h3><h3>/d/: no new syllable</h3><h3>/id/: a new syllable</h3>
-<p data-s="1">jump<b>ed</b></p><p data-s="1">play<b>ed</b></p><p data-s="1">protect<b>ed</b></p>
-<p data-s="2">look<b>ed</b></p><p data-s="2">rain<b>ed</b></p><p data-s="2">detect<b>ed</b></p>
-<p data-s="3">help<b>ed</b></p><p data-s="3">fill<b>ed</b></p><p data-s="3">land<b>ed</b></p></div>
-<p class="lede" data-s="4">Listen to the last sound of the word before -ed.</p>
+<div class="ishas tri edgrid"><h3>/t/: one swoop</h3><h3>/d/: one swoop</h3><h3>/id/: a swoop of its own</h3>
+<div data-s="1">{word("jumped", 92)}</div><div data-s="1">{word("played", 92)}</div><div data-s="1">{word("protected", 92)}</div>
+<div data-s="2">{word("looked", 92)}</div><div data-s="2">{word("rained", 92)}</div><div data-s="2">{word("detected", 92)}</div>
+<div data-s="3">{word("helped", 92)}</div><div data-s="3">{word("filled", 92)}</div><div data-s="3">{word("landed", 92)}</div></div>
+<p class="lede" data-s="4">Count the swoops: one for each syllable.</p>
 <p class="lede" data-s="5">protect ends in /t/. land ends in /d/.</p>
 <p class="q" data-s="6">After /t/ or /d/, -ed is a syllable of its own.</p>""",
+            "The marks show it. In <i>jumped</i> and <i>played</i> the e of -ed sits in a cone, not said, and the word keeps "
+            "one syllable swoop. In <i>protected</i> and <i>landed</i> the e is said, and -ed starts a swoop of its own. "
             "-ed spells /t/ after a sound made without the voice (p, k, s, f, sh, ch) and /d/ after one made with it, vowels "
             "included. After t or d it adds a syllable, so <i>protected</i> has three. "
             "Spelling these jumpt or playd would lose the ending, and with it the meaning: already done.", steps=6)
@@ -1257,7 +1261,7 @@ def protect_deck():
 
 def protect_deck_marked():
     """The family's words have checked codes in family_codes.json; lent to LW.W for this deck."""
-    return with_codes(protect_deck, ["protect", "protects", "protected", "protecting", "protection", "protective", "protectively",
+    return with_codes(protect_deck, ["jumped", "played", "looked", "rained", "helped", "filled", "landed", "protect", "protects", "protected", "protecting", "protection", "protective", "protectively",
                                      "protectiveness", "protector", "unprotected", "overprotective", "detect", "detective",
                                      "detection", "detector"])
 
