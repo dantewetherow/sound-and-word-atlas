@@ -80,6 +80,7 @@ def build(base, sums, label=None, up=""):
                     for k, w in sorted(words.items(), key=lambda kv: (kv[0].count("|"), kv[1])))
     data = json.dumps(words, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
     return (f'<div class="mtx" data-base="{html.escape(base)}" role="group" aria-label="{html.escape(label or base)}: the word matrix">'
+            '<button type="button" class="mfull" aria-pressed="false">Full screen</button>'
             f'<div class="mgrid">{pre}<div class="mcol mbase"><span>{html.escape(base)}</span></div>{suf}</div>'
             f'<p class="mpath" aria-live="polite">Tap the parts to build a path, left to right. Any box can be skipped.</p>'
             f'<div class="mlist"><span>Words in it:</span> {chips}</div>'
@@ -111,6 +112,16 @@ CSS = """
 .cx:not(.mtxview) .mtx { display: none; }
 .ppart .mtx[hidden] { display: none; }
 .mcards { margin: 8px 0 0; font-size: 0.9rem; }
+.mfull { font: inherit; font-size: 0.85rem; border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; background: var(--card); color: var(--ink); cursor: pointer; margin: 0 0 10px; }
+.mtx.mfs { position: fixed; inset: 0; z-index: 200; margin: 0; background: var(--paper); overflow: auto; padding: 3vh 4vw; display: grid; align-content: center; justify-items: center; gap: 2vh; }
+.mtx.mfs .mfull { position: fixed; top: 14px; right: 16px; font-size: 1rem; padding: 8px 16px; }
+.mtx.mfs .mcol { padding: 1.2vh 1.4vw; border-width: 3px; margin-left: -3px; }
+.mtx.mfs .mp { font-size: clamp(1.3rem, 2.8vw, 2.8rem); padding: 0.2vh 0.8vw; }
+.mtx.mfs .mbase { font-size: clamp(2.8rem, 6.5vw, 6.5rem); padding: 2vh 2.4vw; border-width: 5px; }
+.mtx.mfs .mpath { font-size: clamp(1.1rem, 2.2vw, 2.1rem); text-align: center; }
+.mtx.mfs .mlist { font-size: clamp(0.95rem, 1.6vw, 1.5rem); justify-content: center; max-width: 92vw; }
+.mtx.mfs .mcards { display: none; }
+body.mfs-on { overflow: hidden; }
 .mx-open { font: inherit; font-size: 0.85rem; border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; background: var(--card); color: var(--ink); cursor: pointer; margin: 4px 0; }
 """
 
@@ -142,6 +153,21 @@ JS = """<script>(() => {
     const o = e.target.closest('.mx-open'); if (o) { const m = o.nextElementSibling; m.hidden = !m.hidden;
       o.textContent = m.hidden ? 'Show the matrix' : 'Hide the matrix'; }
   });
+  // full screen for the board (24 November 2026): the matrix fills the window, and the browser's own full screen
+  // where it allows one (an iPad does, an iPhone doesn't); Escape or the button again comes back
+  const fsEl = () => document.fullscreenElement || document.webkitFullscreenElement;
+  function board(m, on) {
+    m.classList.toggle('mfs', on); document.body.classList.toggle('mfs-on', on);
+    const b = m.querySelector('.mfull'); b.textContent = on ? 'Exit full screen' : 'Full screen'; b.setAttribute('aria-pressed', on);
+    try {
+      if (on && !fsEl()) (m.requestFullscreen || m.webkitRequestFullscreen || (() => {})).call(m);
+      if (!on && fsEl()) (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+    } catch (e) {}
+  }
+  document.addEventListener('click', e => { const b = e.target.closest('.mtx .mfull'); if (b) { const m = b.closest('.mtx'); board(m, !m.classList.contains('mfs')); } });
+  document.addEventListener('keydown', e => { const m = document.querySelector('.mtx.mfs'); if (m && e.key === 'Escape') board(m, false); });
+  const left = () => { const m = document.querySelector('.mtx.mfs'); if (m && !fsEl()) board(m, false); };
+  document.addEventListener('fullscreenchange', left); document.addEventListener('webkitfullscreenchange', left);
   // the family pages' switch: word sums or matrices, remembered in this browser
   document.querySelectorAll('.mx-switch').forEach(sw => {
     const cx = sw.closest('.cx'), bs = [...sw.querySelectorAll('button')];

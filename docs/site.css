@@ -1199,4 +1199,15 @@ body.tm-on { overflow: hidden; }
 .cx.mtxview .cgroup, .cx.mtxview .pcard { display: none; }
 .cx:not(.mtxview) .mtx { display: none; }
 .ppart .mtx[hidden] { display: none; }
+.mcards { margin: 8px 0 0; font-size: 0.9rem; }
+.mfull { font: inherit; font-size: 0.85rem; border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; background: var(--card); color: var(--ink); cursor: pointer; margin: 0 0 10px; }
+.mtx.mfs { position: fixed; inset: 0; z-index: 200; margin: 0; background: var(--paper); overflow: auto; padding: 3vh 4vw; display: grid; align-content: center; justify-items: center; gap: 2vh; }
+.mtx.mfs .mfull { position: fixed; top: 14px; right: 16px; font-size: 1rem; padding: 8px 16px; }
+.mtx.mfs .mcol { padding: 1.2vh 1.4vw; border-width: 3px; margin-left: -3px; }
+.mtx.mfs .mp { font-size: clamp(1.3rem, 2.8vw, 2.8rem); padding: 0.2vh 0.8vw; }
+.mtx.mfs .mbase { font-size: clamp(2.8rem, 6.5vw, 6.5rem); padding: 2vh 2.4vw; border-width: 5px; }
+.mtx.mfs .mpath { font-size: clamp(1.1rem, 2.2vw, 2.1rem); text-align: center; }
+.mtx.mfs .mlist { font-size: clamp(0.95rem, 1.6vw, 1.5rem); justify-content: center; max-width: 92vw; }
+.mtx.mfs .mcards { display: none; }
+body.mfs-on { overflow: hidden; }
 .mx-open { font: inherit; font-size: 0.85rem; border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; background: var(--card); color: var(--ink); cursor: pointer; margin: 4px 0; }
