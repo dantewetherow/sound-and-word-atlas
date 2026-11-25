@@ -932,8 +932,6 @@ header.site.pinned.open nav.doors { display: flex; padding-block: 6px 4px; }
 .lt[data-k="v"] .lt-dot { border-color: var(--verb); }
 .lt[data-s]:not([data-s=""]) .lt-dot { background: var(--ink); border-color: var(--ink); }
 .lt[data-k="v"][data-s]:not([data-s=""]) .lt-dot, .lt[data-s="vowel"] .lt-dot { background: var(--verb); border-color: var(--verb); }
-.lt[data-l="x"][data-s="sound"] .lt-dot { box-shadow: 14px 0 0 -2px var(--ink); transform: translateX(-7px); }
-.lt[data-s="soft"] .lt-dot { background: var(--paper); box-shadow: inset 0 0 0 5px var(--ink); }
 .lt-say { min-height: 1.2em; font-size: 0.72rem; line-height: 1.2; color: var(--soft); text-align: center; }
 .lt-and { align-self: center; margin-top: -30px; font-size: 0.95rem; color: var(--soft); }
 .bt-rows { display: grid; gap: 14px; margin: 8px 0 14px; }

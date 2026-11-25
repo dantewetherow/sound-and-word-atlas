@@ -3,7 +3,8 @@
 The alphabet as the song sings it, in its units (ABCD, EFG, HIJK, LMNOP, QRS, TUV, WX, Y and Z), as blank tiles a
 teacher taps to reveal: a letter at a time, or a unit at a time, so learners can fill in the next letter or the next unit.
 Uppercase, lowercase or both. Under each tile a sound circle: tap it once for the letter's sound, and on the vowels a
-second time for the long sound (the cup turns to the long mark); c and g turn soft on the second tap, y turns to a vowel.
+second time for the long sound (the cup turns to the long mark); y turns to a vowel. C and g have one circle, like b: their
+soft sounds come at step 10 (Dante, 24 November 2026). X has one circle too.
 The circles are cues for the teacher to say or sing the sounds; when recordings come, each state has its own clip name
 (data-say), and a voice switch will play them.
 
@@ -17,7 +18,7 @@ VOWELS = set("AEIOU")
 
 def _tile(ch):
     lo = ch.lower()
-    kind = "v" if ch in VOWELS else "y" if ch == "Y" else "cg" if ch in "CG" else "c"
+    kind = "v" if ch in VOWELS else "y" if ch == "Y" else "c"
     return (f'<div class="lt" data-k="{kind}" data-l="{lo}">'
             f'<button type="button" class="lt-box" aria-label="Letter {ch}, hidden. Tap to show." aria-pressed="false">'
             f'<span class="lt-mark" aria-hidden="true"></span>'
@@ -75,7 +76,7 @@ def write(door_page, door_head):
   <div class="gp-sheet"><canvas class="gp-grid" aria-hidden="true"></canvas><canvas class="gp-ink" role="img" aria-label="Graph paper: write on it with a finger, a pen or the mouse"></canvas><div class="gp-ring" aria-hidden="true" hidden></div></div>
 </div>
 </div>
-<p class="sub t-only">The graph paper is for showing how a letter is formed: where it starts, which way it goes, and where it sits. <i>Writing lines</i> adds a top line, a dashed middle line and a baseline on the grid, with room below for the tails of g, j, p, q and y. Red is for the vowels, and green for sh, th and ch. The eraser rubs out part of a stroke; Undo takes back the last thing drawn or erased. The circle under a consonant marks its sound. Under a vowel, the first tap gives the short sound and the cup; the second, the long sound, which is the letter&rsquo;s name, and the long mark. A third tap clears it. Under c and g, the second tap makes them soft, as an e, i or y after them does (<a href="steps/10.html">step 10</a>). Under y, the first tap is the consonant of <i>yes</i>, the second the vowel of <i>my</i> (<a href="steps/03.html">step 3</a>). Under x, two sounds: /k/ and /s/.</p>
+<p class="sub t-only">The graph paper is for showing how a letter is formed: where it starts, which way it goes, and where it sits. <i>Writing lines</i> adds a top line, a dashed middle line and a baseline on the grid, with room below for the tails of g, j, p, q and y. Red is for the vowels, and green for sh, th and ch. The eraser rubs out part of a stroke; Undo takes back the last thing drawn or erased. The circle under a consonant marks its sound. Under a vowel, the first tap gives the short sound and the cup; the second, the long sound, which is the letter&rsquo;s name, and the long mark. A third tap clears it. Under y, the first tap is the consonant of <i>yes</i>, the second the vowel of <i>my</i> (<a href="steps/03.html">step 3</a>). X has one circle, though it spells two sounds, /k/ and /s/. The soft sounds of c and g come at <a href="steps/10.html">step 10</a>.</p>
 </div></section>
 
 <section class="about" id="lmnop" aria-labelledby="lm-h"><div class="wrap">
@@ -112,9 +113,9 @@ def write(door_page, door_head):
     if (beat) {{ const ts = [...beat.parentNode.querySelectorAll('.lt')]; const on = !ts.every(t => t.classList.contains('on')); ts.forEach(t => show(t, on)); }}
     if (dot) {{
       const t = dot.closest('.lt'), k = t.dataset.k, l = t.dataset.l;
-      const states = k === 'v' ? ['', 'short', 'long'] : k === 'cg' ? ['', 'hard', 'soft'] : k === 'y' ? ['', 'cons', 'vowel'] : ['', 'sound'];
+      const states = k === 'v' ? ['', 'short', 'long'] : k === 'y' ? ['', 'cons', 'vowel'] : ['', 'sound'];
       const s = (+dot.dataset.state + 1) % states.length; dot.dataset.state = s; t.dataset.s = states[s];
-      const words = {{ short: 'short ' + l, long: 'long ' + l, hard: 'hard ' + l, soft: 'soft ' + l, cons: 'y in yes', vowel: 'y in my', sound: 'its sound' }};
+      const words = {{ short: 'short ' + l, long: 'long ' + l, cons: 'y in yes', vowel: 'y in my', sound: 'its sound' }};
       t.querySelector('.lt-say').textContent = s ? words[states[s]] : '';
       t.dataset.say = s ? states[s] + '-' + l : '';
     }}
