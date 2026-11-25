@@ -466,9 +466,9 @@ L.append(F("sign", "<b>sign</b> means a mark. Its g is quiet in <i>sign</i>, <i>
      ("designer", "She is a designer."), ("assign", "I will assign the jobs."), ("assignment", "Hand in your assignment."),
      ("resign", "He will resign from the team."), ("signify", "What does a red light signify?"), ("significant", "It was a significant day.")],
     ("The g is quiet in <i>sign</i> and said in <i>signal</i>: the i is long in one and short in the other.", ["sign", "signal"]),
-    ["sign + al", "sign + at(e) + ure", "de + sign", "de + sign + er", "as + sign + ment", "sign + i + fy"],
-    [("Stop at the", "sign", "."), ("The ship sent a", "sign + al", "."), ("Please", "de + sign", "a poster."), ("Your", "sign + at(e) + ure", "goes at the bottom.")],
-    [("de + sign + ate", "designate"), ("re + sign + at(e) + ion", "resignation"), ("sign + i + fic + ance", "significance"), ("con + sign", "consign")],
+    ["sign + al", "sign + ature", "de + sign", "de + sign + er", "as + sign + ment", "sign + i + fy"],
+    [("Stop at the", "sign", "."), ("The ship sent a", "sign + al", "."), ("Please", "de + sign", "a poster."), ("Your", "sign + ature", "goes at the bottom.")],
+    [("de + sign + ate", "designate"), ("re + sign + ation", "resignation"), ("sign + i + fic + ance", "significance"), ("con + sign", "consign")],
     ["<i>Assign</i> has two s&rsquo;s because the prefix <i>ad-</i> became <i>as-</i> before the s of sign. Each part brings its own.",
      "<i>Seal</i> is a cousin that lost its g: Latin <i>sigillum</i>, a little sign, through French <i>seel</i>."]))
 

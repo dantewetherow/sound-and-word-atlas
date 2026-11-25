@@ -1165,11 +1165,11 @@ SIGN_CLUSTERS = [
              "<i>sign</i> and the family no longer looks like one.",
      "groups": [
          [("signal", ["sign", "-al"], "a sign that sends a message: a light, a sound, a wave")],
-         [("signature", ["sign", "-at(e)", "-ure"], "your name, written by you"), ("signatory", ["sign", "-at(e)", "-ory"], "someone who signs an agreement")],
+         [("signature", ["sign", "-ature"], "your name, written by you"), ("signatory", ["sign", "-atory"], "someone who signs an agreement")],
          [("signify", ["sign", "-i", "-fy"], "make a sign: show, mean"), ("significant", ["sign", "-i", "-fic", "-ant"], "that makes a sign: full of meaning, important"),
           ("significance", ["sign", "-i", "-fic", "-ance"], "meaning, importance")],
          [("designate", ["de-", "sign", "-ate"], "mark out: name or choose for a job"), ("designation", ["de-", "sign", "-at(e)", "-ion"], "a name or a title given")],
-         [("resignation", ["re-", "sign", "-at(e)", "-ion"], "a giving up of a job; a calm acceptance of what can&rsquo;t be changed")],
+         [("resignation", ["re-", "sign", "-ation"], "a giving up of a job; a calm acceptance of what can&rsquo;t be changed")],
          [("signet", ["sign", "-et"], "a small seal, often on a ring"), ("insignia", ["in-", "sign", "-ia"], "badges and marks of rank")],
      ]},
     {"key": "seal", "label": "seal, sig", "spells": ["seal", "sig"], "head": "a little sign",
@@ -1296,6 +1296,8 @@ STEG_CLUSTERS = [
      "groups": [[("thatch", None, "a roof of straw or reeds", "thatch"), ("deck", None, "the floor that covers a ship; any flat platform", "deck")]]},
 ]
 PARTS.update({
+    "-ature": "the act, or what comes of it: Latin <i>-&amacr;t&umacr;ra</i>, written whole where English has no -ate verb (<i>signature</i>)",
+    "-atory": "one who does it, or to do with it: Latin <i>-&amacr;t&omacr;rius</i>, written whole where English has no -ate verb (<i>signatory</i>)",
     "over-": "too much (<i>overprotective</i>); or above, across (<i>overhead</i>): Old English",
 })
 ROOT_PARTS.update({

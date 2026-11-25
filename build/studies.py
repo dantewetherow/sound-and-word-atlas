@@ -487,11 +487,11 @@ def per_deck():
 <p class="q" data-s="{len(rows) + 1}">{q}</p>""", note, steps=len(rows) + 1)
 
     ladder("Keep building", [("experimental", "<b>+ al</b>: to do with experiments"),
-                             ("experimentation", "<b>+ at(e) + ion</b>: the doing of experiments"),
+                             ("experimentation", "<b>+ ation</b>: the doing of experiments"),
                              ("experimenter", "<b>+ er</b>: one who does the experiment")],
            "Each ending makes a new kind of word.",
-           "Word sums: experiment + al &rarr; <i>experimental</i>; experiment + at(e) + ion &rarr; <i>experimentation</i>; "
-           "experiment + er &rarr; <i>experimenter</i>. The e of -ate drops before -ion. "
+           "Word sums: experiment + al &rarr; <i>experimental</i>; experiment + ation &rarr; <i>experimentation</i>; "
+           "experiment + er &rarr; <i>experimenter</i>. English has no experimentate, so -ation is written whole. "
            "Read from the end: -al describes, -ion names a doing, -er names the one who does it.")
 
     D.slide("The beat moves", f"""<h2 class="head">Say them. The beat moves.</h2>
@@ -538,7 +538,7 @@ def per_deck():
             "<a href=\"../lists/family-per.html\">spelling list</a> has more to build and use.", steps=4)
 
     D.slide("For teachers", f"""<h2 class="head">For teachers</h2>
-<p class="lede">Word sums: ex + peri + ment &rarr; <i>experiment</i>; ex + peri + ence &rarr; <i>experience</i>; experiment + al &rarr; <i>experimental</i>; experiment + at(e) + ion &rarr; <i>experimentation</i>; experiment + er &rarr; <i>experimenter</i>; in + experienc(e) + ed &rarr; <i>inexperienced</i>; ex + peri + ent + ial &rarr; <i>experiential</i>.</p>
+<p class="lede">Word sums: ex + peri + ment &rarr; <i>experiment</i>; ex + peri + ence &rarr; <i>experience</i>; experiment + al &rarr; <i>experimental</i>; experiment + ation &rarr; <i>experimentation</i>; experiment + er &rarr; <i>experimenter</i>; in + experienc(e) + ed &rarr; <i>inexperienced</i>; ex + peri + ent + ial &rarr; <i>experiential</i>.</p>
 <p class="lede">-ment and -ent are two suffixes: Latin <i>-mentum</i> (<a href="https://kaikki.org/dictionary/Latin/meaning/-/-m/-mentum.html">Wiktionary</a>), and the present form <i>-&emacr;ns</i>, <i>-entis</i>, with its noun <i>-entia</i> (Peter Smith, <a href="https://ecampusontario.pressbooks.pub/greeklatinroots/chapter/%C2%A782-english-derivatives-from-latin-present-participles/"><i>Greek and Latin Roots</i>, &sect;82</a>).</p>
 <p class="lede">The wider family, with <i>expert</i>, <i>peril</i> and <i>empirical</i>, is on the <a href="../roots/per.html">*per- page</a>, after the Indo-European Lexicon (per- 2e). Words from the root that no longer look related, such as <i>pirate</i> and <i>fear</i>, are on <a href="../surprising.html">Surprising connections</a>.</p>""", cls="mid")
     return D
@@ -840,8 +840,8 @@ def sign_deck():
             "sig-nal. The g closes the first syllable, so it is said.", steps=4)
 
     D.slide("Build signature", f"""<h2 class="head">Build <b class="r">signature</b></h2>
-{join(["sign", "at(e)", "ure"], ["a mark", "do, make", "what comes of it"], word("signature", 140), 1, "From the end: <b>what comes of making</b> a <b>mark</b>. Your signature is the mark your name makes.")}""",
-            "Word sum: sign + at(e) + ure &rarr; <i>signature</i>, from Medieval Latin <i>sign&amacr;t&umacr;ra</i>. The e of -ate "
+{join(["sign", "ature"], ["a mark", "what comes of doing it"], word("signature", 140), 1, "From the end: <b>what comes of making</b> a <b>mark</b>. Your signature is the mark your name makes.")}""",
+            "Word sum: sign + ature &rarr; <i>signature</i>, from Medieval Latin <i>sign&amacr;t&umacr;ra</i>. English has no signate, so -ature is written whole, as -ation is in <i>information</i>. The e of -ate "
             "drops before the vowel of -ure, and the t and ure join as they do in <i>picture</i> and <i>nature</i>.", steps=4)
 
     D.slide("The g keeps the family", f"""<h2 class="head">One part, one spelling</h2>
@@ -883,17 +883,17 @@ def sign_deck():
     fam("The g is <b class='r'>said</b> again", [("significant", "full of meaning: it matters"), ("designation", "a name or a title"),
                                                ("resignation", "the giving up of a job"), ("signatory", "someone who signs an agreement")],
         "A <b>Latin</b> ending after sign, and you hear the g.",
-        "sign + i + fic + ant; de + sign + at(e) + ion; re + sign + at(e) + ion; sign + at(e) + ory. In <i>designation</i> "
+        "sign + i + fic + ant; de + sign + at(e) + ion; re + sign + ation; sign + atory. In <i>designation</i> "
         "and <i>resignation</i> the s spells z and the e is short: des-ig-na-tion.", h=88)
 
     D.slide("The sign matrix", f"""<h2 class="head">The <b class="r">sign</b> matrix</h2>
 <div class="matrix">
 <div class="mbox" data-s="1"><span>as</span><span>con</span><span>de</span><span>re</span></div>
 <div class="mbox mbase">sign</div>
-<div class="mcols" data-s="2"><div class="mbox"><span>al</span><span>ate</span><span>er</span><span>ify</span><span>ing</span><span>ment</span><span>s</span></div>
-<div class="mbox"><span>ion</span><span>ure</span><span>ory</span></div></div>
+<div class="mcols" data-s="2"><div class="mbox"><span>al</span><span>ate</span><span>ation</span><span>ature</span><span>atory</span><span>er</span><span>ify</span><span>ing</span><span>ment</span><span>s</span></div>
+<div class="mbox"><span>ion</span><span>s</span></div></div>
 </div>
-<div class="paths" data-s="3"><span><b>de + sign + er</b></span><span><b>as + sign + ment</b></span><span><b>sign + at(e) + ure</b></span><span><b>re + sign + at(e) + ion</b></span></div>
+<div class="paths" data-s="3"><span><b>de + sign + er</b></span><span><b>as + sign + ment</b></span><span><b>sign + ature</b></span><span><b>de + sign + at(e) + ion</b></span></div>
 <p class="q" data-s="4">Read across. Which paths make words?</p>""",
             "The word matrix is Melvyn Ramsden&rsquo;s (Real Spelling); <i>sign</i> is a classic first matrix in Pete Bowers&rsquo;s "
             "structured word inquiry. Read left to right, skipping any box. Not every path is a word (<i>con + sign + al</i>): check "
@@ -920,7 +920,7 @@ def sign_deck():
             "which word is the g silent? The <a href='../lists/family-sign.html'>spelling list</a> has more to build and use.", steps=3)
 
     D.slide("For teachers", f"""<h2 class="head">For teachers</h2>
-<p class="lede">Word sums: sign + al &rarr; <i>signal</i>; sign + at(e) + ure &rarr; <i>signature</i>; de + sign &rarr; <i>design</i>; de + sign + er &rarr; <i>designer</i>; as + sign + ment &rarr; <i>assignment</i>; sign + i + fy &rarr; <i>signify</i>; sign + i + fic + ant &rarr; <i>significant</i>.</p>
+<p class="lede">Word sums: sign + al &rarr; <i>signal</i>; sign + ature &rarr; <i>signature</i>; de + sign &rarr; <i>design</i>; de + sign + er &rarr; <i>designer</i>; as + sign + ment &rarr; <i>assignment</i>; sign + i + fy &rarr; <i>signify</i>; sign + i + fic + ant &rarr; <i>significant</i>.</p>
 <p class="lede">The g follows Carney and Venezky, as the site ruled on 12 November 2026. Chomsky and Halle used <i>sign</i> and <i>signify</i> for the same point. Where Latin <i>signum</i> comes from is debated: a root meaning follow, or one meaning cut. The teacher&rsquo;s page is <a href="../roots/sign.html">sign</a>, with the root, Saussure&rsquo;s signifier, and the sources. The list to print is the <a href="../lists/family-sign.html">sign spelling list</a>.</p>""", cls="mid")
     return D
 
