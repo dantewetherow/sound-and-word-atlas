@@ -1455,7 +1455,7 @@ def clusters_html(R):
         note = f'<p class="cnote">{c["note"]}</p>' if c.get("note") else ""
         import matrix                                                  # one matrix per base spelling (24 November 2026)
         csums = [(w, p) for c2, w, p, m, b in words if c2 is c and p]
-        note += "".join(matrix.build(sp, csums, label=sp) for sp in c["spells"])
+        note += "".join(matrix.build(sp, csums, label=sp, up="../") for sp in c["spells"])
         panels.append(f'<section class="cpanel" id="c-{c["key"]}" data-c="{c["key"]}" role="tabpanel" aria-labelledby="c-{c["key"]}-h">'
                       f'<h3 id="c-{c["key"]}-h"><b>{c["label"]}</b>: {c["head"]}</h3><p class="rh">{c["road"]}.</p>{note}{groups}</section>')
 

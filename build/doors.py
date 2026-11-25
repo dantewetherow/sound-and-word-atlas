@@ -34,7 +34,7 @@ HEADS = {
     "explorations": ("Explorations", "Words to take apart and build: a family, contractions, and ablaut.", "Words"),
     "constructions": ("Sentences", "How sentences are built: actors, operators and actions, and the flip from claim to question.", "Sentences"),
     "derivations": ("Roots and their sources", "Where words come from, and the sources the roots cite.", "Roots"),
-    "instructions": ("To print and present", "Presentations, word cards and affix tent cards.", None),
+    "instructions": ("To print and present", "Presentations, word cards and morpheme cards.", None),
     "connections": ("Programs and word lists", "How the path lines up with UFLI Foundations and with the word lists schools already use.", None),
     "explanations": ("Reasons and sources", "Definitions, the notation and its name, and credits.", None),
     "teachers": ("For teachers", DOORS[3][3], None),
@@ -66,9 +66,9 @@ PAGES = [
     ("teachers.html", "teachers", "For teachers", "To print and present, connections to programs, and the reasons and sources."),
     ("constructions.html", "walk", "Sentences", "How sentences are built, and the flip from claim to question."),
     ("gym.html", "walk", "The gymnasium", "A gym for each step: build sentences from the step's words on a balance, a round at a time."),
-    ("instructions.html", "teachers", "To print and present", "Presentations, word cards and affix tent cards."),
+    ("instructions.html", "teachers", "To print and present", "Presentations, word cards and morpheme cards."),
     ("presentations.html", "teachers", "Presentations", "The staff series and decks on single concepts, with their handouts."),
-    ("tents.html", "teachers", "Affix tent cards", "Prefixes, roots and suffixes on cards that stand up: swap the root, keep the affixes. Extension work with the families."),
+    ("tents.html", "teachers", "Morpheme cards", "Prefixes, roots and suffixes on cards that stand up, eight to a page, with a set for each word matrix."),
     ("cards.html", "teachers", "Word cards", "Printable cards: the Early Literacy Profile (Central Okanagan) and Dolch words, and grade 3 word sums."),
     ("connections.html", "teachers", "Programs and word lists", "How the path lines up with the word lists and programs schools already use."),
     ("word-lists.html", "teachers", "Early Literacy Profile and Dolch", "Where the Early Literacy Profile (Central Okanagan) words come from in Dolch's lists."),
@@ -391,7 +391,7 @@ def write(OUT, page, header, footer, X):
         return '<div class="door-tiles">' + "".join(
             f'<a class="dtile" href="{p}"><b>{t}</b><span>{s}</span></a>' for p, t, s in items) + "</div>"
     pick = lambda door: [(p, t, s) for p, d, t, s in PAGES if d == door and p != f"{door}.html" and p not in UNLISTED]
-    door_page("instructions", "To print and present · Sounds and Words, Assembled", "Presentations, word cards and affix tent cards.", f"""{door_head("instructions")}
+    door_page("instructions", "To print and present · Sounds and Words, Assembled", "Presentations, word cards and morpheme cards.", f"""{door_head("instructions")}
 <section class="about"><div class="wrap">
 {tiles([x for x in pick("teachers") if x[0] in ("presentations.html", "cards.html", "tents.html")])}
 {uc("next, the routines: the learning loop, marking a word by hand, flips from claim to question, and word sums at the seam.")}
@@ -410,7 +410,7 @@ def write(OUT, page, header, footer, X):
     # Four doors, never more (ruled 13 November 2026): each opens on a page of three or four.
     shelf = [("lists/index.html", "Spelling", "Spelling lists by step and by family, words with a heart, words spelled apart, and lists for UFLI lessons."),
              ("connections.html", "Programs and word lists", "UFLI Foundations lesson by lesson, and the Early Literacy Profile (Central Okanagan) and Dolch lists."),
-             ("instructions.html", "To print and present", "Presentations, word cards and affix tent cards."),
+             ("instructions.html", "To print and present", "Presentations, word cards and morpheme cards."),
              ("explanations.html", "Reasons and sources", "About the notation, definitions, and credits.")]
     door_page("teachers", "For teachers · Sounds and Words, Assembled", DOOR["teachers"][3], f"""{door_head("teachers")}
 <section class="about"><div class="wrap">{tiles(shelf)}</div></section>""")
@@ -458,7 +458,7 @@ HOME_TILES = [   # (href, name for teachers, name in Board view or None, one lin
     ("notations.html", "The marks", None, "Each mark in the notation, shown on one word.", False),
     ("gym.html", "Sentence gym", "Gym", "Build sentences from each step&rsquo;s words.", False),
     ("explorations.html", "Explorations", None, "Contractions, ablaut (write, wrote, written), and words to take apart.", False),
-    ("instructions.html", "Print resources", None, "Word cards and affix tent cards.", True),
+    ("instructions.html", "Print resources", None, "Word cards and morpheme cards.", True),
     ("connections.html", "Programs", None, "How the steps line up with UFLI, Dolch and the Early Literacy Profile.", True),
     ("explanations.html", "Reasons and sources", None, "Definitions, the notation&rsquo;s name, credits, and open marking decisions.", True),
 ]

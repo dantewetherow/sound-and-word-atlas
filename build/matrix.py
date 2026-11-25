@@ -18,9 +18,9 @@ def _key(p):
     return p.replace("(", "").replace(")", "").split(">")[0].split("+")[0]
 
 
-def build(base, sums, label=None):
-    """base: the part's key ('tect'); sums: [(word, [part, ...])], parts as the sums write them ('pro-', 'tect',
-    '-ion', '-at(e)'). Returns the matrix's html, or '' if no word adds anything to the base."""
+def analyse(base, sums):
+    """The matrix's boxes and its words: ({position: {part: {words}}}, {"pre|base|suf": word}). Positions count out
+    from the base: -1 is the prefix next to it, 1 the suffix next to it."""
     cols, words = {}, {}
     for w, parts in sums:
         ks = [_key(p) for p in parts]
@@ -31,6 +31,43 @@ def build(base, sums, label=None):
         for d, k in enumerate(reversed(pre), 1): cols.setdefault(-d, {}).setdefault(k, set()).add(w)
         for d, k in enumerate(suf, 1): cols.setdefault(d, {}).setdefault(k, set()).add(w)
         words["|".join(pre + [base] + suf)] = w
+    return cols, words
+
+
+MIN_CARDS = 3          # a matrix with this many words or more gets its own set of morpheme cards
+
+
+def card_sets():
+    """Every family matrix worth a set of morpheme cards: [(base, family, family label, cluster key, sums)], one per
+    base spelling, the same list the family pages and the cards page both read."""
+    import roots
+    out, seen = [], set()
+    for R in roots.ROOTS:
+        if not R.get("clusters"): continue
+        words = roots.cluster_words(R)
+        for c in R["clusters"]:
+            sums = [(w, p) for c2, w, p, m, b in words if c2 is c and p]
+            for sp in c["spells"]:
+                if sp in seen: continue
+                if len(analyse(sp, sums)[1]) >= MIN_CARDS:
+                    seen.add(sp); out.append((sp, R["slug"], R["label"], c["key"], sums))
+    return out
+
+
+_SETS = None
+
+
+def cards_href(base, up=""):
+    global _SETS
+    if _SETS is None: _SETS = {b for b, *_ in card_sets()}
+    return f"{up}tents/{base}.html" if base in _SETS else None
+
+
+def build(base, sums, label=None, up=""):
+    """base: the part's key ('tect'); sums: [(word, [part, ...])], parts as the sums write them ('pro-', 'tect',
+    '-ion', '-at(e)'). Returns the matrix's html, or '' if no word adds anything to the base. up: the path to the
+    site's root, for the link to this matrix's morpheme cards."""
+    cols, words = analyse(base, sums)
     if not words: return ""
     order = lambda col: sorted(col, key=lambda k: (-len(col[k]), k))
     def box(pos):
@@ -46,7 +83,8 @@ def build(base, sums, label=None):
             f'<div class="mgrid">{pre}<div class="mcol mbase"><span>{html.escape(base)}</span></div>{suf}</div>'
             f'<p class="mpath" aria-live="polite">Tap the parts to build a path, left to right. Any box can be skipped.</p>'
             f'<div class="mlist"><span>Words in it:</span> {chips}</div>'
-            f'<script type="application/json" class="mdata">{data}</script></div>')
+            + (f'<p class="mcards"><a href="{cards_href(base, up)}">Morpheme cards for this matrix</a>, to print and stand up.</p>' if cards_href(base) else "")
+            + f'<script type="application/json" class="mdata">{data}</script></div>')
 
 
 CSS = """
@@ -72,6 +110,7 @@ CSS = """
 .cx.mtxview .cgroup, .cx.mtxview .pcard { display: none; }
 .cx:not(.mtxview) .mtx { display: none; }
 .ppart .mtx[hidden] { display: none; }
+.mcards { margin: 8px 0 0; font-size: 0.9rem; }
 .mx-open { font: inherit; font-size: 0.85rem; border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; background: var(--card); color: var(--ink); cursor: pointer; margin: 4px 0; }
 """
 

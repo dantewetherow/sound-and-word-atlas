@@ -818,7 +818,8 @@ header.site.pinned.open nav.doors { display: flex; padding-block: 6px 4px; }
 .ufli-chart a:hover .ch-dot, .ufli-chart a:focus .ch-dot { stroke: var(--ink); stroke-width: 2.5; }
 .ulnav a { font-weight: 600; }
 
-/* affix tent cards: on screen, the teacher's side as a tile; in print, the whole tent, two to a page */
+/* morpheme cards (tent cards): on screen, the teacher's side as a tile; in print, the whole card, eight to a page
+   (six where the teacher's side runs long), cut on the solid lines and folded on the dotted one (24 November 2026) */
 .tents { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 12px; margin-top: 8px; }
 .tent { background: var(--card); border: 1px solid var(--line); border-top: 5px solid var(--tc, var(--soft)); border-radius: 12px; }
 .tent.t-pre { --tc: var(--modal); } .tent.t-suf { --tc: var(--verb); } .tent.t-root { --tc: var(--ink); } .tent.t-proc { --tc: var(--soft); }
@@ -828,17 +829,28 @@ header.site.pinned.open nav.doors { display: flex; padding-block: 6px 4px; }
 .tmean { font-weight: 600; }
 .trule, .tex, .tlink { font-size: 0.9rem; color: var(--soft); line-height: 1.4; }
 .tex { font-style: italic; }
+.tsets { display: grid; gap: 6px; padding-left: 1.1em; }
+.tsets .gn { font-size: 0.8rem; color: var(--soft); }
 @media print {
+  @page { size: letter; margin: 0.35in; }
   .tents-page .tset .wrap > h2 { display: none; }
-  .tents { display: block; }
-  .tent { width: 7.5in; height: 4.9in; margin: 0 auto 0.3in; padding: 0; display: grid; grid-template-rows: 1fr 1fr; break-inside: avoid; page-break-inside: avoid;
-          border: 1px solid #999; border-top: 1px solid #999; border-radius: 0; background: #fff; }
-  .tent:nth-child(2n) { page-break-after: always; }
-  .tpanel { place-content: center; text-align: center; padding: 0.2in 0.4in; }
-  .tpanel.flip { display: grid; transform: rotate(180deg); border-bottom: 1px dashed #999; }
-  .tent .tpart { font-size: 72pt; color: #000; }
-  .tent .tpanel:not(.flip) .tpart { font-size: 54pt; }
-  .tmean { font-size: 14pt; } .trule, .tex { font-size: 11pt; color: #333; } .tlink { display: none; }
+  .tents-page .wrap { max-width: none; padding: 0; }
+  .tents { display: flex; flex-wrap: wrap; gap: 0; margin: 0; }
+  .tent { width: 50%; height: 2.55in; margin: 0; padding: 0; display: grid; grid-template-rows: 1fr 1fr; break-inside: avoid; page-break-inside: avoid;
+          border: 1px solid #aaa; border-radius: 0; background: #fff; overflow: hidden; }
+  .tents.six .tent { height: 3.4in; }
+  .tpanel { place-content: center; text-align: center; padding: 0.06in 0.18in; gap: 2px; overflow: hidden; }
+  .tpanel.flip { display: grid; transform: rotate(180deg); border-bottom: 1.5px dotted #888; }
+  .tent .tpart { color: #000; line-height: 1; }
+  .tent .tpanel.flip .tpart { font-size: 46pt; }
+  .tent[data-l="m"] .tpanel.flip .tpart { font-size: 40pt; }
+  .tent[data-l="l"] .tpanel.flip .tpart { font-size: 30pt; }
+  .tent[data-l="xl"] .tpanel.flip .tpart { font-size: 22pt; }
+  .tent .tpanel:not(.flip) .tpart { font-size: 20pt; }
+  .tmean { font-size: 10pt; } .trule, .tex { font-size: 8pt; line-height: 1.25; color: #333; } .tlink { display: none; }
+  .tents.six .tpanel.flip .tpart { font-size: 56pt; } .tents.six .tent[data-l="l"] .tpanel.flip .tpart { font-size: 38pt; }
+  .tents.six .tent[data-l="xl"] .tpanel.flip .tpart { font-size: 26pt; }
+  .tents.six .tmean { font-size: 11pt; } .tents.six .trule, .tents.six .tex { font-size: 9pt; }
   .tset { page-break-before: always; }
   .tents-page .hero + .tset { page-break-before: auto; }
   .tents-page .hero { display: none; }

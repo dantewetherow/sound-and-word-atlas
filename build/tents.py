@@ -1,4 +1,6 @@
-"""Affix tent cards (12 November 2026): tents.html, for the families' extension work.
+"""Morpheme cards (12 November 2026; renamed from affix tent cards, 24 November 2026): tents.html, for the families'
+extension work, and a set for each word matrix (tents/<base>.html), linked both ways with the matrix on its family page.
+In print they are eight to a page (two across, four down), or six where the teacher's side runs long.
 
 A tent card is a half sheet folded along its middle so it stands up. Both sides show the part, so the learners and the
 teacher can read it; the teacher's side also carries what the part means and how it joins. Learners stand a prefix, a
@@ -129,10 +131,17 @@ def grid(cols, G, ROOTS):
     return f'<div class="tablewrap"><table class="swap-grid"><thead><tr><th scope=col>Root</th>{head}</tr></thead><tbody>{"".join(rows)}</tbody></table></div>'
 
 
+def size(part):
+    """The part's length, for its type size in print: a long part gets smaller letters so it fits the card."""
+    import re
+    n = len(re.sub(r"<[^>]+>|&[a-z]+;", "x", part).replace(" ", ""))
+    return "s" if n <= 3 else "m" if n <= 5 else "l" if n <= 8 else "xl"
+
+
 def card(kind, part, mean, rule, ex, link=None):
     """One tent: the top panel upside down for when it stands, then the teacher's panel."""
     more = f'<span class="tlink"><a href="{link}">{"the family" if kind == "root" else "more"}</a></span>' if link else ""
-    return (f'<div class="tent t-{kind}">'
+    return (f'<div class="tent t-{kind}" data-l="{size(part)}">'
             f'<div class="tpanel flip"><span class="tpart">{part}</span></div>'
             f'<div class="tpanel"><span class="tpart">{part}</span><span class="tmean">{mean}</span>'
             f'{f"<span class=trule>{rule}</span>" if rule else ""}<span class="tex">{ex}</span>{more}</div></div>')
@@ -140,14 +149,15 @@ def card(kind, part, mean, rule, ex, link=None):
 
 def write(OUT, page, header, footer, X):
     sec = lambda h, kind, cards, sub: (f'<section class="about tset"><div class="wrap"><h2>{h}</h2><p class="sub noprint">{sub}</p>'
-                                       f'<div class="tents">{"".join(cards)}</div></div></section>')
+                                       f'<div class="tents{six(cards)}">{"".join(cards)}</div></div></section>')
+    sets = write_sets(OUT, page, header, footer, X)
     body = f"""{header(0)}
 <main class="tents-page">
 <section class="hero noprint"><div class="wrap">
 <p class="eyebrow t-only">For teachers &middot; Extension</p>
-<h1>Affix tent cards</h1>
+<h1>Morpheme cards</h1>
 <p class="lead">Cards that stand up on a desk: prefixes, roots, suffixes, and cards for the joins that change something. Stand a prefix, a root and a suffix in a row and read the word. Then keep the affixes and swap the root. The affixes are few and come back again and again; the roots change.</p>
-<p class="board"><a href="#" onclick="window.print(); return false;">Print the cards</a>: two to a page. <a href="#swap">Which rows make words</a> is below them. Cut each page in half, fold each half along the dotted line, and stand it up. Both sides show the part; the side that faces you also says what it means and how it joins.</p>
+<p class="board"><a href="#" onclick="window.print(); return false;">Print the cards</a>: eight to a page, or six where the teacher&rsquo;s side runs long. <a href="#swap">Which rows make words</a> is below them, and <a href="#sets">a set for each word matrix</a> after that. Cut along the solid lines, fold each card along the dotted line, and stand it up. Both sides show the part; the side that faces you also says what it means and how it joins.</p>
 </div></section>
 {sec("Prefixes", "pre", [card("pre", p, m, r, e) for p, m, r, e in PREFIXES], "Some prefixes change their last letter to match the root they join. The card says when.")}
 {sec("Roots", "root", [card("root", p, m, None, e, l) for p, m, l, e in ROOTS], "The first ten are the bases of the word families, extension work for intermediate and middle school. The last eight are common Latin roots with no family page yet.")}
@@ -161,6 +171,7 @@ def write(OUT, page, header, footer, X):
 {grid(SUF_COLS, SUF_GRID, ROOTS)}
 <p class="sub"><sup>*</sup> A join the process cards don&rsquo;t cover: <i>ex + spect</i> drops its s (<i>expect</i>), and sub- turns to sup- and sus- (<i>support</i>, <i>suspect</i>). A good one to puzzle over. Some cells are the same root with an older meaning: <i>remedy</i> (re + med + y) is healing again; <i>indict</i> keeps a silent c and is said like <i>invite</i>.</p>
 </div></section>
+{sets}
 <section class="about noprint"><div class="wrap prose">
 <h2>Using them</h2>
 <p>Start with one root and three or four affixes, and let learners find the real words. Then keep the affixes and swap the root: <i>con + struct + ion</i>, <i>con + duct + ion</i>, <i>con + tract + ion</i>, <i>con + ject + ion</i>? Not every row makes a word, and that last one doesn&rsquo;t. Asking which ones do, and checking a dictionary, is the inquiry.</p>
@@ -171,6 +182,73 @@ def write(OUT, page, header, footer, X):
 </div></section>
 </main>
 {footer(0)}"""
-    (OUT / "tents.html").write_text(page("Affix tent cards · Sounds and Words, Assembled", body, 0,
-                                         "Printable tent cards for word building: prefixes, roots, suffixes and the joins that change a letter."), encoding="utf-8")
+    (OUT / "tents.html").write_text(page("Morpheme cards · Sounds and Words, Assembled", body, 0,
+                                         "Printable morpheme cards that stand up, eight to a page: prefixes, roots, suffixes, the joins that change a letter, and a set for each word matrix."), encoding="utf-8")
     return len(PREFIXES) + len(ROOTS) + len(SUFFIXES) + len(PROCESSES)
+
+
+def six(cards):
+    """Six to a page where any card's teacher side runs long, eight otherwise."""
+    import re
+    longest = max((len(re.sub(r"<[^>]+>", "", c.split('class="tpanel">', 1)[-1])) for c in cards), default=0)
+    return " six" if longest > 190 else ""
+
+
+def _first(text):
+    """A gloss cut to its first sense: the part before the source, and before a second sense."""
+    import re
+    t = re.split(r":\s|; or |; ", text, maxsplit=1)[0]
+    return t
+
+
+def write_sets(OUT, page, header, footer, X):
+    """A set of morpheme cards for each word matrix (matrix.card_sets): the base, then the prefixes and suffixes in
+    its boxes, each with its first meaning, how it joins, and the matrix's words that carry it. Each set links to its
+    matrix on the family page, and the matrix links back. Returns the cards page's section listing the sets."""
+    import matrix, roots, parts as PT, html as H
+    (OUT / "tents").mkdir(exist_ok=True)
+    rule_of = {p.split(",")[0].strip(): r for p, _, r, _ in PREFIXES + SUFFIXES}
+    def mean_of(k):
+        return _first(roots.ROOT_PARTS.get(k) or roots.PARTS.get(k) or PT.MEANS.get(k) or "")
+    def rule(k, kind):
+        if k in rule_of: return rule_of[k]
+        if kind == "suf":
+            return ("Starts with a vowel: a silent e drops before it." if k.strip("-")[:1] in "aeiouy"
+                    else "Starts with a consonant: joins with no change.")
+        return "Joins with no change." if kind == "pre" else None
+    listing = {}
+    for base, slug, label, ckey, sums in matrix.card_sets():
+        cols, words = matrix.analyse(base, sums)
+        carry = lambda k: sorted({w for pos in cols for kk, ws in cols[pos].items() if kk == k for w in ws}, key=len)[:4]
+        back = f"../roots/{slug}.html#c-{ckey}"
+        cards = [card("root", base, mean_of(base), None, ", ".join(sorted(words.values(), key=len)[:5]), back)]
+        for pos in sorted(p for p in cols if p < 0)[::-1]:
+            for k in sorted(cols[pos], key=lambda k: (-len(cols[pos][k]), k)):
+                cards.append(card("pre", H.escape(k), mean_of(k), rule(k, "pre"), ", ".join(carry(k))))
+        for pos in sorted(p for p in cols if p > 0):
+            for k in sorted(cols[pos], key=lambda k: (-len(cols[pos][k]), k)):
+                cards.append(card("suf", H.escape(k), mean_of(k), rule(k, "suf"), ", ".join(carry(k))))
+        seen, uniq = set(), []
+        for c in cards:                                   # a part in two boxes (protects, protectors) gets one card
+            if c not in seen: seen.add(c); uniq.append(c)
+        mtx = matrix.build(base, sums, label=base, up="../").replace('<p class="mcards">', '<p class="mcards" hidden>')
+        body = f"""{header(1)}
+<main class="tents-page">
+<section class="hero noprint"><div class="wrap">
+<p class="eyebrow t-only"><a href="../tents.html">Morpheme cards</a> &middot; {H.escape(label)}</p>
+<h1>Morpheme cards: {H.escape(base)}</h1>
+<p class="lead">The parts of the <a href="{back}">{H.escape(base)} matrix</a> on the {H.escape(label.split(": ")[-1])} page, as cards that stand up. The base comes first, then the prefixes and suffixes found with it. Stand them in a row to build a word from the matrix, then try a path the matrix doesn&rsquo;t list and test it.</p>
+<p class="board"><a href="#" onclick="window.print(); return false;">Print the cards</a>: {"six" if six(uniq) else "eight"} to a page. Cut along the solid lines, fold along the dotted line, and stand each card up.</p>
+{mtx}
+</div></section>
+<section class="about tset"><div class="wrap"><h2 class="noprint">{len(uniq)} cards</h2><div class="tents{six(uniq)}">{"".join(uniq)}</div></div></section>
+</main>
+{footer(1)}"""
+        (OUT / "tents" / f"{base}.html").write_text(page(f"Morpheme cards: {base} · Sounds and Words, Assembled", body, 1,
+            f"Printable morpheme cards for the {base} matrix: the base and the prefixes and suffixes found with it, eight to a page."), encoding="utf-8")
+        listing.setdefault(label, []).append((base, len(uniq), len(words)))
+    rows = "".join(f'<li><b>{H.escape(lab)}</b>: ' + ", ".join(f'<a href="tents/{b}.html">{H.escape(b)}</a> <span class="gn">{n} cards</span>' for b, n, _ in bs) + "</li>"
+                   for lab, bs in listing.items())
+    return (f'<section class="about noprint" id="sets"><div class="wrap"><h2>A set for each word matrix</h2>'
+            f'<p class="sub">Each family page shows a word matrix for each spelling of its base. Each set below is one matrix as cards: its base, and the prefixes and suffixes in its boxes. The matrix links to its set, and the set back to its matrix.</p>'
+            f'<ul class="tsets">{rows}</ul></div></section>')
