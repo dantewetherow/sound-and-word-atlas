@@ -7,6 +7,10 @@ codes the deck tools already use, plus site_codes.py for route words that had no
 page has no doctype or head, because claude.ai adds those when it publishes the page as an artifact."""
 import sys, json, re, html, pathlib, shutil
 HERE = pathlib.Path(__file__).resolve().parent
+import hashlib
+# site.css by its contents (24 November 2026): a new stylesheet gets a new address, so a browser holding the old one
+# fetches it at once instead of pairing a new page with old styles until its cache runs out.
+CSS_V = hashlib.sha1((HERE / "site.css").read_bytes()).hexdigest()[:10]
 sys.path.insert(0, str(HERE))
 STANDALONE = "--standalone" in sys.argv[3:]
 import legomorphic_words as LW
@@ -138,7 +142,7 @@ def page(title, body, depth, desc):
 <script>try {{ const t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; }} catch (e) {{}}</script>
 {doors.VIEW_HEAD}
 {FONTS(up)}
-<link rel="stylesheet" href="{up}site.css">
+<link rel="stylesheet" href="{up}site.css?v={CSS_V}">
 </head>
 <body>
 {body}
@@ -407,7 +411,7 @@ n_marked = n_words - len([w for w in uniq if w in SC.UNMARKED or (w not in LW.W 
 home_head = f"""<title>Sounds and Words, Assembled</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 {FONTS()}
-<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="site.css?v={CSS_V}">
 """
 import landing, walk
 for w in ("legomorphic", "note", "notate", "notation"): assert w in LW.W, w
