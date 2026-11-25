@@ -31,6 +31,8 @@ GROUPS = [
         ("ore", "r.or e0", "more", "")]),
 ]
 
+SECOND = {"cow", "book", "head"}   # a team's second sound: no step shown until the path places it
+
 
 def write(door_page, X):
     import json, gym, pathlib, coverage
@@ -57,7 +59,7 @@ def write(door_page, X):
         tiles = []
         for g, code, key, note in teams:
             say = f"{g} as in {key}" + (f" ({note})" if note else "")
-            st = step(g)
+            st = None if key in SECOND else step(g)   # the path's table gives a team's first sound only
             tiles.append(
                 f'<div class="tm" data-say="{html.escape(say)}">'
                 f'<button type="button" class="tm-box" aria-label="{html.escape(g)}">{team_svg(g, code)}</button>'
