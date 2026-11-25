@@ -18,16 +18,55 @@ def _key(p):
     return p.replace("(", "").replace(")", "").split(">")[0].split("+")[0]
 
 
+_DICT = None
+INFL = ("-s", "-es", "-ed", "-ing")
+
+
+def _known(w):
+    global _DICT
+    if _DICT is None:
+        import cmudict
+        _DICT = set(cmudict.words())
+    return w in _DICT
+
+
+def forms(w, parts):
+    """A word's inflected forms (24 November 2026): -s or -es, -ed, -ing, with the joins written into the sum: the e
+    drops (pro + duc(e) + ing), y turns to i (sign + i + fy>i + es), or the last consonant doubles. Only spellings
+    the CMU Pronouncing Dictionary lists are kept, so a noun gets its plural and a verb its -ed and -ing."""
+    import re
+    if parts[-1] in INFL or not re.fullmatch(r"[a-z]+", w): return []
+    last, head, out = parts[-1], parts[:-1], []
+    drop = lambda p: p[:-1] + "(e)" if p.endswith("e") else p
+    cy = re.search(r"[^aeiou]y$", w)
+    if re.search(r"(s|x|z|ch|sh)$", w): out.append((w + "es", parts + ["-es"]))
+    elif cy: out.append((w[:-1] + "ies", head + [last + ">i", "-es"]))
+    else: out.append((w + "s", parts + ["-s"]))
+    if w.endswith("e"):
+        out += [(w + "d", head + [drop(last), "-ed"]), (w[:-1] + "ing", head + [drop(last), "-ing"])]
+    elif cy:
+        out += [(w[:-1] + "ied", head + [last + ">i", "-ed"]), (w + "ing", parts + ["-ing"])]
+    else:
+        out += [(w + "ed", parts + ["-ed"]), (w + "ing", parts + ["-ing"])]
+        if re.search(r"[^aeiou][aeiou][bdgklmnprt]$", w):
+            out += [(w + w[-1] + "ed", head + [last + "+" + w[-1], "-ed"]), (w + w[-1] + "ing", head + [last + "+" + w[-1], "-ing"])]
+    return [(f, ps) for f, ps in out if _known(f)]
+
+
 def analyse(base, sums):
     """The matrix's boxes and its words: ({position: {part: {words}}}, {"pre|base|suf": word}). Positions count out
-    from the base: -1 is the prefix next to it, 1 the suffix next to it."""
+    from the base: -1 is the prefix next to it, 1 the suffix next to it. Each word brings its inflected forms."""
     cols, words = {}, {}
+    have = {w for w, _ in sums}
+    extra = [f for w, ps in sums for f in forms(w, list(ps)) if f[0] not in have]
+    seen = set()
+    sums = list(sums) + [f for f in extra if not (f[0] in seen or seen.add(f[0]))]
     for w, parts in sums:
         ks = [_key(p) for p in parts]
         try: i = next(n for n, k in enumerate(ks) if k.strip("-") == base)
         except StopIteration: continue
         pre, suf = ks[:i], ks[i + 1:]
-        if not pre and not suf: continue
+        if not pre and not suf: words[base] = w; continue
         for d, k in enumerate(reversed(pre), 1): cols.setdefault(-d, {}).setdefault(k, set()).add(w)
         for d, k in enumerate(suf, 1): cols.setdefault(d, {}).setdefault(k, set()).add(w)
         words["|".join(pre + [base] + suf)] = w
@@ -46,9 +85,10 @@ def card_sets():
         if not R.get("clusters"): continue
         words = roots.cluster_words(R)
         for c in R["clusters"]:
-            sums = [(w, p) for c2, w, p, m, b in words if c2 is c and p]
             for sp in c["spells"]:
                 if sp in seen: continue
+                # every cluster of the family that has this spelling: sign silent and sign said make one set of cards
+                sums = [(w, p) for c2, w, p, m, b in words if sp in c2["spells"] and p]
                 if len(analyse(sp, sums)[1]) >= MIN_CARDS:
                     seen.add(sp); out.append((sp, R["slug"], R["label"], c["key"], sums))
     return out

@@ -212,6 +212,7 @@ def write_sets(OUT, page, header, footer, X):
         return _first(roots.ROOT_PARTS.get(k) or roots.PARTS.get(k) or PT.MEANS.get(k) or "")
     def rule(k, kind):
         if k in rule_of: return rule_of[k]
+        if k == "-es": return "The plural or does ending after s, x, z, sh and ch, and where y turns to i (signifies)."
         if kind == "suf":
             return ("Starts with a vowel: a silent e drops before it." if k.strip("-")[:1] in "aeiouy"
                     else "Starts with a consonant: joins with no change.")
