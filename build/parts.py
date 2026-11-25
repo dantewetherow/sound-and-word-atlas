@@ -405,7 +405,14 @@ PARTS_JS = """<script>(() => {
     });
     document.querySelectorAll('.pgroup').forEach(s => { s.hidden = !s.querySelector('details.ppart:not([hidden])'); });
     count.textContent = t ? n + (n === 1 ? ' part' : ' parts') : '';
+    // while searching, the results come straight after the search box and Families and Lessons move below them (24 November 2026)
+    const groups = [...document.querySelectorAll('.pgroup')], top = [document.getElementById('families'), document.getElementById('lessons')].filter(Boolean);
+    if (groups.length && top.length) {
+      if (t && !moved) { const after = groups[groups.length - 1]; top.slice().reverse().forEach(x => after.after(x)); moved = true; }
+      if (!t && moved) { top.forEach(x => groups[0].before(x)); moved = false; }
+    }
   }
+  let moved = false;
   q.addEventListener('input', run);
   // a link to a part opens it
   const open = () => { const d = location.hash && document.getElementById(location.hash.slice(1)); if (d && d.tagName === 'DETAILS') { d.open = true; d.scrollIntoView({block: 'start'}); } };
