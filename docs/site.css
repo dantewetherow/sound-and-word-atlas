@@ -1164,3 +1164,27 @@ body.tm-on { overflow: hidden; }
 /* the site motto (24 November 2026): five sounds for ough, with an IPA gloss */
 .landing .motto { font-family: var(--display, serif); font-style: italic; font-size: clamp(1.15rem, 2.6vw, 1.5rem); margin: 18px 0 2px; color: var(--ink); }
 .landing .motto-ipa { font-size: clamp(0.95rem, 2.2vw, 1.15rem); letter-spacing: .02em; color: var(--soft); margin: 0 0 22px; }
+
+/* word matrices (24 November 2026): Ramsden's matrix, built from the site's word sums */
+.mtx { margin: 14px 0 18px; }
+.mgrid { display: flex; align-items: center; flex-wrap: wrap; gap: 0; }
+.mcol { display: grid; gap: 2px; padding: 8px 10px; border: 2px solid var(--ink); background: var(--card); margin-left: -2px; }
+.mcol:first-child { margin-left: 0; }
+.mbase { padding: 14px 20px; border-width: 3px; font-family: var(--display, serif); font-size: 1.9rem; color: var(--verb); z-index: 1; }
+.mp { font: inherit; font-size: 1rem; line-height: 1.25; text-align: left; border: 0; border-radius: 6px; padding: 2px 8px; background: transparent; color: var(--ink); cursor: pointer; }
+.mp:hover { background: var(--line); }
+.mp.on { background: var(--ink); color: var(--paper); }
+.mpath { margin: 10px 0 4px; min-height: 1.5em; color: var(--soft); }
+.mpath b { color: var(--ink); font-weight: 600; }
+.mpath .yes { color: var(--subject); font-weight: 600; }
+.mpath .test { color: var(--verb); }
+.mlist { display: flex; flex-wrap: wrap; gap: 4px 6px; align-items: baseline; font-size: 0.9rem; color: var(--soft); margin: 0; }
+.mlist .mw { font: inherit; font-style: italic; border: 1px solid var(--line); border-radius: 999px; padding: 1px 10px; background: transparent; color: var(--ink); cursor: pointer; }
+.mlist .mw.on { border-color: var(--ink); }
+.mx-switch { display: inline-flex; gap: 2px; padding: 2px; border: 1px solid var(--line); border-radius: 999px; margin: 0 0 12px; }
+.mx-switch button { font: inherit; font-size: 0.85rem; border: 0; border-radius: 999px; padding: 5px 14px; background: transparent; color: var(--soft); cursor: pointer; }
+.mx-switch button[aria-checked="true"] { background: var(--ink); color: var(--paper); }
+.cx.mtxview .cgroup, .cx.mtxview .pcard { display: none; }
+.cx:not(.mtxview) .mtx { display: none; }
+.ppart .mtx[hidden] { display: none; }
+.mx-open { font: inherit; font-size: 0.85rem; border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; background: var(--card); color: var(--ink); cursor: pointer; margin: 4px 0; }

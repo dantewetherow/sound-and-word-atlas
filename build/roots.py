@@ -1453,6 +1453,9 @@ def clusters_html(R):
         groups = "".join('<div class="cgroup">' + "".join(wsum(c, w, p, m, b) for c2, w, p, m, b in words
                                                           if c2 is c and w in [it[0] for it in g]) + "</div>" for g in c["groups"])
         note = f'<p class="cnote">{c["note"]}</p>' if c.get("note") else ""
+        import matrix                                                  # one matrix per base spelling (24 November 2026)
+        csums = [(w, p) for c2, w, p, m, b in words if c2 is c and p]
+        note += "".join(matrix.build(sp, csums, label=sp) for sp in c["spells"])
         panels.append(f'<section class="cpanel" id="c-{c["key"]}" data-c="{c["key"]}" role="tabpanel" aria-labelledby="c-{c["key"]}-h">'
                       f'<h3 id="c-{c["key"]}-h"><b>{c["label"]}</b>: {c["head"]}</h3><p class="rh">{c["road"]}.</p>{note}{groups}</section>')
 
@@ -1477,6 +1480,8 @@ def clusters_html(R):
 <section class="about t-only cx" aria-labelledby="fam-h"><div class="wrap">
 <h2 id="fam-h">The family, spelling by spelling</h2>
 <p class="sub">Each word is written as a <a href="../definitions.html#def-word-sum">word sum</a>: the root&rsquo;s spelling in red, the parts that join it on either side. Tap any part to see what it means and which other words carry it. Each word links to its history in Etymonline.</p>
+<div class="mx-switch" role="radiogroup" aria-label="View"><button type="button" role="radio" aria-checked="true" data-v="sums">Word sums</button><button type="button" role="radio" aria-checked="false" data-v="matrix">Matrix</button></div>
+<p class="sub mx-note">The matrix is Melvyn Ramsden&rsquo;s, as Pete Bowers uses it in structured word inquiry. One base sits in the middle, with the parts found beside it on either side. Build a path left to right, skipping any box, then check whether it makes a word.</p>
 <nav class="cchips" role="tablist" aria-label="The root&rsquo;s spellings">{chips}</nav>
 <div class="cpanels">{"".join(panels)}</div>
 <div class="pcard" hidden aria-live="polite"></div>
@@ -1488,6 +1493,7 @@ def clusters_html(R):
 <div class="pgcols">{gloss(roots, "The root&rsquo;s spellings")}{gloss(pre, "Before the root")}{gloss(suf, "After the root")}{gloss(base, "Other roots") if base else ""}</div>
 </div></section>
 <script>{CX_JS}</script>
+{matrix.JS}
 """
 
 

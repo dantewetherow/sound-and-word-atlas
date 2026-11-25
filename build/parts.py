@@ -318,9 +318,14 @@ def write(OUT, door_page, X):
         if k in LESSONS:
             lh, lp = LESSONS[k]
             lesson = f'<div class="plesson" id="lesson-{pid(k)[2:]}"><h3>{lh}</h3>{"".join(f"<p>{x}</p>" for x in lp)}</div>'
+        mtx = ""
+        if e["kind"] in ("root", "base"):                             # the matrix for a root or base (24 November 2026)
+            import matrix
+            m = matrix.build(k, [(w, words[w]["parts"]) for w, _ in ws], label=k)
+            if m: mtx = '<button type="button" class="mx-open">Show the matrix</button>' + m.replace('<div class="mtx"', '<div class="mtx" hidden', 1)
         return (f'<details class="ppart" id="{pid(k)}" data-k="{html.escape(bare(k))}" data-words="{html.escape(" ".join(w for w, _ in ws))}">'
                 f'<summary><b>{html.escape(k)}</b>{f"<span class=pm>{mean}</span>" if mean else ""}<span class="pcnt">{n} {"word" if n == 1 else "words"}</span></summary>{lesson}'
-                f'<ul class="pwords">{"".join(word_li(w, k) for w, _ in ws)}</ul>{stacks}{src}</details>')
+                f'{mtx}<ul class="pwords">{"".join(word_li(w, k) for w, _ in ws)}</ul>{stacks}{src}</details>')
 
     groups = [("pre", "Prefixes", "Before the base."), ("suf", "Suffixes", "After the base. One word can stack several."),
               ("root", "Roots", "A root can have several spellings. Its family page gathers them."),
@@ -369,7 +374,7 @@ def write(OUT, door_page, X):
 <section class="about t-only"><div class="wrap">
 {X["uc"]("the parts come from the words analysed so far: the path, the grade 3 word sums and the first families. Next: more families, starting with <i>accommodate</i> and the prefix <i>com-</i>, and a search by where a part sits in the word.")}
 </div></section>
-{PARTS_JS}{pop_js()}"""
+{PARTS_JS}{pop_js()}{__import__("matrix").JS}"""
     door_page("parts", "Parts · Sounds and Words, Assembled", "Every analysed word, gathered by the parts it is built from.", body)
 
     # for the Words layer: each word's sum, part by part, and for the search: every part
