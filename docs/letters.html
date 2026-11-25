@@ -50,7 +50,7 @@
     <button type="button" class="gp-clear">Clear</button>
     <button type="button" class="gp-full">Full screen</button>
   </div>
-  <div class="gp-sheet"><canvas class="gp-grid" aria-hidden="true"></canvas><canvas class="gp-ink" role="img" aria-label="Graph paper: write on it with a finger, a pen or the mouse"></canvas></div>
+  <div class="gp-sheet"><canvas class="gp-grid" aria-hidden="true"></canvas><canvas class="gp-ink" role="img" aria-label="Graph paper: write on it with a finger, a pen or the mouse"></canvas><div class="gp-ring" aria-hidden="true" hidden></div></div>
 </div>
 </div>
 <p class="sub t-only">The graph paper is for showing how a letter is formed: where it starts, which way it goes, and where it sits. <i>Writing lines</i> adds a top line, a dashed middle line and a baseline on the grid, with room below for the tails of g, j, p, q and y. Red is for the vowels, and green for sh, th and ch. The eraser rubs out part of a stroke; Undo takes back the last thing drawn or erased. The circle under a consonant marks its sound. Under a vowel, the first tap gives the short sound and the cup; the second, the long sound, which is the letter&rsquo;s name, and the long mark. A third tap clears it. Under c and g, the second tap makes them soft, as an e, i or y after them does (<a href="steps/10.html">step 10</a>). Under y, the first tap is the consonant of <i>yes</i>, the second the vowel of <i>my</i> (<a href="steps/03.html">step 3</a>). Under x, two sounds: /k/ and /s/.</p>
@@ -150,12 +150,21 @@
   }
   function redraw() { const g = ink.getContext('2d'); g.clearRect(0, 0, W, H); strokes.forEach(s => paint(g, s)); }
   const at = e => { const r = ink.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+  // the eraser's ring (24 November 2026): the size of the eraser, following the pointer, so its reach shows on a mouse,
+  // a pen or a finger on a board; the mouse cursor hides while it shows
+  const ring = gp.querySelector('.gp-ring'), EW = Math.round(CELL * 0.75);
+  ring.style.width = ring.style.height = EW + 'px';
+  const ringAt = e => { if (pen !== 'erase') { ring.hidden = true; return; } const [x, y] = at(e);
+    ring.style.transform = `translate(${x - EW / 2}px, ${y - EW / 2}px)`; ring.hidden = false; };
+  ink.addEventListener('pointermove', ringAt); ink.addEventListener('pointerdown', ringAt);
+  ink.addEventListener('pointerleave', () => { ring.hidden = true; });
+  ink.addEventListener('pointerup', e => { if (e.pointerType === 'touch') ring.hidden = true; });
   ink.addEventListener('pointerdown', e => { e.preventDefault(); ink.setPointerCapture(e.pointerId);
-    cur = { pen, w: pen === 'erase' ? Math.round(CELL * 0.75) : Math.max(4, Math.round(CELL / 4.5)), pts: [at(e)] }; strokes.push(cur); redraw(); });
+    cur = { pen, w: pen === 'erase' ? EW : Math.max(4, Math.round(CELL / 4.5)), pts: [at(e)] }; strokes.push(cur); redraw(); });
   ink.addEventListener('pointermove', e => { if (!cur) return; const ev = e.getCoalescedEvents ? e.getCoalescedEvents() : [e];
     ev.forEach(x => cur.pts.push(at(x))); redraw(); });
   const end = () => { cur = null; }; ink.addEventListener('pointerup', end); ink.addEventListener('pointercancel', end);
-  gp.querySelectorAll('[data-pen]').forEach(b => b.addEventListener('click', () => { pen = b.dataset.pen; ink.classList.toggle('erasing', pen === 'erase');
+  gp.querySelectorAll('[data-pen]').forEach(b => b.addEventListener('click', () => { pen = b.dataset.pen; ink.classList.toggle('erasing', pen === 'erase'); if (pen !== 'erase') ring.hidden = true;
     gp.querySelectorAll('[data-pen]').forEach(x => x.setAttribute('aria-checked', x === b)); }));
   gp.querySelector('.gp-lines').addEventListener('click', e => { lines = !lines; e.currentTarget.setAttribute('aria-pressed', lines); drawGrid(); });
   gp.querySelector('.gp-undo').addEventListener('click', () => { strokes.pop(); redraw(); });
