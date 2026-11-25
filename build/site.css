@@ -1148,10 +1148,10 @@ body.tm-on { overflow: hidden; }
 .tm-card.in { animation: tm-in .22s ease-out; }
 @keyframes tm-in { from { opacity: 0; transform: translateX(28px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .tm-card.in { animation: none; } }
-.tm-big svg { display: block; height: min(48vh, 62vw); width: auto; max-width: 92vw; }
+.tm-big svg { display: block; height: min(40vh, 30vw); width: auto; max-width: 92vw; }
 .tm-bigkey { display: grid; justify-items: center; gap: 8px; visibility: hidden; }
 .tm-bigkey.on { visibility: visible; }
-.tm-bigkey .tm-kw svg { display: block; height: min(16vh, 24vw); width: auto; max-width: 90vw; }
+.tm-team svg { display: block; height: min(22vh, 26vw); width: auto; max-width: 60vw; }
 .tm-bigkey .tm-as { font-size: clamp(1.2rem, 3vw, 2rem); }
 .tm-bigkey .tm-as small { display: inline; font-size: inherit; color: var(--soft); }
 .tm-drill.paused .tm-clock::after { content: " paused"; }

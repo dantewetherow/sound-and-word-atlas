@@ -3,7 +3,8 @@
 Dante asked for a page like the alphabet page for the common digraphs and trigraphs, built for quick, satisfying drills:
 each team drawn in the notation's colours with its bond bar and sound circle, and a key word for each sound ("ow as in
 snow", "ow as in cow"; th buzzy in this, th quiet in thin). Tap a team's circle for its key word. The Drill button runs
-the chosen rows one team at a time, big, in order or shuffled: say it, then check, or fast; by tap or on a beat; with a
+the chosen rows one key word at a time, big and fully marked: say the word, then the team's sound (the team
+alone is ambiguous: ow in snow, ow in cow); in order or shuffled; say, then check, or fast; by tap or on a beat; with a
 count and a time at the end. Nothing is saved but the drill's settings, in this browser.
 
 Each team is (letters, code for the letters, key word, a note or ""). The code draws the team as it is drawn inside a
@@ -92,7 +93,7 @@ def write(door_page, X):
 </div>
 <p class="sub t-only">The colours are the notation&rsquo;s. Red letters are vowels, and a red bar joins a vowel team. Green is for sh, ch and th, and for tch, where the t stays black. Black bars join consonant teams. An r-controlled unit keeps its vowel red and its r black under one red bar. Qu has two sounds, one circle under each letter.</p>
 <p class="sub t-only">Some teams spell two sounds, and each sound gets its own tile. Ow is in <i>snow</i> and <i>cow</i>, oo in <i>moon</i> and <i>book</i>, ea in <i>eat</i> and <i>head</i>. Th is voiced in <i>this</i> (the buzzy th) and voiceless in <i>thin</i>. The step under a tile is where the path brings the team in.</p>
-<p class="sub t-only">To drill: choose the rows with the buttons at the top, then Drill. Each team comes up alone and large. In <i>Say, then check</i>, the first tap shows the key word and the second moves on. <i>Fast</i> moves on with each tap. A pace of 3, 2 or 1.2 seconds runs the drill on its own; tap to pause. The count and the time show at the end. Space or the right arrow moves on, the left arrow goes back, and Escape stops.</p>
+<p class="sub t-only">To drill: choose the rows with the buttons at the top, then Drill. Each card shows a key word, fully marked: learners say the word. In <i>Say, then check</i>, the first tap shows the team and its sound, and learners say the sound; the second tap moves on. <i>Fast</i> shows only the words, and each tap moves on. A pace of 3, 2 or 1.2 seconds runs the drill on its own; tap to pause. The count and the time show at the end. Space or the right arrow moves on, the left arrow goes back, and Escape stops.</p>
 </div></section>
 <div class="tm-drill" hidden role="dialog" aria-modal="true" aria-label="Drill" tabindex="-1">
   <div class="tm-dbar"><span class="tm-count" aria-live="polite"></span><span class="tm-clock"></span><button type="button" class="tm-close" aria-label="Stop the drill">&times;</button></div>
@@ -131,8 +132,10 @@ JS = """<script>(() => {
   const mmss = ms => { const s = Math.round(ms / 1000); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
   function draw() {
     const t = deck[i];
-    card.innerHTML = '<div class="tm-big">' + t.querySelector('.tm-box').innerHTML + '</div><div class="tm-bigkey">'
-      + t.querySelector('.tm-key').innerHTML + '</div>';
+    // the word first, fully marked: say it. Then the team and its sound: say the sound (24 November 2026). The team
+    // alone is ambiguous (ow in snow, ow in cow); the word settles which sound it spells.
+    card.innerHTML = '<div class="tm-big">' + t.querySelector('.tm-kw').innerHTML + '</div><div class="tm-bigkey"><div class="tm-team">'
+      + t.querySelector('.tm-box').innerHTML + '</div>' + t.querySelector('.tm-as').outerHTML + '</div>';
     card.classList.remove('in'); void card.offsetWidth; card.classList.add('in');
     if (shown) card.querySelector('.tm-bigkey').classList.add('on');
     count.textContent = (i + 1) + ' of ' + deck.length; bar.style.width = ((i + 1) / deck.length * 100) + '%';
