@@ -79,6 +79,8 @@ def hero_only(doors_html):
 <section class="landing solo" aria-labelledby="landing-h"><div class="wrap">
 <h1 id="landing-h">Sounds and Words, Assembled</h1>
 <p class="sublead">Orthography, morphology, phonology and etymology, brought to light.</p>
+<p class="motto">I thought it through and though it was tough I was thorough.</p>
+<p class="motto-ipa" lang="en-fonipa" title="IPA, North American">/a&#618; &#712;&#952;&#593;t &#618;t &#712;&#952;&#633;u &#601;n &#712;&eth;o&#650; &#618;t w&#601;z &#712;t&#652;f a&#618; w&#601;z &#712;&#952;&#605;o&#650;/</p>
 {doors_html}
 </div></section>"""
 

@@ -269,9 +269,9 @@ body{background:var(--paper);color:var(--ink);font-family:var(--sans);overflow:h
 .blanks .gap{display:inline-block;min-width:330px;border-bottom:3px solid var(--soft);text-align:center;margin:0 10px}
 .blanks .ans{font-family:var(--serif);font-style:italic;color:var(--verb)}
 /* parts joining: the tiles, what each means, then they close up, then the word */
-.pieces{display:flex;align-items:flex-start;gap:26px;padding-bottom:66px;transition:gap .6s ease}
+.pieces{display:flex;align-items:flex-start;gap:26px;padding-bottom:72px;transition:gap .6s ease}
 .pc{position:relative;display:block}
-.pc b{font-weight:500;font-size:110px;line-height:1;padding:10px 26px 18px;border:2px solid var(--line);border-radius:22px;background:var(--panel);transition:border-color .6s ease,background .6s ease,padding .6s ease,border-radius .6s ease}
+.pc b{display:inline-block;font-weight:500;font-size:110px;line-height:1;padding:10px 26px 18px;border:2px solid var(--line);border-radius:22px;background:var(--panel);transition:border-color .6s ease,background .6s ease,padding .6s ease,border-radius .6s ease}
 .pc em{position:absolute;top:calc(100% + 16px);left:-240px;right:-240px;text-align:center;white-space:nowrap;font-family:var(--serif);font-size:36px;color:var(--soft)}
 .trig.in ~ .pieces .pc em{opacity:0}   /* the parts have joined: their meanings come back in the line read from the end */
 .plus{font-size:80px;line-height:1;color:var(--soft);padding-top:20px;max-width:80px;overflow:hidden;transition:max-width .6s ease,opacity .4s ease}

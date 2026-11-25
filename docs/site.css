@@ -1160,3 +1160,7 @@ body.tm-on { overflow: hidden; }
 .tm-sum { font-family: var(--display, serif); font-size: clamp(2rem, 6vw, 4rem); margin: 0; color: var(--ink); }
 .tm-again, .tm-done { font: inherit; font-size: 1.1rem; border: 1px solid var(--line); border-radius: 999px; padding: 10px 26px; background: var(--card); color: var(--ink); cursor: pointer; }
 .tm-again { background: var(--verb); color: var(--paper); border-color: var(--verb); }
+
+/* the site motto (24 November 2026): five sounds for ough, with an IPA gloss */
+.landing .motto { font-family: var(--display, serif); font-style: italic; font-size: clamp(1.15rem, 2.6vw, 1.5rem); margin: 18px 0 2px; color: var(--ink); }
+.landing .motto-ipa { font-size: clamp(0.95rem, 2.2vw, 1.15rem); letter-spacing: .02em; color: var(--soft); margin: 0 0 22px; }
