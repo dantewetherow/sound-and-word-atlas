@@ -483,6 +483,6 @@ L.append(F("steg", "<b>tect</b> means covered. <i>Protect</i> is to cover in fro
      ("The case was solved by a", "de + tect + ive", ".")],
     [("over + pro + tect + ive", "overprotective"), ("pro + tect + ive + ness", "protectiveness"), ("de + tect + ion", "detection"), ("un + de + tect + ed", "undetected")],
     ["Before a t, Latin&rsquo;s g became c: <i>tegere</i>, to cover, and <i>tectus</i>, covered. English borrowed the past form, so the part is tect.",
-     "-ed adds a beat after a t: pro-tec-ted. -ive keeps its e before -ly and -ness: <i>protectively</i>, <i>protectiveness</i>."]))
+     "After /t/ or /d/, -ed is a syllable of its own: pro-tec-ted. -ive keeps its e before -ly and -ness: <i>protectively</i>, <i>protectiveness</i>."]))
 
 STEP_LISTS = L

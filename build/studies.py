@@ -1126,18 +1126,19 @@ def protect_deck():
       ["protect", "<b>+ s</b>: does it now", "<b>+ ed</b>: already done", "<b>+ ing</b>: doing it now"], 200, 1)}
 <p class="lede" data-s="4">Count the beats: pro-tect, pro-tects, pro-tec-ted, pro-tec-ting.</p>""",
             "Word sums: pro + tect + s, pro + tect + ed, pro + tect + ing. Each word fades into the next at the same size, so "
-            "only the new ending and its marks change. Ask which one adds a beat that -s doesn&rsquo;t.", steps=4)
+            "only the new ending and its marks change. Ask which ending adds a syllable.", steps=4)
 
     D.slide("-ed, three sounds", f"""<h2 class="head"><b class="r">-ed</b>: one spelling, three sounds</h2>
-<div class="ishas tri"><h3>/t/</h3><h3>/d/</h3><h3>/id/: an extra beat</h3>
-<p data-s="1">jump<b>ed</b></p><p data-s="1">play<b>ed</b></p><p data-s="1">protect<b>ed</b></p>
-<p data-s="2">look<b>ed</b></p><p data-s="2">rain<b>ed</b></p><p data-s="2">detect<b>ed</b></p>
-<p data-s="3">help<b>ed</b></p><p data-s="3">fill<b>ed</b></p><p data-s="3">land<b>ed</b></p></div>
-<p class="lede" data-s="4">After a t or a d, -ed adds a beat.</p>
-<p class="q" data-s="5">The spelling stays <b>-ed</b> every time.</p>""",
+<div class="ishas tri"><h3>/t/: no new syllable</h3><h3>/d/: no new syllable</h3><h3>/id/: a new syllable</h3>
+<p data-s="1">jump<b>ed</b></p><p data-s="1">play<b>ed</b></p><p data-s="1">pro&middot;tect&middot;<b>ed</b></p>
+<p data-s="2">look<b>ed</b></p><p data-s="2">rain<b>ed</b></p><p data-s="2">de&middot;tect&middot;<b>ed</b></p>
+<p data-s="3">help<b>ed</b></p><p data-s="3">fill<b>ed</b></p><p data-s="3">land&middot;<b>ed</b></p></div>
+<p class="lede" data-s="4">Listen to the last sound of the word before -ed.</p>
+<p class="lede" data-s="5">protect ends in /t/. land ends in /d/.</p>
+<p class="q" data-s="6">After /t/ or /d/, -ed is a syllable of its own.</p>""",
             "-ed spells /t/ after a sound made without the voice (p, k, s, f, sh, ch) and /d/ after one made with it, vowels "
             "included. After t or d it adds a syllable, so <i>protected</i> has three. "
-            "Spelling these jumpt or playd would lose the ending, and with it the meaning: already done.", steps=5)
+            "Spelling these jumpt or playd would lose the ending, and with it the meaning: already done.", steps=6)
 
     D.slide("Build protection", f"""<h2 class="head">Name the act</h2>
 {join(["pro", "tect", "ion"], ["in front", "covered", "the act of"], word("protection", 150), 1,
@@ -1187,7 +1188,7 @@ def protect_deck():
 {join(["un", "protect", "ed"], ["not", "keep safe", "done"], word("unprotected", 130), 1,
       "<b>un-</b> means <b>not</b>: not protected.")}""",
             "Word sum: un + pro + tect + ed &rarr; <i>unprotected</i>. A prefix joins with no change to either part. The -ed "
-            "still adds its beat after the t: un-pro-tec-ted.", steps=4)
+            "is still a syllable of its own after the t: un-pro-tec-ted.", steps=4)
     D.slide("over-", f"""<h2 class="head">And another</h2>
 {join(["over", "protect", "ive"], ["too much", "keep safe", "that tends to"], word("overprotective", 120), 1,
       "<b>over-</b> means <b>too much</b>: protective, too much.")}""",
@@ -1232,8 +1233,8 @@ def protect_deck():
 </div>
 <div class="paths" data-s="3"><span><b>un + pro + tect + ed</b></span><span><b>over + pro + tect + ive</b></span><span><b>pro + tect + ive + ness</b></span><span><b>de + tect + or + s</b></span></div>
 <p class="q" data-s="4">Read across. Which paths make words?</p>""",
-            "The word matrix is Melvyn Ramsden&rsquo;s (Real Spelling). Read left to right, skipping any box. Not every path is a "
-            "word (<i>over + de + tect</i>): check each by saying it and using it in a sentence. The last column follows "
+            "The word matrix is Melvyn Ramsden&rsquo;s (Real Spelling), brought into classrooms by Pete Bowers as structured word "
+            "inquiry. Read left to right, skipping any box. Not every path is a word (<i>over + de + tect</i>): check each by saying it and using it in a sentence. The last column follows "
             "<i>ive</i> or <i>or</i>.", steps=4)
 
     D.slide("Your turn", f"""<h2 class="head">Your turn</h2>

@@ -1266,7 +1266,7 @@ STEG_CLUSTERS = [
     {"key": "tect", "label": "tect", "spells": ["tect"], "head": "covered",
      "road": "Latin <i>tectus</i>, covered, the past form of <i>tegere</i>: with <i>pro-</i>, covered in front; with <i>de-</i>, uncovered",
      "note": "Every word here keeps tect, and the stress stays on it. What changes is the sound around the t. It is said in "
-             "<i>protect</i>, spells sh with the i of <i>-ion</i>, and takes an extra beat before <i>-ed</i>.",
+             "<i>protect</i>, spells sh with the i of <i>-ion</i>, and before <i>-ed</i> it ends a syllable: pro-tec-ted.",
      "groups": [
          [("protect", ["pro-", "tect"], "cover in front: keep safe"), ("protects", ["pro-", "tect", "-s"], "keeps safe"),
           ("protected", ["pro-", "tect", "-ed"], "kept safe"), ("protecting", ["pro-", "tect", "-ing"], "keeping safe")],
@@ -1332,12 +1332,12 @@ STEG = {
          ["The spelling of tect never changes in this family. Three sounds next to it do.",
           "<b>The t before -ion.</b> In <i>protect</i> the t is said. In <i>protection</i> it joins the i of <i>-ion</i>, and ti "
           "spells sh. The spelling keeps the t, so <i>protection</i> still shows <i>protect</i>.",
-          "<b>The -ed after a t.</b> -ed spells /t/ in <i>jumped</i> and /d/ in <i>played</i>. After a t or a d it adds a beat: "
+          "<b>The -ed after a t.</b> -ed spells /t/ in <i>jumped</i> and /d/ in <i>played</i>. When the word ends in /t/ or /d/, -ed is a syllable of its own: "
           "pro-tec-ted, de-tec-ted.",
           "<b>The e of -ive.</b> English words don&rsquo;t end in v, so -ive has an e that isn&rsquo;t said and doesn&rsquo;t make "
           "the i long. The e stays before <i>-ly</i> and <i>-ness</i>, which start with a consonant: <i>protectively</i>, "
           "<i>protectiveness</i>."],
-         [("protect", "the t said"), ("protection", "ti spells sh"), ("protected", "-ed adds a beat"), ("protective", "the e of -ive, silent")]),
+         [("protect", "the t said"), ("protection", "ti spells sh"), ("protected", "-ed, a syllable of its own"), ("protective", "the e of -ive, silent")]),
         ("beat", "The beat stays on tect",
          ["Say them: pro-TECT, pro-TEC-tion, pro-TEC-tive, pro-TEC-tor, un-pro-TEC-ted, o-ver-pro-TEC-tive. The main stress "
           "doesn&rsquo;t move. Endings like <i>-ion</i> and <i>-ive</i> put the stress on the syllable just before them, and "
@@ -1361,7 +1361,7 @@ STEG = {
     "s_paras": ["Say them: pro-<b>tect</b>, pro-<b>tec</b>-tion, pro-<b>tec</b>-tive.",
                 "The beat stays on <b>tect</b> every time.",
                 "In <b>protection</b>, the t and the i spell /sh/. The t stays in the spelling.",
-                "<b>protect</b> + <b>ed</b> has an extra beat: pro-tec-ted.",
+                "<b>protect</b> ends in /t/, so <b>-ed</b> is a syllable of its own: pro-tec-ted.",
                 "A <b>detective</b> takes the cover off: finds out what was covered up."],
     "uc": "the family follows the Indo-European Lexicon, (s)teg-, and Etymonline&rsquo;s entry for the root, read on 24 November "
           "2026. Next: <i>integument</i>, and more words with <i>de-</i>.",
