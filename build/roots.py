@@ -1373,6 +1373,112 @@ STEG = {
 ROOTS = [LEG, HAP, DEUK, SEM, MED, LEUK, PER, SIGN, STEG]
 
 
+# ------------------------------------------------------------------ form (25 November 2026)
+# Dante asked for form: a family, a matrix and a word study for learners, with -ation and a Ukrainian cognate. -ation is
+# written whole where English has no -ate verb (his option 2, 25 November 2026): in + form + ation, but educat(e) + ion.
+# Sources: Etymonline (form, perform), Dictionary.com (inform, former), Wiktionary via kaikki.org (informate),
+# affixes.org (-ation), Wiktionary (інформація).
+import cognate
+FORM_ROADS = [("Latin <i>forma</i>, through French <i>forme</i>", "a shape, a figure, an appearance", [("form", "form")])]
+FORM_CLUSTERS = [
+    {"key": "form", "label": "form", "spells": ["form"], "head": "a shape",
+     "road": "Latin <i>forma</i>, a shape, through Old French <i>forme</i>; the verb <i>inform</i> from Latin <i>inf&omacr;rm&amacr;re</i>, to shape, through Old French <i>enformer</i>",
+     "note": "The part is form every time. Before -al, -ation and -ity, the beat moves off it (FOR-mal, for-MA-tion, for-MAL-i-ty), "
+             "and its or goes weak, but the spelling holds.",
+     "groups": [
+         [("form", ["form"], "a shape; to give something its shape"), ("forms", ["form", "-s"], "more than one form; gives shape"),
+          ("formed", ["form", "-ed"], "shaped"), ("forming", ["form", "-ing"], "shaping")],
+         [("formal", ["form", "-al"], "keeping to the set form: proper, official"), ("formally", ["form", "-al", "-ly"], "in a formal way"),
+          ("informal", ["in-", "form", "-al"], "not formal: relaxed"), ("formality", ["form", "-al", "-ity"], "a formal step; being formal")],
+         [("formation", ["form", "-ation"], "the shaping of something; a shape made"), ("formative", ["form", "-ative"], "that shapes: a formative year")],
+         [("inform", ["in-", "form"], "give shape to what someone knows: tell"), ("information", ["in-", "form", "-ation"], "what informs you: facts, knowledge"),
+          ("informative", ["in-", "form", "-ative"], "full of information"), ("informant", ["in-", "form", "-ant"], "someone who gives information"),
+          ("informer", ["in-", "form", "-er"], "someone who informs, often against others"), ("uninformed", ["un-", "in-", "form", "-ed"], "not informed")],
+         [("misinform", ["mis-", "in-", "form"], "inform wrongly"), ("misinformation", ["mis-", "in-", "form", "-ation"], "wrong information"),
+          ("disinformation", ["dis-", "in-", "form", "-ation"], "wrong information spread on purpose")],
+         [("reform", ["re-", "form"], "shape again: change for the better"), ("reformer", ["re-", "form", "-er"], "someone who works for reform"),
+          ("reformation", ["re-", "form", "-ation"], "a reforming; a great change")],
+         [("transform", ["trans-", "form"], "change across: change the form completely"), ("transformation", ["trans-", "form", "-ation"], "a complete change"),
+          ("transformer", ["trans-", "form", "-er"], "a thing that transforms, such as electric power")],
+         [("conform", ["con-", "form"], "take the same form as the rest"), ("conformity", ["con-", "form", "-ity"], "the state of being the same as the rest"),
+          ("deform", ["de-", "form"], "put out of shape"), ("deformity", ["de-", "form", "-ity"], "a shape that is out of the usual")],
+         [("uniform", ["uni-", "form"], "one form: the same for everyone"), ("uniformity", ["uni-", "form", "-ity"], "the state of being all the same"),
+          ("platform", ["plat", "form"], "a flat form: a raised, level floor")],
+     ]},
+]
+PARTS.update({
+    "in-": "into, in (<i>inform</i>, <i>induce</i>); or not (<i>informal</i>): two Latin prefixes, both spelled <i>in-</i>",
+    "uni-": "one: Latin <i>&umacr;nus</i>",
+    "-ative": "that does it, that tends to: written whole where English has no -ate verb (<i>informative</i>)",
+})
+ROOT_PARTS.update({
+    "form": "a shape: Latin <i>forma</i>, of unknown origin",
+    "plat": "flat: French <i>plat</i>",
+})
+FORM = {
+    "slug": "form", "root": "form", "gloss": "a shape", "kind": "a base family: a word study",
+    "h1_s": "form means &lsquo;a shape&rsquo;",
+    "lead": "A shape. Latin <i>forma</i> was a shape, a figure, a mould; English took it through French around 1200. Latin also "
+            "had <i>inf&omacr;rm&amacr;re</i>, to give shape to, and used it for shaping a mind: to train, to tell. So "
+            "<i>inform</i> and <i>information</i> are form words, as <i>uniform</i> and <i>transform</i> are.",
+    "drawn": ("information", "information, marked: in + form + ation, with the i of -ion making the a long"),
+    "sources": [("Etymonline, <i>form</i>", "https://www.etymonline.com/word/form"),
+                ("Dictionary.com, <i>inform</i>", "https://www.dictionary.com/browse/inform"),
+                ("Etymonline, <i>perform</i>", "https://www.etymonline.com/word/perform"),
+                ("Dictionary.com, <i>former</i>", "https://www.dictionary.com/browse/former"),
+                ("<i>informate</i> (kaikki.org)", "https://kaikki.org/dictionary/English/meaning/i/in/informate.html"),
+                ("affixes.org, <i>-ation</i>", "https://www.affixes.org/-ation.html"),
+                ("Wiktionary, <i>&#1110;&#1085;&#1092;&#1086;&#1088;&#1084;&#1072;&#1094;&#1110;&#1103;</i>", "https://kaweah.freedombox.rocks/kiwix/wiktionary_en_all_maxi_2023-04/%D1%96%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%86%D1%96%D1%8F")],
+    "roads": FORM_ROADS, "clusters": FORM_CLUSTERS, "parts": PARTS, "root_parts": ROOT_PARTS,
+    "extra": [
+        ("ation", "-ation: one part, or three?",
+         ["<i>Education</i> is <i>educate</i> + <i>-ion</i>: English has the verb <i>educate</i>, so the sum shows it, with the e "
+          "of -ate dropped. <i>Information</i> has no <i>informate</i> inside it. English took the verb <i>inform</i> through "
+          "French, not the Latin past form that gave us <i>educate</i>, so the -ate verb never arrived.",
+          "So the site writes -ation whole where English has no -ate verb: in + form + ation, form + ation, trans + form + ation. "
+          "English treats it as one suffix too: it builds <i>flirtation</i> and <i>starvation</i> on verbs that have no -ate "
+          "form at all (affixes.org).",
+          "Inside -ation is Latin&rsquo;s a + t + io: the vowel of verbs like <i>inf&omacr;rm&amacr;re</i> and "
+          "<i>&emacr;duc&amacr;re</i>, the t of the past form, and the noun ending. And <i>informate</i> exists now: Shoshana "
+          "Zuboff coined it in 1988, from <i>information</i> on the model of <i>automate</i>, for turning work into "
+          "information. A form the system allows can be made as soon as someone needs it."],
+         [("education", "educat(e) + ion: educate is a verb"), ("information", "in + form + ation: no informate"), ("formation", "form + ation")]),
+        ("in", "Two prefixes spelled in-",
+         ["<i>Inform</i> and <i>informal</i> start with the same letters and different prefixes. In <i>inform</i>, in- means "
+          "in, into: to put a shape into a mind. In <i>informal</i>, in- means not: not formal. Latin had both, and English "
+          "spells both in-. The word&rsquo;s meaning tells you which one you have."],
+         [("inform", "in + form: in, into"), ("informal", "in + form + al: not")]),
+        ("cognate", "A cognate: information in Ukrainian",
+         ["Ukrainian has the same word: <i lang=\"uk\">&#1110;&#1085;&#1092;&#1086;&#1088;&#1084;&#1072;&#1094;&#1110;&#1103;</i> "
+          "(informatsiia). Both come from Latin <i>inf&omacr;rm&amacr;ti&omacr;</i>. Laid side by side, the parts line up in "
+          "the same order: in and &#1110;&#1085;, form and &#1092;&#1086;&#1088;&#1084;, ation and &#1072;&#1094;&#1110;.",
+          "Two things differ. The t of Latin -tio is sh in English (ti spells /sh/) and ts in Ukrainian (&#1094; spells /ts/). "
+          "And Ukrainian ends with &#1103;, an ending that changes with the word&rsquo;s job in a sentence; English has none. "
+          "Both languages stress the same syllable: in-for-MA-tion, &#1110;&#1085;-&#1092;&#1086;&#1088;-&#1052;&#1040;-&#1094;&#1110;-&#1103;.",
+          "Strictly, the two are parallel borrowings of one Latin word rather than cognates inherited side by side. The site "
+          "uses cognate in the plain sense: words in two languages with one origin."], [], cognate.block()),
+        ("lookalikes", "Look-alikes that aren&rsquo;t form",
+         ["<i>Perform</i> looks like per + form and isn&rsquo;t. It is Old French <i>parfornir</i>, to carry out (par + fornir, the "
+          "source of <i>furnish</i>), reshaped in Anglo-French under the influence of <i>forme</i> (Etymonline).",
+          "The adjective <i>former</i>, earlier, is Old English <i>forma</i>, first, with -er (Dictionary.com). The noun "
+          "<i>former</i>, one who forms, is form + er and belongs to the family. The two share a spelling and are different words."],
+         [("perform", "par + fornir, reshaped"), ("former", "forma, first + er")]),
+    ],
+    "students": ["form", "inform", "information", "formal", "informal", "transform", "uniform"],
+    "s_lead": "These words are built on <b>form</b>. It means <i>a shape</i>.",
+    "s_pair": [("inform", "Put a shape into: tell."), ("information", "What informs you: facts.")],
+    "s_paras": ["<b>in + form</b> means put a shape in. <b>in + form + al</b> means not formal.",
+                "<b>information</b> is in + form + ation. There is no <i>informate</i> inside it.",
+                "Say them: FORM, FOR-mal, for-MA-tion. The beat moves; the part stays <b>form</b>.",
+                "Ukrainian has the same word: &#1110;&#1085;&#1092;&#1086;&#1088;&#1084;&#1072;&#1094;&#1110;&#1103;."],
+    "uc": "the family follows Etymonline and Dictionary.com, read on 25 November 2026. Next: <i>formula</i> and "
+          "<i>format</i>, and <i>-form</i> as a suffix (<i>cuneiform</i>).",
+    "label": "Base family: form",
+    "desc": "A word study of form, a shape: inform, information, formal, informal, transform, uniform and the rest, with -ation written whole where English has no -ate verb, and information beside Ukrainian.",
+}
+ROOTS = [LEG, HAP, DEUK, SEM, MED, LEUK, PER, SIGN, STEG, FORM]
+
+
 def bold_root(word, spelling):
     i = word.find(spelling)
     return html.escape(word) if i < 0 else html.escape(word[:i]) + "<b>" + html.escape(spelling) + "</b>" + html.escape(word[i + len(spelling):])
@@ -1476,7 +1582,7 @@ def clusters_html(R):
     script_data = json.dumps(data, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
     return f"""<section class="about t-only" aria-labelledby="rd-h"><div class="wrap">
 <h2 id="rd-h">How the words came into English</h2>
-<p class="sub">The root came into English {doors.NUMBER[len(R["roads"])].lower()} ways, each with its own spellings. This is the time-lapse, or <a href="../definitions.html#def-diachronic">diachronic</a>, view. Pick a spelling to see its words.</p>
+<p class="sub">{("The root came into English " + doors.NUMBER[len(R["roads"])].lower() + " ways, each with its own spellings.") if len(R["roads"]) > 1 else "The base came into English one way, with one spelling."} This is the time-lapse, or <a href="../definitions.html#def-diachronic">diachronic</a>, view.{" Pick a spelling to see its words." if len(R["clusters"]) > 1 else ""}</p>
 <div class="roads-wrap"><table class="roads"><thead><tr><th>From</th><th>Meaning</th><th>Spellings in English</th></tr></thead><tbody>{roads}</tbody></table></div>
 </div></section>
 <section class="about t-only cx" aria-labelledby="fam-h"><div class="wrap">

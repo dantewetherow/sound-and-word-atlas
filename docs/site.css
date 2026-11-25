@@ -1215,3 +1215,13 @@ body.tm-on { overflow: hidden; }
 .mtx.mfs .mcards { display: none; }
 body.mfs-on { overflow: hidden; }
 .mx-open { font: inherit; font-size: 0.85rem; border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; background: var(--card); color: var(--ink); cursor: pointer; margin: 4px 0; }
+
+/* a cognate, part by part (25 November 2026) */
+.cog { display: grid; gap: 10px; margin: 16px 0; overflow-x: auto; }
+.cog-row { display: grid; grid-template-columns: 7.5em repeat(4, minmax(3.2em, auto)) 1fr; align-items: center; gap: 0 6px; }
+.cog-lab { font-size: 0.85rem; color: var(--soft); }
+.cg { display: inline-block; text-align: center; font-size: 1.6rem; padding: 4px 12px; border: 2px solid var(--kc); border-radius: 8px; color: var(--kc); background: var(--card); }
+.cg-pre { --kc: var(--modal); } .cg-base { --kc: var(--ink); } .cg-suf { --kc: var(--verb); } .cg-end { --kc: var(--soft); border-style: dashed; }
+.cg-none { border-color: transparent; background: transparent; }
+.cog-say { font-size: 0.95rem; color: var(--soft); padding-left: 10px; }
+.cog-gls .cog-g { font-size: 0.78rem; color: var(--soft); text-align: center; line-height: 1.2; }

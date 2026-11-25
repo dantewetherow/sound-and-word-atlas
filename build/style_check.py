@@ -130,7 +130,8 @@ CLEAN = ["studies/phonesthemes.html", "lists/phonesthemes.html",   # reviewed ag
          "studies/per.html", "studies/education.html", "studies/leg.html", "studies/sign.html", "studies.html", "about.html",
          "roots/deuk.html", "roots/hap.html", "roots/leg.html", "roots/leuk.html", "roots/med.html", "roots/per.html",
          "roots/sem.html", "roots/sign.html", "surprising.html",
-         "roots/steg.html", "studies/protect.html", "lists/family-steg.html", "teams.html"]   # the protect family and study, 24 November 2026   # surprising.html: written to the reference, 23 November 2026
+         "roots/steg.html", "studies/protect.html", "lists/family-steg.html", "teams.html",
+         "roots/form.html", "studies/form.html", "lists/family-form.html", "tents/form.html"]   # form, 25 November 2026   # the protect family and study, 24 November 2026   # surprising.html: written to the reference, 23 November 2026
 
 
 if __name__ == "__main__":

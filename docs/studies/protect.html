@@ -67,6 +67,16 @@ body{background:var(--paper);color:var(--ink);font-family:var(--sans);overflow:h
 .tri p{font-size:46px}
 .ladder{grid-template-columns:1fr;gap:22px}
 .edgrid{gap:4px 50px}
+/* the cognate on a slide (25 November 2026) */
+.cog-slide .cog{display:grid;gap:12px;margin:0 0 14px}
+.cog-slide .cog-row{display:grid;grid-template-columns:240px repeat(4,auto) 1fr;align-items:center;gap:0 14px;justify-content:start}
+.cog-slide .cog-lab{font-size:30px;color:var(--soft)}
+.cog-slide .cg{display:inline-block;text-align:center;font-size:62px;line-height:1.1;padding:4px 20px;border:3px solid var(--kc);border-radius:14px;color:var(--kc)}
+.cog-slide .cg-pre{--kc:var(--modal)} .cog-slide .cg-base{--kc:var(--ink)} .cog-slide .cg-suf{--kc:var(--verb)} .cog-slide .cg-end{--kc:var(--soft);border-style:dashed}
+.cog-slide .cg-none{border-color:transparent}
+.cog-slide .cog-say{font-size:30px;color:var(--soft);padding-left:18px}
+.cog-slide .cog-say i{display:block;font-size:26px}
+.cog-slide .cog-g{font-size:24px;color:var(--soft);text-align:center;line-height:1.2;max-width:9em}
 .edgrid > div{min-height:96px}
 /* one word turning into the next (grow): stacked in one cell; a later word fading in fades the earlier ones out */
 .ovr{display:none}   /* weak and borrowed sounds stay hidden in the decks too, while they are checked (23 November 2026) */

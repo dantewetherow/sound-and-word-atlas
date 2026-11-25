@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Form, inform, information: a word study</title>
+<meta name="description" content="A word study for learners: a shape, and the words built on it, built a piece at a time.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&family=Lexend:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#ede5d3;--panel:#f4eddd;--line:#dacdb5;--ink:#2b2b2b;--soft:#6b6256;--subject:#3a7d44;--verb:#b5402f;--modal:#3f6488;
+  --serif:"Fraunces",Georgia,serif;--sans:"Lexend",system-ui,sans-serif;}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#1d1b18;--panel:#26231f;--line:#3b362f;--ink:#ece5d8;--soft:#a89e8f;--subject:#7dbb87;--verb:#e2836e;--modal:#95b6db;}}
+:root[data-theme="dark"]{--paper:#1d1b18;--panel:#26231f;--line:#3b362f;--ink:#ece5d8;--soft:#a89e8f;--subject:#7dbb87;--verb:#e2836e;--modal:#95b6db;}
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);overflow:hidden;-webkit-font-smoothing:antialiased}
+#viewport{position:relative;width:100%;height:100%;overflow:hidden}
+#stage{position:absolute;top:0;left:0;width:1600px;height:900px;transform-origin:0 0;background:var(--paper)}
+.slide{position:absolute;inset:0;padding:84px 132px 110px;display:flex;flex-direction:column;visibility:hidden}
+.slide.on{visibility:visible}
+.slide.mid{justify-content:center}
+.num{position:absolute;left:132px;bottom:34px;font-size:20px;color:var(--soft);font-variant-numeric:tabular-nums}
+.progress{position:absolute;left:0;bottom:0;height:4px;background:var(--soft);opacity:.28;transition:width .35s ease}
+.kicker{font-size:24px;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);margin:0 0 18px}
+.display{font-family:var(--serif);font-weight:600;font-size:132px;line-height:1;letter-spacing:-.018em;margin:0}
+.subtitle{font-family:var(--serif);font-style:italic;font-size:48px;margin:18px 0 0}
+.head{font-family:var(--serif);font-weight:500;font-size:68px;line-height:1.1;letter-spacing:-.012em;margin:0 0 34px}
+.head i,.q i,.lede i{font-family:var(--serif);font-style:italic}
+.lede{font-size:38px;line-height:1.35;color:var(--soft);margin:22px 0 0;max-width:1250px}
+.q{font-family:var(--serif);font-style:italic;font-size:52px;line-height:1.2;margin:34px 0 0;max-width:1300px}
+.q.end{font-size:46px;margin-top:30px;padding-top:24px;border-top:1.5px solid var(--line);font-style:normal}
+.q b{color:var(--verb);font-weight:600}
+.r{color:var(--verb)}
+.pair{display:flex;align-items:flex-end;gap:60px;margin-top:56px;flex-wrap:wrap}
+.stack{display:grid;gap:26px;margin:6px 0 0}
+.mw{display:block;width:auto;max-width:100%}
+.tw{font-family:var(--sans);line-height:1;display:block}
+.typed{font-size:96px;line-height:1.1;letter-spacing:.01em;margin:0}
+.same{color:var(--modal)}
+.diff{color:var(--verb);text-decoration:underline;text-decoration-thickness:6px;text-underline-offset:14px}
+.felt{display:grid;grid-template-columns:repeat(2,1fr);gap:26px 70px;margin:4px 0 0}
+.felt > div{display:flex;align-items:baseline;gap:22px;border-bottom:1.5px solid var(--line);padding-bottom:16px}
+.felt .w{font-size:64px;line-height:1}
+.felt .w b{color:var(--verb);font-weight:500}
+.felt .g{font-family:var(--serif);font-style:italic;font-size:36px;color:var(--soft)}
+.fam{display:grid;grid-template-columns:repeat(2,1fr);gap:26px 70px}
+.wrow{display:flex;flex-wrap:wrap;gap:18px 44px;align-items:flex-end;margin-top:20px}
+.wrow.dim{opacity:.5}
+.wrow .aside{font-family:var(--serif);font-style:italic;font-size:34px;color:var(--soft);margin:0 0 12px}
+.wrow .aside.old{font-family:var(--sans);font-style:normal;font-size:64px;color:var(--ink);margin:0 0 4px}
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:40px 80px;margin-top:10px}
+.cols2 .lede{margin-top:0}
+.sorted{display:grid;gap:8px;margin-top:6px}
+.sorted > div{display:flex;align-items:flex-end;gap:30px}
+.sorted > div > b{font-size:40px;min-width:120px;color:var(--verb)}
+.sorted .wrow{margin-top:0}
+.fam > div{display:flex;align-items:flex-end;gap:28px}
+.fam .g{font-family:var(--serif);font-style:italic;font-size:34px;color:var(--soft);padding-bottom:12px}
+.ishas{display:grid;grid-template-columns:1fr 1fr;gap:10px 80px;margin-top:4px}
+.ishas h3{margin:0 0 8px;font-family:var(--sans);font-weight:400;font-size:28px;color:var(--soft);border-bottom:1.5px solid var(--line);padding-bottom:10px}
+.ishas h3 b{color:var(--verb);font-weight:500}
+.ishas p{margin:0;font-size:50px;line-height:1.25}
+.ishas p b{color:var(--verb);font-weight:inherit}
+.tri{grid-template-columns:repeat(3,1fr);gap:10px 50px}
+.tri p{font-size:46px}
+.ladder{grid-template-columns:1fr;gap:22px}
+.edgrid{gap:4px 50px}
+/* the cognate on a slide (25 November 2026) */
+.cog-slide .cog{display:grid;gap:12px;margin:0 0 14px}
+.cog-slide .cog-row{display:grid;grid-template-columns:240px repeat(4,auto) 1fr;align-items:center;gap:0 14px;justify-content:start}
+.cog-slide .cog-lab{font-size:30px;color:var(--soft)}
+.cog-slide .cg{display:inline-block;text-align:center;font-size:62px;line-height:1.1;padding:4px 20px;border:3px solid var(--kc);border-radius:14px;color:var(--kc)}
+.cog-slide .cg-pre{--kc:var(--modal)} .cog-slide .cg-base{--kc:var(--ink)} .cog-slide .cg-suf{--kc:var(--verb)} .cog-slide .cg-end{--kc:var(--soft);border-style:dashed}
+.cog-slide .cg-none{border-color:transparent}
+.cog-slide .cog-say{font-size:30px;color:var(--soft);padding-left:18px}
+.cog-slide .cog-say i{display:block;font-size:26px}
+.cog-slide .cog-g{font-size:24px;color:var(--soft);text-align:center;line-height:1.2;max-width:9em}
+.edgrid > div{min-height:96px}
+/* one word turning into the next (grow): stacked in one cell; a later word fading in fades the earlier ones out */
+.ovr{display:none}   /* weak and borrowed sounds stay hidden in the decks too, while they are checked (23 November 2026) */
+.grow{display:grid;justify-items:start;margin-top:6px}
+.grow > *{grid-area:1/1;transition:opacity .5s ease}
+.grow > .gw:has(~ .in),.grow > .gc:has(~ .in){opacity:0}
+.gcaps{margin-top:18px}
+.gcaps .gc{font-family:var(--serif);font-style:italic;font-size:42px;color:var(--soft)}
+.gcaps .gc b{font-style:normal;color:var(--verb);font-weight:500}
+.cloud{display:flex;flex-wrap:wrap;gap:26px 56px;font-size:60px;line-height:1.1;max-width:1300px;margin-top:6px}
+.cloud span:nth-child(3n+2){transform:translateY(18px)}
+.duo{display:flex;gap:120px;align-items:flex-end;margin-top:40px}
+.duo figure{margin:0;display:grid;justify-items:start;gap:14px}
+.duo figcaption{font-family:var(--serif);font-style:italic;font-size:38px;color:var(--soft)}
+.matrix{display:flex;align-items:center;gap:0;margin:10px 0 0;font-family:var(--sans)}
+.matrix .mbox{border:3px solid var(--ink);padding:12px 26px;display:grid;gap:0;font-size:31px;line-height:1.12;background:var(--panel)}
+.matrix .mbase{font-size:80px;line-height:1;font-family:var(--serif);color:var(--verb);padding:20px 40px;border-width:4px;margin:0 -3px}
+.matrix .mcols{display:flex;border:3px solid var(--ink);background:var(--panel)}
+.matrix .mcols .mbox{border:0;border-left:3px solid var(--line)}
+.matrix .mcols .mbox:first-child{border-left:0}
+.paths{display:flex;gap:40px;flex-wrap:wrap;margin-top:18px;font-size:30px;color:var(--soft)}
+.paths b{color:var(--ink);font-weight:500}
+.fork{display:grid;grid-template-columns:1fr 1fr;gap:0 90px;margin:0 60px}
+.fork .top{grid-column:1/-1;text-align:center;padding-bottom:14px;margin-bottom:16px;border-bottom:4px solid var(--line)}
+.fork .lw{font-family:var(--serif);font-size:84px;line-height:1}
+.fork .lw b{color:var(--verb);font-weight:inherit}
+.fork .g{display:block;font-family:var(--serif);font-style:italic;font-size:34px;color:var(--soft);margin-top:4px}
+.fork .g b{font-style:normal;color:var(--verb);font-weight:inherit}
+.fork h3{font-family:var(--serif);font-weight:500;font-size:40px;margin:0 0 8px}
+.fork h3 small{font-family:var(--serif);font-size:36px;color:var(--soft);font-weight:400;margin-left:14px}
+.fork p{font-family:var(--serif);font-size:44px;line-height:1.05;margin:0 0 12px;padding-left:34px;position:relative}
+.fork p::before{content:"↓";position:absolute;left:0;top:2px;font-size:30px;color:var(--soft)}
+.fork p small{display:block;font-family:var(--sans);font-size:23px;color:var(--soft);margin-top:4px}
+.roads3{display:grid;grid-template-columns:repeat(3,1fr);gap:0 46px;margin-top:4px}
+.roads3 > div{border-top:4px solid var(--line);padding-top:16px;display:grid;gap:12px;align-content:start}
+.roads3 h3{font-family:var(--serif);font-weight:500;font-size:46px;margin:0 0 4px}
+.roads3 h3 small{display:block;font-family:var(--sans);font-size:22px;color:var(--soft);font-weight:400;margin-top:4px}
+.roads3 .tw2{font-size:44px;line-height:1.1}
+.roads3 .tw2 b{color:var(--verb);font-weight:500}
+.chain{display:grid;gap:22px;margin-top:6px}
+.chain p{margin:0;font-size:72px;line-height:1}
+.chain p small{font-family:var(--serif);font-style:italic;font-size:36px;color:var(--soft);margin-left:24px}
+.fam6{display:grid;grid-template-columns:repeat(3,1fr);gap:34px 50px;align-items:end;margin-top:10px}
+.syl{display:flex;gap:16px;font-size:96px;line-height:1.1;margin:0 0 10px}
+.syl span{color:var(--soft)}
+.syl .hit{color:var(--verb);font-weight:500}
+.syl .dot{color:var(--line)}
+.blanks{list-style:none;margin:0;padding:0;display:grid;gap:34px;font-size:52px}
+.blanks .gap{display:inline-block;min-width:330px;border-bottom:3px solid var(--soft);text-align:center;margin:0 10px}
+.blanks .ans{font-family:var(--serif);font-style:italic;color:var(--verb)}
+/* parts joining: the tiles, what each means, then they close up, then the word */
+.pieces{display:flex;align-items:flex-start;gap:26px;padding-bottom:72px;transition:gap .6s ease}
+.pc{position:relative;display:block}
+.pc b{display:inline-block;font-weight:500;font-size:110px;line-height:1;padding:10px 26px 18px;border:2px solid var(--line);border-radius:22px;background:var(--panel);transition:border-color .6s ease,background .6s ease,padding .6s ease,border-radius .6s ease}
+.pc em{position:absolute;top:calc(100% + 16px);left:-240px;right:-240px;text-align:center;white-space:nowrap;font-family:var(--serif);font-size:36px;color:var(--soft)}
+.trig.in ~ .pieces .pc em{opacity:0}   /* the parts have joined: their meanings come back in the line read from the end */
+.plus{font-size:80px;line-height:1;color:var(--soft);padding-top:20px;max-width:80px;overflow:hidden;transition:max-width .6s ease,opacity .4s ease}
+.trig{display:none}
+.trig.in ~ .pieces{gap:0}
+.trig.in ~ .pieces .plus{max-width:0;opacity:0}
+.xx{display:inline-block;max-width:1.2em;overflow:hidden;vertical-align:bottom;color:var(--verb);transition:max-width .7s ease .2s,opacity .5s ease .2s}
+.trig.in ~ .pieces .xx{max-width:0;opacity:0}
+.trig.in ~ .pieces .pc b{border-color:transparent;background:transparent;padding-left:0;padding-right:0}
+.joined{margin-top:26px}
+/* the teacher's notes: a strip along the bottom, hidden until N or the Notes button */
+.tnote{position:absolute;left:132px;right:132px;bottom:76px;font-size:22px;line-height:1.45;color:var(--soft);border-top:1.5px solid var(--line);padding-top:14px;display:none}
+.tnote i{font-family:var(--serif)}
+.tnote a{color:var(--modal)}
+body.notes .tnote{display:block}
+body.notes .slide{padding-bottom:230px}
+/* builds: a click brings the next part in */
+[data-s]{opacity:0;transition:opacity .45s ease,transform .45s ease;transform:translateY(10px)}
+[data-s].in{opacity:1;transform:none}
+.trig[data-s]{opacity:1;transform:none}
+svg [data-s]{transform:none}
+@media (prefers-reduced-motion: reduce){[data-s],.pieces,.plus,.pc b{transition:none}}
+#controls{position:fixed;right:18px;bottom:16px;display:flex;gap:8px;opacity:0;transition:opacity .3s ease}
+body.awake #controls,#controls:focus-within{opacity:1}
+#controls a,#controls button{font:inherit;font-size:22px;min-width:44px;height:44px;padding:0 10px;display:grid;place-items:center;border:1px solid var(--line);border-radius:999px;background:var(--panel);color:var(--ink);text-decoration:none;cursor:pointer}
+#controls #notes{font-size:17px}
+#controls button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+#controls a:focus-visible,#controls button:focus-visible{outline:3px solid var(--modal);outline-offset:3px}
+</style>
+</head>
+<body data-slug="form">
+<div id="viewport"><div id="stage">
+<section class="slide mid" aria-label="Title">
+<p class="kicker">A word study &middot; <i>form</i></p>
+<h1 class="display">Form, inform, information</h1>
+<p class="subtitle">a shape, and the words built on it</p>
+<div class="pair"><svg class="mw" viewBox="0 0 364 248" style="height:120px" role="img" aria-label="form, marked"><g font-family="Lexend, system-ui, sans-serif" font-size="100.0" font-weight="400" text-anchor="middle"><text x="68.0" y="144.0" fill="var(--ink)">f</text><text x="144.0" y="144.0" fill="var(--verb)">o</text><text x="220.0" y="144.0" fill="var(--ink)">r</text><text x="296.0" y="144.0" fill="var(--ink)">m</text></g><line x1="118.3" y1="177.0" x2="245.7" y2="177.0" stroke="var(--verb)" stroke-width="5.0" stroke-linecap="round"/><circle cx="68.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="182.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="182.0" cy="200.0" r="7.2" fill="var(--verb)"/><circle cx="296.0" cy="200.0" r="7.2" fill="var(--ink)"/><path d="M57.3 229.0 Q182.0 249.0 306.7 229.0" fill="none" stroke="var(--modal)" stroke-width="4.6" stroke-linecap="round"/></svg><svg class="mw" viewBox="0 0 940 248" style="height:120px" role="img" aria-label="information, marked"><line x1="193.0" y1="49.0" x2="193.0" y2="190.0" stroke="var(--modal)" stroke-width="3.0" stroke-dasharray="5.7 5.7"/><line x1="519.0" y1="49.0" x2="519.0" y2="190.0" stroke="var(--modal)" stroke-width="3.0" stroke-dasharray="5.7 5.7"/><g font-family="Lexend, system-ui, sans-serif" font-size="100.0" font-weight="400" text-anchor="middle"><text x="68.0" y="144.0" fill="var(--verb)">i</text><text x="144.0" y="144.0" fill="var(--ink)">n</text><text x="242.0" y="144.0" fill="var(--ink)">f</text><text x="318.0" y="144.0" fill="var(--verb)">o</text><text x="394.0" y="144.0" fill="var(--ink)">r</text><text x="470.0" y="144.0" fill="var(--ink)">m</text><text x="568.0" y="144.0" fill="var(--verb)">a</text><text x="644.0" y="144.0" fill="var(--ink)">t</text><text x="720.0" y="144.0" fill="var(--verb)">i</text><text x="796.0" y="144.0" fill="var(--verb)">o</text><text x="872.0" y="144.0" fill="var(--ink)">n</text></g><path d="M42.3 46.5 Q68.0 66.5 93.7 46.5" fill="none" stroke="var(--verb)" stroke-width="5.0" stroke-linecap="round"/><line x1="292.3" y1="177.0" x2="419.7" y2="177.0" stroke="var(--verb)" stroke-width="5.0" stroke-linecap="round"/><line x1="540.1" y1="53.0" x2="595.9" y2="53.0" stroke="var(--verb)" stroke-width="5.0" stroke-linecap="round"/><line x1="618.3" y1="177.0" x2="745.7" y2="177.0" stroke="var(--subject)" stroke-width="5.0" stroke-linecap="round"/><path d="M720.0 47.0 C716.0 4.0 614.0 4.0 573.0 32.0" fill="none" stroke="var(--modal)" stroke-width="4.3" stroke-linecap="round"/><path d="M584.9 30.8 L573.0 32.0 L578.5 21.3" fill="none" stroke="var(--modal)" stroke-width="4.3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="68.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="68.0" cy="200.0" r="7.2" fill="var(--verb)"/><circle cx="144.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="242.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="356.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="356.0" cy="200.0" r="7.2" fill="var(--verb)"/><circle cx="470.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="568.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="568.0" cy="200.0" r="7.2" fill="var(--verb)"/><circle cx="682.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="682.0" cy="200.0" r="7.2" fill="var(--subject)"/><circle cx="796.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="796.0" cy="200.0" r="7.2" fill="var(--verb)"/><circle cx="872.0" cy="200.0" r="7.2" fill="var(--ink)"/><path d="M57.3 229.0 Q106.0 249.0 154.7 229.0" fill="none" stroke="var(--modal)" stroke-width="4.6" stroke-linecap="round"/><path d="M231.3 229.0 Q299.0 249.0 366.7 229.0" fill="none" stroke="var(--modal)" stroke-width="4.6" stroke-linecap="round"/><path d="M459.3 229.0 Q519.0 249.0 578.7 229.0" fill="none" stroke="var(--modal)" stroke-width="4.6" stroke-linecap="round"/><path d="M671.3 229.0 Q777.0 249.0 882.7 229.0" fill="none" stroke="var(--modal)" stroke-width="4.6" stroke-linecap="round"/></svg></div>
+<aside class="tnote" aria-label="Teacher&rsquo;s note">A word study for learners. Click, tap, or press the right arrow for each next piece; N shows and hides these notes. The page for teachers is <a href="../roots/form.html">form</a>, with its <a href="../lists/family-form.html">spelling list</a>, its matrix and its morpheme cards.</aside>
+</section>
+<section class="slide " aria-label="What do they share?" data-max="2">
+<h2 class="head">What do these words share?</h2>
+<div class="cloud"><span>uniform</span><span>information</span><span>informal</span><span>transform</span><span>formation</span><span>platform</span><span>reform</span><span>formal</span><span>informative</span></div>
+<p class="lede" data-s="1">Find the part they all have.</p>
+<p class="q" data-s="2">What could it mean in all of them?</p>
+<aside class="tnote" aria-label="Teacher&rsquo;s note">Let the class find form, then guess a meaning that fits every word. A shape works for all of them, <i>information</i> included: a shape put into a mind.</aside>
+</section>
+<section class="slide " aria-label="Build inform" data-max="4">
+<h2 class="head">Build it</h2>
+<i class="trig" data-s="2"></i><div class="pieces"><span class="pc"><b>in</b><em data-s="1">into</em></span><span class="plus">+</span><span class="pc"><b>form</b><em data-s="1">a shape</em></span></div><div class="joined" data-s="3"><svg class="mw" viewBox="0 0 538 248" style="height:150px" role="img" aria-label="inform, marked"><line x1="193.0" y1="49.0" x2="193.0" y2="190.0" stroke="var(--modal)" stroke-width="3.0" stroke-dasharray="5.7 5.7"/><g font-family="Lexend, system-ui, sans-serif" font-size="100.0" font-weight="400" text-anchor="middle"><text x="68.0" y="144.0" fill="var(--verb)">i</text><text x="144.0" y="144.0" fill="var(--ink)">n</text><text x="242.0" y="144.0" fill="var(--ink)">f</text><text x="318.0" y="144.0" fill="var(--verb)">o</text><text x="394.0" y="144.0" fill="var(--ink)">r</text><text x="470.0" y="144.0" fill="var(--ink)">m</text></g><path d="M42.3 46.5 Q68.0 66.5 93.7 46.5" fill="none" stroke="var(--verb)" stroke-width="5.0" stroke-linecap="round"/><line x1="292.3" y1="177.0" x2="419.7" y2="177.0" stroke="var(--verb)" stroke-width="5.0" stroke-linecap="round"/><circle cx="68.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="68.0" cy="200.0" r="7.2" fill="var(--verb)"/><circle cx="144.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="242.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="356.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="356.0" cy="200.0" r="7.2" fill="var(--verb)"/><circle cx="470.0" cy="200.0" r="7.2" fill="var(--ink)"/><path d="M57.3 229.0 Q106.0 249.0 154.7 229.0" fill="none" stroke="var(--modal)" stroke-width="4.6" stroke-linecap="round"/><path d="M231.3 229.0 Q356.0 249.0 480.7 229.0" fill="none" stroke="var(--modal)" stroke-width="4.6" stroke-linecap="round"/></svg></div><p class="q end" data-s="4">From the end: a <b>shape</b> put <b>into</b> a mind. To inform is to tell.</p>
+<aside class="tnote" aria-label="Teacher&rsquo;s note">Word sum: in + form &rarr; <i>inform</i>. Latin <i>inf&omacr;rm&amacr;re</i> meant to give shape to, and was used for shaping a mind: to train, to tell. English took it through Old French <i>enformer</i> (Dictionary.com).</aside>
+</section>
+<section class="slide " aria-label="Build information" data-max="4">
+<h2 class="head">And the noun</h2>
+<i class="trig" data-s="2"></i><div class="pieces"><span class="pc"><b>in</b><em data-s="1">into</em></span><span class="plus">+</span><span class="pc"><b>form</b><em data-s="1">a shape</em></span><span class="plus">+</span><span class="pc"><b>ation</b><em data-s="1">the act of</em></span></div><div class="joined" data-s="3"><svg class="mw" viewBox="0 0 940 248" style="height:140px" role="img" aria-label="information, marked"><line x1="193.0" y1="49.0" x2="193.0" y2="190.0" stroke="var(--modal)" stroke-width="3.0" stroke-dasharray="5.7 5.7"/><line x1="519.0" y1="49.0" x2="519.0" y2="190.0" stroke="var(--modal)" stroke-width="3.0" stroke-dasharray="5.7 5.7"/><g font-family="Lexend, system-ui, sans-serif" font-size="100.0" font-weight="400" text-anchor="middle"><text x="68.0" y="144.0" fill="var(--verb)">i</text><text x="144.0" y="144.0" fill="var(--ink)">n</text><text x="242.0" y="144.0" fill="var(--ink)">f</text><text x="318.0" y="144.0" fill="var(--verb)">o</text><text x="394.0" y="144.0" fill="var(--ink)">r</text><text x="470.0" y="144.0" fill="var(--ink)">m</text><text x="568.0" y="144.0" fill="var(--verb)">a</text><text x="644.0" y="144.0" fill="var(--ink)">t</text><text x="720.0" y="144.0" fill="var(--verb)">i</text><text x="796.0" y="144.0" fill="var(--verb)">o</text><text x="872.0" y="144.0" fill="var(--ink)">n</text></g><path d="M42.3 46.5 Q68.0 66.5 93.7 46.5" fill="none" stroke="var(--verb)" stroke-width="5.0" stroke-linecap="round"/><line x1="292.3" y1="177.0" x2="419.7" y2="177.0" stroke="var(--verb)" stroke-width="5.0" stroke-linecap="round"/><line x1="540.1" y1="53.0" x2="595.9" y2="53.0" stroke="var(--verb)" stroke-width="5.0" stroke-linecap="round"/><line x1="618.3" y1="177.0" x2="745.7" y2="177.0" stroke="var(--subject)" stroke-width="5.0" stroke-linecap="round"/><path d="M720.0 47.0 C716.0 4.0 614.0 4.0 573.0 32.0" fill="none" stroke="var(--modal)" stroke-width="4.3" stroke-linecap="round"/><path d="M584.9 30.8 L573.0 32.0 L578.5 21.3" fill="none" stroke="var(--modal)" stroke-width="4.3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="68.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="68.0" cy="200.0" r="7.2" fill="var(--verb)"/><circle cx="144.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="242.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="356.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="356.0" cy="200.0" r="7.2" fill="var(--verb)"/><circle cx="470.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="568.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="568.0" cy="200.0" r="7.2" fill="var(--verb)"/><circle cx="682.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="682.0" cy="200.0" r="7.2" fill="var(--subject)"/><circle cx="796.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="796.0" cy="200.0" r="7.2" fill="var(--verb)"/><circle cx="872.0" cy="200.0" r="7.2" fill="var(--ink)"/><path d="M57.3 229.0 Q106.0 249.0 154.7 229.0" fill="none" stroke="var(--modal)" stroke-width="4.6" stroke-linecap="round"/><path d="M231.3 229.0 Q299.0 249.0 366.7 229.0" fill="none" stroke="var(--modal)" stroke-width="4.6" stroke-linecap="round"/><path d="M459.3 229.0 Q519.0 249.0 578.7 229.0" fill="none" stroke="var(--modal)" stroke-width="4.6" stroke-linecap="round"/><path d="M671.3 229.0 Q777.0 249.0 882.7 229.0" fill="none" stroke="var(--modal)" stroke-width="4.6" stroke-linecap="round"/></svg></div><p class="q end" data-s="4">From the end: <b>the act of</b> informing. Information is what informs you.</p>
+<aside class="tnote" aria-label="Teacher&rsquo;s note">Word sum: in + form + ation &rarr; <i>information</i>. The next slide asks why -ation is one part here.</aside>
+</section>
+<section class="slide " aria-label="Where is informate?" data-max="5">
+<h2 class="head">Where is <b class="r">informate</b>?</h2>
+<div class="ishas"><h3>an -ate verb inside</h3><h3>no -ate verb inside</h3>
+<p data-s="1">educate &rarr; educat<b>ion</b></p><p data-s="2">inform &rarr; inform<b>ation</b></p>
+<p data-s="1">create &rarr; creat<b>ion</b></p><p data-s="2">form &rarr; form<b>ation</b></p></div>
+<p class="lede" data-s="3">educate is a word: educat(e) + ion.</p>
+<p class="lede" data-s="4">informate isn&rsquo;t: in + form + ation.</p>
+<p class="q" data-s="5">No -ate verb? Write <b>-ation</b> as one part.</p>
+<aside class="tnote" aria-label="Teacher&rsquo;s note">Latin had <i>&emacr;duc&amacr;re</i> and <i>inf&omacr;rm&amacr;re</i>, verbs of the same class. English borrowed the past form <i>&emacr;duc&amacr;tus</i> as the verb <i>educate</i>, and took <i>inform</i> through French, so no <i>informate</i> came with it. English also uses -ation on its own verbs: <i>flirtation</i>, <i>starvation</i> (affixes.org). And <i>informate</i> exists now: Shoshana Zuboff coined it in 1988 for turning work into information. Ask the class what it could mean before you tell them.</aside>
+</section>
+<section class="slide " aria-label="The beat moves" data-max="5">
+<h2 class="head">Say them. The beat moves.</h2>
+<p class="syl" style="font-size:70px;margin:0 0 6px"><span class="hit">FORM</span></p><p class="syl" style="font-size:70px;margin:0 0 6px" data-s="1"><span class="hit">FOR</span><span class="dot">&middot;</span><span>mal</span></p><p class="syl" style="font-size:70px;margin:0 0 6px" data-s="2"><span>for</span><span class="dot">&middot;</span><span class="hit">MA</span><span class="dot">&middot;</span><span>tion</span></p><p class="syl" style="font-size:70px;margin:0 0 6px" data-s="3"><span>for</span><span class="dot">&middot;</span><span class="hit">MAL</span><span class="dot">&middot;</span><span>i</span><span class="dot">&middot;</span><span>ty</span></p>
+<p class="lede" data-s="4">When the beat leaves form, its or goes weak.</p>
+<p class="q" data-s="5">The sound changes. The spelling stays <b class="r">form</b>.</p>
+<aside class="tnote" aria-label="Teacher&rsquo;s note">-ation, -al with -ity, and most Latin endings move the main stress onto the syllable just before them. In <i>formation</i> the or of form is weak, close to the er of <i>her</i>. The spelling keeps form, so the word still shows its family.</aside>
+</section>
+<section class="slide " aria-label="Two in- prefixes" data-max="4">
+<h2 class="head">Two prefixes spelled <b class="r">in-</b></h2>
+<div class="ishas"><h3>in-: in, into</h3><h3>in-: not</h3>
+<div data-s="1"><svg class="mw" viewBox="0 0 538 248" style="height:110px" role="img" aria-label="inform, marked"><line x1="193.0" y1="49.0" x2="193.0" y2="190.0" stroke="var(--modal)" stroke-width="3.0" stroke-dasharray="5.7 5.7"/><g font-family="Lexend, system-ui, sans-serif" font-size="100.0" font-weight="400" text-anchor="middle"><text x="68.0" y="144.0" fill="var(--verb)">i</text><text x="144.0" y="144.0" fill="var(--ink)">n</text><text x="242.0" y="144.0" fill="var(--ink)">f</text><text x="318.0" y="144.0" fill="var(--verb)">o</text><text x="394.0" y="144.0" fill="var(--ink)">r</text><text x="470.0" y="144.0" fill="var(--ink)">m</text></g><path d="M42.3 46.5 Q68.0 66.5 93.7 46.5" fill="none" stroke="var(--verb)" stroke-width="5.0" stroke-linecap="round"/><line x1="292.3" y1="177.0" x2="419.7" y2="177.0" stroke="var(--verb)" stroke-width="5.0" stroke-linecap="round"/><circle cx="68.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="68.0" cy="200.0" r="7.2" fill="var(--verb)"/><circle cx="144.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="242.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="356.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="356.0" cy="200.0" r="7.2" fill="var(--verb)"/><circle cx="470.0" cy="200.0" r="7.2" fill="var(--ink)"/><path d="M57.3 229.0 Q106.0 249.0 154.7 229.0" fill="none" stroke="var(--modal)" stroke-width="4.6" stroke-linecap="round"/><path d="M231.3 229.0 Q356.0 249.0 480.7 229.0" fill="none" stroke="var(--modal)" stroke-width="4.6" stroke-linecap="round"/></svg></div><div data-s="2"><svg class="mw" viewBox="0 0 712 248" style="height:110px" role="img" aria-label="informal, marked"><line x1="193.0" y1="49.0" x2="193.0" y2="190.0" stroke="var(--modal)" stroke-width="3.0" stroke-dasharray="5.7 5.7"/><line x1="519.0" y1="49.0" x2="519.0" y2="190.0" stroke="var(--modal)" stroke-width="3.0" stroke-dasharray="5.7 5.7"/><g font-family="Lexend, system-ui, sans-serif" font-size="100.0" font-weight="400" text-anchor="middle"><text x="68.0" y="144.0" fill="var(--verb)">i</text><text x="144.0" y="144.0" fill="var(--ink)">n</text><text x="242.0" y="144.0" fill="var(--ink)">f</text><text x="318.0" y="144.0" fill="var(--verb)">o</text><text x="394.0" y="144.0" fill="var(--ink)">r</text><text x="470.0" y="144.0" fill="var(--ink)">m</text><text x="568.0" y="144.0" fill="var(--verb)">a</text><text x="644.0" y="144.0" fill="var(--ink)">l</text></g><path d="M42.3 46.5 Q68.0 66.5 93.7 46.5" fill="none" stroke="var(--verb)" stroke-width="5.0" stroke-linecap="round"/><line x1="292.3" y1="177.0" x2="419.7" y2="177.0" stroke="var(--verb)" stroke-width="5.0" stroke-linecap="round"/><circle cx="68.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="68.0" cy="200.0" r="7.2" fill="var(--verb)"/><circle cx="144.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="242.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="356.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="356.0" cy="200.0" r="7.2" fill="var(--verb)"/><circle cx="470.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="568.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="568.0" cy="200.0" r="7.2" fill="var(--verb)"/><circle cx="644.0" cy="200.0" r="7.2" fill="var(--ink)"/><path d="M57.3 229.0 Q106.0 249.0 154.7 229.0" fill="none" stroke="var(--modal)" stroke-width="4.6" stroke-linecap="round"/><path d="M231.3 229.0 Q299.0 249.0 366.7 229.0" fill="none" stroke="var(--modal)" stroke-width="4.6" stroke-linecap="round"/><path d="M459.3 229.0 Q557.0 249.0 654.7 229.0" fill="none" stroke="var(--modal)" stroke-width="4.6" stroke-linecap="round"/></svg></div></div>
+<p class="lede" data-s="3">inform: put a shape in. informal: not formal.</p>
+<p class="q" data-s="4">The meaning tells you which in- you have.</p>
+<aside class="tnote" aria-label="Teacher&rsquo;s note">Latin had two prefixes spelled in-: one meaning in or into (<i>inform</i>, <i>induce</i>), one meaning not (<i>informal</i>, <i>invisible</i>). English spells both in-. Ask learners to sort a few: <i>include</i>, <i>incorrect</i>, <i>insert</i>, <i>inactive</i>.</aside>
+</section>
+<section class="slide " aria-label="A part at the front" data-max="4">
+<h2 class="head">A part at the front</h2>
+<div class="fam ladder"><div data-s="1"><svg class="mw" viewBox="0 0 766 248" style="height:120px" role="img" aria-label="transform, marked"><line x1="421.0" y1="49.0" x2="421.0" y2="190.0" stroke="var(--modal)" stroke-width="3.0" stroke-dasharray="5.7 5.7"/><g font-family="Lexend, system-ui, sans-serif" font-size="100.0" font-weight="400" text-anchor="middle"><text x="68.0" y="144.0" fill="var(--ink)">t</text><text x="144.0" y="144.0" fill="var(--ink)">r</text><text x="220.0" y="144.0" fill="var(--verb)">a</text><text x="296.0" y="144.0" fill="var(--ink)">n</text><text x="372.0" y="144.0" fill="var(--ink)">s</text><text x="470.0" y="144.0" fill="var(--ink)">f</text><text x="546.0" y="144.0" fill="var(--verb)">o</text><text x="622.0" y="144.0" fill="var(--ink)">r</text><text x="698.0" y="144.0" fill="var(--ink)">m</text></g><path d="M194.3 46.5 Q220.0 66.5 245.7 46.5" fill="none" stroke="var(--verb)" stroke-width="5.0" stroke-linecap="round"/><line x1="520.3" y1="177.0" x2="647.7" y2="177.0" stroke="var(--verb)" stroke-width="5.0" stroke-linecap="round"/><circle cx="68.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="144.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="220.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="220.0" cy="200.0" r="7.2" fill="var(--verb)"/><circle cx="296.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="372.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="470.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="584.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="584.0" cy="200.0" r="7.2" fill="var(--verb)"/><circle cx="698.0" cy="200.0" r="7.2" fill="var(--ink)"/><path d="M57.3 229.0 Q220.0 249.0 382.7 229.0" fill="none" stroke="var(--modal)" stroke-width="4.6" stroke-linecap="round"/><path d="M459.3 229.0 Q584.0 249.0 708.7 229.0" fill="none" stroke="var(--modal)" stroke-width="4.6" stroke-linecap="round"/></svg><span class="g"><b>trans-</b>: across. Change the form completely.</span></div><div data-s="2"><svg class="mw" viewBox="0 0 614 248" style="height:120px" role="img" aria-label="uniform, marked"><line x1="269.0" y1="49.0" x2="269.0" y2="190.0" stroke="var(--modal)" stroke-width="3.0" stroke-dasharray="5.7 5.7"/><g font-family="Lexend, system-ui, sans-serif" font-size="100.0" font-weight="400" text-anchor="middle"><text x="68.0" y="144.0" fill="var(--verb)">u</text><text x="144.0" y="144.0" fill="var(--ink)">n</text><text x="220.0" y="144.0" fill="var(--verb)">i</text><text x="318.0" y="144.0" fill="var(--ink)">f</text><text x="394.0" y="144.0" fill="var(--verb)">o</text><text x="470.0" y="144.0" fill="var(--ink)">r</text><text x="546.0" y="144.0" fill="var(--ink)">m</text></g><line x1="40.1" y1="53.0" x2="95.9" y2="53.0" stroke="var(--verb)" stroke-width="5.0" stroke-linecap="round"/><path d="M194.3 46.5 Q220.0 66.5 245.7 46.5" fill="none" stroke="var(--verb)" stroke-width="5.0" stroke-linecap="round"/><line x1="368.3" y1="177.0" x2="495.7" y2="177.0" stroke="var(--verb)" stroke-width="5.0" stroke-linecap="round"/><circle cx="68.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="68.0" cy="200.0" r="7.2" fill="var(--verb)"/><circle cx="144.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="220.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="220.0" cy="200.0" r="7.2" fill="var(--verb)"/><circle cx="318.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="432.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="432.0" cy="200.0" r="7.2" fill="var(--verb)"/><circle cx="546.0" cy="200.0" r="7.2" fill="var(--ink)"/><path d="M47.3 229.0 Q68.0 249.0 88.7 229.0" fill="none" stroke="var(--modal)" stroke-width="4.6" stroke-linecap="round"/><path d="M133.3 229.0 Q182.0 249.0 230.7 229.0" fill="none" stroke="var(--modal)" stroke-width="4.6" stroke-linecap="round"/><path d="M307.3 229.0 Q432.0 249.0 556.7 229.0" fill="none" stroke="var(--modal)" stroke-width="4.6" stroke-linecap="round"/></svg><span class="g"><b>uni-</b>: one. One form for everyone.</span></div><div data-s="3"><svg class="mw" viewBox="0 0 538 248" style="height:120px" role="img" aria-label="reform, marked"><line x1="193.0" y1="49.0" x2="193.0" y2="190.0" stroke="var(--modal)" stroke-width="3.0" stroke-dasharray="5.7 5.7"/><g font-family="Lexend, system-ui, sans-serif" font-size="100.0" font-weight="400" text-anchor="middle"><text x="68.0" y="144.0" fill="var(--ink)">r</text><text x="144.0" y="144.0" fill="var(--verb)">e</text><text x="242.0" y="144.0" fill="var(--ink)">f</text><text x="318.0" y="144.0" fill="var(--verb)">o</text><text x="394.0" y="144.0" fill="var(--ink)">r</text><text x="470.0" y="144.0" fill="var(--ink)">m</text></g><line x1="116.1" y1="53.0" x2="171.9" y2="53.0" stroke="var(--verb)" stroke-width="5.0" stroke-linecap="round"/><line x1="292.3" y1="177.0" x2="419.7" y2="177.0" stroke="var(--verb)" stroke-width="5.0" stroke-linecap="round"/><circle cx="68.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="144.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="144.0" cy="200.0" r="7.2" fill="var(--verb)"/><circle cx="242.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="356.0" cy="200.0" r="7.2" fill="var(--ink)"/><circle cx="356.0" cy="200.0" r="7.2" fill="var(--verb)"/><circle cx="470.0" cy="200.0" r="7.2" fill="var(--ink)"/><path d="M57.3 229.0 Q106.0 249.0 154.7 229.0" fill="none" stroke="var(--modal)" stroke-width="4.6" stroke-linecap="round"/><path d="M231.3 229.0 Q356.0 249.0 480.7 229.0" fill="none" stroke="var(--modal)" stroke-width="4.6" stroke-linecap="round"/></svg><span class="g"><b>re-</b>: again. Shape it again, better.</span></div></div>
+<p class="q" data-s="4">Each prefix joins form with no change to either part.</p>
+<aside class="tnote" aria-label="Teacher&rsquo;s note">Word sums: trans + form, uni + form, re + form. <i>Platform</i> is plat + form: a flat form. Add the endings next: <i>transformation</i>, <i>uniformity</i>, <i>reformer</i>.</aside>
+</section>
+<section class="slide " aria-label="The form matrix" data-max="4">
+<h2 class="head">The <b class="r">form</b> matrix</h2>
+<div class="matrix">
+<div class="mbox" data-s="1"><span>mis</span><span>dis</span><span>un</span></div>
+<div class="mbox" data-s="1"><span>in</span><span>re</span><span>trans</span><span>con</span><span>de</span><span>uni</span></div>
+<div class="mbox mbase">form</div>
+<div class="mcols" data-s="2"><div class="mbox"><span>al</span><span>ation</span><span>ative</span><span>er</span><span>ity</span><span>s</span><span>ed</span><span>ing</span></div>
+<div class="mbox"><span>ity</span><span>ly</span><span>s</span></div></div>
+</div>
+<div class="paths" data-s="3"><span><b>mis + in + form + ation</b></span><span><b>un + in + form + ed</b></span><span><b>trans + form + ation</b></span><span><b>form + al + ity</b></span></div>
+<p class="q" data-s="4">Read across. Which paths make words?</p>
+<aside class="tnote" aria-label="Teacher&rsquo;s note">The word matrix is Melvyn Ramsden&rsquo;s (Real Spelling), brought into classrooms by Pete Bowers as structured word inquiry. Read left to right, skipping any box. Not every path is a word (<i>uni + in + form</i>): say it, use it, check it. The family page has this matrix to tap, with every form of every word.</aside>
+</section>
+<section class="slide " aria-label="Ukrainian" data-max="7">
+<h2 class="head">The same word in Ukrainian</h2>
+<div class="cog-slide"><div class="cog"><div class="cog-row" lang="en"><span class="cog-lab">English</span><span class="cg cg-pre" data-s="1">in</span><span class="cg cg-base" data-s="2">form</span><span class="cg cg-suf" data-s="3">ation</span><span class="cg cg-end cg-none" data-s="4"></span><span class="cog-say" data-s="5">/&#716;&#618;nf&#601;r&#712;me&#618;&#643;&#601;n/ <i lang="en">information</i></span></div><div class="cog-row" lang="uk"><span class="cog-lab">Ukrainian</span><span class="cg cg-pre" data-s="1">&#1110;&#1085;</span><span class="cg cg-base" data-s="2">&#1092;&#1086;&#1088;&#1084;</span><span class="cg cg-suf" data-s="3">&#1072;&#1094;&#1110;</span><span class="cg cg-end" data-s="4">&#1103;</span><span class="cog-say" data-s="5">[inf&#596;r&#712;mat&#865;s&#690;ij&#592;] <i lang="en">informatsiia</i></span></div><div class="cog-row cog-gls"><span class="cog-lab"></span><span class="cog-g" data-s="1">in, into</span><span class="cog-g" data-s="2">shape</span><span class="cog-g" data-s="3">the act of</span><span class="cog-g" data-s="4">an ending that changes with the sentence</span><span></span></div></div></div>
+<p class="lede" data-s="6">English ti spells /sh/. Ukrainian &#1094; spells /ts/.</p>
+<p class="q" data-s="7">Cognates: words in two languages with one origin.</p>
+<aside class="tnote" aria-label="Teacher&rsquo;s note">Both words come from Latin <i>inf&omacr;rm&amacr;ti&omacr;</i>. Each column comes in on a click: in and &#1110;&#1085;, form and &#1092;&#1086;&#1088;&#1084;, ation and &#1072;&#1094;&#1110;, then &#1103;. The &#1103; at the end changes with the word&rsquo;s job in a sentence; that&rsquo;s all learners need about it. Both stress the same syllable: in-for-MA-tion. Strictly the two are borrowings of one Latin word, which the site counts as cognates in the plain sense. Ask what is the same: the parts, in the same order. Learners who speak Ukrainian can say it for the class.</aside>
+</section>
+<section class="slide " aria-label="Your turn" data-max="5">
+<h2 class="head">Your turn</h2>
+<ol class="blanks" style="gap:26px;font-size:48px">
+<li>The map has <span class="gap"><span class="ans" data-s="1">information</span></span> about the park.</li>
+<li>Heat can <span class="gap"><span class="ans" data-s="2">transform</span></span> ice into water.</li>
+<li>The team has a blue <span class="gap"><span class="ans" data-s="3">uniform</span></span>.</li>
+<li>Jeans are fine: the dinner is <span class="gap"><span class="ans" data-s="4">informal</span></span>.</li>
+<li>The sign will <span class="gap"><span class="ans" data-s="5">inform</span></span> you of the rules.</li>
+</ol>
+<aside class="tnote" aria-label="Teacher&rsquo;s note">Say each sentence with the blank first, and let the class build the word before the click shows it. The <a href="../lists/family-form.html">spelling list</a> has more to build and use.</aside>
+</section>
+<section class="slide mid" aria-label="For teachers">
+<h2 class="head">For teachers</h2>
+<p class="lede">Word sums: in + form &rarr; <i>inform</i>; in + form + ation &rarr; <i>information</i>; form + ation; in + form + al; form + al + ity; trans + form + ation; uni + form; re + form + er; mis + in + form + ation; in + form + ative. Compare educat(e) + ion &rarr; <i>education</i>.</p>
+<p class="lede">-ation is written whole where English has no -ate verb (<a href="https://www.affixes.org/-ation.html">affixes.org</a>). <i>informate</i>: Shoshana Zuboff, 1988 (<a href="https://kaikki.org/dictionary/English/meaning/i/in/informate.html">Wiktionary</a>). The Ukrainian forms and pronunciation are Wiktionary&rsquo;s.</p>
+<p class="lede">The teacher&rsquo;s page is <a href="../roots/form.html">form</a>, with the matrix to tap, look-alikes (<i>perform</i>, <i>former</i>) and sources. To print: the <a href="../lists/family-form.html">form spelling list</a> and the <a href="../tents/form.html">form morpheme cards</a>.</p>
+
+</section>
+  <div class="progress" id="progress" aria-hidden="true"></div>
+  <div class="num" id="num" aria-live="polite"></div>
+</div>
+<div id="controls">
+  <a id="home" href="../studies.html" title="All word studies" aria-label="All word studies on legomorphics.ca" onclick="event.stopPropagation()">&#8962;</a>
+  <button id="notes" aria-pressed="false" title="Teacher&rsquo;s notes (N)">Notes</button>
+  <button id="prev" aria-label="Previous slide">&lsaquo;</button>
+  <button id="next" aria-label="Next slide">&rsaquo;</button>
+  <button id="full" aria-label="Full screen">&#10530;</button>
+</div>
+</div>
+<script>
+(function(){
+  var vp = document.getElementById("viewport"), stage = document.getElementById("stage");
+  var slides = [].slice.call(document.querySelectorAll(".slide")), N = slides.length, cur = 0, KEY = "study:" + document.body.dataset.slug;
+  var num = document.getElementById("num"), prog = document.getElementById("progress"), nb = document.getElementById("notes");
+  function fit(){ var s = Math.min(vp.clientWidth / 1600, vp.clientHeight / 900);
+    stage.style.transform = "translate(" + (vp.clientWidth - 1600 * s) / 2 + "px," + (vp.clientHeight - 900 * s) / 2 + "px) scale(" + s + ")"; }
+  window.addEventListener("resize", fit); fit();
+  function max(sl){ return parseInt(sl.getAttribute("data-max") || "0", 10); }
+  function step(sl, k){ sl._k = k; sl.querySelectorAll("[data-s]").forEach(function(el){
+    var on = parseInt(el.getAttribute("data-s"), 10) <= k;
+    if (el.classList.contains("in") !== on) el.classList.toggle("in", on); }); }
+  function show(n, back){
+    n = Math.max(0, Math.min(N - 1, n));
+    slides.forEach(function(sl, i){ var on = i === n; sl.classList.toggle("on", on); sl.setAttribute("aria-hidden", on ? "false" : "true"); });
+    cur = n; step(slides[n], back ? max(slides[n]) : 0);
+    num.textContent = (n + 1) + " / " + N; prog.style.width = ((n + 1) / N * 100) + "%";
+    try { history.replaceState(null, "", "#" + (n + 1)); } catch (e) {}
+    try { localStorage.setItem(KEY, String(n)); } catch (e) {}
+  }
+  function next(){ var sl = slides[cur]; if ((sl._k || 0) < max(sl)) { step(sl, (sl._k || 0) + 1); return; } if (cur < N - 1) show(cur + 1); }
+  function prev(){ var sl = slides[cur]; if ((sl._k || 0) > 0) { step(sl, sl._k - 1); return; } if (cur > 0) show(cur - 1, true); }
+  function full(){ try { if (!document.fullscreenElement) document.documentElement.requestFullscreen(); else document.exitFullscreen(); } catch (e) {} }
+  function notes(on){ document.body.classList.toggle("notes", on); nb.setAttribute("aria-pressed", String(on)); try { localStorage.setItem("study:notes", on ? "1" : ""); } catch (e) {} }
+  document.getElementById("prev").addEventListener("click", function(e){ e.stopPropagation(); prev(); });
+  document.getElementById("next").addEventListener("click", function(e){ e.stopPropagation(); next(); });
+  document.getElementById("full").addEventListener("click", function(e){ e.stopPropagation(); full(); });
+  nb.addEventListener("click", function(e){ e.stopPropagation(); notes(!document.body.classList.contains("notes")); });
+  document.addEventListener("keydown", function(e){
+    if (e.target && e.target.closest && e.target.closest("button,a") && (e.key === " " || e.key === "Enter")) return;
+    if (["ArrowRight", "ArrowDown", "PageDown", " "].indexOf(e.key) > -1){ e.preventDefault(); next(); }
+    else if (["ArrowLeft", "ArrowUp", "PageUp"].indexOf(e.key) > -1){ e.preventDefault(); prev(); }
+    else if (e.key === "Home") show(0); else if (e.key === "End") show(N - 1);
+    else if (e.key === "f" || e.key === "F") full();
+    else if (e.key === "n" || e.key === "N") notes(!document.body.classList.contains("notes"));
+  });
+  stage.addEventListener("click", function(e){ if (e.target.closest("a,button,.tnote")) return;
+    var r = stage.getBoundingClientRect(); if (e.clientX - r.left < r.width / 3) prev(); else next(); });
+  var tx = null, ty = null;
+  vp.addEventListener("touchstart", function(e){ tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, {passive: true});
+  vp.addEventListener("touchend", function(e){ if (tx === null) return; var dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty;
+    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) { if (dx < 0) next(); else prev(); } tx = null; }, {passive: true});
+  var idle; function wake(){ document.body.classList.add("awake"); clearTimeout(idle); idle = setTimeout(function(){ document.body.classList.remove("awake"); }, 2600); }
+  ["mousemove", "touchstart", "keydown"].forEach(function(ev){ document.addEventListener(ev, wake, {passive: true}); });
+  window.addEventListener("hashchange", function(){ var h = parseInt((location.hash || "").replace("#", ""), 10); if (h >= 1 && h <= N && h - 1 !== cur) show(h - 1); });
+  try { notes(localStorage.getItem("study:notes") === "1"); } catch (e) { notes(false); }
+  var h = parseInt((location.hash || "").replace("#", ""), 10), s0 = 0;
+  if (h >= 1 && h <= N) s0 = h - 1; else { try { var v = parseInt(localStorage.getItem(KEY), 10); if (v >= 0 && v < N) s0 = v; } catch (e) {} }
+  show(s0);
+})();
+</script>
+</body>
+</html>

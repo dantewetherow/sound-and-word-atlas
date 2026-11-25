@@ -70,6 +70,17 @@ STUDIES = [{
              "t that spells sh in <i>protection</i>. Then the e on <i>-ive</i>, a beat that stays on tect, <i>detect</i>, and "
              "the tect matrix.",
 }, {
+    "slug": "form",
+    "title": "Form, inform, information",
+    "sub": "a shape, and the words built on it",
+    "root": "form", "root_page": "roots/form.html", "list": "lists/family-form.html",
+    "words": ["form", "inform", "information", "formal", "informal", "formality", "formation", "transform", "uniform", "reform",
+              "informative", "misinformation"],
+    "blurb": "<i>Inform</i> is in + form: to put a shape into a mind. Learners build <i>information</i>, then ask where "
+             "<i>informate</i> went: <i>education</i> has <i>educate</i> inside it, and <i>information</i> has nothing "
+             "between form and -ation. Then the beat moves, two prefixes share the spelling in-, and the same parts turn up "
+             "in Ukrainian: &#1110;&#1085;&#1092;&#1086;&#1088;&#1084;&#1072;&#1094;&#1110;&#1103;.",
+}, {
     "slug": "phonesthemes",
     "title": "Glow, gleam, glitter",
     "sub": "sounds shared by words with related meanings",
@@ -220,6 +231,16 @@ body{background:var(--paper);color:var(--ink);font-family:var(--sans);overflow:h
 .tri p{font-size:46px}
 .ladder{grid-template-columns:1fr;gap:22px}
 .edgrid{gap:4px 50px}
+/* the cognate on a slide (25 November 2026) */
+.cog-slide .cog{display:grid;gap:12px;margin:0 0 14px}
+.cog-slide .cog-row{display:grid;grid-template-columns:240px repeat(4,auto) 1fr;align-items:center;gap:0 14px;justify-content:start}
+.cog-slide .cog-lab{font-size:30px;color:var(--soft)}
+.cog-slide .cg{display:inline-block;text-align:center;font-size:62px;line-height:1.1;padding:4px 20px;border:3px solid var(--kc);border-radius:14px;color:var(--kc)}
+.cog-slide .cg-pre{--kc:var(--modal)} .cog-slide .cg-base{--kc:var(--ink)} .cog-slide .cg-suf{--kc:var(--verb)} .cog-slide .cg-end{--kc:var(--soft);border-style:dashed}
+.cog-slide .cg-none{border-color:transparent}
+.cog-slide .cog-say{font-size:30px;color:var(--soft);padding-left:18px}
+.cog-slide .cog-say i{display:block;font-size:26px}
+.cog-slide .cog-g{font-size:24px;color:var(--soft);text-align:center;line-height:1.2;max-width:9em}
 .edgrid > div{min-height:96px}
 /* one word turning into the next (grow): stacked in one cell; a later word fading in fades the earlier ones out */
 .ovr{display:none}   /* weak and borrowed sounds stay hidden in the decks too, while they are checked (23 November 2026) */
@@ -1266,7 +1287,135 @@ def protect_deck_marked():
                                      "detection", "detector"])
 
 
-DECKS = {"per": per_deck_marked, "education": educ_deck, "leg": leg_deck, "sign": sign_deck, "phonesthemes": phon_deck_marked, "protect": protect_deck_marked}
+# ------------------------------------------------------------------ form: Form, inform, information (25 November 2026)
+def form_deck():
+    """For learners: form, the in- of inform, -ation written whole where there is no -ate verb (option 2), the beat moving,
+    the two in- prefixes, and information beside Ukrainian інформація."""
+    import cognate
+    D = Deck()
+    D.slide("Title", f"""<p class="kicker">A word study &middot; <i>form</i></p>
+<h1 class="display">Form, inform, information</h1>
+<p class="subtitle">a shape, and the words built on it</p>
+<div class="pair">{word("form", 120)}{word("information", 120)}</div>""",
+            "A word study for learners. Click, tap, or press the right arrow for each next piece; N shows and hides these notes. "
+            "The page for teachers is <a href=\"../roots/form.html\">form</a>, with its "
+            "<a href=\"../lists/family-form.html\">spelling list</a>, its matrix and its morpheme cards.", "mid")
+
+    sort = ["uniform", "information", "informal", "transform", "formation", "platform", "reform", "formal", "informative"]
+    D.slide("What do they share?", f"""<h2 class="head">What do these words share?</h2>
+<div class="cloud">{"".join(f"<span>{w}</span>" for w in sort)}</div>
+<p class="lede" data-s="1">Find the part they all have.</p>
+<p class="q" data-s="2">What could it mean in all of them?</p>""",
+            "Let the class find form, then guess a meaning that fits every word. A shape works for all of them, "
+            "<i>information</i> included: a shape put into a mind.", steps=2)
+
+    D.slide("Build inform", f"""<h2 class="head">Build it</h2>
+{join(["in", "form"], ["into", "a shape"], word("inform", 150), 1,
+      "From the end: a <b>shape</b> put <b>into</b> a mind. To inform is to tell.")}""",
+            "Word sum: in + form &rarr; <i>inform</i>. Latin <i>inf&omacr;rm&amacr;re</i> meant to give shape to, and was used "
+            "for shaping a mind: to train, to tell. English took it through Old French <i>enformer</i> (Dictionary.com).", steps=4)
+
+    D.slide("Build information", f"""<h2 class="head">And the noun</h2>
+{join(["in", "form", "ation"], ["into", "a shape", "the act of"], word("information", 140), 1,
+      "From the end: <b>the act of</b> informing. Information is what informs you.")}""",
+            "Word sum: in + form + ation &rarr; <i>information</i>. The next slide asks why -ation is one part here.", steps=4)
+
+    D.slide("Where is informate?", f"""<h2 class="head">Where is <b class="r">informate</b>?</h2>
+<div class="ishas"><h3>an -ate verb inside</h3><h3>no -ate verb inside</h3>
+<p data-s="1">educate &rarr; educat<b>ion</b></p><p data-s="2">inform &rarr; inform<b>ation</b></p>
+<p data-s="1">create &rarr; creat<b>ion</b></p><p data-s="2">form &rarr; form<b>ation</b></p></div>
+<p class="lede" data-s="3">educate is a word: educat(e) + ion.</p>
+<p class="lede" data-s="4">informate isn&rsquo;t: in + form + ation.</p>
+<p class="q" data-s="5">No -ate verb? Write <b>-ation</b> as one part.</p>""",
+            "Latin had <i>&emacr;duc&amacr;re</i> and <i>inf&omacr;rm&amacr;re</i>, verbs of the same class. English borrowed "
+            "the past form <i>&emacr;duc&amacr;tus</i> as the verb <i>educate</i>, and took <i>inform</i> through French, so "
+            "no <i>informate</i> came with it. English also uses -ation on its own verbs: <i>flirtation</i>, "
+            "<i>starvation</i> (affixes.org). And <i>informate</i> exists now: Shoshana Zuboff coined it in 1988 for turning "
+            "work into information. Ask the class what it could mean before you tell them.", steps=5)
+
+    syl = lambda parts, hit: ('<span class="dot">&middot;</span>'.join(f'<span class="hit">{p.upper()}</span>' if i == hit else f"<span>{p}</span>"
+                                                                      for i, p in enumerate(parts)))
+    beats = [(["form"], 0), (["for", "mal"], 0), (["for", "ma", "tion"], 1), (["for", "mal", "i", "ty"], 1)]
+    lines = "".join(f'<p class="syl" style="font-size:70px;margin:0 0 6px"{"" if k == 0 else f" data-s={chr(34)}{k}{chr(34)}"}>{syl(p, h)}</p>'
+                    for k, (p, h) in enumerate(beats))
+    D.slide("The beat moves", f"""<h2 class="head">Say them. The beat moves.</h2>
+{lines}
+<p class="lede" data-s="4">When the beat leaves form, its or goes weak.</p>
+<p class="q" data-s="5">The sound changes. The spelling stays <b class="r">form</b>.</p>""",
+            "-ation, -al with -ity, and most Latin endings move the main stress onto the syllable just before them. In "
+            "<i>formation</i> the or of form is weak, close to the er of <i>her</i>. The spelling keeps form, so the word "
+            "still shows its family.", steps=5)
+
+    D.slide("Two in- prefixes", f"""<h2 class="head">Two prefixes spelled <b class="r">in-</b></h2>
+<div class="ishas"><h3>in-: in, into</h3><h3>in-: not</h3>
+<div data-s="1">{word("inform", 110)}</div><div data-s="2">{word("informal", 110)}</div></div>
+<p class="lede" data-s="3">inform: put a shape in. informal: not formal.</p>
+<p class="q" data-s="4">The meaning tells you which in- you have.</p>""",
+            "Latin had two prefixes spelled in-: one meaning in or into (<i>inform</i>, <i>induce</i>), one meaning not "
+            "(<i>informal</i>, <i>invisible</i>). English spells both in-. Ask learners to sort a few: <i>include</i>, "
+            "<i>incorrect</i>, <i>insert</i>, <i>inactive</i>.", steps=4)
+
+    def ladder(head, rows, q, note):
+        cells = "".join(f'<div data-s="{k + 1}">{word(w, 120)}<span class="g">{g}</span></div>' for k, (w, g) in enumerate(rows))
+        D.slide(head, f"""<h2 class="head">{head}</h2>
+<div class="fam ladder">{cells}</div>
+<p class="q" data-s="{len(rows) + 1}">{q}</p>""", note, steps=len(rows) + 1)
+
+    ladder("A part at the front", [("transform", "<b>trans-</b>: across. Change the form completely."),
+                                   ("uniform", "<b>uni-</b>: one. One form for everyone."),
+                                   ("reform", "<b>re-</b>: again. Shape it again, better.")],
+           "Each prefix joins form with no change to either part.",
+           "Word sums: trans + form, uni + form, re + form. <i>Platform</i> is plat + form: a flat form. Add the endings next: "
+           "<i>transformation</i>, <i>uniformity</i>, <i>reformer</i>.")
+
+    D.slide("The form matrix", f"""<h2 class="head">The <b class="r">form</b> matrix</h2>
+<div class="matrix">
+<div class="mbox" data-s="1"><span>mis</span><span>dis</span><span>un</span></div>
+<div class="mbox" data-s="1"><span>in</span><span>re</span><span>trans</span><span>con</span><span>de</span><span>uni</span></div>
+<div class="mbox mbase">form</div>
+<div class="mcols" data-s="2"><div class="mbox"><span>al</span><span>ation</span><span>ative</span><span>er</span><span>ity</span><span>s</span><span>ed</span><span>ing</span></div>
+<div class="mbox"><span>ity</span><span>ly</span><span>s</span></div></div>
+</div>
+<div class="paths" data-s="3"><span><b>mis + in + form + ation</b></span><span><b>un + in + form + ed</b></span><span><b>trans + form + ation</b></span><span><b>form + al + ity</b></span></div>
+<p class="q" data-s="4">Read across. Which paths make words?</p>""",
+            "The word matrix is Melvyn Ramsden&rsquo;s (Real Spelling), brought into classrooms by Pete Bowers as structured word "
+            "inquiry. Read left to right, skipping any box. Not every path is a word (<i>uni + in + form</i>): say it, use "
+            "it, check it. The family page has this matrix to tap, with every form of every word.", steps=4)
+
+    D.slide("Ukrainian", f"""<h2 class="head">The same word in Ukrainian</h2>
+<div class="cog-slide">{cognate.block(steps=True)}</div>
+<p class="lede" data-s="6">English ti spells /sh/. Ukrainian &#1094; spells /ts/.</p>
+<p class="q" data-s="7">Cognates: words in two languages with one origin.</p>""",
+            "Both words come from Latin <i>inf&omacr;rm&amacr;ti&omacr;</i>. Each column comes in on a click: in and &#1110;&#1085;, "
+            "form and &#1092;&#1086;&#1088;&#1084;, ation and &#1072;&#1094;&#1110;, then &#1103;. The &#1103; at the end "
+            "changes with the word&rsquo;s job in a sentence; that&rsquo;s all learners need about it. Both stress the same "
+            "syllable: in-for-MA-tion. Strictly the two are borrowings of one Latin word, which the site counts as cognates "
+            "in the plain sense. Ask what is the same: the parts, in the same order. Learners who speak Ukrainian can say "
+            "it for the class.", steps=7)
+
+    D.slide("Your turn", f"""<h2 class="head">Your turn</h2>
+<ol class="blanks" style="gap:26px;font-size:48px">
+<li>The map has <span class="gap"><span class="ans" data-s="1">information</span></span> about the park.</li>
+<li>Heat can <span class="gap"><span class="ans" data-s="2">transform</span></span> ice into water.</li>
+<li>The team has a blue <span class="gap"><span class="ans" data-s="3">uniform</span></span>.</li>
+<li>Jeans are fine: the dinner is <span class="gap"><span class="ans" data-s="4">informal</span></span>.</li>
+<li>The sign will <span class="gap"><span class="ans" data-s="5">inform</span></span> you of the rules.</li>
+</ol>""",
+            "Say each sentence with the blank first, and let the class build the word before the click shows it. The "
+            "<a href=\"../lists/family-form.html\">spelling list</a> has more to build and use.", steps=5)
+
+    D.slide("For teachers", f"""<h2 class="head">For teachers</h2>
+<p class="lede">Word sums: in + form &rarr; <i>inform</i>; in + form + ation &rarr; <i>information</i>; form + ation; in + form + al; form + al + ity; trans + form + ation; uni + form; re + form + er; mis + in + form + ation; in + form + ative. Compare educat(e) + ion &rarr; <i>education</i>.</p>
+<p class="lede">-ation is written whole where English has no -ate verb (<a href="https://www.affixes.org/-ation.html">affixes.org</a>). <i>informate</i>: Shoshana Zuboff, 1988 (<a href="https://kaikki.org/dictionary/English/meaning/i/in/informate.html">Wiktionary</a>). The Ukrainian forms and pronunciation are Wiktionary&rsquo;s.</p>
+<p class="lede">The teacher&rsquo;s page is <a href="../roots/form.html">form</a>, with the matrix to tap, look-alikes (<i>perform</i>, <i>former</i>) and sources. To print: the <a href="../lists/family-form.html">form spelling list</a> and the <a href="../tents/form.html">form morpheme cards</a>.</p>""", cls="mid")
+    return D
+
+
+def form_deck_marked():
+    return with_codes(form_deck, ["form", "inform", "information", "informal", "transform", "uniform", "reform"])
+
+
+DECKS = {"per": per_deck_marked, "education": educ_deck, "leg": leg_deck, "sign": sign_deck, "phonesthemes": phon_deck_marked, "protect": protect_deck_marked, "form": form_deck_marked}
 
 
 def write(OUT, door_page):

@@ -485,4 +485,17 @@ L.append(F("steg", "<b>tect</b> means covered. <i>Protect</i> is to cover in fro
     ["Before a t, Latin&rsquo;s g became c: <i>tegere</i>, to cover, and <i>tectus</i>, covered. English borrowed the past form, so the part is tect.",
      "After /t/ or /d/, -ed is a syllable of its own: pro-tec-ted. -ive keeps its e before -ly and -ness: <i>protectively</i>, <i>protectiveness</i>."]))
 
+L.append(F("form", "<b>form</b> means a shape. <i>Inform</i> is to put a shape into a mind: to tell. Every word here keeps form, even where the beat moves off it.",
+    [("form", "Fill in the form."), ("inform", "The sign will inform you of the rules."), ("information", "The map has information about the park."),
+     ("formal", "The letter was formal."), ("informal", "The party was informal."), ("transform", "Heat can transform ice into water."),
+     ("uniform", "The team has a blue uniform."), ("reform", "The town will reform its rules."), ("platform", "The train stops at the platform."),
+     ("formation", "The geese flew in a V formation.")],
+    ("In <i>inform</i>, in- means into. In <i>informal</i>, in- means not.", ["inform", "informal"]),
+    ["in + form", "in + form + ation", "in + form + al", "trans + form", "uni + form", "form + al + ity"],
+    [("The map gives", "in + form + ation", "about the park."), ("Heat can", "trans + form", "ice into water."), ("The team has a blue", "uni + form", "."),
+     ("The party was", "in + form + al", ".")],
+    [("mis + in + form + ation", "misinformation"), ("re + form + er", "reformer"), ("con + form + ity", "conformity"), ("in + form + ative", "informative")],
+    ["English has no <i>informate</i>, so -ation is written whole: in + form + ation. <i>Education</i> keeps <i>educate</i> inside it: educat(e) + ion.",
+     "<i>Perform</i> and the adjective <i>former</i> look like form words and aren&rsquo;t: the family page explains."]))
+
 STEP_LISTS = L
