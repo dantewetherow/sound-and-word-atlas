@@ -45,6 +45,7 @@ PAGES = [
     ("index.html", None, "Home", "Legomorphic Notation and the three layers of the site."),
     ("progressions.html", "progressions", "Steps", "The legomorphic path through English spelling: the steps in their bands."),
     ("letters.html", "progressions", "Letters, names and sounds", "Before step 1: the alphabet in the song's units, as tiles to reveal, with a sound circle under each letter."),
+    ("teams.html", "progressions", "Letter teams", "The common digraphs and trigraphs in their colours, each with a key word, and a drill."),
     ("notations.html", "progressions", "The marks", "The marks of Legomorphic Notation, each drawn alone on one word."),
     ("walk.html", "walk", "Words", "Look up a word and walk through it, a move at a time, with its parts."),
     ("studies.html", "walk", "Word studies", "Presentations for learners: one family of words per deck, built a part at a time."),
@@ -304,13 +305,15 @@ def write(OUT, page, header, footer, X):
 <h2 id="route-h" class="t-only">The legomorphic path at a glance</h2>
 <p class="lead t-only">{X["route_lead"]} Open a step to see its words marked, the marks it brings in, and the pages in Carney's survey that back it.</p>
 <p class="sub t-only">Each word is shown with its letters in colour: red for vowel letters, green for <em>sh</em>, <em>th</em> and <em>ch</em>, black for the rest.</p>
-<div class="door-tiles route-tiles"><a class="dtile" href="letters.html"><b>Before step 1: letters</b><span class="t-only">Letters, names and sounds: the alphabet in the song&rsquo;s units, with a sound circle under each letter.</span></a><a class="dtile" href="notations.html"><b>The marks</b><span class="t-only">The twelve marks, each drawn alone on one word.</span></a></div>
+<div class="door-tiles route-tiles"><a class="dtile" href="letters.html"><b>Before step 1: letters</b><span class="t-only">Letters, names and sounds: the alphabet in the song&rsquo;s units, with a sound circle under each letter.</span></a><a class="dtile" href="teams.html"><b>Letter teams</b><span class="t-only">The common digraphs and trigraphs in their colours, each with a key word, and a drill.</span></a><a class="dtile" href="notations.html"><b>The marks</b><span class="t-only">The twelve marks, each drawn alone on one word.</span></a></div>
 {X["bands_html"]}
 {uc(X["draft_note"])}
 </div></section>""")
 
     import letters                                        # the alphabet before step 1 (13 November 2026)
     letters.write(door_page, door_head)
+    import teams                                          # digraphs and trigraphs, with a drill (24 November 2026)
+    X["team_words"] = teams.write(door_page, X)
 
     # Notations: the legend, moved from the home page.
     note_word = X["svg_of"]("notation", 58, label="notation, marked")
