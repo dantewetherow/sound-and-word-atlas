@@ -1251,6 +1251,126 @@ SIGN = {
 ROOTS = [LEG, HAP, DEUK, SEM, MED, LEUK, PER, SIGN]
 
 
+# ------------------------------------------------------------------ *(s)teg-: protect (24 November 2026)
+# Dante asked for a family around protect, built for intermediate readers and spellers: every affix on tect, and what each
+# does to the sound. The root and its other roads (thatch, deck, tile, toga, stegosaurus) are here on the teacher's page; the
+# word study (studies.py) stays with tect. Sources: the Indo-European Lexicon, (s)teg- (after Pokorny), and Etymonline's entry
+# for the root; Allen and Greenough §15 for g before t becoming c in Latin.
+STEG_ROADS = [
+    ("Latin <i>tegere</i>, <i>tectus</i>", "to cover; covered", [("tect", "tect")]),
+    ("Latin <i>t&#x0113;gula</i>, <i>toga</i>", "a roof tile; a covering, the Roman robe", [("teg", "tile, toga")]),
+    ("Greek <i>stegos</i>", "a roof", [("steg", "steg")]),
+    ("Old English <i>&thorn;eccan</i>; Middle Dutch <i>dec</i>", "to cover; a roof, a covering", [("thatch", "thatch, deck")]),
+]
+STEG_CLUSTERS = [
+    {"key": "tect", "label": "tect", "spells": ["tect"], "head": "covered",
+     "road": "Latin <i>tectus</i>, covered, the past form of <i>tegere</i>: with <i>pro-</i>, covered in front; with <i>de-</i>, uncovered",
+     "note": "Every word here keeps tect, and the stress stays on it. What changes is the sound around the t. It is said in "
+             "<i>protect</i>, spells sh with the i of <i>-ion</i>, and takes an extra beat before <i>-ed</i>.",
+     "groups": [
+         [("protect", ["pro-", "tect"], "cover in front: keep safe"), ("protects", ["pro-", "tect", "-s"], "keeps safe"),
+          ("protected", ["pro-", "tect", "-ed"], "kept safe"), ("protecting", ["pro-", "tect", "-ing"], "keeping safe")],
+         [("protection", ["pro-", "tect", "-ion"], "the act of keeping safe; what keeps you safe"),
+          ("protective", ["pro-", "tect", "-ive"], "that protects, or wants to"),
+          ("protector", ["pro-", "tect", "-or"], "one who protects; a thing that protects"),
+          ("protectors", ["pro-", "tect", "-or", "-s"], "more than one protector")],
+         [("protectively", ["pro-", "tect", "-ive", "-ly"], "in a way that protects"),
+          ("protectiveness", ["pro-", "tect", "-ive", "-ness"], "the state of being protective")],
+         [("unprotected", ["un-", "pro-", "tect", "-ed"], "not protected"),
+          ("overprotective", ["over-", "pro-", "tect", "-ive"], "protective, too much")],
+         [("detect", ["de-", "tect"], "take the cover off: find out"), ("detected", ["de-", "tect", "-ed"], "found out"),
+          ("detection", ["de-", "tect", "-ion"], "the finding out"), ("detective", ["de-", "tect", "-ive"], "one whose job is finding out"),
+          ("detector", ["de-", "tect", "-or"], "a thing that finds: a smoke detector"),
+          ("undetected", ["un-", "de-", "tect", "-ed"], "not found out")],
+     ]},
+    {"key": "teg", "label": "tile, toga", "spells": ["til", "tog"], "head": "a covering",
+     "road": "Latin <i>t&#x0113;gula</i>, a roof tile, through Old English <i>tigele</i>; Latin <i>toga</i>, a covering",
+     "note": "A tile covers a roof, and a toga covers a Roman. Neither shows tect, and neither is built with a prefix.",
+     "groups": [[("tile", None, "a flat piece of baked clay, first for covering a roof", "til"),
+                 ("toga", None, "the robe a Roman citizen wore", "tog")]]},
+    {"key": "steg", "label": "steg", "spells": ["steg"], "head": "a roof",
+     "road": "Greek <i>stegos</i>, a roof, the root with its s",
+     "groups": [[("stegosaurus", None, "roofed lizard: a dinosaur named for the plates along its back", "steg")]]},
+    {"key": "thatch", "label": "thatch, deck", "spells": ["thatch", "deck"], "head": "a cover, a roof",
+     "road": "Old English <i>&thorn;eccan</i>, to cover, and Middle Dutch <i>dec</i>, a roof: the root by its Germanic road, where g became k",
+     "groups": [[("thatch", None, "a roof of straw or reeds", "thatch"), ("deck", None, "the floor that covers a ship; any flat platform", "deck")]]},
+]
+PARTS.update({
+    "over-": "too much (<i>overprotective</i>); or above, across (<i>overhead</i>): Old English",
+})
+ROOT_PARTS.update({
+    "tect": "covered: Latin <i>tectus</i>, the past form of <i>tegere</i>, to cover",
+    "til": "a roof tile: Latin <i>t&#x0113;gula</i>",
+    "tog": "a covering: Latin <i>toga</i>",
+    "steg": "a roof: Greek <i>stegos</i>",
+    "thatch": "a cover, a roof: Old English <i>&thorn;eccan</i>, to cover",
+    "deck": "a roof, a covering: Middle Dutch <i>dec</i>",
+})
+STEG = {
+    "slug": "steg", "root": "*(s)teg-", "gloss": "to cover", "kind": "a root family: a word study",
+    "h1_s": "*(s)teg- means &lsquo;to cover&rsquo;",
+    "lead": "To cover, often with a roof. Latin made <i>tegere</i>, to cover, and its past form <i>tectus</i>, covered. English borrowed "
+            "<i>protect</i>, to cover in front, and <i>detect</i>, to take the cover off. It builds on them with almost every common "
+            "affix: <i>protection</i>, <i>protective</i>, <i>protector</i>, <i>unprotected</i>, <i>overprotective</i>, "
+            "<i>detective</i>. The part stays tect throughout; the sounds around it change.",
+    "drawn": ("protection", "protection, marked: pro + tect + ion, with the t and the i of -ion spelling sh"),
+    "sources": [("Indo-European Lexicon, (s)teg- 1, after Pokorny", "https://lrc.la.utexas.edu/lex/master/1879"),
+                ("Etymonline, <i>*(s)teg-</i>", "https://www.etymonline.com/word/*(s)teg-"),
+                ("Allen and Greenough&rsquo;s <i>New Latin Grammar</i>, &sect;15.10: g before t became c (Dickinson College Commentaries)", "https://dcc.dickinson.edu/grammar/latin/phonetic-changes"),
+                ("Latin <i>teg&#x014D;, tegere, t&#x0113;x&#x012B;, t&#x0113;ctus</i>: cover, protect (latindictionary.io)", "https://www.latindictionary.io/entry/36930")],
+    "roads": STEG_ROADS, "clusters": STEG_CLUSTERS, "parts": PARTS, "root_parts": ROOT_PARTS,
+    "extra": [
+        ("teg", "teg and tect: g becomes c before t",
+         ["Latin&rsquo;s verb was <i>tegere</i>, to cover, with a g. Its past form was <i>tectus</i>, covered, with a c. Before the "
+          "t of the past form, a g became c. The two sounds, g and /k/, are made in the same place; /k/ is g without the voice. "
+          "Allen and Greenough give the rule: g before t became c (&sect;15.10).",
+          "The same change is in other families on this site. Latin <i>legere</i>, to gather, has the past form <i>lectus</i>: "
+          "<i>legend</i> beside <i>collect</i>. Latin <i>regere</i>, to rule or guide, has <i>rectus</i>: <i>regal</i> beside "
+          "<i>direct</i>. English borrowed the past forms, so the words built on them spell tect, lect and rect."],
+         [("protect", "pro + tect: covered in front"), ("detect", "de + tect: the cover taken off"), ("collect", "col + lect: the same change in *leg-")]),
+        ("sound", "One part, and the sounds around it",
+         ["The spelling of tect never changes in this family. Three sounds next to it do.",
+          "<b>The t before -ion.</b> In <i>protect</i> the t is said. In <i>protection</i> it joins the i of <i>-ion</i>, and ti "
+          "spells sh. The spelling keeps the t, so <i>protection</i> still shows <i>protect</i>.",
+          "<b>The -ed after a t.</b> -ed spells /t/ in <i>jumped</i> and /d/ in <i>played</i>. After a t or a d it adds a beat: "
+          "pro-tec-ted, de-tec-ted.",
+          "<b>The e of -ive.</b> English words don&rsquo;t end in v, so -ive has an e that isn&rsquo;t said and doesn&rsquo;t make "
+          "the i long. The e stays before <i>-ly</i> and <i>-ness</i>, which start with a consonant: <i>protectively</i>, "
+          "<i>protectiveness</i>."],
+         [("protect", "the t said"), ("protection", "ti spells sh"), ("protected", "-ed adds a beat"), ("protective", "the e of -ive, silent")]),
+        ("beat", "The beat stays on tect",
+         ["Say them: pro-TECT, pro-TEC-tion, pro-TEC-tive, pro-TEC-tor, un-pro-TEC-ted, o-ver-pro-TEC-tive. The main stress "
+          "doesn&rsquo;t move. Endings like <i>-ion</i> and <i>-ive</i> put the stress on the syllable just before them, and "
+          "in this family that syllable is already tect.",
+          "Compare <i>experiment</i> and <i>experimental</i> on the <a href=\"per.html\">*per- page</a>, where the beat moves and "
+          "the vowels change. Here the vowels hold, so the family is a good first one for affixes. Learners can add part after "
+          "part and hear the base stay put.",
+          "The o of <i>pro-</i> is weak in all of them, close to the a of <i>about</i>. To hear it, say a word where "
+          "<i>pro-</i> has the stress: <i>prologue</i>, <i>program</i>."], []),
+        ("speller", "For the speller",
+         ["<b>-tion, not -shun.</b> The t belongs to tect: tect + ion. The same is true of <i>act</i>, <i>action</i> and "
+          "<i>collect</i>, <i>collection</i>.",
+          "<b>-or, not -er.</b> <i>Protector</i> and <i>detector</i> take Latin&rsquo;s <i>-or</i>, as <i>actor</i>, "
+          "<i>collector</i> and <i>conductor</i> do. It sounds like -er; the spelling marks a Latin word.",
+          "<b>One word.</b> <i>Overprotective</i> and <i>unprotected</i> are each one word: a prefix joins the base with no "
+          "hyphen and no change to either part."], []),
+    ],
+    "students": ["protect", "protection", "protective", "protector", "unprotected", "detect"],
+    "s_lead": "These words are built on <b>tect</b>. It means <i>covered</i>.",
+    "s_pair": [("protect", "Cover in front: keep safe."), ("detect", "Take the cover off: find out.")],
+    "s_paras": ["Say them: pro-<b>tect</b>, pro-<b>tec</b>-tion, pro-<b>tec</b>-tive.",
+                "The beat stays on <b>tect</b> every time.",
+                "In <b>protection</b>, the t and the i spell /sh/. The t stays in the spelling.",
+                "<b>protect</b> + <b>ed</b> has an extra beat: pro-tec-ted.",
+                "A <b>detective</b> takes the cover off: finds out what was covered up."],
+    "uc": "the family follows the Indo-European Lexicon, (s)teg-, and Etymonline&rsquo;s entry for the root, read on 24 November "
+          "2026. Next: <i>integument</i>, and more words with <i>de-</i>.",
+    "label": "Root family: *(s)teg-",
+    "desc": "A word study of protect: the root *(s)teg-, to cover, and the family built on tect (protection, protective, protector, unprotected, overprotective, detect, detective), with what each affix does to the sound.",
+}
+ROOTS = [LEG, HAP, DEUK, SEM, MED, LEUK, PER, SIGN, STEG]
+
+
 def bold_root(word, spelling):
     i = word.find(spelling)
     return html.escape(word) if i < 0 else html.escape(word[:i]) + "<b>" + html.escape(spelling) + "</b>" + html.escape(word[i + len(spelling):])
@@ -1284,7 +1404,8 @@ def clusters_html(R):
         for p in parts or []:
             carriers.setdefault(part_key(p), [])
             if w not in carriers[part_key(p)]: carriers[part_key(p)].append(w)
-    meaning = lambda k: R["parts"].get(k) or R["root_parts"].get(k)
+    import parts as PT                                                 # common affixes (un-, -ly, -ness) are glossed once, in parts.MEANS
+    meaning = lambda k: R["parts"].get(k) or R["root_parts"].get(k) or PT.MEANS.get(k)
     missing = [k for k in carriers if not meaning(k)]
     assert not missing, f"parts with no meaning: {missing}"
 

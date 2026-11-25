@@ -66,6 +66,16 @@ body{background:var(--paper);color:var(--ink);font-family:var(--sans);overflow:h
 .tri{grid-template-columns:repeat(3,1fr);gap:10px 50px}
 .tri p{font-size:46px}
 .ladder{grid-template-columns:1fr;gap:22px}
+/* one word turning into the next (grow): stacked in one cell; a later word fading in fades the earlier ones out */
+.ovr{display:none}   /* weak and borrowed sounds stay hidden in the decks too, while they are checked (23 November 2026) */
+.grow{display:grid;justify-items:start;margin-top:6px}
+.grow > *{grid-area:1/1;transition:opacity .5s ease}
+.grow > .gw:has(~ .in),.grow > .gc:has(~ .in){opacity:0}
+.gcaps{margin-top:18px}
+.gcaps .gc{font-family:var(--serif);font-style:italic;font-size:42px;color:var(--soft)}
+.gcaps .gc b{font-style:normal;color:var(--verb);font-weight:500}
+.cloud{display:flex;flex-wrap:wrap;gap:26px 56px;font-size:60px;line-height:1.1;max-width:1300px;margin-top:6px}
+.cloud span:nth-child(3n+2){transform:translateY(18px)}
 .duo{display:flex;gap:120px;align-items:flex-end;margin-top:40px}
 .duo figure{margin:0;display:grid;justify-items:start;gap:14px}
 .duo figcaption{font-family:var(--serif);font-style:italic;font-size:38px;color:var(--soft)}

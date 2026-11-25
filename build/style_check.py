@@ -129,7 +129,8 @@ def run(OUT, paths=None):
 CLEAN = ["studies/phonesthemes.html", "lists/phonesthemes.html",   # reviewed against the reference, 22 November 2026
          "studies/per.html", "studies/education.html", "studies/leg.html", "studies/sign.html", "studies.html", "about.html",
          "roots/deuk.html", "roots/hap.html", "roots/leg.html", "roots/leuk.html", "roots/med.html", "roots/per.html",
-         "roots/sem.html", "roots/sign.html", "surprising.html"]   # surprising.html: written to the reference, 23 November 2026
+         "roots/sem.html", "roots/sign.html", "surprising.html",
+         "roots/steg.html", "studies/protect.html", "lists/family-steg.html"]   # the protect family and study, 24 November 2026   # surprising.html: written to the reference, 23 November 2026
 
 
 if __name__ == "__main__":

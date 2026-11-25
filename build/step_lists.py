@@ -472,4 +472,17 @@ L.append(F("sign", "<b>sign</b> means a mark. Its g is quiet in <i>sign</i>, <i>
     ["<i>Assign</i> has two s&rsquo;s because the prefix <i>ad-</i> became <i>as-</i> before the s of sign. Each part brings its own.",
      "<i>Seal</i> is a cousin that lost its g: Latin <i>sigillum</i>, a little sign, through French <i>seel</i>."]))
 
+L.append(F("steg", "<b>tect</b> means covered. <i>Protect</i> is to cover in front; <i>detect</i>, to take the cover off. Every ending and prefix joins tect without changing it; what changes is the sound around the t.",
+    [("protect", "A fence can protect the garden."), ("protection", "The roof gives protection from the rain."), ("protective", "The lab has protective glasses."),
+     ("protector", "A screen protector keeps the glass safe."), ("protected", "The seeds are protected from the frost."), ("unprotected", "The plants were left unprotected."),
+     ("overprotective", "The rule felt overprotective."), ("detect", "Can you detect the smell of smoke?"), ("detective", "The case was solved by a detective."),
+     ("detector", "The smoke detector beeped.")],
+    ("The t is said in <i>protect</i>. In <i>protection</i> it joins the i of -ion, and ti spells sh.", ["protect", "protection"]),
+    ["pro + tect + ion", "pro + tect + ive", "pro + tect + or", "un + pro + tect + ed", "de + tect + ive", "pro + tect + ive + ly"],
+    [("The fence gives", "pro + tect + ion", "from the wind."), ("The smoke", "de + tect + or", "beeped."), ("The seeds were left", "un + pro + tect + ed", "."),
+     ("The case was solved by a", "de + tect + ive", ".")],
+    [("over + pro + tect + ive", "overprotective"), ("pro + tect + ive + ness", "protectiveness"), ("de + tect + ion", "detection"), ("un + de + tect + ed", "undetected")],
+    ["Before a t, Latin&rsquo;s g became c: <i>tegere</i>, to cover, and <i>tectus</i>, covered. English borrowed the past form, so the part is tect.",
+     "-ed adds a beat after a t: pro-tec-ted. -ive keeps its e before -ly and -ness: <i>protectively</i>, <i>protectiveness</i>."]))
+
 STEP_LISTS = L

@@ -59,6 +59,17 @@ STUDIES = [{
              "and <i>signify</i> sound it, and the spelling keeps the same part in all of them. Then: how the silent g makes the i "
              "long, <i>design</i> as marking out, and the sign matrix. Last, <i>seal</i>: a sign that lost its g.",
 }, {
+    "slug": "protect",
+    "title": "Protect, part by part",
+    "sub": "tect and every affix built on it",
+    "root": "*(s)teg-", "root_page": "roots/steg.html", "list": "lists/family-steg.html",
+    "words": ["protect", "protects", "protected", "protecting", "protection", "protective", "protectively", "protectiveness",
+              "protector", "unprotected", "overprotective", "detect", "detective", "detection", "detector", "undetected"],
+    "blurb": "<i>Protect</i> is pro + tect: covered in front. Learners sort the family, build it a part at a time, and watch each "
+             "word turn into the next. On the way they meet Latin&rsquo;s g turning to c, the three sounds of <i>-ed</i>, and the "
+             "t that spells sh in <i>protection</i>. Then the e on <i>-ive</i>, a beat that stays on tect, <i>detect</i>, and "
+             "the tect matrix.",
+}, {
     "slug": "phonesthemes",
     "title": "Glow, gleam, glitter",
     "sub": "sounds shared by words with related meanings",
@@ -131,6 +142,20 @@ def join(parts, meanings, word_svg, start, read_end=None):
     return out
 
 
+
+def grow(words, caps, h, start):
+    """One word turns into the next in place (24 November 2026). Each click fades in the next word, drawn at the same
+    scale and from the same left edge, so the letters the words share stay still and only the new part and its marks
+    change. caps: a line under each word. Uses start, start+1, ... for words 2, 3, ..."""
+    drawn = [LW.svg_word(w, 100.0, 0.0, cls=False) for w in words]
+    W, H = max(d[1] for d in drawn), max(d[2] for d in drawn)
+    ds = lambda k: f' data-s="{start + k - 1}"' if k else ""
+    svgs = "".join(f'<svg class="mw gw"{ds(k)} viewBox="0 0 {W:.0f} {H:.0f}" style="height:{h}px" role="img" '
+                   f'aria-label="{html.escape(w)}, marked">{g}</svg>' for k, (w, (g, _, _)) in enumerate(zip(words, drawn)))
+    lines = "".join(f'<span class="gc"{ds(k)}>{c}</span>' for k, c in enumerate(caps))
+    return f'<div class="grow">{svgs}</div><div class="grow gcaps">{lines}</div>'
+
+
 FONTS = """<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&family=Lexend:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -194,6 +219,16 @@ body{background:var(--paper);color:var(--ink);font-family:var(--sans);overflow:h
 .tri{grid-template-columns:repeat(3,1fr);gap:10px 50px}
 .tri p{font-size:46px}
 .ladder{grid-template-columns:1fr;gap:22px}
+/* one word turning into the next (grow): stacked in one cell; a later word fading in fades the earlier ones out */
+.ovr{display:none}   /* weak and borrowed sounds stay hidden in the decks too, while they are checked (23 November 2026) */
+.grow{display:grid;justify-items:start;margin-top:6px}
+.grow > *{grid-area:1/1;transition:opacity .5s ease}
+.grow > .gw:has(~ .in),.grow > .gc:has(~ .in){opacity:0}
+.gcaps{margin-top:18px}
+.gcaps .gc{font-family:var(--serif);font-style:italic;font-size:42px;color:var(--soft)}
+.gcaps .gc b{font-style:normal;color:var(--verb);font-weight:500}
+.cloud{display:flex;flex-wrap:wrap;gap:26px 56px;font-size:60px;line-height:1.1;max-width:1300px;margin-top:6px}
+.cloud span:nth-child(3n+2){transform:translateY(18px)}
 .duo{display:flex;gap:120px;align-items:flex-end;margin-top:40px}
 .duo figure{margin:0;display:grid;justify-items:start;gap:14px}
 .duo figcaption{font-family:var(--serif);font-style:italic;font-size:38px;color:var(--soft)}
@@ -1034,7 +1069,199 @@ def phon_deck_marked():
     return with_codes(phon_deck, set(phonesthemes.words()) | {"gold", "yellow", "two"}, strict=False)
 
 
-DECKS = {"per": per_deck_marked, "education": educ_deck, "leg": leg_deck, "sign": sign_deck, "phonesthemes": phon_deck_marked}
+# ------------------------------------------------------------------ *(s)teg-: Protect, part by part (24 November 2026)
+def protect_deck():
+    """For intermediate readers and spellers: every common affix on tect, and what each does to the sound. The root and
+    its other roads are on roots/steg.html; this deck stays with tect."""
+    D = Deck()
+    D.slide("Title", f"""<p class="kicker">A word study &middot; <i>*(s)teg-</i></p>
+<h1 class="display">Protect, part by part</h1>
+<p class="subtitle">one part, every affix, and what each does to the sound</p>
+<div class="pair">{word("protect", 120)}{word("overprotective", 120)}</div>""",
+            "A word study for learners. Click, tap, or press the right arrow for each next piece; N shows and hides these notes. "
+            "The page for teachers is <a href=\"../roots/steg.html\">*(s)teg-</a>, with its "
+            "<a href=\"../lists/family-steg.html\">spelling list</a>.", "mid")
+
+    sort = ["protection", "unprotected", "protects", "protective", "overprotective", "protector", "protecting", "protectively", "protected"]
+    D.slide("What do they share?", f"""<h2 class="head">What do these words share?</h2>
+<div class="cloud">{"".join(f"<span>{w}</span>" for w in sort)}</div>
+<p class="lede" data-s="1">Find the part they all have.</p>
+<p class="q" data-s="2">Then: what changes from word to word?</p>""",
+            "Give the class time before anything is explained. Most will find protect quickly. Ask what the rest of each word "
+            "adds, and keep their guesses: the slides that follow test them.", steps=2)
+
+    D.slide("Build protect", f"""<h2 class="head">Build it</h2>
+{join(["pro", "tect"], ["in front", "covered"], word("protect", 150), 1,
+      "Read it from the end: <b>covered</b> in <b>front</b>. To protect is to keep safe.")}""",
+            "Word sum: pro + tect &rarr; <i>protect</i>. Latin <i>pr&#x014D;tegere</i>, to cover in front, to shield: "
+            "<i>pr&#x014D;</i>, in front, and <i>tegere</i>, to cover.", steps=4)
+
+    def rows2(head, rows, says, note, extra=""):
+        cells = "".join(f'<div data-s="{k + 1}"><span class="w">{w}</span><span class="g">{g}</span></div>' for k, (w, g) in enumerate(rows))
+        D.slide(head, f"""<h2 class="head">{head}</h2>
+<div class="felt" style="grid-template-columns:1fr">{cells}</div>
+<p class="q" data-s="{len(rows) + 1}">{says}</p>{extra}""", note, steps=len(rows) + 1)
+
+    rows2("An old word for cover", [("*(s)teg-", "to cover, often with a roof"), ("Latin <b>tegere</b>", "to cover"),
+                                    ("Latin <b>tectus</b>", "covered: the part in <i>protect</i>")],
+          "<b>tect</b> means <b>covered</b>.",
+          "The root is <i>*(s)teg-</i>, to cover (Indo-European Lexicon, after Pokorny; Etymonline). English has words from it by "
+          "other roads: <i>thatch</i> and <i>deck</i> (Germanic), <i>tile</i> and <i>toga</i> (Latin), <i>stegosaurus</i> "
+          "(Greek <i>stegos</i>, a roof). They are on the <a href=\"../roots/steg.html\">*(s)teg- page</a>. This study stays with tect.")
+
+    D.slide("g to c", f"""<h2 class="head">Why <b class="r">tect</b>, and not <b>teg</b>?</h2>
+<p class="lede" data-s="1" style="margin:0 0 22px">Latin&rsquo;s word for cover was <b>tegere</b>, with a g.</p>
+<div class="ishas"><h3>with a g</h3><h3>a c before t</h3>
+<p data-s="2">te<b>g</b>ere: to cover</p><p data-s="2">pro<b>tect</b>: covered in front</p>
+<p data-s="3">le<b>g</b>end</p><p data-s="3">col<b>lect</b></p>
+<p data-s="4">re<b>g</b>al</p><p data-s="4">di<b>rect</b></p></div>
+<p class="lede" data-s="5">Say /g/, then /k/. Your tongue is in the same place.</p>
+<p class="q" data-s="6">Before a t, Latin&rsquo;s g turned into c.</p>""",
+            "Latin <i>tegere</i>, <i>tectus</i>; <i>legere</i>, <i>lectus</i>; <i>regere</i>, <i>rectus</i>. Allen and Greenough "
+            "give the rule: g before t became c (&sect;15.10). /k/ is /g/ without the voice, and the t that followed has no voice "
+            "either. English borrowed the past forms, so the parts are tect, lect and rect.", steps=6)
+
+    D.slide("-s, -ed, -ing", f"""<h2 class="head">Add an ending. Watch the word.</h2>
+{grow(["protect", "protects", "protected", "protecting"],
+      ["protect", "<b>+ s</b>: does it now", "<b>+ ed</b>: already done", "<b>+ ing</b>: doing it now"], 200, 1)}
+<p class="lede" data-s="4">Count the beats: pro-tect, pro-tects, pro-tec-ted, pro-tec-ting.</p>""",
+            "Word sums: pro + tect + s, pro + tect + ed, pro + tect + ing. Each word fades into the next at the same size, so "
+            "only the new ending and its marks change. Ask which one adds a beat that -s doesn&rsquo;t.", steps=4)
+
+    D.slide("-ed, three sounds", f"""<h2 class="head"><b class="r">-ed</b>: one spelling, three sounds</h2>
+<div class="ishas tri"><h3>/t/</h3><h3>/d/</h3><h3>/id/: an extra beat</h3>
+<p data-s="1">jump<b>ed</b></p><p data-s="1">play<b>ed</b></p><p data-s="1">protect<b>ed</b></p>
+<p data-s="2">look<b>ed</b></p><p data-s="2">rain<b>ed</b></p><p data-s="2">detect<b>ed</b></p>
+<p data-s="3">help<b>ed</b></p><p data-s="3">fill<b>ed</b></p><p data-s="3">land<b>ed</b></p></div>
+<p class="lede" data-s="4">After a t or a d, -ed adds a beat.</p>
+<p class="q" data-s="5">The spelling stays <b>-ed</b> every time.</p>""",
+            "-ed spells /t/ after a sound made without the voice (p, k, s, f, sh, ch) and /d/ after one made with it, vowels "
+            "included. After t or d it adds a syllable, so <i>protected</i> has three. "
+            "Spelling these jumpt or playd would lose the ending, and with it the meaning: already done.", steps=5)
+
+    D.slide("Build protection", f"""<h2 class="head">Name the act</h2>
+{join(["pro", "tect", "ion"], ["in front", "covered", "the act of"], word("protection", 150), 1,
+      "From the end: <b>the act of</b> covering in front. Protection keeps you safe.")}""",
+            "Word sum: pro + tect + ion &rarr; <i>protection</i>. A suffix that starts with a vowel joins tect with no change "
+            "to its spelling.", steps=4)
+
+    D.slide("The t in protection", f"""<h2 class="head">The t in <b class="r">protection</b> spells /sh/</h2>
+{grow(["protect", "protection"], ["the t is said", "<b>ti</b> spells /sh/, and the t stays"], 210, 1)}
+<p class="lede" data-s="2">act, action &middot; collect, collection &middot; direct, direction</p>
+<p class="q" data-s="3">Spell the part, not the sound: <b>tect + ion</b>.</p>""",
+            "Watch the t: a black circle in <i>protect</i>, and a green bar under ti in <i>protection</i>. The green bar "
+            "marks one sound spelled with two letters. The t never leaves the spelling, so <i>protection</i> still shows "
+            "<i>protect</i>. A learner who writes protecshun has spelled the sound and lost the word.", steps=3)
+
+    def ladder(head, rows, q, note):
+        cells = "".join(f'<div data-s="{k + 1}">{word(w, 150)}<span class="g">{g}</span></div>' for k, (w, g) in enumerate(rows))
+        D.slide(head, f"""<h2 class="head">{head}</h2>
+<div class="fam ladder">{cells}</div>
+<p class="q" data-s="{len(rows) + 1}">{q}</p>""", note, steps=len(rows) + 1)
+
+    ladder("Two more endings", [("protective", "<b>+ ive</b>: that protects"), ("protector", "<b>+ or</b>: one who protects")],
+           "<b>-or</b> sounds like -er. It marks a Latin ending: actor, collector.",
+           "Word sums: pro + tect + ive &rarr; <i>protective</i>; pro + tect + or &rarr; <i>protector</i>. Latin&rsquo;s agent "
+           "ending is -or, and words built on Latin parts usually keep it: <i>actor</i>, <i>collector</i>, <i>conductor</i>, "
+           "<i>detector</i>. -er is English&rsquo;s own: <i>teacher</i>, <i>painter</i>.")
+
+    D.slide("The e on -ive", f"""<h2 class="head">Why is there an e on <b class="r">-ive</b>?</h2>
+<div class="pair" style="margin-top:0">{word("protective", 190, steps=1)}</div>
+<p class="lede" data-s="7">The e is silent. The i stays short.</p>
+<p class="lede" data-s="8">English words don&rsquo;t end in v: have, give, live, active.</p>
+<p class="q" data-s="9">The e is there because the word would end in v.</p>""",
+            "The marks come in a layer at a time: the circles, the cup on the short i, then the e that isn&rsquo;t said. The e of -ive makes no vault: the i is short. English spelling avoids a final v, so <i>give</i>, "
+            "<i>have</i> and <i>live</i> carry an e that does nothing to the vowel. A few short new words break it, such as "
+            "<i>rev</i>.", steps=9)
+
+    D.slide("-ly and -ness", f"""<h2 class="head">Keep going</h2>
+{grow(["protective", "protectively", "protectiveness"],
+      ["protective", "<b>+ ly</b>: in a protective way", "<b>+ ness</b>: being protective"], 190, 1)}
+<p class="lede" data-s="3">-ly and -ness start with a consonant. The e stays.</p>
+<p class="q" data-s="4">Before a vowel, the e drops: active, activity.</p>""",
+            "Word sums: pro + tect + ive + ly &rarr; <i>protectively</i>; pro + tect + ive + ness &rarr; <i>protectiveness</i>. "
+            "The usual rule for a final e: it drops before a suffix that starts with a vowel, as in act + iv(e) + ity &rarr; "
+            "<i>activity</i>. It stays before one that starts with a consonant.", steps=4)
+
+    D.slide("un-", f"""<h2 class="head">A part at the front</h2>
+{join(["un", "protect", "ed"], ["not", "keep safe", "done"], word("unprotected", 130), 1,
+      "<b>un-</b> means <b>not</b>: not protected.")}""",
+            "Word sum: un + pro + tect + ed &rarr; <i>unprotected</i>. A prefix joins with no change to either part. The -ed "
+            "still adds its beat after the t: un-pro-tec-ted.", steps=4)
+    D.slide("over-", f"""<h2 class="head">And another</h2>
+{join(["over", "protect", "ive"], ["too much", "keep safe", "that tends to"], word("overprotective", 120), 1,
+      "<b>over-</b> means <b>too much</b>: protective, too much.")}""",
+            "Word sum: over + pro + tect + ive &rarr; <i>overprotective</i>. One word, no hyphen. Two prefixes now stand before "
+            "tect, and each keeps its spelling.", steps=4)
+
+    syl = lambda parts, hit: ('<span class="dot">&middot;</span>'.join(f'<span class="hit">{p.upper()}</span>' if i == hit else f"<span>{p}</span>"
+                                                                      for i, p in enumerate(parts)))
+    beats = [(["pro", "tect"], 1), (["pro", "tec", "tion"], 1), (["un", "pro", "tec", "ted"], 2), (["o", "ver", "pro", "tec", "tive"], 3)]
+    lines = "".join(f'<p class="syl" style="font-size:66px;margin:0 0 6px"{"" if k == 0 else f" data-s={chr(34)}{k}{chr(34)}"}>{syl(p, h)}</p>'
+                    for k, (p, h) in enumerate(beats))
+    D.slide("The beat", f"""<h2 class="head">Say them. Where is the beat?</h2>
+{lines}
+<p class="lede" data-s="4">The beat stays on <b class="r">tect</b> every time.</p>
+<p class="lede" data-s="5">The o of pro is weak, like the a in about.</p>""",
+            "-ion and -ive put the main stress on the syllable just before them, and in this family that syllable is tect "
+            "already. So nothing moves, and the vowels hold. Compare <i>experiment</i> and <i>experimental</i> in "
+            "<a href=\"per.html\">Try it out</a>, where the beat moves. The o of <i>pro-</i> is clear where pro- has the "
+            "stress: <i>prologue</i>, <i>program</i>.", steps=5)
+
+    D.slide("Build detect", f"""<h2 class="head">Take the cover off</h2>
+{join(["de", "tect"], ["off, away", "covered"], word("detect", 150), 1,
+      "From the end: the cover taken <b>off</b>. To detect is to find out.")}""",
+            "Word sum: de + tect &rarr; <i>detect</i>. Latin <i>d&#x0113;tegere</i>, to uncover. A detective was first a "
+            "detective police officer: one whose job was finding out.", steps=4)
+
+    D.slide("The detect words", f"""<h2 class="head">The same endings on <b class="r">detect</b></h2>
+{grow(["detect", "detective", "detection", "detector"],
+      ["detect", "<b>+ ive</b>: one whose job is finding out", "<b>+ ion</b>: the finding out", "<b>+ or</b>: a thing that finds"], 210, 1)}
+<p class="lede" data-s="4">The same sound changes come with each ending.</p>""",
+            "Word sums: de + tect + ive, de + tect + ion, de + tect + or; and un + de + tect + ed &rarr; <i>undetected</i>. "
+            "Ask learners to say which sound changes before you click: the ti of <i>detection</i>, the silent e of "
+            "<i>detective</i>.", steps=4)
+
+    D.slide("The tect matrix", f"""<h2 class="head">The <b class="r">tect</b> matrix</h2>
+<div class="matrix">
+<div class="mbox" data-s="1"><span>un</span><span>over</span></div>
+<div class="mbox" data-s="1"><span>pro</span><span>de</span></div>
+<div class="mbox mbase">tect</div>
+<div class="mcols" data-s="2"><div class="mbox"><span>s</span><span>ed</span><span>ing</span><span>ion</span><span>ive</span><span>or</span></div>
+<div class="mbox"><span>ly</span><span>ness</span><span>s</span></div></div>
+</div>
+<div class="paths" data-s="3"><span><b>un + pro + tect + ed</b></span><span><b>over + pro + tect + ive</b></span><span><b>pro + tect + ive + ness</b></span><span><b>de + tect + or + s</b></span></div>
+<p class="q" data-s="4">Read across. Which paths make words?</p>""",
+            "The word matrix is Melvyn Ramsden&rsquo;s (Real Spelling). Read left to right, skipping any box. Not every path is a "
+            "word (<i>over + de + tect</i>): check each by saying it and using it in a sentence. The last column follows "
+            "<i>ive</i> or <i>or</i>.", steps=4)
+
+    D.slide("Your turn", f"""<h2 class="head">Your turn</h2>
+<ol class="blanks" style="gap:26px;font-size:48px">
+<li>The roof gives <span class="gap"><span class="ans" data-s="1">protection</span></span> from the rain.</li>
+<li>The seeds were left <span class="gap"><span class="ans" data-s="2">unprotected</span></span> in the frost.</li>
+<li>The case was solved by a <span class="gap"><span class="ans" data-s="3">detective</span></span>.</li>
+<li>The smoke <span class="gap"><span class="ans" data-s="4">detector</span></span> beeped.</li>
+<li>Put a <span class="gap"><span class="ans" data-s="5">protective</span></span> cover on the book.</li>
+</ol>""",
+            "Say each sentence with the blank first, and let the class build the word before the click shows it. The "
+            "<a href=\"../lists/family-steg.html\">spelling list</a> has more to build and use.", steps=5)
+
+    D.slide("For teachers", f"""<h2 class="head">For teachers</h2>
+<p class="lede">Word sums: pro + tect &rarr; <i>protect</i>; pro + tect + ed; pro + tect + ion; pro + tect + ive + ly; pro + tect + ive + ness; pro + tect + or; un + pro + tect + ed; over + pro + tect + ive; de + tect + ive; de + tect + ion; un + de + tect + ed.</p>
+<p class="lede">The root and its family follow the <a href="https://lrc.la.utexas.edu/lex/master/1879">Indo-European Lexicon, (s)teg-</a> and <a href="https://www.etymonline.com/word/*(s)teg-">Etymonline</a>. Latin&rsquo;s g before t: <a href="https://dcc.dickinson.edu/grammar/latin/phonetic-changes">Allen and Greenough, &sect;15.10</a>.</p>
+<p class="lede">The teacher&rsquo;s page is <a href="../roots/steg.html">*(s)teg-</a>; the list to print is the <a href="../lists/family-steg.html">*(s)teg- spelling list</a>. The marks are on the <a href="../notations.html">Notations</a> page.</p>""", cls="mid")
+    return D
+
+
+def protect_deck_marked():
+    """The family's words have checked codes in family_codes.json; lent to LW.W for this deck."""
+    return with_codes(protect_deck, ["protect", "protects", "protected", "protecting", "protection", "protective", "protectively",
+                                     "protectiveness", "protector", "unprotected", "overprotective", "detect", "detective",
+                                     "detection", "detector"])
+
+
+DECKS = {"per": per_deck_marked, "education": educ_deck, "leg": leg_deck, "sign": sign_deck, "phonesthemes": phon_deck_marked, "protect": protect_deck_marked}
 
 
 def write(OUT, door_page):
