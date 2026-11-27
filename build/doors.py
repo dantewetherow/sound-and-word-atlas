@@ -42,7 +42,8 @@ HEADS = {
 
 # The tree: (path, layer, title, one-line summary). Steps join it in tree().
 PAGES = [
-    ("index.html", None, "Home", "Legomorphic Notation and the three layers of the site."),
+    ("index.html", None, "Home", "Welcome: Legomorphics assembling, what the site is, and the way in."),
+    ("tools.html", None, "The tools", "Every tool on the site in bands, from the alphabet to word families and the teachers' shelf."),
     ("progressions.html", "progressions", "Steps", "The legomorphic path through English spelling: the steps in their bands."),
     ("letters.html", "progressions", "Letters, names and sounds", "Before step 1: the alphabet in the song's units, as tiles to reveal, with a sound circle under each letter."),
     ("teams.html", "progressions", "Letter teams", "The common digraphs and trigraphs in their colours, each with a key word, and a drill."),

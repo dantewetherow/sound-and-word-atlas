@@ -426,9 +426,15 @@ OLD_ANCHORS = """<script>(() => { const h = location.hash;
 home_body = f"""{header(0, home=True)}
 {OLD_ANCHORS}
 <main>
-{landing.hero_only(doors.home_grid())}
+{landing.welcome(LW, json.loads((HERE / "data" / "family_codes.json").read_text(encoding="utf-8"))["legomorphics"])}
 </main>
 {footer(0)}"""
+# the buttons, in their bands, behind the Welcome button (27 November 2026)
+(OUT / "tools.html").write_text(page("The tools · Sounds and Words, Assembled", f"""{header(0)}
+<main>
+{landing.tools_body(doors.home_grid())}
+</main>
+{footer(0)}""", 0, "Every tool on the site in bands, from the alphabet and letter teams to word families, word studies and the teachers' shelf."), encoding="utf-8")
 if STANDALONE:
     home = page("Sounds and Words, Assembled", home_body, 0,
                 "The legomorphic path through English spelling, for teachers: 32 steps, with every word marked in Legomorphic Notation.")

@@ -145,3 +145,68 @@ def lego_block(LW):
 <div class="stage stage-lego" id="lego">{lego}<p class="cap">{lego_caps}</p></div>
 <p><button class="replay" type="button" data-replay="lego">Play again</button></p>
 {_play_js(False)}"""
+
+
+# ------------------------------------------------------------------ the welcome page (27 November 2026)
+# Dante: the landing page as a welcome. Legomorphics assembles: its parts arrive from four sides (leg from the left, o from
+# above, morph from below, ics from the right), then the notation's marks come in a layer at a time, the seams last.
+# Under it, what the site is, a Welcome button to the tools, and Where does the word come from? The tiles moved to
+# tools.html.
+WELCOME_TEXT = ("Legomorphics is a set of tools for teaching how English words work: their sounds, their letters and the "
+                "parts they are built from. It is made for a teacher and a class to use together, on the board. It "
+                "isn&rsquo;t a program that moves a learner through on their own: choose the page that fits the lesson.")
+# where each letter comes from (dx, dy in the drawing's units), by part: l e g | o | m o r p h | i c s
+FROM = [(-420, -60), (-380, 40), (-340, -20), (0, -260), (-60, 300), (-20, 340), (20, 300), (60, 340), (100, 300),
+        (420, -40), (380, 50), (440, 10)]
+LAYERS = [1, 2, 3, 4, 6, 7, 8, 9]   # the marks, in the order they come in (circles first, seams last)
+
+
+def welcome(LW, code):
+    """The welcome page's body: the assembling word, the name, what the site is, and the two buttons."""
+    import re
+    had = "legomorphics" in LW.W
+    LW.W["legomorphics"] = code
+    try: g, w, H = LW.svg_word("legomorphics", 100.0, 0.0, cls=True)
+    finally:
+        if not had: LW.W.pop("legomorphics", None)
+    g = re.sub(r'<rect class="wt"[^>]*/>', "", g)
+    k = iter(range(len(FROM)))
+    g = re.sub(r"<text ", lambda m: f'<text class="wl-l" style="--i:{(n := next(k))};--dx:{FROM[n][0]}px;--dy:{FROM[n][1]}px" ', g)
+    rules = "".join(f".wl-svg.play .nz{n}{{animation:wl-mark .6s ease {1.9 + 0.35 * i:.2f}s both}}" for i, n in enumerate(LAYERS))
+    return f"""<style>
+.welcome {{ min-height: calc(100vh - 140px); display: grid; align-content: center; justify-items: center; text-align: center; padding: 4vh 16px 6vh; gap: 2.2vh; }}
+.wl-svg {{ width: min(980px, 92vw); height: auto; overflow: visible; }}
+.wl-svg .wl-l {{ transform-box: fill-box; transform-origin: center; }}
+.wl-svg.play .wl-l {{ animation: wl-in 1.1s cubic-bezier(.2,.8,.25,1) calc(.15s + var(--i) * .07s) both; }}
+@keyframes wl-in {{ from {{ opacity: 0; transform: translate(var(--dx), var(--dy)) rotate(-18deg) scale(.6); }} to {{ opacity: 1; transform: none; }} }}
+@keyframes wl-mark {{ from {{ opacity: 0; transform: translateY(8px); }} to {{ opacity: 1; transform: none; }} }}
+{rules}
+.wl-svg.play [class^="nz"]:not(.nz5) {{ opacity: 0; }}
+.welcome h1 {{ font-family: var(--display, serif); font-weight: 500; font-size: clamp(1.4rem, 3.2vw, 2.2rem); margin: 0; color: var(--ink); }}
+.welcome h1 small {{ display: block; font-size: .5em; letter-spacing: .12em; text-transform: uppercase; color: var(--soft); margin-bottom: .4em; }}
+.wl-lead {{ max-width: 44em; font-size: clamp(1rem, 1.9vw, 1.2rem); line-height: 1.55; color: var(--ink); margin: 0; }}
+.wl-btns {{ display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 1vh; }}
+.wl-go {{ font-size: clamp(1.3rem, 2.6vw, 1.8rem); font-weight: 600; padding: 18px 48px; border-radius: 999px; background: var(--verb); color: var(--paper); text-decoration: none; }}
+.wl-go:hover, .wl-go:focus-visible {{ filter: brightness(1.08); }}
+.wl-why {{ font-size: clamp(1rem, 1.8vw, 1.15rem); padding: 18px 28px; border-radius: 999px; border: 1.5px solid var(--line); color: var(--ink); text-decoration: none; background: var(--card); }}
+.welcome .motto {{ margin: 2vh 0 0; }}
+@media (prefers-reduced-motion: reduce) {{ .wl-svg.play .wl-l, .wl-svg.play [class^="nz"] {{ animation: none !important; opacity: 1 !important; }} }}
+</style>
+<section class="welcome" aria-labelledby="wl-h">
+<svg class="wl-svg play" viewBox="-20 0 {w + 40:.0f} {H:.0f}" role="img" aria-label="Legomorphics, its parts arriving and the notation's marks drawn on it">{g}</svg>
+<h1 id="wl-h"><small>Legomorphics</small>Sounds and Words, Assembled</h1>
+<p class="wl-lead">{WELCOME_TEXT}</p>
+<div class="wl-btns"><a class="wl-go" href="tools.html">Welcome</a><a class="wl-why" href="about.html#word-h">Where does the word come from?</a></div>
+<p class="motto">I thought it through and though it was tough I was thorough.</p>
+<p class="motto-ipa" lang="en-fonipa" title="IPA, North American">/a&#618; &#712;&#952;&#593;t &#618;t &#712;&#952;&#633;u &#601;n &#712;&eth;o&#650; &#618;t w&#601;z &#712;t&#652;f a&#618; w&#601;z &#712;&#952;&#605;o&#650;/</p>
+</section>"""
+
+
+def tools_body(doors_html):
+    """tools.html: the buttons that were the home page, in their bands."""
+    return f"""<style>{css()}</style>
+<section class="landing solo" aria-labelledby="tools-h"><div class="wrap">
+<h1 id="tools-h">The tools</h1>
+<p class="sublead">Everything on the site, from single letters to word families. Pick the one that fits the lesson.</p>
+{doors_html}
+</div></section>"""
