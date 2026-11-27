@@ -220,9 +220,9 @@ def write_sets(OUT, page, header, footer, X):
     listing = {}
     for base, slug, label, ckey, sums in matrix.card_sets():
         cols, words = matrix.analyse(base, sums)
-        carry = lambda k: sorted({w for pos in cols for kk, ws in cols[pos].items() if kk == k for w in ws}, key=len)[:4]
+        carry = lambda k: sorted({w for pos in cols for kk, ws in cols[pos].items() if kk == k for w in ws}, key=lambda w: (len(w), w))[:4]
         back = f"../roots/{slug}.html#c-{ckey}"
-        cards = [card("root", base, mean_of(base), None, ", ".join(sorted(words.values(), key=len)[:5]), back)]
+        cards = [card("root", base, mean_of(base), None, ", ".join(sorted(words.values(), key=lambda w: (len(w), w))[:5]), back)]
         for pos in sorted(p for p in cols if p < 0)[::-1]:
             for k in sorted(cols[pos], key=lambda k: (-len(cols[pos][k]), k)):
                 cards.append(card("pre", H.escape(k), mean_of(k), rule(k, "pre"), ", ".join(carry(k))))
