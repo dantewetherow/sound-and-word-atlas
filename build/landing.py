@@ -155,6 +155,9 @@ def lego_block(LW):
 WELCOME_TEXT = ("Legomorphics is a set of tools for teaching how English words work: their sounds, their letters and the "
                 "parts they are built from. It is made for a teacher and a class to use together, on the board. It "
                 "isn&rsquo;t a program that moves a learner through on their own: choose the page that fits the lesson.")
+# 27 November 2026, Dante: not levelled by grade. Any learner may want or need any part of it.
+WELCOME_ALL = ("It isn&rsquo;t levelled by grade or age. It is for all learners, and any learner may want or need some "
+               "part of it to see how English spelling works.")
 # where each letter comes from (dx, dy in the drawing's units), by part: l e g | o | m o r p h | i c s
 FROM = [(-420, -60), (-380, 40), (-340, -20), (0, -260), (-60, 300), (-20, 340), (20, 300), (60, 340), (100, 300),
         (420, -40), (380, 50), (440, 10)]
@@ -185,7 +188,7 @@ def welcome(LW, code):
 .welcome h1 {{ font-family: var(--display, serif); font-weight: 500; font-size: clamp(1.4rem, 3.2vw, 2.2rem); margin: 0; color: var(--ink); }}
 .welcome h1 small {{ display: block; font-size: .5em; letter-spacing: .12em; text-transform: uppercase; color: var(--soft); margin-bottom: .4em; }}
 .wl-lead {{ max-width: 44em; font-size: clamp(1rem, 1.9vw, 1.2rem); line-height: 1.55; color: var(--ink); margin: 0; }}
-.wl-btns {{ display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 1vh; }}
+.wl-btns {{ display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; align-items: center; margin-top: 1vh; }}
 .wl-go {{ font-size: clamp(1.3rem, 2.6vw, 1.8rem); font-weight: 600; padding: 18px 48px; border-radius: 999px; background: var(--verb); color: var(--paper); text-decoration: none; }}
 .wl-go:hover, .wl-go:focus-visible {{ filter: brightness(1.08); }}
 .wl-why {{ font-size: clamp(1rem, 1.8vw, 1.15rem); padding: 18px 28px; border-radius: 999px; border: 1.5px solid var(--line); color: var(--ink); text-decoration: none; background: var(--card); }}
@@ -196,7 +199,8 @@ def welcome(LW, code):
 <svg class="wl-svg play" viewBox="-20 0 {w + 40:.0f} {H:.0f}" role="img" aria-label="Legomorphics, its parts arriving and the notation's marks drawn on it">{g}</svg>
 <h1 id="wl-h"><small>Legomorphics</small>Sounds and Words, Assembled</h1>
 <p class="wl-lead">{WELCOME_TEXT}</p>
-<div class="wl-btns"><a class="wl-go" href="tools.html">Welcome</a><a class="wl-why" href="about.html#word-h">Where does the word come from?</a></div>
+<p class="wl-lead wl-all">{WELCOME_ALL}</p>
+<div class="wl-btns"><a class="wl-go" href="tools.html">Welcome</a><a class="wl-why" href="system.html">How it fits together</a><a class="wl-why" href="about.html#word-h">Where does the word come from?</a></div>
 <p class="motto">I thought it through and though it was tough I was thorough.</p>
 <p class="motto-ipa" lang="en-fonipa" title="IPA, North American">/a&#618; &#712;&#952;&#593;t &#618;t &#712;&#952;&#633;u &#601;n &#712;&eth;o&#650; &#618;t w&#601;z &#712;t&#652;f a&#618; w&#601;z &#712;&#952;&#605;o&#650;/</p>
 </section>"""
@@ -208,5 +212,6 @@ def tools_body(doors_html):
 <section class="landing solo" aria-labelledby="tools-h"><div class="wrap">
 <h1 id="tools-h">The tools</h1>
 <p class="sublead">Everything on the site, from single letters to word families. Pick the one that fits the lesson.</p>
+<p class="sub">None of it is levelled by grade. Any learner, at any age, may need any part of it.</p>
 {doors_html}
 </div></section>"""

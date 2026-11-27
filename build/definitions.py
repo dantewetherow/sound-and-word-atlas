@@ -130,6 +130,20 @@ EXTRA_MARKS = [   # marks the legend doesn't list on its own
 ]
 
 
+def system_rows():
+    """The system's terms (27 November 2026), from system_page.ENTRIES so the two pages can't drift: what each is, then
+    who named it, with a link to its ring."""
+    import system_page as S
+    order = [k for u, f, _ in S.RINGS for k in (u, f) if k] + [t for t, *_ in S.BRIDGES]
+    ring_of = {f: u for u, f, _ in S.RINGS if f}
+    rows = []
+    for k in order:
+        term, pos, what, fits, _, hist, _ = S.ENTRIES[k]
+        at = S.slug(ring_of.get(k, k))
+        rows.append((term, pos, f'{what} <a href="system.html#{at}">On the rings</a>.', hist))
+    return rows
+
+
 def slug(t): return "def-" + re.sub(r"[^a-z]+", "-", t.lower()).strip("-")
 
 
@@ -137,7 +151,7 @@ def terms(KEY):
     """Every entry on the page, as (term, anchor), for the site's search."""
     words = [("legomorphic", "def-legomorphic"), ("legomorph", "def-legomorph"), ("legomorphics", "def-legomorphics"),
              ("Legomorphic Notation", "def-legomorphic-notation")]
-    rows = [(t, slug(t)) for t, *_ in SENTENCES + TEACHING + STUDY]
+    rows = [(t, slug(t)) for t, *_ in SENTENCES + TEACHING + STUDY + system_rows()]
     marks = [(n.lower(), slug(n)) for n, *_ in list(KEY) + EXTRA_MARKS]
     return words + rows + marks
 
@@ -174,7 +188,7 @@ def write(OUT, page, header, footer, svg_of, KEY, LW):
 <p class="eyebrow">Definitions</p>
 <h1>The words of the notation</h1>
 <p class="lead">What the words on this site mean here, and where they come from. Each says whether it was coined for the notation or taken from someone else, and from whom.</p>
-<p class="toc"><a href="#word">The word</a><a href="#sentences">Sentences</a><a href="#marks">Marks</a><a href="#teaching">Teaching</a><a href="#study">Studying language</a></p>
+<p class="toc"><a href="#word">The word</a><a href="#system">The system</a><a href="#sentences">Sentences</a><a href="#marks">Marks</a><a href="#teaching">Teaching</a><a href="#study">Studying language</a></p>
 </div></section>
 
 <section class="about" id="word" aria-labelledby="word-h"><div class="wrap prose">
@@ -207,6 +221,12 @@ def write(OUT, page, header, footer, svg_of, KEY, LW):
 <div class="def" id="def-legomorphic-notation"><dt>Legomorphic Notation <span class="pos">noun</span></dt>
 <dd>The marks and colours this site draws on ordinary spelling, so that a word&rsquo;s legomorphs can be seen: its sounds, the letters that spell them, its meaningful parts, and the changes letters make to one another. The marks are listed <a href="#marks">below</a> and drawn in <a href="notations.html#marks">Notations</a>.<span class="src">Coined for the notation.</span></dd></div>
 </dl>
+</div></section>
+
+<section class="about" id="system" aria-labelledby="system-h"><div class="wrap prose">
+<h2 id="system-h">The system</h2>
+<p>The units of speech, spelling and meaning, from one speech sound to what a sentence means. Each comes with the field that studies it and who named it. <a href="system.html">How it fits together</a> draws them as rings, each defined by the rings around it.</p>
+{entries(system_rows())}
 </div></section>
 
 <section class="about" id="sentences" aria-labelledby="sent-h"><div class="wrap prose">

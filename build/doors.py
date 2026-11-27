@@ -76,6 +76,7 @@ PAGES = [
     ("ufli.html", "teachers", "UFLI Foundations", "For schools that run UFLI: where its lessons meet the path, the mark to draw alongside each part of UFLI, and why the two orders differ."),
     ("explanations.html", "teachers", "Reasons and sources", "Definitions, the notation and its name, and credits."),
     ("definitions.html", "teachers", "Definitions", "What the notation's words mean, and where they come from."),
+    ("system.html", "teachers", "How it fits together", "System definitions as rings, from phone to meaning: each term, how it fits the others, and who named it."),
     ("about.html", "teachers", "About the notation", "The notation, its name, and how it came about."),
     ("credits.html", "teachers", "Credits and contact", "The writers the notation draws on, and how to get in touch."),
     ("calls.html", "teachers", "Marking calls", "Every place the marks rest on a choice: each drawn as marked now, with the other reading beside it."),
@@ -86,7 +87,7 @@ PAGES[-1:-1] = _lists.PAGES                 # the spelling lists, on the teacher
 # The page each shelf page sits behind, for its breadcrumb: the four teachers' doors (13 November 2026).
 SHELF_PARENT = {"gym.html": "constructions.html", "ufli.html": "connections.html", "word-lists.html": "connections.html",
                 "presentations.html": "instructions.html", "cards.html": "instructions.html", "tents.html": "instructions.html",
-                "definitions.html": "explanations.html", "about.html": "explanations.html", "credits.html": "explanations.html",
+                "definitions.html": "explanations.html", "system.html": "explanations.html", "about.html": "explanations.html", "credits.html": "explanations.html",
                 "calls.html": "explanations.html"}
 # Pages built and kept at their address, but linked from nowhere: no site map, search, door or step-page link (18 November 2026:
 # the gym, while it needs work). Take a page out of this set to list it again.
@@ -378,6 +379,8 @@ def write(OUT, page, header, footer, X):
     X["roots"] = roots.write(OUT, page, header, footer, X)
     import surprising                                     # words from one root that no longer look related (23 November 2026)
     X["surprising_words"] = surprising.write(OUT, door_page, X)
+    import system_page                                    # the system definitions as rings (27 November 2026)
+    system_page.write(door_page, X)
     door_page("derivations", "Derivations · Sounds and Words, Assembled", "Where words come from, and the sources the roots will cite.", f"""{door_head("derivations")}
 <section class="about"><div class="wrap"><div class="door-tiles"><a class="dtile" href="roots/leg.html"><b>*leg-<span class="t-only">: to gather</span></b><span class="t-only">The first root family: <i>logic</i>, <i>collect</i>, <i>legend</i>, <i>lesson</i>, <i>loyal</i>, and the notation&rsquo;s own name.</span><span class="s-only">gather</span></a><a class="dtile" href="roots/hap.html"><b>hap<span class="t-only">: chance, luck</span></b><span class="t-only">A base family: <i>happy</i>, <i>happen</i>, <i>mishap</i>, <i>hapless</i>, <i>haphazard</i>, <i>perhaps</i>, and why <i>happy</i> has two p&rsquo;s.</span><span class="s-only">luck</span></a><a class="dtile" href="surprising.html"><b>Surprising connections</b><span class="t-only">Words from one root that no longer look related: <i>experiment</i>, <i>pirate</i> and <i>fear</i>; <i>gold</i> and <i>yellow</i>; <i>educate</i> and <i>tug</i>.</span><span class="s-only">related?</span></a></div></div></section>
 <section class="about t-only" aria-labelledby="dv-h"><div class="wrap prose">
@@ -399,8 +402,8 @@ def write(OUT, page, header, footer, X):
 </div></section>""")
     door_page("explanations", "Reasons and sources · Sounds and Words, Assembled", "Definitions, the notation and its name, and credits.", f"""{door_head("explanations")}
 <section class="about"><div class="wrap">
-{tiles([x for x in pick("teachers") if x[0] in ("definitions.html", "about.html", "credits.html", "calls.html")])}
-{uc("next, pages of ideas: the primary terms from phone to sememe, grapheme two ways, why English spells the way it does, and what the name claims.")}
+{tiles([x for x in pick("teachers") if x[0] in ("system.html", "definitions.html", "about.html", "credits.html", "calls.html")])}
+{uc("next, pages of ideas: why English spells the way it does, and what the name claims.")}
 </div></section>""")
 
     # The teachers' shelf: everything a teacher prints, presents or checks, on one page.
