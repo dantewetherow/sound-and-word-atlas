@@ -462,16 +462,19 @@ HOME_BANDS = [   # (band, what it holds, [(href, name for teachers, name in Boar
     ("Parts", "the morphemes inside words", [
         ("parts.html", "Morphemes", "Parts", "Prefixes, suffixes, roots and joins, each with the words on the site that use it.", False),
         ("derivations.html", "Word families", None, "Families built on one root or base, with word sums and a matrix for each.", False),
-        ("studies.html", "Word studies", None, "Presentations for learners: one word family per deck.", False)]),
-    ("Sentences", "words working together", [
-        ("gym.html", "Sentence gym", "Gym", "Build sentences from each step&rsquo;s words.", False),
+        ("studies.html", "Word studies", None, "Presentations for learners: one word family per deck.", False),
         ("explorations.html", "Explorations", None, "Contractions, ablaut (write, wrote, written), and words to take apart.", False)]),
+    ("Sentences", "words working together", [
+        ("gym.html", "Sentence gym", "Gym", "Build sentences from each step&rsquo;s words.", False)]),
     ("For teachers", "to print, present and look up", [
         ("presentations.html", "Teacher presentations", None, "The staff series and single-concept decks, with handouts.", True),
         ("instructions.html", "Print resources", None, "Word cards and morpheme cards.", True),
         ("connections.html", "Programs", None, "How the steps line up with UFLI, Dolch and the Early Literacy Profile.", True),
         ("explanations.html", "Reasons and sources", None, "Definitions, the notation&rsquo;s name, credits, and open marking decisions.", True)]),
 ]
+# An unlisted page (the gym, hidden again 26 November 2026) leaves its band, and a band left empty goes.
+HOME_BANDS = [(b, w, [t for t in ts if t[0] not in UNLISTED]) for b, w, ts in HOME_BANDS]
+HOME_BANDS = [x for x in HOME_BANDS if x[2]]
 HOME_TILES = [t for _, _, ts in HOME_BANDS for t in ts]   # the All pages menu reads them in the same order
 
 
