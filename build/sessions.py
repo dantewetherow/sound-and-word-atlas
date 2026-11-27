@@ -100,6 +100,9 @@ def write(OUT, page, header, footer):
         web = re.sub(r'<link[^>]+fonts\.(?:googleapis|gstatic)\.com[^>]*>\n?', "", src)
         web = web.replace("</head>", '<link rel="stylesheet" href="../fonts/fonts.css">\n</head>', 1)
         assert "googleapis" not in web and "gstatic" not in web
+        if "lm-pointer" not in web:                       # the board pointer (P), for decks made before it (27 November 2026)
+            import pointer
+            web = web.replace("</body>", pointer.SCRIPT + "\n</body>", 1)
         (OUT / "sessions" / f"{f}.html").write_text(web, encoding="utf-8")
         labels = slide_labels(src)
         shots = "".join(

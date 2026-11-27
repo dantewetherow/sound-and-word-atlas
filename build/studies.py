@@ -399,10 +399,12 @@ def page(s, deck):
   <button id="notes" aria-pressed="false" title="Teacher&rsquo;s notes (N)">Notes</button>
   <button id="prev" aria-label="Previous slide">&lsaquo;</button>
   <button id="next" aria-label="Next slide">&rsaquo;</button>
+  {__import__("pointer").DECK_BUTTON}
   <button id="full" aria-label="Full screen">&#10530;</button>
 </div>
 </div>
 {JS}
+{__import__("pointer").SCRIPT}
 </body>
 </html>
 """

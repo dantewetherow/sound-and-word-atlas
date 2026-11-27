@@ -8,6 +8,7 @@ page has no doctype or head, because claude.ai adds those when it publishes the 
 import sys, json, re, html, pathlib, shutil
 HERE = pathlib.Path(__file__).resolve().parent
 import hashlib
+import pointer   # the board pointer (27 November 2026)
 # site.css by its contents (24 November 2026): a new stylesheet gets a new address, so a browser holding the old one
 # fetches it at once instead of pairing a new page with old styles until its cache runs out.
 CSS_V = hashlib.sha1((HERE / "site.css").read_bytes()).hexdigest()[:10]
@@ -148,6 +149,7 @@ def page(title, body, depth, desc):
 {body}
 {THEME_JS}
 {doors.VIEW_JS}
+{pointer.SCRIPT}
 {doors.MENU_JS}
 {doors.PIN_JS}
 {doors.SEARCH_JS}
@@ -190,7 +192,7 @@ def header(depth, home=False):
     up = "../" * depth
     search, smap, view, menu, door_nav = doors.header_parts(up)
     return (f'<div class="head-hold"><header class="site{" is-home" if home else ""}"><div class="wrap"><div class="masthead"><a class="brand" href="{up}index.html"><span class="logo">{LOGO}</span><span class="name"><small>Legomorphic Notation</small><span class="nm">Sounds and Words, Assembled</span></span></a>'
-            f'<div class="tools">{search}{smap}{view}{THEME_SWITCH}{menu}</div></div>{door_nav}<!--crumbs--></div></header></div><!--after-head-->')
+            f'<div class="tools">{search}{smap}{view}{THEME_SWITCH}{pointer.BUTTON}{menu}</div></div>{door_nav}<!--crumbs--></div></header></div><!--after-head-->')
 
 def footer(depth):
     up = "../" * depth

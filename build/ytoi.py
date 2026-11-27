@@ -278,10 +278,12 @@ def main():
   <a id="home" href="../presentations.html" title="All presentations" aria-label="All presentations on legomorphics.ca" onclick="event.stopPropagation()">&#8962;</a>
   <button id="prev" aria-label="Previous slide">&lsaquo;</button>
   <button id="next" aria-label="Next slide">&rsaquo;</button>
+  {__import__("pointer").DECK_BUTTON}
   <button id="full" aria-label="Full screen">&#10530;</button>
 </div>
 </div>
 {JS}
+{__import__("pointer").SCRIPT}
 </body>
 </html>
 """

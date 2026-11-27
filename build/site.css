@@ -1225,3 +1225,7 @@ body.mfs-on { overflow: hidden; }
 .cg-none { border-color: transparent; background: transparent; }
 .cog-say { font-size: 0.95rem; color: var(--soft); padding-left: 10px; }
 .cog-gls .cog-g { font-size: 0.78rem; color: var(--soft); text-align: center; line-height: 1.2; }
+
+/* the board pointer's switch in the header (27 November 2026); pointer.py draws the ring */
+.ptr-btn { font: inherit; font-size: 0.8rem; line-height: 1; padding: 7px 12px; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--soft); cursor: pointer; }
+.ptr-btn:focus-visible { outline: 2px solid var(--modal); outline-offset: 2px; }
