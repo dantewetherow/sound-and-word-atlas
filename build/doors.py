@@ -422,6 +422,9 @@ def write(OUT, page, header, footer, X):
     X["walk"] = walk.write(OUT, door_page, X)
     import gym                                            # the gymnasium, after the walk it borrows from (17 November 2026)
     X["gym_steps"] = gym.write(OUT, door_page, X["LW"])
+    if "gym.html" in UNLISTED:                            # not published while it needs work (26 November 2026): the page and its
+        (OUT / "gym.html").unlink(missing_ok=True)        # word cards come off the site; gym.py and build_gym_word_cards.py
+        for f in (OUT / "cards").glob("gym-word-cards-step-*.pdf"): f.unlink()   # make them again when it is listed
     import studies                                        # word studies: presentations for learners (20 November 2026)
     studies.write(OUT, door_page)
     import calls_page                                     # marking calls, drawn both ways (21 November 2026)
