@@ -523,8 +523,7 @@ table.cw-table td:first-of-type { width: 46%; }
 /* Try it: the learner marks the word on the stage, with a mark picked from the tools; the site's marks can go underneath */
 .walk.trying .walk-cap, .walk.trying .walk-nav, .walk.trying.texting .walk-stage { display: none; }
 .walk.trying .walk-stage { touch-action: none; cursor: crosshair; -webkit-touch-callout: none; }
-.walk.trying .walk-board { display: grid; grid-template-columns: 10.5em minmax(0, 1fr); gap: 10px; align-items: start; margin-top: 8px; }
-.walk.trying.texting .walk-board { grid-template-columns: 1fr; }
+.walk.trying .walk-board { display: grid; grid-template-columns: 10.5em minmax(0, 1fr) 10.5em; gap: 10px; align-items: start; margin-top: 8px; }
 .walk.trying .walk-board .walk-stage { margin-top: 0; }
 .try-tools { display: grid; gap: 4px; }
 .try-tools[hidden] { display: none; }
@@ -559,10 +558,28 @@ table.cw-table td:first-of-type { width: 46%; }
 .try-acts button { font: inherit; font-size: 0.92rem; padding: 6px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--ink); cursor: pointer; }
 .try-acts button[hidden] { display: none; }
 .try-acts button:disabled { opacity: 0.45; cursor: default; }
+/* the instruction and Show ours sit over the word, where the eye is (27 November 2026) */
+.walk-main { min-width: 0; }
+.try-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 14px; margin: 0 0 8px; }
+.try-top[hidden] { display: none; }
+.try-top .try-say { margin: 0; flex: 1 1 22em; font-size: 1.02rem; }
+.try-top .try-acts { flex: none; }
+.try-acts .try-show { font-weight: 600; font-size: 1rem; padding: 8px 20px; background: var(--modal); border-color: var(--modal); color: var(--paper); }
+.try-acts .try-show[aria-pressed="true"] { background: var(--card); color: var(--modal); }
+.try-grp { font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--soft); margin: 8px 0 0 4px; }
+.try-grp:first-child { margin-top: 0; }
+.try-tools button[data-tool="red"], .try-tools button[data-tool="schwa"], .try-tools button[data-tool="says"] { --tc: var(--verb); }
+.try-tools button[data-tool="green"] { --tc: var(--subject); }
+.try-sounds { display: inline-flex; flex-wrap: wrap; gap: 4px; margin-left: 8px; vertical-align: middle; }
+.try-sounds button { font: inherit; font-size: 0.95rem; min-width: 2.4em; padding: 2px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--verb); cursor: pointer; }
+.try-sounds button[aria-pressed="true"] { border-color: var(--verb); background: color-mix(in srgb, var(--verb) 14%, var(--card)); font-weight: 600; }
+.try-board.inkonly .nz5, .try-board.inkonly .nz5 * { fill: var(--ink) !important; }
+.try-board.ov .ovr { display: inline !important; }
 @media (max-width: 760px) {
   .walk.trying .walk-board { grid-template-columns: 1fr; }
   .try-tools { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; }
   .try-tools button { flex: none; border-radius: 999px; padding: 6px 12px 6px 9px; white-space: nowrap; }
+  .try-grp { flex: none; align-self: center; margin: 0 0 0 6px; }
 }
 .walk-cap { min-height: 3em; margin: 14px 0 0; font-size: 1.2rem; line-height: 1.45; }
 .walk-nav { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 8px; }

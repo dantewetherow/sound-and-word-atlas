@@ -74,6 +74,10 @@ def facts(LW, word):
                       "bx": [[m["from"], m["to"]] for m in p["marks"] if m["type"] == "block"],
                       "bv": [[m["from"], m["blockFrom"], m["blockTo"]] for m in p["marks"] if m["type"] == "blockedvault"],
                       "nd": [[m["from"], m["to"]] for m in p["marks"] if m["type"] == "nudge"],
+                      # the letters' colours (red vowel letters, green sh, th, ch), and the ə or borrowed sound over a unit
+                      "red": [i for i, l in enumerate(p["letters"]) if l["type"] == "vowel"],
+                      "gr": [i for i, l in enumerate(p["letters"]) if l["type"] == "team"],
+                      "ov": [[m["cols"][0], m["cols"][-1], m["text"]] for m in p["marks"] if m["type"] == "over"],
                       "cn": [m["col"] for m in p["marks"] if m["type"] == "cone"] + [m["to"] for m in p["marks"] if m["type"] == "vault" and m.get("cone", True)]}
     return out
 
@@ -162,9 +166,14 @@ def write(OUT, door_page, X):
 
     body = f"""<section class="hero walk-hero"><div class="wrap">
 <h1><span class="t-only">Words</span><span class="s-only">Pick a word</span></h1>
-<p class="lead t-only">Look up a word, then tap or swipe through it, or try marking it first. <b>Read it</b> starts from the word in plain letters and decodes; <b>Spell it</b> starts from the syllables, then the sounds, then the letters. <b>Try it</b> puts the marks in the learner’s hands: pick sound circles, bond bars, syllable swoops, short or long marks, cones, vowel vaults, block boxes, nice-nudges or seams, then tap or swipe them onto the word, or write its word sum. <b>Show ours</b> sets the site’s marks underneath to talk about; nothing is scored. Under the word is its sum: tap a part to see every word that shares it.</p>
+<p class="lead t-only">Type a word, then mark it yourself, read it or spell it.</p>
 </div></section>
-{section(note=X["uc"]("a word is either marked, so it can be walked, or shown as a word sum only. Since 13 November 2026 about 2,800 common words of early reading are marked by rule and say so: their marks are a first pass for teachers to check, and some will be wrong."))}
+{section(default_mode="try", note=X["uc"]("a word is either marked, so it can be walked, or shown as a word sum only. Since 13 November 2026 about 2,800 common words of early reading are marked by rule and say so: their marks are a first pass for teachers to check, and some will be wrong."))}
+<section class="about t-only"><div class="wrap prose"><h2>How the walk works</h2>
+<p><b>Try it</b> puts the marks in the learner&rsquo;s hands. Pick a tool, then tap or swipe it onto the word: red for vowel letters, green for <i>sh</i>, <i>th</i> and <i>ch</i>, and every mark in the notation. The word&rsquo;s parts can be written as a word sum, or put back together.</p>
+<p><b>Show ours</b> sets the site&rsquo;s marks underneath, only the kinds the learner has used, to talk about. Nothing is scored.</p>
+<p><b>Read it</b> starts from the word in plain letters and decodes. <b>Spell it</b> starts from the syllables, then the sounds, then the letters. Tap or swipe through either. Under the word is its sum: tap a part to see every word that shares it.</p>
+</div></section>
 <section class="about"><div class="wrap"><div class="door-tiles"><a class="dtile" href="studies.html"><b>Word studies</b><span class="t-only">Presentations for learners: a family of words built a piece at a time.</span></a><a class="dtile" href="explorations.html"><b>Explorations</b><span class="t-only">Words to take apart and build: a family, contractions, and ablaut.</span></a><a class="dtile" href="constructions.html"><b>Sentences</b><span class="t-only">How words make a sentence, and the flip from claim to question.</span></a></div><p class="t-only">Every analysed word, by its parts, is in <a href="parts.html">Parts</a>.</p></div></section>"""
     door_page("walk", "Words · Sounds and Words, Assembled", "Look up a word and walk through it: its marks, a move at a time, and its parts.", body)
     return len(index), skipped
@@ -172,10 +181,10 @@ def write(OUT, door_page, X):
 
 
 
-def section(note="", head="", lazy=False, url=True, default="which"):
+def section(note="", head="", lazy=False, url=True, default="which", default_mode="read"):
     """The walk: the word field and its suggestions, the three walks, the stage and its controls, and the script. walk.html
     has it whole; the home page has a copy (head, lazy, and no ?w= in its address), since 9 November 2026."""
-    return f"""<section class="walk" aria-label="Word walk" data-default="{default}"{' data-lazy="1"' if lazy else ''}{' data-url="off"' if not url else ''}><div class="wrap">
+    return f"""<section class="walk" aria-label="Word walk" data-default="{default}" data-mode0="{default_mode}"{' data-lazy="1"' if lazy else ''}{' data-url="off"' if not url else ''}><div class="wrap">
 {head}<div class="walk-bar">
 <form class="walk-form" role="search" autocomplete="off">
 <label class="sr" for="walk-q">A word</label>
@@ -183,21 +192,21 @@ def section(note="", head="", lazy=False, url=True, default="which"):
 <div class="walk-sug" id="walk-sug" role="listbox" aria-label="Words on the site" hidden></div></div>
 <button type="submit" class="btn">Show it</button>
 </form>
-<div class="walk-modes" role="group" aria-label="Walk"><button type="button" data-mode="read" aria-pressed="true">Read it</button><button type="button" data-mode="spell" aria-pressed="false">Spell it</button><button type="button" data-mode="try" aria-pressed="false">Try it</button></div>
+<div class="walk-modes" role="group" aria-label="Walk"><button type="button" data-mode="try" aria-pressed="{str(default_mode == "try").lower()}">Try it</button><button type="button" data-mode="read" aria-pressed="{str(default_mode == "read").lower()}">Read it</button><button type="button" data-mode="spell" aria-pressed="false">Spell it</button></div>
 </div>
 <div class="walk-forms" hidden></div>
 <p class="walk-msg" role="status"></p>
 <div class="walk-board"><div class="try-tools" role="group" aria-label="What to mark" hidden></div>
-<div class="walk-stage" tabindex="0" aria-label="The word. Tap, swipe left, or press the right arrow, for the next step."></div></div>
+<div class="walk-main"><div class="try-top" hidden><p class="try-say"></p>
+<div class="try-acts"><button type="button" class="try-show" aria-pressed="false">Show ours</button><button type="button" class="try-undo">Undo</button><button type="button" class="try-clear">Clear</button></div></div>
+<div class="walk-stage" tabindex="0" aria-label="The word. Tap, swipe left, or press the right arrow, for the next step."></div><div class="try-text"></div></div>
+<div class="try-tools try-right" role="group" aria-label="Marks over the word, and its parts" hidden></div></div>
 <p class="walk-cap" aria-live="polite"></p>
 <div class="walk-nav"><button type="button" class="walk-back">Back</button><span class="walk-dots" aria-hidden="true"></span><button type="button" class="walk-next">Next</button><button type="button" class="walk-all">Show it all</button></div>
 <div class="walk-try" hidden>
-<p class="try-say"></p>
-<div class="try-text"></div>
 <div class="try-row try-ours" hidden><span class="try-lab">Ours</span><div class="try-board"></div></div>
 <p class="try-open" hidden>The site&rsquo;s call on this word is still open, so take ours as a draft to talk about, not the answer.</p>
 <p class="try-count" aria-live="polite"></p>
-<div class="try-acts"><button type="button" class="try-undo">Undo</button><button type="button" class="try-clear">Clear</button><button type="button" class="try-show" aria-pressed="false">Show ours</button></div>
 </div>
 <p class="walk-sum"></p>
 <div class="pcard walk-pop" hidden aria-live="polite"></div>
@@ -218,9 +227,9 @@ WALK_JS = r"""<script>(() => {
   const esc = s => String(s).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
   const it = s => '<i>' + esc(s) + '</i>';
   const and = a => a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1];
-  let index = [], word = null, form_ = 0, mode = 'read', step = 0, steps = [];
+  let index = [], word = null, form_ = 0, mode = root.dataset.mode0 || 'read', step = 0, steps = [];
   const params = new URLSearchParams(location.search);
-  if (params.get('m') === 'spell' || params.get('m') === 'try') mode = params.get('m');
+  if (['read', 'spell', 'try'].includes(params.get('m'))) mode = params.get('m');
 
   function plan(f) {
     const S = [], beats = n => '<span class="t-only">' + n + (n === 1 ? ' syllable' : ' syllables') + '</span><span class="s-only">' + n + (n === 1 ? ' beat' : ' beats') + '</span>';
@@ -278,7 +287,7 @@ WALK_JS = r"""<script>(() => {
   function draw() {
     if (!word) return;
     const trying = mode === 'try';
-    root.classList.toggle('trying', trying); tryBox.hidden = toolsBox.hidden = !trying; if (!trying) root.classList.remove('texting');
+    root.classList.toggle('trying', trying); tryBox.hidden = toolsBox.hidden = rightBox.hidden = tryTop.hidden = !trying; if (!trying) root.classList.remove('texting');
     root.querySelectorAll('[data-mode]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.mode === mode)));
     root.classList.toggle('sum-only', !word.forms.length);
     if (!word.forms.length) {      // taken apart, not marked yet: the word in plain letters
@@ -364,7 +373,7 @@ WALK_JS = r"""<script>(() => {
   // Try it: the learner marks the word on the stage itself, picking a mark first so a tap or a swipe means one thing,
   // and the site's marks can be set underneath to compare. Nothing is scored.
   const tryBox = $('.walk-try'), toolsBox = $('.try-tools'), say = $('.try-say'), countBox = $('.try-count'), textBox = $('.try-text'),
-        oursRow = $('.try-ours'), oursB = $('.try-ours .try-board'), showB = $('.try-show');
+        oursRow = $('.try-ours'), oursB = $('.try-ours .try-board'), showB = $('.try-show'), tryTop = $('.try-top');
   const NS = 'http://www.w3.org/2000/svg';
   const ICON = {
     circ: '<circle cx="6.5" cy="11" r="3.6" fill="var(--ink)"/><circle cx="15.5" cy="11" r="3.6" fill="var(--verb)"/>',
@@ -377,10 +386,18 @@ WALK_JS = r"""<script>(() => {
     vault: '<path d="M18 17 C18 4 6 4 5 10" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M8 9.6 L5 10 L6.3 7.3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
     box: '<rect x="4" y="5" width="14" height="12" rx="2.5" fill="none" stroke="currentColor" stroke-width="2.2"/>',
     nudge: '<text x="3.5" y="12" font-size="10" font-family="var(--body)" fill="var(--ink)">c</text><text x="12" y="12" font-size="10" font-family="var(--body)" fill="var(--verb)">e</text><path d="M15 15 Q11 20.5 7 15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>',
+    red: '<text x="11" y="16.5" font-size="15" font-family="var(--body)" text-anchor="middle" fill="var(--verb)">a</text>',
+    green: '<text x="11" y="16" font-size="13" font-family="var(--body)" text-anchor="middle" fill="var(--subject)">sh</text>',
+    schwa: '<text x="11" y="16" font-size="15" font-family="var(--body)" text-anchor="middle" fill="var(--verb)">&#601;</text>',
+    says: '<text x="11" y="15.5" font-size="11" font-family="var(--body)" text-anchor="middle" fill="var(--verb)">oo</text>',
     sum: '<path d="M11 5V17M5 11H17" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>',
     join: '<path d="M4 11H17M12 6l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>'
   };
   const TOOLS = {
+    red: ['Vowels red', 'Tap each vowel letter to make it red. Swipe across a vowel team to colour it all.', 'red letter', 'red letters'],
+    green: ['sh, th, ch green', 'Swipe across <i>sh</i>, <i>th</i> or <i>ch</i> to make it green. Tap a green letter to take its colour off.', 'green letter', 'green letters'],
+    schwa: ['Schwa', 'Tap a vowel said weakly, like the <i>a</i> of <i>about</i>, to put &#601; over it. Swipe across a vowel team for one &#601;.', 'schwa', 'schwas'],
+    says: ['Borrowed sound', 'Pick the sound, then tap the vowel that borrows it: <i>oo</i> over the <i>o</i> of <i>do</i>. Tap it again to take it off.', 'borrowed sound', 'borrowed sounds'],
     circ: ['Sound circles', 'Tap a letter for each sound you say. Where two or more letters spell one sound, swipe across them for one circle.', 'sound circle', 'sound circles'],
     bond: ['Bond bars', 'Swipe across letters that work together to bond them with a bar.', 'bond bar', 'bond bars'],
     swoop: ['Syllable swoops', 'Swipe under each syllable, from its first letter to its last. Tap a letter for a syllable of one letter.', 'syllable swoop', 'syllable swoops'],
@@ -394,10 +411,19 @@ WALK_JS = r"""<script>(() => {
     sum: ['Word sum', 'Write the word sum. Put + between the parts and brackets round a letter that drops or changes: <i>hop(e) + ing</i>.'],
     join: ['Put together', 'Here are the parts. Write the word they make.']
   };
-  const MARKS = ['circ', 'bond', 'swoop', 'breve', 'macron', 'cone', 'vault', 'box', 'nudge', 'seam'],
-        LAYERS = {circ: [1, 2], bond: [4], swoop: [3], breve: [6], macron: [6], cone: [8], vault: [7, 8], box: [7], nudge: [8], seam: [9]};
-  let T = null, G = null, Y = null, tool = 'circ', showing = false, undo = [];
-  const fresh = () => ({circ: [], bond: [], swoop: [], breve: [], macron: [], cone: [], vault: [], box: [], nudge: [], seam: [], sum: '', join: ''});
+  // the tools in groups, around the word: its letters' colours, the marks under it, over it, and around it, then its parts
+  // the left of the word holds its letters and what goes under and around them; the right, what goes over it, and its parts
+  const GROUPS = [['Letters', ['red', 'green'], 0], ['Under', ['circ', 'bond', 'swoop', 'nudge'], 0], ['Around', ['box', 'seam'], 0],
+                  ['Over', ['breve', 'macron', 'schwa', 'says', 'vault', 'cone'], 1], ['Parts', ['sum', 'join'], 1]];
+  const rightBox = $('.try-right'), toolBoxes = [toolsBox, rightBox];
+  const MARKS = ['red', 'green', 'circ', 'bond', 'swoop', 'nudge', 'breve', 'macron', 'schwa', 'says', 'vault', 'cone', 'box', 'seam'],
+        LAYERS = {red: [5], green: [5], circ: [1, 2], bond: [4], swoop: [3], breve: [6], macron: [6], schwa: [6], says: [6], cone: [8], vault: [7, 8], box: [7], nudge: [8], seam: [9]};
+  const SAYS = ['ee', 'ah', 'u', '\u028a', 'oo', 'e', 'i'];
+  let T = null, G = null, Y = null, tool = 'red', showing = false, undo = [], sound = 'oo';
+  const fresh = () => ({red: [], green: [], circ: [], bond: [], swoop: [], breve: [], macron: [], schwa: [], says: [], cone: [], vault: [], box: [], nudge: [], seam: [], sum: '', join: ''});
+  // a circle or a bar takes the colour of its letters, as the site's do: red with a vowel letter, green with sh, th or ch
+  const hue = (m, a, b) => { for (let i = a; i <= b; i++) if (m.red.includes(i)) return 'var(--verb)';
+    for (let i = a; i <= b; i++) if (m.green.includes(i)) return 'var(--subject)'; return 'var(--ink)'; };
   // a learner's vault is blocked when one of their block boxes stands between its sender and the vowel
   const blocker = (m, [s, r]) => m.box.find(([a, b]) => a > Math.min(s, r) && b < Math.max(s, r));
   const plainSum = () => word.sum.map(p => p.s.replace(/\(([^)&]*)&rarr;[^)]*\)/g, '$1').replace(/[()]/g, '')).join(' + ');
@@ -420,15 +446,16 @@ WALK_JS = r"""<script>(() => {
     }
     const tools = (G ? MARKS : []).concat(word.sum && word.sum.length > 1 ? ['sum', 'join'] : []);
     if (!tools.includes(tool)) tool = tools[0];
-    toolsBox.innerHTML = tools.map(k => '<button type="button" data-tool="' + k + '" aria-pressed="' + (k === tool) + '"><svg viewBox="0 0 22 22" aria-hidden="true">' + ICON[k] + '</svg><span>' + TOOLS[k][0] + '</span></button>').join('');
-    toolsBox.hidden = !tools.length;
+    toolBoxes.forEach((box, side) => { box.innerHTML = GROUPS.filter(g => g[2] === side).map(([h, ks]) => { const here = ks.filter(k => tools.includes(k)); if (!here.length) return '';
+      return '<span class="try-grp">' + h + '</span>' + here.map(k => '<button type="button" data-tool="' + k + '" aria-pressed="' + (k === tool) + '"><svg viewBox="0 0 22 22" aria-hidden="true">' + ICON[k] + '</svg><span>' + TOOLS[k][0] + '</span></button>').join(''); }).join('');
+      box.hidden = !box.innerHTML; });
     if (!tools.length) { say.textContent = 'This word has nothing to mark yet.'; return; }
     tryDraw();
   }
   const isText = () => tool === 'sum' || tool === 'join';
   function tryDraw() {
     root.classList.toggle('texting', isText());
-    say.innerHTML = TOOLS[tool][1];
+    say.innerHTML = TOOLS[tool][1] + (tool === 'says' ? '<span class="try-sounds" role="group" aria-label="The sound it borrows">' + SAYS.map(v => '<button type="button" data-sound="' + v + '" aria-pressed="' + (v === sound) + '">' + v + '</button>').join('') + '</span>' : '');
     showB.textContent = showing ? 'Hide ours' : 'Show ours'; showB.setAttribute('aria-pressed', String(showing));
     $('.try-undo').hidden = isText(); $('.try-undo').disabled = !undo.length;
     oursRow.hidden = !showing; $('.try-open').hidden = !(showing && word.open);
@@ -442,6 +469,9 @@ WALK_JS = r"""<script>(() => {
       countBox.textContent = ''; return;
     }
     textBox.innerHTML = '';
+    svgOf().querySelectorAll('g.nz5 text').forEach((t, i) => {     // the learner's colours on the letters themselves
+      const c = Y.red.includes(i) ? 'var(--verb)' : Y.green.includes(i) ? 'var(--subject)' : '';
+      if (c) t.style.setProperty('fill', c, 'important'); else t.style.removeProperty('fill'); });
     ink(svgOf().querySelector('g.yours'), Y);
     if (showing) ours();
     countBox.innerHTML = counts();
@@ -454,8 +484,12 @@ WALK_JS = r"""<script>(() => {
     m.seam.forEach(k => { o += line(G.gaps[k - 1], B - 76, G.gaps[k - 1], B + 36.8, 'var(--modal)', 2.4, 1); });
     m.breve.forEach(i => { o += '<path d="M' + (x[i] - 20.6) + ' ' + (B - 78) + ' Q' + x[i] + ' ' + (B - 62) + ' ' + (x[i] + 20.6) + ' ' + (B - 78) + '" fill="none" stroke="var(--verb)" stroke-width="4" stroke-linecap="round"/>'; });
     m.macron.forEach(i => { o += line(x[i] - 22.3, B - 72.8, x[i] + 22.3, B - 72.8, 'var(--verb)', 4); });
-    m.bond.forEach(([a, b]) => { o += line(x[a] - 20.6, B + 26.4, x[b] + 20.6, B + 26.4, 'var(--ink)', 4); });
-    m.circ.forEach(([a, b]) => { o += '<circle cx="' + (x[a] + x[b]) / 2 + '" cy="' + (B + 44.8) + '" r="5.8" fill="var(--ink)"/>'; });
+    m.bond.forEach(([a, b]) => { o += line(x[a] - 20.6, B + 26.4, x[b] + 20.6, B + 26.4, hue(m, a, b), 4); });
+    m.circ.forEach(([a, b]) => { o += '<circle cx="' + (x[a] + x[b]) / 2 + '" cy="' + (B + 44.8) + '" r="5.8" fill="' + hue(m, a, b) + '"/>'; });
+    const over = (a, b, t, fs) => { const ch = ((T && T.L) || '').slice(a, b + 1), up = /[ijl]/.test(ch) ? 78.4 : 64, bar = m.macron.some(i => i >= a && i <= b) ? 92.8 : up;
+      return '<text x="' + (x[a] + x[b]) / 2 + '" y="' + (B - bar) + '" font-family="Lexend, system-ui, sans-serif" font-size="' + fs + '" text-anchor="middle" fill="var(--verb)">' + esc(t) + '</text>'; };
+    m.schwa.forEach(([a, b]) => { o += over(a, b, '\u0259', 40); });
+    m.says.forEach(([a, b, t]) => { o += over(a, b, t, 32); });
     m.cone.forEach(i => {     // the cone fits its letter, as the site draws it: up over a tall one, down over one that hangs
       const ch = (T && T.L[i]) || '', cy = /[bdfhklt]/.test(ch) ? B - 32 : /[gjpqy]/.test(ch) ? B - 11.2 : B - 20.8, ry = /[bdfhklt]/.test(ch) ? 41.6 : /[gjpqy]/.test(ch) ? 40 : 29.6;
       o += '<ellipse cx="' + x[i] + '" cy="' + cy + '" rx="29.6" ry="' + ry + '" fill="none" stroke="var(--soft)" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 6.2"/>'; });
@@ -482,15 +516,19 @@ WALK_JS = r"""<script>(() => {
   }
   const used = () => MARKS.filter(k => k === tool || Y[k].length);
   function ours() {
-    const f = word.forms[form_], show = new Set([5]); used().forEach(k => LAYERS[k].forEach(n => show.add(n)));
+    const f = word.forms[form_], show = new Set([5]), u = used(); u.forEach(k => LAYERS[k].forEach(n => show.add(n)));
+    const cups = u.includes('breve') || u.includes('macron'), overs = u.includes('schwa') || u.includes('says');
     oursB.innerHTML = '<svg viewBox="0 0 ' + f.W + ' ' + f.H + '" role="img" aria-label="' + esc(word.w) + ', as the site marks it">' + f.svg + '</svg>';
-    oursB.querySelectorAll('[class*="nz"]').forEach(el => { const n = +((el.getAttribute('class') || '').match(/nz(\d)/) || [])[1]; el.classList.toggle('on', show.has(n)); });
+    oursB.classList.toggle('inkonly', !u.includes('red') && !u.includes('green')); oursB.classList.toggle('ov', overs);
+    oursB.querySelectorAll('[class*="nz"]').forEach(el => { const c = el.getAttribute('class') || '', n = +(c.match(/nz(\d)/) || [])[1];
+      el.classList.toggle('on', show.has(n) && (n !== 6 || (/\bovr\b/.test(c) ? overs : cups))); });
   }
   function counts() {
     const blocked = Y.vault.filter(v => blocker(Y, v)).length;
-    const mine = {circ: Y.circ.length, bond: Y.bond.length, swoop: Y.swoop.length, breve: Y.breve.length, macron: Y.macron.length,
+    const ovs = (T.ov || []), sch = ovs.filter(o => o[2] === '\u0259').length;
+    const mine = {red: Y.red.length, green: Y.green.length, schwa: Y.schwa.length, says: Y.says.length, circ: Y.circ.length, bond: Y.bond.length, swoop: Y.swoop.length, breve: Y.breve.length, macron: Y.macron.length,
                   cone: Y.cone.length, vault: Y.vault.length - blocked, bv: blocked, box: Y.box.length, nudge: Y.nudge.length, seam: Y.seam.length},
-          site = {circ: T.d.length, bond: T.b.length, swoop: T.sy.length + 1, breve: T.sh.length, macron: T.lg.length,
+          site = {red: (T.red || []).length, green: (T.gr || []).length, schwa: sch, says: ovs.length - sch, circ: T.d.length, bond: T.b.length, swoop: T.sy.length + 1, breve: T.sh.length, macron: T.lg.length,
                   cone: T.cn.length, vault: T.v.length, bv: T.bv.length, box: T.bx.length, nudge: (T.nd || []).length, seam: T.sm.length};
     const NAME = Object.assign({bv: [0, 0, 'blocked vault', 'blocked vaults']}, TOOLS);
     let ks = used().filter(k => mine[k] || showing);
@@ -508,6 +546,19 @@ WALK_JS = r"""<script>(() => {
     let a = G.x.findIndex(c => c >= lo - pad), b = n - 1 - [...G.x].reverse().findIndex(c => c <= hi + pad);
     if (tap || a < 0 || b < a || a >= n) a = b = near(tap ? x0 : (x0 + x1) / 2);
     const m = JSON.parse(JSON.stringify(Y));
+    if (t === 'red' || t === 'green') {        // a tap toggles one letter; a swipe colours the run, or clears it if it's all coloured
+      const o = t === 'red' ? 'green' : 'red', run = []; for (let i = a; i <= b; i++) run.push(i);
+      const all = run.every(i => m[t].includes(i));
+      m[t] = all ? m[t].filter(i => !run.includes(i)) : [...new Set(m[t].concat(run))]; m[o] = m[o].filter(i => !run.includes(i)); return m;
+    }
+    if (t === 'schwa' || t === 'says') {       // one over each unit: a tap takes off what's there, or puts one on
+      const hit = (m.schwa.concat(m.says)).filter(([p, q]) => !(q < a || p > b));
+      m.schwa = m.schwa.filter(r => !hit.includes(r)); m.says = m.says.filter(r => !hit.includes(r));
+      if (hit.length && tap) return m;
+      m[t].push(t === 'says' ? [a, b, sound] : [a, b]);
+      for (let i = a; i <= b; i++) { m.breve = m.breve.filter(v => v !== i); if (t === 'schwa') m.macron = m.macron.filter(v => v !== i); }
+      return m;
+    }
     if (t === 'cone') { const i = near(x0); m.cone.includes(i) ? m.cone = m.cone.filter(v => v !== i) : m.cone.push(i); return m; }
     if (t === 'vault') {           // from the letter the swipe starts on to the one it ends on; a tap takes off a vault there
       const s = near(x0), r = near(x1);
@@ -527,7 +578,8 @@ WALK_JS = r"""<script>(() => {
     }
     if (t === 'seam') { if (n < 2) return null; const k = gap(tap ? x0 : (x0 + x1) / 2), i = m.seam.indexOf(k); i < 0 ? m.seam.push(k) : m.seam.splice(i, 1); }
     else if (t === 'breve' || t === 'macron') { const o = t === 'breve' ? 'macron' : 'breve', i = near(x0);
-      m[o] = m[o].filter(v => v !== i); m[t].includes(i) ? m[t] = m[t].filter(v => v !== i) : m[t].push(i); }
+      m[o] = m[o].filter(v => v !== i); m[t].includes(i) ? m[t] = m[t].filter(v => v !== i) : m[t].push(i);
+      m.schwa = m.schwa.filter(([p, q]) => i < p || i > q); if (t === 'breve') m.says = m.says.filter(([p, q]) => i < p || i > q); }
     else {
       const hit = span(a, b, m[t]);
       if (tap) { if (hit.length) m[t] = m[t].filter(r => !hit.includes(r)); else if (t !== 'bond') m[t].push([a, a]); }
@@ -551,9 +603,12 @@ WALK_JS = r"""<script>(() => {
     const m = e.type === 'pointerup' ? act(tool, px, p.x, tap) : null; px = null; svgOf().querySelector('g.ghost').innerHTML = '';
     if (m) { undo.push(JSON.stringify(Y)); Y = m; tryDraw(); } };
   stage.addEventListener('pointerup', lift); stage.addEventListener('pointercancel', lift);
-  toolsBox.addEventListener('click', e => { const b = e.target.closest('[data-tool]'); if (!b) return; tool = b.dataset.tool;
-    toolsBox.querySelectorAll('[data-tool]').forEach(x => x.setAttribute('aria-pressed', String(x === b))); tryDraw(); });
-  showB.addEventListener('click', () => { showing = !showing; tryDraw(); });
+  toolBoxes.forEach(box => box.addEventListener('click', e => { const b = e.target.closest('[data-tool]'); if (!b) return; tool = b.dataset.tool;
+    root.querySelectorAll('[data-tool]').forEach(x => x.setAttribute('aria-pressed', String(x === b))); tryDraw(); }));
+  showB.addEventListener('click', () => { showing = !showing; tryDraw();       // ours sits under the word: bring it into view
+    if (showing) (isText() ? textBox : oursRow).scrollIntoView({behavior: 'smooth', block: 'nearest'}); });
+  say.addEventListener('click', e => { const b = e.target.closest('[data-sound]'); if (!b) return; sound = b.dataset.sound;
+    say.querySelectorAll('[data-sound]').forEach(x => x.setAttribute('aria-pressed', String(x === b))); });
   $('.try-undo').addEventListener('click', () => { if (undo.length) { Y = JSON.parse(undo.pop()); tryDraw(); } });
   $('.try-clear').addEventListener('click', () => { if (!Y) return; undo.push(JSON.stringify(Y));
     if (isText()) Y[tool] = ''; else MARKS.forEach(k => { Y[k] = []; }); showing = false; tryDraw(); });
